@@ -1,0 +1,41 @@
+.form-horizontal {
+    text-align: center;
+    background-image: url(https://img.freepik.com/vector-premium/fondo-blanco-trama-semitonos_67845-798.jpg?w=2000);
+}
+.Table_1 {
+    text-align: center;
+}
+.form-box-2 {
+    text-align: center;
+    background-image: url(https://img.freepik.com/vector-premium/fondo-blanco-trama-semitonos_67845-798.jpg?w=2000);
+}
+.form-horizontal input[type="Nombre_com"],
+.form-horizontal input[type="Type_user"],
+.form-horizontal input[type="email"]{
+  border: 0;  
+  text-align: center;
+  border: 2px solid #D6DBDF;  
+  transition: 0.25s;
+  border-radius: 5px;
+}
+.form-horizontal input[type="Nombre_com"]:focus,
+.form-horizontal input[type="Type_user"]:focus,
+.form-horizontal input[type="email"]:focus{
+  border-color: aqua;
+}
+.bot_per{
+    background-color: orange;
+    border-radius: 5px;
+    color: white;
+    border-color: white;
+    width: 150px;
+    cursor: pointer;
+}
+.bot_per_2{
+    background-color: purple;
+    border-radius: 5px;
+    color: white;
+    border-color: white;
+    width: 150px;
+    cursor: pointer;
+  }
