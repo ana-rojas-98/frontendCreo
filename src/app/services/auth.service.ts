@@ -7,19 +7,31 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-  private URL_SER = 'http://localhost:3000';
+  private URL_SER = 'https://localhost:5001';
   constructor(
     private http:HttpClient,
     private jwtHelper: JwtHelperService
     ) { }
   signin(user:any){
-    return this.http.post(`${this.URL_SER}/user/signin`,user);
+    return this.http.post(`${this.URL_SER}/api/Usuarios/Authenticate`,user);
   }
   isAuth():boolean{
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');    
     if(this.jwtHelper.isTokenExpired(token) || !localStorage.getItem('token')){
       return false;
     }
     return true;
+  }
+  singup(user_reg:any){
+    return this.http.post(`${this.URL_SER}/api/Usuarios/PostUsuario`,user_reg);
+  }
+  crear_estandar(estand:any){
+    return this.http.post(`${this.URL_SER}/api/Estandares/PostEstandar`,estand);
+  }
+  crear_categoria(categoria:any){
+    return this.http.post(`${this.URL_SER}/api/Categoria/PostCategoria`,categoria);
+  }
+  crear_subcategoria(subcategoria:any){
+    return this.http.post(`${this.URL_SER}/api/Subcategoria/PostSubcategoria`,subcategoria);
   }
 }

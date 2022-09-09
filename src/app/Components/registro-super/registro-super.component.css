@@ -39,3 +39,10 @@
     width: 150px;
     cursor: pointer;
   }
+.selectbox{
+  border: 0;  
+  text-align: center;
+  border: 2px solid #D6DBDF;  
+  transition: 0.25s;
+  border-radius: 5px;
+}

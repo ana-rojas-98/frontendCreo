@@ -4,19 +4,19 @@
             Registrate
         </h1> 
         <div>
-            <input type="Nombre_com" name ="Nombre Completo" placeholder ="Nombre Completo" class="control_bas">
+            <input type="Nombre_com" name ="Nombre Completo" placeholder ="Nombre Completo" class="control_bas" [(ngModel)]="user_reg.Fullname">
         </div>
         <div>
-            <input type="email" name ="email" placeholder ="email" class="control_bas">
+            <input type="email" name ="email" placeholder ="email" class="control_bas" [(ngModel)]="user_reg.Email">
         </div>
         <div>
-            <input type="Cargo" name ="cargo" placeholder ="Tipo de usuario" class="control_bas">
+            <input type="number" name ="cargo" placeholder ="Tipo de usuario" class="control_bas" [(ngModel)]="user_reg.Typeuser">
         </div>
         <div>
-            <input type="password" name ="password" placeholder ="password" class="control_bas">
+            <input type="password" name ="password" placeholder ="password" class="control_bas" [(ngModel)]="user_reg.Pass">
         </div>
         <div>
-            <button type="submit" class = "bot2">Registrar       
+            <button type="submit" class = "bot2" (click)="Sing_up()">Registrar       
             </button> 
         </div>
         <div>

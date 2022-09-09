@@ -16,6 +16,9 @@ import { PrivateComponent } from './Components/private/private.component';
 import { JwtHelperService, JWT_OPTIONS }  from '@auth0/angular-jwt'
 import { AuthGuard } from './guards/auth.guard';
 import { RegistroSuperComponent } from './Components/registro-super/registro-super.component';
+import { EstandaresComponent } from './Components/estandares/estandares.component';
+import { CategoriasComponent } from './Components/categorias/categorias.component';
+import { SubcategoComponent } from './Components/subcatego/subcatego.component';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -26,7 +29,10 @@ import { RegistroSuperComponent } from './Components/registro-super/registro-sup
     LoginComponent,
     RegisterComponent,
     RegistroSuperComponent,
-    PrivateComponent
+    PrivateComponent,
+    EstandaresComponent,
+    CategoriasComponent,
+    SubcategoComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -37,7 +43,10 @@ import { RegistroSuperComponent } from './Components/registro-super/registro-sup
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'private', component: PrivateComponent,canActivate:[AuthGuard]},
-      { path: 'registro-super', component: RegistroSuperComponent},
+      { path: 'registro-super', component: RegistroSuperComponent, canActivate:[AuthGuard]},
+      { path: 'estandares', component: EstandaresComponent},
+      { path: 'categorias', component: CategoriasComponent},
+      { path: 'subcategorias', component: SubcategoComponent},
     ])
   ],
   providers: [

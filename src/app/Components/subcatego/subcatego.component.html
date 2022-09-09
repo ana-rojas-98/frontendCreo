@@ -1,0 +1,23 @@
+<body>
+    <form class="form-box">
+        <h1 class="Form-title" align = "center">
+            Nueva Sub categoria
+        </h1>
+        <div class="form-group col">
+            <select name="select" type = selectbox>
+                <option value="1" [(ngModel)]="Categoria.IdCategoria" selected>categoria 1</option>
+                <option value="2" [(ngModel)]="Categoria.IdCategoria">categoria 2</option>
+                <option value="3" [(ngModel)]="Categoria.IdCategoria">categoria 3</option>
+            </select> 
+            <br>
+            <br>
+            <input type = "Subcatego" name = "Subcatego" placeholder="Nombre de la subcategoria" class="form-control" [(ngModel)]="Subcatego.NombreSubcategoria">
+        </div>
+        <div>
+          <button type="cancel" class = "bot_per_2"> Cancelar
+          </button>
+          <button type="submit" class = "bot_est" (click)="SetSubCategoria()">Guardar
+          </button>
+        </div>      
+    </form>
+  </body>

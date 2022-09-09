@@ -1,0 +1,17 @@
+<body>
+  <form class="form-box">
+      <h1 class="Form-title" align = "center">
+          Nuevo Estandar
+      </h1>
+      <div class="form-group col">
+          <input type = "Estandar" name = "estandar" placeholder="Nombre del Estandar" class="form-control" [(ngModel)]="Estandar.NombreEstandar">
+      </div>
+      <div>
+        <button type="cancel" class = "bot_per_2"> Cancelar
+        </button>
+        <button type="submit" class = "bot_est" (click)="SetEstandar()">Guardar
+        </button>
+      </div>      
+  </form>
+</body>
+
