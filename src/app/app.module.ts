@@ -20,6 +20,7 @@ import { RegistroSuperComponent } from './Components/registro-super/registro-sup
 import { EstandaresComponent } from './Components/estandares/estandares.component';
 import { CategoriasComponent } from './Components/categorias/categorias.component';
 import { SubcategoComponent } from './Components/subcatego/subcatego.component';
+import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { PermisosRegistrosComponent } from './Components/permisos-registros/permisos-registros.component';
 import { OlvideClaveComponent } from './Components/olvide-clave/olvide-clave.component';
 import { CambioContrasenaComponent } from './Components/cambio-contrasena/cambio-contrasena.component';
@@ -37,6 +38,7 @@ import { CambioContrasenaComponent } from './Components/cambio-contrasena/cambio
     EstandaresComponent,
     CategoriasComponent,
     SubcategoComponent,
+    SidebarComponent,
     PermisosRegistrosComponent,
     OlvideClaveComponent,
     CambioContrasenaComponent,
