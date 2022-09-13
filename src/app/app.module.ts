@@ -19,6 +19,7 @@ import { RegistroSuperComponent } from './Components/registro-super/registro-sup
 import { EstandaresComponent } from './Components/estandares/estandares.component';
 import { CategoriasComponent } from './Components/categorias/categorias.component';
 import { SubcategoComponent } from './Components/subcatego/subcatego.component';
+import { SidebarComponent } from './Components/sidebar/sidebar.component';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -32,7 +33,8 @@ import { SubcategoComponent } from './Components/subcatego/subcatego.component';
     PrivateComponent,
     EstandaresComponent,
     CategoriasComponent,
-    SubcategoComponent
+    SubcategoComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
