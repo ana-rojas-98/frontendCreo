@@ -1,11 +1,23 @@
+@import "../../../assets/styles/main.scss";
 .sidebar {
 background:#ffffff;
 width: 760px;
 height: max-content;
+font-family: $font;
+border: 1px solid rgba(0, 0, 0, 0.2);
 }
 h3{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
     text-align: center;
-    text-decoration: underline rgba(0, 0, 0, 0.2) solid;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);;
+    width: 171.04px;
+    height: 30px;
+    left: 41px;
+    margin-left: 15px;
+    margin-bottom: 15px;
 }
 .link-sidebar{
     width: 180.92px;
@@ -19,7 +31,6 @@ h3{
     height: 34px;
 }
 .link-sidebar a{
-    font-family: Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
