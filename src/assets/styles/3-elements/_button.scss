@@ -9,5 +9,17 @@
   width: 130px;
   height: 41px;
   border-radius: 35px;
-  background-color: $buttonPrimary;
+  background-color: $buttonSecondary;
+}
+
+@media (max-width: 600px) {
+  .button-enviar {
+    width: 90%;
+    margin: 0 auto 20px;
+  }
+
+  .button-cancelar {
+    width: 90%;
+    margin:0 auto;
+  }
 }

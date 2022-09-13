@@ -3,15 +3,15 @@
 .container-principal {
   margin: 0 auto;
   width: 400px;
-  height: 287px;
+  height: 700px;
   text-align: center;
 }
 
 .container-form-formularo {
-  background-color: $backgroun;
-  border-radius: 10px;
+  background-color: $background;
   margin-top: 30px;
-
+  padding-top: 30px;
+  border-radius: 25px;
   span {
     margin-bottom: 30px;
   }
@@ -20,10 +20,21 @@
     margin: 10px;
     border-radius: 20px;
     width: 80%;
+    text-align: center;
   }
 }
 
-.ccontainerbutton {
-  display: flex;
-  flex-direction: column;
+.container-button {
+  margin-top: 20px;
+  .button-cancelar {
+    margin-right: 20px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container-button {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 }

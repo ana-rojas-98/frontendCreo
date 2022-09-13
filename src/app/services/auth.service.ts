@@ -34,4 +34,8 @@ export class AuthService {
   crear_subcategoria(subcategoria:any){
     return this.http.post(`${this.URL_SER}/api/Subcategoria/PostSubcategoria`,subcategoria);
   }
+  
+  validar_correo(email:any){
+    return this.http.post(`${this.URL_SER}/api/Usuarios/ValidationEmail`,email);
+  }
 }

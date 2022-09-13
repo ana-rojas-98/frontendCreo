@@ -22,6 +22,7 @@ import { CategoriasComponent } from './Components/categorias/categorias.componen
 import { SubcategoComponent } from './Components/subcatego/subcatego.component';
 import { PermisosRegistrosComponent } from './Components/permisos-registros/permisos-registros.component';
 import { OlvideClaveComponent } from './Components/olvide-clave/olvide-clave.component';
+import { CambioContrasenaComponent } from './Components/cambio-contrasena/cambio-contrasena.component';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -38,6 +39,7 @@ import { OlvideClaveComponent } from './Components/olvide-clave/olvide-clave.com
     SubcategoComponent,
     PermisosRegistrosComponent,
     OlvideClaveComponent,
+    CambioContrasenaComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -53,6 +55,7 @@ import { OlvideClaveComponent } from './Components/olvide-clave/olvide-clave.com
       { path: 'categorias', component: CategoriasComponent},
       { path: 'subcategorias', component: SubcategoComponent},
       { path: 'olvide-clave', component: OlvideClaveComponent},
+      { path: 'cambio-contrasena', component: CambioContrasenaComponent},
     ])
   ],
   providers: [
