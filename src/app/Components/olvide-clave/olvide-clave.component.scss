@@ -1,0 +1,29 @@
+@import "../../../assets/styles/main.scss";
+
+.container-principal {
+  margin: 0 auto;
+  width: 400px;
+  height: 287px;
+  text-align: center;
+}
+
+.container-form-formularo {
+  background-color: $backgroun;
+  border-radius: 10px;
+  margin-top: 30px;
+
+  span {
+    margin-bottom: 30px;
+  }
+
+  .input-olvido-clave {
+    margin: 10px;
+    border-radius: 20px;
+    width: 80%;
+  }
+}
+
+.ccontainerbutton {
+  display: flex;
+  flex-direction: column;
+}

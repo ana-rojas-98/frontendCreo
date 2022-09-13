@@ -12,6 +12,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { PrivateComponent } from './Components/private/private.component';
 
+
 // Providers
 import { JwtHelperService, JWT_OPTIONS }  from '@auth0/angular-jwt'
 import { AuthGuard } from './guards/auth.guard';
@@ -20,6 +21,8 @@ import { EstandaresComponent } from './Components/estandares/estandares.componen
 import { CategoriasComponent } from './Components/categorias/categorias.component';
 import { SubcategoComponent } from './Components/subcatego/subcatego.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
+import { PermisosRegistrosComponent } from './Components/permisos-registros/permisos-registros.component';
+import { OlvideClaveComponent } from './Components/olvide-clave/olvide-clave.component';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -34,7 +37,9 @@ import { SidebarComponent } from './Components/sidebar/sidebar.component';
     EstandaresComponent,
     CategoriasComponent,
     SubcategoComponent,
-    SidebarComponent
+    SidebarComponent,
+    PermisosRegistrosComponent,
+    OlvideClaveComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -49,6 +54,7 @@ import { SidebarComponent } from './Components/sidebar/sidebar.component';
       { path: 'estandares', component: EstandaresComponent},
       { path: 'categorias', component: CategoriasComponent},
       { path: 'subcategorias', component: SubcategoComponent},
+      { path: 'olvide-clave', component: OlvideClaveComponent},
     ])
   ],
   providers: [

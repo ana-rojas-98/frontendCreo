@@ -1,25 +1,39 @@
 <body>
   <form class="form-box">
-      <h1 class="Form-title" align = "center">
-          Sign In
-      </h1>
-      <div class="form-group col">
-          <input type = "email" name = "email" placeholder="email" class="form-control" [(ngModel)]="user.Email">
-      </div>
-      <div class="form-group col">
-          <input type = "password" name = "password" placeholder="password" class="form-control" [(ngModel)]="user.password">
-      </div>
-      <div>
-          <button type="submit" class = "bot1" (click)="LogIn()">Login
-          </button>
-      </div>
-      <div>
-        <br>
-        <p>¿No tienes cuenta? <a class="link-active" [routerLink]="['/register']">Registrate aquí.</a>
-        </p>
-        <p>¿Olvidaste la contraseña? <a class="link" >Presiona aquí.</a>
-        </p>
+    <h1 class="Form-title" align="center">Sign In</h1>
+    <div class="form-group col">
+      <input
+        type="email"
+        name="email"
+        placeholder="email"
+        class="form-control"
+        [(ngModel)]="user.Email"
+      />
+    </div>
+    <div class="form-group col">
+      <input
+        type="password"
+        name="password"
+        placeholder="password"
+        class="form-control"
+        [(ngModel)]="user.password"
+      />
+    </div>
+    <div>
+      <button type="submit" class="bot1" (click)="LogIn()">Login</button>
+    </div>
+    <div>
+      <br/>
+      <p>
+        ¿No tienes cuenta?
+        <a class="link-active" [routerLink]="['/register']">Registrate aquí.</a>
+      </p>
+      <p>
+        ¿Olvidaste la contraseña?
+        <a class="link-active" [routerLink]="['/olvide-clave']"
+          >Presiona aquí.</a
+        >
+      </p>
     </div>
   </form>
-
 </body>
