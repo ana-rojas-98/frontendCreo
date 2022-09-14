@@ -23,6 +23,7 @@ import { SubcategoComponent } from './Components/subcatego/subcatego.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { PermisosRegistrosComponent } from './Components/permisos-registros/permisos-registros.component';
 import { OlvideClaveComponent } from './Components/olvide-clave/olvide-clave.component';
+import { AdministrarIndicadoresComponent } from './Components/administrar-indicadores/administrar-indicadores.component';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -40,6 +41,7 @@ import { OlvideClaveComponent } from './Components/olvide-clave/olvide-clave.com
     SidebarComponent,
     PermisosRegistrosComponent,
     OlvideClaveComponent,
+    AdministrarIndicadoresComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -55,6 +57,7 @@ import { OlvideClaveComponent } from './Components/olvide-clave/olvide-clave.com
       { path: 'categorias', component: CategoriasComponent},
       { path: 'subcategorias', component: SubcategoComponent},
       { path: 'olvide-clave', component: OlvideClaveComponent},
+      { path: 'administrar-indicadores', component: AdministrarIndicadoresComponent},
     ])
   ],
   providers: [

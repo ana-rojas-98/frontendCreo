@@ -1,0 +1,75 @@
+<body>    
+    <div class="admin-indicadores">
+        <app-sidebar></app-sidebar>
+        <div class="content-admin">
+            <div class="tittle-indicadores">
+            <h1>Administrar indicadores</h1>
+            </div>
+            <div class="seleccion">
+            <div class="box">
+                <h3>ESTANDAR</h3>
+                <select name="select" type = selectbox align = "center">
+                    <option value="Estandar 1" [(ngModel)]="Categoria.IdEstandar" selected>Filtro Estandar 1</option>
+                    <option value="Estandar 2" [(ngModel)]="Categoria.IdEstandar">Filtro Estandar 2</option>
+                    <option value="Estandar 3" [(ngModel)]="Categoria.IdEstandar">Filtro Estandar 3</option>
+                  </select>
+            </div>
+            <div class="box">
+                <h3>CATEGORIA</h3>
+                <select name="select" type = selectbox align = "center">
+                    <option value="Categoria 1" [(ngModel)]="Categoria.IdEstandar" selected>Filtro Categoria 1</option>
+                    <option value="Categoria 2" [(ngModel)]="Categoria.IdEstandar">Filtro Categoria 2</option>
+                    <option value="Categoria 3" [(ngModel)]="Categoria.IdEstandar">Filtro Categoria 3</option>
+                  </select>
+            </div>
+            <div class="box">
+                <h3>SUBCATEGORIA</h3>
+                <select name="select" type = selectbox align = "center">
+                    <option value="Subcategoria 1" [(ngModel)]="Categoria.IdEstandar" selected>Filtro Subcategoria 1</option>
+                    <option value="Subcategoria 2" [(ngModel)]="Categoria.IdEstandar">Filtro SubCategoria 2</option>
+                    <option value="Subcategoria 3" [(ngModel)]="Categoria.IdEstandar">Filtro Subcategoria 3</option>
+                  </select>
+            </div>
+            </div> 
+            <div class="botones-crear">
+                <button>Crear nuevo estandar</button>
+                <button>Crear nueva categoria</button>
+                <button>Crear nueva subcategoria</button>
+                <button>Crear nuevo indicador</button>
+                <button>Crear indicadores masivamente</button>
+            </div>
+            <div class="botones-eliminar">
+                <button>Eliminar estandar</button>
+                <button>Eliminar categoria</button>
+                <button>Eliminar subcategoria</button>
+            </div>
+            <div class="resultados-tabla">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><img src="../../../assets/imagenes/nombreIndicador.png" alt="icon"> Nombre indicador</th>
+                            <th><img src="../../../assets/imagenes/creador.png" alt="icon"> Creador</th>
+                            <th><img src="../../../assets/imagenes/fechaHora.png" alt="icon"> Fecha y hora Creacion</th>
+                            <th><img src="../../../assets/imagenes/archivo.png" alt=""> Archivo</th>
+                            <th><img src="../../../assets/imagenes/ver.png" alt=""> Ver</th>
+                            <th><img src="../../../assets/imagenes/editar.png" alt=""> Editar</th>
+                            <th><img src="../../../assets/imagenes/eliminar.png" alt=""> Eliminar</th>
+                            <th><img src="../../../assets/imagenes/duplicar.png" alt=""> Duplicar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td>indicador1</td>
+                        <td>creador</td>
+                        <td>2022/12/05</td>
+                        <td>Archivo</td>
+                        <td>Ver</td>
+                        <td>Editar</td>
+                        <td>eliminar</td>
+                        <td>Duplicar</td>
+                    </tbody>
+                </table>
+                <button>Descargar todos los archivos adjuntos</button>
+            </div>
+        </div>   
+    </div>
+</body>

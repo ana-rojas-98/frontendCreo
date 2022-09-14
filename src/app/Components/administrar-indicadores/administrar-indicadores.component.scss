@@ -1,0 +1,28 @@
+@import "../../../assets/styles/main.scss";
+.admin-indicadores{
+    position: absolute;
+    display: flex;
+    flex-wrap: nowrap;
+}
+.content-admin{
+    width: 1088px;
+    height: 726px;
+    border: 1px red solid;
+    background: linear-gradient(180deg, rgba(17, 17, 17, 0.06) 0%, rgba(255, 255, 255, 0) 100%);
+}
+.tittle-indicadores{
+    text-align: center;
+    height: 200px;
+}
+h1{
+    color:#2BAEE5;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+}
+.seleccion{
+    display: flex;
+    flex-wrap: wrap;
+}
