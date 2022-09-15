@@ -2,15 +2,16 @@
 <h3>Administración</h3>
 <div class="link-sidebar">
     <img src="../../../assets/imagenes/indicadores.png" alt="indicador">
-    <a href="">Indicadores</a>
+    <a >Indicadores</a>
 </div>
 <div class="link-sidebar">
     <img src="../../../assets/imagenes/reportes.png" alt="reporte">
-    <a href="">Reportes</a>
+    <a>Reportes</a>
+    <router-outlet></router-outlet>
 </div>
 <div class="link-sidebar">
     <img src="../../../assets/imagenes/administrar-indicador.png" alt="indicador">
-    <a href="">Administrar indicadores</a>
+    <a [routerLink]="['/administrar-indicadores']" [routerLinkActive]="['link-active']">Administrar indicadores</a>
 </div>
 <div class="link-sidebar">
     <img src="../../../assets/imagenes/administardor-usuarios.png" alt="indicador">
