@@ -1,0 +1,119 @@
+@import "../../../assets/styles/main.scss";
+.admin-indicadores{
+    position: absolute;
+    display: flex;
+    flex-wrap: nowrap;
+}
+.content-admin{
+    width: 1088px;
+    height: 726px;
+    background: linear-gradient(180deg, rgba(17, 17, 17, 0.06) 0%, rgba(255, 255, 255, 0) 100%);
+    font-family: 'Montserrat';
+}
+.tittle-indicadores{
+    text-align: center;
+    height: 60px;
+    padding: 10px 350px 10px 350px;
+    margin-top: 20px;
+}
+h1{
+    color:#2BAEE5;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.seleccion{
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: 500;
+    font-size: 16px;
+    justify-content: space-around;
+    height: 100px;
+    padding: 10px;
+}
+.selector{
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border: 1px;
+    height: 40px;
+    width: 280px;
+    font-family: 'Montserrat';
+    text-align: center;
+}
+.botones-crear{
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+}
+.botones-crear button{
+    background-color: $buttonPrimary;
+    border-radius: 25px;
+    border: 1px;
+    height: 29px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45), 0px 0px 1px rgba(0, 0, 0, 0.45);
+    font-weight: 700;
+    font-size: 12px;
+    color: #FFFFFF;
+    padding: 9px;
+}
+.botones-eliminar{
+    height: 50px;
+    padding: 5px;
+}
+.botones-eliminar button{
+        background-color: $buttonBackground;
+        border-radius: 25px;
+        border: 1px;
+        height: 29px;
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45), 0px 0px 1px rgba(0, 0, 0, 0.45);
+        font-weight: 700;
+        font-size: 12px;
+        color: #FFFFFF;
+        padding: 9px;
+        margin-left: 20px;
+}
+.resultados-tabla{
+    padding: 20px;
+}
+.resultados-tabla table{    
+    border: 1px gray solid;
+    width: 1050px;
+    border-radius: 10px;
+}
+.resultados-tabla table tr{
+    border: 1px gray solid;
+}
+.resultados-tabla thead th{
+    width: min-content;    
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    height: 30px;
+}
+table tbody td{
+    text-align: center;
+    font-weight: 500;
+    font-size: 12px;
+    height: 25px;
+}
+table img{
+    width: 20px;
+    height: 20px;
+}
+.resultados-tabla button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    width: 350px;
+    height: 29px;
+    background: $buttonDownload;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45), 0px 0px 1px rgba(0, 0, 0, 0.45);
+    border-radius: 25px;
+    border: 1px;
+    margin-left: 500px;
+    color: #FFFFFF;
+}

@@ -1,10 +1,12 @@
 @import "../../../assets/styles/main.scss";
 .sidebar {
 background:#ffffff;
-width: 760px;
+width: 260px;
 height: max-content;
-font-family: $font;
 border: 1px solid rgba(0, 0, 0, 0.2);
+font-family: 'Montserrat';
+font-size: 20px;
+font-weight: 400;
 }
 h3{
     font-style: normal;
@@ -12,7 +14,7 @@ h3{
     font-size: 20px;
     line-height: 24px;
     text-align: center;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     width: 171.04px;
     height: 30px;
     left: 41px;
