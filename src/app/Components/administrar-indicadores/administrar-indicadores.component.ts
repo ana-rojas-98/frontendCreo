@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-administrar-indicadores',
   templateUrl: './administrar-indicadores.component.html',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdministrarIndicadoresComponent implements OnInit {
 
-  constructor() { }
+    constructor() { }
 
   ngOnInit() {
   }
