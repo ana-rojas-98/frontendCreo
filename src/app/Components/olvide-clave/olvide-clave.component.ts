@@ -17,7 +17,7 @@ export class OlvideClaveComponent implements OnInit {
   };
 
   validateEmail() {
-    console.log("hola: ",this.email);
+    console.log(this.email);
     this.authService.validar_correo(this.email).subscribe((res: any) => {
       console.log(res);
     });

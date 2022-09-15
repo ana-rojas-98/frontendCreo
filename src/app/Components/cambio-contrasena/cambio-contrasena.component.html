@@ -3,11 +3,32 @@
     <h1 class="Form-title">Cambio de contraseña</h1>
     <div class="form-group col">
       <input
+        type="email"
+        name="email"
+        placeholder="ejemple@gmail.com"
+        class="form-control"
+        [(ngModel)]="token.email"
+        required
+      />
+    </div>
+    <div class="form-group col">
+      <input
+        type="number"
+        name="token"
+        placeholder="token"
+        class="form-control"
+        [(ngModel)]="token.token"
+        required
+      />
+    </div>
+    <div class="form-group col">
+      <input
         type="password"
         name="contrasena"
         placeholder="password"
         class="form-control"
-        [(ngModel)]="user.Email"
+        [(ngModel)]="token.pass"
+        required
       />
     </div>
     <div class="form-group col">
@@ -16,11 +37,42 @@
         name="password"
         placeholder="password"
         class="form-control"
-        [(ngModel)]="user.password"
+        [(ngModel)]="token.pass1"
+        required
       />
     </div>
     <div>
-      <button type="submit" class="button-enviar" (click)="expression">Enviar</button>
+      <button type="submit" class="button-enviar" (click)="eviarToken()">
+        Enviar
+      </button>
     </div>
   </form>
 </div>
+
+<ng-template #contenido let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Titulo Modal</h4>
+    <button
+      class="close"
+      aria-label="close"
+      type="button"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Este es el contenido de este modal. Este es el contenido de este modal. Este
+    es el contenido de este modal. Este es el contenido de este modal. Este es
+    el contenido de este modal. Este es el contenido de este modal. Este es el
+    contenido de este modal. Este es el contenido de este modal. Este es el
+    contenido de este modal.
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="modal.close()">
+      Ok!
+    </button>
+  </div>
+</ng-template>
+
+<button type="button" class="btn btn-outline-danger" (click)="openSM(contenido)">lanzar modal SM</button>
