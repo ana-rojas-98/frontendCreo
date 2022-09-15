@@ -4,14 +4,20 @@
     <form action="" class="container-form-formularo">
       <span
         ><label for="email">Ingrese el correo electronico registrado</label>
-        <input class="input-olvido-clave" type="email" name="email"
+        <input
+          class="input-olvido-clave"
+          type="email"
+          name="email"
+          placeholder="ejem@gmail.com"
+          [(ngModel)]="email.Email"
       /></span>
-      <div class="containerbutton">
-        <button class="button-cancelar"
-        [routerLink]="['/login']">
-        cancelar
-      </button>
-      <input class="button-enviar" type="button" value="enviar" />
+      <div class="container-button">
+        <button class="button-cancelar" [routerLink]="['/cambio-contrasena']">
+          cancelar
+        </button>
+          <button class="button-enviar" (click)="validateEmail()">
+            Enviar
+          </button>
       </div>
     </form>
   </div>
