@@ -12,7 +12,6 @@ import { RegisterComponent } from "./Components/register/register.component";
 import { PrivateComponent } from "./Components/private/private.component";
 
 // Providers
-<<<<<<< HEAD
 import { JwtHelperService, JWT_OPTIONS } from "@auth0/angular-jwt";
 import { AuthGuard } from "./guards/auth.guard";
 import { RegistroSuperComponent } from "./Components/registro-super/registro-super.component";
@@ -23,18 +22,6 @@ import { SidebarComponent } from "./Components/sidebar/sidebar.component";
 import { PermisosRegistrosComponent } from "./Components/permisos-registros/permisos-registros.component";
 import { OlvideClaveComponent } from "./Components/olvide-clave/olvide-clave.component";
 import { CambioContrasenaComponent } from "./Components/cambio-contrasena/cambio-contrasena.component";
-=======
-import { JwtHelperService, JWT_OPTIONS }  from '@auth0/angular-jwt'
-import { AuthGuard } from './guards/auth.guard';
-import { RegistroSuperComponent } from './Components/registro-super/registro-super.component';
-import { EstandaresComponent } from './Components/estandares/estandares.component';
-import { CategoriasComponent } from './Components/categorias/categorias.component';
-import { SubcategoComponent } from './Components/subcatego/subcatego.component';
-import { SidebarComponent } from './Components/sidebar/sidebar.component';
-import { PermisosRegistrosComponent } from './Components/permisos-registros/permisos-registros.component';
-import { OlvideClaveComponent } from './Components/olvide-clave/olvide-clave.component';
-import { AdministrarIndicadoresComponent } from './Components/administrar-indicadores/administrar-indicadores.component';
->>>>>>> e6a9dcdea989b2c5ddfcbd508007b37a643dc6be
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -52,18 +39,13 @@ import { AdministrarIndicadoresComponent } from './Components/administrar-indica
     SidebarComponent,
     PermisosRegistrosComponent,
     OlvideClaveComponent,
-<<<<<<< HEAD
     CambioContrasenaComponent,
-=======
-    AdministrarIndicadoresComponent,
->>>>>>> e6a9dcdea989b2c5ddfcbd508007b37a643dc6be
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-<<<<<<< HEAD
       { path: "", component: HomeComponent, pathMatch: "full" },
       { path: "login", component: LoginComponent },
       { path: "register", component: RegisterComponent },
@@ -84,19 +66,6 @@ import { AdministrarIndicadoresComponent } from './Components/administrar-indica
       { path: "cambio-contrasena", component: CambioContrasenaComponent },
       { path: "SidebarComponent", component: SidebarComponent },
     ]),
-=======
-      { path: '', component: HomeComponent, pathMatch: 'full' },            
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
-      { path: 'private', component: PrivateComponent,canActivate:[AuthGuard]},
-      { path: 'registro-super', component: RegistroSuperComponent, canActivate:[AuthGuard]},
-      { path: 'estandares', component: EstandaresComponent},
-      { path: 'categorias', component: CategoriasComponent},
-      { path: 'subcategorias', component: SubcategoComponent},
-      { path: 'olvide-clave', component: OlvideClaveComponent},
-      { path: 'administrar-indicadores', component: AdministrarIndicadoresComponent},
-    ])
->>>>>>> e6a9dcdea989b2c5ddfcbd508007b37a643dc6be
   ],
   providers: [
     // JWT
