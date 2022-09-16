@@ -1,17 +1,27 @@
 <body>
     <form class="form-box">
         <h1 class="Form-title" align = "center">
-            Nueva Sub categoria
+            Nueva Subcategoria
         </h1>
         <div class="form-group col">
+            <label>Estándar</label>
+            <select name="select" type = selectbox>
+                <option value="1" [(ngModel)]="Categoria.IdCategoria" selected>Estándar 1</option>
+                <option value="2" [(ngModel)]="Categoria.IdCategoria">Estándar 2</option>
+                <option value="3" [(ngModel)]="Categoria.IdCategoria">Estándar 3</option>
+            </select> 
+            <br>
+            <br>
+            <label>Categoría</label>
             <select name="select" type = selectbox>
                 <option value="1" [(ngModel)]="Categoria.IdCategoria" selected>categoria 1</option>
                 <option value="2" [(ngModel)]="Categoria.IdCategoria">categoria 2</option>
                 <option value="3" [(ngModel)]="Categoria.IdCategoria">categoria 3</option>
-            </select> 
+            </select>
             <br>
             <br>
-            <input type = "Subcatego" name = "Subcatego" placeholder="Nombre de la subcategoria" class="form-control" [(ngModel)]="Subcatego.NombreSubcategoria">
+            <label>Nombre Subcategoria</label>
+            <input type = "Subcatego" name = "Subcatego" class="form-control" [(ngModel)]="Subcatego.NombreSubcategoria">
         </div>
         <div>
           <button type="cancel" class = "bot_per_2"> Cancelar

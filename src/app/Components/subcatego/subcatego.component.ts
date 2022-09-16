@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-subcatego',
   templateUrl: './subcatego.component.html',
-  styleUrls: ['./subcatego.component.css']
+  styleUrls: ['./subcatego.component.scss']
 })
 export class SubcategoComponent implements OnInit {
 

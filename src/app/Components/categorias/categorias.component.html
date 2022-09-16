@@ -4,20 +4,21 @@
             Nueva categoria
         </h1>
         <div class="form-group col">
-            <select name="select" type = selectbox align = "center">
+            <label for="select">Estándar</label>
+            <select name="select" type = selectbox>
                 <option value="Estandar 1" [(ngModel)]="Categoria.IdEstandar" selected>Estandar 1</option>
                 <option value="Estandar 2" [(ngModel)]="Categoria.IdEstandar">Estandar 2</option>
                 <option value="Estandar 3" [(ngModel)]="Categoria.IdEstandar">Estandar 3</option>
-              </select> 
-              <br>
-              <br>
-            <input type = "Categoria" name = "Categoria" placeholder="Nombre de la categoria" class="form-control" [(ngModel)]="Categoria.NombreCategoria">
-        </div>        
-        <div>
-          <button type="cancel" class = "bot_per_2"> Cancelar
-          </button>
-          <button type="submit" class = "bot_est" (click)="SetCategoria()">Guardar
-          </button>
-        </div>      
+              </select>
+              <label for="Categoria">Nombre categoría</label>
+              <input type = "Categoria" name = "Categoria" class="form-control" [(ngModel)]="Categoria.NombreCategoria">
+            </div>
+            <div>
+              <button type="cancel" class = "bot_per_2"> Cancelar
+              </button>
+              <button type="submit" class = "bot_est" (click)="SetCategoria()">Guardar
+              </button>
+            </div>
+     
     </form>
   </body>
