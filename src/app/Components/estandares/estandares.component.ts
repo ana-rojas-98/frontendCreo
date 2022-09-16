@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-estandares',
   templateUrl: './estandares.component.html',
-  styleUrls: ['./estandares.component.css']
+  styleUrls: ['./estandares.component.scss']
 })
 export class EstandaresComponent implements OnInit {
 

@@ -1,10 +1,11 @@
 <body>
   <form class="form-box">
       <h1 class="Form-title" align = "center">
-          Nuevo Estandar
+          Nuevo estándar
       </h1>
       <div class="form-group col">
-          <input type = "Estandar" name = "estandar" placeholder="Nombre del Estandar" class="form-control" [(ngModel)]="Estandar.NombreEstandar">
+          <label for="estandar">Nombre del estándar</label>
+          <input type = "Estandar" name = "estandar" class="form-control" [(ngModel)]="Estandar.NombreEstandar">
       </div>
       <div>
         <button type="cancel" class = "bot_per_2"> Cancelar

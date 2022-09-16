@@ -25,6 +25,7 @@ import { PermisosRegistrosComponent } from './Components/permisos-registros/perm
 import { OlvideClaveComponent } from './Components/olvide-clave/olvide-clave.component';
 import { AdministrarIndicadoresComponent } from './Components/administrar-indicadores/administrar-indicadores.component';
 import { CambioContrasenaComponent } from './Components/cambio-contrasena/cambio-contrasena.component';
+import { FooterComponent } from './Components/footer/footer.component';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -44,6 +45,7 @@ import { CambioContrasenaComponent } from './Components/cambio-contrasena/cambio
     OlvideClaveComponent,
     AdministrarIndicadoresComponent,
     CambioContrasenaComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
