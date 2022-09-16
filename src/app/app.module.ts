@@ -14,7 +14,6 @@ import { PrivateComponent } from './Components/private/private.component';
 
 
 // Providers
-<<<<<<< HEAD
 import { JwtHelperService, JWT_OPTIONS }  from '@auth0/angular-jwt'
 import { AuthGuard } from './guards/auth.guard';
 import { RegistroSuperComponent } from './Components/registro-super/registro-super.component';
@@ -26,18 +25,6 @@ import { PermisosRegistrosComponent } from './Components/permisos-registros/perm
 import { OlvideClaveComponent } from './Components/olvide-clave/olvide-clave.component';
 import { AdministrarIndicadoresComponent } from './Components/administrar-indicadores/administrar-indicadores.component';
 import { CambioContrasenaComponent } from './Components/cambio-contrasena/cambio-contrasena.component';
-=======
-import { JwtHelperService, JWT_OPTIONS } from "@auth0/angular-jwt";
-import { AuthGuard } from "./guards/auth.guard";
-import { RegistroSuperComponent } from "./Components/registro-super/registro-super.component";
-import { EstandaresComponent } from "./Components/estandares/estandares.component";
-import { CategoriasComponent } from "./Components/categorias/categorias.component";
-import { SubcategoComponent } from "./Components/subcatego/subcatego.component";
-import { SidebarComponent } from "./Components/sidebar/sidebar.component";
-import { PermisosRegistrosComponent } from "./Components/permisos-registros/permisos-registros.component";
-import { OlvideClaveComponent } from "./Components/olvide-clave/olvide-clave.component";
-import { CambioContrasenaComponent } from "./Components/cambio-contrasena/cambio-contrasena.component";
->>>>>>> 5868f0bf2104a306e9dfa026a610f24895779cea
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -55,10 +42,7 @@ import { CambioContrasenaComponent } from "./Components/cambio-contrasena/cambio
     SidebarComponent,
     PermisosRegistrosComponent,
     OlvideClaveComponent,
-<<<<<<< HEAD
     AdministrarIndicadoresComponent,
-=======
->>>>>>> 5868f0bf2104a306e9dfa026a610f24895779cea
     CambioContrasenaComponent,
   ],
   imports: [
@@ -66,7 +50,6 @@ import { CambioContrasenaComponent } from "./Components/cambio-contrasena/cambio
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-<<<<<<< HEAD
       { path: '', component: HomeComponent, pathMatch: 'full' },            
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
@@ -79,28 +62,6 @@ import { CambioContrasenaComponent } from "./Components/cambio-contrasena/cambio
       { path: 'administrar-indicadores', component: AdministrarIndicadoresComponent},
       { path: 'cambio-contrasena.component', component: CambioContrasenaComponent},
     ])
-=======
-      { path: "", component: HomeComponent, pathMatch: "full" },
-      { path: "login", component: LoginComponent },
-      { path: "register", component: RegisterComponent },
-      {
-        path: "private",
-        component: PrivateComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: "registro-super",
-        component: RegistroSuperComponent,
-        canActivate: [AuthGuard],
-      },
-      { path: "estandares", component: EstandaresComponent },
-      { path: "categorias", component: CategoriasComponent },
-      { path: "subcategorias", component: SubcategoComponent },
-      { path: "olvide-clave", component: OlvideClaveComponent },
-      { path: "cambio-contrasena", component: CambioContrasenaComponent },
-      { path: "SidebarComponent", component: SidebarComponent },
-    ]),
->>>>>>> 5868f0bf2104a306e9dfa026a610f24895779cea
   ],
   providers: [
     // JWT
