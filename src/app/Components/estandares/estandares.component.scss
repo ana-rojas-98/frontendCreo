@@ -1,0 +1,60 @@
+@import "../../../assets/styles/main.scss";
+
+body html{
+    height: 100%;
+  }
+  body{
+    margin: 10%;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color:rgb(255, 255, 255);
+  }
+  .form-box {
+    position: relative;
+    width: 627px;
+    height: 361px;
+    background: $background-color;
+    border: 1px blue solid;
+    border-radius: 15px;
+  }
+  .Form-title{
+    text-align: center;
+    margin-top: 39px;
+    margin-bottom: 39px;    
+    @include tittleCard(700, 24px);
+  }
+.form-box input[type="Estandar"]{
+  margin-top: 10px;
+  text-align: justify;
+  @include inputCard(360px, 48px);
+}
+.form-box input[type="Estandar"] :focus{
+  border-color: aqua;
+}
+.form-group{
+  display: flex;  
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 130px;
+}
+.bot_est{
+    @include buttonCard($buttonPrimary);
+    width: 123px;
+    height: 47px;
+    left: calc(50% - 123px/2 + 115px);
+    top: calc(50% - 47px/2 + 89px);
+    cursor: pointer;
+  }
+  .bot_per_2{
+    @include buttonCard($buttonSecondary);    
+    width: 130px;
+    height: 47px;
+    left: calc(50% - 130px/2 - 106.5px);
+    top: calc(50% - 47px/2 + 89px);
+    cursor: pointer;
+  }
+  

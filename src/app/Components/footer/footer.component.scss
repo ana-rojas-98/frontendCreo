@@ -1,0 +1,29 @@
+footer{
+    width: 1440px;
+    height: 11px;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-around;
+}
+
+.imagen img{
+    width: 250.38px;
+    height: 92px;
+    position: absolute;
+    left: 36px;
+    margin-top: 15px;
+}
+.text-footer{
+    width: 81px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    margin-top: 55px;
+}
+.text-footer h5{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    color: #9C9B9B;
+}
