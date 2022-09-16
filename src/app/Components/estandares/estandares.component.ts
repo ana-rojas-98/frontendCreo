@@ -20,9 +20,8 @@ export class EstandaresComponent implements OnInit {
   ngOnInit() {
   }
   SetEstandar(){
-    console.log(this.Estandar);
     this.authService.crear_estandar(this.Estandar).subscribe((res:any) => {
-      console.log(res);                 
+      console.log("mensaje: ",res.result);            
     })
   } 
 

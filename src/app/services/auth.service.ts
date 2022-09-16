@@ -24,12 +24,7 @@ export class AuthService {
   singup(user_reg: any) {
     return this.http.post(`${this.URL_SER}/api/Usuarios/PostUsuario`, user_reg);
   }
-  crear_estandar(estand: any) {
-    return this.http.post(
-      `${this.URL_SER}/api/Estandares/PostEstandar`,
-      estand
-    );
-  }
+
   crear_categoria(categoria: any) {
     return this.http.post(
       `${this.URL_SER}/api/Categoria/PostCategoria`,
@@ -56,7 +51,7 @@ export class AuthService {
   }
 
   cambiar_contrasena(token: any) {
-    let result = this.http.post(
+    this.http.post(
       `${this.URL_SER}/api/RecuperarContrasena/ValidatioToken`,
       token
     );
@@ -64,5 +59,14 @@ export class AuthService {
       `${this.URL_SER}/api/RecuperarContrasena/ValidatioToken`,
       token
     );
+  }
+
+  crear_estandar(estandar: any) {
+    let result = this.http.post(
+      `${this.URL_SER}/api/Estandares/PostEstandar`,
+      estandar
+    );
+    console.log("el mensaje es: ",result)
+    return result
   }
 }

@@ -62,7 +62,7 @@ import { FooterComponent } from './Components/footer/footer.component';
       { path: 'subcategorias', component: SubcategoComponent},
       { path: 'olvide-clave', component: OlvideClaveComponent},
       { path: 'administrar-indicadores', component: AdministrarIndicadoresComponent},
-      { path: 'cambio-contrasena.component', component: CambioContrasenaComponent},
+      { path: 'cambio-contrasena', component: CambioContrasenaComponent},
     ])
   ],
   providers: [

@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
-
-
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-cambio-contrasena",
@@ -10,7 +9,7 @@ import { AuthService } from "src/app/services/auth.service";
   styleUrls: ["./cambio-contrasena.component.scss"],
 })
 export class CambioContrasenaComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router,) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   token = {
     email: "",
@@ -28,12 +27,20 @@ export class CambioContrasenaComponent implements OnInit {
       };
       this.authService.cambiar_contrasena(token1).subscribe((res: any) => {
         if (res === "El correo no existe") {
-          console.log("datos incorrectos: ", res);
+          this.alerta("datos erroneos");
         } else {
           console.log("cambio exitoso: ", res);
         }
       });
+    } else {
+      this.alerta("las contraseñas no coninciden");
     }
+  }
+
+  alerta(mensaje: any) {
+    Swal.fire(
+      mensaje
+    )
   }
 
   ngOnInit() {}
