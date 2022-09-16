@@ -18,13 +18,9 @@ body html{
     width: 627px;
     height: 361px;
     background: $background-color;
-    border: 1px blue solid;
     border-radius: 15px;
   }
-  .Form-title{
-    text-align: center;
-    margin-top: 39px;
-    margin-bottom: 39px;    
+  .Form-title{    
     @include tittleCard(700, 24px);
   }
 .form-box input[type="Estandar"]{
