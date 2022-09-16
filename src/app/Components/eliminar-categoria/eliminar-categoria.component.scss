@@ -1,0 +1,49 @@
+@import "../../../assets/styles/main.scss";
+.contenedor{
+    margin: auto;
+    background-color:rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-box{
+    position: relative;
+    width: 627px;
+    height: 496px;  
+    background: #FFFFFF;
+    border-radius: 15px;
+    text-align: center;
+}
+.form-group{
+    position: absolute;
+    display: flex;  
+    flex-direction: column;
+    align-items: baseline;
+    width: 308px;
+    height: 289px;
+    left: 160px;
+    top: 123px;
+}
+.Form-title{
+    @include tittleCard(700, 24px);
+}
+.form-group label{
+    @include label;
+}
+.form-group select{
+    @include select;
+}
+.bot_per_2{
+    @include buttonCard($buttonSecondary);
+    width: 130px;
+    height: 47px;
+    left: calc(50% - 130px/2 - 107.5px);
+    top: calc(50% - 47px/2 + 154.5px);
+}
+.bot_est{
+    @include buttonCard($buttonPrimary);
+    width: 123px;
+    height: 47px;
+    left: calc(50% - 123px/2 + 114px);
+    top: calc(50% - 47px/2 + 154.5px);
+}

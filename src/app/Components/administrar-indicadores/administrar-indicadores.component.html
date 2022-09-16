@@ -39,9 +39,9 @@
                 <button>Crear indicadores masivamente</button>
             </div>
             <div class="botones-eliminar">
-                <button>Eliminar estandar</button>
-                <button>Eliminar categoria</button>
-                <button>Eliminar subcategoria</button>
+                <button [routerLink]="['/eliminar-estandar']" [routerLinkActive]="['link-active']">Eliminar estandar</button>
+                <button [routerLink]="['/eliminar-categoria']" [routerLinkActive]="['link-active']">Eliminar categoria</button>
+                <button [routerLink]="['/eliminar-subcategoria']" [routerLinkActive]="['link-active']">Eliminar subcategoria</button>
             </div>
             <div class="resultados-tabla">
                 <table>
@@ -92,4 +92,3 @@
         </div>   
     </div>
 </body>
-<app-footer></app-footer>
