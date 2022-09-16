@@ -1,19 +1,4 @@
 using System;
-namespace backendCreo.Models
-{
-    public class TokenRecuperarContrasena
-    {
-        public TokenRecuperarContrasena()
-        { }
-        public int id { get; set; }
-        public string token { get; set; }
-        public DateTime hora { get; set; }
-        public DateTime fecha { get; set; }
-    }
-}
-
-
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,80 +19,79 @@ namespace backendCreo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubcategoriaController : ControllerBase
+    public class EstandaresController : ControllerBase
     {
         private readonly CreoContext _context;
 
         HelperToken helper;
 
-        public SubcategoriaController(CreoContext context, IConfiguration configuration)
+        public EstandaresController(CreoContext context, IConfiguration configuration)
         {
             _context = context;
             this.helper = new HelperToken(configuration);
           
         }
 
-        // GET: api/SubCategoria
+        // GET: api/Usuarios
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<Subcategoria>>> GetSubcategoria()
+        public async Task<ActionResult<IEnumerable<Estandares>>> GetEstandares()
         {
-            return await _context.Subcategoria.ToListAsync();
+            return await _context.Estandares.ToListAsync();
         }
 
-        // GET: api/Subcategoria/5
+        // GET: api/Estandares/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Subcategoria>> GetSubcategoria(int id)
+        public async Task<ActionResult<Estandares>> GetEstandares(int id)
         {
-            var subcategoria = await _context.Subcategoria.FindAsync(id);
+            var estandares = await _context.Estandares.FindAsync(id);
 
-            if (subcategoria == null)
+            if (estandares == null)
             {
                 return NotFound();
             }
 
-            return subcategoria;
+            return estandares;
         }
 
         // POST: api/Estandares
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost("[action]")]
-        public async Task<ActionResult<Subcategoria>> Postsubcategoria(Subcategoria subcategoria)
+        public async Task<dynamic> PostEstandar(Estandares Estandar_o)
         {
             //var pass = SecurityLogic.GetMD5Password(usuario.Pass);
 
-            Subcategoria newSubcategoria = new Subcategoria();
+            Estandares newEstandar = new Estandares();
 
-            newSubcategoria.NombreSubcategoria = subcategoria.NombreSubcategoria;
-            newSubcategoria.IdCategoria = subcategoria.IdCategoria;
+            newEstandar.NombreEstandar = Estandar_o.NombreEstandar;
 
-            _context.Subcategoria.Add(newSubcategoria);
+            _context.Estandares.Add(newEstandar);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSubcategoria", new { id = subcategoria.Subcategoria1}, subcategoria);
+            return newEstandar;
         }
 
         // DELETE: api/Estandares/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Subcategoria>> DeleteSubcategoria(int id)
+        public async Task<ActionResult<Estandares>> DeleteEstandar(int id)
         {
-            var subcategoria = await _context.Subcategoria.FindAsync(id);
-            if (subcategoria == null)
+            var estandar = await _context.Estandares.FindAsync(id);
+            if (estandar == null)
             {
                 return NotFound();
             }
 
-            _context.Subcategoria.Remove(subcategoria);
+            _context.Estandares.Remove(estandar);
             await _context.SaveChangesAsync();
 
-            return subcategoria;
+            return estandar;
         }
 
-        private bool SubcategoriaExists(int id)
+        private bool EstandarExists(int id)
         {
-            return _context.Subcategoria.Any(e => e.Subcategoria1 == id);
+            return _context.Estandares.Any(e => e.Estandar == id);
         }        
                
     }
