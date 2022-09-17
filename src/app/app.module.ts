@@ -26,6 +26,9 @@ import { OlvideClaveComponent } from './Components/olvide-clave/olvide-clave.com
 import { AdministrarIndicadoresComponent } from './Components/administrar-indicadores/administrar-indicadores.component';
 import { CambioContrasenaComponent } from './Components/cambio-contrasena/cambio-contrasena.component';
 import { FooterComponent } from './Components/footer/footer.component';
+import { EliminarEstandarComponent } from './Components/eliminar-estandar/eliminar-estandar.component';
+import { EliminarCategoriaComponent } from './Components/eliminar-categoria/eliminar-categoria.component';
+import { EliminarSubcategoriaComponent } from './Components/eliminar-subcategoria/eliminar-subcategoria.component';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -46,6 +49,9 @@ import { FooterComponent } from './Components/footer/footer.component';
     AdministrarIndicadoresComponent,
     CambioContrasenaComponent,
     FooterComponent,
+    EliminarEstandarComponent,
+    EliminarCategoriaComponent,
+    EliminarSubcategoriaComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
