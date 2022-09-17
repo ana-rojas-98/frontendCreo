@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-estandares',
@@ -21,8 +22,12 @@ export class EstandaresComponent implements OnInit {
   }
   SetEstandar(){
     this.authService.crear_estandar(this.Estandar).subscribe((res:any) => {
-      console.log("mensaje: ",res.result);            
+      this.alerta(res.result);           
     })
   } 
+
+  alerta(mensaje:any){
+    Swal.fire(mensaje);
+  }
 
 }

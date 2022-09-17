@@ -1,33 +1,41 @@
 <body>
-    <form class="form-box">
-        <h1 class="Form-title" align = "center">
-            Nueva Subcategoria
-        </h1>
-        <div class="form-group col">
-            <label>Estándar</label>
-            <select name="select" type = selectbox>
-                <option value="1" [(ngModel)]="Categoria.IdCategoria" selected>Estándar 1</option>
-                <option value="2" [(ngModel)]="Categoria.IdCategoria">Estándar 2</option>
-                <option value="3" [(ngModel)]="Categoria.IdCategoria">Estándar 3</option>
-            </select> 
-            <br>
-            <br>
-            <label>Categoría</label>
-            <select name="select" type = selectbox>
-                <option value="1" [(ngModel)]="Categoria.IdCategoria" selected>categoria 1</option>
-                <option value="2" [(ngModel)]="Categoria.IdCategoria">categoria 2</option>
-                <option value="3" [(ngModel)]="Categoria.IdCategoria">categoria 3</option>
-            </select>
-            <br>
-            <br>
-            <label>Nombre Subcategoria</label>
-            <input type = "Subcatego" name = "Subcatego" class="form-control" [(ngModel)]="Subcatego.NombreSubcategoria">
-        </div>
-        <div>
-          <button type="cancel" class = "bot_per_2"> Cancelar
-          </button>
-          <button type="submit" class = "bot_est" (click)="SetSubCategoria()">Guardar
-          </button>
-        </div>      
-    </form>
-  </body>
+  <form class="form-box">
+    <h1 class="Form-title" align="center">Nueva Subcategoria</h1>
+    <div class="form-group col">
+      <select name="select" type="selectbox" [(ngModel)]="Categoria.estandar">
+        <option
+          *ngFor="let resultado of resultados"
+          [value]="resultado.estandar"
+        >
+          <h1>{{ resultado.nombreEstandar }}</h1>
+        </option>
+      </select>
+      <label>Categoría</label>
+
+      <select type="selectbox">
+        <option
+          *ngFor="let categoria of resultados"
+          [value]="categoria.categoria1"
+        >
+          <h1>{{ categoria.nombreCategoria }}</h1>
+        </option>
+      </select>
+
+      <br />
+      <br />
+      <label>Nombre Subcategoria</label>
+      <input
+        type="Subcatego"
+        name="Subcatego"
+        class="form-control"
+        [(ngModel)]="Subcatego.NombreSubcategoria"
+      />
+    </div>
+    <div>
+      <button type="cancel" class="bot_per_2">Cancelar</button>
+      <button type="submit" class="bot_est" (click)="SetSubCategoria()">
+        Guardar
+      </button>
+    </div>
+  </form>
+</body>
