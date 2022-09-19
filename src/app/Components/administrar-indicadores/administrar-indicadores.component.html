@@ -77,14 +77,14 @@
         </button>
 
         <button
-          [routerLink]="['/estandares']"
+          [routerLink]="['/nuevo-indicador']"
           [routerLinkActive]="['link-active']"
         >
           Crear nuevo indicador
         </button>
 
         <button
-          [routerLink]="['/estandares']"
+          [routerLink]="['/indicadores-masivos']"
           [routerLinkActive]="['link-active']"
         >
           Crear indicadores masivamente
@@ -117,33 +117,34 @@
               <th>
                 <img
                   src="../../../assets/imagenes/nombreIndicador.png"
-                  alt="icon"
+                  alt="icono-nombre"
                 />
                 Nombre indicador
               </th>
               <th>
-                <img src="../../../assets/imagenes/creador.png" alt="icon" />
+                <img src="../../../assets/imagenes/creador.png" alt="icono-creador" />
                 Creador
               </th>
               <th>
-                <img src="../../../assets/imagenes/fechaHora.png" alt="icon" />
+                <img src="../../../assets/imagenes/fechaHora.png" alt="icono-fecha" />
                 Fecha y hora Creacion
               </th>
               <th>
-                <img src="../../../assets/imagenes/archivo.png" alt="" />
+                <img src="../../../assets/imagenes/archivo.png" alt="icono-archivo" />
                 Archivo
               </th>
-              <th><img src="../../../assets/imagenes/ver.png" alt="" /> Ver</th>
+              <th><img src="../../../assets/imagenes/ver.png" alt="icono-ver" /></th>
               <th>
-                <img src="../../../assets/imagenes/editar.png" alt="" /> Editar
+                <img src="../../../assets/imagenes/editar.png" alt="icono-editar" 
+                [routerLink]="['/editar-icono']"
+                [routerLinkActive]="['link-active']"
+                />
               </th>
               <th>
-                <img src="../../../assets/imagenes/eliminar.png" alt="" />
-                Eliminar
+                <img src="../../../assets/imagenes/eliminar.png" alt="icono-eliminar" />
               </th>
               <th>
-                <img src="../../../assets/imagenes/duplicar.png" alt="" />
-                Duplicar
+                <img src="../../../assets/imagenes/duplicar.png" alt="icono-duplicar" />                
               </th>
               <th></th>
             </tr>
