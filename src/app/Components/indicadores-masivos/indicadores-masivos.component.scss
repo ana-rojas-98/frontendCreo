@@ -1,0 +1,65 @@
+@import "../../../assets/styles/main.scss";
+
+.contenedor{
+    @include contenedor;
+}
+.cuerpo{
+    @include body;
+}
+.title-body{
+    @include titleBody;
+    h1{
+        @include h1Body;
+    }
+}
+.archivo-ejemplo{
+    margin: 20px;
+}
+.subir-archivo{
+    margin: 20px;
+}
+.masivos{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+.botones{
+    display: flex;
+    justify-content: center;
+}
+.cancelar{
+    margin-right: 130px;
+}
+table{
+    border:2px solid #000000;
+    width: 1050px;
+}
+table img{
+    width: 20px;
+    height: 20px;
+}
+table tr{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+table thead th{ 
+    text-align: center;
+    font-size: 14px;
+    height: 30px;
+    border-left: 2px solid rgba(0, 0, 0, 0.2);
+}
+table tbody td{
+    text-align: center;
+    font-weight: 500;
+    font-size: 12px;
+    height: 25px;
+}
+table select{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 100px;
+    height: 40px;
+    border: 1px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

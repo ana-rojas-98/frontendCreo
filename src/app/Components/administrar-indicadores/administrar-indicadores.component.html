@@ -35,8 +35,8 @@
                 <button [routerLink]="['/estandares']" [routerLinkActive]="['link-active']">Crear nuevo estandar</button>
                 <button>Crear nueva categoria</button>
                 <button>Crear nueva subcategoria</button>
-                <button>Crear nuevo indicador</button>
-                <button>Crear indicadores masivamente</button>
+                <button [routerLink]="['/nuevo-indicador']" [routerLinkActive]="['link-active']">Crear nuevo indicador</button>
+                <button [routerLink]="['/indicadores-masivos']" [routerLinkActive]="['link-active']">Crear indicadores masivamente</button>
             </div>
             <div class="botones-eliminar">
                 <button [routerLink]="['/eliminar-estandar']" [routerLinkActive]="['link-active']">Eliminar estandar</button>
@@ -47,14 +47,14 @@
                 <table>
                     <thead>
                         <tr>
-                            <th><img src="../../../assets/imagenes/nombreIndicador.png" alt="icon"> Nombre indicador</th>
-                            <th><img src="../../../assets/imagenes/creador.png" alt="icon"> Creador</th>
-                            <th><img src="../../../assets/imagenes/fechaHora.png" alt="icon"> Fecha y hora Creacion</th>
-                            <th><img src="../../../assets/imagenes/archivo.png" alt=""> Archivo</th>
-                            <th><img src="../../../assets/imagenes/ver.png" alt=""> Ver</th>
-                            <th><img src="../../../assets/imagenes/editar.png" alt=""> Editar</th>
-                            <th><img src="../../../assets/imagenes/eliminar.png" alt=""> Eliminar</th>
-                            <th><img src="../../../assets/imagenes/duplicar.png" alt=""> Duplicar</th>
+                            <th><img src="../../../assets/imagenes/nombreIndicador.png" alt="icono-nombre"> Nombre indicador</th>
+                            <th><img src="../../../assets/imagenes/creador.png" alt="icono-creador"> Creador</th>
+                            <th><img src="../../../assets/imagenes/fechaHora.png" alt="icono-fecha"> Fecha y hora Creacion</th>
+                            <th><img src="../../../assets/imagenes/archivo.png" alt="icono-archivo"> Archivo</th>
+                            <th><img src="../../../assets/imagenes/ver.png" alt="icono-ver"></th>
+                            <th><img src="../../../assets/imagenes/editar.png" alt="icono-editar"></th>
+                            <th><img src="../../../assets/imagenes/eliminar.png" alt="icono-eliminar"> Eliminar</th>
+                            <th><img src="../../../assets/imagenes/duplicar.png" alt="icono-duplicar"> Duplicar</th>
                             <th> </th>
                         </tr>
                     </thead>
@@ -65,9 +65,17 @@
                             <td>2022/12/05</td>
                             <td>Archivo</td>
                             <td><img src="../../../assets/imagenes/ver.png" alt="ver-icono"></td>
-                            <td><img src="../../../assets/imagenes/editar.png" alt="editar-icono"></td>
-                            <td><img src="../../../assets/imagenes/eliminar.png" alt="eliminar-icono"></td>
-                            <td><img src="../../../assets/imagenes/duplicar.png" alt="duplicar-icono"></td>
+                            <td>
+                                <img src="../../../assets/imagenes/editar.png"
+                                alt="editar-icono"
+                                [routerLink]="['/editar-indicador']"
+                                [routerLinkActive]="['link-active']">
+                            </td>
+                            <td><img src="../../../assets/imagenes/eliminar.png" alt="eliminar-icono" ></td>
+                            <td>
+                                <img src="../../../assets/imagenes/duplicar.png" 
+                                alt="duplicar-icono">
+                            </td>
                             <td><img src="../../../assets/imagenes/excel.png" alt="excel-icono"></td>
                             <td><img src="../../../assets/imagenes/word.png" alt="word-icono"></td>
                             <td><img src="../../../assets/imagenes/pdf.png" alt="pdf-icono"></td>

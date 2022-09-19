@@ -1,0 +1,68 @@
+<div class="contenedor">
+    <app-sidebar></app-sidebar>
+    <div class="cuerpo">
+        <div class="title-indicador">
+            <h1>Nuevo indicador</h1>
+        </div>
+        <div class="ingreso-archivo">
+            <p>A continuación porfavor ingrese el archivo Excel para
+                crear el indicador, puede descargar un ejemplo del 
+                archivo en el siguiente enlace.
+            </p>
+            <button class="button-interactivo">Achivo ejemplo</button>
+        </div>
+        <div class="seleccion-estandar">
+            <p>Seleccione estandar, categoría y subcategoria a la que pertenece el indicador</p>
+            <div class="box-select">
+            <div class="box">
+                <h3>Estandar</h3>
+                <select class="selector" name="select" type = selectbox>
+                    <option value="Estandar 1">Seleciona estandar</option>
+                    <option value="Estandar 2">Filtro Estandar 2</option>
+                    <option value="Estandar 3">Filtro Estandar 3</option>
+                </select>
+            </div>
+            <div class="box">
+                <h3>Categoria</h3>
+                <select class="selector" name="select" type = selectbox>
+                    <option value="Categoria 1">Filtro Categoria 1</option>
+                    <option value="Categoria 2">Filtro Categoria 2</option>
+                    <option value="Categoria 3">Filtro Categoria 3</option>
+                  </select>
+            </div>
+            <div class="box">
+                <h3>Subcategoria</h3>
+                <select class="selector" name="select" type = selectbox>
+                    <option value="Subcategoria 1">Filtro Subcategoria 1</option>
+                    <option value="Subcategoria 2">Filtro SubCategoria 2</option>
+                    <option value="Subcategoria 3">Filtro Subcategoria 3</option>
+                  </select>
+            </div>
+            </div>
+        </div>
+        <div class="subir-archivo">
+            <p>Subir el archivo excel:</p>
+            <button class="button-interactivo">Subir archivo</button>
+        </div>
+        <div class="perioricidad-indicador">
+            <p>Seleccione la perioricidad de este indicador</p>
+            <br>
+            <h3>Perioricidad</h3>
+            <br>
+            <select name="select" type="selectbox">
+                <option value="Perioricidad 1">Perioricidad 1</option>
+                <option value="Perioricidad 2">Perioricidad 2</option>
+            </select>
+        </div>
+        <div class="previsualizar-indicador">
+            <p>A continuación revise la previsualización del indicador:</p>
+            <button class="button-interactivo">Previsualización del indicador</button>
+        </div>
+        <div class="buttons">
+            <button type="cancel" class = "cancelar"> Cancelar
+            </button>
+            <button type="submit" class = "guardar" (click)="SetCategoria()">Guardar
+            </button>
+        </div>
+    </div>
+</div>
