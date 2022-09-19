@@ -10,7 +10,7 @@ import { AuthService } from "src/app/services/auth.service";
 export class SubcategoComponent implements OnInit {
   Subcategoria = {
     NombreSubcategoria: "",
-    IdCategoria: "",
+    IdCategoria: ""
   };
 
   Categoria = {
@@ -27,10 +27,13 @@ export class SubcategoComponent implements OnInit {
     this.getStandares();
   }
 
+  categoria(){
+    console.log(this.Subcategoria)
+  }
+
   getCategoria() {
-    this.authService.getCategoria(this.Subcategoria).subscribe((res: any) => {
-      res.map((item) => {
-        //console.log("hola: ", item.nombreCategoria);
+    this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
+      this.resultados = res.map((item) => {
         return item;
       });
     });
@@ -38,15 +41,18 @@ export class SubcategoComponent implements OnInit {
 
   getStandares() {
     this.authService.getStandares(this.Categoria).subscribe((res: any) => {
-      this.resultados = res.map((item) => {
+      res.map((item) => {
         return item;
       });
     });
   }
 
   SetSubCategoria() {
+    console.log("hola: ", this.Subcategoria)
     this.authService
       .crear_subcategoria(this.Subcategoria)
-      .subscribe((res: any) => {});
+      .subscribe((res: any) => {
+        console.log(res)
+      });
   }
 }

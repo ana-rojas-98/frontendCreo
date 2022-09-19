@@ -9,28 +9,48 @@
         <div class="box">
           <h3>Estandar</h3>
           <br />
-          <select class="selector" name="select" type="selectbox">
-            <option value="Estandar 1">Seleciona estandar</option>
-            <option value="Estandar 2">Filtro Estandar 2</option>
-            <option value="Estandar 3">Filtro Estandar 3</option>
+          <select
+            class="selector"
+            name="estandar"
+            type="selectbox"
+            [(ngModel)]="Estandar.estandar"
+            (change)="estandar()"
+          >
+            <option
+              *ngFor="let resultado of resultados"
+              [value]="resultado.estandar"
+            >
+              <h1>{{ resultado.nombreEstandar }}</h1>
+            </option>
           </select>
         </div>
         <div class="box">
           <h3>Categoria</h3>
           <br />
-          <select class="selector" name="select" type="selectbox">
-            <option value="Categoria 1">Filtro Categoria 1</option>
-            <option value="Categoria 2">Filtro Categoria 2</option>
-            <option value="Categoria 3">Filtro Categoria 3</option>
+          <select
+            class="selector"
+            name="categoria"
+            type="selectbox"
+            (change)="categoria()"
+          >
+            <option
+              *ngFor="let resultadoCategoria of resultadosCategoria"
+              [value]="resultadoCategoria.categoria1"
+            >
+              {{ resultadoCategoria.nombreCategoria }}
+            </option>
           </select>
         </div>
         <div class="box">
           <h3>Subcategoria</h3>
           <br />
           <select class="selector" name="select" type="selectbox">
-            <option value="Subcategoria 1">Filtro Subcategoria 1</option>
-            <option value="Subcategoria 2">Filtro SubCategoria 2</option>
-            <option value="Subcategoria 3">Filtro Subcategoria 3</option>
+            <option
+              *ngFor="let item of resultadosSubCategoria"
+              [value]="item.subcategoria1"
+            >
+              {{ item.nombreSubcategoria }}
+            </option>
           </select>
         </div>
       </div>

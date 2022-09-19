@@ -25,13 +25,6 @@ export class AuthService {
     return this.http.post(`${this.URL_SER}/api/Usuarios/PostUsuario`, user_reg);
   }
 
-  crear_subcategoria(subcategoria: any) {
-    return this.http.post(
-      `${this.URL_SER}/api/Subcategoria/PostSubcategoria`,
-      subcategoria
-    );
-  }
-
   validar_correo(email: any) {
     let result = this.http.post(
       `${this.URL_SER}/api/Usuarios/ValidationEmail`,
@@ -64,21 +57,44 @@ export class AuthService {
     return result;
   }
 
-  getStandares(estandar: any) {
-    let result = this.http.get(`${this.URL_SER}/api/Estandares`, estandar);
-    console.log(result);
-    return result;
-  }
-
-  getCategoria(categorias:any) {
-    let result = this.http.get(`${this.URL_SER}/api/Categoria`,categorias);
-    return result;
-  }
-
   crear_categoria(categoria: any) {
     let result = this.http.post(
       `${this.URL_SER}/api/Categoria/PostCategoria`,
       categoria
+    );
+    return result;
+  }
+
+  crear_subcategoria(subcategoria: any) {
+    let resul = this.http.post(
+      `${this.URL_SER}/api/Subcategoria/PostSubcategoria`,
+      subcategoria
+    );
+    return resul;
+  }
+
+  getStandares(estandar: any) {
+    let result = this.http.get(`${this.URL_SER}/api/Estandares`, estandar);
+    return result;
+  }
+
+  getCategoria(categorias: any) {
+    let result = this.http.get(`${this.URL_SER}/api/Categoria/`, categorias);
+    return result;
+  }
+
+  getSubCategoria(subCategorias: any) {
+    let result = this.http.get(
+      `${this.URL_SER}/api/SubCategoria`,
+      subCategorias
+    );
+    return result;
+  }
+
+  deleteEstandar(estandar: any) {
+    let result = this.http.post(
+      `${this.URL_SER}/api/Estandares/DeleteEstandar`,
+      estandar
     );
     return result;
   }

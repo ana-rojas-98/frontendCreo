@@ -10,7 +10,7 @@ import { AuthService } from "src/app/services/auth.service";
 export class CategoriasComponent implements OnInit {
   Categoria = {
     NombreCategoria: "",
-    estandar: "",
+    IdEstandar: "",
   };
 
   resultados = {};
@@ -35,9 +35,8 @@ export class CategoriasComponent implements OnInit {
   }
 
   crear_categoria() {
-    console.log(this.Categoria);
     this.authService.crear_categoria(this.Categoria).subscribe((res: any) => {
-      //console.log(res);
+      console.log(res);
     });
   }
 }

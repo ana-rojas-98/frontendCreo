@@ -2,22 +2,18 @@
   <form class="form-box">
     <h1 class="Form-title" align="center">Nueva Subcategoria</h1>
     <div class="form-group col">
-      <select name="select" type="selectbox" [(ngModel)]="Categoria.estandar">
-        <option
-          *ngFor="let resultado of resultados"
-          [value]="resultado.estandar"
-        >
-          <h1>{{ resultado.nombreEstandar }}</h1>
-        </option>
-      </select>
       <label>Categoría</label>
-
-      <select type="selectbox">
+      <select
+        class="selector"
+        name="categoria"
+        type="selectbox"
+        [(ngModel)]="Subcategoria.IdCategoria"
+      >
         <option
-          *ngFor="let categoria of resultados"
-          [value]="categoria.categoria1"
+          *ngFor="let resultadoCategoria of resultados"
+          [value]="resultadoCategoria.categoria1"
         >
-          <h1>{{ categoria.nombreCategoria }}</h1>
+          {{ resultadoCategoria.nombreCategoria }}
         </option>
       </select>
 
@@ -28,7 +24,7 @@
         type="Subcatego"
         name="Subcatego"
         class="form-control"
-        [(ngModel)]="Subcatego.NombreSubcategoria"
+        [(ngModel)]="Subcategoria.NombreSubcategoria"
       />
     </div>
     <div>
