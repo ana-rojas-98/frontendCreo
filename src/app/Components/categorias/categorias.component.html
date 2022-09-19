@@ -3,7 +3,7 @@
     <h1 class="Form-title" align="center">Nueva categoria</h1>
     <div class="form-group col">
       <label for="select">Estándar</label>
-      <select name="select" type="selectbox" [(ngModel)] = "Categoria.estandar">
+      <select name="select" type="selectbox" [(ngModel)] = "Categoria.IdEstandar">
         <option
           *ngFor="let resultado of resultados"
           [value]="resultado.estandar"
