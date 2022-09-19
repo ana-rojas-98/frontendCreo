@@ -12,7 +12,38 @@
   gap: 1rem;
   margin: 0 auto;
 }
-
+@mixin contenedor{
+  width: 1440px;
+  height: 726px;
+  display: flex;
+  flex-wrap: nowrap;
+}
+@mixin body {
+  font-family: 'Montserrat';
+  width: 1199px;
+  height: 726px;
+  left: 0px;
+  top: 0px;
+  overflow-y: scroll;
+  background: linear-gradient(180deg, rgba(17, 17, 17, 0.06) 0%, rgba(17, 17, 17, 0) 100%);
+  
+}
+@mixin titleBody{
+  height: 60px;
+  padding: 10px 350px 10px 350px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+@mixin h1Body{
+  text-align: center;
+  color:#2BAEE5;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  width: max-content;
+}
 @mixin tittleCard ($weight, $size){  
 font-family: 'Montserrat';
 font-style: normal;

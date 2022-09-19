@@ -1,6 +1,5 @@
 @import "../../../assets/styles/main.scss";
 .admin-indicadores{
-    position: absolute;
     display: flex;
     flex-wrap: nowrap;
 }
@@ -102,6 +101,9 @@ table tbody td{
 table img{
     width: 20px;
     height: 20px;
+}
+table tbody td{
+    cursor: pointer;
 }
 .resultados-tabla button{
     display: flex;

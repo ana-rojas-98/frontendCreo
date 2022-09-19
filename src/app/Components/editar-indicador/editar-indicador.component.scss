@@ -1,0 +1,104 @@
+@import "../../../assets/styles/main.scss";
+
+.contenedor{
+    @include contenedor;
+}
+.cuerpo{
+    @include body;
+}
+.title-body{
+    @include titleBody;
+    h1{
+        @include h1Body;
+    }
+}
+.formatos{
+    border-bottom:1px gray solid;
+    margin: 20px;
+}
+img{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+.seleccion{
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: 500;
+    font-size: 16px;
+    justify-content: space-around;
+    height: max-content;
+    padding: 10px;
+}
+select{
+    @include select;
+}
+.tablero{
+    margin: 50px;
+    border: 1px black solid;
+    border-radius: 10px;
+}
+.title-card{
+    margin: 20px;
+    text-align: center;
+    font-family: 'Montserrat';
+    h1{
+        font-weight: bold;
+    }
+}
+.nombre-organizacion{
+    height: max-content;
+    margin: 20px;
+    label{
+        @include label;
+    }
+    input{
+        @include inputCard (369px, 45.86px);
+    }
+}
+.title-finanzas{
+    margin: 20px;
+}
+.campos{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    p{
+        text-align: center;
+    }
+}
+.campos-activos{
+    margin: 20px;
+    height: max-content;
+    label{
+        @include label;
+    }
+    input{
+        @include inputCard (202px, 45.86px);
+        margin-right: 10px;
+    }
+}
+.campos-pasivos{
+    margin: 20px;
+    height: max-content;
+    label{
+        @include label;
+    }
+    input{
+        @include inputCard (202px, 45.86px);
+    }
+}
+.corriente{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-bottom: 50px;
+}
+.botones{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+.cancelar{
+    margin-right: 100px;
+}

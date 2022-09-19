@@ -29,6 +29,9 @@ import { FooterComponent } from './Components/footer/footer.component';
 import { EliminarEstandarComponent } from './Components/eliminar-estandar/eliminar-estandar.component';
 import { EliminarCategoriaComponent } from './Components/eliminar-categoria/eliminar-categoria.component';
 import { EliminarSubcategoriaComponent } from './Components/eliminar-subcategoria/eliminar-subcategoria.component';
+import { NuevoIndicadorComponent } from './Components/nuevo-indicador/nuevo-indicador.component';
+import { IndicadoresMasivosComponent } from './Components/indicadores-masivos/indicadores-masivos.component';
+import { EditarIndicadorComponent } from './Components/editar-indicador/editar-indicador.component';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -52,6 +55,9 @@ import { EliminarSubcategoriaComponent } from './Components/eliminar-subcategori
     EliminarEstandarComponent,
     EliminarCategoriaComponent,
     EliminarSubcategoriaComponent,
+    NuevoIndicadorComponent,
+    IndicadoresMasivosComponent,
+    EditarIndicadorComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -72,6 +78,9 @@ import { EliminarSubcategoriaComponent } from './Components/eliminar-subcategori
       { path: 'eliminar-estandar', component: EliminarEstandarComponent},
       { path: 'eliminar-categoria', component: EliminarCategoriaComponent},
       { path: 'eliminar-subcategoria', component: EliminarSubcategoriaComponent},
+      { path: 'nuevo-indicador', component: NuevoIndicadorComponent},
+      { path: 'indicadores-masivos', component: IndicadoresMasivosComponent},
+      { path: 'editar-indicador', component: EditarIndicadorComponent},
     ])
   ],
   providers: [

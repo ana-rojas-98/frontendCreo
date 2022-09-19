@@ -1,0 +1,55 @@
+@import "../../../assets/styles/main.scss";
+
+.contenedor{
+    @include contenedor;
+}
+.cuerpo{
+    @include body;
+}
+.ingreso-archivo{
+    margin: 25px;
+}
+.title-indicador{
+   @include titleBody;
+}
+h1{
+    @include h1Body;
+}
+.ingreso-archivo{
+    height: max-content;
+}
+.seleccion-estandar{
+    margin: 20px;
+}
+.box-select{
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: 500;
+    font-size: 16px;
+    justify-content: space-around;
+    height: max-content;
+    padding: 10px;
+}
+.selector{
+    @include select;
+}
+.subir-archivo{
+    margin: 25px
+}
+.perioricidad-indicador{
+    margin: 25px;
+}
+.perioricidad-indicador select{
+    @include select;
+}
+.previsualizar-indicador{
+    margin: 20px;
+}
+.buttons{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.cancelar{
+    margin-right: 130px;
+}
