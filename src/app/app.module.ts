@@ -69,6 +69,9 @@ import { EliminarSubcategoriaComponent } from './Components/eliminar-subcategori
       { path: 'olvide-clave', component: OlvideClaveComponent},
       { path: 'administrar-indicadores', component: AdministrarIndicadoresComponent},
       { path: 'cambio-contrasena', component: CambioContrasenaComponent},
+      { path: 'eliminar-estandar', component: EliminarEstandarComponent},
+      { path: 'eliminar-categoria', component: EliminarCategoriaComponent},
+      { path: 'eliminar-subcategoria', component: EliminarSubcategoriaComponent},
     ])
   ],
   providers: [
