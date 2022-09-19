@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-categorias",
@@ -20,11 +21,8 @@ export class CategoriasComponent implements OnInit {
   ngOnInit() {
     this.getStandares();
   }
-  SetCategoria() {
-    this.authService.crear_categoria(this.Categoria).subscribe((res: any) => {
-      //console.log(res);
-    });
-  }
+
+  
 
   getStandares() {
     this.authService.getStandares(this.Categoria).subscribe((res: any) => {
@@ -36,7 +34,12 @@ export class CategoriasComponent implements OnInit {
 
   crear_categoria() {
     this.authService.crear_categoria(this.Categoria).subscribe((res: any) => {
-      console.log(res);
+      this.alerta(res.resul)
     });
   }
+
+  alerta(mensaje:any){
+    Swal.fire(mensaje);
+  }
+
 }
