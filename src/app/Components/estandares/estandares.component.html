@@ -8,7 +8,9 @@
           <input type = "Estandar" name = "estandar" class="form-control" [(ngModel)]="Estandar.NombreEstandar">
       </div>
       <div>
-        <button type="cancel" class = "bot_per_2"> Cancelar
+        <button [routerLink]="['/administrar-indicadores']"
+                [routerLinkActive]="['link-active']"
+                type="cancel" class = "bot_per_2"> Cancelar
         </button>
         <button type="submit" class = "bot_est" (click)="SetEstandar()">Guardar
         </button>
