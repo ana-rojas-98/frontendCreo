@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-subcatego",
@@ -18,13 +19,22 @@ export class SubcategoComponent implements OnInit {
     estandar: "",
   };
 
+  Estandar = {
+    estandar: ""
+  };
+
   resultados = {};
+  resultadosEstandares = {};
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.getCategoria();
     this.getStandares();
+  }
+  
+  alerta(mensaje:any){
+    Swal.fire(mensaje);
   }
 
   categoria(){
@@ -41,18 +51,17 @@ export class SubcategoComponent implements OnInit {
 
   getStandares() {
     this.authService.getStandares(this.Categoria).subscribe((res: any) => {
-      res.map((item) => {
+      this.resultadosEstandares = res.map((item) => {
         return item;
       });
     });
   }
 
   SetSubCategoria() {
-    console.log("hola: ", this.Subcategoria)
     this.authService
       .crear_subcategoria(this.Subcategoria)
       .subscribe((res: any) => {
-        console.log(res)
+        this.alerta(res.resul)
       });
   }
 }

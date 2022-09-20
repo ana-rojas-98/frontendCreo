@@ -2,6 +2,21 @@
   <form class="form-box">
     <h1 class="Form-title" align="center">Nueva Subcategoria</h1>
     <div class="form-group col">
+      <label>Estandar</label>
+      <select
+        class="selector"
+        name="estandar"
+        type="selectbox"
+        [(ngModel)]="Estandar.estandar"
+      >
+        <option
+          *ngFor="let resultado of resultadosEstandares"
+          [value]="resultado.estandar"
+        >
+          {{ resultado.NombreEstandar }}
+        </option>
+      </select>
+
       <label>Categoría</label>
       <select
         class="selector"

@@ -1,39 +1,73 @@
 <div class="contenedor">
-    <form class="form-box">
-        <h1 class="Form-title" align = "center">
-            Eliminar Subcategoría
-        </h1>
-        <div class="form-group col">
-            <label for="select">Estándar</label>
-            <select name="select" type = selectbox>
-                <option value="Estandar 1" [(ngModel)]="Categoria.IdEstandar" selected>Estandar 1</option>
-                <option value="Estandar 2" [(ngModel)]="Categoria.IdEstandar">Estandar 2</option>
-                <option value="Estandar 3" [(ngModel)]="Categoria.IdEstandar">Estandar 3</option>
-            </select>
-            <br>
-            <br>
-            <label for="select">Categoría</label>
-            <select name="select" type = selectbox>
-                <option value="Estandar 1" [(ngModel)]="Categoria.IdEstandar" selected>Categoria 1</option>
-                <option value="Estandar 2" [(ngModel)]="Categoria.IdEstandar">Categoria 2</option>
-                <option value="Estandar 3" [(ngModel)]="Categoria.IdEstandar">Categoria 3</option>
-            </select>
-            <br>
-            <br>
-            <label for="select">Subcategoría</label>
-            <select name="select" type = selectbox>
-                <option value="Estandar 1" [(ngModel)]="Categoria.IdEstandar" selected>Subcategoria 1</option>
-                <option value="Estandar 2" [(ngModel)]="Categoria.IdEstandar">Subcategoria 2</option>
-                <option value="Estandar 3" [(ngModel)]="Categoria.IdEstandar">Subcategoria 3</option>
-            </select>
-        </div>
-        <div>
-          <button [routerLink]="['/administrar-indicadores']"
-                  [routerLinkActive]="['link-active']"
-                  class = "bot_per_2"> Cancelar
-          </button>
-          <button type="submit" class = "bot_est" (click)="SetEstandar()">Guardar
-          </button>
-        </div>      
-    </form>
+  <form class="form-box">
+    <h1 class="Form-title" align="center">Eliminar subcategoría</h1>
+    <div class="seleccion">
+      <div class="box">
+        <h3>Estandar</h3>
+        <br />
+        <select
+          class="selector"
+          name="estandar"
+          type="selectbox"
+          [(ngModel)]="Estandar.estandar"
+          (change)="estandar()"
+        >
+          <option
+            *ngFor="let resultado of resultados"
+            [value]="resultado.estandar"
+          >
+            <h1>{{ resultado.nombreEstandar }}</h1>
+          </option>
+        </select>
+      </div>
+      <div class="box">
+        <h3>Categoria</h3>
+        <br />
+        <select
+          class="selector"
+          name="categoria"
+          type="selectbox"
+          [(ngModel)]="Categoria.categoria1"
+          (change)="categoria()"
+        >
+          <option
+            *ngFor="let resultadoCategoria of resultadosCategoria"
+            [value]="resultadoCategoria.categoria1"
+          >
+            {{ resultadoCategoria.nombreCategoria }}
+          </option>
+        </select>
+      </div>
+      <div class="box">
+        <h3>Subcategoria</h3>
+        <br />
+        <select
+          class="selector"
+          name="select"
+          type="selectbox"
+          (change)="categoria()"
+        >
+          <option
+            *ngFor="let item of resultadosSubCategoria"
+            [value]="item.subcategoria1"
+          >
+            {{ item.nombreSubcategoria }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <button
+        [routerLink]="['/administrar-indicadores']"
+        [routerLinkActive]="['link-active']"
+        type="cancel"
+        class="bot_per_2"
+      >
+        Cancelar
+      </button>
+      <button type="submit" class="bot_est" (click)="SetEstandar()">
+        Guardar
+      </button>
+    </div>
+  </form>
 </div>

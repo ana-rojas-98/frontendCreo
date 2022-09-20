@@ -86,6 +86,7 @@ select{
     }
     input{
         @include inputCard (202px, 45.86px);
+        margin-right: 10px;
     }
 }
 .corriente{
