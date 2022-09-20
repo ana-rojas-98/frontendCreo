@@ -3,21 +3,29 @@
     <h1 class="Form-title" align="center">Eliminar categoría</h1>
     <div class="form-group col">
       <label for="select">Estándar</label>
-      <select name="select" type="selectbox">
-        <option value="Estandar 1" [(ngModel)]="Categoria.IdEstandar" selected>
-          Estandar 1
+      <select
+        class="selector"
+        name="estandar"
+        type="selectbox"
+        [(ngModel)]="Estandar.estandar"
+        (change)="estandar()"
+      >
+      <option value="">Estandar</option>
+        <option
+          *ngFor="let resultado of resultados"
+          [value]="resultado.estandar"
+        >
+          <h1>{{ resultado.nombreEstandar }}</h1>
         </option>
       </select>
       <label for="select">Categoría</label>
-      <select name="select" type="selectbox">
-        <option value="Estandar 1" [(ngModel)]="Categoria.IdEstandar" selected>
-          Categoria 1
-        </option>
-        <option value="Estandar 2" [(ngModel)]="Categoria.IdEstandar">
-          Categoria 2
-        </option>
-        <option value="Estandar 3" [(ngModel)]="Categoria.IdEstandar">
-          Categoria 3
+      <select name="select" type="selectbox" [(ngModel)]="Categoria.categoria1">
+        <option value="">Categoria</option>
+        <option
+          *ngFor="let resultadoCategoria of resultadosCategoria"
+          [value]="resultadoCategoria.categoria1"
+        >
+          {{ resultadoCategoria.nombreCategoria }}
         </option>
       </select>
     </div>
@@ -30,7 +38,7 @@
       >
         Cancelar
       </button>
-      <button type="submit" class="bot_est" (click)="SetEstandar()">
+      <button type="submit" class="bot_est" (click)="eliminarCategoria()">
         Guardar
       </button>
     </div>

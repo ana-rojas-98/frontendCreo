@@ -1,21 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthService } from "src/app/services/auth.service";
+import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-eliminar-subcategoria',
-  templateUrl: './eliminar-subcategoria.component.html',
-  styleUrls: ['./eliminar-subcategoria.component.scss']
+  selector: "app-eliminar-subcategoria",
+  templateUrl: "./eliminar-subcategoria.component.html",
+  styleUrls: ["./eliminar-subcategoria.component.scss"],
 })
 export class EliminarSubcategoriaComponent implements OnInit {
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   Estandar = {
     NombreEstandar: "",
-    estandar: ""
+    estandar: "",
   };
 
   estandarId = {
@@ -41,12 +39,12 @@ export class EliminarSubcategoriaComponent implements OnInit {
   estandar() {
     this.estandarFil = this.Estandar.estandar;
     this.getCategoria(this.estandarFil);
-    this.getSubCategoria(0)
+    this.getSubCategoria(0);
   }
 
   categoria() {
-    this.categoriaFil = this.Categoria.categoria1
-    this.getSubCategoria(this.categoriaFil)
+    this.categoriaFil = this.Categoria.categoria1;
+    this.getSubCategoria(this.categoriaFil);
   }
 
   ngOnInit() {
@@ -79,4 +77,15 @@ export class EliminarSubcategoriaComponent implements OnInit {
       });
   }
 
+  eliminarSubcategoria() {
+    this.resultadosSubCategoria = this.authService
+      .eliminarSubcategoria(this.SubCategoria)
+      .subscribe((res: any) => {
+        this.alerta(res.resul);
+      });
+  }
+
+  alerta(mensaje: any) {
+    Swal.fire(mensaje);
+  }
 }
