@@ -20,7 +20,9 @@
       />
     </div>
     <div>
-      <button type="cancel" class="bot_per_2">Cancelar</button>
+      <button [routerLink]="['/administrar-indicadores']"
+              [routerLinkActive]="['link-active']"
+              type="cancel" class="bot_per_2">Cancelar</button>
       <button type="submit" class="bot_est" (click)="crear_categoria()">
         Guardar
       </button>
