@@ -26,6 +26,7 @@
   top: 0px;
   overflow-y: scroll;
   background: linear-gradient(180deg, rgba(17, 17, 17, 0.06) 0%, rgba(17, 17, 17, 0) 100%);
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
   
 }
 @mixin titleBody{

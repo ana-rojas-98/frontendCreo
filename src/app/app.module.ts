@@ -71,7 +71,7 @@ import { EditarIndicadorComponent } from './Components/editar-indicador/editar-i
       { path: 'registro-super', component: RegistroSuperComponent, canActivate:[AuthGuard]},
       { path: 'estandares', component: EstandaresComponent},
       { path: 'categorias', component: CategoriasComponent},
-      { path: 'subcategorias', component: SubcategoComponent},
+      { path: 'subcatego', component: SubcategoComponent},
       { path: 'olvide-clave', component: OlvideClaveComponent},
       { path: 'administrar-indicadores', component: AdministrarIndicadoresComponent},
       { path: 'cambio-contrasena', component: CambioContrasenaComponent},
