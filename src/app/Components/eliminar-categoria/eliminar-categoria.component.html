@@ -1,29 +1,38 @@
 <div class="contenedor">
-    <form class="form-box">
-        <h1 class="Form-title" align = "center">
-            Eliminar categoría
-        </h1>
-        <div class="form-group col">
-            <label for="select">Estándar</label>
-            <select name="select" type = selectbox>
-                <option value="Estandar 1" [(ngModel)]="Categoria.IdEstandar" selected>Estandar 1</option>
-                <option value="Estandar 2" [(ngModel)]="Categoria.IdEstandar">Estandar 2</option>
-                <option value="Estandar 3" [(ngModel)]="Categoria.IdEstandar">Estandar 3</option>
-            </select>
-            <br>
-            <br>
-            <label for="select">Categoría</label>
-            <select name="select" type = selectbox>
-                <option value="Estandar 1" [(ngModel)]="Categoria.IdEstandar" selected>Categoria 1</option>
-                <option value="Estandar 2" [(ngModel)]="Categoria.IdEstandar">Categoria 2</option>
-                <option value="Estandar 3" [(ngModel)]="Categoria.IdEstandar">Categoria 3</option>
-            </select>
-        </div>
-        <div>
-          <button type="cancel" class = "bot_per_2"> Cancelar
-          </button>
-          <button type="submit" class = "bot_est" (click)="SetEstandar()">Guardar
-          </button>
-        </div>      
-    </form>
+  <form class="form-box">
+    <h1 class="Form-title" align="center">Eliminar categoría</h1>
+    <div class="form-group col">
+      <label for="select">Estándar</label>
+      <select name="select" type="selectbox">
+        <option value="Estandar 1" [(ngModel)]="Categoria.IdEstandar" selected>
+          Estandar 1
+        </option>
+      </select>
+      <label for="select">Categoría</label>
+      <select name="select" type="selectbox">
+        <option value="Estandar 1" [(ngModel)]="Categoria.IdEstandar" selected>
+          Categoria 1
+        </option>
+        <option value="Estandar 2" [(ngModel)]="Categoria.IdEstandar">
+          Categoria 2
+        </option>
+        <option value="Estandar 3" [(ngModel)]="Categoria.IdEstandar">
+          Categoria 3
+        </option>
+      </select>
+    </div>
+    <div>
+      <button
+        [routerLink]="['/administrar-indicadores']"
+        [routerLinkActive]="['link-active']"
+        type="cancel"
+        class="bot_per_2"
+      >
+        Cancelar
+      </button>
+      <button type="submit" class="bot_est" (click)="SetEstandar()">
+        Guardar
+      </button>
+    </div>
+  </form>
 </div>

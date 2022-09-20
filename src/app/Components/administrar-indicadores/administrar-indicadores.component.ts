@@ -10,6 +10,11 @@ export class AdministrarIndicadoresComponent implements OnInit {
   constructor(private authService: AuthService) {}
   Estandar = {
     NombreEstandar: "",
+    estandar: "",
+  };
+
+  estandarId = {
+    id: "",
   };
 
   Categoria = {
@@ -25,16 +30,24 @@ export class AdministrarIndicadoresComponent implements OnInit {
   resultados = {};
   resultadosCategoria = {};
   resultadosSubCategoria = {};
+  estandarFil = "";
+  categoriaFil = "";
+
+  estandar() {
+    this.estandarFil = this.Estandar.estandar;
+    this.getCategoria(this.estandarFil);
+    this.getSubCategoria(-1);
+  }
 
   categoria() {
-    console.log("hola: ", this.Categoria);
+    this.categoriaFil = this.Categoria.categoria1;
+    this.getSubCategoria(this.categoriaFil);
   }
 
   ngOnInit() {
-    this.getCategoria();
     this.getStandares();
-
-    this.getSubCategoria();
+    this.getCategoria(0);
+    this.getSubCategoria(0);
   }
 
   getStandares() {
@@ -45,22 +58,39 @@ export class AdministrarIndicadoresComponent implements OnInit {
     });
   }
 
-  getCategoria() {
-    this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
-      this.resultadosCategoria = res.map((item) => {
-        return item;
-      });
-    });
-  }
-
-  getSubCategoria() {
-    this.authService
-      .getSubCategoria(this.SubCategoria)
-      .subscribe((res: any) => {
-        this.resultadosSubCategoria = res.map((item) => {
+  getCategoria(estandar) {
+    if (estandar == 0) {
+      this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
+        this.resultadosCategoria = res.map((item) => {
           return item;
         });
-        console.log("hola: ", this.resultadosSubCategoria);
       });
+    } else {
+      this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
+        this.resultadosCategoria = res.filter(
+          (item) => item.idEstandar == estandar
+        );
+      });
+    }
+  }
+
+  getSubCategoria(categoria) {
+    if (categoria == 0) {
+      this.authService
+        .getSubCategoria(this.SubCategoria)
+        .subscribe((res: any) => {
+          this.resultadosSubCategoria = res.map((item) => {
+            return item;
+          });
+        });
+    } else {
+      this.authService
+        .getSubCategoria(this.SubCategoria)
+        .subscribe((res: any) => {
+          this.resultadosSubCategoria = res.filter(
+            (item) => item.idCategoria == categoria
+          );
+        });
+    }
   }
 }

@@ -19,7 +19,12 @@ export class SubcategoComponent implements OnInit {
     estandar: "",
   };
 
+  Estandar = {
+    estandar: ""
+  };
+
   resultados = {};
+  resultadosEstandares = {};
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -46,7 +51,7 @@ export class SubcategoComponent implements OnInit {
 
   getStandares() {
     this.authService.getStandares(this.Categoria).subscribe((res: any) => {
-      res.map((item) => {
+      this.resultadosEstandares = res.map((item) => {
         return item;
       });
     });

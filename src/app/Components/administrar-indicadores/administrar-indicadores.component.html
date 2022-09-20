@@ -31,6 +31,7 @@
             class="selector"
             name="categoria"
             type="selectbox"
+            [(ngModel)]="Categoria.categoria1"
             (change)="categoria()"
           >
             <option
@@ -44,7 +45,12 @@
         <div class="box">
           <h3>Subcategoria</h3>
           <br />
-          <select class="selector" name="select" type="selectbox">
+          <select
+            class="selector"
+            name="select"
+            type="selectbox"
+            (change)="categoria()"
+          >
             <option
               *ngFor="let item of resultadosSubCategoria"
               [value]="item.subcategoria1"
@@ -122,29 +128,48 @@
                 Nombre indicador
               </th>
               <th>
-                <img src="../../../assets/imagenes/creador.png" alt="icono-creador" />
+                <img
+                  src="../../../assets/imagenes/creador.png"
+                  alt="icono-creador"
+                />
                 Creador
               </th>
               <th>
-                <img src="../../../assets/imagenes/fechaHora.png" alt="icono-fecha" />
+                <img
+                  src="../../../assets/imagenes/fechaHora.png"
+                  alt="icono-fecha"
+                />
                 Fecha y hora Creacion
               </th>
               <th>
-                <img src="../../../assets/imagenes/archivo.png" alt="icono-archivo" />
+                <img
+                  src="../../../assets/imagenes/archivo.png"
+                  alt="icono-archivo"
+                />
                 Archivo
               </th>
-              <th><img src="../../../assets/imagenes/ver.png" alt="icono-ver" /></th>
               <th>
-                <img src="../../../assets/imagenes/editar.png" alt="icono-editar" 
-                [routerLink]="['/editar-icono']"
-                [routerLinkActive]="['link-active']"
+                <img src="../../../assets/imagenes/ver.png" alt="icono-ver" />
+              </th>
+              <th>
+                <img
+                  src="../../../assets/imagenes/editar.png"
+                  alt="icono-editar"
+                  [routerLink]="['/editar-icono']"
+                  [routerLinkActive]="['link-active']"
                 />
               </th>
               <th>
-                <img src="../../../assets/imagenes/eliminar.png" alt="icono-eliminar" />
+                <img
+                  src="../../../assets/imagenes/eliminar.png"
+                  alt="icono-eliminar"
+                />
               </th>
               <th>
-                <img src="../../../assets/imagenes/duplicar.png" alt="icono-duplicar" />                
+                <img
+                  src="../../../assets/imagenes/duplicar.png"
+                  alt="icono-duplicar"
+                />
               </th>
               <th></th>
             </tr>
@@ -160,6 +185,8 @@
               </td>
               <td>
                 <img
+                  [routerLink]="['/editar-indicador']"
+                  [routerLinkActive]="['link-active']"
                   src="../../../assets/imagenes/editar.png"
                   alt="editar-icono"
                 />

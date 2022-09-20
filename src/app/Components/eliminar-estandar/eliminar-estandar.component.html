@@ -4,13 +4,24 @@
     <div class="form-group col">
       <label for="select">Estándar</label>
       <select name="select" type="selectbox" [(ngModel)]="Estandar.IdEstandar">
-        <option *ngFor="let item of resultados" [value]="item.estandar" selected>
+        <option
+          *ngFor="let item of resultados"
+          [value]="item.estandar"
+          selected
+        >
           {{ item.nombreEstandar }}
         </option>
       </select>
     </div>
     <div>
-      <button type="cancel" class="bot_per_2">Cancelar</button>
+      <button
+        [routerLink]="['/administrar-indicadores']"
+        [routerLinkActive]="['link-active']"
+        type="cancel"
+        class="bot_per_2"
+      >
+        Cancelar
+      </button>
       <button type="submit" class="bot_est" (click)="deleteEstandar()">
         Guardar
       </button>
