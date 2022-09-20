@@ -1,12 +1,10 @@
 <div class="contenedor">
   <form class="form-box">
     <h1 class="Form-title" align="center">Eliminar subcategoría</h1>
-    <div class="seleccion">
-      <div class="box">
-        <h3>Estandar</h3>
+    <div class="form-group col">      
+        <label for="estandar">Estandar</label>
         <br />
         <select
-          class="selector"
           name="estandar"
           type="selectbox"
           [(ngModel)]="Estandar.estandar"
@@ -19,12 +17,9 @@
             <h1>{{ resultado.nombreEstandar }}</h1>
           </option>
         </select>
-      </div>
-      <div class="box">
-        <h3>Categoria</h3>
+        <label for="categoria">Categoria</label>
         <br />
         <select
-          class="selector"
           name="categoria"
           type="selectbox"
           [(ngModel)]="Categoria.categoria1"
@@ -37,12 +32,9 @@
             {{ resultadoCategoria.nombreCategoria }}
           </option>
         </select>
-      </div>
-      <div class="box">
-        <h3>Subcategoria</h3>
+        <label for="select">Subcategoria</label>
         <br />
         <select
-          class="selector"
           name="select"
           type="selectbox"
           (change)="categoria()"
@@ -54,7 +46,6 @@
             {{ item.nombreSubcategoria }}
           </option>
         </select>
-      </div>
     </div>
     <div>
       <button

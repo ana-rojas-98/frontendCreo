@@ -65,8 +65,8 @@ h1 {
   font-size: 11px;
   color: #ffffff;
   padding: 9px;
-  margin-left: 18px;
-  width: 210px;
+  margin-left: 19px;
+  width: 211px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -74,11 +74,6 @@ h1 {
 }
 .resultados-tabla {
   padding: 20px;
-}
-.resultados-tabla table {
-  border-radius: 30%;
-  width: 1050px;
-  background-color: #ffffff;
 }
 .resultados-tabla table tr {
   border: 1px gray solid;
@@ -120,6 +115,8 @@ table tbody td {
 
 table { 
     border-collapse: separate; 
+    width: 1050px;
+    background-color: #ffffff;
 }
 td, th { 
     border: solid 1px rgb(0, 0, 0); 

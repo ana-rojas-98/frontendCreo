@@ -34,6 +34,9 @@
 .form-group select{
     @include select;
 }
+.botones{
+    border: 1px red solid;
+}
 .bot_per_2{
     @include buttonCard($buttonSecondary);
     width: 130px;
