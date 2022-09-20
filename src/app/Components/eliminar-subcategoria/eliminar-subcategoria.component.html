@@ -37,8 +37,10 @@
         <select
           name="select"
           type="selectbox"
+          [(ngModel)]="SubCategoria.subcategoria1"
           (change)="categoria()"
         >
+        <option value="">Subcategoria</option>
           <option
             *ngFor="let item of resultadosSubCategoria"
             [value]="item.subcategoria1"
@@ -56,7 +58,7 @@
       >
         Cancelar
       </button>
-      <button type="submit" class="bot_est" (click)="SetEstandar()">
+      <button type="submit" class="bot_est" (click)="eliminarSubcategoria()">
         Guardar
       </button>
     </div>

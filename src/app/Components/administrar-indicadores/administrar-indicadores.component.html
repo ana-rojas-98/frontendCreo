@@ -1,274 +1,268 @@
-  <div class="contenedor">
-    <app-sidebar></app-sidebar>
-    <div class="content-admin">
-      <div class="tittle-indicadores">
-        <h1>Administrar indicadores</h1>
-      </div>
-      <div class="seleccion">
-        <div class="box">
-          <h3>Estándar</h3>
-          <br />
-          <select
-            class="selector"
-            name="estandar"
-            type="selectbox"
-            [(ngModel)]="Estandar.estandar"
-            (change)="estandar()"
-          >
-            <option
-              *ngFor="let resultado of resultados"
-              [value]="resultado.estandar"
-            >
-              <h1>{{ resultado.nombreEstandar }}</h1>
-            </option>
-          </select>
-        </div>
-        <div class="box">
-          <h3>Categoria</h3>
-          <br />
-          <select
-            class="selector"
-            name="categoria"
-            type="selectbox"
-            [(ngModel)]="Categoria.categoria1"
-            (change)="categoria()"
-          >
-            <option
-              *ngFor="let resultadoCategoria of resultadosCategoria"
-              [value]="resultadoCategoria.categoria1"
-            >
-              {{ resultadoCategoria.nombreCategoria }}
-            </option>
-          </select>
-        </div>
-        <div class="box">
-          <h3>Subcategoria</h3>
-          <br />
-          <select
-            class="selector"
-            name="select"
-            type="selectbox"
-            (change)="categoria()"
-          >
-            <option
-              *ngFor="let item of resultadosSubCategoria"
-              [value]="item.subcategoria1"
-            >
-              {{ item.nombreSubcategoria }}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="botones-crear">
-        <button
-          [routerLink]="['/estandares']"
-          [routerLinkActive]="['link-active']"
-        >
-          Crear nuevo estandar
-        </button>
-
-        <button
-          [routerLink]="['/categorias']"
-          [routerLinkActive]="['link-active']"
-        >
-          Crear nueva categoria
-        </button>
-
-        <button
-          [routerLink]="['/subcatego']"
-          [routerLinkActive]="['link-active']"
-        >
-          Crear nueva subcategoria
-        </button>
-
-        <button
-          [routerLink]="['/nuevo-indicador']"
-          [routerLinkActive]="['link-active']"
-        >
-          Crear nuevo indicador
-        </button>
-
-        <button
-          [routerLink]="['/indicadores-masivos']"
-          [routerLinkActive]="['link-active']"
-        >
-          Crear indicadores masivamente
-        </button>
-      </div>
-      <div class="botones-eliminar">
-        <button
-          [routerLink]="['/eliminar-estandar']"
-          [routerLinkActive]="['link-active']"
-        >
-          Eliminar estandar
-        </button>
-        <button
-          [routerLink]="['/eliminar-categoria']"
-          [routerLinkActive]="['link-active']"
-        >
-          Eliminar categoria
-        </button>
-        <button
-          [routerLink]="['/eliminar-subcategoria']"
-          [routerLinkActive]="['link-active']"
-        >
-          Eliminar subcategoria
-        </button>
-      </div>
-      <div class="resultados-tabla">
-        <table class="tabla-indicadores">
-          <thead>
-            <tr>
-              <th>
-                <img
-                  src="../../../assets/imagenes/nombreIndicador.png"
-                  alt="icono-nombre"
-                />
-                Nombre indicador
-              </th>
-              <th>
-                <img
-                  src="../../../assets/imagenes/creador.png"
-                  alt="icono-creador"
-                />
-                Creador
-              </th>
-              <th>
-                <img
-                  src="../../../assets/imagenes/fechaHora.png"
-                  alt="icono-fecha"
-                />
-                Fecha y hora Creacion
-              </th>
-              <th>
-                <img
-                  src="../../../assets/imagenes/archivo.png"
-                  alt="icono-archivo"
-                />
-                Archivo
-              </th>
-              <th>
-                <img src="../../../assets/imagenes/ver.png" alt="icono-ver" />
-              </th>
-              <th>
-                <img
-                  src="../../../assets/imagenes/editar.png"
-                  alt="icono-editar"
-                  [routerLink]="['/editar-icono']"
-                  [routerLinkActive]="['link-active']"
-                />
-              </th>
-              <th>
-                <img
-                  src="../../../assets/imagenes/eliminar.png"
-                  alt="icono-eliminar"
-                />
-              </th>
-              <th>
-                <img
-                  src="../../../assets/imagenes/duplicar.png"
-                  alt="icono-duplicar"
-                />
-              </th>
-              <th>
-                <img
-                  src="../../../assets/imagenes/excel.png"
-                  alt="excel-icono"
-                />
-              </th>
-              <th>
-                <img src="../../../assets/imagenes/word.png" alt="word-icono" />
-              </th>
-              <th>
-                <img src="../../../assets/imagenes/pdf.png" alt="pdf-icono" />
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>indicador1</td>
-              <td>creador</td>
-              <td>2022/12/05</td>
-              <td>Archivo</td>
-              <td>
-                <img src="../../../assets/imagenes/ver.png" alt="ver-icono" />
-              </td>
-              <td>
-                <img
-                  [routerLink]="['/editar-indicador']"
-                  [routerLinkActive]="['link-active']"
-                  src="../../../assets/imagenes/editar.png"
-                  alt="editar-icono"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../assets/imagenes/eliminar.png"
-                  alt="eliminar-icono"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../assets/imagenes/duplicar.png"
-                  alt="duplicar-icono"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../assets/imagenes/excel.png"
-                  alt="excel-icono"
-                />
-              </td>
-              <td>
-                <img src="../../../assets/imagenes/word.png" alt="word-icono" />
-              </td>
-              <td>
-                <img src="../../../assets/imagenes/pdf.png" alt="pdf-icono" />
-              </td>
-            </tr>
-            <tr>
-              <td>indicador2</td>
-              <td>creador</td>
-              <td>2022/12/05</td>
-              <td>Archivo</td>
-              <td>
-                <img src="../../../assets/imagenes/ver.png" alt="ver-icono" />
-              </td>
-              <td>
-                <img
-                  src="../../../assets/imagenes/editar.png"
-                  alt="editar-icono"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../assets/imagenes/eliminar.png"
-                  alt="eliminar-icono"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../assets/imagenes/duplicar.png"
-                  alt="duplicar-icono"
-                />
-              </td>
-              <td>
-                <img
-                  src="../../../assets/imagenes/excel.png"
-                  alt="excel-icono"
-                />
-              </td>
-              <td>
-                <img src="../../../assets/imagenes/word.png" alt="word-icono" />
-              </td>
-              <td>
-                <img src="../../../assets/imagenes/pdf.png" alt="pdf-icono" />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+<div class="contenedor">
+  <app-sidebar></app-sidebar>
+  <div class="content-admin">
+    <div class="tittle-indicadores">
+      <h1>Administrar indicadores</h1>
+    </div>
+    <div class="seleccion">
+      <div class="box">
+        <h3>Estándar</h3>
         <br />
-        <button>Descargar todos los archivos adjuntos</button>
+        <select
+          class="selector"
+          name="estandar"
+          type="selectbox"
+          [(ngModel)]="Estandar.estandar"
+          (change)="estandar()"
+        >
+        <option value="">Estándar</option>
+          <option
+            *ngFor="let resultado of resultados"
+            [value]="resultado.estandar"
+          >
+            <h1>{{ resultado.nombreEstandar }}</h1>
+          </option>
+        </select>
+      </div>
+      <div class="box">
+        <h3>Categoria</h3>
+        <br />
+        <select
+          class="selector"
+          name="categoria"
+          type="selectbox"
+          [(ngModel)]="Categoria.categoria1"
+          (change)="categoria()"
+        >
+        <option value="">Categoria</option>
+          <option
+            *ngFor="let resultadoCategoria of resultadosCategoria"
+            [value]="resultadoCategoria.categoria1"
+          >
+            {{ resultadoCategoria.nombreCategoria }}
+          </option>
+        </select>
+      </div>
+      <div class="box">
+        <h3>Subcategoria</h3>
+        <br />
+        <select
+          class="selector"
+          name="select"
+          type="selectbox"
+          (change)="Subcategoria()"
+        >
+        <option>Subcategoria</option>
+          <option
+            *ngFor="let item of resultadosSubCategoria"
+            [value]="item.subcategoria1"
+          >
+            {{ item.nombreSubcategoria }}
+          </option>
+        </select>
       </div>
     </div>
+    <div class="botones-crear">
+      <button
+        [routerLink]="['/estandares']"
+        [routerLinkActive]="['link-active']"
+      >
+        Crear nuevo estandar
+      </button>
+
+      <button
+        [routerLink]="['/categorias']"
+        [routerLinkActive]="['link-active']"
+      >
+        Crear nueva categoria
+      </button>
+
+      <button
+        [routerLink]="['/subcatego']"
+        [routerLinkActive]="['link-active']"
+      >
+        Crear nueva subcategoria
+      </button>
+
+      <button
+        [routerLink]="['/nuevo-indicador']"
+        [routerLinkActive]="['link-active']"
+      >
+        Crear nuevo indicador
+      </button>
+
+      <button
+        [routerLink]="['/indicadores-masivos']"
+        [routerLinkActive]="['link-active']"
+      >
+        Crear indicadores masivamente
+      </button>
+    </div>
+    <div class="botones-eliminar">
+      <button
+        [routerLink]="['/eliminar-estandar']"
+        [routerLinkActive]="['link-active']"
+      >
+        Eliminar estandar
+      </button>
+      <button
+        [routerLink]="['/eliminar-categoria']"
+        [routerLinkActive]="['link-active']"
+      >
+        Eliminar categoria
+      </button>
+      <button
+        [routerLink]="['/eliminar-subcategoria']"
+        [routerLinkActive]="['link-active']"
+      >
+        Eliminar subcategoria
+      </button>
+    </div>
+    <div class="resultados-tabla">
+      <table class="tabla-indicadores">
+        <thead>
+          <tr>
+            <th>
+              <img
+                src="../../../assets/imagenes/nombreIndicador.png"
+                alt="icono-nombre"
+              />
+              Nombre indicador
+            </th>
+            <th>
+              <img
+                src="../../../assets/imagenes/creador.png"
+                alt="icono-creador"
+              />
+              Creador
+            </th>
+            <th>
+              <img
+                src="../../../assets/imagenes/fechaHora.png"
+                alt="icono-fecha"
+              />
+              Fecha y hora Creacion
+            </th>
+            <th>
+              <img
+                src="../../../assets/imagenes/archivo.png"
+                alt="icono-archivo"
+              />
+              Archivo
+            </th>
+            <th>
+              <img src="../../../assets/imagenes/ver.png" alt="icono-ver" />
+            </th>
+            <th>
+              <img
+                src="../../../assets/imagenes/editar.png"
+                alt="icono-editar"
+                [routerLink]="['/editar-icono']"
+                [routerLinkActive]="['link-active']"
+              />
+            </th>
+            <th>
+              <img
+                src="../../../assets/imagenes/eliminar.png"
+                alt="icono-eliminar"
+              />
+            </th>
+            <th>
+              <img
+                src="../../../assets/imagenes/duplicar.png"
+                alt="icono-duplicar"
+              />
+            </th>
+            <th>
+              <img src="../../../assets/imagenes/excel.png" alt="excel-icono" />
+            </th>
+            <th>
+              <img src="../../../assets/imagenes/word.png" alt="word-icono" />
+            </th>
+            <th>
+              <img src="../../../assets/imagenes/pdf.png" alt="pdf-icono" />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>indicador1</td>
+            <td>creador</td>
+            <td>2022/12/05</td>
+            <td>Archivo</td>
+            <td>
+              <img src="../../../assets/imagenes/ver.png" alt="ver-icono" />
+            </td>
+            <td>
+              <img
+                [routerLink]="['/editar-indicador']"
+                [routerLinkActive]="['link-active']"
+                src="../../../assets/imagenes/editar.png"
+                alt="editar-icono"
+              />
+            </td>
+            <td>
+              <img
+                src="../../../assets/imagenes/eliminar.png"
+                alt="eliminar-icono"
+              />
+            </td>
+            <td>
+              <img
+                src="../../../assets/imagenes/duplicar.png"
+                alt="duplicar-icono"
+              />
+            </td>
+            <td>
+              <img src="../../../assets/imagenes/excel.png" alt="excel-icono" />
+            </td>
+            <td>
+              <img src="../../../assets/imagenes/word.png" alt="word-icono" />
+            </td>
+            <td>
+              <img src="../../../assets/imagenes/pdf.png" alt="pdf-icono" />
+            </td>
+          </tr>
+          <tr>
+            <td>indicador2</td>
+            <td>creador</td>
+            <td>2022/12/05</td>
+            <td>Archivo</td>
+            <td>
+              <img src="../../../assets/imagenes/ver.png" alt="ver-icono" />
+            </td>
+            <td>
+              <img
+                src="../../../assets/imagenes/editar.png"
+                alt="editar-icono"
+              />
+            </td>
+            <td>
+              <img
+                src="../../../assets/imagenes/eliminar.png"
+                alt="eliminar-icono"
+              />
+            </td>
+            <td>
+              <img
+                src="../../../assets/imagenes/duplicar.png"
+                alt="duplicar-icono"
+              />
+            </td>
+            <td>
+              <img src="../../../assets/imagenes/excel.png" alt="excel-icono" />
+            </td>
+            <td>
+              <img src="../../../assets/imagenes/word.png" alt="word-icono" />
+            </td>
+            <td>
+              <img src="../../../assets/imagenes/pdf.png" alt="pdf-icono" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <button>Descargar todos los archivos adjuntos</button>
+    </div>
   </div>
+</div>

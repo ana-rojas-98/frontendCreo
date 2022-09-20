@@ -98,4 +98,20 @@ export class AuthService {
     );
     return result;
   }
+
+  eliminarSubcategoria(subcategoria: any) {
+    let result = this.http.post(
+      `${this.URL_SER}/api/SubCategoria/DeleteSubcategoria`,
+      subcategoria
+    );
+    return result;
+  }
+
+  eliminarCategoria(categoria: any) {
+    let result = this.http.post(
+      `${this.URL_SER}/api/Categoria/DeleteCategoria`,
+      categoria
+    );
+    return result;
+  }
 }
