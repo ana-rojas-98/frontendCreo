@@ -91,7 +91,9 @@
       <button class="button-interactivo">Previsualización del indicador</button>
     </div>
     <div class="buttons">
-      <button type="cancel" class="cancelar">Cancelar</button>
+      <button [routerLink]="['/administrar-indicadores']"
+              [routerLinkActive]="['link-active']"
+              type="cancel" class="cancelar">Cancelar</button>
       <button type="submit" class="guardar" (click)="SetCategoria()">
         Guardar
       </button>

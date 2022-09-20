@@ -10,6 +10,7 @@
           [(ngModel)]="Estandar.estandar"
           (change)="estandar()"
         >
+          <option value="">Estándar</option>
           <option
             *ngFor="let resultado of resultados"
             [value]="resultado.estandar"
@@ -25,6 +26,7 @@
           [(ngModel)]="Categoria.categoria1"
           (change)="categoria()"
         >
+          <option value="">Categoria</option>
           <option
             *ngFor="let resultadoCategoria of resultadosCategoria"
             [value]="resultadoCategoria.categoria1"

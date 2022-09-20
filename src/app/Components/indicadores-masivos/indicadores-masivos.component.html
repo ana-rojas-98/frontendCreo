@@ -71,7 +71,9 @@
             </table>
         </div>
         <div class="botones">
-            <button class="cancelar">Cancelar</button>
+            <button [routerLink]="['/administrar-indicadores']"
+                    [routerLinkActive]="['link-active']"
+                    class="cancelar">Cancelar</button>
             <button class="guardar">Guardar</button>
         </div>
     </div>

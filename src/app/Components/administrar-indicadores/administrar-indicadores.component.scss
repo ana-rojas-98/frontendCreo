@@ -75,15 +75,13 @@ h1 {
 .resultados-tabla {
   padding: 20px;
 }
-.resultados-tabla table tr {
-  border: 1px gray solid;
-}
 .resultados-tabla thead th {
   width: min-content;
   text-align: center;
   font-weight: 500;
   font-size: 14px;
   height: 30px;
+  padding-top: 10px;
 }
 table tbody td {
   text-align: center;
@@ -119,8 +117,8 @@ table {
     background-color: #ffffff;
 }
 td, th { 
-    border-bottom: solid 1px rgb(0, 0, 0); 
-    border-top: solid 1px rgb(0, 0, 0); 
+    border-bottom: 1px solid #000000;
+    border-top: 1px solid #000000;
 }
 tr td, th { 
     border-top-right-radius: 0;               
@@ -129,14 +127,24 @@ tr td, th {
     border-bottom-right-radius: 0; 
 }
 th:first-child { 
-    border-top-left-radius: 10px; 
+    border-top-left-radius: 10px;
+    border-left: 1px solid #000000;
 }
 th:last-child {   
-    border-top-right-radius: 10px; 
+    border-top-right-radius: 10px;
+    border-right: 1px solid #000000;
 }
 tr:last-child td:first-child { 
-    border-bottom-left-radius: 10px; 
+    border-bottom-left-radius: 10px;
+    border-left: 1px solid #000000;
+}
+tr:first-child td:first-child {
+  border-left: 1px solid #000000;
 }
 tr:last-child td:last-child { 
     border-bottom-right-radius: 10px; 
+    border-right: 1px solid #000000;
+}
+tr:first-child td:last-child {
+    border-right: 1px solid #000000;
 }

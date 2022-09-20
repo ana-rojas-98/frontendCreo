@@ -4,6 +4,7 @@
     <div class="form-group col">
       <label for="select">Estándar</label>
       <select name="select" type="selectbox" [(ngModel)]="Estandar.IdEstandar">
+        <option value="">Estándar</option>
         <option
           *ngFor="let item of resultados"
           [value]="item.estandar"

@@ -9,6 +9,7 @@
         type="selectbox"
         [(ngModel)]="Estandar.estandar"
       >
+        <option value="">Estándar</option>
         <option
           *ngFor="let resultado of resultadosEstandares"
           [value]="resultado.estandar"
@@ -24,6 +25,7 @@
         type="selectbox"
         [(ngModel)]="Subcategoria.IdCategoria"
       >
+        <option value="">Categoría</option>
         <option
           *ngFor="let resultadoCategoria of resultados"
           [value]="resultadoCategoria.categoria1"
