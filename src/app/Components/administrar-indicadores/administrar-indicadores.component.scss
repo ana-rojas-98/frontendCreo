@@ -1,26 +1,15 @@
 @import "../../../assets/styles/main.scss";
-.admin-indicadores{
-    display: flex;
-    flex-wrap: nowrap;
+.contenedor{
+    @include contenedor;
 }
 .content-admin{
-    width: 1088px;
-    height: 726px;
-    background: linear-gradient(180deg, rgba(17, 17, 17, 0.06) 0%, rgba(255, 255, 255, 0) 100%);
-    font-family: 'Montserrat';
+    @include body;
 }
 .tittle-indicadores{
-    text-align: center;
-    height: 60px;
-    padding: 10px 350px 10px 350px;
-    margin-top: 20px;
+@include titleBody;
 }
 h1{
-    color:#2BAEE5;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    @include h1Body;
 }
 .seleccion{
     display: flex;
@@ -46,6 +35,7 @@ h1{
     display: flex;
     justify-content: space-around;
     padding: 5px;
+    margin-top: 20px;
 }
 .botones-crear button{
     background-color: $buttonPrimary;
@@ -54,33 +44,40 @@ h1{
     height: 29px;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45), 0px 0px 1px rgba(0, 0, 0, 0.45);
     font-weight: 700;
-    font-size: 12px;
+    font-size: 11px;
     color: #FFFFFF;
-    padding: 9px;
+    width: 1000px;
+    margin-left: 15px;
 }
 .botones-eliminar{
     height: 50px;
     padding: 5px;
+    display: grid;
+    grid-template-columns: repeat(2,0.6fr) repeat(3,1fr);
 }
 .botones-eliminar button{
         background-color: $buttonBackground;
         border-radius: 25px;
-        border: 1px;
         height: 29px;
         box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45), 0px 0px 1px rgba(0, 0, 0, 0.45);
         font-weight: 700;
-        font-size: 12px;
+        font-size: 11px;
         color: #FFFFFF;
         padding: 9px;
-        margin-left: 20px;
+        margin-left: 18px;
+        width: 210px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px;
 }
 .resultados-tabla{
     padding: 20px;
 }
-.resultados-tabla table{    
-    border: 1px gray solid;
+.resultados-tabla table{
+    border-radius: 30%;
     width: 1050px;
-    border-radius: 10px;
+    background-color: #FFFFFF;
 }
 .resultados-tabla table tr{
     border: 1px gray solid;

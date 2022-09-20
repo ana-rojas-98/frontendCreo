@@ -2,6 +2,10 @@ nav{
   width: 1440px;
   height: 111px;
 }
+.container{
+  width: 1440px;
+  margin: 20px;
+}
  .container img{
   width: 207px;
   height: 93px;
@@ -19,8 +23,4 @@ html {
   html {
     font-size: 16px;
   }
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }

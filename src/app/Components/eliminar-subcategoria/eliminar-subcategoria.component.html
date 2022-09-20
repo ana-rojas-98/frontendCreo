@@ -28,7 +28,9 @@
             </select>
         </div>
         <div>
-          <button type="cancel" class = "bot_per_2"> Cancelar
+          <button type="cancel" class = "bot_per_2"
+          [routerLink]="['/estandares']"
+          [routerLinkActive]="['link-active']"> Cancelar
           </button>
           <button type="submit" class = "bot_est" (click)="SetEstandar()">Guardar
           </button>
