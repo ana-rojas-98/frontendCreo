@@ -76,4 +76,8 @@ export class NuevoIndicadorComponent implements OnInit {
       });
   }
 
+  CapturarArchivo(event){
+    console.log(event.target.files)
+  }
+
 }
