@@ -75,6 +75,10 @@
     <div class="subir-archivo">
       <p>Subir el archivo excel:</p>
       <button class="button-interactivo">Subir archivo</button>
+      <input type="file"
+      (Change)="CapturarArchivo($event)"
+       accept=".xlsx"
+       id="subir"/>
     </div>
     <div class="perioricidad-indicador">
       <p>Seleccione la perioricidad de este indicador</p>
