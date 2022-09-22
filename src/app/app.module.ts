@@ -32,6 +32,7 @@ import { EliminarSubcategoriaComponent } from './Components/eliminar-subcategori
 import { NuevoIndicadorComponent } from './Components/nuevo-indicador/nuevo-indicador.component';
 import { IndicadoresMasivosComponent } from './Components/indicadores-masivos/indicadores-masivos.component';
 import { EditarIndicadorComponent } from './Components/editar-indicador/editar-indicador.component';
+import { AdministrarUsuariosComponent } from './Components/administrar-usuarios/administrar-usuarios.component';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -58,6 +59,7 @@ import { EditarIndicadorComponent } from './Components/editar-indicador/editar-i
     NuevoIndicadorComponent,
     IndicadoresMasivosComponent,
     EditarIndicadorComponent,
+    AdministrarUsuariosComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -74,6 +76,7 @@ import { EditarIndicadorComponent } from './Components/editar-indicador/editar-i
       { path: 'subcatego', component: SubcategoComponent},
       { path: 'olvide-clave', component: OlvideClaveComponent},
       { path: 'administrar-indicadores', component: AdministrarIndicadoresComponent},
+      { path: 'administrar-usuarios', component: AdministrarUsuariosComponent},
       { path: 'cambio-contrasena', component: CambioContrasenaComponent},
       { path: 'eliminar-estandar', component: EliminarEstandarComponent},
       { path: 'eliminar-categoria', component: EliminarCategoriaComponent},

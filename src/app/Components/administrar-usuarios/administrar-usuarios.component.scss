@@ -1,0 +1,42 @@
+@import "../../../assets/styles/main.scss";
+.contenedor {
+  @include contenedor;
+}
+.content-admin {
+  @include body;
+}
+.tittle-indicadores {
+  @include titleBody;
+}
+h1 {
+  @include h1Body;
+  margin: 0 auto;
+}
+
+.select {
+  @include select;
+  margin: 10px;
+}
+
+.container-input{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.container-input,
+.resultados-tabla {
+  @include centerFlex;
+}
+
+.boton{
+    padding: 20px;
+    background: $buttonPrimary;
+    border-radius: 55px;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #ffffff;
+    border: 1px;
+}
