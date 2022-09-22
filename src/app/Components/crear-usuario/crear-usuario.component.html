@@ -1,0 +1,96 @@
+<div class="contenedor">
+  <app-sidebar></app-sidebar>
+  <div class="container">
+    <h1>Crear usuario</h1>
+    <div class="container-input">
+      <div>
+        <p>Nombre</p>
+        <input class="input" type="text" />
+      </div>
+      <div>
+        <p>Correo electronico</p>
+        <input class="input" type="email" />
+      </div>
+      <div>
+        <p>Telefono</p>
+        <input class="input" type="number" />
+      </div>
+      <div>
+        <input class="boton" type="button" value="Asignar indicadores" />
+      </div>
+    </div>
+    <div class="container-tipos-usuarios">
+      <h3>Tipos de usuario</h3>
+      <label
+        >Tipo de usuario<input
+          type="checkbox"
+          class="checkbox"
+          value="first_checkbox"
+        />
+      </label>
+      <label
+        >Administrado<input type="checkbox" class="checkbox"  value="first_checkbox" />
+      </label>
+      <label
+        >Usuario<input type="checkbox" class="checkbox"  value="first_checkbox" />
+      </label>
+    </div>
+    <div class="resultados-tabla">
+      <table class="tabla-indicadores">
+        <thead>
+          <tr>
+            <th>Categoria</th>
+            <th>Crear</th>
+            <th>Ver</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Administrador de indicadores</td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+          </tr>
+          <tr>
+            <td>Administración de usuarios y permisos</td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+          </tr>
+          <tr>
+            <td>Visor de eventos</td>
+            <td></td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Gestor de notificaciones</td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+          </tr>
+          <tr>
+            <td>Reportes</td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+          </tr>
+          <tr>
+            <td>Configuración</td>
+            <td></td>
+            <td></td>
+            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

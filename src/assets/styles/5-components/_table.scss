@@ -43,11 +43,7 @@ table {
   width: 100%;
   background-color: #ffffff;
 }
-td,
-th {
-  border-bottom: 1px solid #000000;
-  border-top: 1px solid #000000;
-}
+
 tr td,
 th {
   border-top-right-radius: 0;
@@ -55,28 +51,32 @@ th {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
+
+td,
+th {
+  border-bottom: 1px solid #000000;
+  border-top: 1px solid #000000;
+}
+
 th:first-child {
   border-top-left-radius: 10px;
-  border-left: 1px solid #000000;
+  border-left: 1px solid rgb(0, 0, 0, 20%);
 }
 th:last-child {
   border-top-right-radius: 10px;
-  border-right: 1px solid #000000;
+  border-right: 1px solid rgb(0, 0, 0, 20%);
 }
 tr:last-child td:first-child {
   border-bottom-left-radius: 10px;
-  border-left: 1px solid #000000;
+  border-left: 1px solid rgb(0, 0, 0, 20%);
 }
 tr:first-child td:first-child {
-  border-left: 1px solid #000000;
+  border-left: 1px solid rgb(0, 0, 0, 20%);
 }
 tr:last-child td:last-child {
   border-bottom-right-radius: 10px;
-  border-right: 1px solid #000000;
+  border-right: 1px solid rgb(0, 0, 0, 20%);
 }
 tr:first-child td:last-child {
-  border-right: 1px solid #000000;
+  border-right: 1px solid rgb(0, 0, 0, 20%);
 }
-
-
-

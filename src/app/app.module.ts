@@ -33,6 +33,7 @@ import { NuevoIndicadorComponent } from './Components/nuevo-indicador/nuevo-indi
 import { IndicadoresMasivosComponent } from './Components/indicadores-masivos/indicadores-masivos.component';
 import { EditarIndicadorComponent } from './Components/editar-indicador/editar-indicador.component';
 import { AdministrarUsuariosComponent } from './Components/administrar-usuarios/administrar-usuarios.component';
+import { CrearUsuarioComponent } from './Components/crear-usuario/crear-usuario.component';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -60,6 +61,7 @@ import { AdministrarUsuariosComponent } from './Components/administrar-usuarios/
     IndicadoresMasivosComponent,
     EditarIndicadorComponent,
     AdministrarUsuariosComponent,
+    CrearUsuarioComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -76,7 +78,6 @@ import { AdministrarUsuariosComponent } from './Components/administrar-usuarios/
       { path: 'subcatego', component: SubcategoComponent},
       { path: 'olvide-clave', component: OlvideClaveComponent},
       { path: 'administrar-indicadores', component: AdministrarIndicadoresComponent},
-      { path: 'administrar-usuarios', component: AdministrarUsuariosComponent},
       { path: 'cambio-contrasena', component: CambioContrasenaComponent},
       { path: 'eliminar-estandar', component: EliminarEstandarComponent},
       { path: 'eliminar-categoria', component: EliminarCategoriaComponent},
@@ -84,6 +85,8 @@ import { AdministrarUsuariosComponent } from './Components/administrar-usuarios/
       { path: 'nuevo-indicador', component: NuevoIndicadorComponent},
       { path: 'indicadores-masivos', component: IndicadoresMasivosComponent},
       { path: 'editar-indicador', component: EditarIndicadorComponent},
+      { path: 'administrar-usuarios', component: AdministrarUsuariosComponent},
+      { path: 'crear-usuarios', component: CrearUsuarioComponent},
     ])
   ],
   providers: [

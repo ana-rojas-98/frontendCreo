@@ -16,7 +16,13 @@
         <option value="">Administrador</option>
       </select>
       <input class="select" type="select" name="" />
-      <input class="boton" type="button" value="Crear nuevo usuario" />
+      <input
+        [routerLink]="['/crear-usuarios']"
+        [routerLinkActive]="['link-active']"
+        class="boton"
+        type="button"
+        value="Crear nuevo usuario"
+      />
     </div>
     <div class="resultados-tabla">
       <table class="tabla-indicadores">
@@ -36,18 +42,9 @@
               />
               Nombre
             </th>
-            <th>
-             
-              Telefono
-            </th>
-            <th>
-              
-              Estado
-            </th>
-            <th>
-              
-              Quien lo creo
-            </th>
+            <th>Telefono</th>
+            <th>Estado</th>
+            <th>Quien lo creo</th>
 
             <th>
               <img
