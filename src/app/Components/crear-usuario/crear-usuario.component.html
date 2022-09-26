@@ -16,7 +16,13 @@
         <input class="input" type="number" />
       </div>
       <div>
-        <input class="boton" type="button" value="Asignar indicadores" />
+        <input
+          [routerLink]="['/asignar-indicadores']"
+          [routerLinkActive]="['link-active']"
+          class="boton"
+          type="button"
+          value="Asignar indicadores"
+        />
       </div>
     </div>
     <div class="container-tipos-usuarios">
@@ -29,10 +35,18 @@
         />
       </label>
       <label
-        >Administrado<input type="checkbox" class="checkbox"  value="first_checkbox" />
+        >Administrado<input
+          type="checkbox"
+          class="checkbox"
+          value="first_checkbox"
+        />
       </label>
       <label
-        >Usuario<input type="checkbox" class="checkbox"  value="first_checkbox" />
+        >Usuario<input
+          type="checkbox"
+          class="checkbox"
+          value="first_checkbox"
+        />
       </label>
     </div>
     <div class="resultados-tabla">

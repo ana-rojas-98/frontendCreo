@@ -1,0 +1,85 @@
+@import "../../../assets/styles/main.scss";
+.contenedor {
+  @include contenedor;
+}
+.container {
+  @include body;
+  width: 100%;
+  padding-top: 40px;
+  border: 1px rgb(0, 0, 0, 20%) solid;
+}
+
+.tittle-indicadores {
+  @include titleBody;
+}
+h1 {
+  @include h1Body;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+
+.seleccion {
+  display: flex;
+  width: 100%;
+  margin: 20px;
+  .selector {
+    @include inputCard(350px, 50px);
+    margin: 0 10px 20px 10px;
+  }
+}
+
+.nombre-usuario {
+  display: flex;
+  margin: 20px;
+  h3 {
+    font-weight: bold;
+    margin-right: 20px;
+  }
+}
+
+.seleccion {
+  input {
+    background: #ffffff;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 280px;
+    height: 60px;
+    border: 1px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+}
+
+table tbody td {
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  height: 25px;
+}
+
+.container-tipos-usuarios {
+  margin-left: 20px;
+  margin-top: 40px;
+  label {
+    margin-right: 80px;
+  }
+}
+
+.checkbox {
+  margin-left: 19px;
+  border: black 1px solid;
+  width: 20px;
+  height: 20px;
+}
+
+.resultados-tabla {
+  margin-right: 20px;
+}
+
+.container-button {
+  @include centerFlex;
+
+  .button-cancelar {
+    margin-right: 60px;
+  }
+}
