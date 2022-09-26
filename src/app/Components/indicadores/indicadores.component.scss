@@ -1,0 +1,26 @@
+@import "../../../assets/styles/main.scss";
+
+.contenedor{
+    @include contenedor;
+}
+.cuerpo{
+    @include body;
+}
+.title{
+    @include titleBody;
+    h1{
+        @include h1Body;
+    }
+}
+.selectores{
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: 500;
+    font-size: 16px;
+    justify-content: space-around;
+    height: max-content;
+    padding: 10px;
+}
+select{
+    @include select;
+}
