@@ -1,0 +1,112 @@
+<div class="contenedor">
+    <app-sidebar></app-sidebar>
+    <div class="cuerpo">
+        <div class="title">
+            <h1>Indicadores</h1>
+        </div>
+        <br>
+        <div class="selectores">
+            <div class="box">
+                <h3>Estándar</h3>
+                <select
+                  class="selector"
+                  name="estandar"
+                  type="selectbox">
+                  <option value="">Estándar</option>
+                  <option>
+                    <h1>opcion generada</h1>
+                  </option>
+                </select>
+            </div>
+            <div class="box">
+                <h3>Categoria</h3>
+                <select
+                  class="selector"
+                  name="categoria"
+                  type="selectbox"
+                >
+                  <option value="">Categoria</option>
+                  <option>
+                    opcion generada
+                  </option>
+                </select>
+            </div>
+            <div class="box">
+                <h3>Subcategoria</h3>
+                <select>
+                  <option>Subcategoria</option>
+                  <option>
+                    opcion generada
+                  </option>
+                </select>
+            </div>
+        </div>
+        <div class="resultados-tabla">
+            <table>
+                <thead>
+                    <tr>
+                        <th><img src="../../../assets/imagenes/nombreIndicador.png"
+                            alt="icono-indicador">
+                            Nombre indicador
+                        </th>
+                        <th><img src="../../../assets/imagenes/creador.png"
+                            alt="icono-diligenciador">
+                            Ultimo que diligencio
+                        </th>
+                        <th><img src="../../../assets/imagenes/fechaHora.png"
+                            alt="icono-fecha">
+                            Fecha y hora
+                        </th>
+                        <th>% avance</th>
+                        <th><img src="../../../assets/imagenes/archivo.png"
+                            alt="icono-archivo">
+                            Archivo
+                        </th>
+                        <th><img src="../../../assets/imagenes/ver.png"
+                            alt="icono-ver">
+                            Ver
+                        </th>
+                        <th><img src="../../../assets/imagenes/editar.png"
+                            alt="icono-editar">
+                            Diligenciar
+                        </th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>indicador1</td>
+                        <td>Pepito</td>
+                        <td>2022</td>
+                        <td>2%</td>
+                        <td>n/a</td>
+                        <td><img src="../../../assets/imagenes/ver.png"
+                            alt="icono-ver">
+                        </td>
+                        <td><img src="../../../assets/imagenes/editar.png"
+                            alt="icono-editar"
+                            [routerLink]="['/diligenciar-indicador']"
+                            [routerLinkActive]="['link-active']"
+                            >
+                        </td>
+                        <td><img src="../../../assets/imagenes/excel.png"
+                            alt="icono-excel">
+                        </td>
+                        <td><img src="../../../assets/imagenes/word.png"
+                            alt="icono-word">
+                        </td>
+                        <td><img src="../../../assets/imagenes/pdf.png"
+                            alt="icono-pdf">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <button>
+                Descargar todos los archivos adjuntos
+            </button>
+        </div>
+    </div>
+</div>

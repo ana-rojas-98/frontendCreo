@@ -1,0 +1,168 @@
+@import "../../../assets/styles/main.scss";
+
+.contenedor{
+    @include contenedor;
+}
+.cuerpo{
+    @include body;
+}
+.title{
+    @include titleBody;
+    h1{
+        @include h1Body;
+    }
+}
+.formatos{
+    border-bottom:1px gray solid;
+    margin: 20px;
+    display: flex;
+}
+.formatos img{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+.formato{
+    margin-left: 800px;
+    padding-bottom: 10px;
+}
+.formatos button{
+    width: max-content;
+    height: 29px;
+    background: $buttonDownload;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45), 0px 0px 1px rgba(0, 0, 0, 0.45);
+    border-radius: 25px;
+    border: 1px;
+    color: #ffffff;
+    margin-right: 20px;
+}
+
+.tablero{
+    margin: 50px;
+    border: 1px black solid;
+    border-radius: 10px;
+}
+.title-card{
+    margin: 20px;
+    text-align: center;
+    font-family: 'Montserrat';
+    h1{
+        font-weight: bold;
+    }
+}
+.title-c{
+    display: flex;
+    justify-content: center;
+    a{
+        text-decoration: none;
+        margin-left: 10px;
+        margin-right: 10px;        
+        text-decoration: none;
+        color: black;
+    }
+}
+.periodicidad{
+    display: flex;
+    justify-content: center;    
+    p{
+        font-weight: bold;
+    }
+    a{
+        text-decoration: none;
+        margin-left: 5px;
+        color: black;
+    }
+}
+.nombre-organizacion{
+    height: max-content;
+    margin: 20px;
+    label{
+        @include label;
+    }
+    input{
+        @include inputCard (369px, 45.86px);
+    }
+}
+.title-finanzas{
+    margin: 20px;
+}
+.campos{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    p{
+        text-align: center;
+    }
+}
+.campos-activos{
+    margin: 20px;
+    height: max-content;
+    label{
+        @include label;
+    }
+    input{
+        @include inputCard (202px, 45.86px);
+        margin-right: 10px;
+    }
+}
+.campos-pasivos{
+    margin: 20px;
+    height: max-content;
+    label{
+        @include label;
+    }
+    input{
+        @include inputCard (202px, 45.86px);
+        margin-right: 10px;
+    }
+}
+.corriente{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-bottom: 50px;
+}
+.botones{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+.finalizar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    background: $buttonBackground;
+    border-radius: 55px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #FFFFFF;
+    border: 1px;  
+    width: 123px;
+    height: 47px;
+    left: calc(50% - 123px/2 + 112px);
+    top: calc(50% - 47px/2 + 369.5px);
+}
+.guardar-indicador{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    background: $buttonDownload;
+    border-radius: 55px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #FFFFFF;
+    border: 1px;  
+    width: 130px;
+    height: 47px;
+    left: calc(50% - 130px/2 - 109.5px);
+    top: calc(50% - 47px/2 + 369.5px);
+    margin-right: 100px;
+}

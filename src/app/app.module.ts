@@ -34,6 +34,8 @@ import { IndicadoresMasivosComponent } from './Components/indicadores-masivos/in
 import { EditarIndicadorComponent } from './Components/editar-indicador/editar-indicador.component';
 import { AdministrarUsuariosComponent } from './Components/administrar-usuarios/administrar-usuarios.component';
 import { CrearUsuarioComponent } from './Components/crear-usuario/crear-usuario.component';
+import { IndicadoresComponent } from './Components/indicadores/indicadores.component';
+import { DiligenciarIndicadorComponent } from './Components/diligenciar-indicador/diligenciar-indicador.component';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -62,6 +64,8 @@ import { CrearUsuarioComponent } from './Components/crear-usuario/crear-usuario.
     EditarIndicadorComponent,
     AdministrarUsuariosComponent,
     CrearUsuarioComponent,
+    IndicadoresComponent,
+    DiligenciarIndicadorComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -87,6 +91,8 @@ import { CrearUsuarioComponent } from './Components/crear-usuario/crear-usuario.
       { path: 'editar-indicador', component: EditarIndicadorComponent},
       { path: 'administrar-usuarios', component: AdministrarUsuariosComponent},
       { path: 'crear-usuarios', component: CrearUsuarioComponent},
+      { path: 'indicadores', component: IndicadoresComponent},
+      { path: 'diligenciar-indicador', component: DiligenciarIndicadorComponent},
     ])
   ],
   providers: [
