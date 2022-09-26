@@ -1,0 +1,41 @@
+@import "../../../assets/styles/main.scss";
+.contenedor {
+  @include contenedor;
+}
+.container {
+  padding-top: 40px;
+  border: 1px rgb(0, 0, 0, 20%) solid;
+}
+.content-admin {
+  @include body;
+}
+.tittle-indicadores {
+  @include titleBody;
+}
+h1 {
+  @include h1Body;
+  margin: 0 auto;
+}
+
+.select {
+  @include select;
+  margin: 10px;
+}
+
+.container-input {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.container-input,
+.resultados-tabla {
+  @include centerFlex;
+}
+
+.boton {
+  @include boton($buttonPrimary);
+}
+
+img {
+  margin-top: 10px;
+}

@@ -32,6 +32,8 @@ import { EliminarSubcategoriaComponent } from './Components/eliminar-subcategori
 import { NuevoIndicadorComponent } from './Components/nuevo-indicador/nuevo-indicador.component';
 import { IndicadoresMasivosComponent } from './Components/indicadores-masivos/indicadores-masivos.component';
 import { EditarIndicadorComponent } from './Components/editar-indicador/editar-indicador.component';
+import { AdministrarUsuariosComponent } from './Components/administrar-usuarios/administrar-usuarios.component';
+import { CrearUsuarioComponent } from './Components/crear-usuario/crear-usuario.component';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -58,6 +60,8 @@ import { EditarIndicadorComponent } from './Components/editar-indicador/editar-i
     NuevoIndicadorComponent,
     IndicadoresMasivosComponent,
     EditarIndicadorComponent,
+    AdministrarUsuariosComponent,
+    CrearUsuarioComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -81,6 +85,8 @@ import { EditarIndicadorComponent } from './Components/editar-indicador/editar-i
       { path: 'nuevo-indicador', component: NuevoIndicadorComponent},
       { path: 'indicadores-masivos', component: IndicadoresMasivosComponent},
       { path: 'editar-indicador', component: EditarIndicadorComponent},
+      { path: 'administrar-usuarios', component: AdministrarUsuariosComponent},
+      { path: 'crear-usuarios', component: CrearUsuarioComponent},
     ])
   ],
   providers: [

@@ -1,0 +1,97 @@
+<div class="contenedor">
+  <app-sidebar></app-sidebar>
+  <div class="container">
+    <h1>Administrador de usuarios y permisos</h1>
+    <div class="container-input">
+      <select class="select" name="" id="">
+        <option value="">Administrador</option>
+      </select>
+      <select
+        class="select"
+        data-show-subtext="true"
+        data-live-search="true"
+        name=""
+        id=""
+      >
+        <option value="">Administrador</option>
+      </select>
+      <input class="select" type="select" name="" />
+      <input
+        [routerLink]="['/crear-usuarios']"
+        [routerLinkActive]="['link-active']"
+        class="boton"
+        type="button"
+        value="Crear nuevo usuario"
+      />
+    </div>
+    <div class="resultados-tabla">
+      <table class="tabla-indicadores">
+        <thead>
+          <tr>
+            <th>
+              <img
+                src="../../../assets/imagenes/creador.png"
+                alt="icono-nombre"
+              />
+              Tipo de usuario
+            </th>
+            <th>
+              <img
+                src="../../../assets/imagenes/creador.png"
+                alt="icono-creador"
+              />
+              Nombre
+            </th>
+            <th>Telefono</th>
+            <th>Estado</th>
+            <th>Quien lo creo</th>
+
+            <th>
+              <img
+                src="../../../assets/imagenes/editar.png"
+                alt="icono-editar"
+                [routerLink]="['/editar-icono']"
+                [routerLinkActive]="['link-active']"
+              />
+            </th>
+            <th>
+              <img src="../../../assets/imagenes/ver.png" alt="icono-ver" />
+            </th>
+            <th>
+              <img
+                src="../../../assets/imagenes/eliminar.png"
+                alt="icono-eliminar"
+              />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Admin</td>
+            <td>Juan</td>
+            <td>3133453459</td>
+            <td>juan@gmail.com</td>
+            <td>Activo</td>
+            <td>
+              <img
+                [routerLink]="['/editar-indicador']"
+                [routerLinkActive]="['link-active']"
+                src="../../../assets/imagenes/editar.png"
+                alt="editar-icono"
+              />
+            </td>
+            <td>
+              <img src="../../../assets/imagenes/ver.png" alt="ver-icono" />
+            </td>
+            <td>
+              <img
+                src="../../../assets/imagenes/eliminar.png"
+                alt="icono-eliminar"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
