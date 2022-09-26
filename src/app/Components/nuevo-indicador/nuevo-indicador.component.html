@@ -27,7 +27,7 @@
             [(ngModel)]="Estandar.estandar"
             (change)="estandar()"
           >
-          <option>Estandar</option>
+          <option>Estándar</option>
             <option
               *ngFor="let resultado of resultados"
               [value]="resultado.estandar"
@@ -86,8 +86,12 @@
       <h3>Perioricidad</h3>
       <br />
       <select name="select" type="selectbox">
-        <option value="Perioricidad 1">Perioricidad 1</option>
-        <option value="Perioricidad 2">Perioricidad 2</option>
+        <option value="Perioricidad 1">Mensual</option>
+        <option value="Perioricidad 2">Bimestral</option>
+        <option value="Perioricidad 2">Trimestral</option>
+        <option value="Perioricidad 2">Cuatrimestral</option>
+        <option value="Perioricidad 2">Semestral</option>
+        <option value="Perioricidad 2">Anual</option>
       </select>
     </div>
     <div class="previsualizar-indicador">
