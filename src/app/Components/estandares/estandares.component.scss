@@ -1,18 +1,10 @@
 @import "../../../assets/styles/main.scss";
 
-body html{
-    height: 100%;
-  }
-  body{
-    margin: 10%;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    background-color:rgb(255, 255, 255);
-  }
+.contenedor{
+  @include contenedor;
+  align-items: center;
+  justify-content: center;
+}
   .form-box {
     position: relative;
     width: 627px;
