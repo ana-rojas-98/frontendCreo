@@ -43,6 +43,7 @@
               Nombre
             </th>
             <th>Telefono</th>
+            <th>Correo</th>
             <th>Estado</th>
             <th>Quien lo creo</th>
 
@@ -66,12 +67,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Admin</td>
-            <td>Juan</td>
-            <td>3133453459</td>
-            <td>juan@gmail.com</td>
-            <td>Activo</td>
+          <tr *ngFor="let item of resultados">
+            <td>{{ item.tipoUsuario }}</td>
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.telefono }}</td>
+            <td>{{ item.correo }}</td>
+            <td>{{ item.estado }}</td>
+            <td>quien lo creo</td>
             <td>
               <img
                 [routerLink]="['/editar-indicador']"

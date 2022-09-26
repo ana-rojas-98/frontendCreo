@@ -114,4 +114,13 @@ export class AuthService {
     );
     return result;
   }
+
+  getUsuarios(usuario: any) {
+    let result = this.http.get(
+      `${this.URL_SER}/api/Usuarios`,
+      usuario
+    );
+    return result;
+  }
+
 }
