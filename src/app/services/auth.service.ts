@@ -6,7 +6,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
   providedIn: "root",
 })
 export class AuthService {
-  private URL_SER = "https://localhost:5001";
+  private URL_SER = "http://www.creo.somee.com";
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
   signin(user: any) {
     return this.http.post(`${this.URL_SER}/api/Usuarios/Authenticate`, user);
