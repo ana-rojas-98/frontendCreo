@@ -59,7 +59,6 @@
             class="selector"
             name="select"
             type="selectbox"
-            (change)="subcategoria()"
           >
           <option>Subcategoria</option>
             <option
@@ -102,7 +101,7 @@
       <button [routerLink]="['/administrar-indicadores']"
               [routerLinkActive]="['link-active']"
               type="cancel" class="cancelar">Cancelar</button>
-      <button type="submit" class="guardar" (click)="SetCategoria()">
+      <button type="submit" class="guardar">
         Guardar
       </button>
     </div>
