@@ -1,0 +1,7 @@
+{
+  "/apa/*": {
+    "target": "http://www.creo.somee.com",
+    "secure": false,
+    "loglevel": "debug"
+  }
+}
