@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵflushModuleScopingQueueAsMuchAsPossible } from '@angular/core';
 import { AuthService } from "src/app/services/auth.service";
+import * as XSLX from 'xlsx';
 
 @Component({
   selector: 'app-nuevo-indicador',
@@ -9,6 +10,11 @@ import { AuthService } from "src/app/services/auth.service";
 export class NuevoIndicadorComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
+
+  archivos = [];
+  ExcelData: any;
+
+  element = false;
 
   Estandar = {
     NombreEstandar: "",
@@ -34,6 +40,16 @@ export class NuevoIndicadorComponent implements OnInit {
   resultadosSubCategoria = {};
   estandarFil = "";
   categoriaFil = "";
+
+ nombres = [
+ 'mensual',
+ 'bimensual',
+ 'trimestral',
+ 'cuatrimestral',
+ 'semestral',
+ 'anual',
+ ];
+ 
 
   estandar() {
     this.estandarFil = this.Estandar.estandar;
@@ -75,9 +91,40 @@ export class NuevoIndicadorComponent implements OnInit {
         );
       });
   }
+  SubirArchivo(){
+    const fileUpload = document.getElementById('fileUpload') as HTMLInputElement;
+    fileUpload.click();
+    fileUpload.onchange = () =>{
+     for(let index = 0; index <fileUpload.files.length ; index++){
+      const file = fileUpload.files[index]
+      this.archivos.push(file)
+     }
+     console.log(this.archivos)
+    }
+   
+  }
+    leerArchivo(){
+   
+      const archivoleido= new FileReader();
+      const archi = this.archivos[0];
+      archivoleido.readAsBinaryString(archi);
 
-  CapturarArchivo(event){
-    console.log(event.target.files)
+       archivoleido.onload = (e) => {
+       const workArchi = XSLX.read(archivoleido.result,{type:'binary'});
+       const nombreHojas = workArchi.SheetNames;
+       this.ExcelData = XSLX.utils.sheet_to_json(workArchi.Sheets[nombreHojas[0]])
+       console.log(this.ExcelData)
+    }
+
+  }
+
+  ShowData(){
+    this.element = true;
+    console.log(this.element)
+  }
+  HiddenData(){
+    this.element = false;
+    console.log(this.element)
   }
 
 }
