@@ -5,9 +5,7 @@
 .container {
   @include body;
 }
-.content-admin {
-  @include body;
-}
+
 .titulo {
   width: max-content;
   @include titleBody;

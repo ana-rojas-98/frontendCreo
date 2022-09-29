@@ -1,4 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
+import { AuthService } from "src/app/services/auth.service";
+import { AdministrarUsuariosService } from "src/app/services/administrar-usuarios.service";
 
 @Component({
   selector: "app-crear-usuario",
@@ -6,58 +8,65 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./crear-usuario.component.scss"],
 })
 export class CrearUsuarioComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private authService: AuthService,
+    private serviceAdministaraUsuario: AdministrarUsuariosService
+  ) {}
 
+  UsuarioIdp ={
+    id: 3
+  } ;
 
-
-  administrarIndicadores ={
-    Crear:false,
+  administrarIndicadores = {
+    Crear: false,
     Ver: false,
     Editar: false,
-    Eliminar: false
-  }
+    Eliminar: false,
+  };
 
-  administrarPermisos={
-    Crear:false,
+  administrarPermisos = {
+    Crear: false,
     Ver: false,
     Editar: false,
-    Eliminar: false
-  }
-  visorEventos ={
-    Crear:false,
+    Eliminar: false,
+  };
+  visorEventos = {
+    Crear: false,
     Ver: false,
     Editar: false,
-    Eliminar: false
-  }
+    Eliminar: false,
+  };
 
-  gestorNotificaciones ={
-    Crear:false,
+  gestorNotificaciones = {
+    Crear: false,
     Ver: false,
     Editar: false,
-    Eliminar: false
-  }
+    Eliminar: false,
+  };
 
-  reportes ={
-    Crear:false,
+  reportes = {
+    Crear: false,
     Ver: false,
     Editar: false,
-    Eliminar: false
-  }
+    Eliminar: false,
+  };
 
-  configuracion ={
-    Crear:false,
+  configuracion = {
+    Crear: false,
     Ver: false,
     Editar: false,
-    Eliminar: false
-  }
+    Eliminar: false,
+  };
 
   NuevoUsuario = {
+    Usuarioid: 1,
     Fullname: "",
     Email: "",
-    Pass: "",
+    Pass: "12345",
     Typeuser: "",
     Telefono: "",
-    Estado: "",
+    Estado: 1,
+    IdUsuarioRegistro: localStorage.getItem("idUsuario"),
     administrarIndicadores: this.administrarIndicadores,
     administrarPermisos: this.administrarIndicadores,
     visorEventos: this.administrarIndicadores,
@@ -66,9 +75,23 @@ export class CrearUsuarioComponent implements OnInit {
     configuracion: this.administrarIndicadores,
   };
 
-  asignarIndicadores(){
-    console.log(this.NuevoUsuario)
+  Usuarioid = "";
+
+  asignarIndicadores() {
+    //console.log(this.NuevoUsuario);
+    this.authService
+      .CrearNuevoUsuario(this.NuevoUsuario)
+      .subscribe((res: any) => {
+        this.Usuarioid = res.usuarioid;
+        console.log("peticion: ", res);
+      });
   }
 
-  ngOnInit() {}
+  enviarUsuarioId(){
+    this.serviceAdministaraUsuario.UsuarioId.emit(this.UsuarioIdp)
+  }
+
+  ngOnInit() {
+
+  }
 }

@@ -1,14 +1,18 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
+import { AdministrarUsuariosService } from "src/app/services/administrar-usuarios.service";
 import { AuthService } from "src/app/services/auth.service";
 
 @Component({
-  selector: 'app-asignar-indicadores',
-  templateUrl: './asignar-indicadores.component.html',
-  styleUrls: ['./asignar-indicadores.component.scss']
+  selector: "app-asignar-indicadores",
+  templateUrl: "./asignar-indicadores.component.html",
+  styleUrls: ["./asignar-indicadores.component.scss"],
 })
 export class AsignarIndicadoresComponent implements OnInit {
-
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private serviceAdministaraUsuario: AdministrarUsuariosService
+  ) {}
+  usuarioId: any;
   Estandar = {
     NombreEstandar: "",
     estandar: "",
@@ -45,10 +49,19 @@ export class AsignarIndicadoresComponent implements OnInit {
     this.getSubCategoria(this.categoriaFil);
   }
 
+  getUsuarioId() {
+    this.serviceAdministaraUsuario.UsuarioId.subscribe((Usuarioid) => {
+      this.usuarioId = Usuarioid;
+      console.log("hola: ", this.usuarioId);
+    });
+  }
+
   ngOnInit() {
+    this.getUsuarioId();
     this.getStandares();
     this.getCategoria(0);
     this.getSubCategoria(0);
+    
   }
 
   getStandares() {
@@ -94,5 +107,4 @@ export class AsignarIndicadoresComponent implements OnInit {
         });
     }
   }
-
 }

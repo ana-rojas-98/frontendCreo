@@ -15,17 +15,14 @@
       </div>
       <div>
         <p>Telefono</p>
-        <input
-          class="input"
-          type="number"
-          [(ngModel)]="NuevoUsuario.Telefono"
-        />
+        <input class="input" type="text" [(ngModel)]="NuevoUsuario.Telefono" />
       </div>
       <div>
         <input
           class="boton"
           type="button"
           value="Asignar indicadores"
+          (click)="enviarUsuarioId()"
           [routerLink]="['/asignar-indicadores']"
           [routerLinkActive]="['link-active']"
         />
@@ -103,41 +100,140 @@
           </tr>
           <tr>
             <td>Administración de usuarios y permisos</td>
-            <td><input type="checkbox" class="checkbox" [(ngModel)]="administrarPermisos.Crear" /></td>
-            <td><input type="checkbox" class="checkbox" [(ngModel)]="administrarPermisos.Ver" /></td>
-            <td><input type="checkbox" class="checkbox" [(ngModel)]="administrarPermisos.Editar" /></td>
-            <td><input type="checkbox" class="checkbox" [(ngModel)]="administrarPermisos.Eliminar" /></td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="administrarPermisos.Crear"
+              />
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="administrarPermisos.Ver"
+              />
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="administrarPermisos.Editar"
+              />
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="administrarPermisos.Eliminar"
+              />
+            </td>
           </tr>
           <tr>
             <td>Visor de eventos</td>
             <td></td>
-            <td><input type="checkbox" class="checkbox" [(ngModel)]="visorEventos.Ver" /></td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="visorEventos.Ver"
+              />
+            </td>
             <td></td>
             <td></td>
           </tr>
           <tr>
             <td>Gestor de notificaciones</td>
-            <td><input type="checkbox" class="checkbox" [(ngModel)]="gestorNotificaciones.Crear" /></td>
-            <td><input type="checkbox" class="checkbox" [(ngModel)]="gestorNotificaciones.Ver" /></td>
-            <td><input type="checkbox" class="checkbox" [(ngModel)]="gestorNotificaciones.Editar" /></td>
-            <td><input type="checkbox" class="checkbox" [(ngModel)]="gestorNotificaciones.Eliminar" /></td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="gestorNotificaciones.Crear"
+              />
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="gestorNotificaciones.Ver"
+              />
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="gestorNotificaciones.Editar"
+              />
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="gestorNotificaciones.Eliminar"
+              />
+            </td>
           </tr>
           <tr>
             <td>Reportes</td>
-            <td><input type="checkbox" class="checkbox" [(ngModel)]="reportes.Crear" /></td>
-            <td><input type="checkbox" class="checkbox" [(ngModel)]="reportes.Ver" /></td>
-            <td><input type="checkbox" class="checkbox" [(ngModel)]="reportes.Editar" /></td>
-            <td><input type="checkbox" class="checkbox" [(ngModel)]="reportes.Eliminar" /></td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="reportes.Crear"
+              />
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="reportes.Ver"
+              />
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="reportes.Editar"
+              />
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="reportes.Eliminar"
+              />
+            </td>
           </tr>
           <tr>
             <td>Configuración</td>
             <td></td>
             <td></td>
-            <td><input type="checkbox" class="checkbox" [(ngModel)]="configuracion.Editar"  /></td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="configuracion.Editar"
+              />
+            </td>
             <td></td>
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="container-button">
+      <input
+        [routerLink]="['/administrar-usuarios']"
+        [routerLinkActive]="['link-active']"
+        class="button-cancelar"
+        type="button"
+        value="Cancelar"
+      />
+      <input
+        class="button-enviar"
+        type="button"
+        value="Guardar"
+        (click)="asignarIndicadores()"
+      />
     </div>
   </div>
 </div>

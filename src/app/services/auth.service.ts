@@ -6,7 +6,9 @@ import { JwtHelperService } from "@auth0/angular-jwt";
   providedIn: "root",
 })
 export class AuthService {
-  private URL_SER = "http://www.creo.somee.com";
+  //https://localhost:5001
+  //http://www.creo.somee.com
+  private URL_SER = "https://localhost:5001";
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
   signin(user: any) {
     return this.http.post(`${this.URL_SER}/api/Usuarios/Authenticate`, user);
@@ -21,6 +23,7 @@ export class AuthService {
     }
     return true;
   }
+
   singup(user_reg: any) {
     return this.http.post(`${this.URL_SER}/api/Usuarios/PostUsuario`, user_reg);
   }
@@ -118,5 +121,20 @@ export class AuthService {
   getUsuarios(usuario: any) {
     let result = this.http.get(`${this.URL_SER}/api/Usuarios`, usuario);
     return result;
+  }
+  CrearNuevoUsuario(
+    usuario: any,
+    /*indicadores: any,
+    permisos: any,
+    eventos: any,
+    notificaciones: any,
+    reportes:any,
+    configuracion:any*/
+  ) {
+    let resul = this.http.post(
+      `${this.URL_SER}/api/Usuarios/PostNuevoUsuario`,
+      usuario
+    );
+    return resul;
   }
 }
