@@ -122,19 +122,19 @@ export class AuthService {
     let result = this.http.get(`${this.URL_SER}/api/Usuarios`, usuario);
     return result;
   }
-  CrearNuevoUsuario(
-    usuario: any,
-    /*indicadores: any,
-    permisos: any,
-    eventos: any,
-    notificaciones: any,
-    reportes:any,
-    configuracion:any*/
-  ) {
+  CrearNuevoUsuario(usuario: any) {
     let resul = this.http.post(
       `${this.URL_SER}/api/Usuarios/PostNuevoUsuario`,
       usuario
     );
     return resul;
+  }
+  
+  setIndicadorNuevo(nuevoIndicador: any) {
+    let result = this.http.post(
+      `${this.URL_SER}/api/archivos/postArchivos`,
+      nuevoIndicador
+    );
+    return result;
   }
 }

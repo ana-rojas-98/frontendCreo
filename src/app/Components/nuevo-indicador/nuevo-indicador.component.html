@@ -27,7 +27,7 @@
             [(ngModel)]="Estandar.estandar"
             (change)="estandar()"
           >
-          <option>Estándar</option>
+          <option value="">Seleccionar</option>
             <option
               *ngFor="let resultado of resultados"
               [value]="resultado.estandar"
@@ -44,7 +44,7 @@
             [(ngModel)]="Categoria.categoria1"
             (change)="categoria()"
           >
-          <option>Categoria</option>
+          <option value="">Seleccionar</option>
             <option
               *ngFor="let resultadoCategoria of resultadosCategoria"
               [value]="resultadoCategoria.categoria1"
@@ -60,7 +60,7 @@
             name="select"
             type="selectbox"
           >
-          <option>Subcategoria</option>
+          <option>Seleccionar</option>
             <option
               *ngFor="let item of resultadosSubCategoria"
               [value]="item.subcategoria1"
@@ -73,35 +73,63 @@
     </div>
     <div class="subir-archivo">
       <p>Subir el archivo excel:</p>
-      <button class="button-interactivo">Subir archivo</button>
-      <input type="file"
-      (Change)="CapturarArchivo($event)"
-       accept=".xlsx"
-       id="subir"/>
+      <button 
+        class="button-interactivo"
+        (click)="SubirArchivo()">
+        Subir Archivo
+      </button>
+      <input
+        type="file"
+        name="fileUpload"
+        id="fileUpload"
+        style="display: none;"/>
     </div>
     <div class="perioricidad-indicador">
       <p>Seleccione la perioricidad de este indicador</p>
       <br />
       <h3>Perioricidad</h3>
       <br />
-      <select name="select" type="selectbox">
-        <option value="Perioricidad 1">Mensual</option>
-        <option value="Perioricidad 2">Bimestral</option>
-        <option value="Perioricidad 2">Trimestral</option>
-        <option value="Perioricidad 2">Cuatrimestral</option>
-        <option value="Perioricidad 2">Semestral</option>
-        <option value="Perioricidad 2">Anual</option>
+      <select name="select" type="selectbox" [(ngModel)]="nuevoIndicador.periodicidad" (change)="Periodicidad()">
+        <option value="">Seleccionar</option>
+          <option *ngFor = "let nombre of nombres "
+                  [value]="nombre.id" >
+                  {{nombre.periodicidad}}
+          </option>
       </select>
     </div>
     <div class="previsualizar-indicador">
       <p>A continuación revise la previsualización del indicador:</p>
-      <button class="button-interactivo">Previsualización del indicador</button>
+      <button
+       class="button-interactivo"
+       (click)="ShowData()"
+       (click)="leerArchivo()">
+       Previsualización del indicador
+      </button>
+      <br>
+      <div *ngIf="element == true">
+        <table>
+          <thead>
+            <tr>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let dato of ExcelData">
+              <td>{{dato.nombreIndicador}}</td>
+              <td>{{dato.activoCorriente}}</td>
+              <td>{{dato.ActivoNoCorriente}}</td>
+              <td>{{dato.PasivoCorriente}}</td>
+              <td>{{dato.PasivoNoCorriente}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="button-interactivo" (click)="HiddenData()">Cerrar</button>
+      </div>
     </div>
     <div class="buttons">
       <button [routerLink]="['/administrar-indicadores']"
               [routerLinkActive]="['link-active']"
               type="cancel" class="cancelar">Cancelar</button>
-      <button type="submit" class="guardar">
+      <button class="guardar" (click)="setNuevoIndicador()">
         Guardar
       </button>
     </div>
