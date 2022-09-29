@@ -42,14 +42,35 @@ export class NuevoIndicadorComponent implements OnInit {
   categoriaFil = "";
 
  nombres = [
- 'mensual',
- 'bimensual',
- 'trimestral',
- 'cuatrimestral',
- 'semestral',
- 'anual',
- ];
- 
+ {
+  id: "1",
+  periodicidad:'mensual'
+ },
+ {
+  id: "2",
+  periodicidad:'bimensual'
+ },
+ {
+  id: "3",
+  periodicidad:'trimestral'
+ },
+ {
+  id: "4",
+  periodicidad:'cuatrimestral'
+ },
+ {
+  id: "5",
+  periodicidad:'semestral'
+ },
+ {
+  id: "6",
+  periodicidad:'anual'
+ }
+]
+seleccionado={
+  id:""
+}
+variableP=this.seleccionado.id;
 
   estandar() {
     this.estandarFil = this.Estandar.estandar;
@@ -118,6 +139,10 @@ export class NuevoIndicadorComponent implements OnInit {
 
   }
 
+  Periodicidad(){
+     console.log(this.variableP)
+   }
+
   ShowData(){
     this.element = true;
     console.log(this.element)
@@ -127,4 +152,17 @@ export class NuevoIndicadorComponent implements OnInit {
     console.log(this.element)
   }
 
+  nuevoIndicador={
+    estandar:this.Estandar.estandar,
+    categoria:this.Categoria.categoria1,
+    subcategoria:this.SubCategoria.subcategoria1,
+    archivo: this.archivos,
+    periodicidad: ""
+  }
+
+  setNuevoIndicador(){
+    this.authService.setIndicadorNuevo(this.nuevoIndicador).subscribe((res : any)=>{
+      console.log(res);
+    })
+  }
 }

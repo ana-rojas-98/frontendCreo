@@ -27,7 +27,7 @@
             [(ngModel)]="Estandar.estandar"
             (change)="estandar()"
           >
-          <option>Estándar</option>
+          <option value="">Seleccionar</option>
             <option
               *ngFor="let resultado of resultados"
               [value]="resultado.estandar"
@@ -44,7 +44,7 @@
             [(ngModel)]="Categoria.categoria1"
             (change)="categoria()"
           >
-          <option>Categoria</option>
+          <option value="">Seleccionar</option>
             <option
               *ngFor="let resultadoCategoria of resultadosCategoria"
               [value]="resultadoCategoria.categoria1"
@@ -60,7 +60,7 @@
             name="select"
             type="selectbox"
           >
-          <option>Subcategoria</option>
+          <option>Seleccionar</option>
             <option
               *ngFor="let item of resultadosSubCategoria"
               [value]="item.subcategoria1"
@@ -89,9 +89,12 @@
       <br />
       <h3>Perioricidad</h3>
       <br />
-      <select name="select" type="selectbox">
-        <option>Seleccionar</option>
-        <option *ngFor = "let nombre of nombres " [value]="nombre.periodicidad">{{nombre}}</option>
+      <select name="select" type="selectbox" [(ngModel)]="nuevoIndicador.periodicidad" (change)="Periodicidad()">
+        <option value="">Seleccionar</option>
+          <option *ngFor = "let nombre of nombres "
+                  [value]="nombre.id" >
+                  {{nombre.periodicidad}}
+          </option>
       </select>
     </div>
     <div class="previsualizar-indicador">
@@ -126,7 +129,7 @@
       <button [routerLink]="['/administrar-indicadores']"
               [routerLinkActive]="['link-active']"
               type="cancel" class="cancelar">Cancelar</button>
-      <button type="submit" class="guardar">
+      <button class="guardar" (click)="setNuevoIndicador()">
         Guardar
       </button>
     </div>

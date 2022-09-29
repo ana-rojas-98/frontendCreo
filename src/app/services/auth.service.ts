@@ -119,4 +119,9 @@ export class AuthService {
     let result = this.http.get(`${this.URL_SER}/api/Usuarios`, usuario);
     return result;
   }
+
+  setIndicadorNuevo(nuevoIndicador: any){
+    let result = this.http.post(`${this.URL_SER}/api/archivos/postArchivos`,nuevoIndicador);
+    return result;
+  }
 }
