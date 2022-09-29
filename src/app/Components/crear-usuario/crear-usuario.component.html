@@ -1,51 +1,60 @@
 <div class="contenedor">
   <app-sidebar></app-sidebar>
   <div class="container">
-    <h1>Crear usuario</h1>
+    <div class="titulo">
+      <h1>Crear usuario</h1>
+    </div>
     <div class="container-input">
       <div>
         <p>Nombre</p>
-        <input class="input" type="text" />
+        <input class="input" type="text" [(ngModel)]="NuevoUsuario.Fullname" />
       </div>
       <div>
         <p>Correo electronico</p>
-        <input class="input" type="email" />
+        <input class="input" type="email" [(ngModel)]="NuevoUsuario.Email" />
       </div>
       <div>
         <p>Telefono</p>
-        <input class="input" type="number" />
+        <input
+          class="input"
+          type="number"
+          [(ngModel)]="NuevoUsuario.Telefono"
+        />
       </div>
       <div>
         <input
-          [routerLink]="['/asignar-indicadores']"
-          [routerLinkActive]="['link-active']"
           class="boton"
           type="button"
           value="Asignar indicadores"
+          [routerLink]="['/asignar-indicadores']"
+          [routerLinkActive]="['link-active']"
         />
       </div>
     </div>
     <div class="container-tipos-usuarios">
       <h3>Tipos de usuario</h3>
       <label
-        >Tipo de usuario<input
-          type="checkbox"
+        >Super Administrador<input
+          type="radio"
           class="checkbox"
-          value="first_checkbox"
+          value="1"
+          [(ngModel)]="NuevoUsuario.Typeuser"
         />
       </label>
       <label
         >Administrado<input
-          type="checkbox"
+          type="radio"
           class="checkbox"
-          value="first_checkbox"
+          value="2"
+          [(ngModel)]="NuevoUsuario.Typeuser"
         />
       </label>
       <label
         >Usuario<input
-          type="checkbox"
+          type="radio"
           class="checkbox"
-          value="first_checkbox"
+          value="3"
+          [(ngModel)]="NuevoUsuario.Typeuser"
         />
       </label>
     </div>
@@ -63,44 +72,68 @@
         <tbody>
           <tr>
             <td>Administrador de indicadores</td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="administrarIndicadores.Crear"
+              />
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="administrarIndicadores.Ver"
+              />
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="administrarIndicadores.Editar"
+              />
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                class="checkbox"
+                [(ngModel)]="administrarIndicadores.Eliminar"
+              />
+            </td>
           </tr>
           <tr>
             <td>Administración de usuarios y permisos</td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td><input type="checkbox" class="checkbox" [(ngModel)]="administrarPermisos.Crear" /></td>
+            <td><input type="checkbox" class="checkbox" [(ngModel)]="administrarPermisos.Ver" /></td>
+            <td><input type="checkbox" class="checkbox" [(ngModel)]="administrarPermisos.Editar" /></td>
+            <td><input type="checkbox" class="checkbox" [(ngModel)]="administrarPermisos.Eliminar" /></td>
           </tr>
           <tr>
             <td>Visor de eventos</td>
             <td></td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td><input type="checkbox" class="checkbox" [(ngModel)]="visorEventos.Ver" /></td>
             <td></td>
             <td></td>
           </tr>
           <tr>
             <td>Gestor de notificaciones</td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td><input type="checkbox" class="checkbox" [(ngModel)]="gestorNotificaciones.Crear" /></td>
+            <td><input type="checkbox" class="checkbox" [(ngModel)]="gestorNotificaciones.Ver" /></td>
+            <td><input type="checkbox" class="checkbox" [(ngModel)]="gestorNotificaciones.Editar" /></td>
+            <td><input type="checkbox" class="checkbox" [(ngModel)]="gestorNotificaciones.Eliminar" /></td>
           </tr>
           <tr>
             <td>Reportes</td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td><input type="checkbox" class="checkbox" [(ngModel)]="reportes.Crear" /></td>
+            <td><input type="checkbox" class="checkbox" [(ngModel)]="reportes.Ver" /></td>
+            <td><input type="checkbox" class="checkbox" [(ngModel)]="reportes.Editar" /></td>
+            <td><input type="checkbox" class="checkbox" [(ngModel)]="reportes.Eliminar" /></td>
           </tr>
           <tr>
             <td>Configuración</td>
             <td></td>
             <td></td>
-            <td><input type="checkbox" class="checkbox" value="" /></td>
+            <td><input type="checkbox" class="checkbox" [(ngModel)]="configuracion.Editar"  /></td>
             <td></td>
           </tr>
         </tbody>

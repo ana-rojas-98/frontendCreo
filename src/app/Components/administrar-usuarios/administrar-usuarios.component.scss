@@ -3,13 +3,13 @@
   @include contenedor;
 }
 .container {
-  padding-top: 40px;
-  border: 1px rgb(0, 0, 0, 20%) solid;
+  @include body;
 }
 .content-admin {
   @include body;
 }
-.tittle-indicadores {
+.titulo {
+  width: max-content;
   @include titleBody;
 }
 h1 {

@@ -1,0 +1,7 @@
+@import "../../../assets/styles/main.scss";
+.contenedor {
+  @include contenedor;
+}
+.container {
+  @include body;
+}
