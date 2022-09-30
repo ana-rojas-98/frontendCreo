@@ -83,7 +83,6 @@ export class CrearUsuarioComponent implements OnInit {
       .CrearNuevoUsuario(this.NuevoUsuario)
       .subscribe((res: any) => {
         this.Usuarioid = res.usuarioid;
-        console.log("peticion: ", res);
       });
   }
 

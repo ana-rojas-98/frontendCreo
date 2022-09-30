@@ -24,7 +24,6 @@ export class AdministrarUsuariosComponent implements OnInit {
   getUsuarios() {
     this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
       this.resultados = res.map((item) => {
-        console.log("hola: ", item)
         return item;
       });
     });
