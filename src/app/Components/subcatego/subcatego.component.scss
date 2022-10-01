@@ -3,15 +3,30 @@
 .contenedor{
   @include contenedor;
   align-items: center;
-  justify-content: center;
+  justify-content: center; 
   }
-  .form-box {
+  .cerrar{
+    height: 450px;
+    width: 50px;
+  }
+  .circulo{
+    width: max-content;
+    height: max-content;
+    border-radius: 100%;
+    border: 1px black solid;
+  }
+  .cerrar .circulo a{
+    cursor: pointer;
+    text-decoration: none;
+    color: black;  
+  }
+.form-box {
     position: relative;
     width: 627px;
-    height: 573px;
+    height: 500px;
     border-radius: 15px;
     background-color: $background-color;
-  }
+}
 .Form-title{
     @include tittleCard(700, 24px);
 }
@@ -21,7 +36,7 @@
   justify-content: center;
   width: 380px;
   height: 290px;
-  margin-left: 170px
+  margin-left: 170px;
 }
 .form-group label{
   @include label;
