@@ -29,7 +29,7 @@
         </select>
       </div>
       <div class="box">
-        <h3>Categoria</h3>
+        <h3>Categoría</h3>
         <br />
         <select
           class="selector"
@@ -38,7 +38,7 @@
           [(ngModel)]="Categoria.categoria1"
           (change)="categoria()"
         >
-          <option value="">Categoria</option>
+          <option value="">Categoría</option>
           <option
             *ngFor="let resultadoCategoria of resultadosCategoria"
             [value]="resultadoCategoria.categoria1"
@@ -48,14 +48,14 @@
         </select>
       </div>
       <div class="box">
-        <h3>Subcategoria</h3>
+        <h3>Subcategoría</h3>
         <br />
         <select
           class="selector"
           name="select"
           type="selectbox"
         >
-          <option>Subcategoria</option>
+          <option>Subcategoría</option>
           <option
             *ngFor="let item of resultadosSubCategoria"
             [value]="item.subcategoria1"
@@ -142,3 +142,4 @@
     </div>
   </div>
 </div>
+<app-footer></app-footer>

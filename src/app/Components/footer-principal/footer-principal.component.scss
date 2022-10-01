@@ -1,0 +1,21 @@
+footer{
+    width: 100%;
+    height: max-content;
+    left: 36px;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+.text-footer{
+    width: 81px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+}
+.text-footer h5{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    color: #9C9B9B;
+}

@@ -15,7 +15,7 @@
           [(ngModel)]="Estandar.estandar"
           (change)="estandar()"
         >
-          <option value="">Estándar</option>
+          <option value="">Seleccionar estándar</option>
           <option
             *ngFor="let resultado of resultados"
             [value]="resultado.estandar"
@@ -25,7 +25,7 @@
         </select>
       </div>
       <div class="box">
-        <h3>Categoria</h3>
+        <h3>Categoría</h3>
         <br />
         <select
           class="selector"
@@ -34,7 +34,7 @@
           [(ngModel)]="Categoria.categoria1"
           (change)="categoria()"
         >
-          <option value="">Categoria</option>
+          <option value="">Seleccionar categoría</option>
           <option
             *ngFor="let resultadoCategoria of resultadosCategoria"
             [value]="resultadoCategoria.categoria1"
@@ -44,14 +44,14 @@
         </select>
       </div>
       <div class="box">
-        <h3>Subcategoria</h3>
+        <h3>Sub categoría</h3>
         <br />
         <select
           class="selector"
           name="select"
           type="selectbox"
         >
-          <option>Subcategoria</option>
+          <option>Sub categoría</option>
           <option
             *ngFor="let item of resultadosSubCategoria"
             [value]="item.subcategoria1"
@@ -66,21 +66,21 @@
         [routerLink]="['/estandares']"
         [routerLinkActive]="['link-active']"
       >
-        Crear nuevo estandar
+        Crear nuevo estándar
       </button>
 
       <button
         [routerLink]="['/categorias']"
         [routerLinkActive]="['link-active']"
       >
-        Crear nueva categoria
+        Crear nueva categoría
       </button>
 
       <button
         [routerLink]="['/subcatego']"
         [routerLinkActive]="['link-active']"
       >
-        Crear nueva subcategoria
+        Crear nueva subcategoría
       </button>
 
       <button
@@ -102,19 +102,19 @@
         [routerLink]="['/eliminar-estandar']"
         [routerLinkActive]="['link-active']"
       >
-        Eliminar estandar
+        Eliminar estándar
       </button>
       <button
         [routerLink]="['/eliminar-categoria']"
         [routerLinkActive]="['link-active']"
       >
-        Eliminar categoria
+        Eliminar categoría
       </button>
       <button
         [routerLink]="['/eliminar-subcategoria']"
         [routerLinkActive]="['link-active']"
       >
-        Eliminar subcategoria
+        Eliminar subcategoría
       </button>
     </div>
     <div class="resultados-tabla">
@@ -140,7 +140,7 @@
                 src="../../../assets/imagenes/fechaHora.png"
                 alt="icono-fecha"
               />
-              Fecha y hora Creacion
+              Fecha y hora Creación
             </th>
             <th>
               <img
@@ -260,8 +260,8 @@
           </tr>
         </tbody>
       </table>
-      <br />
       <button>Descargar todos los archivos adjuntos</button>
     </div>
   </div>
 </div>
+<app-footer></app-footer>

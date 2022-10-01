@@ -1,3 +1,4 @@
+<div class="contenedor">
 <div class="container-principal">
   <div class="title-contrasena">
   <h1>Olvido de contraseña</h1>
@@ -5,17 +6,16 @@
   <div class="container-form-div">
     <form action="" class="container-form-formularo">
       <span
-        ><label for="email">Ingrese el correo electronico registrado</label>
+        ><label for="email">Ingrese el correo electrónico registrado</label>
         <input
           class="input-olvido-clave"
           type="email"
           name="email"
-          placeholder="ejem@gmail.com"
           [(ngModel)]="email.Email"
       /></span>
       <div class="container-button">
         <button class="button-cancelar" [routerLink]="['/cambio-contrasena']">
-          cancelar
+          Cancelar
         </button>
           <button class="button-enviar" (click)="validateEmail()">
             Enviar
@@ -24,3 +24,5 @@
     </form>
   </div>
 </div>
+</div>
+<app-footer-principal></app-footer-principal> 

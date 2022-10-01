@@ -1,14 +1,23 @@
 footer{
     width: 100%;
-    height: 11px;
+    height: max-content;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
     display: flex;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 0;
+    background: #ffffff;
+}
+.footer-content{
+    display: flex;
+    width: 100%;
+    align-content: center;
     justify-content: space-around;
 }
 
 .imagen img{
     width: 250.38px;
-    height: 92px;
+    height: 70%;
     position: absolute;
     left: 36px;
     margin-top: 15px;

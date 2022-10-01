@@ -1,11 +1,15 @@
-<div class="container">
-  <form class="form-box">
-    <h1 class="Form-title">Cambio de contraseña</h1>
+<div class="contenedor">
+  <div class="cuerpo">
+    <div class="title-contrasena">
+    <h1>Cambio de contraseña</h1>
+    </div>
+    <div class="cuerpo-contraseña">
+    <form class="form-box">
     <div class="form-group col">
       <input
         type="email"
         name="email"
-        placeholder="ejemple@gmail.com"
+        placeholder="Correo electrónico"
         class="form-control"
         [(ngModel)]="token.email"
         required
@@ -15,7 +19,7 @@
       <input
         type="number"
         name="token"
-        placeholder="token"
+        placeholder="Código de recuperación"
         class="form-control"
         [(ngModel)]="token.token"
         required
@@ -25,7 +29,7 @@
       <input
         type="password"
         name="contrasena"
-        placeholder="password"
+        placeholder="Nueva contraseña"
         class="form-control"
         [(ngModel)]="token.pass"
         required
@@ -35,7 +39,7 @@
       <input
         type="password"
         name="password"
-        placeholder="password"
+        placeholder="Confirmar contraseña"
         class="form-control"
         [(ngModel)]="token.pass1"
         required
@@ -46,5 +50,8 @@
         Enviar
       </button>
     </div>
-  </form>
+    </form>
+    </div>
+  </div>
 </div>
+<app-footer-principal></app-footer-principal> 

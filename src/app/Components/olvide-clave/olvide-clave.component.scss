@@ -1,17 +1,27 @@
 @import "../../../assets/styles/main.scss";
 
+.contenedor{
+ @include contenedor;
+ justify-content: center;
+ padding: 7%;
+}
 .container-principal {
-  margin: 0 auto;
-  width: 400px;
-  height: 700px;
+  width: max-content;
+  height: 100%;
   text-align: center;
+}
+.title-contrasena h1{
+  font-family: 'Montserrat';
+  color:#9C9B9B;
+  font-weight: 700;
+  font-size: 150%;
 }
 
 .container-form-formularo {
   background-color: $background;
   margin-top: 30px;
   padding-top: 30px;
-  border-radius: 25px;
+  border-radius: 25px;  
   span {
     margin-bottom: 30px;
   }
@@ -19,8 +29,9 @@
   .input-olvido-clave {
     margin: 10px;
     border-radius: 20px;
-    width: 80%;
-    text-align: center;
+    width: 60%;
+    text-align: center;    
+    border: 1px;
   }
 }
 
@@ -31,8 +42,18 @@
     margin-bottom: 40px;
   }
 }
+@media (max-width: 1000px){
+  .contenedor{
+    padding-top: 25%;
+    padding-bottom: 25%;
+  }
+}
 
 @media (max-width: 600px) {
+  .contenedor{
+    padding-top: 20%;
+    padding-bottom: 10%;
+  }
   .container-button {
     display: flex;
     flex-direction: column-reverse;

@@ -1,41 +1,48 @@
 <div class="contenedor">
-  <form class="form-box">
-    <h1 class="Form-title" align="center">Sign In</h1>
-    <div class="form-group col">
-      <input
-        type="email"
-        name="email"
-        placeholder="email"
-        class="form-control"
-        [(ngModel)]="user.Email"
-      />
+    <div class="title-login">
+    <h1>Iniciar sesión</h1>
     </div>
-    <div class="form-group col">
-      <input
-        type="password"
-        name="password"
-        placeholder="password"
-        class="form-control"
-        [(ngModel)]="user.Password"
-      />
+    <div class="login">
+    <form class="form-box">
+      <h1 class="Form-title" align="center">Correo electrónico</h1>
+      <br>
+      <div class="form-group col">
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          [(ngModel)]="user.Email"
+        />
+      </div>
+      <br>
+      <h1 class="Form-title" align="center">Contraseña</h1>
+      <br>
+      <div class="form-group col">
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          [(ngModel)]="user.Password"
+        />
+      </div>
+      <div>
+        <br />
+        <!--  <p>
+          ¿No tienes cuenta?
+          <a class="link-active" [routerLink]="['/register']">Registrate aquí.</a>
+        </p>-->
+        <p>          
+          <a class="link-active" [routerLink]="['/olvide-clave']"
+            >¿Olvidó su contraseña?</a
+          >
+        </p>
+      </div>
+      <div>
+        <button type="submit" class="button-enviar" (click)="LogIn()">
+          Ingresar
+        </button>
+      </div>
+    </form>
     </div>
-    <div>
-      <button type="submit" class="button-enviar" (click)="LogIn()">
-        Login
-      </button>
-    </div>
-    <div>
-      <br />
-      <!--  <p>
-        ¿No tienes cuenta?
-        <a class="link-active" [routerLink]="['/register']">Registrate aquí.</a>
-      </p>-->
-      <p>
-        ¿Olvidaste la contraseña?
-        <a class="link-active" [routerLink]="['/olvide-clave']"
-          >Presiona aquí.</a
-        >
-      </p>
-    </div>
-  </form>
 </div>
+<app-footer-principal></app-footer-principal> 
