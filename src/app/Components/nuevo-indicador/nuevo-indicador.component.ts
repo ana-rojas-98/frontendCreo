@@ -1,3 +1,4 @@
+import { JsonpClientBackend } from '@angular/common/http';
 import { Component, OnInit, ɵflushModuleScopingQueueAsMuchAsPossible } from '@angular/core';
 import { AuthService } from "src/app/services/auth.service";
 import * as XSLX from 'xlsx';
@@ -160,8 +161,12 @@ variableP=this.seleccionado.id;
     periodicidad: ""
   }
 
+  form_data = new FormData();
+  fform_data = this.archivos;
+
   setNuevoIndicador(){
-    this.authService.setIndicadorNuevo(this.nuevoIndicador).subscribe((res : any)=>{
+    console.log("prueba", this.fform_data);
+    this.authService.setIndicadorNuevo(this.fform_data).subscribe((res : any)=>{
       console.log(res);
     })
   }

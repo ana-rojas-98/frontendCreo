@@ -15,13 +15,53 @@ export class AdministrarUsuariosComponent implements OnInit {
     correo: "",
   };
 
-  resultados = {}
+  tipoUsuario = {
+    typeuser: 1,
+    nombreTipo: "",
+  };
+
+  resultados = [];
+  resultadosTipoUsuario = {};
+  resultadosEstado = {};
+  estado = "";
 
   ngOnInit() {
-    this.getUsuarios();
+    this.getUsuariosfilter();
+    this.getTipoUsuario();
+    this.getEstado();
+  }
+
+  MtipoUsuario() {
+    this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
+      this.resultados = res.filter((item) => {
+        return item.typeuser == this.tipoUsuario.typeuser;
+      });
+      this.estado = res
+    });
+  }
+
+  getEstado() {
+    console.log(this.estado);
+  }
+
+  getTipoUsuario() {
+    this.authService.getTipoUsuario(this.tipoUsuario).subscribe((res: any) => {
+      this.resultadosTipoUsuario = res.map((item) => {
+        this.estado = res;
+        return item;
+      });
+    });
   }
 
   getUsuarios() {
+    this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
+      this.resultados = res.map((item) => {
+        return item;
+      });
+    });
+  }
+
+  getUsuariosfilter() {
     this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
       this.resultados = res.map((item) => {
         return item;

@@ -1,23 +1,33 @@
 <div class="contenedor">
   <app-sidebar></app-sidebar>
   <div class="container">
-   
     <div class="titulo">
       <h1>Administrador de usuarios y permisos</h1>
     </div>
     <div class="container-input">
-      <select class="select" name="" id="">
-        <option value="">Administrador</option>
-      </select>
-      <select
-        class="select"
-        data-show-subtext="true"
-        data-live-search="true"
-        name=""
-        id=""
-      >
-        <option value="">Administrador</option>
-      </select>
+      <label
+        >Tipo de usuario
+        <select
+          class="select"
+          [(ngModel)]="tipoUsuario.typeuser"
+          (change)="MtipoUsuario()"
+        >
+        <option value="0">Tipo de usuario</option>
+          <option
+            *ngFor="let tipoUsuario of resultadosTipoUsuario"
+            [value]="tipoUsuario.typeuser"
+          >
+            {{ tipoUsuario.nombreTipo }}
+          </option>
+        </select>
+      </label>
+      <label
+        >Estado
+        <select class="select" (change)="getEstado()">
+         <option value="1">Activo</option>
+         <option value="o">Inactivo</option>
+        </select>
+      </label>
       <input class="select" type="select" name="" />
       <input
         [routerLink]="['/crear-usuarios']"

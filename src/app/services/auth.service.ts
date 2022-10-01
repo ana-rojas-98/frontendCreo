@@ -8,7 +8,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 export class AuthService {
   //https://localhost:5001
   //http://www.creo.somee.com
-  private URL_SER = "http://www.creo.somee.com";
+  private URL_SER = "https://localhost:5001";
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
   signin(user: any) {
     return this.http.post(`${this.URL_SER}/api/Usuarios/Authenticate`, user);
@@ -48,6 +48,13 @@ export class AuthService {
     return this.http.post(
       `${this.URL_SER}/api/RecuperarContrasena/ValidatioToken`,
       token
+    );
+  }
+
+  getTipoUsuario(tipoUsuario: any) {
+    return this.http.get(
+      `${this.URL_SER}/api/Usuarios/GeTipotUsuario`,
+      tipoUsuario
     );
   }
 
@@ -129,10 +136,10 @@ export class AuthService {
     );
     return resul;
   }
-  
+
   setIndicadorNuevo(nuevoIndicador: any) {
     let result = this.http.post(
-      `${this.URL_SER}/api/archivos/postArchivos`,
+      `${this.URL_SER}/api/archivos/UploadFile`,
       nuevoIndicador
     );
     return result;
