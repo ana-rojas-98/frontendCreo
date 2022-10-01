@@ -51,6 +51,13 @@ export class AuthService {
     );
   }
 
+  getTipoUsuario(tipoUsuario: any) {
+    return this.http.get(
+      `${this.URL_SER}/api/Usuarios/GeTipotUsuario`,
+      tipoUsuario
+    );
+  }
+
   crear_estandar(estandar: any) {
     let result = this.http.post(
       `${this.URL_SER}/api/Estandares/PostEstandar`,
@@ -129,10 +136,10 @@ export class AuthService {
     );
     return resul;
   }
-  
+
   setIndicadorNuevo(nuevoIndicador: any) {
     let result = this.http.post(
-      `${this.URL_SER}/api/archivos/postArchivos`,
+      `${this.URL_SER}/api/archivos/UploadFile`,
       nuevoIndicador
     );
     return result;

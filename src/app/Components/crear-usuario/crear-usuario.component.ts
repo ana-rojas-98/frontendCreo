@@ -12,10 +12,9 @@ export class CrearUsuarioComponent implements OnInit {
     private authService: AuthService,
     private serviceAdministaraUsuario: AdministrarUsuariosService
   ) {}
-
-  UsuarioIdp ={
-    id: 3
-  } ;
+  
+  
+  UsuarioRegistrado ={} 
 
   administrarIndicadores = {
     Crear: false,
@@ -82,13 +81,14 @@ export class CrearUsuarioComponent implements OnInit {
     this.authService
       .CrearNuevoUsuario(this.NuevoUsuario)
       .subscribe((res: any) => {
-        this.Usuarioid = res.usuarioid;
-        console.log("peticion: ", res);
+        this.UsuarioRegistrado = res
+        console.log("hola: ", res)
+        return res;
       });
   }
 
   enviarUsuarioId(){
-    this.serviceAdministaraUsuario.UsuarioId.emit(this.UsuarioIdp)
+    this.serviceAdministaraUsuario.UsuarioId.emit(this.UsuarioRegistrado)
   }
 
   ngOnInit() {
