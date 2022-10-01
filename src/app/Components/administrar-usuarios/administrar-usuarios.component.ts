@@ -35,6 +35,12 @@ export class AdministrarUsuariosComponent implements OnInit {
   }
 
   tipoUsuarioFiltro() {
+    console.log("aqui");
+    if (this.tipoUsuario.typeuser == 0) {
+      this.getUsuariosApi();
+      this.getUsuarioApi();
+      return true;
+    }
     this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
       this.resultadosTabla = res.filter((item) => {
         return item.typeuser == this.tipoUsuario.typeuser;
@@ -44,6 +50,10 @@ export class AdministrarUsuariosComponent implements OnInit {
   }
 
   getEstadoFiltro() {
+    if (this.estadoSelecionado.id == "5") {
+      this.tipoUsuarioFiltro();
+      return true;
+    }
     this.resultadosTabla = this.estado.filter((item) => {
       return item.estado == parseInt(this.estadoSelecionado.id);
     });

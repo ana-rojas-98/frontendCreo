@@ -12,6 +12,7 @@
           [(ngModel)]="tipoUsuario.typeuser"
           (change)="tipoUsuarioFiltro()"
         >
+          <option value="0" selected="selected">Tipo de usuario</option>
           <option
             *ngFor="let tipoUsuario of resultadosTipoUsuario"
             [value]="tipoUsuario.typeuser"
@@ -22,9 +23,14 @@
       </label>
       <label
         >Estado
-        <select class="select" [(ngModel)]="estadoSelecionado.id" (change)="getEstadoFiltro()">
-         <option value="1">Activo</option>
-         <option value="0">Inactivo</option>
+        <select
+          class="select"
+          [(ngModel)]="estadoSelecionado.id"
+          (change)="getEstadoFiltro()"
+        >
+          <option value="5">Estado</option>
+          <option value="1">Activo</option>
+          <option value="0">Inactivo</option>
         </select>
       </label>
       <input class="select" type="select" name="" />
