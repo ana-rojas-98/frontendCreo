@@ -19,32 +19,37 @@ export class AdministrarUsuariosComponent implements OnInit {
     typeuser: 1,
     nombreTipo: "",
   };
+  estadoSelecionado = {
+    id: "",
+  };
 
-  resultados = [];
+  resultadosTabla = [];
   resultadosTipoUsuario = {};
   resultadosEstado = {};
-  estado = "";
+  estado = [];
 
   ngOnInit() {
-    this.getUsuariosfilter();
-    this.getTipoUsuario();
-    this.getEstado();
+    this.getUsuariosApi();
+    this.getTipoUsuarioApi();
+    this.getUsuarioApi();
   }
 
-  MtipoUsuario() {
+  tipoUsuarioFiltro() {
     this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
-      this.resultados = res.filter((item) => {
+      this.resultadosTabla = res.filter((item) => {
         return item.typeuser == this.tipoUsuario.typeuser;
       });
-      this.estado = res
+      this.estado = this.resultadosTabla;
     });
   }
 
-  getEstado() {
-    console.log(this.estado);
+  getEstadoFiltro() {
+    this.resultadosTabla = this.estado.filter((item) => {
+      return item.estado == parseInt(this.estadoSelecionado.id);
+    });
   }
 
-  getTipoUsuario() {
+  getTipoUsuarioApi() {
     this.authService.getTipoUsuario(this.tipoUsuario).subscribe((res: any) => {
       this.resultadosTipoUsuario = res.map((item) => {
         this.estado = res;
@@ -53,17 +58,18 @@ export class AdministrarUsuariosComponent implements OnInit {
     });
   }
 
-  getUsuarios() {
-    this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
-      this.resultados = res.map((item) => {
+  getUsuarioApi() {
+    this.authService.getUsuarios(this.estado).subscribe((res: any) => {
+      this.estado = res.map((item) => {
         return item;
       });
+      console.log("hola: ", this.estado);
     });
   }
 
-  getUsuariosfilter() {
+  getUsuariosApi() {
     this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
-      this.resultados = res.map((item) => {
+      this.resultadosTabla = res.map((item) => {
         return item;
       });
     });
