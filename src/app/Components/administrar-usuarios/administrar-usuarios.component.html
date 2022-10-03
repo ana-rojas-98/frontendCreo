@@ -6,14 +6,13 @@
     </div>
     <div class="container-input">
       <div class="box">
-      <h3>Tipo de usuario</h3> 
+        <h3>Tipo de usuario</h3>
         <select
           class="select"
           [(ngModel)]="tipoUsuario.typeuser"
           (change)="tipoUsuarioFiltro()"
         >
           <option value="">Selecciona Tipo de usuario</option>
-          <option value="0" selected="selected">Tipo de usuario</option>
           <option
             *ngFor="let tipoUsuario of resultadosTipoUsuario"
             [value]="tipoUsuario.typeuser"
@@ -23,28 +22,26 @@
         </select>
       </div>
       <div class="box">
-        <h3>Estado</h3> 
+        <h3>Estado</h3>
         <select
           class="select"
           [(ngModel)]="estadoSelecionado.id"
           (change)="getEstadoFiltro()"
         >
           <option value="">Seleciona Estado</option>
-          <option value="5">Estado</option>
           <option value="1">Activo</option>
           <option value="0">Inactivo</option>
         </select>
       </div>
       <div class="box">
         <h3>Buscar</h3>
-      <input class="select" type="select" name="" />
-      <input
-        [routerLink]="['/crear-usuarios']"
-        [routerLinkActive]="['link-active']"
-        class="boton"
-        type="button"
-        value="Crear nuevo usuario"
-        placeholder="Buscar"
+        <input class="select" type="select" name="" placeholder="Buscar" />
+        <input
+          [routerLink]="['/crear-usuarios']"
+          [routerLinkActive]="['link-active']"
+          class="boton"
+          type="button"
+          value="Crear nuevo usuario"
         />
       </div>
     </div>
