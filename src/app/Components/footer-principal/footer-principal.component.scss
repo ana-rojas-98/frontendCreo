@@ -1,14 +1,15 @@
 footer{
-    width: 100%;
-    height: max-content;
-    left: 36px;
     display: flex;
-    justify-content: center;
+    width: 100%;
+    background: #ffffff;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
 }
 .text-footer{
     width: 81px;
-    height: 90px;
+    height: 24px;
     display: flex;
     align-items: center;
 }

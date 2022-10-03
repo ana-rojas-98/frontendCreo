@@ -4,14 +4,12 @@ footer{
     border-top: 1px solid rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: space-around;
-    bottom: 0;
     background: #ffffff;
-    border: 2px red solid;
 }
 .footer-content{
     display: flex;
     width: 100%;
-    align-content: center;
+    align-items: center;
     justify-content: space-around;
     //otro footer
     height: max-content;
@@ -21,15 +19,14 @@ footer{
 
 .imagen img{
     width: 250.38px;
-    left: 36px;
     margin-top: 15px;
+    height: 50px;
 }
 .text-footer{
     width: 81px;
     height: 24px;
     display: flex;
     align-items: center;
-    margin-top: 55px;
 }
 .text-footer h5{
     font-family: 'Montserrat';

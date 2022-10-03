@@ -186,6 +186,6 @@ tr:first-child td:last-child {
 }
 @media(width>1380px){
   .content-admin{
-    height: 900px;
+    overflow-y: scroll;
     }
 }
