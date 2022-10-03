@@ -16,7 +16,7 @@ export class AdministrarUsuariosComponent implements OnInit {
   };
 
   tipoUsuario = {
-    typeuser: 1,
+    typeuser: "",
     nombreTipo: "",
   };
   estadoSelecionado = {
@@ -36,7 +36,7 @@ export class AdministrarUsuariosComponent implements OnInit {
 
   tipoUsuarioFiltro() {
     console.log("aqui");
-    if (this.tipoUsuario.typeuser == 0) {
+    if (this.tipoUsuario.typeuser == "") {
       this.getUsuariosApi();
       this.getUsuarioApi();
       return true;
@@ -50,7 +50,7 @@ export class AdministrarUsuariosComponent implements OnInit {
   }
 
   getEstadoFiltro() {
-    if (this.estadoSelecionado.id == "5") {
+    if (this.estadoSelecionado.id == "") {
       this.tipoUsuarioFiltro();
       return true;
     }

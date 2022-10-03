@@ -36,7 +36,6 @@
   }
 .form-box input[type="Estandar"]{
   margin-top: 10px;
-  text-align: justify;
   @include inputCard(360px, 48px);
 }
 .form-box input[type="Estandar"] :focus{
