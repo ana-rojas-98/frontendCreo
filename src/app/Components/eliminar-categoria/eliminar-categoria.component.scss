@@ -4,6 +4,25 @@
     justify-content: center;
     align-items: center;
 }
+.cerrar{
+    height: 450px;
+    width: 50px;
+  }
+  .circulo{
+    width: max-content;
+    height: max-content;
+    border-radius: 100%;
+    border: 1px black solid;    
+    width: 15px;
+    display: block;
+    text-align: center;
+  }
+  .cerrar .circulo a{
+    cursor: pointer;
+    text-decoration: none;
+    color: black;  
+    cursor: pointer;
+  }
 .form-box{
     position: relative;
     width: 627px;
