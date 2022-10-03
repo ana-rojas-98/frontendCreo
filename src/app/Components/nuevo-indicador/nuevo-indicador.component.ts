@@ -175,9 +175,18 @@ export class NuevoIndicadorComponent implements OnInit {
     console.log("arc: ", this.elArchivo);
     console.log("arc2: ", this.archivos);
     this.authService
-      .setIndicadorNuevo(this.archivos)
-      .subscribe((res: any) => {
-        console.log(res);
-      });
+    .setIndicadorNuevo(this.archivos)
+    .subscribe((res: any) => {
+      console.log(res);
+    });
+
+      ////ensayos
+      
+  // const formData = new FormData();
+  // Object.keys(this.nuevoIndicador).forEach(key => 
+  //   formData.append(key, this.nuevoIndicador[key]),           
+  //   console.log('este es lel mensaje',formData)
+  //     );
+  // return formData; 
   }
 }
