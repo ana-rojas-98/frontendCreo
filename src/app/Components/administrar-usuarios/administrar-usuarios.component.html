@@ -35,7 +35,14 @@
       </div>
       <div class="box">
         <h3>Buscar</h3>
-        <input class="select" type="select" name="" placeholder="Buscar" />
+        <input
+          class="select"
+          type="select"
+          name=""
+          placeholder="Buscar"
+          (ngModelChange)="buscar()"
+          [(ngModel)]="buscarInput"
+        />
         <input
           [routerLink]="['/crear-usuarios']"
           [routerLinkActive]="['link-active']"

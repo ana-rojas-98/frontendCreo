@@ -27,11 +27,13 @@ export class AdministrarUsuariosComponent implements OnInit {
   resultadosTipoUsuario = {};
   resultadosEstado = {};
   estado = [];
+  buscarInput = "";
 
   ngOnInit() {
     this.getUsuariosApi();
     this.getTipoUsuarioApi();
     this.getUsuarioApi();
+    this.buscar();
   }
 
   tipoUsuarioFiltro() {
@@ -83,5 +85,9 @@ export class AdministrarUsuariosComponent implements OnInit {
         return item;
       });
     });
+  }
+
+  buscar() {
+    console.log("hola: ", this.buscarInput);
   }
 }
