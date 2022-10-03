@@ -81,7 +81,7 @@ table tbody td {
   }
 }
 @media (max-width: 700px){
-  .content-admin{
+  .cuerpo{
   overflow-y: scroll;
   }
   .seleccion{
@@ -95,7 +95,8 @@ table tbody td {
   }
 }
 @media(width>1380px){
-  .content-admin{
+  .cuerpo{
     height: 900px;
+    width: 100%;
     }
 }
