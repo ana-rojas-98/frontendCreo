@@ -27,7 +27,7 @@ export class AdministrarUsuariosComponent implements OnInit {
   resultadosTipoUsuario = {};
   resultadosEstado = {};
   estado = [];
-  buscarInput = "";
+  buscarInput:String;
 
   ngOnInit() {
     this.getUsuariosApi();

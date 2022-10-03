@@ -17,6 +17,8 @@ export class NuevoIndicadorComponent implements OnInit {
 
   archivos = [];
   ExcelData: any;
+  elArchivo:FormData
+  archivosp = ""
 
   element = false;
 
@@ -122,10 +124,10 @@ export class NuevoIndicadorComponent implements OnInit {
     this.archivos.push(archivoCapturado)
     console.log(this.archivos)
     //para subir
-    const elArchivo = new FormData();
+    this.elArchivo = new FormData();
     this.archivos.forEach(archivo =>{
       console.log(archivo);
-      elArchivo.append('files',archivo)
+      this.elArchivo.append('archivo',archivo)
       console.log(this.archivos)
   })
 }
@@ -134,7 +136,6 @@ export class NuevoIndicadorComponent implements OnInit {
     const archivoleido = new FileReader();
     const archi = this.archivos[0];
     archivoleido.readAsBinaryString(archi);
-
     archivoleido.onload = (e) => {
       const workArchi = XSLX.read(archivoleido.result, { type: "binary" });
       const nombreHojas = workArchi.SheetNames;
@@ -158,11 +159,12 @@ export class NuevoIndicadorComponent implements OnInit {
     console.log(this.element);
   }
 
+
   nuevoIndicador = {
+    archivo: this.archivos,
     estandar: this.Estandar.estandar,
     categoria: this.Categoria.categoria1,
     subcategoria: this.SubCategoria.subcategoria1,
-    archivo: this.archivos,
     periodicidad: "",
   };
 
@@ -170,9 +172,10 @@ export class NuevoIndicadorComponent implements OnInit {
   fform_data = this.archivos;
 
   setNuevoIndicador() {
-    console.log("prueba", this.fform_data);
+    console.log("arc: ", this.elArchivo);
+    console.log("arc2: ", this.archivos);
     this.authService
-      .setIndicadorNuevo(this.fform_data)
+      .setIndicadorNuevo(this.archivos)
       .subscribe((res: any) => {
         console.log(res);
       });
