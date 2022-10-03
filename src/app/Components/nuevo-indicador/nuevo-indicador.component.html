@@ -27,7 +27,7 @@
             [(ngModel)]="Estandar.estandar"
             (change)="estandar()"
           >
-          <option value="">Seleccionar</option>
+            <option value="">Seleccionar</option>
             <option
               *ngFor="let resultado of resultados"
               [value]="resultado.estandar"
@@ -44,7 +44,7 @@
             [(ngModel)]="Categoria.categoria1"
             (change)="categoria()"
           >
-          <option value="">Seleccionar</option>
+            <option value="">Seleccionar</option>
             <option
               *ngFor="let resultadoCategoria of resultadosCategoria"
               [value]="resultadoCategoria.categoria1"
@@ -55,12 +55,8 @@
         </div>
         <div class="box">
           <h3>Subcategoria</h3>
-          <select
-            class="selector"
-            name="select"
-            type="selectbox"
-          >
-          <option>Seleccionar</option>
+          <select class="selector" name="select" type="selectbox">
+            <option>Seleccionar</option>
             <option
               *ngFor="let item of resultadosSubCategoria"
               [value]="item.subcategoria1"
@@ -83,57 +79,74 @@
         name="fileUpload"
         id="fileUpload"
         style="display: none;"/> -->
-        <button class="button-interactivo" (click)="capturar.click()">Subir</button>
-        <input type="file" hidden (change)="archivoCapt($event)" #capturar id="in"/>
+      <button class="button-interactivo" (click)="capturar.click()">
+        Subir
+      </button>
+      <input
+        type="file"
+        hidden
+        (change)="archivoCapt($event)"
+        #capturar
+        id="in"
+      />
     </div>
     <div class="perioricidad-indicador">
       <p>Seleccione la perioricidad de este indicador</p>
       <br />
       <h3>Perioricidad</h3>
       <br />
-      <select name="select" type="selectbox" [(ngModel)]="nuevoIndicador.periodicidad" (change)="Periodicidad()">
+      <select
+        name="select"
+        type="selectbox"
+        [(ngModel)]="nuevoIndicador.periodicidad"
+        (change)="Periodicidad()"
+      >
         <option value="">Seleccionar</option>
-          <option *ngFor = "let nombre of nombres "
-                  [value]="nombre.id" >
-                  {{nombre.periodicidad}}
-          </option>
+        <option *ngFor="let nombre of nombres" [value]="nombre.id">
+          {{ nombre.periodicidad }}
+        </option>
       </select>
     </div>
     <div class="previsualizar-indicador">
       <p>A continuación revise la previsualización del indicador:</p>
       <button
-       class="button-interactivo"
-       (click)="ShowData()"
-       (click)="leerArchivo()">
-       Previsualización del indicador
+        class="button-interactivo"
+        (click)="ShowData()"
+        (click)="leerArchivo()"
+      >
+        Previsualización del indicador
       </button>
-      <br>
+      <br />
       <div *ngIf="element == true">
         <table>
           <thead>
-            <tr>
-            </tr>
+            <tr></tr>
           </thead>
           <tbody>
             <tr *ngFor="let dato of ExcelData">
-              <td>{{dato.nombreIndicador}}</td>
-              <td>{{dato.activoCorriente}}</td>
-              <td>{{dato.ActivoNoCorriente}}</td>
-              <td>{{dato.PasivoCorriente}}</td>
-              <td>{{dato.PasivoNoCorriente}}</td>
+              <td>{{ dato.nombreIndicador }}</td>
+              <td>{{ dato.activoCorriente }}</td>
+              <td>{{ dato.ActivoNoCorriente }}</td>
+              <td>{{ dato.PasivoCorriente }}</td>
+              <td>{{ dato.PasivoNoCorriente }}</td>
             </tr>
           </tbody>
         </table>
-        <button class="button-interactivo" (click)="HiddenData()">Cerrar</button>
+        <button class="button-interactivo" (click)="HiddenData()">
+          Cerrar
+        </button>
       </div>
     </div>
     <div class="buttons">
-      <button [routerLink]="['/administrar-indicadores']"
-              [routerLinkActive]="['link-active']"
-              type="cancel" class="cancelar">Cancelar</button>
-      <button class="guardar" (click)="setNuevoIndicador()">
-        Guardar
+      <button
+        [routerLink]="['/administrar-indicadores']"
+        [routerLinkActive]="['link-active']"
+        type="cancel"
+        class="cancelar"
+      >
+        Cancelar
       </button>
+      <button class="guardar" (click)="setNuevoIndicador()">Guardar</button>
     </div>
   </div>
 </div>

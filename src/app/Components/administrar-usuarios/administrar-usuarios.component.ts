@@ -27,7 +27,7 @@ export class AdministrarUsuariosComponent implements OnInit {
   resultadosTipoUsuario = {};
   resultadosEstado = {};
   estado = [];
-  buscarInput:String;
+  buscarInput: String;
 
   ngOnInit() {
     this.getUsuariosApi();
@@ -88,6 +88,15 @@ export class AdministrarUsuariosComponent implements OnInit {
   }
 
   buscar() {
-    console.log("hola: ", this.buscarInput);
+    this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
+      this.resultadosTabla = res.filter((item) => {
+        return (
+          item.tipoUsuario.includes(this.buscarInput) ||
+          item.nombre.includes(this.buscarInput) ||
+          item.correo.includes(this.buscarInput)
+        );
+      });
+      console.log("busqueda: ", this.resultadosTabla);
+    });
   }
 }
