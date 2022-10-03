@@ -116,19 +116,20 @@ export class NuevoIndicadorComponent implements OnInit {
         );
       });
   }
-  SubirArchivo() {
-    const fileUpload = document.getElementById(
-      "fileUpload"
-    ) as HTMLInputElement;
-    fileUpload.click();
-    fileUpload.onchange = () => {
-      for (let index = 0; index < fileUpload.files.length; index++) {
-        const file = fileUpload.files[index];
-        this.archivos.push(file);
-      }
-      console.log(this.archivos);
-    };
-  }
+
+  archivoCapt(event){
+    const archivoCapturado = event.target.files[0]
+    this.archivos.push(archivoCapturado)
+    console.log(this.archivos)
+    //para subir
+    const elArchivo = new FormData();
+    this.archivos.forEach(archivo =>{
+      console.log(archivo);
+      elArchivo.append('files',archivo)
+      console.log(this.archivos)
+  })
+}
+
   leerArchivo() {
     const archivoleido = new FileReader();
     const archi = this.archivos[0];
