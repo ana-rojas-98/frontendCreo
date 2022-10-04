@@ -23,17 +23,18 @@ h1 {
   margin-top: 30px;
   margin-bottom: 30px;
 }
-.select{
+.selector{
   background: #ffffff;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   width: 230px;
-  height: 60px;
+  height: 40px;
   border: 1px;
   margin-top: 20px;
   margin-bottom: 30px;
   margin-right: 20px;
   margin-left: 20px;
+  font-family: "Montserrat";
 }
 
 .container-input,
@@ -63,7 +64,14 @@ img {
 }
 @media(width>1380px){
   .cuerpo{
-    height: 900px;
+    height: 75vh;
     width: 100%;
+    }
+    .container-input{
+      display: flex;
+      flex-wrap: wrap;
+      font-weight: 500;
+      font-size: 16px;
+      justify-content: space-around;
     }
 }
