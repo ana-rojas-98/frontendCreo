@@ -79,9 +79,12 @@
         name="fileUpload"
         id="fileUpload"
         style="display: none;"/> -->
+      <input type="file" (change)="leer($event)"/>
+      <p *ngFor="let item of resultadoExcel">{{ item.Valor }}</p>
       <button class="button-interactivo" (click)="capturar.click()">
         Subir
       </button>
+      <button (click)="mostrar()">mostrar</button>
       <input
         type="file"
         hidden
