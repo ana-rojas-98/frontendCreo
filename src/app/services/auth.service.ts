@@ -139,7 +139,7 @@ export class AuthService {
 
   setIndicadorNuevo(nuevoIndicador: any) {
     let result = this.http.post(
-      `${this.URL_SER}/api/archivos/UploadFile`,
+      `${this.URL_SER}/api/archivos/postArchivos`,
       nuevoIndicador
     );
     //this.res.post()

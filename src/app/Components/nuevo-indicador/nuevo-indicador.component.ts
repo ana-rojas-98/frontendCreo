@@ -17,8 +17,8 @@ export class NuevoIndicadorComponent implements OnInit {
 
   archivos = [];
   ExcelData: any;
-  elArchivo:FormData
-  archivosp = ""
+  elArchivo: FormData;
+  archivosp = "";
 
   element = false;
 
@@ -119,18 +119,18 @@ export class NuevoIndicadorComponent implements OnInit {
       });
   }
 
-  archivoCapt(event){
-    const archivoCapturado = event.target.files[0]
-    this.archivos.push(archivoCapturado)
-    console.log(this.archivos)
+  archivoCapt(event) {
+    const archivoCapturado = event.target.files[0];
+    this.archivos.push(archivoCapturado);
+    console.log(this.archivos);
     //para subir
     this.elArchivo = new FormData();
-    this.archivos.forEach(archivo =>{
+    this.archivos.forEach((archivo) => {
       console.log(archivo);
-      this.elArchivo.append('archivo',archivo)
-      console.log(this.archivos)
-  })
-}
+      this.elArchivo.append("archivo", archivo);
+      console.log(this.archivos);
+    });
+  }
 
   leerArchivo() {
     const archivoleido = new FileReader();
@@ -159,34 +159,35 @@ export class NuevoIndicadorComponent implements OnInit {
     console.log(this.element);
   }
 
-
   nuevoIndicador = {
-    archivo: this.archivos,
-    estandar: this.Estandar.estandar,
-    categoria: this.Categoria.categoria1,
-    subcategoria: this.SubCategoria.subcategoria1,
-    periodicidad: "",
+    //archivo: this.archivos,
+    estandar: 1,
+    categoria: 2,
+    subcategoria: 2,
+    periodicidad: "1",
   };
 
   form_data = new FormData();
-  fform_data = this.archivos;
+  fform_data = this.nuevoIndicador;
 
   setNuevoIndicador() {
     console.log("arc: ", this.elArchivo);
-    console.log("arc2: ", this.archivos);
-    this.authService
-    .setIndicadorNuevo(this.archivos)
-    .subscribe((res: any) => {
+    console.log("arc2: ", this.fform_data);
+   /* this.authService.setIndicadorNuevo(this.fform_data).subscribe((res: any) => {
       console.log(res);
-    });
+    });*/
 
-      ////ensayos
-      
-  // const formData = new FormData();
-  // Object.keys(this.nuevoIndicador).forEach(key => 
-  //   formData.append(key, this.nuevoIndicador[key]),           
-  //   console.log('este es lel mensaje',formData)
-  //     );
-  // return formData; 
+    ////ensayos
+
+    const formData = new FormData();
+    Object.keys(this.nuevoIndicador).forEach(key =>
+    formData.append(key, this.nuevoIndicador[key]),
+    console.log('este es lel mensaje',formData)
+        );
+
+        this.authService.setIndicadorNuevo(formData).subscribe((res: any) => {
+          console.log(res);
+        })
+    return formData;
   }
 }
