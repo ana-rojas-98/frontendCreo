@@ -85,7 +85,7 @@ import { FooterPrincipalComponent } from './Components/footer-principal/footer-p
       { path: 'categorias', component: CategoriasComponent},
       { path: 'subcatego', component: SubcategoComponent},
       { path: 'olvide-clave', component: OlvideClaveComponent},
-      { path: 'administrar-indicadores', component: AdministrarIndicadoresComponent},
+      { path: 'administrar-indicadores', component: AdministrarIndicadoresComponent, canActivate:[AuthGuard]},
       { path: 'cambio-contrasena', component: CambioContrasenaComponent},
       { path: 'eliminar-estandar', component: EliminarEstandarComponent},
       { path: 'eliminar-categoria', component: EliminarCategoriaComponent},
