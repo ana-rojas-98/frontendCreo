@@ -12,9 +12,9 @@ export class CrearUsuarioComponent implements OnInit {
     private authService: AuthService,
     private serviceAdministaraUsuario: AdministrarUsuariosService
   ) {}
-  
-  
-  UsuarioRegistrado ={} 
+
+  UsuarioRegistrado = {};
+  UsuarioIdModificar = "";
 
   administrarIndicadores = {
     Crear: false,
@@ -58,7 +58,6 @@ export class CrearUsuarioComponent implements OnInit {
   };
 
   NuevoUsuario = {
-    Usuarioid: 1,
     Fullname: "",
     Email: "",
     Pass: "12345",
@@ -76,22 +75,33 @@ export class CrearUsuarioComponent implements OnInit {
 
   Usuarioid = "";
 
+  
+
+  getUsuarioId() {
+    this.serviceAdministaraUsuario.UsuarioIdModificar.subscribe(
+      (UsuarioIdModificar) => {
+        this.UsuarioIdModificar = UsuarioIdModificar;
+        console.log("usuario a modificar: ", this.UsuarioIdModificar);
+      }
+    );
+  }
+
+  ngOnInit() {
+    this.getUsuarioId();
+  }
+
   asignarIndicadores() {
-    //console.log(this.NuevoUsuario);
+    console.log(this.NuevoUsuario);
     this.authService
       .CrearNuevoUsuario(this.NuevoUsuario)
       .subscribe((res: any) => {
-        this.UsuarioRegistrado = res
-        console.log("hola: ", res)
+        this.UsuarioRegistrado = res;
+        console.log("hola: ", res);
         return res;
       });
   }
 
-  enviarUsuarioId(){
-    this.serviceAdministaraUsuario.UsuarioId.emit(this.UsuarioRegistrado)
-  }
-
-  ngOnInit() {
-
+  enviarUsuarioId() {
+    this.serviceAdministaraUsuario.UsuarioId.emit(this.UsuarioRegistrado);
   }
 }

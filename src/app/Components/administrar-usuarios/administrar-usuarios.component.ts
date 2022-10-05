@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
+import { AdministrarUsuariosService } from "src/app/services/administrar-usuarios.service";
 
 @Component({
   selector: "app-administrar-usuarios",
@@ -7,7 +8,10 @@ import { AuthService } from "src/app/services/auth.service";
   styleUrls: ["./administrar-usuarios.component.scss"],
 })
 export class AdministrarUsuariosComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private serviceAdministaraUsuario: AdministrarUsuariosService
+  ) {}
   usuarios = {
     tipoUsuario: "",
     nombre: "",
@@ -23,6 +27,10 @@ export class AdministrarUsuariosComponent implements OnInit {
     id: "",
   };
 
+  usarioid = {
+    usarioid: "",
+  };
+
   resultadosTabla = [];
   resultadosTipoUsuario = {};
   resultadosEstado = {};
@@ -33,6 +41,11 @@ export class AdministrarUsuariosComponent implements OnInit {
     this.getUsuariosApi();
     this.getTipoUsuarioApi();
     this.getUsuarioApi();
+  }
+
+  tbUsuarioid(UsuarioIdModificar) {
+    this.serviceAdministaraUsuario.UsuarioIdModificar.emit(UsuarioIdModificar);
+    console.log("hola", UsuarioIdModificar);
   }
 
   tipoUsuarioFiltro() {

@@ -96,7 +96,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of resultadosTabla">
-            <td>{{ item.tipoUsuario }}</td>
+            <td>{{ item.usarioid }}</td>
             <td>{{ item.nombre }}</td>
             <td>{{ item.telefono }}</td>
             <td>{{ item.correo }}</td>
@@ -104,7 +104,8 @@
             <td>{{ item.quienRegistroUsuario }}</td>
             <td>
               <img
-                [routerLink]="['/editar-indicador']"
+                (click)="tbUsuarioid(item.usarioid)"
+                [routerLink]="['/crear-usuarios']"
                 [routerLinkActive]="['link-active']"
                 src="../../../assets/imagenes/editar.png"
                 alt="editar-icono"
