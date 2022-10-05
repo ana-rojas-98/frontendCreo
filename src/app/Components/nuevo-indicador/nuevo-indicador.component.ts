@@ -17,14 +17,10 @@ export class NuevoIndicadorComponent implements OnInit {
 
   archivos : File = null;
   ExcelData: any;
-  elArchivo: FormData;
   archivosp = "";
   archivoCapturado: File;
-  //defino variables: 1-array donde guardo objeto 2-donde lo voy a guardar
   resultadoExcel: any;
   resultadoExcelEnviar = [{}];
-//ensayo para guardar un dato de un objeto
-  ensayo=[];
 
   element = false;
 
@@ -128,10 +124,7 @@ export class NuevoIndicadorComponent implements OnInit {
   archivoCapt(event) {
     this.archivoCapturado = event.target.files[0];
     this.archivos = this.archivoCapturado;
-    this.elArchivo = new FormData();
-    //this.archivos.forEach((archivo) => {
-      this.elArchivo.append("archivo", this.archivos);
-   // });
+    //otro metodo
     this.leer(this.archivoCapturado);
   }
 
@@ -162,21 +155,9 @@ export class NuevoIndicadorComponent implements OnInit {
     FinColumna: "",
     SaltoLinea: "",
   };
-  ensayito = {
-    entrada: "",
-  }
   mostrar() {
       let con = 0;
     for (let item of this.resultadoExcel) { 
-      //console.log('Entrada: ',item);
-        this.ensayito.entrada = item.Entrada;  
-       // console.log('objeto ensayito: ',this.ensayito);       
-       this.ensayo.push(item);
-      //  console.log('proceso',this.ensayo.push(this.ensayito));
-      //   console.log('objeto ensayito dentro: ', this.ensayito);   
-      //   console.log('valor entrada dentro: ', this.ensayito.entrada); 
-       //  console.log('array ensayo dentro: ', this.ensayo);
-
   //     if (item.Entrada == "Text") {
   //       con++;
   //       this.NuevoIndicadorRegistro.Entrada = item.Entrada;
@@ -234,8 +215,6 @@ export class NuevoIndicadorComponent implements OnInit {
   //       console.log(item.Entrada, "if 2");
   //     }
      }             
-     console.log('objeto ensayito afuera: ', this.ensayito);      
-     console.log('array ensayo afuera', this.ensayo);   
   //   //console.log("indicador a registara4", this.resultadoExcelEnviar,  " ", con);
   }
 
