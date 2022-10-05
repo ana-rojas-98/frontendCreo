@@ -82,7 +82,8 @@
       <button class="button-interactivo" (click)="capturar.click()">
         Subir
       </button>
-      <button (click)="mostrar()">mostrar</button>
+      <!--defino el boton que me va a mostrar la información-->
+      <button (click)="mostrar()">Mostrar</button>
       <input
         type="file"
         hidden
@@ -120,7 +121,24 @@
       <br />
       <div *ngIf="element == true">
         <table>
-          <thead><tr></tr></thead>
+          <thead align="center">
+            <tr>
+              <th>Entero</th>
+              <th>Num?</th>
+              <th>For?</th>
+              <th>For</th>
+              <th>Valor</th>
+              <th>T</th>
+              <th>Ttexto</th>
+              <th>C</th>
+              <th>N</th>
+              <th>S</th>
+              <th>K</th>
+              <th>ICol</th>
+              <th>FCol</th>
+              <th>SLinea</th>
+            </tr>
+          </thead>
           <tbody>
             <tr *ngFor="let dato of ExcelData">
               <td>{{dato.Entrada}}</td>
@@ -133,8 +151,9 @@
               <td>{{dato.Color}}</td>
               <td>{{dato.Negrilla}}</td>
               <td>{{dato.Subrayado}}</td>
-              <td>{{dato.Cursiva}}</td>
+              <td>{{dato.cursiva}}</td>
               <td>{{dato.Iniciocolunma}}</td>
+              <td>{{dato.Fincolumna}}</td>
               <td>{{dato.Saltodelinea}}</td>
             </tr>
           </tbody>

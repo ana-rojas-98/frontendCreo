@@ -17,7 +17,6 @@ export class NuevoIndicadorComponent implements OnInit {
 
   archivos : File = null;
   ExcelData: any;
-  elArchivo: FormData;
   archivosp = "";
   archivoCapturado: File;
   resultadoExcel: any;
@@ -125,10 +124,7 @@ export class NuevoIndicadorComponent implements OnInit {
   archivoCapt(event) {
     this.archivoCapturado = event.target.files[0];
     this.archivos = this.archivoCapturado;
-    this.elArchivo = new FormData();
-    //this.archivos.forEach((archivo) => {
-      this.elArchivo.append("archivo", this.archivos);
-   // });
+    //otro metodo
     this.leer(this.archivoCapturado);
   }
 
@@ -159,68 +155,67 @@ export class NuevoIndicadorComponent implements OnInit {
     FinColumna: "",
     SaltoLinea: "",
   };
-
   mostrar() {
-    let con = 0;
-    for (let item of this.resultadoExcel) {
-      if (item.Entrada == "Text") {
-        con++;
-        this.NuevoIndicadorRegistro.Entrada = item.Entrada;
-        this.NuevoIndicadorRegistro.Numero = "No";
-        this.NuevoIndicadorRegistro.TieneFormula = "No";
-        this.NuevoIndicadorRegistro.formula = "No";
-        this.NuevoIndicadorRegistro.Valor = item.Valor;
-        this.NuevoIndicadorRegistro.Titulo = item.Titulo;
-        this.NuevoIndicadorRegistro.TamanoTexto = item.TamanoTexto;
-        this.NuevoIndicadorRegistro.Color = item.Color;
-        this.NuevoIndicadorRegistro.Negrilla = item.Negrilla;
-        this.NuevoIndicadorRegistro.Subrallado = item.Subrayado;
-        this.NuevoIndicadorRegistro.Cursiva = item.Cursiva;
-        this.NuevoIndicadorRegistro.InicioColumna = item.InicioColunma;
-        this.NuevoIndicadorRegistro.FinColumna = item.FinColumna;
-        this.NuevoIndicadorRegistro.SaltoLinea = item.SaltoDeLinea;
-        console.log(item.Entrada, "tem.Entrada == Text");
-      } else if (item.TieneFormula == "Input") {
-        this.NuevoIndicadorRegistro.Entrada = item.Entrada;
-        this.NuevoIndicadorRegistro.Numero = "No";
-        this.NuevoIndicadorRegistro.TieneFormula = "No";
-        this.NuevoIndicadorRegistro.formula = "No";
-        this.NuevoIndicadorRegistro.Valor = item.Valor;
-        this.NuevoIndicadorRegistro.Titulo = "No";
-        this.NuevoIndicadorRegistro.TamanoTexto = item.TamanoTexto;
-        this.NuevoIndicadorRegistro.Color = item.Color;
-        this.NuevoIndicadorRegistro.Negrilla = item.Negrilla;
-        this.NuevoIndicadorRegistro.Subrallado = item.Subrayado;
-        this.NuevoIndicadorRegistro.Cursiva = item.Cursiva;
-        this.NuevoIndicadorRegistro.InicioColumna = item.InicioColunma;
-        this.NuevoIndicadorRegistro.FinColumna = item.FinColumna;
-        this.NuevoIndicadorRegistro.SaltoLinea = item.SaltoDeLinea;
-        this.resultadoExcelEnviar.push(this.NuevoIndicadorRegistro);
-        console.log(item.Entrada, "if 3");
-      } else if (
-        item.Entrada == "Input" &&
-        item.Numero == "Si" &&
-        item.TieneFormula == "No"
-      ) {
-        this.NuevoIndicadorRegistro.Entrada = item.Entrada;
-        this.NuevoIndicadorRegistro.Numero = "Si";
-        this.NuevoIndicadorRegistro.TieneFormula = "No";
-        this.NuevoIndicadorRegistro.formula = "No";
-        this.NuevoIndicadorRegistro.Valor = item.Valor;
-        this.NuevoIndicadorRegistro.Titulo = "no";
-        this.NuevoIndicadorRegistro.TamanoTexto = item.TamanoTexto;
-        this.NuevoIndicadorRegistro.Color = item.Color;
-        this.NuevoIndicadorRegistro.Negrilla = item.Negrilla;
-        this.NuevoIndicadorRegistro.Subrallado = item.Subrayado;
-        this.NuevoIndicadorRegistro.Cursiva = item.Cursiva;
-        this.NuevoIndicadorRegistro.InicioColumna = item.InicioColunma;
-        this.NuevoIndicadorRegistro.FinColumna = item.FinColumna;
-        this.NuevoIndicadorRegistro.SaltoLinea = item.SaltoDeLinea;
-        this.resultadoExcelEnviar.push(this.NuevoIndicadorRegistro);
-        console.log(item.Entrada, "if 2");
-      }
-    }
-    //console.log("indicador a registara4", this.resultadoExcelEnviar,  " ", con);
+      let con = 0;
+    for (let item of this.resultadoExcel) { 
+  //     if (item.Entrada == "Text") {
+  //       con++;
+  //       this.NuevoIndicadorRegistro.Entrada = item.Entrada;
+  //       this.NuevoIndicadorRegistro.Numero = "No";
+  //       this.NuevoIndicadorRegistro.TieneFormula = "No";
+  //       this.NuevoIndicadorRegistro.formula = "No";
+  //       this.NuevoIndicadorRegistro.Valor = item.Valor;
+  //       this.NuevoIndicadorRegistro.Titulo = item.Titulo;
+  //       this.NuevoIndicadorRegistro.TamanoTexto = item.TamanoTexto;
+  //       this.NuevoIndicadorRegistro.Color = item.Color;
+  //       this.NuevoIndicadorRegistro.Negrilla = item.Negrilla;
+  //       this.NuevoIndicadorRegistro.Subrallado = item.Subrayado;
+  //       this.NuevoIndicadorRegistro.Cursiva = item.Cursiva;
+  //       this.NuevoIndicadorRegistro.InicioColumna = item.InicioColunma;
+  //       this.NuevoIndicadorRegistro.FinColumna = item.FinColumna;
+  //       this.NuevoIndicadorRegistro.SaltoLinea = item.SaltoDeLinea;
+  //       console.log(item.Entrada, "tem.Entrada == Text");
+  //     } else if (item.TieneFormula == "Input") {
+  //       this.NuevoIndicadorRegistro.Entrada = item.Entrada;
+  //       this.NuevoIndicadorRegistro.Numero = "No";
+  //       this.NuevoIndicadorRegistro.TieneFormula = "No";
+  //       this.NuevoIndicadorRegistro.formula = "No";
+  //       this.NuevoIndicadorRegistro.Valor = item.Valor;
+  //       this.NuevoIndicadorRegistro.Titulo = "No";
+  //       this.NuevoIndicadorRegistro.TamanoTexto = item.TamanoTexto;
+  //       this.NuevoIndicadorRegistro.Color = item.Color;
+  //       this.NuevoIndicadorRegistro.Negrilla = item.Negrilla;
+  //       this.NuevoIndicadorRegistro.Subrallado = item.Subrayado;
+  //       this.NuevoIndicadorRegistro.Cursiva = item.Cursiva;
+  //       this.NuevoIndicadorRegistro.InicioColumna = item.InicioColunma;
+  //       this.NuevoIndicadorRegistro.FinColumna = item.FinColumna;
+  //       this.NuevoIndicadorRegistro.SaltoLinea = item.SaltoDeLinea;
+  //       this.resultadoExcelEnviar.push(this.NuevoIndicadorRegistro);
+  //       console.log(item.Entrada, "if 3");
+  //     } else if (
+  //       item.Entrada == "Input" &&
+  //       item.Numero == "Si" &&
+  //       item.TieneFormula == "No"
+  //     ) {
+  //       this.NuevoIndicadorRegistro.Entrada = item.Entrada;
+  //       this.NuevoIndicadorRegistro.Numero = "Si";
+  //       this.NuevoIndicadorRegistro.TieneFormula = "No";
+  //       this.NuevoIndicadorRegistro.formula = "No";
+  //       this.NuevoIndicadorRegistro.Valor = item.Valor;
+  //       this.NuevoIndicadorRegistro.Titulo = "no";
+  //       this.NuevoIndicadorRegistro.TamanoTexto = item.TamanoTexto;
+  //       this.NuevoIndicadorRegistro.Color = item.Color;
+  //       this.NuevoIndicadorRegistro.Negrilla = item.Negrilla;
+  //       this.NuevoIndicadorRegistro.Subrallado = item.Subrayado;
+  //       this.NuevoIndicadorRegistro.Cursiva = item.Cursiva;
+  //       this.NuevoIndicadorRegistro.InicioColumna = item.InicioColunma;
+  //       this.NuevoIndicadorRegistro.FinColumna = item.FinColumna;
+  //       this.NuevoIndicadorRegistro.SaltoLinea = item.SaltoDeLinea;
+  //       this.resultadoExcelEnviar.push(this.NuevoIndicadorRegistro);
+  //       console.log(item.Entrada, "if 2");
+  //     }
+     }             
+  //   //console.log("indicador a registara4", this.resultadoExcelEnviar,  " ", con);
   }
 
   leerArchivo() {
