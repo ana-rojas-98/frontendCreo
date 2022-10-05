@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { environment } from "src/environments/environment";
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: "root",
@@ -13,7 +14,7 @@ export class AuthService {
    //https://localhost:5001
   ///http://www.creo.somee.com
   private URL_SER = environment.apiUrl;
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, public router: Router) {}
   signin(user: any) {
     return this.http.post(`${this.URL_SER}/api/Usuarios/Authenticate`, user);
   }
@@ -163,4 +164,14 @@ export class AuthService {
       nuevoIndicador, headers );
     return result;
   }
+
+
+  fnDestroySessionData(objectObserve) {
+
+    localStorage.clear();
+    sessionStorage.clear();
+    objectObserve(true);
+   // this.auth.logout({ returnTo: this.doc.location.origin });
+    this.router.navigate(['login']); 
+}
 }
