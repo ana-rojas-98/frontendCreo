@@ -19,6 +19,9 @@ export class NuevoIndicadorComponent implements OnInit {
   ExcelData: any;
   elArchivo: FormData;
   archivosp = "";
+  archivoCapturado: File;
+  resultadoExcel: any;
+  resultadoExcelEnviar = [{}];
 
   element = false;
 
@@ -120,16 +123,104 @@ export class NuevoIndicadorComponent implements OnInit {
   }
 
   archivoCapt(event) {
-    const archivoCapturado = event.target.files[0];
-    this.archivos.push(archivoCapturado);
-    console.log(this.archivos);
-    //para subir
+    this.archivoCapturado = event.target.files[0];
+    this.archivos.push(this.archivoCapturado);
     this.elArchivo = new FormData();
     this.archivos.forEach((archivo) => {
-      console.log(archivo);
       this.elArchivo.append("archivo", archivo);
-      console.log(this.archivos);
     });
+    this.leer(this.archivoCapturado);
+  }
+
+  leer(event: any) {
+    //this.archivoCapturado = event.target.files[0];
+    let leerArchivo = new FileReader();
+    leerArchivo.readAsBinaryString(this.archivoCapturado);
+    leerArchivo.onload = (e) => {
+      let libro = XSLX.read(leerArchivo.result, { type: "binary" });
+      let hoja = libro.SheetNames;
+      this.resultadoExcel = XSLX.utils.sheet_to_json(libro.Sheets[hoja[0]]);
+    };
+  }
+
+  NuevoIndicadorRegistro = {
+    Entrada: "",
+    Numero: "",
+    TieneFormula: "",
+    formula: "",
+    Valor: "",
+    Titulo: "",
+    TamanoTexto: 1,
+    Color: "",
+    Negrilla: "",
+    Subrallado: "",
+    Cursiva: "",
+    InicioColumna: "",
+    FinColumna: "",
+    SaltoLinea: "",
+  };
+
+  mostrar() {
+    let con = 0;
+    for (let item of this.resultadoExcel) {
+      if (item.Entrada == "Text") {
+        con++;
+        this.NuevoIndicadorRegistro.Entrada = item.Entrada;
+        this.NuevoIndicadorRegistro.Numero = "No";
+        this.NuevoIndicadorRegistro.TieneFormula = "No";
+        this.NuevoIndicadorRegistro.formula = "No";
+        this.NuevoIndicadorRegistro.Valor = item.Valor;
+        this.NuevoIndicadorRegistro.Titulo = item.Titulo;
+        this.NuevoIndicadorRegistro.TamanoTexto = item.TamanoTexto;
+        this.NuevoIndicadorRegistro.Color = item.Color;
+        this.NuevoIndicadorRegistro.Negrilla = item.Negrilla;
+        this.NuevoIndicadorRegistro.Subrallado = item.Subrayado;
+        this.NuevoIndicadorRegistro.Cursiva = item.Cursiva;
+        this.NuevoIndicadorRegistro.InicioColumna = item.InicioColunma;
+        this.NuevoIndicadorRegistro.FinColumna = item.FinColumna;
+        this.NuevoIndicadorRegistro.SaltoLinea = item.SaltoDeLinea;
+        console.log(item.Entrada, "tem.Entrada == Text");
+      } else if (item.TieneFormula == "Input") {
+        this.NuevoIndicadorRegistro.Entrada = item.Entrada;
+        this.NuevoIndicadorRegistro.Numero = "No";
+        this.NuevoIndicadorRegistro.TieneFormula = "No";
+        this.NuevoIndicadorRegistro.formula = "No";
+        this.NuevoIndicadorRegistro.Valor = item.Valor;
+        this.NuevoIndicadorRegistro.Titulo = "No";
+        this.NuevoIndicadorRegistro.TamanoTexto = item.TamanoTexto;
+        this.NuevoIndicadorRegistro.Color = item.Color;
+        this.NuevoIndicadorRegistro.Negrilla = item.Negrilla;
+        this.NuevoIndicadorRegistro.Subrallado = item.Subrayado;
+        this.NuevoIndicadorRegistro.Cursiva = item.Cursiva;
+        this.NuevoIndicadorRegistro.InicioColumna = item.InicioColunma;
+        this.NuevoIndicadorRegistro.FinColumna = item.FinColumna;
+        this.NuevoIndicadorRegistro.SaltoLinea = item.SaltoDeLinea;
+        this.resultadoExcelEnviar.push(this.NuevoIndicadorRegistro);
+        console.log(item.Entrada, "if 3");
+      } else if (
+        item.Entrada == "Input" &&
+        item.Numero == "Si" &&
+        item.TieneFormula == "No"
+      ) {
+        this.NuevoIndicadorRegistro.Entrada = item.Entrada;
+        this.NuevoIndicadorRegistro.Numero = "Si";
+        this.NuevoIndicadorRegistro.TieneFormula = "No";
+        this.NuevoIndicadorRegistro.formula = "No";
+        this.NuevoIndicadorRegistro.Valor = item.Valor;
+        this.NuevoIndicadorRegistro.Titulo = "no";
+        this.NuevoIndicadorRegistro.TamanoTexto = item.TamanoTexto;
+        this.NuevoIndicadorRegistro.Color = item.Color;
+        this.NuevoIndicadorRegistro.Negrilla = item.Negrilla;
+        this.NuevoIndicadorRegistro.Subrallado = item.Subrayado;
+        this.NuevoIndicadorRegistro.Cursiva = item.Cursiva;
+        this.NuevoIndicadorRegistro.InicioColumna = item.InicioColunma;
+        this.NuevoIndicadorRegistro.FinColumna = item.FinColumna;
+        this.NuevoIndicadorRegistro.SaltoLinea = item.SaltoDeLinea;
+        this.resultadoExcelEnviar.push(this.NuevoIndicadorRegistro);
+        console.log(item.Entrada, "if 2");
+      }
+    }
+    //console.log("indicador a registara4", this.resultadoExcelEnviar,  " ", con);
   }
 
   leerArchivo() {
@@ -142,7 +233,6 @@ export class NuevoIndicadorComponent implements OnInit {
       this.ExcelData = XSLX.utils.sheet_to_json(
         workArchi.Sheets[nombreHojas[0]]
       );
-      console.log(this.ExcelData);
     };
   }
 
@@ -171,23 +261,23 @@ export class NuevoIndicadorComponent implements OnInit {
   fform_data = this.nuevoIndicador;
 
   setNuevoIndicador() {
-    console.log("arc: ", this.elArchivo);
-    console.log("arc2: ", this.fform_data);
-   /* this.authService.setIndicadorNuevo(this.fform_data).subscribe((res: any) => {
+    //console.log("arc: ", this.elArchivo);
+    //console.log("arc2: ", this.fform_data);
+    /* this.authService.setIndicadorNuevo(this.fform_data).subscribe((res: any) => {
       console.log(res);
     });*/
 
     ////ensayos
 
     const formData = new FormData();
-    Object.keys(this.nuevoIndicador).forEach(key =>
-    formData.append(key, this.nuevoIndicador[key]),
-    console.log('este es lel mensaje',formData)
-        );
+    Object.keys(this.nuevoIndicador).forEach(
+      (key) => formData.append(key, this.nuevoIndicador[key]),
+      console.log("este es lel mensaje", formData)
+    );
 
-        this.authService.setIndicadorNuevo(formData).subscribe((res: any) => {
-          console.log(res);
-        })
+    this.authService.setIndicadorNuevo(formData).subscribe((res: any) => {
+      console.log(res);
+    });
     return formData;
   }
 }

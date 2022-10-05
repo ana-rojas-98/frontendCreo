@@ -33,7 +33,6 @@ export class AdministrarUsuariosComponent implements OnInit {
     this.getUsuariosApi();
     this.getTipoUsuarioApi();
     this.getUsuarioApi();
-    this.buscar();
   }
 
   tipoUsuarioFiltro() {
@@ -75,7 +74,6 @@ export class AdministrarUsuariosComponent implements OnInit {
       this.estado = res.map((item) => {
         return item;
       });
-      console.log("hola: ", this.estado);
     });
   }
 
@@ -96,7 +94,6 @@ export class AdministrarUsuariosComponent implements OnInit {
           item.correo.includes(this.buscarInput)
         );
       });
-      console.log("busqueda: ", this.resultadosTabla);
     });
   }
 }
