@@ -165,9 +165,7 @@ export class AuthService {
     return result;
   }
 
-
   fnDestroySessionData(objectObserve) {
-
     localStorage.clear();
     sessionStorage.clear();
     objectObserve(true);

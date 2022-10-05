@@ -1,28 +1,33 @@
 <div class="contenedor">
-<div class="container-principal">
-  <div class="title-contrasena">
-  <h1>Olvido de contraseña</h1>
-  </div>
-  <div class="container-form-div">
-    <form action="" class="container-form-formularo">
-      <span
-        ><label for="email">Ingrese el correo electrónico registrado</label>
-        <input
-          class="input-olvido-clave"
-          type="email"
-          name="email"
-          [(ngModel)]="email.Email"
-      /></span>
-      <div class="container-button">
-        <button class="button-cancelar" [routerLink]="['/cambio-contrasena']">
-          Cancelar
-        </button>
-          <button class="button-enviar" (click)="validateEmail()">
+  <div class="container-principal">
+    <div class="title-contrasena">
+      <h1>Olvido de contraseña</h1>
+    </div>
+    <div class="container-form-div">
+      <form action="" class="container-form-formularo">
+        <span
+          ><label for="email">Ingrese el correo electrónico registrado</label>
+          <input
+            class="input-olvido-clave"
+            type="email"
+            name="email"
+            [(ngModel)]="email.Email"
+        /></span>
+        <div class="container-button">
+          <button class="button-cancelar" [routerLink]="['/login']">
+            Cancelar
+          </button>
+          <button
+            [routerLink]="['/cambio-contrasena']"
+            routerLinkActive="router-link-active"
+            class="button-enviar"
+            (click)="validateEmail()"
+          >
             Enviar
           </button>
-      </div>
-    </form>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
-</div>
-<app-footer-principal></app-footer-principal> 
+<app-footer-principal></app-footer-principal>
