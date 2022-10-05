@@ -12,7 +12,14 @@
         </div>
         <div class="subir-archivo">
             <p>Suba el archivo</p>
-            <button class="button-interactivo">Subir archivo</button>
+            <button class="button-interactivo" (click)="capturar.click()">Subir archivo</button>
+            <input
+            type="file"
+            hidden
+            (change)="capturarArchivo($event)"
+            #capturar
+            id="in"
+          />
         </div>
         <div class="masivos">
             <table>
