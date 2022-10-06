@@ -34,6 +34,7 @@ h3{
     height: 10%;
     display: flex;
     flex-wrap: nowrap;
+    align-items: center;
 }
 .link-sidebar img{
     width: 30px;
@@ -48,4 +49,6 @@ h3{
     text-decoration: none;
     height: 50px;
     font-family: 'Montserrat';
+    display: flex;
+    align-items: center;
 }

@@ -127,8 +127,8 @@ table {
     background-color: #ffffff;
 }
 td, th { 
-    border-bottom: 1px solid #000000;
-    border-top: 1px solid #000000;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 tr td, th { 
     border-top-right-radius: 0;               
@@ -138,25 +138,25 @@ tr td, th {
 }
 th:first-child { 
     border-top-left-radius: 10px;
-    border-left: 1px solid #000000;
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
 }
 th:last-child {   
     border-top-right-radius: 10px;
-    border-right: 1px solid #000000;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
 }
 tr:last-child td:first-child { 
     border-bottom-left-radius: 10px;
-    border-left: 1px solid #000000;
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
 }
 tr:first-child td:first-child {
-  border-left: 1px solid #000000;
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
 }
 tr:last-child td:last-child { 
     border-bottom-right-radius: 10px; 
-    border-right: 1px solid #000000;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
 }
 tr:first-child td:last-child {
-    border-right: 1px solid #000000;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 @media (width<1130px){
