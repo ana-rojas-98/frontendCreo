@@ -21,6 +21,7 @@ export class NuevoIndicadorComponent implements OnInit {
   archivoCapturado: File;
   resultadoExcel: any;
   resultadoExcelEnviar = [{}];
+  archivoleer = [];
 
   element = false;
 
@@ -124,6 +125,7 @@ export class NuevoIndicadorComponent implements OnInit {
   archivoCapt(event) {
     this.archivoCapturado = event.target.files[0];
     this.archivos = this.archivoCapturado;
+    this.archivoleer.push(this.archivoCapturado);
     //otro metodo
     this.leer(this.archivoCapturado);
   }
@@ -220,7 +222,8 @@ export class NuevoIndicadorComponent implements OnInit {
 
   leerArchivo() {
     const archivoleido = new FileReader();
-    const archi = this.archivos[0];
+    const archi = this.archivoleer[0];
+    console.log('el archivo',archi)
     archivoleido.readAsBinaryString(archi);
     archivoleido.onload = (e) => {
       const workArchi = XSLX.read(archivoleido.result, { type: "binary" });
@@ -229,6 +232,7 @@ export class NuevoIndicadorComponent implements OnInit {
         workArchi.Sheets[nombreHojas[0]]
       );
     };
+    console.log('el excelDato',this.ExcelData)
   }
 
   Periodicidad() {
