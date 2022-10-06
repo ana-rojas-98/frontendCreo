@@ -73,21 +73,60 @@ export class CrearUsuarioComponent implements OnInit {
     configuracion: this.administrarIndicadores,
   };
 
-  Usuarioid = "";
+  UsuarioModificarApi = {
+    usuarioId:1,
+    Fullname: "",
+    Email: "",
+    Pass: "12345",
+    Typeuser: "",
+    Telefono: "",
+    Estado: 1,
+    IdUsuarioRegistro: localStorage.getItem("idUsuario"),
+    administrarIndicadores: this.administrarIndicadores,
+    administrarPermisos: this.administrarIndicadores,
+    visorEventos: this.administrarIndicadores,
+    gestorNotificaciones: this.administrarIndicadores,
+    reportes: this.administrarIndicadores,
+    configuracion: this.administrarIndicadores,
+  };
 
-  
+  usarioConsultarApi = {
+    Usuarioid: this.UsuarioIdModificar,
+  };
+
+  Usuarioid = "";
 
   getUsuarioId() {
     this.serviceAdministaraUsuario.UsuarioIdModificar.subscribe(
       (UsuarioIdModificar) => {
         this.UsuarioIdModificar = UsuarioIdModificar;
-        console.log("usuario a modificar: ", this.UsuarioIdModificar);
+        if (this.UsuarioIdModificar != "") {
+          this.usarioConsultarApi.Usuarioid = UsuarioIdModificar;
+          this.getUsuarioModificar(this.usarioConsultarApi);
+        } else {
+          console.log("id a modificar: ", this.UsuarioIdModificar);
+        }
       }
     );
   }
 
+  getUsuarioModificar(usarioConsultarApi) {
+    this.authService
+      .getUsuarioModificar(usarioConsultarApi)
+      .subscribe((res: any) => {
+        this.UsuarioModificarApi.usuarioId = res.usuarioid
+        this.NuevoUsuario.Fullname = "res.nombre"
+        this.NuevoUsuario.Email = res.correo
+        this.NuevoUsuario.Telefono = res.telefono
+        this.administrarIndicadores = res.indicadorId
+        console.log("api: ", res);
+        return res;
+      });
+  }
+
   ngOnInit() {
     this.getUsuarioId();
+    console.log("full name: ",this.NuevoUsuario.Fullname);
   }
 
   asignarIndicadores() {

@@ -10,6 +10,7 @@
     @include titleBody;
     h1{
         @include h1Body;
+        margin-bottom: 71px;
     }
 }
 .selectores{
@@ -20,6 +21,7 @@
     justify-content: space-around;
     height: max-content;
     padding: 10px;
+    margin-bottom: 41px;
 }
 select{
     @include select;

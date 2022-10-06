@@ -172,4 +172,12 @@ export class AuthService {
    // this.auth.logout({ returnTo: this.doc.location.origin });
     this.router.navigate(['login']); 
 }
+
+getUsuarioModificar(id){
+  let resul = this.http.post(
+    `${this.URL_SER}/api/Usuarios/GetUsuarioModificar`,
+    id);
+  return resul;
+}
+
 }
