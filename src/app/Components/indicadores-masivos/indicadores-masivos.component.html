@@ -16,9 +16,10 @@
             <input
             type="file"
             hidden
-            (change)="capturarArchivo($event)"
+            (change)="capturarArchivo()"
             #capturar
             id="in"
+            multiple
           />
         </div>
         <div class="masivos">
@@ -41,35 +42,53 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Indicador 1</td>
+                    <tr *ngFor="let valor of ensayo" >
+                        <td>{{valor.name}}</td>
                         <td>
-                            <select class="selector" name="select" type = selectbox>
-                                <option value="Subcategoria 1">Filtro Subcategoria 1</option>
-                                <option value="Subcategoria 2">Filtro SubCategoria 2</option>
-                                <option value="Subcategoria 3">Filtro Subcategoria 3</option>
+                            <select class="selector"
+                                    name="estandar" 
+                                    type = selectbox 
+                                    [(ngModel)]="Estandar.estandar"
+                                    (change)="estandar()">
+                                <option value="">Estándar</option>
+                                <option *ngFor="let resultado of resultados"
+                                        [value]="resultado.estandar">
+                                        <h1>{{ resultado.nombreEstandar }}</h1>
+                                </option>
                             </select>
                         </td>
                         <td>
-                            <select class="selector" name="select" type = selectbox>
-                                <option value="Subcategoria 1">Filtro Subcategoria 1</option>
-                                <option value="Subcategoria 2">Filtro SubCategoria 2</option>
-                                <option value="Subcategoria 3">Filtro Subcategoria 3</option>
+                            <select class="selector"
+                                    type = "selectbox"
+                                    [(ngModel)]="Categoria.categoria1"
+                                    (change)="categoria()">
+                                <option value="">Categoría</option>
+                                <option *ngFor="let resultadoCategoria of resultadosCategoria"
+                                        [value]="resultadoCategoria.categoria1">
+                                        {{ resultadoCategoria.nombreCategoria }}
+                                </option>
                             </select>  
                         </td>
                         <td>
-                            <select class="selector" name="select" type = selectbox>
-                                <option value="Subcategoria 1">Filtro Subcategoria 1</option>
-                                <option value="Subcategoria 2">Filtro SubCategoria 2</option>
-                                <option value="Subcategoria 3">Filtro Subcategoria 3</option>
-                            </select>
+                            <select class="selector"
+                                    type = "selectbox"
+                                   [(ngModel)]="Categoria.categoria1"><!--revisar-->
+                                <option value="">Subcategoría</option>
+                                <option *ngFor="let item of resultadosSubCategoria"
+                                        [value]="item.subcategoria1">
+                                        {{ item.nombreSubcategoria }}
+                                </option>
+                            </select>  
                         </td>
                         <td>
-                            <select class="selector" name="select" type = selectbox>
-                                <option value="Subcategoria 1">Filtro Subcategoria 1</option>
-                                <option value="Subcategoria 2">Filtro SubCategoria 2</option>
-                                <option value="Subcategoria 3">Filtro Subcategoria 3</option>
-                            </select>
+                            <select class="selector"
+                                    type = "selectbox">
+                                    <option value="">Periodicidad</option>
+                                    <option *ngFor="let nombre of nombres"
+                                            [value]="nombre.id">
+                                            {{ nombre.periodicidad }}
+                                    </option>
+                            </select>  
                         </td>
                         <td>Editar</td>
                         <td>Ver</td>
