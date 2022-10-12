@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 export class SubcategoComponent implements OnInit {
   Subcategoria = {
     NombreSubcategoria: "",
-    IdCategoria: ""
+    Subcategoria1: ""
   };
 
   Categoria = {
@@ -61,11 +61,11 @@ export class SubcategoComponent implements OnInit {
     this.authService
       .crear_subcategoria(this.Subcategoria)
       .subscribe((res: any) => {
-        if(res.resul == "Subategoria guardada"){
+        if(res.resul == "Subcategoria guardada"){
           this.router.navigate(['subcatego']);
           return this.alerta(res.resul);
         }else{
-          this.alerta("no se pudo agregar la Subcategoria"); 
+          this.alerta("No se pudo agregar la Subcategoria"); 
         }
       });
   }

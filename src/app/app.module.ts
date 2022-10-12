@@ -95,6 +95,8 @@ import { FooterPrincipalComponent } from './Components/footer-principal/footer-p
       { path: 'editar-indicador', component: EditarIndicadorComponent, canActivate:[AuthGuard]},
       { path: 'administrar-usuarios', component: AdministrarUsuariosComponent, canActivate:[AuthGuard]},
       { path: 'crear-usuarios', component: CrearUsuarioComponent, canActivate:[AuthGuard]},
+      { path: 'crear-usuarios/:id', component: CrearUsuarioComponent, canActivate:[AuthGuard]},
+      { path: 'crear-usuarios/:v/:usuario', component: CrearUsuarioComponent, canActivate:[AuthGuard]},
       { path: 'indicadores', component: IndicadoresComponent, canActivate:[AuthGuard]},
       { path: 'diligenciar-indicador', component: DiligenciarIndicadorComponent, canActivate:[AuthGuard]},
       { path: 'asignar-indicadores', component: AsignarIndicadoresComponent, canActivate:[AuthGuard]},
