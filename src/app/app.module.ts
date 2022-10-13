@@ -38,6 +38,7 @@ import { IndicadoresComponent } from './Components/indicadores/indicadores.compo
 import { DiligenciarIndicadorComponent } from './Components/diligenciar-indicador/diligenciar-indicador.component';
 import { AsignarIndicadoresComponent } from './Components/asignar-indicadores/asignar-indicadores.component';
 import { FooterPrincipalComponent } from './Components/footer-principal/footer-principal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -74,6 +75,7 @@ import { FooterPrincipalComponent } from './Components/footer-principal/footer-p
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
     HttpClientModule,
+    NgbModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },            

@@ -1,5 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
+import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
+import { Subject } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
 import Swal from "sweetalert2";
 
@@ -10,6 +12,27 @@ import Swal from "sweetalert2";
 })
 export class CambioContrasenaComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
+  private _success = new Subject<string>();
+
+  successMessage = '';
+  
+  @ViewChild('selfClosingAlert', {static: false}) selfClosingAlert: NgbAlert;
+
+  public changeSuccessMessage(i: number) { 
+    if (i == 1)
+    {
+      this._success.next('Datos incorrectos'); 
+    }
+    if (i == 2)
+    {
+      this._success.next('Las contraseñas no coinciden'); 
+    }
+    if (i == 3)
+    {
+      this._success.next('Cambio exitoso'); 
+    }
+    
+  }
 
   token = {
     email: "",
@@ -26,14 +49,16 @@ export class CambioContrasenaComponent implements OnInit {
         token: this.token.token,
       };
       this.authService.cambiar_contrasena(token1).subscribe((res: any) => {
-        if (res === "El correo no existe") {
-          this.alerta("datos erroneos");
+        if (res.resul == "Datos incorrectos") {
+          this.changeSuccessMessage(1);
         } else {
-          console.log("cambio exitoso: ", res);
+          this.changeSuccessMessage(3);
+          this.router.navigate(['login']);
+          console.log("Cambio exitoso: ", res);
         }
       });
     } else {
-      this.alerta("las contraseñas no coninciden");
+      this.changeSuccessMessage(2);
     }
   }
 
@@ -43,5 +68,7 @@ export class CambioContrasenaComponent implements OnInit {
     )
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this._success.subscribe(message => this.successMessage = message);
+  }
 }

@@ -1,6 +1,6 @@
 <div class="contenedor">
   <form class="form-box">
-    <h1 class="Form-title" align="center">Nueva categoria</h1>
+    <h1 class="Form-title" align="center">Nueva categoría</h1>
     <div class="form-group col">
       <label for="select">Estándar</label>
       <select name="select" type="selectbox" [(ngModel)] = "Categoria.IdEstandar">        
@@ -9,7 +9,7 @@
           *ngFor="let resultado of resultados"
           [value]="resultado.estandar"
         >
-          <h1>{{ resultado.nombreEstandar }}</h1>
+          <h1>{{ resultado.nombreEstandar}}</h1>
         </option>
       </select>
       <label for="Categoria">Nombre categoría</label>

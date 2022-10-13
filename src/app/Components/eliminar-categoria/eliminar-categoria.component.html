@@ -10,7 +10,7 @@
         [(ngModel)]="Estandar.estandar"
         (change)="estandar()"
       >
-      <option value="">Estandar</option>
+      <option value="">Estándar</option>
         <option
           *ngFor="let resultado of resultados"
           [value]="resultado.estandar"
@@ -20,7 +20,7 @@
       </select>
       <label for="select">Categoría</label>
       <select name="select" type="selectbox" [(ngModel)]="Categoria.categoria1">
-        <option value="">Categoria</option>
+        <option value="">Categoría</option>
         <option
           *ngFor="let resultadoCategoria of resultadosCategoria"
           [value]="resultadoCategoria.categoria1"
