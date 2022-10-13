@@ -1,0 +1,86 @@
+@import "../../../assets/styles/main.scss";
+
+.contenedor{
+    @include contenedor;
+}
+.cuerpo{
+    @include body;
+}
+.title{
+    @include titleBody;
+    h1{
+        @include h1Body;
+    }
+}
+h5{
+    font-weight: bold;
+}
+.logo-nombre{
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 5%;
+}
+.logo{
+    width: 100%;
+}
+.logo img{
+    width: 207px;
+    height: 110px;
+}
+.nombre{
+    width: 100%;
+    input{
+        @include inputCard(300px,35px);
+    }
+}
+.titulo{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.tiempo{
+    display: flex;
+    flex-wrap: nowrap;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 2%;
+}
+.inicio{
+    width: 100%;
+    input{
+        @include inputCard(300px,35px);
+    }
+}
+.final{
+    width: 100%;
+    input{
+        @include inputCard(300px,35px);
+    }
+}
+.botones{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin: 5%;
+}
+.guardar{
+    margin-left: 10%;
+}
+.cambiar-logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+    background: $buttonPrimary;
+    border-radius: 55px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 24px;
+    color: #FFFFFF;
+    border: 1px;  
+    width: max-content;
+    height: max-content;
+    left: calc(50% - 123px/2 + 112px);
+    top: calc(50% - 47px/2 + 369.5px);
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "src/app/services/auth.service";
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-indicadores-masivos',
@@ -21,21 +22,21 @@ export class IndicadoresMasivosComponent implements OnInit {
     id: "",
   };
 
-  Categoria = {
-    categoria1: "",
-    NombreCategoria: "",
-  };
+  // Categoria = {
+  //   categoria1: "",
+  //   NombreCategoria: "",
+  // };
 
-  SubCategoria = {
-    subcategoria1: "",
-    nombreSubcategoria: "",
-  };
+  // SubCategoria = {
+  //   subcategoria1: "",
+  //   nombreSubcategoria: "",
+  // };
 
   resultados = {};
-  resultadosCategoria = {};
-  resultadosSubCategoria = {};
+ // resultadosCategoria = {};
+ // resultadosSubCategoria = {};
   estandarFil = "";
-  categoriaFil = "";
+ // categoriaFil = "";
 
   nombres = [
     {
@@ -66,20 +67,39 @@ export class IndicadoresMasivosComponent implements OnInit {
   seleccionado = {
     id: "",
   };
-  variableP = this.seleccionado.id;
-
-  estandar() {
-    this.estandarFil = this.Estandar.estandar;
-    this.getCategoria(this.estandarFil);
-    this.getSubCategoria(0);
+  variableP = [];
+  
+  valor: FormGroup;
+  Periodicidad(){
+   this.valor = new FormGroup({});
+   for (let index = 0; index < this.nombres.length; index++) {
+    this.valor.addControl('control'+index,this.valor)
+    console.log('valor', this.valor)
+   }
+   console.log('afuera valor', this.valor)
+  // const otro: FormControl = new FormControl();
+  // console.log('form control',otro.setValue)
+  // for (let index = 0; index < this.nombres.length; index++) {
+  //  console.log('dentro for control', otro.value )   
+  // }
   }
 
-  categoria() {
-    this.categoriaFil = this.Categoria.categoria1;
-    this.getSubCategoria(this.categoriaFil);
-  }
+  // estandar() {
+  //   this.estandarFil = this.Estandar.estandar;
+  //   // this.getCategoria(this.estandarFil);
+  //   // this.getSubCategoria(0);
+  //   console.log('estandr Fil',this.estandarFil)
+  //   console.log('resultado estandar', this.resultados)
+  //   console.log('estandar objeto', this.Estandar)
+  //   console.log('estandarid', this.estandarId)
+  // }
 
-  ngOnInit() {
+  // categoria() {
+  //   this.categoriaFil = this.Categoria.categoria1;
+  //   this.getSubCategoria(this.categoriaFil);
+  // }
+
+  ngOnInit() {    
     this.getStandares();
   }
   getStandares() {
@@ -90,23 +110,23 @@ export class IndicadoresMasivosComponent implements OnInit {
     });
   }
 
-  getCategoria(estandar) {
-    this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
-      this.resultadosCategoria = res.filter(
-        (item) => item.idEstandar == estandar
-      );
-    });
-  }
+  // getCategoria(estandar) {
+  //   this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
+  //     this.resultadosCategoria = res.filter(
+  //       (item) => item.idEstandar == estandar
+  //     );
+  //   });
+  // }
 
-  getSubCategoria(categoria) {
-    this.authService
-      .getSubCategoria(this.SubCategoria)
-      .subscribe((res: any) => {
-        this.resultadosSubCategoria = res.filter(
-          (item) => item.idCategoria == categoria
-        );
-      });
-  }
+  // getSubCategoria(categoria) {
+  //   this.authService
+  //     .getSubCategoria(this.SubCategoria)
+  //     .subscribe((res: any) => {
+  //       this.resultadosSubCategoria = res.filter(
+  //         (item) => item.idCategoria == categoria
+  //       );
+  //     });
+  // }
 
 
   capturarArchivo(){
@@ -117,6 +137,18 @@ export class IndicadoresMasivosComponent implements OnInit {
       this.archivos = element;
       this.ensayo.push(this.archivos);
      } 
+  }
+
+  descargarArchivo(){
+    this.authService.descarga().subscribe(res=>{
+      let nombreArchivo = res.headers.get('content-disposition')
+      //?.split(';')[1].split('=')[1];
+      let tipo:Blob=res.body as Blob;
+      let a = document.createElement('a');
+      a.download = 'ArchivoEjemplo.xlsx';
+      a.href = window.URL.createObjectURL(tipo);
+      a.click();
+    })
   }
 
 }

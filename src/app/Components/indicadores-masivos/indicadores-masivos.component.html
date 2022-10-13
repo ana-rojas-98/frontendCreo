@@ -1,158 +1,104 @@
 <div class="contenedor">
-  <app-sidebar></app-sidebar>
-  <div class="cuerpo">
-    <div class="title-body">
-      <h1>Nuevos indicadores</h1>
+    <app-sidebar></app-sidebar>
+    <div class="cuerpo">
+        <div class="title-body">
+            <h1>Nuevos indicadores</h1>
+        </div>
+        <div class="archivo-ejemplo">
+            <p>A continuación por favor ingrese el archivo Excel para ccrear el indicador,
+                puede descargar un ejemplo del archivo en el siguiente enlace.
+            </p>
+            <button class="button-interactivo" (click)="descargarArchivo()">Archivo ejemplo</button>
+        </div>
+        <div class="subir-archivo">
+            <p>Suba el archivo</p>
+            <button class="button-interactivo" (click)="capturar.click()">Subir archivos</button>
+            <input
+            type="file"
+            hidden
+            (change)="capturarArchivo()"
+            #capturar
+            id="in"
+            multiple
+          />
+        </div>
+        <div class="masivos">
+            <table ngformGroup="valor">
+                <thead>
+                    <tr>
+                        <th><img src="../../../assets/imagenes/indicadores.png"
+                            alt="icono-indicador"> Nombre indicador</th>
+                        <th><img src="../../../assets/imagenes/estandar.png"
+                            alt="icono-estandar"> Estándar</th>
+                        <th><img src="../../../assets/imagenes/categoria.png"
+                            alt="icono-categoria"> Categoria</th>
+                        <th><img src="../../../assets/imagenes/subcategoria.png"
+                            alt="icono-subcategoria"> Subcategoria</th>
+                        <th><img src="../../../assets/imagenes/periodicidad.png"
+                            alt="icono-periodicidad"> Periodicidad</th>
+                        <th><img src="../../../assets/imagenes/editar.png"
+                            alt="icono-editar"> Editar</th>
+                        <th><img src="../../../assets/imagenes/ver.png" alt="icono-ver"> Ver</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let valor of ensayo; let i = index" >
+                        <td>{{valor.name}}</td>
+                        <!-- <td>
+                            <select (change)="estandar()" [(ngModel)]="Estandar">
+                                <option value="">Estándar</option>
+                                <option *ngFor="let resultado of resultados">
+                                        {{ resultado.nombreEstandar }}
+                                </option>
+                            </select>
+                        </td> -->
+                        <!-- <td>
+                            <select class="selector"
+                                    type = "selectbox"
+                                    [(ngModel)]="Categoria.categoria1"
+                                    (change)="categoria()">
+                                <option value="">Categoría</option>
+                                <option *ngFor="let resultadoCategoria of resultadosCategoria"
+                                        [value]="resultadoCategoria.categoria1">
+                                        {{ resultadoCategoria.nombreCategoria }}
+                                </option>
+                            </select>  
+                        </td>
+                        <td>
+                            <select class="selector"
+                                    type = "selectbox"
+                                   [(ngModel)]="Categoria.categoria1">
+                                <option value="">Subcategoría</option>
+                                <option *ngFor="let item of resultadosSubCategoria"
+                                        [value]="item.subcategoria1">
+                                        {{ item.nombreSubcategoria }}
+                                </option>
+                            </select>  
+                        </td> -->
+                        <td>
+                            <select class="selector"
+                                    type = "selectbox"
+                                    ngformControl="control"
+                                    (change)="Periodicidad()">
+                                    <option value="">Periodicidad</option>
+                                    <option *ngFor="let nombre of nombres"
+                                            [value]="nombre.id">
+                                            {{ nombre.periodicidad }}
+                                    </option>
+                            </select>  
+                        </td>
+                        <td>Editar</td>
+                        <td>Ver</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="botones">
+            <button [routerLink]="['/administrar-indicadores']"
+                    [routerLinkActive]="['link-active']"
+                    class="cancelar">Cancelar</button>
+            <button class="guardar">Guardar</button>
+        </div>
     </div>
-    <div class="archivo-ejemplo">
-      <p>
-        A continuación por favor ingrese el archivo Excel para ccrear el
-        indicador, puede descargar un ejemplo del archivo en el siguiente
-        enlace.
-      </p>
-      <button class="button-interactivo">Archivo ejemplo</button>
-    </div>
-    <div class="subir-archivo">
-      <p>Suba el archivo</p>
-      <button class="button-interactivo" (click)="capturar.click()">
-        Subir archivo
-      </button>
-      <input
-        type="file"
-        hidden
-        (change)="capturarArchivo()"
-        #capturar
-        id="in"
-        multiple
-      />
-    </div>
-    <div class="masivos">
-      <table>
-        <thead>
-          <tr>
-            <th>
-              <img
-                src="../../../assets/imagenes/indicadores.png"
-                alt="icono-indicador"
-              />
-              Nombre indicador
-            </th>
-            <th>
-              <img
-                src="../../../assets/imagenes/estandar.png"
-                alt="icono-estandar"
-              />
-              Estándar
-            </th>
-            <th>
-              <img
-                src="../../../assets/imagenes/categoria.png"
-                alt="icono-categoria"
-              />
-              Categoria
-            </th>
-            <th>
-              <img
-                src="../../../assets/imagenes/subcategoria.png"
-                alt="icono-subcategoria"
-              />
-              Subcategoria
-            </th>
-            <th>
-              <img
-                src="../../../assets/imagenes/periodicidad.png"
-                alt="icono-periodicidad"
-              />
-              Periodicidad
-            </th>
-            <th>
-              <img
-                src="../../../assets/imagenes/editar.png"
-                alt="icono-editar"
-              />
-              Editar
-            </th>
-            <th>
-              <img src="../../../assets/imagenes/ver.png" alt="icono-ver" /> Ver
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let valor of ensayo">
-            <td>{{ valor.name }}</td>
-            <td>
-              <select
-                class="selector"
-                name="estandar"
-                type="selectbox"
-                [(ngModel)]="Estandar.estandar"
-                (change)="estandar()"
-              >
-                <option value="">Estándar</option>
-                <option
-                  *ngFor="let resultado of resultados"
-                  [value]="resultado.estandar"
-                >
-                  <h1>{{ resultado.nombreEstandar }}</h1>
-                </option>
-              </select>
-            </td>
-            <td>
-              <select
-                class="selector"
-                type="selectbox"
-                [(ngModel)]="Categoria.categoria1"
-                (change)="categoria()"
-              >
-                <option value="">Categoría</option>
-                <option
-                  *ngFor="let resultadoCategoria of resultadosCategoria"
-                  [value]="resultadoCategoria.categoria1"
-                >
-                  {{ resultadoCategoria.nombreCategoria }}
-                </option>
-              </select>
-            </td>
-            <td>
-              <select
-                class="selector"
-                type="selectbox"
-                [(ngModel)]="Categoria.categoria1"
-              >
-                <!--revisar-->
-                <option value="">Subcategoría</option>
-                <option
-                  *ngFor="let item of resultadosSubCategoria"
-                  [value]="item.subcategoria1"
-                >
-                  {{ item.nombreSubcategoria }}
-                </option>
-              </select>
-            </td>
-            <td>
-              <select class="selector" type="selectbox">
-                <option value="">Periodicidad</option>
-                <option *ngFor="let nombre of nombres" [value]="nombre.id">
-                  {{ nombre.periodicidad }}
-                </option>
-              </select>
-            </td>
-            <td>Editar</td>
-            <td>Ver</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="botones">
-      <button
-        [routerLink]="['/administrar-indicadores']"
-        [routerLinkActive]="['link-active']"
-        class="cancelar"
-      >
-        Cancelar
-      </button>
-      <button class="guardar">Guardar</button>
-    </div>
-  </div>
 </div>
 <app-footer></app-footer>

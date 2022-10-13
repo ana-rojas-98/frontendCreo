@@ -1,0 +1,41 @@
+<div class="contenedor">
+    <app-sidebar></app-sidebar>
+    <div class="cuerpo">
+        <div class="title">
+            <h1>Configuración</h1>
+        </div>
+        <div class="logo-nombre">
+            <div class="logo">
+                <h5>Logo empresa</h5>
+                <img [src]="guardarimg[0]" alt="logo-empresa">
+                <button class="cambiar-logo" (click)="capturado.click()">Cambiar logo</button>
+                <input type="file" hidden (change)="captImg($event)" #capturado id="image">
+            </div>
+            <div class="nombre">
+                <h5>Nombre empresa</h5>
+                <br>
+                <input type="text">
+            </div>
+        </div>
+        <div class="titulo">
+            <h5>Horizonte de tiempo</h5>
+        </div>
+        <div class="tiempo">
+            <div class="inicio">
+                <h5>Año inicial</h5>
+                <br>
+                <input type="text">
+            </div>
+            <div class="final">
+                <h5>Año final</h5>
+                <br>
+                <input type="text">
+            </div>
+        </div>
+        <div class="botones">
+            <button class="cancelar">Cancelar</button>
+            <button class="guardar">Guardar</button>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

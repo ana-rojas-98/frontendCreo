@@ -38,7 +38,9 @@ import { IndicadoresComponent } from './Components/indicadores/indicadores.compo
 import { DiligenciarIndicadorComponent } from './Components/diligenciar-indicador/diligenciar-indicador.component';
 import { AsignarIndicadoresComponent } from './Components/asignar-indicadores/asignar-indicadores.component';
 import { FooterPrincipalComponent } from './Components/footer-principal/footer-principal.component';
+import { ConfiguracionComponent } from './Components/configuracion/configuracion.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AsignarIndicadorComponent } from './Components/asignar-indicador/asignar-indicador.component';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -71,7 +73,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DiligenciarIndicadorComponent,
     AsignarIndicadoresComponent,
     FooterPrincipalComponent,
-    
+    ConfiguracionComponent,
+    AsignarIndicadorComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -104,6 +107,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       { path: 'indicadores', component: IndicadoresComponent, canActivate:[AuthGuard]},
       { path: 'diligenciar-indicador', component: DiligenciarIndicadorComponent, canActivate:[AuthGuard]},
       { path: 'asignar-indicadores', component: AsignarIndicadoresComponent, canActivate:[AuthGuard]},
+      { path: 'configuracion', component: ConfiguracionComponent},
+      { path: 'asignar-indicador', component: AsignarIndicadorComponent},
     ])
   ],
   providers: [

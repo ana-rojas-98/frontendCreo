@@ -98,6 +98,7 @@
             <th>PDF</th>
             <th>Excel</th>
             <th>Word</th>
+            <th>Guardar</th>
           </tr>
         </thead>
         <tbody>
@@ -110,24 +111,58 @@
             <td>{{ item.categoria }}</td>
             <td>{{ item.subCategoria }}</td>
             <td>
-              <input type="checkbox" class="checkbox" value="first_checkbox" />
+              <input
+                formControlName="ver"
+                type="checkbox"
+                class="checkbox"
+                value="first_checkbox"
+              />
             </td>
             <td>
-              <input type="checkbox" class="checkbox" value="first_checkbox" />
+              <input
+                formControlName="diligenciar"
+                type="checkbox"
+                class="checkbox"
+                value="first_checkbox"
+              />
             </td>
             <td>
-              <input type="checkbox" class="checkbox" value="first_checkbox" />
+              <input
+                formControlName="pdf"
+                type="checkbox"
+                class="checkbox"
+                value="first_checkbox"
+              />
             </td>
             <td>
-              <input type="checkbox" class="checkbox" value="first_checkbox" />
+              <input
+                formControlName="excel"
+                type="checkbox"
+                class="checkbox"
+                value="first_checkbox"
+              />
             </td>
             <td>
-              <input type="checkbox" class="checkbox" value="first_checkbox" />
+              <input
+                formControlName="word"
+                type="checkbox"
+                class="checkbox"
+                value="first_checkbox"
+              />
+            </td>
+            <td>
+              <img
+                (click)="guardarIndicadores(item.idIndicador)"
+                src="../../../assets/imagenes/boton-guardar.png"
+                alt="icono-guardar"
+              />
             </td>
           </tr>
         </tbody>
       </table>
+
       <br />
+      <p>{{ permisosIndicador.value | json }}</p>
       <div class="container-button">
         <input
           [routerLink]="['/administrar-usuarios']"
@@ -141,5 +176,5 @@
     </div>
   </div>
 </div>
-<p>{{ permisosIndicador.value | json }}</p>
+
 <app-footer></app-footer>

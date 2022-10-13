@@ -184,6 +184,11 @@ export class AuthService {
     return resul;
   }
 
+descarga(){
+  let resu = this.http.get(`${this.URL_SER}/api/FormatoArchivoes/descargarArchivo`,
+    {observe:'response', responseType:'blob'});
+    return resu;
+}
   ModificarUsuario(id) {
     let resul = this.http.post(
       `${this.URL_SER}/api/Usuarios/ModificarUsuario`,
