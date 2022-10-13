@@ -22,7 +22,13 @@ export class EstandaresComponent implements OnInit {
   }
   SetEstandar(){
     this.authService.crear_estandar(this.Estandar).subscribe((res:any) => {
-      this.alerta(res.result);           
+      if(res.result == "se guardo exitosamente"){
+        this.router.navigate(['categorias']);
+        return this.alerta(res.result);
+      }else{
+        this.alerta("no se pudo agregar el nuevo estandar"); 
+      }
+                
     })
   } 
 

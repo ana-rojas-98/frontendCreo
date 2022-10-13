@@ -81,11 +81,18 @@ export class EliminarSubcategoriaComponent implements OnInit {
     this.resultadosSubCategoria = this.authService
       .eliminarSubcategoria(this.SubCategoria)
       .subscribe((res: any) => {
-        this.alerta(res.resul);
+        if(res.resul == "Subcategoria eliminada correctamente"){
+          this.router.navigate(['categorias'])
+          this.alerta(res.resul);
+        }else{
+          this.alerta("No se pudo eliminar correctamente");
+        }
+        
       });
   }
 
   alerta(mensaje: any) {
+    this.getStandares();
     Swal.fire(mensaje);
   }
 }

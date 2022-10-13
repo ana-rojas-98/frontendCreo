@@ -34,7 +34,12 @@ export class CategoriasComponent implements OnInit {
 
   crear_categoria() {
     this.authService.crear_categoria(this.Categoria).subscribe((res: any) => {
-      this.alerta(res.resul)
+      if(res.resul == "Categoria guardada"){
+        this.router.navigate(['subcatego']);
+        return this.alerta(res.resul);
+      }else{
+        this.alerta("no se pudo agregar la categoria"); 
+      }
     });
   }
 

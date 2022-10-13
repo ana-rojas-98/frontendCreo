@@ -2,19 +2,22 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { environment } from "src/environments/environment";
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
+  data_headers_request: any = "";
 
-  data_headers_request: any = '';
-
-   //https://localhost:5001
+  //https://localhost:5001
   ///http://www.creo.somee.com
   private URL_SER = environment.apiUrl;
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, public router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private jwtHelper: JwtHelperService,
+    public router: Router
+  ) {}
   signin(user: any) {
     return this.http.post(`${this.URL_SER}/api/Usuarios/Authenticate`, user);
   }
@@ -30,17 +33,15 @@ export class AuthService {
   }
 
   fnSetDefineTokenAuthorization() {
-    const token = localStorage.getItem("token"); 
+    const token = localStorage.getItem("token");
     const headers = new HttpHeaders({
+      "Content-Type": "application/json",
 
-      'Content-Type': 'application/json',
-  
-      'Authorization': `Bearer ${token}`
-  
+      Authorization: `Bearer ${token}`,
     });
     const requestOptions = { headers: headers };
     return requestOptions;
-}
+  }
 
   singup(user_reg: any) {
     return this.http.post(`${this.URL_SER}/api/Usuarios/PostUsuario`, user_reg);
@@ -156,12 +157,13 @@ export class AuthService {
   }
 
   setIndicadorNuevo(nuevoIndicador: any) {
-    
     const headers = this.fnSetDefineTokenAuthorization();
-    console.log(headers); 
+
     let result = this.http.post(
       `${this.URL_SER}/api/archivos/postArchivos`,
-      nuevoIndicador, headers );
+      nuevoIndicador,
+      headers
+    );
     return result;
   }
 
@@ -169,20 +171,40 @@ export class AuthService {
     localStorage.clear();
     sessionStorage.clear();
     objectObserve(true);
-   // this.auth.logout({ returnTo: this.doc.location.origin });
-    this.router.navigate(['login']); 
-}
+    // this.auth.logout({ returnTo: this.doc.location.origin });
+    this.router.navigate(["login"]);
+  }
 
-getUsuarioModificar(id){
-  let resul = this.http.post(
-    `${this.URL_SER}/api/Usuarios/GetUsuarioModificar`,
-    id);
-  return resul;
-}
+  getUsuarioModificar(id) {
+    let resul = this.http.post(
+      `${this.URL_SER}/api/Usuarios/GetUsuarioModificar`,
+      id
+    );
+    console.log(resul);
+    return resul;
+  }
 
 descarga(){
   let resu = this.http.get(`${this.URL_SER}/api/FormatoArchivoes/descargarArchivo`,
     {observe:'response', responseType:'blob'});
     return resu;
+}
+  ModificarUsuario(id) {
+    let resul = this.http.post(
+      `${this.URL_SER}/api/Usuarios/ModificarUsuario`,
+      id
+    );
+    return resul;
+  }
+
+  eliminarUsuario(id) {
+    let usuarioid = {
+      usuarioid: id,
+    };
+    let resul = this.http.post(
+      `${this.URL_SER}/api/Usuarios/EliminarUsuario`,
+      usuarioid
+    );
+    return resul;
   }
 }

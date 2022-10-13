@@ -39,6 +39,7 @@ import { DiligenciarIndicadorComponent } from './Components/diligenciar-indicado
 import { AsignarIndicadoresComponent } from './Components/asignar-indicadores/asignar-indicadores.component';
 import { FooterPrincipalComponent } from './Components/footer-principal/footer-principal.component';
 import { ConfiguracionComponent } from './Components/configuracion/configuracion.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -76,6 +77,7 @@ import { ConfiguracionComponent } from './Components/configuracion/configuracion
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
     HttpClientModule,
+    NgbModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },            
@@ -97,6 +99,8 @@ import { ConfiguracionComponent } from './Components/configuracion/configuracion
       { path: 'editar-indicador', component: EditarIndicadorComponent, canActivate:[AuthGuard]},
       { path: 'administrar-usuarios', component: AdministrarUsuariosComponent, canActivate:[AuthGuard]},
       { path: 'crear-usuarios', component: CrearUsuarioComponent, canActivate:[AuthGuard]},
+      { path: 'crear-usuarios/:id', component: CrearUsuarioComponent, canActivate:[AuthGuard]},
+      { path: 'crear-usuarios/:v/:usuario', component: CrearUsuarioComponent, canActivate:[AuthGuard]},
       { path: 'indicadores', component: IndicadoresComponent, canActivate:[AuthGuard]},
       { path: 'diligenciar-indicador', component: DiligenciarIndicadorComponent, canActivate:[AuthGuard]},
       { path: 'asignar-indicadores', component: AsignarIndicadoresComponent, canActivate:[AuthGuard]},

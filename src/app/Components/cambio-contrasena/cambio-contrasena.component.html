@@ -1,57 +1,36 @@
 <div class="contenedor">
   <div class="cuerpo">
     <div class="title-contrasena">
-    <h1>Cambio de contraseña</h1>
+      <h1>Cambio de contraseña</h1>
     </div>
     <div class="cuerpo-contraseña">
-    <form class="form-box">
-    <div class="form-group col">
-      <input
-        type="email"
-        name="email"
-        placeholder="Correo electrónico"
-        class="form-control"
-        [(ngModel)]="token.email"
-        required
-      />
-    </div>
-    <div class="form-group col">
-      <input
-        type="number"
-        name="token"
-        placeholder="Código de recuperación"
-        class="form-control"
-        [(ngModel)]="token.token"
-        required
-      />
-    </div>
-    <div class="form-group col">
-      <input
-        type="password"
-        name="contrasena"
-        placeholder="Nueva contraseña"
-        class="form-control"
-        [(ngModel)]="token.pass"
-        required
-      />
-    </div>
-    <div class="form-group col">
-      <input
-        type="password"
-        name="password"
-        placeholder="Confirmar contraseña"
-        class="form-control"
-        [(ngModel)]="token.pass1"
-        required
-      />
-    </div>
-    <div>
-      <button type="submit" class="button-enviar" (click)="eviarToken()">
-        Enviar
-      </button>
-    </div>
-    </form>
+      <form class="form-box">
+        <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" [dismissible]="false" id="Alert"
+          (closed)="successMessage = ''">{{ successMessage }}
+        </ngb-alert>
+        <div class="form-group col">
+          <input type="email" name="email" placeholder="Correo electrónico" class="form-control"
+            [(ngModel)]="token.email" required />
+        </div>
+        <div class="form-group col">
+          <input type="number" name="token" placeholder="Código de recuperación" class="form-control"
+            [(ngModel)]="token.token" required />
+        </div>
+        <div class="form-group col">
+          <input type="password" name="contrasena" placeholder="Nueva contraseña" class="form-control"
+            [(ngModel)]="token.pass" required />
+        </div>
+        <div class="form-group col">
+          <input type="password" name="password" placeholder="Confirmar contraseña" class="form-control"
+            [(ngModel)]="token.pass1" required />
+        </div>
+        <div>
+          <button type="submit" class="button-enviar" (click)="eviarToken()">
+            Enviar
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
-<app-footer-principal></app-footer-principal> 
+<app-footer-principal></app-footer-principal>

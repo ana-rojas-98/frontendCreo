@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
+import { Router } from "@angular/router";
 import { AdministrarUsuariosService } from "src/app/services/administrar-usuarios.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-administrar-usuarios",
@@ -10,7 +12,8 @@ import { AdministrarUsuariosService } from "src/app/services/administrar-usuario
 export class AdministrarUsuariosComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private serviceAdministaraUsuario: AdministrarUsuariosService
+    private serviceAdministaraUsuario: AdministrarUsuariosService,
+    private router: Router
   ) {}
   usuarios = {
     tipoUsuario: "",
@@ -18,6 +21,9 @@ export class AdministrarUsuariosComponent implements OnInit {
     telefono: "",
     correo: "",
   };
+
+  idUsuarioLogueado = "";
+  buscarText = false;
 
   tipoUsuario = {
     typeuser: "",
@@ -38,14 +44,22 @@ export class AdministrarUsuariosComponent implements OnInit {
   buscarInput: String;
 
   ngOnInit() {
+    this.idUsuarioLogueado = localStorage.getItem("idUsuario");
     this.getUsuariosApi();
     this.getTipoUsuarioApi();
     this.getUsuarioApi();
   }
 
-  tbUsuarioid(UsuarioIdModificar) {
-    this.serviceAdministaraUsuario.UsuarioIdModificar.emit(UsuarioIdModificar);
-    console.log("hola", UsuarioIdModificar);
+  modificarUsuario(UsuarioIdModificar, typeuserModificar) {
+    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    let typeuser = parseInt(usarioLocalStote.typeuser)
+    if (typeuser <= typeuserModificar) {
+      this.router.navigate(['crear-usuarios',typeuserModificar])
+      this.serviceAdministaraUsuario.UsuarioIdModificar.emit(UsuarioIdModificar);
+    } else if (typeuser > typeuserModificar) {
+      this.alert("No puedes realizar esta operacion")
+    }
+    
   }
 
   tipoUsuarioFiltro() {
@@ -102,11 +116,33 @@ export class AdministrarUsuariosComponent implements OnInit {
     this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
       this.resultadosTabla = res.filter((item) => {
         return (
-          item.tipoUsuario.includes(this.buscarInput) ||
+          item.nombreTipoUsuario.includes(this.buscarInput) ||
           item.nombre.includes(this.buscarInput) ||
           item.correo.includes(this.buscarInput)
         );
       });
     });
+  }
+
+  eliminarUsuario(usuarioid, typeuserEliminar) {
+    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    let typeuser = parseInt(usarioLocalStote.typeuser);
+    if (typeuser >= typeuserEliminar) {
+      this.authService.eliminarUsuario(usuarioid).subscribe((res: any) => {
+        if (res.codigo == 1) {
+          this.getUsuariosApi();
+          this.getTipoUsuarioApi();
+          this.getUsuarioApi();
+          return this.alert("Usuario eliminado");
+        } else {
+          return this.alert("No se pudo eliminar");
+        }
+      });
+    } else if (typeuser < typeuserEliminar) {
+      this.alert("No puedes eliminar el usuario")
+    }
+  }
+  alert(mensaje) {
+    Swal.fire(mensaje);
   }
 }

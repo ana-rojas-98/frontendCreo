@@ -5,24 +5,19 @@
     </div>
     <div class="container-form-div">
       <form action="" class="container-form-formularo">
-        <span
-          ><label for="email">Ingrese el correo electrónico registrado</label>
-          <input
-            class="input-olvido-clave"
-            type="email"
-            name="email"
-            [(ngModel)]="email.Email"
-        /></span>
+        <div class="px-5">
+          <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" [dismissible]="false"
+            (closed)="successMessage = ''">{{ successMessage }}
+          </ngb-alert>
+        </div>
+
+        <span><label for="email">Ingrese el correo electrónico registrado</label>
+          <input class="input-olvido-clave" type="email" name="email" [(ngModel)]="email.Email" /></span>
         <div class="container-button">
           <button class="button-cancelar" [routerLink]="['/login']">
             Cancelar
           </button>
-          <button
-            [routerLink]="['/cambio-contrasena']"
-            routerLinkActive="router-link-active"
-            class="button-enviar"
-            (click)="validateEmail()"
-          >
+          <button routerLinkActive="router-link-active" class="button-enviar" (click)="validateEmail()">
             Enviar
           </button>
         </div>

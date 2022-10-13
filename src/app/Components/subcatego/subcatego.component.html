@@ -1,8 +1,8 @@
 <div class="contenedor">
   <form class="form-box">
-    <h1 class="Form-title" align="center">Nueva Subcategoria</h1>
+    <h1 class="Form-title" align="center">Nueva Subcategoría</h1>
     <div class="form-group col">
-      <label>Estandar</label>
+      <label>Estándar</label>
       <select
         class="selector"
         name="estandar"
@@ -14,7 +14,7 @@
           *ngFor="let resultado of resultadosEstandares"
           [value]="resultado.estandar"
         >
-          {{ resultado.NombreEstandar }}
+          {{ resultado.nombreEstandar }}
         </option>
       </select>
 
@@ -23,7 +23,7 @@
         class="selector"
         name="categoria"
         type="selectbox"
-        [(ngModel)]="Subcategoria.IdCategoria"
+        [(ngModel)]="Subcategoria.Subcategoria1"
       >
         <option value="">Categoría</option>
         <option
@@ -36,7 +36,7 @@
 
       <br />
       <br />
-      <label>Nombre Subcategoria</label>
+      <label>Nombre Subcategoría</label>
       <input
         type="Subcatego"
         name="Subcatego"

@@ -8,18 +8,18 @@
       <p>
         A continuación porfavor ingrese el archivo Excel para crear el
         indicador, puede descargar un ejemplo del archivo en el siguiente
-        enlace.
+        enlace:
       </p>
-      <button class="button-interactivo" (click)="descargarArchivo()">Achivo ejemplo</button>
+      <button class="button-interactivo">Archivo ejemplo</button>
     </div>
     <div class="seleccion-estandar">
       <p>
-        Seleccione estandar, categoría y subcategoria a la que pertenece el
+        Seleccione estándar, categoría y subcategoría a la que pertenece el
         indicador
       </p>
       <div class="box-select">
         <div class="box">
-          <h3>Estandar</h3>
+          <h3>Estándar</h3>
           <select
             class="selector"
             name="estandar"
@@ -37,7 +37,7 @@
           </select>
         </div>
         <div class="box">
-          <h3>Categoria</h3>
+          <h3>Categoría</h3>
           <select
             class="selector"
             type="selectbox"
@@ -54,7 +54,7 @@
           </select>
         </div>
         <div class="box">
-          <h3>Subcategoria</h3>
+          <h3>Subcategoría</h3>
           <select class="selector" name="select" type="selectbox">
             <option>Seleccionar</option>
             <option
@@ -83,9 +83,9 @@
       />
     </div>
     <div class="perioricidad-indicador">
-      <p>Seleccione la perioricidad de este indicador</p>
+      <p>Seleccione la periodicidad de este indicador</p>
       <br />
-      <h3>Perioricidad</h3>
+      <h3>Periodicidad</h3>
       <br />
       <select
         name="select"
@@ -104,8 +104,7 @@
       <button
         class="button-interactivo"
         (click)="ShowData()"
-        (click)="leerArchivo()"
-      >
+        (click)="leerArchivo()">
         Previsualización del indicador
       </button>
       <br />

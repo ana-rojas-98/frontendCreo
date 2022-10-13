@@ -7,18 +7,24 @@
     <div class="container-input">
       <div>
         <p>Nombre</p>
-        <input class="input" type="text" [(ngModel)]="NuevoUsuario.Fullname" />
+        <input
+          class="input"
+          type="text"
+          [(ngModel)]="NuevoUsuario.Fullname"
+          [disabled]="readonly"
+        />
       </div>
       <div>
         <p>Correo electrónico</p>
-        <input class="input" type="email" [(ngModel)]="NuevoUsuario.Email" />
+        <input class="input" type="email" [(ngModel)]="NuevoUsuario.Email" [disabled]="readonly"/>
       </div>
       <div>
         <p>Teléfono</p>
-        <input class="input" type="text" [(ngModel)]="NuevoUsuario.Telefono" />
+        <input class="input" type="text" [(ngModel)]="NuevoUsuario.Telefono" [disabled]="readonly"/>
       </div>
       <div>
         <input
+          *ngIf="mostaraGuardar"
           class="boton"
           type="button"
           value="Asignar indicadores"
@@ -31,19 +37,25 @@
     <div class="container-tipos-usuarios">
       <h3>Tipos de usuario</h3>
       <label
-        >Super Administrador<input
+        >Super Administrador
+        <input
           type="radio"
           class="checkbox"
           value="1"
+          (click)="inputSuperAdministrador()"
+          [disabled]="readonlySuperAdministrador"
           [(ngModel)]="NuevoUsuario.Typeuser"
+
         />
       </label>
       <label
-        >Administrado<input
+        >Administrador<input
           type="radio"
           class="checkbox"
           value="2"
+          (click)="inputAdministrador()"
           [(ngModel)]="NuevoUsuario.Typeuser"
+          [disabled]="readonlyAdministrador"
         />
       </label>
       <label
@@ -51,7 +63,9 @@
           type="radio"
           class="checkbox"
           value="3"
+          (click)="inputUsuario()"
           [(ngModel)]="NuevoUsuario.Typeuser"
+          [disabled]="readonly"
         />
       </label>
     </div>
@@ -73,28 +87,37 @@
               <input
                 type="checkbox"
                 class="checkbox"
+                *ngIf="permisoAdministrarIndicadores.Crear"
                 [(ngModel)]="administrarIndicadores.Crear"
+                [disabled]="readonlyTabla"
               />
             </td>
             <td>
               <input
+                [disabled]="readonlyTabla"
                 type="checkbox"
                 class="checkbox"
+                *ngIf="permisoAdministrarIndicadores.Ver"
                 [(ngModel)]="administrarIndicadores.Ver"
+                [disabled]="readonlyTabla"
               />
             </td>
             <td>
               <input
                 type="checkbox"
                 class="checkbox"
+                *ngIf="permisoAdministrarIndicadores.Editar"
                 [(ngModel)]="administrarIndicadores.Editar"
+                [disabled]="readonlyTabla"
               />
             </td>
             <td>
               <input
                 type="checkbox"
                 class="checkbox"
-                [(ngModel)]="administrarIndicadores.Eliminar"
+                *ngIf="permisoAdministrarIndicadores.Eliminat"
+                [(ngModel)]="administrarIndicadores.Eliminat"
+                [disabled]="readonlyTabla"
               />
             </td>
           </tr>
@@ -104,28 +127,36 @@
               <input
                 type="checkbox"
                 class="checkbox"
+                *ngIf="permisoAdministrarPermisos.Crear"
                 [(ngModel)]="administrarPermisos.Crear"
+                [disabled]="readonlyTabla"
               />
             </td>
             <td>
               <input
                 type="checkbox"
                 class="checkbox"
+                *ngIf="permisoAdministrarPermisos.Ver"
                 [(ngModel)]="administrarPermisos.Ver"
+                [disabled]="readonlyTabla"
               />
             </td>
             <td>
               <input
                 type="checkbox"
                 class="checkbox"
+                *ngIf="permisoAdministrarPermisos.Editar"
                 [(ngModel)]="administrarPermisos.Editar"
+                [disabled]="readonlyTabla"
               />
             </td>
             <td>
               <input
                 type="checkbox"
                 class="checkbox"
-                [(ngModel)]="administrarPermisos.Eliminar"
+                *ngIf="permisoAdministrarPermisos.Eliminat"
+                [(ngModel)]="administrarPermisos.Eliminat"
+                [disabled]="readonlyTabla"
               />
             </td>
           </tr>
@@ -136,7 +167,9 @@
               <input
                 type="checkbox"
                 class="checkbox"
+                *ngIf="permisoVisorEventos.Ver"
                 [(ngModel)]="visorEventos.Ver"
+                [disabled]="readonlyTabla"
               />
             </td>
             <td></td>
@@ -148,28 +181,36 @@
               <input
                 type="checkbox"
                 class="checkbox"
+                *ngIf="permisoGestorNotificaciones.Crear"
                 [(ngModel)]="gestorNotificaciones.Crear"
+                [disabled]="readonlyTabla"
               />
             </td>
             <td>
               <input
                 type="checkbox"
                 class="checkbox"
+                *ngIf="permisoGestorNotificaciones.Ver"
                 [(ngModel)]="gestorNotificaciones.Ver"
+                [disabled]="readonlyTabla"
               />
             </td>
             <td>
               <input
                 type="checkbox"
                 class="checkbox"
+                *ngIf="permisoGestorNotificaciones.Editar"
                 [(ngModel)]="gestorNotificaciones.Editar"
+                [disabled]="readonlyTabla"
               />
             </td>
             <td>
               <input
                 type="checkbox"
                 class="checkbox"
-                [(ngModel)]="gestorNotificaciones.Eliminar"
+                *ngIf="permisoGestorNotificaciones.Eliminat"
+                [(ngModel)]="gestorNotificaciones.Eliminat"
+                [disabled]="readonlyTabla"
               />
             </td>
           </tr>
@@ -179,28 +220,36 @@
               <input
                 type="checkbox"
                 class="checkbox"
+                *ngIf="permisoReportes.Crear"
                 [(ngModel)]="reportes.Crear"
+                [disabled]="readonlyTabla"
               />
             </td>
             <td>
               <input
                 type="checkbox"
                 class="checkbox"
+                *ngIf="permisoReportes.Ver"
                 [(ngModel)]="reportes.Ver"
+                [disabled]="readonlyTabla"
               />
             </td>
             <td>
               <input
                 type="checkbox"
                 class="checkbox"
+                *ngIf="permisoReportes.Editar"
                 [(ngModel)]="reportes.Editar"
+                [disabled]="readonlyTabla"
               />
             </td>
             <td>
               <input
                 type="checkbox"
                 class="checkbox"
-                [(ngModel)]="reportes.Eliminar"
+                *ngIf="permisoReportes.Eliminat"
+                [(ngModel)]="reportes.Eliminat"
+                [disabled]="readonlyTabla"
               />
             </td>
           </tr>
@@ -212,7 +261,9 @@
               <input
                 type="checkbox"
                 class="checkbox"
+                *ngIf="permisoConfiguracion.Editar"
                 [(ngModel)]="configuracion.Editar"
+                [disabled]="readonlyTabla"
               />
             </td>
             <td></td>
@@ -229,6 +280,7 @@
         value="Cancelar"
       />
       <input
+        *ngIf="mostaraGuardar"
         class="button-enviar"
         type="button"
         value="Guardar"

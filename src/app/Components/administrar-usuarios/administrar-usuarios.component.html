@@ -36,6 +36,7 @@
       <div class="box">
         <h3>Buscar</h3>
         <input
+          [disabled]="buscarText"
           class="selector"
           type="select"
           name=""
@@ -118,7 +119,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of resultadosTabla">
-            <td>{{ item.usarioid }}</td>
+            <td>{{ item.nombreTipoUsuario }}</td>
             <td>{{ item.nombre }}</td>
             <td>{{ item.telefono }}</td>
             <td>{{ item.correo }}</td>
@@ -126,18 +127,23 @@
             <td>{{ item.quienRegistroUsuario }}</td>
             <td>
               <img
-                (click)="tbUsuarioid(item.usarioid)"
-                [routerLink]="['/crear-usuarios']"
-                [routerLinkActive]="['link-active']"
+                (click)="modificarUsuario(item.usuarioid, item.typeuser)"
                 src="../../../assets/imagenes/editar.png"
                 alt="editar-icono"
               />
             </td>
             <td>
-              <img src="../../../assets/imagenes/ver.png" alt="ver-icono" />
+              <img
+                (click)="verUsuario(item.usuarioid)"
+                [routerLink]="['/crear-usuarios', item.usuarioid, 'usuario']"
+                [routerLinkActive]="['link-active']"
+                src="../../../assets/imagenes/ver.png"
+                alt="ver-icono"
+              />
             </td>
             <td>
               <img
+                (click)="eliminarUsuario(item.usuarioid)"
                 src="../../../assets/imagenes/eliminar.png"
                 alt="icono-eliminar"
               />

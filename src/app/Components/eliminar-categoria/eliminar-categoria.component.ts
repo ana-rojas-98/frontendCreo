@@ -66,22 +66,15 @@ export class EliminarCategoriaComponent implements OnInit {
     });
   }
 
-  eliminarSubcategoria() {
-    this.resultadosSubCategoria = this.authService
-      .eliminarSubcategoria(this.SubCategoria)
-      .subscribe((res: any) => {
-        this.alerta(res.resul);
-      });
-  }
-
   eliminarCategoria() {
     this.resultadosSubCategoria = this.authService
       .eliminarCategoria(this.Categoria)
       .subscribe((res: any) => {
         if (res.codigo == 1) {
+          this.router.navigate(['eliminar-estandar'])
           this.alerta(res.resul);
         } else {
-           //his.alerta(res.er)
+           this.alerta("No se pudo eliminar la categoria")
         }
       });
   }
