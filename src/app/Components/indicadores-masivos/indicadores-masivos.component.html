@@ -8,11 +8,11 @@
             <p>A continuación por favor ingrese el archivo Excel para ccrear el indicador,
                 puede descargar un ejemplo del archivo en el siguiente enlace.
             </p>
-            <button class="button-interactivo">Archivo ejemplo</button>
+            <button class="button-interactivo" (click)="descargarArchivo()">Archivo ejemplo</button>
         </div>
         <div class="subir-archivo">
             <p>Suba el archivo</p>
-            <button class="button-interactivo" (click)="capturar.click()">Subir archivo</button>
+            <button class="button-interactivo" (click)="capturar.click()">Subir archivos</button>
             <input
             type="file"
             hidden
@@ -23,7 +23,7 @@
           />
         </div>
         <div class="masivos">
-            <table>
+            <table ngformGroup="valor">
                 <thead>
                     <tr>
                         <th><img src="../../../assets/imagenes/indicadores.png"
@@ -42,22 +42,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let valor of ensayo" >
+                    <tr *ngFor="let valor of ensayo; let i = index" >
                         <td>{{valor.name}}</td>
-                        <td>
-                            <select class="selector"
-                                    name="estandar" 
-                                    type = selectbox 
-                                    [(ngModel)]="Estandar.estandar"
-                                    (change)="estandar()">
+                        <!-- <td>
+                            <select (change)="estandar()" [(ngModel)]="Estandar">
                                 <option value="">Estándar</option>
-                                <option *ngFor="let resultado of resultados"
-                                        [value]="resultado.estandar">
-                                        <h1>{{ resultado.nombreEstandar }}</h1>
+                                <option *ngFor="let resultado of resultados">
+                                        {{ resultado.nombreEstandar }}
                                 </option>
                             </select>
-                        </td>
-                        <td>
+                        </td> -->
+                        <!-- <td>
                             <select class="selector"
                                     type = "selectbox"
                                     [(ngModel)]="Categoria.categoria1"
@@ -72,17 +67,19 @@
                         <td>
                             <select class="selector"
                                     type = "selectbox"
-                                   [(ngModel)]="Categoria.categoria1"><!--revisar-->
+                                   [(ngModel)]="Categoria.categoria1">
                                 <option value="">Subcategoría</option>
                                 <option *ngFor="let item of resultadosSubCategoria"
                                         [value]="item.subcategoria1">
                                         {{ item.nombreSubcategoria }}
                                 </option>
                             </select>  
-                        </td>
+                        </td> -->
                         <td>
                             <select class="selector"
-                                    type = "selectbox">
+                                    type = "selectbox"
+                                    ngformControl="control"
+                                    (change)="Periodicidad()">
                                     <option value="">Periodicidad</option>
                                     <option *ngFor="let nombre of nombres"
                                             [value]="nombre.id">

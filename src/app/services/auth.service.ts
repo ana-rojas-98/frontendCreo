@@ -180,4 +180,9 @@ getUsuarioModificar(id){
   return resul;
 }
 
+descarga(){
+  let resu = this.http.get(`${this.URL_SER}/api/FormatoArchivoes/descargarArchivo`,
+    {observe:'response', responseType:'blob'});
+    return resu;
+  }
 }

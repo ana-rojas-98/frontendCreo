@@ -286,4 +286,16 @@ export class NuevoIndicadorComponent implements OnInit {
     });
     return formData;
   }
+
+  descargarArchivo(){
+    this.authService.descarga().subscribe(res=>{
+      let nombreArchivo = res.headers.get('content-disposition')
+      //?.split(';')[1].split('=')[1];
+      let tipo:Blob=res.body as Blob;
+      let a = document.createElement('a');
+      a.download = 'ArchivoEjemplo.xlsx';
+      a.href = window.URL.createObjectURL(tipo);
+      a.click();
+    })
+  }
 }
