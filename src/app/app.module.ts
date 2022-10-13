@@ -104,7 +104,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       { path: 'indicadores', component: IndicadoresComponent, canActivate:[AuthGuard]},
       { path: 'diligenciar-indicador', component: DiligenciarIndicadorComponent, canActivate:[AuthGuard]},
       { path: 'asignar-indicadores', component: AsignarIndicadoresComponent, canActivate:[AuthGuard]},
-      { path: 'configuracion', component: ConfiguracionComponent},
+      { path: 'configuracion', component: ConfiguracionComponent, canActivate:[AuthGuard]},
     ])
   ],
   providers: [
