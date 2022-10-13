@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
-import { Router } from "@angular/router";
 import { AdministrarUsuariosService } from "src/app/services/administrar-usuarios.service";
 import Swal from "sweetalert2";
 
@@ -12,8 +11,7 @@ import Swal from "sweetalert2";
 export class AdministrarUsuariosComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private serviceAdministaraUsuario: AdministrarUsuariosService,
-    private router: Router
+    private serviceAdministaraUsuario: AdministrarUsuariosService
   ) {}
   usuarios = {
     tipoUsuario: "",
@@ -53,11 +51,10 @@ export class AdministrarUsuariosComponent implements OnInit {
   modificarUsuario(UsuarioIdModificar, typeuserModificar) {
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
     let typeuser = parseInt(usarioLocalStote.typeuser)
-    if (typeuser <= typeuserModificar) {
-      this.router.navigate(['crear-usuarios',typeuserModificar])
+    if (typeuser >= typeuserModificar) {
       this.serviceAdministaraUsuario.UsuarioIdModificar.emit(UsuarioIdModificar);
-    } else if (typeuser > typeuserModificar) {
-      this.alert("No puedes realizar esta operacion")
+    } else if (typeuser <= typeuserModificar) {
+      
     }
     
   }

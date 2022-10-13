@@ -50,11 +50,7 @@
       <div class="box">
         <h3>Subcategoría</h3>
         <br />
-        <select
-          class="selector"
-          name="select"
-          type="selectbox"
-        >
+        <select class="selector" name="select" type="selectbox">
           <option>Subcategoría</option>
           <option
             *ngFor="let item of resultadosSubCategoria"
@@ -102,33 +98,71 @@
             <th>PDF</th>
             <th>Excel</th>
             <th>Word</th>
+            <th>Guardar</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>indicador1</td>
-            <td>Ambuentales</td>
-            <td>Perfil de la organización</td>
-            <td>Sub-categora 1</td>
+          <tr
+            *ngFor="let item of resultadosTabla"
+            [formGroup]="permisosIndicador"
+          >
+            <td>{{ item.indicador }}</td>
+            <td>{{ item.estandar }}</td>
+            <td>{{ item.categoria }}</td>
+            <td>{{ item.subCategoria }}</td>
             <td>
-              <input type="checkbox" class="checkbox" value="first_checkbox" />
+              <input
+                formControlName="ver"
+                type="checkbox"
+                class="checkbox"
+                value="first_checkbox"
+              />
             </td>
             <td>
-              <input type="checkbox" class="checkbox" value="first_checkbox" />
+              <input
+                formControlName="diligenciar"
+                type="checkbox"
+                class="checkbox"
+                value="first_checkbox"
+              />
             </td>
             <td>
-              <input type="checkbox" class="checkbox" value="first_checkbox" />
+              <input
+                formControlName="pdf"
+                type="checkbox"
+                class="checkbox"
+                value="first_checkbox"
+              />
             </td>
             <td>
-              <input type="checkbox" class="checkbox" value="first_checkbox" />
+              <input
+                formControlName="excel"
+                type="checkbox"
+                class="checkbox"
+                value="first_checkbox"
+              />
             </td>
             <td>
-              <input type="checkbox" class="checkbox" value="first_checkbox" />
+              <input
+                formControlName="word"
+                type="checkbox"
+                class="checkbox"
+                value="first_checkbox"
+              />
+            </td>
+            <td>
+              <img
+                (click)="guardarIndicadores(item.idIndicador)"
+                src="../../../assets/imagenes/boton-guardar.png"
+                alt="icono-guardar"
+              />
             </td>
           </tr>
         </tbody>
       </table>
+
       <br />
+      <p>{{ permisosIndicador.value | json }}</p>
       <div class="container-button">
         <input
           [routerLink]="['/administrar-usuarios']"
@@ -142,4 +176,5 @@
     </div>
   </div>
 </div>
+
 <app-footer></app-footer>
