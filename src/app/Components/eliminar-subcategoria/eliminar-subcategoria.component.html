@@ -2,7 +2,7 @@
   <form class="form-box">
     <h1 class="Form-title" align="center">Eliminar subcategoría</h1>
     <div class="form-group col">      
-        <label for="estandar">Estandar</label>
+        <label for="estandar">Estándar</label>
         <br />
         <select
           name="estandar"
@@ -18,7 +18,7 @@
             <h1>{{ resultado.nombreEstandar }}</h1>
           </option>
         </select>
-        <label for="categoria">Categoria</label>
+        <label for="categoria">Categoría</label>
         <br />
         <select
           name="categoria"
@@ -26,7 +26,7 @@
           [(ngModel)]="Categoria.categoria1"
           (change)="categoria()"
         >
-          <option value="">Categoria</option>
+          <option value="">Categoría</option>
           <option
             *ngFor="let resultadoCategoria of resultadosCategoria"
             [value]="resultadoCategoria.categoria1"
@@ -34,7 +34,7 @@
             {{ resultadoCategoria.nombreCategoria }}
           </option>
         </select>
-        <label for="select">Subcategoria</label>
+        <label for="select">Subcategoría</label>
         <br />
         <select
           name="select"
@@ -42,7 +42,7 @@
           [(ngModel)]="SubCategoria.subcategoria1"
           (change)="categoria()"
         >
-        <option value="">Subcategoria</option>
+        <option value="">Subcategoría</option>
           <option
             *ngFor="let item of resultadosSubCategoria"
             [value]="item.subcategoria1"

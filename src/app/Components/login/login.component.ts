@@ -1,6 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
+import { NgbAlert, NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { Subject } from "rxjs";
+
 
 @Component({
   selector: "app-login",
@@ -17,9 +20,20 @@ export class LoginComponent implements OnInit {
     Usuarioid: 107,
   };
 
-  constructor(private authService: AuthService, private router: Router) {}
+  private _success = new Subject<string>();
 
-  ngOnInit() {}
+  successMessage = '';
+
+  @ViewChild('selfClosingAlert', {static: false}) selfClosingAlert: NgbAlert;
+
+  constructor(private authService: AuthService, private router: Router) { }
+
+  public changeSuccessMessage() { this._success.next('Correo electrónico o contraseña invalidos'); }
+  
+  ngOnInit() 
+  { 
+    this._success.subscribe(message => this.successMessage = message);
+  }
 
   getPermisos(id) {
     this.authService.getUsuarioModificar(id).subscribe((res: any) => {
@@ -30,13 +44,18 @@ export class LoginComponent implements OnInit {
 
   LogIn() {
     this.authService.signin(this.user).subscribe((res: any) => {
-      this.id.Usuarioid = res.usuario.usuarioid;
-      this.getPermisos(this.id);
-      localStorage.setItem("token", res.payload);
-      this.router.navigate(["private"]);
-      localStorage.setItem("idUsuario", res.usuario.usuarioid);
-      this.id.Usuarioid = res.usuario.usuarioid;
-      return res;
+      if (res.resul == 'Credenciales incorrectas') {
+        this.changeSuccessMessage();
+      }
+      else {
+        this.id.Usuarioid = res.usuario.usuarioid;
+        this.getPermisos(this.id);
+        localStorage.setItem("token", res.payload);
+        this.router.navigate(["private"]);
+        localStorage.setItem("idUsuario", res.usuario.usuarioid);
+        this.id.Usuarioid = res.usuario.usuarioid;
+        return res;
+      }
     });
   }
 }

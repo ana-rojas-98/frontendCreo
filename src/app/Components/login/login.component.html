@@ -4,6 +4,9 @@
     </div>
     <div class="login">
     <form class="form-box">
+      <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" [dismissible]="false"
+                  (closed)="successMessage = ''">{{ successMessage }}
+      </ngb-alert>
       <h1 class="Form-title" align="center">Correo electrónico</h1>
       <br>
       <div class="form-group col">
