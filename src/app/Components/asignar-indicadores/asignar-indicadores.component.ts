@@ -25,28 +25,6 @@ export class AsignarIndicadoresComponent implements OnInit {
     word: false,
   };
 
-  public permisosIndicador = this.formBuilder.array([
-    this.formBuilder.group({
-      id: [""],
-      idIndicador: [""],
-      ver: [""],
-      diligenciar: [""],
-      pdf: [""],
-      excel: [""],
-      word: [""],
-    }),
-  ]);
-
-  public permisosIndicador1: FormGroup = new FormGroup({
-    id: new FormControl(""),
-    idIndicador: new FormControl(""),
-    ver: new FormControl(""),
-    diligenciar: new FormControl(""),
-    pdf: new FormControl(""),
-    excel: new FormControl(""),
-    word: new FormControl(""),
-  });
-
   usuarioId: any;
   Estandar = {
     NombreEstandar: "",
