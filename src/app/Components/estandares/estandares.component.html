@@ -1,28 +1,29 @@
 <div class="contenedor">
   <form class="form-box">
-      <h1 class="Form-title" align = "center">
-          Nuevo estándar
-      </h1>
-      <div class="form-group col">
-          <label for="estandar">Nombre del estándar</label>
-          <input type = "Estandar" name = "estandar" class="form-control" [(ngModel)]="Estandar.NombreEstandar">
-      </div>
-      <div>
-        <button [routerLink]="['/administrar-indicadores']"
-                [routerLinkActive]="['link-active']"
-                type="cancel" class = "bot_per_2"> Cancelar
-        </button>
-        <button type="submit" class = "bot_est" (click)="SetEstandar()">Guardar
-        </button>
-      </div>      
+    <div class="text-center">
+      <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" [dismissible]="false" id="Alert"
+        (closed)="successMessage = ''">{{ successMessage }}
+      </ngb-alert>
+    </div>
+    <h1 class="Form-title" align="center">
+      Nuevo estándar
+    </h1>
+    <div class="form-group row">
+      <label for="estandar">Nombre del estándar</label>
+      <input type="Estandar" name="estandar" class="form-control" [(ngModel)]="Estandar.NombreEstandar">
+    </div>
+    <div class="row mt-5">
+      <button [routerLink]="['/administrar-indicadores']" [routerLinkActive]="['link-active']" type="cancel"
+        class="bot_per_2"> Cancelar
+      </button>
+      <button type="submit" class="bot_est" (click)="SetEstandar()">Guardar</button>
+    </div>
   </form>
   <div class="cerrar">
     <div class="circulo">
-      <a [routerLink]="['/administrar-indicadores']"
-        [routerLinkActive]="['link-active']">
+      <a [routerLink]="['/administrar-indicadores']" [routerLinkActive]="['link-active']">
         X
       </a>
     </div>
   </div>
 </div>
-
