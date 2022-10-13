@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { AdministrarUsuariosService } from "src/app/services/administrar-usuarios.service";
+import { IndicadoresService } from "src/app/services/indicadores.service";
 import { AuthService } from "src/app/services/auth.service";
+import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "app-asignar-indicadores",
@@ -10,8 +12,41 @@ import { AuthService } from "src/app/services/auth.service";
 export class AsignarIndicadoresComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private serviceAdministaraUsuario: AdministrarUsuariosService
+    private IndicadoresService: IndicadoresService,
+    private serviceAdministaraUsuario: AdministrarUsuariosService,
+    private formBuilder: FormBuilder
   ) {}
+
+  asingnarIndicadores = {
+    ver: false,
+    diligenciar: false,
+    pdf: false,
+    excel: false,
+    word: false,
+  };
+
+  public permisosIndicador = this.formBuilder.array([
+    this.formBuilder.group({
+      id: [""],
+      idIndicador: [""],
+      ver: [""],
+      diligenciar: [""],
+      pdf: [""],
+      excel: [""],
+      word: [""],
+    }),
+  ]);
+
+  public permisosIndicador1: FormGroup = new FormGroup({
+    id: new FormControl(""),
+    idIndicador: new FormControl(""),
+    ver: new FormControl(""),
+    diligenciar: new FormControl(""),
+    pdf: new FormControl(""),
+    excel: new FormControl(""),
+    word: new FormControl(""),
+  });
+
   usuarioId: any;
   Estandar = {
     NombreEstandar: "",
@@ -37,6 +72,7 @@ export class AsignarIndicadoresComponent implements OnInit {
   resultadosSubCategoria = {};
   estandarFil = "";
   categoriaFil = "";
+  resultadosTabla: [];
 
   estandar() {
     this.estandarFil = this.Estandar.estandar;
@@ -61,7 +97,7 @@ export class AsignarIndicadoresComponent implements OnInit {
     this.getStandares();
     this.getCategoria(0);
     this.getSubCategoria(0);
-    
+    this.GetIndicadoresPermisos();
   }
 
   getStandares() {
@@ -106,5 +142,13 @@ export class AsignarIndicadoresComponent implements OnInit {
           );
         });
     }
+  }
+
+  GetIndicadoresPermisos() {
+    this.IndicadoresService.GetIndicadoresPermisos("").subscribe((res: any) => {
+      this.resultadosTabla = res;
+      console.log("indicadores: ", res);
+      return res;
+    });
   }
 }
