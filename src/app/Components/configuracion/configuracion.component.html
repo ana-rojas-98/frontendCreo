@@ -7,8 +7,9 @@
         <div class="logo-nombre">
             <div class="logo">
                 <h5>Logo empresa</h5>
-                <img src="../../../assets/imagenes/logo-creo.png" alt="logo-empresa">
-                <button class="cambiar-logo">Cambiar logo</button>
+                <img [src]="guardarimg[0]" alt="logo-empresa">
+                <button class="cambiar-logo" (click)="capturado.click()">Cambiar logo</button>
+                <input type="file" hidden (change)="captImg($event)" #capturado id="image">
             </div>
             <div class="nombre">
                 <h5>Nombre empresa</h5>

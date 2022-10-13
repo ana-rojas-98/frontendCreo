@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { async } from 'rxjs/internal/scheduler/async';
 
 @Component({
   selector: 'app-configuracion',
@@ -11,5 +12,12 @@ export class ConfiguracionComponent implements OnInit {
 
   ngOnInit() {
   }
+
+   guardarimg =[];
+  captImg(event){
+    const imagen = event.target.files[0];
+    this.guardarimg.push(imagen);
+  }
+  
 
 }
