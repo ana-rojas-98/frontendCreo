@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -40,6 +40,7 @@ import { AsignarIndicadoresComponent } from './Components/asignar-indicadores/as
 import { FooterPrincipalComponent } from './Components/footer-principal/footer-principal.component';
 import { ConfiguracionComponent } from './Components/configuracion/configuracion.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AsignarIndicadorComponent } from './Components/asignar-indicador/asignar-indicador.component';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -73,12 +74,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AsignarIndicadoresComponent,
     FooterPrincipalComponent,
     ConfiguracionComponent,
+    AsignarIndicadorComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
     HttpClientModule,
     NgbModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },            
       { path: 'login', component: LoginComponent },
@@ -104,7 +107,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       { path: 'indicadores', component: IndicadoresComponent, canActivate:[AuthGuard]},
       { path: 'diligenciar-indicador', component: DiligenciarIndicadorComponent, canActivate:[AuthGuard]},
       { path: 'asignar-indicadores', component: AsignarIndicadoresComponent, canActivate:[AuthGuard]},
-      { path: 'configuracion', component: ConfiguracionComponent},
+      { path: 'configuracion', component: ConfiguracionComponent, canActivate:[AuthGuard]},
+      { path: 'asignar-indicador', component: AsignarIndicadorComponent},
     ])
   ],
   providers: [

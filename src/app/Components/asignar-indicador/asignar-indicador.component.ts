@@ -5,11 +5,11 @@ import { AuthService } from "src/app/services/auth.service";
 import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
 
 @Component({
-  selector: "app-asignar-indicadores",
-  templateUrl: "./asignar-indicadores.component.html",
-  styleUrls: ["./asignar-indicadores.component.scss"],
+  selector: "app-asignar-indicador",
+  templateUrl: "./asignar-indicador.component.html",
+  styleUrls: ["./asignar-indicador.component.scss"],
 })
-export class AsignarIndicadoresComponent implements OnInit {
+export class AsignarIndicadorComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private IndicadoresService: IndicadoresService,
@@ -24,18 +24,6 @@ export class AsignarIndicadoresComponent implements OnInit {
     excel: false,
     word: false,
   };
-
-
-
-  public permisosIndicador: FormGroup = new FormGroup({
-    id: new FormControl(""),
-    idIndicador: new FormControl(""),
-    ver: new FormControl(""),
-    diligenciar: new FormControl(""),
-    pdf: new FormControl(""),
-    excel: new FormControl(""),
-    word: new FormControl(""),
-  });
 
   usuarioId: any;
   Estandar = {
@@ -141,11 +129,4 @@ export class AsignarIndicadoresComponent implements OnInit {
       return res;
     });
   }
-
-  guardarIndicadores(idIndicador){
-    //this.permisosIndicador.get.
-    console.log("hola: ", idIndicador);
-    console.log(this.permisosIndicador.value);
-  }
-
 }

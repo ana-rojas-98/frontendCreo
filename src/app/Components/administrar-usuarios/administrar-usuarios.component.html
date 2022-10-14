@@ -36,7 +36,7 @@
       <div class="box">
         <h3>Buscar</h3>
         <input
-          [disabled]="buscarText"
+        [disabled]="buscarText"
           class="selector"
           type="select"
           name=""
@@ -128,6 +128,8 @@
             <td>
               <img
                 (click)="modificarUsuario(item.usuarioid, item.typeuser)"
+                [routerLink]="['/crear-usuarios', item.usuarioid]"
+                [routerLinkActive]="['link-active']"
                 src="../../../assets/imagenes/editar.png"
                 alt="editar-icono"
               />
@@ -135,7 +137,7 @@
             <td>
               <img
                 (click)="verUsuario(item.usuarioid)"
-                [routerLink]="['/crear-usuarios', item.usuarioid, 'usuario']"
+                [routerLink]="['/crear-usuarios',item.usuarioid,'usuario']"
                 [routerLinkActive]="['link-active']"
                 src="../../../assets/imagenes/ver.png"
                 alt="ver-icono"

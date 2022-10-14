@@ -1,0 +1,143 @@
+<div class="contenedor">
+    <app-sidebar></app-sidebar>
+    <div class="cuerpo">
+      <h1>Asignar Indicadores</h1>
+      <div class="nombre-usuario">
+        <h3>Nombre de usuario:</h3>
+        <p>
+          Juan Sandoval (Nombre de la persona a la que estoy creando el usuario)
+        </p>
+      </div>
+      <div class="seleccion">
+        <div class="box">
+          <h3>Estándar</h3>
+          <br />
+          <select
+            class="selector"
+            name="estandar"
+            type="selectbox"
+            [(ngModel)]="Estandar.estandar"
+            (change)="estandar()"
+          >
+            <option value="">Estándar</option>
+            <option
+              *ngFor="let resultado of resultados"
+              [value]="resultado.estandar"
+            >
+              <h1>{{ resultado.nombreEstandar }}</h1>
+            </option>
+          </select>
+        </div>
+        <div class="box">
+          <h3>Categoría</h3>
+          <br />
+          <select
+            class="selector"
+            name="categoria"
+            type="selectbox"
+            [(ngModel)]="Categoria.categoria1"
+            (change)="categoria()"
+          >
+            <option value="">Categoría</option>
+            <option
+              *ngFor="let resultadoCategoria of resultadosCategoria"
+              [value]="resultadoCategoria.categoria1"
+            >
+              {{ resultadoCategoria.nombreCategoria }}
+            </option>
+          </select>
+        </div>
+        <div class="box">
+          <h3>Subcategoría</h3>
+          <br />
+          <select class="selector" name="select" type="selectbox">
+            <option>Subcategoría</option>
+            <option
+              *ngFor="let item of resultadosSubCategoria"
+              [value]="item.subcategoria1"
+            >
+              {{ item.nombreSubcategoria }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="resultados-tabla">
+        <table class="tabla-indicadores">
+          <thead>
+            <tr>
+              <th>
+                <img
+                  src="../../../assets/imagenes/nombreIndicador.png"
+                  alt="icono-nombre"
+                />
+                Nombre indicador
+              </th>
+              <th>
+                <img
+                  src="../../../assets/imagenes/creador.png"
+                  alt="icono-creador"
+                />
+                Estandar
+              </th>
+              <th>
+                <img
+                  src="../../../assets/imagenes/fechaHora.png"
+                  alt="icono-fecha"
+                />
+                Categoria
+              </th>
+              <th>
+                <img
+                  src="../../../assets/imagenes/archivo.png"
+                  alt="icono-archivo"
+                />
+                Sub categoría
+              </th>
+              <th>Ver</th>
+              <th>Diligenciar</th>
+              <th>PDF</th>
+              <th>Excel</th>
+              <th>Word</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of resultadosTabla">
+              <td>{{ item.indicador }}</td>
+              <td>{{ item.estandar }}</td>
+              <td>{{ item.categoria }}</td>
+              <td>{{ item.subCategoria }}</td>
+              <td>
+                <input type="checkbox" class="checkbox" value="first_checkbox" />
+              </td>
+              <td>
+                <input type="checkbox" class="checkbox" value="first_checkbox" />
+              </td>
+              <td>
+                <input type="checkbox" class="checkbox" value="first_checkbox" />
+              </td>
+              <td>
+                <input type="checkbox" class="checkbox" value="first_checkbox" />
+              </td>
+              <td>
+                <input type="checkbox" class="checkbox" value="first_checkbox" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <div class="container-button">
+          <input
+            [routerLink]="['/administrar-usuarios']"
+            [routerLinkActive]="['link-active']"
+            class="button-cancelar"
+            type="button"
+            value="Cancelar"
+          />
+          <input class="button-enviar" type="button" value="Guardar" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>{{ permisosIndicador.value | json }}</p>
+  <app-footer></app-footer>
+  

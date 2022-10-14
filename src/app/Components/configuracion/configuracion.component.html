@@ -7,7 +7,9 @@
         <div class="logo-nombre">
             <div class="logo">
                 <h5>Logo empresa</h5>
-                <img [src]="guardarimg[0]" alt="logo-empresa">
+                <div >
+                <img [src]="prev" alt="logo-empresa">
+                </div>
                 <button class="cambiar-logo" (click)="capturado.click()">Cambiar logo</button>
                 <input type="file" hidden (change)="captImg($event)" #capturado id="image">
             </div>

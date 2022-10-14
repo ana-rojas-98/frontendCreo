@@ -44,18 +44,17 @@
                 <tbody>
                     <tr *ngFor="let valor of ensayo; let i = index" >
                         <td>{{valor.name}}</td>
-                        <!-- <td>
-                            <select (change)="estandar()" [(ngModel)]="Estandar">
+                        <td>
+                            <select (change)="estandar()">
                                 <option value="">Estándar</option>
                                 <option *ngFor="let resultado of resultados">
                                         {{ resultado.nombreEstandar }}
                                 </option>
                             </select>
                         </td> -->
-                        <!-- <td>
+                        <td>
                             <select class="selector"
                                     type = "selectbox"
-                                    [(ngModel)]="Categoria.categoria1"
                                     (change)="categoria()">
                                 <option value="">Categoría</option>
                                 <option *ngFor="let resultadoCategoria of resultadosCategoria"
@@ -66,15 +65,14 @@
                         </td>
                         <td>
                             <select class="selector"
-                                    type = "selectbox"
-                                   [(ngModel)]="Categoria.categoria1">
+                                    type = "selectbox">
                                 <option value="">Subcategoría</option>
                                 <option *ngFor="let item of resultadosSubCategoria"
                                         [value]="item.subcategoria1">
                                         {{ item.nombreSubcategoria }}
                                 </option>
                             </select>  
-                        </td> -->
+                        </td>
                         <td>
                             <select class="selector"
                                     type = "selectbox"

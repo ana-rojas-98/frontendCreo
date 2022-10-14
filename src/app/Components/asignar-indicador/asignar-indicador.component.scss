@@ -2,7 +2,7 @@
 .contenedor {
   @include contenedor;
 }
-.cuerpo {
+.container {
   @include body;
   width: 100%;
   padding-top: 40px;
@@ -87,12 +87,6 @@ h1 {
     padding: 10px;
   }
 }
-
-tbody img {
-  width: 20px;
-  height: 24px;
-}
-
 @media (width>1380px) {
   .cuerpo {
     height: 900px;

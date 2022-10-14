@@ -42,7 +42,11 @@
     </div>
     <div class="link-sidebar">
       <img src="../../../assets/imagenes/notificaciones.png" alt="indicador" />
-      <a >Notificaciones</a>
+      <a [routerLink]="['/configuracion']"
+         [routerLinkActive]="['link-active']"
+      >
+         Notificaciones
+      </a>
     </div>
     <div class="link-sidebar">
       <img src="../../../assets/imagenes/configuracion.png" alt="indicador" />
