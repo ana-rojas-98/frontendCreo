@@ -1,38 +1,39 @@
 <div class="contenedor">
   <form class="form-box">
-    <h1 class="Form-title" align="center">Nueva categoría</h1>
-    <div class="form-group col">
-      <label for="select">Estándar</label>
-      <select name="select" type="selectbox" [(ngModel)] = "Categoria.IdEstandar">        
-        <option value="">Estándar</option>
-        <option
-          *ngFor="let resultado of resultados"
-          [value]="resultado.estandar"
-        >
-          <h1>{{ resultado.nombreEstandar}}</h1>
-        </option>
-      </select>
-      <label for="Categoria">Nombre categoría</label>
-      <input
-        type="Categoria"
-        name="Categoria"
-        class="form-control"
-        [(ngModel)]="Categoria.NombreCategoria"
-      />
+    <div class="row">
+      <h1 class="Form-title">Nueva categoría</h1>
     </div>
-    <div>
-      <button [routerLink]="['/administrar-indicadores']"
-              [routerLinkActive]="['link-active']"
-              type="cancel" class="bot_per_2">Cancelar</button>
-      <button type="submit" class="bot_est" (click)="crear_categoria()">
-        Guardar
-      </button>
+    <div class="form-group">
+      <div class="row">
+        <label for="select">Estándar</label>
+      </div>
+      <div class="row">
+        <select name="select" type="selectbox" [(ngModel)]="Categoria.IdEstandar">
+          <option value="">Estándar</option>
+          <option *ngFor="let resultado of resultados" [value]="resultado.estandar">
+            <h1>{{ resultado.nombreEstandar}}</h1>
+          </option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="Categoria">Nombre categoría</label>
+      </div>
+      <div class="row">
+        <input type="Categoria" name="Categoria" class="form-control" [(ngModel)]="Categoria.NombreCategoria" />
+      </div>
+      <div class="d-flex justify-content-center mt-5">
+        <button [routerLink]="['/administrar-indicadores']" [routerLinkActive]="['link-active']" type="cancel"
+          class="bot_per_2">Cancelar</button>
+        <button type="submit" class="bot_est" (click)="crear_categoria()">
+          Guardar
+        </button>
+      </div>
     </div>
+   
   </form>
   <div class="cerrar">
     <div class="circulo">
-      <a [routerLink]="['/administrar-indicadores']"
-        [routerLinkActive]="['link-active']">
+      <a [routerLink]="['/administrar-indicadores']" [routerLinkActive]="['link-active']">
         X
       </a>
     </div>
