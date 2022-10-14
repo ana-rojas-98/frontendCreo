@@ -10,7 +10,9 @@
         indicador, puede descargar un ejemplo del archivo en el siguiente
         enlace:
       </p>
-      <button class="button-interactivo">Archivo ejemplo</button>
+      <button (click)="descargarArchivo()" class="button-interactivo">
+        Archivo ejemplo
+      </button>
     </div>
     <div class="seleccion-estandar">
       <p>
@@ -73,7 +75,7 @@
         Subir
       </button>
       <!--defino el boton que me va a mostrar la información en el ensayo-->
-       <!-- <button (click)="mostrar()">Mostrar</button> -->
+      <!-- <button (click)="mostrar()">Mostrar</button> -->
       <input
         type="file"
         hidden
@@ -104,7 +106,8 @@
       <button
         class="button-interactivo"
         (click)="ShowData()"
-        (click)="leerArchivo()">
+        (click)="leerArchivo()"
+      >
         Previsualización del indicador
       </button>
       <br />
@@ -130,20 +133,20 @@
           </thead>
           <tbody>
             <tr *ngFor="let dato of ExcelData">
-              <td>{{dato.Entrada}}</td>
-              <td>{{dato.Numero}}</td>
-              <td>{{dato.Formulap}}</td>
-              <td>{{dato.Formula}}</td>
-              <td>{{dato.Valor}}</td>
-              <td>{{dato.Titulo}}</td>
-              <td>{{dato.Tamanotexto}}</td>
-              <td>{{dato.Color}}</td>
-              <td>{{dato.Negrilla}}</td>
-              <td>{{dato.Subrayado}}</td>
-              <td>{{dato.cursiva}}</td>
-              <td>{{dato.Iniciocolunma}}</td>
-              <td>{{dato.Fincolumna}}</td>
-              <td>{{dato.Saltodelinea}}</td>
+              <td>{{ dato.Entrada }}</td>
+              <td>{{ dato.Numero }}</td>
+              <td>{{ dato.Formulap }}</td>
+              <td>{{ dato.Formula }}</td>
+              <td>{{ dato.Valor }}</td>
+              <td>{{ dato.Titulo }}</td>
+              <td>{{ dato.Tamanotexto }}</td>
+              <td>{{ dato.Color }}</td>
+              <td>{{ dato.Negrilla }}</td>
+              <td>{{ dato.Subrayado }}</td>
+              <td>{{ dato.cursiva }}</td>
+              <td>{{ dato.Iniciocolunma }}</td>
+              <td>{{ dato.Fincolumna }}</td>
+              <td>{{ dato.Saltodelinea }}</td>
             </tr>
           </tbody>
         </table>

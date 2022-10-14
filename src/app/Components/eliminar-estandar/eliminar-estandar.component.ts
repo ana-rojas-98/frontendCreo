@@ -31,8 +31,8 @@ export class EliminarEstandarComponent implements OnInit {
 
   deleteEstandar(){
     console.log("hola: ", this.Estandar)
-    this.authService.crear_categoria(this.Estandar).subscribe((res: any) => {
-      if (res.codigo == 1) {
+    this.authService.deleteEstandar(this.Estandar).subscribe((res: any) => {
+      if (res.resul == "Estandar eliminado correctamente") {
         this.router.navigate(['administrar-indicadores'])
         this.alerta(res.resul);
       } else {

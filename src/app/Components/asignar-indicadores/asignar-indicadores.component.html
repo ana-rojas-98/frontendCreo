@@ -102,57 +102,37 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            *ngFor="let item of resultadosTabla"
-            [formGroup]="permisosIndicador"
-          >
+          <tr *ngFor="let item of resultadosTabla">
             <td>{{ item.indicador }}</td>
             <td>{{ item.estandar }}</td>
             <td>{{ item.categoria }}</td>
             <td>{{ item.subCategoria }}</td>
             <td>
-              <input
-                formControlName="ver"
-                type="checkbox"
-                class="checkbox"
-                value="first_checkbox"
-              />
+              <input [(ngModel)]="item.ver" type="checkbox" class="checkbox" />
             </td>
             <td>
               <input
-                formControlName="diligenciar"
+                [(ngModel)]="item.diligenciar"
                 type="checkbox"
                 class="checkbox"
-                value="first_checkbox"
               />
             </td>
             <td>
-              <input
-                formControlName="pdf"
-                type="checkbox"
-                class="checkbox"
-                value="first_checkbox"
-              />
+              <input [(ngModel)]="item.pdf" type="checkbox" class="checkbox" />
             </td>
             <td>
               <input
-                formControlName="excel"
+                [(ngModel)]="item.excel"
                 type="checkbox"
                 class="checkbox"
-                value="first_checkbox"
               />
             </td>
             <td>
-              <input
-                formControlName="word"
-                type="checkbox"
-                class="checkbox"
-                value="first_checkbox"
-              />
+              <input [(ngModel)]="item.word" type="checkbox" class="checkbox" />
             </td>
             <td>
               <img
-                (click)="guardarIndicadores(item.idIndicador)"
+                (click)="guardarIndicadores()"
                 src="../../../assets/imagenes/boton-guardar.png"
                 alt="icono-guardar"
               />
@@ -162,7 +142,6 @@
       </table>
 
       <br />
-      <p>{{ permisosIndicador.value | json }}</p>
       <div class="container-button">
         <input
           [routerLink]="['/administrar-usuarios']"

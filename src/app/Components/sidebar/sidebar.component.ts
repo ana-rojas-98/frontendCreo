@@ -1,24 +1,48 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "src/app/services/auth.service";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  selector: "app-sidebar",
+  templateUrl: "./sidebar.component.html",
+  styleUrls: ["./sidebar.component.scss"],
 })
 export class SidebarComponent implements OnInit {
-
   constructor(private authService: AuthService, public router: Router) {}
+  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+
+  visorEventos = true;
+  indicadores = true;
+  reportes = true;
+  administrarIndicadores = true;
+  administrarUsuarios = true;
+  notificaciones = true;
+  configuraciones = true;
+  licenciar = true;
 
   ngOnInit() {
+    if (this.usarioLocalStote.typeuser == "3") {
+      this.visorEventos = false;
+      this.indicadores = false;
+      this.reportes = true;
+      this.administrarIndicadores = false;
+      this.administrarUsuarios = false;
+      this.notificaciones = false;
+      this.configuraciones = false;
+      this.licenciar = false;
+    }
+    if (this.usarioLocalStote.visorEventosVer == false) {
+      this.visorEventos = false;
+    }
+    if (this.usarioLocalStote.configuracionEditar == false) {
+      this.configuraciones = false;
+    }
   }
 
   CerrarSesion() {
     this.authService.fnDestroySessionData(function (res_clean_session) {
       if (res_clean_session) {
-           }
-  });
+      }
+    });
   }
-
 }

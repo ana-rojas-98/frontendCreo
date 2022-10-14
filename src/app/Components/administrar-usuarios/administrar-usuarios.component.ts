@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
 import { AdministrarUsuariosService } from "src/app/services/administrar-usuarios.service";
@@ -11,7 +12,8 @@ import Swal from "sweetalert2";
 export class AdministrarUsuariosComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private serviceAdministaraUsuario: AdministrarUsuariosService
+    private serviceAdministaraUsuario: AdministrarUsuariosService,
+    public router: Router
   ) {}
   usuarios = {
     tipoUsuario: "",
@@ -40,9 +42,30 @@ export class AdministrarUsuariosComponent implements OnInit {
   resultadosEstado = {};
   estado = [];
   buscarInput: String;
+  permisoModificar = true;
+  permisoVer = true;
+  permioEliminar = true;
+  permisoCrear = true;
+  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+  typeuser = parseInt(this.usarioLocalStote.typeuser);
 
   ngOnInit() {
-    this.idUsuarioLogueado = localStorage.getItem("idUsuario");
+    if (this.usarioLocalStote.typeuser == "3") {
+      this.router.navigate(['private'])
+      return true
+    }
+    if (this.usarioLocalStote.permisosEditar == false) {
+      this.permisoModificar = false;
+    }
+    if (this.usarioLocalStote.permisosVer == false) {
+      this.permisoVer = false;
+    }
+    if (this.usarioLocalStote.permisosEliminar == false) {
+      this.permioEliminar = false;
+    }
+    if (this.usarioLocalStote.permisosCrear == false) {
+      this.permisoCrear = false;
+    }
     this.getUsuariosApi();
     this.getTipoUsuarioApi();
     this.getUsuarioApi();
@@ -50,13 +73,13 @@ export class AdministrarUsuariosComponent implements OnInit {
 
   modificarUsuario(UsuarioIdModificar, typeuserModificar) {
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
-    let typeuser = parseInt(usarioLocalStote.typeuser)
+    let typeuser = parseInt(usarioLocalStote.typeuser);
     if (typeuser >= typeuserModificar) {
-      this.serviceAdministaraUsuario.UsuarioIdModificar.emit(UsuarioIdModificar);
+      this.serviceAdministaraUsuario.UsuarioIdModificar.emit(
+        UsuarioIdModificar
+      );
     } else if (typeuser <= typeuserModificar) {
-      
     }
-    
   }
 
   tipoUsuarioFiltro() {
@@ -121,23 +144,17 @@ export class AdministrarUsuariosComponent implements OnInit {
     });
   }
 
-  eliminarUsuario(usuarioid, typeuserEliminar) {
-    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
-    let typeuser = parseInt(usarioLocalStote.typeuser);
-    if (typeuser >= typeuserEliminar) {
-      this.authService.eliminarUsuario(usuarioid).subscribe((res: any) => {
-        if (res.codigo == 1) {
-          this.getUsuariosApi();
-          this.getTipoUsuarioApi();
-          this.getUsuarioApi();
-          return this.alert("Usuario eliminado");
-        } else {
-          return this.alert("No se pudo eliminar");
-        }
-      });
-    } else if (typeuser < typeuserEliminar) {
-      this.alert("No puedes eliminar el usuario")
-    }
+  eliminarUsuario(usuarioid) {
+    this.authService.eliminarUsuario(usuarioid).subscribe((res: any) => {
+      if (res.codigo == 1) {
+        this.getUsuariosApi();
+        this.getTipoUsuarioApi();
+        this.getUsuarioApi();
+        return this.alert("Usuario eliminado");
+      } else {
+        return this.alert("No se pudo eliminar");
+      }
+    });
   }
   alert(mensaje) {
     Swal.fire(mensaje);
