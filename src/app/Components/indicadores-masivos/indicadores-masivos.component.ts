@@ -13,94 +13,82 @@ export class IndicadoresMasivosComponent implements OnInit {
   archivos: File = null;
   ensayo = [];
 
-  Estandar = {
-    NombreEstandar: "",
-    estandar: "",
-  };
-
-  estandarId = {
-    id: "",
-  };
-
-  // Categoria = {
-  //   categoria1: "",
-  //   NombreCategoria: "",
-  // };
-
-  // SubCategoria = {
-  //   subcategoria1: "",
-  //   nombreSubcategoria: "",
-  // };
+  Estandar = new FormControl('');
+  Categoria = new FormControl('');
+  Subcategoria = new FormControl('');
+  Periodicidad = new FormControl('');
 
   resultados = {};
- // resultadosCategoria = {};
- // resultadosSubCategoria = {};
+  resultadosCategoria = {};
+  resultadosSubCategoria = {};
+
+  Registros = [];
+  EstandarOpciones = [];
+  CategoriaOpciones = [];
+  SubcategoriaOpciones = [];
+
   estandarFil = "";
- // categoriaFil = "";
+
 
   nombres = [
     {
       id: "1",
-      periodicidad: "mensual",
+      periodicidad: "Mensual",
     },
     {
       id: "2",
-      periodicidad: "bimensual",
+      periodicidad: "Bimensual",
     },
     {
       id: "3",
-      periodicidad: "trimestral",
+      periodicidad: "Trimestral",
     },
     {
       id: "4",
-      periodicidad: "cuatrimestral",
+      periodicidad: "Cuatrimestral",
     },
     {
       id: "5",
-      periodicidad: "semestral",
+      periodicidad: "Semestral",
     },
     {
       id: "6",
-      periodicidad: "anual",
+      periodicidad: "Anual",
     },
   ];
   seleccionado = {
     id: "",
   };
-  variableP = [];
-  
+
   valor: FormGroup;
-  Periodicidad(){
-   this.valor = new FormGroup({});
-   for (let index = 0; index < this.nombres.length; index++) {
-    this.valor.addControl('control'+index,this.valor)
-    console.log('valor', this.valor)
-   }
-   console.log('afuera valor', this.valor)
-  // const otro: FormControl = new FormControl();
-  // console.log('form control',otro.setValue)
-  // for (let index = 0; index < this.nombres.length; index++) {
-  //  console.log('dentro for control', otro.value )   
-  // }
+
+  periodicidad(Posicion){
+    this.Registros[Posicion][3] = this.Periodicidad.value;
+    console.log('Registros',this.Registros);
   }
 
-  // estandar() {
-  //   this.estandarFil = this.Estandar.estandar;
-  //   // this.getCategoria(this.estandarFil);
-  //   // this.getSubCategoria(0);
-  //   console.log('estandr Fil',this.estandarFil)
-  //   console.log('resultado estandar', this.resultados)
-  //   console.log('estandar objeto', this.Estandar)
-  //   console.log('estandarid', this.estandarId)
-  // }
+  estandar(Posicion) {
+    this.Registros[Posicion][0] = this.Estandar.value;
+    console.log('Registros',this.Registros);
+    this.getCategoriaFilter(Posicion,this.Estandar.value);
+    this.getSubCategoriaFilter(Posicion,this.Categoria.value);
+  }
 
-  // categoria() {
-  //   this.categoriaFil = this.Categoria.categoria1;
-  //   this.getSubCategoria(this.categoriaFil);
-  // }
+  categoria(Posicion) {
+    this.Registros[Posicion][1] = this.Categoria.value;
+    console.log('Registros',this.Registros);
+    this.getSubCategoriaFilter(Posicion,this.Categoria.value);
+  }
+
+  subcategoria(Posicion) {
+    this.Registros[Posicion][2] = this.Subcategoria.value;
+    console.log('Registros',this.Registros);
+  }
 
   ngOnInit() {    
     this.getStandares();
+    this.getCategoria();
+    this.getSubCategoria();
   }
   getStandares() {
     this.authService.getStandares(this.Estandar).subscribe((res: any) => {
@@ -110,24 +98,37 @@ export class IndicadoresMasivosComponent implements OnInit {
     });
   }
 
-  // getCategoria(estandar) {
-  //   this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
-  //     this.resultadosCategoria = res.filter(
-  //       (item) => item.idEstandar == estandar
-  //     );
-  //   });
-  // }
+  getCategoria() {
+    this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
+      this.resultadosCategoria = res.map((item) => {
+        return item;
+      });
+    });
+  }
+  
+  getSubCategoria() {
+    this.authService.getSubCategoria(this.Subcategoria).subscribe((res: any) => {
+        this.resultadosSubCategoria = res.map((item) => {
+          return item;
+        });
+      });
+  }
 
-  // getSubCategoria(categoria) {
-  //   this.authService
-  //     .getSubCategoria(this.SubCategoria)
-  //     .subscribe((res: any) => {
-  //       this.resultadosSubCategoria = res.filter(
-  //         (item) => item.idCategoria == categoria
-  //       );
-  //     });
-  // }
+  getCategoriaFilter(Posicion,estandar) {
+    this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
+      this.CategoriaOpciones[Posicion] = res.filter(
+        (item) => item.idEstandar == estandar
+      );
+    });
+  }
 
+  getSubCategoriaFilter(Posicion,categoria) {
+    this.authService.getSubCategoria(this.Subcategoria).subscribe((res: any) => {
+        this.SubcategoriaOpciones[Posicion] = res.filter(
+          (item) => item.idCategoria == categoria
+        );
+      });
+  }
 
   capturarArchivo(){
     //funciona
@@ -136,6 +137,10 @@ export class IndicadoresMasivosComponent implements OnInit {
       const element = idInput.files[index];
       this.archivos = element;
       this.ensayo.push(this.archivos);
+      this.Registros.push([0,0,0,0]);
+      this.EstandarOpciones.push(this.resultados);
+      this.CategoriaOpciones.push(this.resultadosCategoria);
+      this.SubcategoriaOpciones.push(this.resultadosSubCategoria);
      } 
   }
 
@@ -149,6 +154,9 @@ export class IndicadoresMasivosComponent implements OnInit {
       a.href = window.URL.createObjectURL(tipo);
       a.click();
     })
+  }
+
+  GuardarIndicadores(){
   }
 
 }
