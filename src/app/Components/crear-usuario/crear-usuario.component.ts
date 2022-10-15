@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 import { Component, OnInit, Input } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 import { AdministrarUsuariosService } from "src/app/services/administrar-usuarios.service";
 
@@ -13,13 +13,15 @@ export class CrearUsuarioComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private serviceAdministaraUsuario: AdministrarUsuariosService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public router: Router
   ) {}
 
   UsuarioRegistrado = {};
   UsuarioIdModificar = "";
   mostaraGuardar = true;
   readonly = false;
+  disabledEmail = false;
   modificar = false;
   readonlyTabla = false;
   prueba = {};
@@ -28,6 +30,10 @@ export class CrearUsuarioComponent implements OnInit {
   readonlyAdministrador = false;
   readonlySuperAdministrador = false;
   aux = 1;
+  selectEstado = false;
+  mostaraAsignarIndicadorModificar = false;
+  mostaraAsinnarIndicadorCrear = true;
+  idUsuarioIndicadores = 0;
 
   permisoAdministrarIndicadores = {
     Crear: false,
@@ -118,7 +124,7 @@ export class CrearUsuarioComponent implements OnInit {
     Pass: "12345",
     Typeuser: "",
     Telefono: "",
-    Estado: 1,
+    Estado: "1",
     IdUsuarioRegistro: localStorage.getItem("idUsuario"),
     administrarIndicadores: this.administrarIndicadores,
     administrarPermisos: this.administrarPermisos,
@@ -159,9 +165,12 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   datosCargadosUsuario(res) {
-    
     if (this.aux == 1 && this.modificar == true && res.typeuser == "3") {
       this.aux = 2;
+      this.NuevoUsuario.usuarioId = res.usuarioid;
+      this.NuevoUsuario.Fullname = res.nombre;
+      this.NuevoUsuario.Email = res.correo;
+      this.NuevoUsuario.Telefono = res.telefono;
       this.reportes.Crear = res.reportesCrear;
       this.reportes.Ver = res.reportesVer;
       this.reportes.Editar = res.reportesEditar;
@@ -179,6 +188,7 @@ export class CrearUsuarioComponent implements OnInit {
     this.NuevoUsuario.Fullname = res.nombre;
     this.NuevoUsuario.Email = res.correo;
     this.NuevoUsuario.Telefono = res.telefono;
+
     if (this.auxTypeUsuario == "") {
       this.NuevoUsuario.Typeuser = res.typeuser;
     } else {
@@ -382,12 +392,15 @@ export class CrearUsuarioComponent implements OnInit {
   inputAdministrador() {
     this.permisoTabala(false);
     this.permisos("administrador");
-    this.getUsuarioModificar(this.usarioConsultarApi);
+    if (this.modificar == true) {
+      this.getUsuarioModificar(this.usarioConsultarApi);
+    }
     this.auxTypeUsuario = "2";
   }
 
   ngOnInit() {
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+
     if (usarioLocalStote.typeuser == "3") {
       this.readonlyAdministrador = true;
       this.readonlySuperAdministrador = true;
@@ -403,23 +416,46 @@ export class CrearUsuarioComponent implements OnInit {
     let idp = parseInt(id);
     let usuaarioVer = parseInt(idVer);
     if (id) {
-      this.modificar = true;
+      this.idUsuarioIndicadores = parseInt(id);
+      if (usarioLocalStote.permisosEditar == false) {
+        this.router.navigate(["administrar-usuarios"]);
+        return true;
+      }
+      this.selectEstado = true;
+      (this.mostaraAsignarIndicadorModificar = true),
+        (this.mostaraAsinnarIndicadorCrear = false),
+        (this.modificar = true);
+      this.disabledEmail = true;
       this.usarioConsultarApi.Usuarioid = idp;
       this.getUsuarioModificar(this.usarioConsultarApi);
       this.permisos(false);
+      return true;
     } else if (usuario == "usuario") {
+      if (usarioLocalStote.permisosVer == false) {
+        this.alert("no puedo estar aqui");
+        this.router.navigate(["administrar-usuarios"]);
+        return true;
+      }
+      (this.mostaraAsignarIndicadorModificar = false),
+        (this.mostaraAsinnarIndicadorCrear = false),
+        (this.disabledEmail = true);
       this.usarioConsultarApi.Usuarioid = usuaarioVer;
       this.getUsuarioModificar(this.usarioConsultarApi);
       this.mostaraGuardar = false;
       this.readonly = true;
       this.readonlyTabla = true;
       this.permisos(true);
+      return true;
+    } else if (usarioLocalStote.permisosCrear == false) {
+      this.router.navigate(["administrar-usuarios"]);
+      this.alert("no puedo estar aqui");
+      return true;
     }
-    //this.getUsuarioId();
   }
 
   asignarIndicadores() {
     if (this.modificar == true) {
+      console.log("hola: ", this.NuevoUsuario);
       this.authService
         .ModificarUsuario(this.NuevoUsuario)
         .subscribe((res: any) => {
@@ -438,6 +474,7 @@ export class CrearUsuarioComponent implements OnInit {
         .subscribe((res: any) => {
           this.UsuarioRegistrado = res;
           if (res.mensaje == "Usuario registrado correctamente") {
+            this.idUsuarioIndicadores = res.usuarioid;
             return this.alert("Registro exitoso");
           } else if (res.mensaje == "El correo ya se encuentra registrado") {
             return this.alert("El correo ya se encuentra registrado");

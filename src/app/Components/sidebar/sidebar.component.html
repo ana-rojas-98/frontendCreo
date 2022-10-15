@@ -3,18 +3,18 @@
     <h3>Administración</h3>
   </div>
   <div class="box-links">
-    <div class="link-sidebar">
+    <div class="link-sidebar" *ngIf="indicadores">
       <img src="../../../assets/imagenes/indicadores.png" alt="indicador" />
       <a [routerLink]="['/indicadores']" [routerLinkActive]="['link-active']"
         >Indicadores</a
       >
     </div>
-    <div class="link-sidebar">
+    <div class="link-sidebar" *ngIf="reportes">
       <img src="../../../assets/imagenes/reportes.png" alt="reporte" />
       <a>Reportes</a>
       <router-outlet></router-outlet>
     </div>
-    <div class="link-sidebar">
+    <div class="link-sidebar" *ngIf="administrarIndicadores">
       <img
         src="../../../assets/imagenes/administrar-indicador.png"
         alt="indicador"
@@ -25,7 +25,7 @@
         >Administrar indicadores</a
       >
     </div>
-    <div class="link-sidebar">
+    <div class="link-sidebar" *ngIf="administrarUsuarios">
       <img
         src="../../../assets/imagenes/administardor-usuarios.png"
         alt="indicador"
@@ -36,25 +36,23 @@
         >Administrador de usuarios</a
       >
     </div>
-    <div class="link-sidebar">
+    <div class="link-sidebar" *ngIf="visorEventos">
       <img src="../../../assets/imagenes/visor-eventos.png" alt="indicador" />
-      <a >Visor de eventos</a>
+      <a>Visor de eventos</a>
     </div>
-    <div class="link-sidebar">
+    <div class="link-sidebar" *ngIf="notificaciones">
       <img src="../../../assets/imagenes/notificaciones.png" alt="indicador" />
-      <a [routerLink]="['/configuracion']"
-         [routerLinkActive]="['link-active']"
-      >
-         Notificaciones
-      </a>
+      <a> Notificaciones </a>
     </div>
-    <div class="link-sidebar">
+    <div class="link-sidebar" *ngIf="configuraciones">
       <img src="../../../assets/imagenes/configuracion.png" alt="indicador" />
-      <a >Configuraciones</a>
+      <a [routerLink]="['/configuracion']" [routerLinkActive]="['link-active']"
+        >Configuraciones</a
+      >
     </div>
-    <div class="link-sidebar">
+    <div class="link-sidebar" *ngIf="licenciar">
       <img src="../../../assets/imagenes/licencias.png" alt="indicador" />
-      <a >Licenciar</a>
+      <a>Licenciar</a>
     </div>
 
     <div class="link-sidebar">
