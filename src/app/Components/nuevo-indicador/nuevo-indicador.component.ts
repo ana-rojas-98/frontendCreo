@@ -157,74 +157,13 @@ export class NuevoIndicadorComponent implements OnInit {
     FinColumna: "",
     SaltoLinea: "",
   };
-  mostrar() {
-      let con = 0;
-    for (let item of this.resultadoExcel) { 
-  //     if (item.Entrada == "Text") {
-  //       con++;
-  //       this.NuevoIndicadorRegistro.Entrada = item.Entrada;
-  //       this.NuevoIndicadorRegistro.Numero = "No";
-  //       this.NuevoIndicadorRegistro.TieneFormula = "No";
-  //       this.NuevoIndicadorRegistro.formula = "No";
-  //       this.NuevoIndicadorRegistro.Valor = item.Valor;
-  //       this.NuevoIndicadorRegistro.Titulo = item.Titulo;
-  //       this.NuevoIndicadorRegistro.TamanoTexto = item.TamanoTexto;
-  //       this.NuevoIndicadorRegistro.Color = item.Color;
-  //       this.NuevoIndicadorRegistro.Negrilla = item.Negrilla;
-  //       this.NuevoIndicadorRegistro.Subrallado = item.Subrayado;
-  //       this.NuevoIndicadorRegistro.Cursiva = item.Cursiva;
-  //       this.NuevoIndicadorRegistro.InicioColumna = item.InicioColunma;
-  //       this.NuevoIndicadorRegistro.FinColumna = item.FinColumna;
-  //       this.NuevoIndicadorRegistro.SaltoLinea = item.SaltoDeLinea;
-  //       console.log(item.Entrada, "tem.Entrada == Text");
-  //     } else if (item.TieneFormula == "Input") {
-  //       this.NuevoIndicadorRegistro.Entrada = item.Entrada;
-  //       this.NuevoIndicadorRegistro.Numero = "No";
-  //       this.NuevoIndicadorRegistro.TieneFormula = "No";
-  //       this.NuevoIndicadorRegistro.formula = "No";
-  //       this.NuevoIndicadorRegistro.Valor = item.Valor;
-  //       this.NuevoIndicadorRegistro.Titulo = "No";
-  //       this.NuevoIndicadorRegistro.TamanoTexto = item.TamanoTexto;
-  //       this.NuevoIndicadorRegistro.Color = item.Color;
-  //       this.NuevoIndicadorRegistro.Negrilla = item.Negrilla;
-  //       this.NuevoIndicadorRegistro.Subrallado = item.Subrayado;
-  //       this.NuevoIndicadorRegistro.Cursiva = item.Cursiva;
-  //       this.NuevoIndicadorRegistro.InicioColumna = item.InicioColunma;
-  //       this.NuevoIndicadorRegistro.FinColumna = item.FinColumna;
-  //       this.NuevoIndicadorRegistro.SaltoLinea = item.SaltoDeLinea;
-  //       this.resultadoExcelEnviar.push(this.NuevoIndicadorRegistro);
-  //       console.log(item.Entrada, "if 3");
-  //     } else if (
-  //       item.Entrada == "Input" &&
-  //       item.Numero == "Si" &&
-  //       item.TieneFormula == "No"
-  //     ) {
-  //       this.NuevoIndicadorRegistro.Entrada = item.Entrada;
-  //       this.NuevoIndicadorRegistro.Numero = "Si";
-  //       this.NuevoIndicadorRegistro.TieneFormula = "No";
-  //       this.NuevoIndicadorRegistro.formula = "No";
-  //       this.NuevoIndicadorRegistro.Valor = item.Valor;
-  //       this.NuevoIndicadorRegistro.Titulo = "no";
-  //       this.NuevoIndicadorRegistro.TamanoTexto = item.TamanoTexto;
-  //       this.NuevoIndicadorRegistro.Color = item.Color;
-  //       this.NuevoIndicadorRegistro.Negrilla = item.Negrilla;
-  //       this.NuevoIndicadorRegistro.Subrallado = item.Subrayado;
-  //       this.NuevoIndicadorRegistro.Cursiva = item.Cursiva;
-  //       this.NuevoIndicadorRegistro.InicioColumna = item.InicioColunma;
-  //       this.NuevoIndicadorRegistro.FinColumna = item.FinColumna;
-  //       this.NuevoIndicadorRegistro.SaltoLinea = item.SaltoDeLinea;
-  //       this.resultadoExcelEnviar.push(this.NuevoIndicadorRegistro);
-  //       console.log(item.Entrada, "if 2");
-  //     }
-     }             
-  //   //console.log("indicador a registara4", this.resultadoExcelEnviar,  " ", con);
-  }
+ 
 
   leerArchivo() {
     const archivoleido = new FileReader();
     const archi = this.archivoleer[0];
-    console.log('el archivo',archi)
     archivoleido.readAsBinaryString(archi);
+    console.log('el archivo',archi)
     archivoleido.onload = (e) => {
       const workArchi = XSLX.read(archivoleido.result, { type: "binary" });
       const nombreHojas = workArchi.SheetNames;
@@ -232,7 +171,7 @@ export class NuevoIndicadorComponent implements OnInit {
         workArchi.Sheets[nombreHojas[0]]
       );
     };
-    console.log('el excelDato',this.ExcelData)
+    console.log('el excelData',this.ExcelData)
   }
 
   Periodicidad() {
@@ -261,14 +200,6 @@ export class NuevoIndicadorComponent implements OnInit {
   setNuevoIndicador() {
     console.log(this.nuevoIndicador); 
 
-    //console.log("arc: ", this.elArchivo);
-    //console.log("arc2: ", this.fform_data);
-    /* this.authService.setIndicadorNuevo(this.fform_data).subscribe((res: any) => {
-      console.log(res);
-    });*/
-
-    ////ensayos
-
     const formData = new FormData();
     formData.append("archivo", this.archivos); 
     formData.append("IdEstandar", "2"); 
@@ -276,10 +207,6 @@ export class NuevoIndicadorComponent implements OnInit {
     formData.append("Idsubcategoria", "3"); 
     formData.append("periodicidad", "3"); 
     console.log("este es lel mensaje", formData); 
-    //Object.keys(this.nuevoIndicador).forEach(
-    //  (key) => formData.append(key, this.nuevoIndicador[key]),
-    //  console.log("este es lel mensaje", formData)
-    //);
 
     this.authService.setIndicadorNuevo(formData).subscribe((res: any) => {
       console.log(res);

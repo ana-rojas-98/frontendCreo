@@ -207,4 +207,9 @@ descarga(){
     );
     return resul;
   }
+
+  setConfiguracion(confi: any){
+    let res = this.http.post(`${this.URL_SER}/api/elresto`,confi);
+    return res;
+  }
 }
