@@ -17,16 +17,6 @@ export class AsignarIndicadoresComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {}
 
-  asingnarIndicadores = {
-    ver: false,
-    diligenciar: false,
-    pdf: false,
-    excel: false,
-    word: false,
-  };
-
-
-
   public permisosIndicador: FormGroup = new FormGroup({
     id: new FormControl(""),
     idIndicador: new FormControl(""),
@@ -62,7 +52,8 @@ export class AsignarIndicadoresComponent implements OnInit {
   resultadosSubCategoria = {};
   estandarFil = "";
   categoriaFil = "";
-  resultadosTabla: [];
+  resultadosTabla: any = [];
+  resulEnviarApi: any = [];
 
   estandar() {
     this.estandarFil = this.Estandar.estandar;
@@ -83,6 +74,7 @@ export class AsignarIndicadoresComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.ConsultarIndicadoresAsignados()
     this.getUsuarioId();
     this.getStandares();
     this.getCategoria(0);
@@ -134,18 +126,51 @@ export class AsignarIndicadoresComponent implements OnInit {
     }
   }
 
+  mapearResultadosTabla() {
+    this.resultadosTabla.map((res) => {
+      res.ver = false;
+      res.diligenciar = false;
+      res.pdf = false;
+      res.excel = false;
+      res.word = false;
+    });
+  }
+
   GetIndicadoresPermisos() {
     this.IndicadoresService.GetIndicadoresPermisos("").subscribe((res: any) => {
       this.resultadosTabla = res;
-      console.log("indicadores: ", res);
+      this.mapearResultadosTabla();
       return res;
     });
   }
 
-  guardarIndicadores(idIndicador){
-    //this.permisosIndicador.get.
-    console.log("hola: ", idIndicador);
-    console.log(this.permisosIndicador.value);
+  guardarIndicadores() {
+    this.resulEnviarApi = this.resultadosTabla.filter(
+      (item) =>
+        item.ver == true ||
+        item.diligenciar == true ||
+        item.pdf == true ||
+        item.excel == true ||
+        item.word == true
+    );
+    this.CerarPermisosIndicador();
   }
 
+  CerarPermisosIndicador() {
+    this.IndicadoresService.CerarPermisosIndicador(
+      this.resulEnviarApi
+    ).subscribe((res: any) => {
+      console.log("api: ", res);
+      return res;
+    });
+  }
+
+  ConsultarIndicadoresAsignados() {
+    this.IndicadoresService.ConsultarIndicadoresAsignados("").subscribe(
+      (res: any) => {
+        console.log("api: ", res);
+        return res;
+      }
+    );
+  }
 }

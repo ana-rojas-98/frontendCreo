@@ -36,7 +36,7 @@
       <div class="box">
         <h3>Buscar</h3>
         <input
-        [disabled]="buscarText"
+          [disabled]="buscarText"
           class="selector"
           type="select"
           name=""
@@ -45,6 +45,7 @@
           [(ngModel)]="buscarInput"
         />
         <input
+          *ngIf="permisoCrear"
           [routerLink]="['/crear-usuarios']"
           [routerLinkActive]="['link-active']"
           class="boton"
@@ -98,7 +99,7 @@
               Quien creo
             </th>
 
-            <th>
+            <th *ngIf="permisoModificar">
               <img
                 src="../../../assets/imagenes/editar.png"
                 alt="icono-editar"
@@ -106,10 +107,10 @@
                 [routerLinkActive]="['link-active']"
               />
             </th>
-            <th>
+            <th *ngIf="permisoVer">
               <img src="../../../assets/imagenes/ver.png" alt="icono-ver" />
             </th>
-            <th>
+            <th *ngIf="permioEliminar">
               <img
                 src="../../../assets/imagenes/eliminar.png"
                 alt="icono-eliminar"
@@ -125,7 +126,7 @@
             <td>{{ item.correo }}</td>
             <td>{{ item.estado }}</td>
             <td>{{ item.quienRegistroUsuario }}</td>
-            <td>
+            <td *ngIf="permisoModificar">
               <img
                 (click)="modificarUsuario(item.usuarioid, item.typeuser)"
                 [routerLink]="['/crear-usuarios', item.usuarioid]"
@@ -134,10 +135,10 @@
                 alt="editar-icono"
               />
             </td>
-            <td>
+            <td *ngIf="permisoVer">
               <img
                 (click)="verUsuario(item.usuarioid)"
-                [routerLink]="['/crear-usuarios',item.usuarioid,'usuario']"
+                [routerLink]="['/crear-usuarios', item.usuarioid, 'usuario']"
                 [routerLinkActive]="['link-active']"
                 src="../../../assets/imagenes/ver.png"
                 alt="ver-icono"
@@ -145,6 +146,7 @@
             </td>
             <td>
               <img
+                *ngIf="permioEliminar"
                 (click)="eliminarUsuario(item.usuarioid)"
                 src="../../../assets/imagenes/eliminar.png"
                 alt="icono-eliminar"

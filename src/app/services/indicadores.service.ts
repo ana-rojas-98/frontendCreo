@@ -23,4 +23,19 @@ export class IndicadoresService {
     let resul = this.http.get(`${this.URL_SER}/api/indicadores`);
     return resul;
   }
+
+  CerarPermisosIndicador(permisos) {
+    let resul = this.http.post(
+      `${this.URL_SER}/api/indicadores/RegistroIndicadores`,
+      permisos
+    );
+    return resul;
+  }
+
+  ConsultarIndicadoresAsignados(permisos) {
+    let resul = this.http.get(
+      `${this.URL_SER}/api/indicadores/ConsultarIndicadoresAsignados`
+    );
+    return resul;
+  }
 }

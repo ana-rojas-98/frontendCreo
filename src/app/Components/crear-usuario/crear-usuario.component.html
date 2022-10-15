@@ -16,15 +16,33 @@
       </div>
       <div>
         <p>Correo electrónico</p>
-        <input class="input" type="email" [(ngModel)]="NuevoUsuario.Email" [disabled]="readonly"/>
+        <input
+          class="input"
+          type="email"
+          [(ngModel)]="NuevoUsuario.Email"
+          [disabled]="disabledEmail"
+        />
       </div>
       <div>
         <p>Teléfono</p>
-        <input class="input" type="text" [(ngModel)]="NuevoUsuario.Telefono" [disabled]="readonly"/>
+        <input
+          class="input"
+          type="text"
+          [(ngModel)]="NuevoUsuario.Telefono"
+          [disabled]="readonly"
+        />
+      </div>
+      <div *ngIf="selectEstado">
+        <h3>Estado</h3>
+        <select class="selector" [(ngModel)]="NuevoUsuario.Estado">
+          <option value="">Seleciona Estado</option>
+          <option value="1">Activo</option>
+          <option value="0">Inactivo</option>
+        </select>
       </div>
       <div>
         <input
-          *ngIf="mostaraGuardar"
+          *ngIf="mostaraAsinnarIndicadorCrear"
           class="boton"
           type="button"
           value="Asignar indicadores"
@@ -45,7 +63,6 @@
           (click)="inputSuperAdministrador()"
           [disabled]="readonlySuperAdministrador"
           [(ngModel)]="NuevoUsuario.Typeuser"
-
         />
       </label>
       <label
@@ -68,6 +85,15 @@
           [disabled]="readonly"
         />
       </label>
+      <input
+        *ngIf="mostaraAsignarIndicadorModificar"
+        class="boton1"
+        type="button"
+        value="Asignar indicadores"
+        (click)="enviarUsuarioId()"
+        [routerLink]="['/asignar-indicadores']"
+        [routerLinkActive]="['link-active']"
+      />
     </div>
     <div class="resultados-tabla">
       <table class="tabla-indicadores">
