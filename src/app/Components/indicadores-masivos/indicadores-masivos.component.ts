@@ -22,21 +22,21 @@ export class IndicadoresMasivosComponent implements OnInit {
     id: "",
   };
 
-  // Categoria = {
-  //   categoria1: "",
-  //   NombreCategoria: "",
-  // };
+Categoria = {
+    categoria1: "",
+    NombreCategoria: "",
+  };
 
-  // SubCategoria = {
-  //   subcategoria1: "",
-  //   nombreSubcategoria: "",
-  // };
+  SubCategoria = {
+    subcategoria1: "",
+    nombreSubcategoria: "",
+  };
 
   resultados = {};
- // resultadosCategoria = {};
- // resultadosSubCategoria = {};
+ resultadosCategoria = {};
+ resultadosSubCategoria = {};
   estandarFil = "";
- // categoriaFil = "";
+ categoriaFil = "";
 
   nombres = [
     {
@@ -77,27 +77,27 @@ export class IndicadoresMasivosComponent implements OnInit {
     console.log('valor', this.valor)
    }
    console.log('afuera valor', this.valor)
-  // const otro: FormControl = new FormControl();
-  // console.log('form control',otro.setValue)
-  // for (let index = 0; index < this.nombres.length; index++) {
-  //  console.log('dentro for control', otro.value )   
-  // }
+  const otro: FormControl = new FormControl();
+  console.log('form control',otro.setValue)
+  for (let index = 0; index < this.nombres.length; index++) {
+   console.log('dentro for control', otro.value )   
+  }
   }
 
-  // estandar() {
-  //   this.estandarFil = this.Estandar.estandar;
-  //   // this.getCategoria(this.estandarFil);
-  //   // this.getSubCategoria(0);
-  //   console.log('estandr Fil',this.estandarFil)
-  //   console.log('resultado estandar', this.resultados)
-  //   console.log('estandar objeto', this.Estandar)
-  //   console.log('estandarid', this.estandarId)
-  // }
+  estandar() {
+    this.estandarFil = this.Estandar.estandar;
+    this.getCategoria(this.estandarFil);
+    this.getSubCategoria(0);
+    console.log('estandr Fil',this.estandarFil)
+    console.log('resultado estandar', this.resultados)
+    console.log('estandar objeto', this.Estandar)
+    console.log('estandarid', this.estandarId)
+  }
 
-  // categoria() {
-  //   this.categoriaFil = this.Categoria.categoria1;
-  //   this.getSubCategoria(this.categoriaFil);
-  // }
+  categoria() {
+    this.categoriaFil = this.Categoria.categoria1;
+    this.getSubCategoria(this.categoriaFil);
+  }
 
   ngOnInit() {    
     this.getStandares();
@@ -110,23 +110,23 @@ export class IndicadoresMasivosComponent implements OnInit {
     });
   }
 
-  // getCategoria(estandar) {
-  //   this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
-  //     this.resultadosCategoria = res.filter(
-  //       (item) => item.idEstandar == estandar
-  //     );
-  //   });
-  // }
+  getCategoria(estandar) {
+    this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
+      this.resultadosCategoria = res.filter(
+        (item) => item.idEstandar == estandar
+      );
+    });
+  }
 
-  // getSubCategoria(categoria) {
-  //   this.authService
-  //     .getSubCategoria(this.SubCategoria)
-  //     .subscribe((res: any) => {
-  //       this.resultadosSubCategoria = res.filter(
-  //         (item) => item.idCategoria == categoria
-  //       );
-  //     });
-  // }
+  getSubCategoria(categoria) {
+    this.authService
+      .getSubCategoria(this.SubCategoria)
+      .subscribe((res: any) => {
+        this.resultadosSubCategoria = res.filter(
+          (item) => item.idCategoria == categoria
+        );
+      });
+  }
 
 
   capturarArchivo(){
