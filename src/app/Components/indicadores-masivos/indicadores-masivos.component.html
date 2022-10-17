@@ -45,39 +45,34 @@
                     <tr *ngFor="let valor of ensayo; let i = index" >
                         <td>{{valor.name}}</td>
                         <td>
-                            <select (change)="estandar()">
+                            <select (change)="estandar(i)" [formControl] = "Estandar">
                                 <option value="">Estándar</option>
-                                <option *ngFor="let resultado of resultados">
+                                <option *ngFor="let resultado of resultados"
+                                [value]="resultado.estandar">
                                         {{ resultado.nombreEstandar }}
                                 </option>
                             </select>
                         </td>
                         <td>
-                            <select class="selector"
-                                    type = "selectbox"
-                                    (change)="categoria()">
+                            <select (change)="categoria(i)" [formControl] = "Categoria">
                                 <option value="">Categoría</option>
-                                <option *ngFor="let resultadoCategoria of resultadosCategoria"
+                                <option *ngFor="let resultadoCategoria of CategoriaOpciones[i]"
                                         [value]="resultadoCategoria.categoria1">
                                         {{ resultadoCategoria.nombreCategoria }}
                                 </option>
                             </select>  
                         </td>
                         <td>
-                            <select class="selector"
-                                    type = "selectbox">
+                            <select (change)="subcategoria(i)" [formControl] = "Subcategoria">
                                 <option value="">Subcategoría</option>
-                                <option *ngFor="let item of resultadosSubCategoria"
+                                <option *ngFor="let item of SubcategoriaOpciones[i]"
                                         [value]="item.subcategoria1">
                                         {{ item.nombreSubcategoria }}
                                 </option>
                             </select>  
                         </td>
                         <td>
-                            <select class="selector"
-                                    type = "selectbox"
-                                    ngformControl="control"
-                                    (change)="Periodicidad()">
+                            <select (change)="periodicidad(i)" [formControl] = "Periodicidad">
                                     <option value="">Periodicidad</option>
                                     <option *ngFor="let nombre of nombres"
                                             [value]="nombre.id">
@@ -95,7 +90,7 @@
             <button [routerLink]="['/administrar-indicadores']"
                     [routerLinkActive]="['link-active']"
                     class="cancelar">Cancelar</button>
-            <button class="guardar">Guardar</button>
+            <button class="guardar" (click)="GuardarIndicadores()">Guardar</button>
         </div>
     </div>
 </div>

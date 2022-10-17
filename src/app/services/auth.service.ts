@@ -209,7 +209,7 @@ descarga(){
   }
 
   setConfiguracion(confi: any){
-    let res = this.http.post(`${this.URL_SER}/api/elresto`,confi);
+    let res = this.http.post(`${this.URL_SER}/api/Configuracions/guardarConfiguracion`,confi);
     return res;
   }
 }
