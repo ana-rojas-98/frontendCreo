@@ -98,7 +98,6 @@
             <th>PDF</th>
             <th>Excel</th>
             <th>Word</th>
-            <th>Guardar</th>
           </tr>
         </thead>
         <tbody>
@@ -130,13 +129,6 @@
             <td>
               <input [(ngModel)]="item.word" type="checkbox" class="checkbox" />
             </td>
-            <td>
-              <img
-                (click)="guardarIndicadores()"
-                src="../../../assets/imagenes/boton-guardar.png"
-                alt="icono-guardar"
-              />
-            </td>
           </tr>
         </tbody>
       </table>
@@ -150,7 +142,12 @@
           type="button"
           value="Cancelar"
         />
-        <input class="button-enviar" type="button" value="Guardar" />
+        <input
+          (click)="guardarIndicadores()"
+          class="button-enviar"
+          type="button"
+          value="Guardar"
+        />
       </div>
     </div>
   </div>

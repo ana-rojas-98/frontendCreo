@@ -34,6 +34,7 @@ export class CrearUsuarioComponent implements OnInit {
   mostaraAsignarIndicadorModificar = false;
   mostaraAsinnarIndicadorCrear = true;
   idUsuarioIndicadores = 0;
+  titulo = "Crear usuario"
 
   permisoAdministrarIndicadores = {
     Crear: false,
@@ -461,6 +462,7 @@ export class CrearUsuarioComponent implements OnInit {
     let idp = parseInt(id);
     let usuaarioVer = parseInt(idVer);
     if (id) {
+      this.titulo = "Editar usuario"
       this.idUsuarioIndicadores = parseInt(id);
       if (usarioLocalStote.permisosEditar == false) {
         this.router.navigate(["administrar-usuarios"]);
@@ -498,7 +500,6 @@ export class CrearUsuarioComponent implements OnInit {
 
   asignarIndicadores() {
     if (this.modificar == true) {
-      console.log("hola: ", this.NuevoUsuario);
       this.authService
         .ModificarUsuario(this.NuevoUsuario)
         .subscribe((res: any) => {
@@ -543,7 +544,7 @@ export class CrearUsuarioComponent implements OnInit {
         this.alert("El usuario es super administrador, no requiere asignar indicadores");
         return true;
       }
-      if (this.NuevoUsuario.Typeuser == "2") {
+      if (this.NuevoUsuario.Typeuser == "3") {
           if (this.modificar == true) {
             this.router.navigate([
               "asignar-indicadores",

@@ -4,6 +4,7 @@ import { IndicadoresService } from "src/app/services/indicadores.service";
 import { AuthService } from "src/app/services/auth.service";
 import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-asignar-indicadores",
@@ -59,6 +60,7 @@ export class AsignarIndicadoresComponent implements OnInit {
   estandarFil = "";
   categoriaFil = "";
   resulEnviarApi: any = [];
+  titulo = "Crear usuario";
 
   resultadosTabla: any = [];
 
@@ -114,8 +116,6 @@ export class AsignarIndicadoresComponent implements OnInit {
         this.router.navigate(["private"]);
         return true;
       }
-
-      
     }
 
     this.ConsultarIndicadoresAsignados();
@@ -190,14 +190,7 @@ export class AsignarIndicadoresComponent implements OnInit {
   }
 
   guardarIndicadores() {
-    this.resulEnviarApi = this.resultadosTabla.filter(
-      (item) =>
-        item.ver == true ||
-        item.diligenciar == true ||
-        item.pdf == true ||
-        item.excel == true ||
-        item.word == true
-    );
+    this.resulEnviarApi = this.resultadosTabla
     this.CerarPermisosIndicador();
   }
 
@@ -205,7 +198,9 @@ export class AsignarIndicadoresComponent implements OnInit {
     this.IndicadoresService.CerarPermisosIndicador(
       this.resulEnviarApi
     ).subscribe((res: any) => {
-      console.log("api: ", res);
+      if (res.resul == "Se guardo con exito") {
+        this.alert("Datos guardados");
+      }
       return res;
     });
   }
@@ -213,9 +208,12 @@ export class AsignarIndicadoresComponent implements OnInit {
   ConsultarIndicadoresAsignados() {
     this.IndicadoresService.ConsultarIndicadoresAsignados("").subscribe(
       (res: any) => {
-        console.log("api: ", res);
         return res;
       }
     );
+  }
+
+  alert(mensaje) {
+    Swal.fire(mensaje);
   }
 }

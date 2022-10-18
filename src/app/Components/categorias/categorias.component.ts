@@ -19,10 +19,17 @@ export class CategoriasComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
+    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    if (usarioLocalStote.typeuser == "3") {
+      this.router.navigate(["private"]);
+      return true;
+    }
+    if (usarioLocalStote.indicadorCrear == false) {
+      this.router.navigate(["private"]);
+      return true;
+    }
     this.getStandares();
   }
-
-  
 
   getStandares() {
     this.authService.getStandares(this.Categoria).subscribe((res: any) => {
@@ -34,17 +41,16 @@ export class CategoriasComponent implements OnInit {
 
   crear_categoria() {
     this.authService.crear_categoria(this.Categoria).subscribe((res: any) => {
-      if(res.resul == "Categoria guardada"){
-        this.router.navigate(['subcatego']);
+      if (res.resul == "Categoria guardada") {
+        this.router.navigate(["subcatego"]);
         return this.alerta(res.resul);
-      }else{
-        this.alerta("no se pudo agregar la categoria"); 
+      } else {
+        this.alerta("no se pudo agregar la categoria");
       }
     });
   }
 
-  alerta(mensaje:any){
+  alerta(mensaje: any) {
     Swal.fire(mensaje);
   }
-
 }

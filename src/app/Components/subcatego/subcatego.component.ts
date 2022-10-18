@@ -29,6 +29,15 @@ export class SubcategoComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
+    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    if (usarioLocalStote.typeuser == "3") {
+      this.router.navigate(["private"]);
+      return true;
+    }
+    if (usarioLocalStote.indicadorCrear == false) {
+      this.router.navigate(["private"]);
+      return true;
+    }
     this.getCategoria();
     this.getStandares();
   }

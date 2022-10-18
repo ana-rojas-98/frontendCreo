@@ -14,11 +14,19 @@ export class EliminarEstandarComponent implements OnInit {
   };
   constructor(private authService: AuthService, private router: Router) {}
 
-
-  resultados = {}
+  resultados = {};
 
   ngOnInit() {
-    this.getStandares()
+    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    if (usarioLocalStote.typeuser == "3") {
+      this.router.navigate(["private"]);
+      return true;
+    }
+    if (usarioLocalStote.indicadorEliminar == false) {
+      this.router.navigate(["private"]);
+      return true;
+    }
+    this.getStandares();
   }
 
   getStandares() {
@@ -29,14 +37,14 @@ export class EliminarEstandarComponent implements OnInit {
     });
   }
 
-  deleteEstandar(){
-    console.log("hola: ", this.Estandar)
+  deleteEstandar() {
+    console.log("hola: ", this.Estandar);
     this.authService.deleteEstandar(this.Estandar).subscribe((res: any) => {
       if (res.resul == "Estandar eliminado correctamente") {
-        this.router.navigate(['administrar-indicadores'])
+        this.router.navigate(["administrar-indicadores"]);
         this.alerta(res.resul);
       } else {
-         this.alerta("No se pudo eliminar el estandar")
+        this.alerta("No se pudo eliminar el estandar");
       }
     });
   }
@@ -44,5 +52,4 @@ export class EliminarEstandarComponent implements OnInit {
   alerta(mensaje: any) {
     Swal.fire(mensaje);
   }
-
 }

@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
     if (this.usarioLocalStote.typeuser == "3") {
       this.visorEventos = false;
-      this.indicadores = false;
+      this.indicadores = true;
       this.reportes = true;
       this.administrarIndicadores = false;
       this.administrarUsuarios = false;

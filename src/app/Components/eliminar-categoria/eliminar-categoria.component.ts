@@ -47,6 +47,15 @@ export class EliminarCategoriaComponent implements OnInit {
   }
 
   ngOnInit() {
+    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    if (usarioLocalStote.typeuser == "3") {
+      this.router.navigate(['private'])
+      return true;
+    }
+    if (usarioLocalStote.indicadorEliminar == false) {
+      this.router.navigate(['private'])
+      return true;
+    }
     this.getStandares();
   }
 
