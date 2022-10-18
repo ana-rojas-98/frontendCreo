@@ -175,12 +175,58 @@ export class CrearUsuarioComponent implements OnInit {
       this.reportes.Ver = res.reportesVer;
       this.reportes.Editar = res.reportesEditar;
       this.reportes.Eliminat = res.reportesEliminar;
+
+      this.administrarIndicadores.Crear = false;
+      this.administrarIndicadores.Ver = false;
+      this.administrarIndicadores.Editar = false;
+      this.administrarIndicadores.Eliminat = false;
+
+      this.administrarPermisos.Crear = false;
+      this.administrarPermisos.Ver = false;
+      this.administrarPermisos.Editar = false;
+      this.administrarPermisos.Eliminat = res.permisosEliminar;
+
+      this.visorEventos.Ver = false;
+
+      this.gestorNotificaciones.Crear = false;
+      this.gestorNotificaciones.Ver = false;
+      this.gestorNotificaciones.Editar = false;
+      this.gestorNotificaciones.Eliminat = false;
+
+      this.configuracion.Editar = false;
       if (this.auxTypeUsuario == "") {
         this.NuevoUsuario.Typeuser = res.typeuser;
       } else {
         this.NuevoUsuario.Typeuser = this.auxTypeUsuario;
       }
       this.permisos("reportes");
+      return true;
+    } else if (this.auxTypeUsuario == "3") {
+      this.NuevoUsuario.usuarioId = res.usuarioid;
+      this.NuevoUsuario.Fullname = res.nombre;
+      this.NuevoUsuario.Email = res.correo;
+      this.NuevoUsuario.Telefono = res.telefono;
+      this.reportes.Crear = res.reportesCrear;
+      this.reportes.Ver = res.reportesVer;
+      this.reportes.Editar = res.reportesEditar;
+      this.reportes.Eliminat = res.reportesEliminar;
+
+      this.administrarIndicadores.Crear = false;
+      this.administrarIndicadores.Ver = false;
+      this.administrarIndicadores.Editar = false;
+      this.administrarIndicadores.Eliminat = false;
+
+      this.administrarPermisos.Crear = false;
+      this.administrarPermisos.Ver = false;
+      this.administrarPermisos.Editar = false;
+      this.administrarPermisos.Eliminat = false;
+
+      this.visorEventos.Ver = false;
+
+      this.gestorNotificaciones.Crear = false;
+      this.gestorNotificaciones.Ver = false;
+      this.gestorNotificaciones.Editar = false;
+      this.gestorNotificaciones.Eliminat = false;
       return true;
     }
 
@@ -369,7 +415,6 @@ export class CrearUsuarioComponent implements OnInit {
 
     this.permisoConfiguracion.Editar = usarioLocalStote.configuracionEditar;
 
-    console.log("permiso: ", usarioLocalStote);
   }
 
   inputUsuario() {
