@@ -82,6 +82,7 @@
         (change)="archivoCapt($event)"
         #capturar
         id="in"
+        accept=".xlsx"
       />
     </div>
     <div class="perioricidad-indicador">
@@ -134,7 +135,7 @@
           <tbody>
             <tr *ngFor="let dato of ExcelData">
               <td>{{ dato.Entrada }}</td>
-              <td>{{ dato.Numero }}</td>
+              <td>{{ dato.Numerop }}</td>
               <td>{{ dato.Formulap }}</td>
               <td>{{ dato.Formula }}</td>
               <td>{{ dato.Valor }}</td>
@@ -143,9 +144,9 @@
               <td>{{ dato.Color }}</td>
               <td>{{ dato.Negrilla }}</td>
               <td>{{ dato.Subrayado }}</td>
-              <td>{{ dato.cursiva }}</td>
-              <td>{{ dato.Iniciocolunma }}</td>
-              <td>{{ dato.Fincolumna }}</td>
+              <td>{{ dato.Cursiva }}</td>
+              <td>{{ dato.InicioColumna }}</td>
+              <td>{{ dato.FinColumna }}</td>
               <td>{{ dato.Saltodelinea }}</td>
             </tr>
           </tbody>

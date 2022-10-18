@@ -1,6 +1,8 @@
+import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { async } from 'rxjs/internal/scheduler/async';
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: 'app-configuracion',
@@ -9,21 +11,20 @@ import { async } from 'rxjs/internal/scheduler/async';
 })
 export class ConfiguracionComponent implements OnInit {
 
-  constructor(private sanitizer:DomSanitizer) { }
+  constructor(private authService: AuthService, private sanitizer:DomSanitizer) { }
 
   ngOnInit() {
   }
 
-   guardarimg =[];
-   prev : string;
-   subido = [];
+   logo: File = null;
+   prev : string; 
+
   captImg(event){
     const imagen = event.target.files[0];
     this.extraerBase64(imagen).then((i:any) => {
       this.prev = i.base;
     })
-    this.guardarimg.push(imagen);
-     console.log(this.subido);
+    this.logo = imagen;
   }
   extraerBase64 = async ($event: any) => new Promise((resolve, reject)=>{
     try{
@@ -47,4 +48,25 @@ export class ConfiguracionComponent implements OnInit {
     }
   });
 
+  configuracion={
+    nombreEmpresa:"",
+    inicial:"",
+    final:"",
+  }
+
+  guardarConfiguracion(){    
+  const enviarimg = new FormData ();
+  
+  enviarimg.append('logo',this.prev);
+  enviarimg.append('nombre',this.configuracion.nombreEmpresa);
+  enviarimg.append('inicio',this.configuracion.inicial);
+  enviarimg.append('final',this.configuracion.final);
+
+  this.authService.setConfiguracion(enviarimg).subscribe((res:any)=>
+  {
+    console.log(res)
+  });
+  return enviarimg;
+  }
+  
 }

@@ -16,7 +16,10 @@
             <div class="nombre">
                 <h5>Nombre empresa</h5>
                 <br>
-                <input type="text">
+                <input 
+                type="text"
+                [(ngModel)]="configuracion.nombreEmpresa"
+                >
             </div>
         </div>
         <div class="titulo">
@@ -26,17 +29,23 @@
             <div class="inicio">
                 <h5>Año inicial</h5>
                 <br>
-                <input type="text">
+                <input 
+                type="text"
+                [(ngModel)]="configuracion.inicial"
+                >
             </div>
             <div class="final">
                 <h5>Año final</h5>
                 <br>
-                <input type="text">
+                <input 
+                type="text"
+                [(ngModel)]="configuracion.final"
+                >
             </div>
         </div>
         <div class="botones">
             <button class="cancelar">Cancelar</button>
-            <button class="guardar">Guardar</button>
+            <button class="guardar" (click)="guardarConfiguracion()">Guardar</button>
         </div>
     </div>
 </div>
