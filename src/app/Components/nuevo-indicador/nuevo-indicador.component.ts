@@ -189,10 +189,10 @@ export class NuevoIndicadorComponent implements OnInit {
 
   nuevoIndicador = {
     archivo: this.archivos,
-    IdEstandar: 1,
-    IdCategoria: 2,
-    Idsubcategoria: 2,
-    periodicidad: "1",
+    IdEstandar: "",
+    IdCategoria: "",
+    Idsubcategoria: "",
+    periodicidad: "",
   };
 
 
@@ -202,15 +202,15 @@ export class NuevoIndicadorComponent implements OnInit {
 
     const formData = new FormData();
     formData.append("archivo", this.archivos); 
-    formData.append("IdEstandar", "2"); 
-    formData.append("IdCategoria", "3"); 
-    formData.append("Idsubcategoria", "3"); 
-    formData.append("periodicidad", "3"); 
+    formData.append("IdEstandar", this.nuevoIndicador.IdEstandar); 
+    formData.append("IdCategoria", this.nuevoIndicador.IdCategoria); 
+    formData.append("Idsubcategoria", this.nuevoIndicador.Idsubcategoria); 
+    formData.append("periodicidad", this.nuevoIndicador.periodicidad); 
     console.log("este es lel mensaje", formData); 
 
-    this.authService.setIndicadorNuevo(formData).subscribe((res: any) => {
+     this.authService.setIndicadorNuevo(formData).subscribe((res: any) => {
       console.log(res);
-    });
+     });
     return formData;
   }
 

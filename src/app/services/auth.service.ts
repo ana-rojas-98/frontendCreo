@@ -42,6 +42,15 @@ export class AuthService {
     const requestOptions = { headers: headers };
     return requestOptions;
   }
+  cabecera(){
+    const token = localStorage.getItem("token");
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    });
+    const requestOptions = { headers: headers };
+    return requestOptions;
+  }
 
   singup(user_reg: any) {
     return this.http.post(`${this.URL_SER}/api/Usuarios/PostUsuario`, user_reg);
@@ -208,8 +217,21 @@ descarga(){
     return resul;
   }
 
+  masivos(archivos: any){
+    const headers = this.fnSetDefineTokenAuthorization();
+    let resultado = this.http.post(`${this.URL_SER}/api/archivos/postArchivos`,
+      archivos,
+      headers
+      );    
+    return resultado;
+  }
+
   setConfiguracion(confi: any){
-    let res = this.http.post(`${this.URL_SER}/api/Configuracions/guardarConfiguracion`,confi);
+    const headers =this.cabecera();
+    let res = this.http.post(`${this.URL_SER}/api/Configuracions/guardarConfiguracion`,
+      confi,
+      headers
+      );
     return res;
   }
 }

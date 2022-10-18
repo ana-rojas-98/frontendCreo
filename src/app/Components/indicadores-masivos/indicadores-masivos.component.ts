@@ -157,6 +157,15 @@ export class IndicadoresMasivosComponent implements OnInit {
   }
 
   GuardarIndicadores(){
+   const formD = new FormData();
+   this.Registros.forEach(arra=>{    
+    formD.append('archivo',arra)
+    console.log(arra)
+   });
+   this.authService.masivos(formD).subscribe((res: any) =>{
+    console.log(res);
+   });
+   return formD;
   }
 
 }
