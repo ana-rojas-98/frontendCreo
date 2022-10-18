@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { AdministrarUsuariosService } from "src/app/services/administrar-usuarios.service";
 import { IndicadoresService } from "src/app/services/indicadores.service";
 import { AuthService } from "src/app/services/auth.service";
+import { ActivatedRoute, Router } from "@angular/router";
 import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
 
 @Component({
@@ -14,10 +15,21 @@ export class AsignarIndicadorComponent implements OnInit {
     private authService: AuthService,
     private IndicadoresService: IndicadoresService,
     private serviceAdministaraUsuario: AdministrarUsuariosService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    public router: Router
   ) {}
 
+  resultados = {};
+  resultadosCategoria = {};
+  resultadosSubCategoria = {};
+  estandarFil = "";
+  categoriaFil = "";
+  resultadosTabla: [];
+  idUsuarioIndicador = 0
+
   asingnarIndicadores = {
+    idUsuario: this.idUsuarioIndicador,
     ver: false,
     diligenciar: false,
     pdf: false,
@@ -45,13 +57,7 @@ export class AsignarIndicadorComponent implements OnInit {
     nombreSubcategoria: "",
   };
 
-  resultados = {};
-  resultadosCategoria = {};
-  resultadosSubCategoria = {};
-  estandarFil = "";
-  categoriaFil = "";
-  resultadosTabla: [];
-
+  
   estandar() {
     this.estandarFil = this.Estandar.estandar;
     this.getCategoria(this.estandarFil);
@@ -71,6 +77,7 @@ export class AsignarIndicadorComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     this.getUsuarioId();
     this.getStandares();
     this.getCategoria(0);

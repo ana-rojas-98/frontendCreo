@@ -3,6 +3,7 @@ import { AdministrarUsuariosService } from "src/app/services/administrar-usuario
 import { IndicadoresService } from "src/app/services/indicadores.service";
 import { AuthService } from "src/app/services/auth.service";
 import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-asignar-indicadores",
@@ -14,7 +15,9 @@ export class AsignarIndicadoresComponent implements OnInit {
     private authService: AuthService,
     private IndicadoresService: IndicadoresService,
     private serviceAdministaraUsuario: AdministrarUsuariosService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    public router: Router
   ) {}
 
   public permisosIndicador: FormGroup = new FormGroup({
@@ -47,13 +50,17 @@ export class AsignarIndicadoresComponent implements OnInit {
     nombreSubcategoria: "",
   };
 
+  idUsuarioIndicador = 0;
+  indicadorEditarCrear = "";
+  modificar = false;
   resultados = {};
   resultadosCategoria = {};
   resultadosSubCategoria = {};
   estandarFil = "";
   categoriaFil = "";
-  resultadosTabla: any = [];
   resulEnviarApi: any = [];
+
+  resultadosTabla: any = [];
 
   estandar() {
     this.estandarFil = this.Estandar.estandar;
@@ -74,7 +81,44 @@ export class AsignarIndicadoresComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ConsultarIndicadoresAsignados()
+    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    this.idUsuarioIndicador = parseInt(this.route.snapshot.paramMap.get("id"));
+    this.indicadorEditarCrear = this.route.snapshot.paramMap.get("usuario");
+
+    if (this.indicadorEditarCrear != "modificar") {
+      if (this.indicadorEditarCrear != "crear") {
+        this.router.navigate(["private"]);
+        return true;
+      }
+    }
+
+    if (usarioLocalStote.typeuser == "3") {
+      this.router.navigate(["private"]);
+      return true;
+    }
+    if (usarioLocalStote.typeuser == "2") {
+      if (
+        usarioLocalStote.permisosCrear == false &&
+        this.idUsuarioIndicador == 0 &&
+        this.indicadorEditarCrear == "crear"
+      ) {
+        this.router.navigate(["private"]);
+        return true;
+      }
+
+      if (
+        usarioLocalStote.permisosEditar == false &&
+        this.idUsuarioIndicador == 0 &&
+        this.indicadorEditarCrear == "modificar"
+      ) {
+        this.router.navigate(["private"]);
+        return true;
+      }
+
+      
+    }
+
+    this.ConsultarIndicadoresAsignados();
     this.getUsuarioId();
     this.getStandares();
     this.getCategoria(0);
@@ -133,6 +177,7 @@ export class AsignarIndicadoresComponent implements OnInit {
       res.pdf = false;
       res.excel = false;
       res.word = false;
+      res.idusuario = this.idUsuarioIndicador;
     });
   }
 

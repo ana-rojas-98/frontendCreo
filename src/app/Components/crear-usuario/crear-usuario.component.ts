@@ -118,7 +118,7 @@ export class CrearUsuarioComponent implements OnInit {
   };
 
   NuevoUsuario = {
-    usuarioId: 1,
+    usuarioId: 0,
     Fullname: "",
     Email: "",
     Pass: "12345",
@@ -414,7 +414,6 @@ export class CrearUsuarioComponent implements OnInit {
     this.permisoReportes.Eliminat = usarioLocalStote.reportesEliminar;
 
     this.permisoConfiguracion.Editar = usarioLocalStote.configuracionEditar;
-
   }
 
   inputUsuario() {
@@ -454,7 +453,8 @@ export class CrearUsuarioComponent implements OnInit {
       this.readonlySuperAdministrador = true;
     }
     this.permisos(false);
-    let id = this.route.snapshot.paramMap.get("id");
+    let id = "";
+    id = this.route.snapshot.paramMap.get("id");
     let usuario = this.route.snapshot.paramMap.get("usuario");
     let idVer = this.route.snapshot.paramMap.get("v");
     console.log("usuario: ", usuario);
@@ -477,7 +477,6 @@ export class CrearUsuarioComponent implements OnInit {
       return true;
     } else if (usuario == "usuario") {
       if (usarioLocalStote.permisosVer == false) {
-        this.alert("no puedo estar aqui");
         this.router.navigate(["administrar-usuarios"]);
         return true;
       }
@@ -493,7 +492,6 @@ export class CrearUsuarioComponent implements OnInit {
       return true;
     } else if (usarioLocalStote.permisosCrear == false) {
       this.router.navigate(["administrar-usuarios"]);
-      this.alert("no puedo estar aqui");
       return true;
     }
   }
@@ -531,8 +529,37 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   enviarUsuarioId() {
-    this.serviceAdministaraUsuario.UsuarioId.emit(this.UsuarioRegistrado);
-  }
+    if (this.modificar == false && this.idUsuarioIndicadores == 0) {
+      this.alert("Debes crear un usuario antes");
+      return true;
+    }
+
+    if (this.idUsuarioIndicadores != 0) {
+      if (this.NuevoUsuario.Typeuser == "2") {
+        this.alert("El usuario es administrador, no requiere asignar indicadores");
+        return true;
+      }
+      if (this.NuevoUsuario.Typeuser == "1") {
+        this.alert("El usuario es super administrador, no requiere asignar indicadores");
+        return true;
+      }
+      if (this.NuevoUsuario.Typeuser == "2") {
+          if (this.modificar == true) {
+            this.router.navigate([
+              "asignar-indicadores",
+              this.idUsuarioIndicadores,
+              "modificar",
+            ]);
+          } else {
+            this.router.navigate([
+              "asignar-indicadores",
+              this.idUsuarioIndicadores,
+              "crear",
+            ]);
+          }
+        }
+        }
+      }
 
   alert(mensaje) {
     Swal.fire(mensaje);
