@@ -1,19 +1,19 @@
 <div class="contenedor">
   <form class="form-box">
+    <div class="text-center mx-5 px-5">
+      <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" [dismissible]="false" id="Alert"
+        (closed)="successMessage = ''">{{ successMessage }}
+      </ngb-alert>
+    </div>
     <h1 class="Form-title" align="center">Nueva Subcategoría</h1>
     <div class="form-group col">
       <label>Estándar</label>
       <select
-        class="selector"
-        name="estandar"
-        type="selectbox"
-        [(ngModel)]="Estandar.estandar"
-      >
+        class="selector" name="estandar" 
+        type="selectbox" [(ngModel)]="Estandar.estandar" (change)="getCategoriafilter(Estandar.estandar)">
         <option value="">Estándar</option>
-        <option
-          *ngFor="let resultado of resultadosEstandares"
-          [value]="resultado.estandar"
-        >
+        <option *ngFor="let resultado of resultadosEstandares"
+          [value]="resultado.estandar">
           {{ resultado.nombreEstandar }}
         </option>
       </select>
@@ -23,8 +23,7 @@
         class="selector"
         name="categoria"
         type="selectbox"
-        [(ngModel)]="Subcategoria.Subcategoria1"
-      >
+        [(ngModel)]="Subcategoria.Subcategoria1">
         <option value="">Categoría</option>
         <option
           *ngFor="let resultadoCategoria of resultados"
@@ -33,9 +32,6 @@
           {{ resultadoCategoria.nombreCategoria }}
         </option>
       </select>
-
-      <br />
-      <br />
       <label>Nombre Subcategoría</label>
       <input
         type="Subcatego"
@@ -44,7 +40,7 @@
         [(ngModel)]="Subcategoria.NombreSubcategoria"
       />
     </div>
-    <div>
+    <div class="mt-5">
       <button [routerLink]="['/administrar-indicadores']"
               [routerLinkActive]="['link-active']"
               type="cancel" class="bot_per_2">Cancelar</button>

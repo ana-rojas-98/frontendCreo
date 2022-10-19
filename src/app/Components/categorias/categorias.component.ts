@@ -1,5 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
+import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
+import { Subject } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
 import Swal from "sweetalert2";
 
@@ -13,10 +15,13 @@ export class CategoriasComponent implements OnInit {
     NombreCategoria: "",
     IdEstandar: "",
   };
-
   resultados = {};
 
-  constructor(private authService: AuthService, private router: Router) {}
+  private _success = new Subject<string>();
+  successMessage = "";
+  @ViewChild("selfClosingAlert", { static: false }) selfClosingAlert: NgbAlert;
+
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
@@ -29,6 +34,22 @@ export class CategoriasComponent implements OnInit {
       return true;
     }
     this.getStandares();
+    this._success.subscribe((message) => (this.successMessage = message));
+  }
+
+  public changeSuccessMessage(i: number) {
+    if (i == 1) {
+      this._success.next("¡Se guardó existosamente!");
+    }
+    if (i == 2) {
+      this._success.next("¡Error!, la categoría ya existe");
+    }
+    if (i == 3) {
+      this._success.next("¡Error!, debe seleccionar el estándar");
+    }
+    if (i == 4) {
+      this._success.next("¡Error!, debe ingresar el nombre de la categoría");
+    }
   }
 
   getStandares() {
@@ -40,14 +61,24 @@ export class CategoriasComponent implements OnInit {
   }
 
   crear_categoria() {
-    this.authService.crear_categoria(this.Categoria).subscribe((res: any) => {
-      if (res.resul == "Categoria guardada") {
-        this.router.navigate(["subcatego"]);
-        return this.alerta(res.resul);
-      } else {
-        this.alerta("no se pudo agregar la categoria");
+    if (this.Categoria.IdEstandar == '') {
+      this.changeSuccessMessage(3);
+    }
+    else {
+      if (this.Categoria.NombreCategoria == '') {
+        this.changeSuccessMessage(4);
       }
-    });
+      else {
+        this.authService.crear_categoria(this.Categoria).subscribe((res: any) => {
+          if (res.resul == "Categoria guardada") {
+            this.router.navigate(["subcatego"]);
+            return this.alerta("Categoría creada exitosamente");
+          } else {
+            this.changeSuccessMessage(2);
+          }
+        });
+      }
+    }
   }
 
   alerta(mensaje: any) {

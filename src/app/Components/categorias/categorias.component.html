@@ -1,8 +1,13 @@
 <div class="contenedor">
   <form class="form-box">
-    <div class="row">
-      <h1 class="Form-title">Nueva categoría</h1>
+    <div class="text-center mx-5 px-5">
+      <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" [dismissible]="false" id="Alert"
+        (closed)="successMessage = ''">{{ successMessage }}
+      </ngb-alert>
     </div>
+    <h1 class="Form-title" align="center">
+      Nueva categoría
+    </h1>
     <div class="form-group">
       <div class="row">
         <label for="select">Estándar</label>
@@ -29,7 +34,6 @@
         </button>
       </div>
     </div>
-   
   </form>
   <div class="cerrar">
     <div class="circulo">

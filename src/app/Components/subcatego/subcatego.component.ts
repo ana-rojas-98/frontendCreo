@@ -1,5 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
+import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
+import { Subject } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
 import Swal from "sweetalert2";
 
@@ -26,7 +28,12 @@ export class SubcategoComponent implements OnInit {
   resultados = {};
   resultadosEstandares = {};
 
-  constructor(private authService: AuthService, private router: Router) {}
+  private _success = new Subject<string>();
+  successMessage = "";
+  @ViewChild("selfClosingAlert", { static: false }) selfClosingAlert: NgbAlert;
+
+
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
@@ -40,14 +47,11 @@ export class SubcategoComponent implements OnInit {
     }
     this.getCategoria();
     this.getStandares();
-  }
-  
-  alerta(mensaje:any){
-    Swal.fire(mensaje);
+    this._success.subscribe((message) => (this.successMessage = message));
   }
 
-  categoria(){
-    console.log(this.Subcategoria)
+  alerta(mensaje: any) {
+    Swal.fire(mensaje);
   }
 
   getCategoria() {
@@ -66,16 +70,59 @@ export class SubcategoComponent implements OnInit {
     });
   }
 
-  SetSubCategoria() {
-    this.authService
-      .crear_subcategoria(this.Subcategoria)
-      .subscribe((res: any) => {
-        if(res.resul == "Subcategoria guardada"){
-          this.router.navigate(['subcatego']);
-          return this.alerta(res.resul);
-        }else{
-          this.alerta("No se pudo agregar la Subcategoria"); 
-        }
-      });
+  getCategoriafilter(estandar) {
+    this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
+      this.resultados = res.filter(
+        (item) => item.idEstandar == estandar
+      );
+    });
   }
+
+  SetSubCategoria() {
+    if (this.Estandar.estandar == '') {
+      this.changeSuccessMessage(2);
+    }
+    else {
+      if (this.Subcategoria.Subcategoria1 == '') {
+        this.changeSuccessMessage(3);
+      }
+      else {
+        if (this.Subcategoria.NombreSubcategoria == '') {
+          this.changeSuccessMessage(4);
+        }
+        else {
+          this.authService
+            .crear_subcategoria(this.Subcategoria)
+            .subscribe((res: any) => {
+              if (res.resul == "Subcategoria guardada") {
+                this.router.navigate(['/subcatego']);
+                return this.alerta("Categoría creada exitosamente");
+              } else {
+                this.changeSuccessMessage(5);
+              }
+            });
+        }
+      }
+    }
+
+  }
+
+  public changeSuccessMessage(i: number) {
+    if (i == 1) {
+      this._success.next("¡Se guardó existosamente!");
+    }
+    if (i == 2) {
+      this._success.next("¡Error!, debe seleccionar el estándar");
+    }
+    if (i == 3) {
+      this._success.next("¡Error!, debe seleccionar la categoría");
+    }
+    if (i == 4) {
+      this._success.next("¡Error!, debe ingresar el nombre de la subcategoría");
+    }
+    if (i == 5) {
+      this._success.next("¡Error!, la subcategoría ya existe");
+    }
+  }
+
 }
