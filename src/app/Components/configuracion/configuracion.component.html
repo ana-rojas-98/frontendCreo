@@ -10,8 +10,19 @@
                 <div >
                 <img [src]="prev" alt="logo-empresa">
                 </div>
-                <button class="cambiar-logo" (click)="capturado.click()">Cambiar logo</button>
-                <input type="file" hidden (change)="captImg($event)" #capturado id="image">
+                <button 
+                    class="cambiar-logo"
+                    (click)="capturado.click()"
+                    >
+                    Cambiar logo
+                </button>
+                <input 
+                    type="file" 
+                    hidden (change)="captImg($event)" 
+                    #capturado 
+                    id="image"
+                    accept=".jpg,.png"
+                    >
             </div>
             <div class="nombre">
                 <h5>Nombre empresa</h5>

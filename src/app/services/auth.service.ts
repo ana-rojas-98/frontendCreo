@@ -227,11 +227,15 @@ descarga(){
   }
 
   setConfiguracion(confi: any){
-    const headers =this.cabecera();
+   // const headers =this.cabecera();
     let res = this.http.post(`${this.URL_SER}/api/Configuracions/guardarConfiguracion`,
-      confi,
-      headers
+      confi
       );
+    return res;
+  }
+
+  enviarSoloArchivo(formato: any){
+    let res = this.http.post(`${this.URL_SER}/api/FormatoArchivoes/guardarFormato`, formato);
     return res;
   }
 }

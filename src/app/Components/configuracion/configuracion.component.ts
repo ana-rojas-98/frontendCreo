@@ -57,8 +57,8 @@ export class ConfiguracionComponent implements OnInit {
   guardarConfiguracion(){    
   const enviarimg = new FormData ();
   
-  enviarimg.append('logo',this.prev);
-  enviarimg.append('nombre',this.configuracion.nombreEmpresa);
+  enviarimg.append('logo',this.logo);
+  enviarimg.append('nombre', this.configuracion.nombreEmpresa);
   enviarimg.append('inicio',this.configuracion.inicial);
   enviarimg.append('final',this.configuracion.final);
 

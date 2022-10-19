@@ -189,29 +189,40 @@ export class NuevoIndicadorComponent implements OnInit {
 
   nuevoIndicador = {
     archivo: this.archivos,
-    IdEstandar: "",
-    IdCategoria: "",
-    Idsubcategoria: "",
-    periodicidad: "",
+    IdEstandar: 21,
+    IdCategoria: 67,
+    Idsubcategoria: 14,
+    periodicidad: 6,
   };
 
 
 
   setNuevoIndicador() {
-    console.log(this.nuevoIndicador); 
+    console.log(this.archivos); 
 
-    const formData = new FormData();
-    formData.append("archivo", this.archivos); 
-    formData.append("IdEstandar", this.nuevoIndicador.IdEstandar); 
-    formData.append("IdCategoria", this.nuevoIndicador.IdCategoria); 
-    formData.append("Idsubcategoria", this.nuevoIndicador.Idsubcategoria); 
-    formData.append("periodicidad", this.nuevoIndicador.periodicidad); 
-    console.log("este es lel mensaje", formData); 
+    // const formData = new FormData();
+    // formData.append("archivo", this.archivos); 
+    // formData.append("IdEstandar", "21"); 
+    // formData.append("IdCategoria", "67"); 
+    // formData.append("Idsubcategoria", "14"); 
+    // formData.append("periodicidad", "6"); 
+    // console.log("este es lel mensaje", formData); 
 
-     this.authService.setIndicadorNuevo(formData).subscribe((res: any) => {
+    //  this.authService.setIndicadorNuevo(formData).subscribe((res: any) => {
+    //   console.log(res);
+    //  });
+    // return formData;
+
+  }
+  archivo(){
+    console.log('entra a archivo');
+    const soloArchivo = new FormData();
+    soloArchivo.append("archivo",this.archivos);
+    this.authService.enviarSoloArchivo(soloArchivo).subscribe((res:any) =>{
       console.log(res);
-     });
-    return formData;
+      console.log('entra al segundo');
+    });
+    return soloArchivo;
   }
 
   descargarArchivo(){
