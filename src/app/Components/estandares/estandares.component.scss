@@ -37,7 +37,8 @@
   }
 .form-box input[type="Estandar"]{
   margin-top: 10px;
-  @include inputCard(360px, 48px);
+  width: 300 px;
+  @include inputCard(280px, 48px);
 }
 .form-box input[type="Estandar"] :focus{
   border-color: aqua;
@@ -46,7 +47,7 @@
   display: flex;  
   flex-direction: column;
   justify-content: center;
-  margin-left: 130px;
+  margin-left: 175px;
 }
 .bot_est{
     @include buttonCard($buttonPrimary);

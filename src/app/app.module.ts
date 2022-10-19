@@ -106,7 +106,7 @@ import { AsignarIndicadorComponent } from './Components/asignar-indicador/asigna
       { path: 'crear-usuarios/:v/:usuario', component: CrearUsuarioComponent, canActivate:[AuthGuard]},
       { path: 'indicadores', component: IndicadoresComponent, canActivate:[AuthGuard]},
       { path: 'diligenciar-indicador', component: DiligenciarIndicadorComponent, canActivate:[AuthGuard]},
-      { path: 'asignar-indicadores', component: AsignarIndicadoresComponent, canActivate:[AuthGuard]},
+      { path: 'asignar-indicadores/:id/:usuario', component: AsignarIndicadoresComponent, canActivate:[AuthGuard]},
       { path: 'configuracion', component: ConfiguracionComponent, canActivate:[AuthGuard]},
       { path: 'asignar-indicador', component: AsignarIndicadorComponent},
     ])

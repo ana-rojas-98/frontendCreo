@@ -1,4 +1,5 @@
 import { JsonpClientBackend } from "@angular/common/http";
+import { Router } from "@angular/router";
 import {
   Component,
   OnInit,
@@ -7,15 +8,16 @@ import {
 import { AuthService } from "src/app/services/auth.service";
 import * as XSLX from "xlsx";
 
+
 @Component({
   selector: "app-nuevo-indicador",
   templateUrl: "./nuevo-indicador.component.html",
   styleUrls: ["./nuevo-indicador.component.scss"],
 })
 export class NuevoIndicadorComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  archivos : File = null;
+  archivos: File = null;
   ExcelData: any;
   archivosp = "";
   archivoCapturado: File;
@@ -93,6 +95,15 @@ export class NuevoIndicadorComponent implements OnInit {
   }
 
   ngOnInit() {
+    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    if (usarioLocalStote.typeuser == "3") {
+      this.router.navigate(["private"]);
+      return true;
+    }
+    if (usarioLocalStote.indicadorCrear == false) {
+      this.router.navigate(["private"]);
+      return true;
+    }
     this.getStandares();
   }
 
@@ -157,13 +168,12 @@ export class NuevoIndicadorComponent implements OnInit {
     FinColumna: "",
     SaltoLinea: "",
   };
- 
 
   leerArchivo() {
     const archivoleido = new FileReader();
     const archi = this.archivoleer[0];
     archivoleido.readAsBinaryString(archi);
-    console.log('el archivo',archi)
+    console.log("el archivo", archi);
     archivoleido.onload = (e) => {
       const workArchi = XSLX.read(archivoleido.result, { type: "binary" });
       const nombreHojas = workArchi.SheetNames;
@@ -171,7 +181,7 @@ export class NuevoIndicadorComponent implements OnInit {
         workArchi.Sheets[nombreHojas[0]]
       );
     };
-    console.log('el excelData',this.ExcelData)
+    console.log("el excelData", this.ExcelData);
   }
 
   Periodicidad() {
@@ -194,8 +204,6 @@ export class NuevoIndicadorComponent implements OnInit {
     Idsubcategoria: 14,
     periodicidad: 6,
   };
-
-
 
   setNuevoIndicador() {
     console.log(this.archivos); 
@@ -225,15 +233,15 @@ export class NuevoIndicadorComponent implements OnInit {
     return soloArchivo;
   }
 
-  descargarArchivo(){
-    this.authService.descarga().subscribe(res=>{
-      let nombreArchivo = res.headers.get('content-disposition')
+  descargarArchivo() {
+    this.authService.descarga().subscribe((res) => {
+      let nombreArchivo = res.headers.get("content-disposition");
       //?.split(';')[1].split('=')[1];
-      let tipo:Blob=res.body as Blob;
-      let a = document.createElement('a');
-      a.download = 'ArchivoEjemplo.xlsx';
+      let tipo: Blob = res.body as Blob;
+      let a = document.createElement("a");
+      a.download = "ArchivoEjemplo.xlsx";
       a.href = window.URL.createObjectURL(tipo);
       a.click();
-    })
+    });
   }
 }

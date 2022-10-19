@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-administrar-indicadores",
@@ -7,7 +8,7 @@ import { AuthService } from "src/app/services/auth.service";
   styleUrls: ["./administrar-indicadores.component.scss"],
 })
 export class AdministrarIndicadoresComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, public router: Router) {}
   Estandar = {
     NombreEstandar: "",
     estandar: "",
@@ -32,6 +33,10 @@ export class AdministrarIndicadoresComponent implements OnInit {
   resultadosSubCategoria = {};
   estandarFil = "";
   categoriaFil = "";
+  crear = false;
+  ver = false;
+  editar = false;
+  eliminar = false;
 
   estandar() {
     this.estandarFil = this.Estandar.estandar;
@@ -45,6 +50,24 @@ export class AdministrarIndicadoresComponent implements OnInit {
   }
 
   ngOnInit() {
+    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+
+    if (usarioLocalStote.typeuser == "3") {
+      this.router.navigate(['private'])
+      return true;
+    }
+    if (usarioLocalStote.indicadorCrear == true) {
+      this.crear = true;
+    }
+    if (usarioLocalStote.indicadorVer == true) {
+      this.ver = true;
+    }
+    if (usarioLocalStote.indicadorEditar == true) {
+      this.editar = true;
+    }
+    if (usarioLocalStote.indicadorEliminar == true) {
+      this.eliminar = true;
+    }
     this.getStandares();
     this.getCategoria(0);
     this.getSubCategoria(0);

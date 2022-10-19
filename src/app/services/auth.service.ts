@@ -42,7 +42,7 @@ export class AuthService {
     const requestOptions = { headers: headers };
     return requestOptions;
   }
-  cabecera(){
+  cabecera() {
     const token = localStorage.getItem("token");
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
@@ -61,7 +61,6 @@ export class AuthService {
       `${this.URL_SER}/api/Usuarios/ValidationEmail`,
       email
     );
-    console.log(result);
     return this.http.post(
       `${this.URL_SER}/api/Usuarios/ValidationEmail`,
       email
@@ -91,7 +90,6 @@ export class AuthService {
       `${this.URL_SER}/api/Estandares/PostEstandar`,
       estandar
     );
-    console.log(result);
     return result;
   }
 
@@ -189,15 +187,16 @@ export class AuthService {
       `${this.URL_SER}/api/Usuarios/GetUsuarioModificar`,
       id
     );
-    console.log(resul);
     return resul;
   }
 
-descarga(){
-  let resu = this.http.get(`${this.URL_SER}/api/FormatoArchivoes/descargarArchivo`,
-    {observe:'response', responseType:'blob'});
+  descarga() {
+    let resu = this.http.get(
+      `${this.URL_SER}/api/FormatoArchivoes/descargarArchivo`,
+      { observe: "response", responseType: "blob" }
+    );
     return resu;
-}
+  }
   ModificarUsuario(id) {
     let resul = this.http.post(
       `${this.URL_SER}/api/Usuarios/ModificarUsuario`,
@@ -217,12 +216,13 @@ descarga(){
     return resul;
   }
 
-  masivos(archivos: any){
+  masivos(archivos: any) {
     const headers = this.fnSetDefineTokenAuthorization();
-    let resultado = this.http.post(`${this.URL_SER}/api/archivos/postArchivos`,
+    let resultado = this.http.post(
+      `${this.URL_SER}/api/archivos/postArchivos`,
       archivos,
       headers
-      );    
+    );
     return resultado;
   }
 

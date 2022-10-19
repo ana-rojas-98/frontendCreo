@@ -3,6 +3,8 @@ import { AdministrarUsuariosService } from "src/app/services/administrar-usuario
 import { IndicadoresService } from "src/app/services/indicadores.service";
 import { AuthService } from "src/app/services/auth.service";
 import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-asignar-indicadores",
@@ -14,7 +16,9 @@ export class AsignarIndicadoresComponent implements OnInit {
     private authService: AuthService,
     private IndicadoresService: IndicadoresService,
     private serviceAdministaraUsuario: AdministrarUsuariosService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    public router: Router
   ) {}
 
   public permisosIndicador: FormGroup = new FormGroup({
@@ -47,39 +51,174 @@ export class AsignarIndicadoresComponent implements OnInit {
     nombreSubcategoria: "",
   };
 
+  usarioConsultarApi = {
+    Usuarioid: 1,
+  };
+
+  idUsuarioIndicador = 0;
+  indicadorEditarCrear = "";
+  modificar = false;
   resultados = {};
   resultadosCategoria = {};
   resultadosSubCategoria = {};
   estandarFil = "";
   categoriaFil = "";
+  subCategoriaFil = "";
+  resulEnviarApi: any = [this.SubCategoria];
+  resultadosBusquedaIndicadores: any = {};
+  nombre = "";
+  idUsuarioConsultarApi = {
+    id: 0,
+  };
+
   resultadosTabla: any = [];
-  resulEnviarApi: any = [];
+  auxresultadosTabla: any = [];
+  auxresultadosTabla1: any = [];
+  con = 0;
 
   estandar() {
+    if (this.con == 0) {
+      this.auxresultadosTabla1 = this.resultadosTabla;
+      this.con = 1;
+    }
+    this.auxresultadosTabla = this.auxresultadosTabla1;
     this.estandarFil = this.Estandar.estandar;
     this.getCategoria(this.estandarFil);
     this.getSubCategoria(-1);
+
+    //methodo para filtara despues de precionr el celect
+    if (this.estandarFil == "") {
+      this.ConsultarIndicadoresAsignados();
+      return true;
+    }
+
+    if (this.estandarFil != "") {
+      let id = parseInt(this.estandarFil);
+
+      let resultadosTabla = this.auxresultadosTabla1.filter((item) => {
+        return item.idEstandar == id;
+      });
+      this.resultadosTabla = resultadosTabla;
+      this.mapearResultadosTabla(this.auxresultadosTabla1);
+    }
   }
 
+  subCategoria() {
+    if (this.con == 0) {
+      this.auxresultadosTabla1 = this.resultadosTabla;
+      this.con = 1;
+    }
+    this.subCategoriaFil = this.SubCategoria.subcategoria1;
+
+    //methodo para filtara despues de precionr el celect
+    if (this.subCategoriaFil == "") {
+      this.ConsultarIndicadoresAsignados();
+      return true;
+    }
+
+    if (this.subCategoriaFil != "") {
+      let id = parseInt(this.subCategoriaFil);
+
+      let resultadosTabla = this.auxresultadosTabla1.filter((item) => {
+        return item.idSubCategoria == id;
+      });
+      this.resultadosTabla = resultadosTabla;
+      this.mapearResultadosTabla(this.auxresultadosTabla1);
+    }
+  }
   categoria() {
+    if (this.con == 0) {
+      this.auxresultadosTabla1 = this.resultadosTabla;
+      this.con = 1;
+    }
     this.categoriaFil = this.Categoria.categoria1;
     this.getSubCategoria(this.categoriaFil);
+
+    //methodo para filtara despues de precionr el celect
+    if (this.categoriaFil == "") {
+      this.ConsultarIndicadoresAsignados();
+      return true;
+    }
+
+    if (this.categoriaFil != "") {
+      let id = parseInt(this.categoriaFil);
+
+      let resultadosTabla = this.auxresultadosTabla1.filter((item) => {
+        return item.idCategoria == id;
+      });
+      this.resultadosTabla = resultadosTabla;
+      this.mapearResultadosTabla(this.auxresultadosTabla1);
+    }
   }
 
   getUsuarioId() {
     this.serviceAdministaraUsuario.UsuarioId.subscribe((Usuarioid) => {
       this.usuarioId = Usuarioid;
-      console.log("hola: ", this.usuarioId);
     });
   }
 
+  getUsuarioApi(id) {
+    this.usarioConsultarApi.Usuarioid = id;
+    this.authService
+      .getUsuarioModificar(this.usarioConsultarApi)
+      .subscribe((res: any) => {
+        this.nombre = res.nombre;
+      });
+  }
+
   ngOnInit() {
-    this.ConsultarIndicadoresAsignados()
+    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    this.idUsuarioIndicador = parseInt(this.route.snapshot.paramMap.get("id"));
+    this.indicadorEditarCrear = this.route.snapshot.paramMap.get("usuario");
+    this.idUsuarioConsultarApi.id = this.idUsuarioIndicador;
+    this.getUsuarioApi(this.idUsuarioIndicador);
+
+    if (this.indicadorEditarCrear != "modificar") {
+      if (this.indicadorEditarCrear != "crear") {
+        this.router.navigate(["private"]);
+        return true;
+      }
+    }
+
+    if (usarioLocalStote.typeuser == "3") {
+      this.router.navigate(["private"]);
+      return true;
+    }
+    if (usarioLocalStote.typeuser == "2") {
+      if (
+        usarioLocalStote.permisosCrear == false &&
+        this.idUsuarioIndicador == 0 &&
+        this.indicadorEditarCrear == "crear"
+      ) {
+        this.router.navigate(["private"]);
+        return true;
+      }
+
+      if (
+        usarioLocalStote.permisosEditar == false &&
+        this.idUsuarioIndicador == 0 &&
+        this.indicadorEditarCrear == "modificar"
+      ) {
+        this.router.navigate(["private"]);
+        return true;
+      }
+    }
+
+    this.ConsultarIndicadoresAsignados();
     this.getUsuarioId();
     this.getStandares();
     this.getCategoria(0);
     this.getSubCategoria(0);
-    this.GetIndicadoresPermisos();
+  }
+
+  ConsultarIndicadoresAsignados() {
+    this.IndicadoresService.ConsultarIndicadoresAsignados(
+      this.idUsuarioConsultarApi
+    ).subscribe((res: any) => {
+      this.resultadosBusquedaIndicadores = res;
+      this.GetIndicadoresPermisos(this.resultadosBusquedaIndicadores);
+      return res;
+    });
   }
 
   getStandares() {
@@ -126,33 +265,34 @@ export class AsignarIndicadoresComponent implements OnInit {
     }
   }
 
-  mapearResultadosTabla() {
-    this.resultadosTabla.map((res) => {
-      res.ver = false;
-      res.diligenciar = false;
-      res.pdf = false;
-      res.excel = false;
-      res.word = false;
+  mapearResultadosTabla(resultadosBusquedaIndicadores) {
+    this.auxresultadosTabla = this.resultadosTabla.map((res) => {
+      resultadosBusquedaIndicadores.map((item) => {
+        if (res.idIndicador == item.idIndicador) {
+          res.ver = item.ver;
+          res.diligenciar = item.diligenciar;
+          res.pdf = item.pdf;
+          res.excel = item.excel;
+          res.word = item.word;
+          return true;
+        }
+      });
+
+      res.idusuario = this.idUsuarioIndicador;
+      return res;
     });
   }
 
-  GetIndicadoresPermisos() {
+  GetIndicadoresPermisos(resultadosBusquedaIndicadores) {
     this.IndicadoresService.GetIndicadoresPermisos("").subscribe((res: any) => {
       this.resultadosTabla = res;
-      this.mapearResultadosTabla();
+      this.mapearResultadosTabla(resultadosBusquedaIndicadores);
       return res;
     });
   }
 
   guardarIndicadores() {
-    this.resulEnviarApi = this.resultadosTabla.filter(
-      (item) =>
-        item.ver == true ||
-        item.diligenciar == true ||
-        item.pdf == true ||
-        item.excel == true ||
-        item.word == true
-    );
+    this.resulEnviarApi = this.resultadosTabla;
     this.CerarPermisosIndicador();
   }
 
@@ -160,17 +300,14 @@ export class AsignarIndicadoresComponent implements OnInit {
     this.IndicadoresService.CerarPermisosIndicador(
       this.resulEnviarApi
     ).subscribe((res: any) => {
-      console.log("api: ", res);
+      if (res.resul == "Se guardo con exito") {
+        this.alert("Datos guardados");
+      }
       return res;
     });
   }
 
-  ConsultarIndicadoresAsignados() {
-    this.IndicadoresService.ConsultarIndicadoresAsignados("").subscribe(
-      (res: any) => {
-        console.log("api: ", res);
-        return res;
-      }
-    );
+  alert(mensaje) {
+    Swal.fire(mensaje);
   }
 }

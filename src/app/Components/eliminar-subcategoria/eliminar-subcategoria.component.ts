@@ -48,6 +48,15 @@ export class EliminarSubcategoriaComponent implements OnInit {
   }
 
   ngOnInit() {
+    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    if (usarioLocalStote.typeuser == "3") {
+      this.router.navigate(["private"]);
+      return true;
+    }
+    if (usarioLocalStote.indicadorEliminar == false) {
+      this.router.navigate(["private"]);
+      return true;
+    }
     this.getStandares();
   }
 
@@ -81,13 +90,12 @@ export class EliminarSubcategoriaComponent implements OnInit {
     this.resultadosSubCategoria = this.authService
       .eliminarSubcategoria(this.SubCategoria)
       .subscribe((res: any) => {
-        if(res.resul == "Subcategoria eliminada correctamente"){
-          this.router.navigate(['categorias'])
+        if (res.resul == "Subcategoria eliminada correctamente") {
+          this.router.navigate(["categorias"]);
           this.alerta(res.resul);
-        }else{
+        } else {
           this.alerta("No se pudo eliminar correctamente");
         }
-        
       });
   }
 

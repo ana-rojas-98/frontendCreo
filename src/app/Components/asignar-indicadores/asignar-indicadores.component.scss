@@ -20,8 +20,16 @@ h1 {
   width: 100%;
   margin: 20px;
   .selector {
-    @include inputCard(350px, 50px);
-    margin: 0 10px 20px 10px;
+    background: #ffffff;
+    border: 1px solid #d0d4d9;
+    border-radius: 25px;
+    width: 100%;
+    height: 60px;
+    margin: 10px 10px 20px 10px;
+  }
+  .box {
+    width: 25%;
+    margin-left: 20px;
   }
 }
 
@@ -31,19 +39,6 @@ h1 {
   h3 {
     font-weight: bold;
     margin-right: 20px;
-  }
-}
-
-.seleccion {
-  input {
-    background: #ffffff;
-    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    width: 280px;
-    height: 60px;
-    border: 1px;
-    margin-top: 20px;
-    margin-bottom: 30px;
   }
 }
 

@@ -32,9 +32,10 @@ export class IndicadoresService {
     return resul;
   }
 
+
   ConsultarIndicadoresAsignados(permisos) {
-    let resul = this.http.get(
-      `${this.URL_SER}/api/indicadores/ConsultarIndicadoresAsignados`
+    let resul = this.http.post(
+      `${this.URL_SER}/api/indicadores/ConsultarUsuarios`,permisos
     );
     return resul;
   }

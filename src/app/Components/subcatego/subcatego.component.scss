@@ -39,8 +39,6 @@
   display: flex;  
   flex-direction: column;
   justify-content: center;
-  width: 380px;
-  height: 290px;
   margin-left: 170px;
 }
 .form-group label{
@@ -48,8 +46,12 @@
 }
 .form-group select{
   @include select;
+  height: 40px;
+  width: 280;
 }
 .form-box input[type="Subcatego"]{
+  margin-top: 10px;
+  width: 300px;
  @include inputCard(280px, 48px);
 }
 .form-box input[type="Subcatego"] :focus{
@@ -60,7 +62,6 @@
   width: 123px;
   height: 47px;
   left: calc(50% - 123px/2 + 115px);
-  top: calc(50% - 47px/2 + 204px);
   cursor: pointer;
 }
   .bot_per_2{
@@ -68,6 +69,5 @@
     width: 130px;
     height: 47px;
     left: calc(50% - 130px/2 - 106.5px);
-    top: calc(50% - 47px/2 + 204px);
     cursor: pointer;
   }
