@@ -12,7 +12,7 @@
           [(ngModel)]="tipoUsuario.typeuser"
           (change)="tipoUsuarioFiltro()"
         >
-          <option value="">Selecciona Tipo de usuario</option>
+          <option value="">Selecciona tipo de usuario</option>
           <option
             *ngFor="let tipoUsuario of resultadosTipoUsuario"
             [value]="tipoUsuario.typeuser"
@@ -82,13 +82,13 @@
             <th>
               <img
                 src="../../../assets/imagenes/correo.svg"
-                alt="icono-nombre"
+                alt="icono-nombre" class="mx-1"
               />Correo
             </th>
             <th>
               <img
                 src="../../../assets/imagenes/estado.svg"
-                alt="icono-nombre"
+                alt="icono-nombre" class="mx-1"
               />Estado
             </th>
             <th>

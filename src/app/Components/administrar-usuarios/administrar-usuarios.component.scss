@@ -47,11 +47,13 @@ h1 {
 
 .boton {
   @include boton($buttonPrimary);
+  height: 40px;
 }
 
 img {
-  margin-top: 10px;
-  margin-right: 2px;
+  padding-right: 5px;
+  width: 10px;
+  height: 10px;
 }
 @media (width < 1312px){
   .cuerpo{
