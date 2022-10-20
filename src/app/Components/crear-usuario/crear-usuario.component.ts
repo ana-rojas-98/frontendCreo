@@ -1,8 +1,11 @@
 import Swal from "sweetalert2";
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 import { AdministrarUsuariosService } from "src/app/services/administrar-usuarios.service";
+import { Subject } from "rxjs";
+import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
+import { timeStamp } from "console";
 
 @Component({
   selector: "app-crear-usuario",
@@ -15,7 +18,7 @@ export class CrearUsuarioComponent implements OnInit {
     private serviceAdministaraUsuario: AdministrarUsuariosService,
     private route: ActivatedRoute,
     public router: Router
-  ) {}
+  ) { }
 
   UsuarioRegistrado = {};
   UsuarioIdModificar = "";
@@ -140,6 +143,10 @@ export class CrearUsuarioComponent implements OnInit {
   };
 
   Usuarioid = "";
+
+  private _success = new Subject<string>();
+  successMessage = "";
+  @ViewChild("selfClosingAlert", { static: false }) selfClosingAlert: NgbAlert;
 
   getUsuarioId() {
     this.serviceAdministaraUsuario.UsuarioIdModificar.subscribe(
@@ -445,6 +452,7 @@ export class CrearUsuarioComponent implements OnInit {
 
   ngOnInit() {
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    this._success.subscribe((message) => (this.successMessage = message));
 
     if (usarioLocalStote.typeuser == "3") {
       this.readonlyAdministrador = true;
@@ -499,33 +507,65 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   asignarIndicadores() {
-    if (this.modificar == true) {
-      this.authService
-        .ModificarUsuario(this.NuevoUsuario)
-        .subscribe((res: any) => {
-          this.UsuarioRegistrado = res;
-          if (res.resul == "Registro actualizado correctamente") {
-            return this.alert("Registro actualizado correctamente");
-          } else if (res.resul == "el usuario no se encuentra registrado") {
-            return this.alert("El correo ya se encuentra registrado");
+    if (this.NuevoUsuario.Fullname == '') {
+      this.changeSuccessMessage(1);
+    }
+    else {
+      if (this.NuevoUsuario.Email == '') {
+        this.changeSuccessMessage(2);
+      }
+      else {
+        if (this.NuevoUsuario.Typeuser == '') {
+          this.changeSuccessMessage(3);
+        }
+        else {
+          if (this.modificar == true) {
+            this.authService
+              .ModificarUsuario(this.NuevoUsuario)
+              .subscribe((res: any) => {
+                this.UsuarioRegistrado = res;
+                if (res.resul == "Registro actualizado correctamente") {
+                  return this.alert("Registro actualizado correctamente");
+                } else if (res.resul == "el usuario no se encuentra registrado") {
+                  this.changeSuccessMessage(4);
+                } else {
+                  return this.alert("Error al modificar el usuario");
+                }
+              });
           } else {
-            return this.alert("Error al modificar el usuario");
+            this.authService
+              .CrearNuevoUsuario(this.NuevoUsuario)
+              .subscribe((res: any) => {
+                this.UsuarioRegistrado = res;
+                if (res.mensaje == "Usuario registrado correctamente") {
+                  this.idUsuarioIndicadores = res.usuarioid;
+                  return this.alert("Registro exitoso");
+                } else if (res.resul == "El correo ya se encuentra registrado") {
+                  this.changeSuccessMessage(4);
+                } else {
+                  return this.alert("Error al registrar el usuario");
+                }
+              });
           }
-        });
-    } else {
-      this.authService
-        .CrearNuevoUsuario(this.NuevoUsuario)
-        .subscribe((res: any) => {
-          this.UsuarioRegistrado = res;
-          if (res.mensaje == "Usuario registrado correctamente") {
-            this.idUsuarioIndicadores = res.usuarioid;
-            return this.alert("Registro exitoso");
-          } else if (res.mensaje == "El correo ya se encuentra registrado") {
-            return this.alert("El correo ya se encuentra registrado");
-          } else {
-            return this.alert("Error al registrar el usuario");
-          }
-        });
+        }
+
+      }
+    }
+
+  }
+
+  public changeSuccessMessage(i: number) {
+    if (i == 1) {
+      this._success.next("¡Error!, el campo nombre no puede estar vacío");
+    }
+    if (i == 2) {
+      this._success.next("¡Error!, el campo correo electrónico no puede estar vacío");
+    }
+    if (i == 3) {
+      this._success.next("¡Error!, debe seleccionar un tipo de usuario");
+    }
+    if (i == 4) {
+      this._success.next("¡Error!, el correo ya se encuentra registrado");
     }
   }
 
@@ -545,22 +585,22 @@ export class CrearUsuarioComponent implements OnInit {
         return true;
       }
       if (this.NuevoUsuario.Typeuser == "3") {
-          if (this.modificar == true) {
-            this.router.navigate([
-              "asignar-indicadores",
-              this.idUsuarioIndicadores,
-              "modificar",
-            ]);
-          } else {
-            this.router.navigate([
-              "asignar-indicadores",
-              this.idUsuarioIndicadores,
-              "crear",
-            ]);
-          }
-        }
+        if (this.modificar == true) {
+          this.router.navigate([
+            "asignar-indicadores",
+            this.idUsuarioIndicadores,
+            "modificar",
+          ]);
+        } else {
+          this.router.navigate([
+            "asignar-indicadores",
+            this.idUsuarioIndicadores,
+            "crear",
+          ]);
         }
       }
+    }
+  }
 
   alert(mensaje) {
     Swal.fire(mensaje);

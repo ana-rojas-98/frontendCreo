@@ -55,27 +55,27 @@ export class NuevoIndicadorComponent implements OnInit {
   nombres = [
     {
       id: "1",
-      periodicidad: "mensual",
+      periodicidad: "Mensual",
     },
     {
       id: "2",
-      periodicidad: "bimensual",
+      periodicidad: "Bimensual",
     },
     {
       id: "3",
-      periodicidad: "trimestral",
+      periodicidad: "Trimestral",
     },
     {
       id: "4",
-      periodicidad: "cuatrimestral",
+      periodicidad: "Cuatrimestral",
     },
     {
       id: "5",
-      periodicidad: "semestral",
+      periodicidad: "Semestral",
     },
     {
       id: "6",
-      periodicidad: "anual",
+      periodicidad: "Anual",
     },
   ];
   seleccionado = {

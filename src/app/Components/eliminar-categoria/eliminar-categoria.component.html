@@ -1,7 +1,12 @@
 <div class="contenedor">
   <form class="form-box">
+    <div class="text-center mx-5 px-5">
+      <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" [dismissible]="false" id="Alert"
+        (closed)="successMessage = ''">{{ successMessage }}
+      </ngb-alert>
+    </div>
     <h1 class="Form-title" align="center">Eliminar categoría</h1>
-    <div class="form-group col">
+    <div class="form-group">
       <label for="select">Estándar</label>
       <select
         class="selector"
