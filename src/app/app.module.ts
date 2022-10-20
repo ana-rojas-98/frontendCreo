@@ -84,6 +84,7 @@ import { ReportesComponent } from './Components/reportes/reportes.component';
     HttpClientModule,
     NgbModule,
     FormsModule,
+    GoogleChartsModule,
     ReactiveFormsModule,
     GoogleChartsModule.forRoot(),
     RouterModule.forRoot([
