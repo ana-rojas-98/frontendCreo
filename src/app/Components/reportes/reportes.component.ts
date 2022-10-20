@@ -11,7 +11,7 @@ export class ReportesComponent implements OnInit {
 
   columnNames = ["Browser", "Percentage"];
   title = "googlechart";
-  type = "Dual-Y";
+  type = "PieChart";
   data = [
     ["Name1", 5.0],
     ["Name2", 36.8],

@@ -43,6 +43,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AsignarIndicadorComponent } from './Components/asignar-indicador/asignar-indicador.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { ReportesComponent } from './Components/reportes/reportes.component';
+
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -84,7 +85,6 @@ import { ReportesComponent } from './Components/reportes/reportes.component';
     HttpClientModule,
     NgbModule,
     FormsModule,
-    GoogleChartsModule,
     ReactiveFormsModule,
     GoogleChartsModule.forRoot(),
     RouterModule.forRoot([
