@@ -41,6 +41,8 @@ import { FooterPrincipalComponent } from './Components/footer-principal/footer-p
 import { ConfiguracionComponent } from './Components/configuracion/configuracion.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AsignarIndicadorComponent } from './Components/asignar-indicador/asignar-indicador.component';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { ReportesComponent } from './Components/reportes/reportes.component';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -75,6 +77,7 @@ import { AsignarIndicadorComponent } from './Components/asignar-indicador/asigna
     FooterPrincipalComponent,
     ConfiguracionComponent,
     AsignarIndicadorComponent,
+    ReportesComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -82,6 +85,7 @@ import { AsignarIndicadorComponent } from './Components/asignar-indicador/asigna
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    GoogleChartsModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },            
       { path: 'login', component: LoginComponent },
@@ -109,6 +113,7 @@ import { AsignarIndicadorComponent } from './Components/asignar-indicador/asigna
       { path: 'asignar-indicadores/:id/:usuario', component: AsignarIndicadoresComponent, canActivate:[AuthGuard]},
       { path: 'configuracion', component: ConfiguracionComponent, canActivate:[AuthGuard]},
       { path: 'asignar-indicador', component: AsignarIndicadorComponent},
+      { path: 'reportes', component: ReportesComponent},
     ])
   ],
   providers: [
