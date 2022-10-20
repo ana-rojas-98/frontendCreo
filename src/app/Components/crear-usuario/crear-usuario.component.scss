@@ -107,22 +107,3 @@ h3 {
   font-family: "Montserrat";
 }
 
-@media (width>1580px) {
-  .cuerpo {
-    height: 1000px;
-    width: 100%;
-  }
-  .container-input {
-    margin-top: 50px;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    margin-left: 100px;
-    align-items: center;
-  }
-  .resultados-tabla {
-    display: flex;
-    align-items: center;
-  }
-}

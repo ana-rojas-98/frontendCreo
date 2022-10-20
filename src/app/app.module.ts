@@ -41,6 +41,7 @@ import { FooterPrincipalComponent } from './Components/footer-principal/footer-p
 import { ConfiguracionComponent } from './Components/configuracion/configuracion.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AsignarIndicadorComponent } from './Components/asignar-indicador/asignar-indicador.component';
+import { GoogleChartsModule } from 'angular-google-charts';
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -81,6 +82,7 @@ import { AsignarIndicadorComponent } from './Components/asignar-indicador/asigna
     HttpClientModule,
     NgbModule,
     FormsModule,
+    GoogleChartsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },            
