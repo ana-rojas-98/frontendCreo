@@ -5,7 +5,6 @@ import { AuthService } from "src/app/services/auth.service";
 import { AdministrarUsuariosService } from "src/app/services/administrar-usuarios.service";
 import { Subject } from "rxjs";
 import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
-import { timeStamp } from "console";
 
 @Component({
   selector: "app-crear-usuario",
