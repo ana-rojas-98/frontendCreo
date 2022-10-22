@@ -43,6 +43,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AsignarIndicadorComponent } from './Components/asignar-indicador/asignar-indicador.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { ReportesComponent } from './Components/reportes/reportes.component';
+import { ReportesIndicadoresComponent } from './Components/reportes-indicadores/reportes-indicadores.component';
 
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
@@ -79,6 +80,7 @@ import { ReportesComponent } from './Components/reportes/reportes.component';
     ConfiguracionComponent,
     AsignarIndicadorComponent,
     ReportesComponent,
+    ReportesIndicadoresComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -115,6 +117,7 @@ import { ReportesComponent } from './Components/reportes/reportes.component';
       { path: 'configuracion', component: ConfiguracionComponent, canActivate:[AuthGuard]},
       { path: 'asignar-indicador', component: AsignarIndicadorComponent},
       { path: 'reportes', component: ReportesComponent},
+      { path: 'reportes-indicadores', component: ReportesIndicadoresComponent},
     ])
   ],
   providers: [

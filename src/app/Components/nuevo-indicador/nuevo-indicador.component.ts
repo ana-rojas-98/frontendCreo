@@ -208,29 +208,29 @@ export class NuevoIndicadorComponent implements OnInit {
   setNuevoIndicador() {
     console.log(this.archivos); 
 
-    // const formData = new FormData();
-    // formData.append("archivo", this.archivos); 
-    // formData.append("IdEstandar", "21"); 
-    // formData.append("IdCategoria", "67"); 
-    // formData.append("Idsubcategoria", "14"); 
-    // formData.append("periodicidad", "6"); 
-    // console.log("este es lel mensaje", formData); 
+    const formData = new FormData();
+    formData.append("archivo", this.archivos); 
+    formData.append("IdEstandar", "21"); 
+    formData.append("IdCategoria", "67"); 
+    formData.append("Idsubcategoria", "14"); 
+    formData.append("periodicidad", "6"); 
+    console.log("este es lel mensaje", formData); 
 
-    //  this.authService.setIndicadorNuevo(formData).subscribe((res: any) => {
-    //   console.log(res);
-    //  });
-    // return formData;
+     this.authService.setIndicadorNuevo(formData).subscribe((res: any) => {
+      console.log(res);
+     });
+    return formData;
 
   }
   archivo(){
-    console.log('entra a archivo');
-    const soloArchivo = new FormData();
-    soloArchivo.append("archivo",this.archivos);
-    this.authService.enviarSoloArchivo(soloArchivo).subscribe((res:any) =>{
-      console.log(res);
-      console.log('entra al segundo');
-    });
-    return soloArchivo;
+    // console.log('entra a archivo');
+    // const soloArchivo = new FormData();
+    // soloArchivo.append("archivo",this.archivos);
+    // this.authService.enviarSoloArchivo(soloArchivo).subscribe((res:any) =>{
+    //   console.log(res);
+    //   console.log('entra al segundo');
+    // });
+    // return soloArchivo;
   }
 
   descargarArchivo() {

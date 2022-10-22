@@ -11,7 +11,9 @@
     </div>
     <div class="link-sidebar" *ngIf="reportes">
       <img src="../../../assets/imagenes/reportes.png" alt="reporte" />
-      <a>Reportes</a>
+      <a [routerLink]="['/reportes']" routerLinkActive="router-link-active"
+        >Reportes</a
+      >
       <router-outlet></router-outlet>
     </div>
     <div class="link-sidebar" *ngIf="administrarIndicadores">

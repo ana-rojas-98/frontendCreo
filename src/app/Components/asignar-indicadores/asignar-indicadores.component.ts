@@ -67,6 +67,7 @@ export class AsignarIndicadoresComponent implements OnInit {
   resulEnviarApi: any = [this.SubCategoria];
   resultadosBusquedaIndicadores: any = {};
   nombre = "";
+  permisoDocumento = true;
   idUsuarioConsultarApi = {
     id: 0,
   };
@@ -112,7 +113,7 @@ export class AsignarIndicadoresComponent implements OnInit {
 
     //methodo para filtara despues de precionr el celect
     if (this.subCategoriaFil == "") {
-      this.ConsultarIndicadoresAsignados();
+      this.categoria();
       return true;
     }
 
@@ -136,7 +137,7 @@ export class AsignarIndicadoresComponent implements OnInit {
 
     //methodo para filtara despues de precionr el celect
     if (this.categoriaFil == "") {
-      this.ConsultarIndicadoresAsignados();
+      this.estandar();
       return true;
     }
 
@@ -271,9 +272,20 @@ export class AsignarIndicadoresComponent implements OnInit {
         if (res.idIndicador == item.idIndicador) {
           res.ver = item.ver;
           res.diligenciar = item.diligenciar;
+          if (res.ver == true || res.diligenciar == true) {
+            res.permisoDocumento = false;
+          } else {
+            res.permisoDocumento = true;
+          }
           res.pdf = item.pdf;
           res.excel = item.excel;
           res.word = item.word;
+          if (res.ver == false && res.diligenciar == false) {
+            res.permisoDocumento = true;
+            res.pdf = false;
+            res.excel = false;
+            res.word = false;
+          } 
           return true;
         }
       });
@@ -281,6 +293,10 @@ export class AsignarIndicadoresComponent implements OnInit {
       res.idusuario = this.idUsuarioIndicador;
       return res;
     });
+  }
+
+  habilitar() {
+    this.mapearResultadosTabla(this.resultadosTabla);
   }
 
   GetIndicadoresPermisos(resultadosBusquedaIndicadores) {

@@ -1,0 +1,20 @@
+@import "../../../assets/styles/main.scss";
+
+.contenedor {
+  @include contenedor;
+}
+.cuerpo {
+  @include body;
+  //@include centerFlex;
+}
+
+h1 {
+  @include h1Body;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  margin-top: 34px;
+}
+
+.contenedorSelect {
+  @include grid(3, 2);
+}

@@ -1,9 +1,29 @@
-<google-chart #chart  
-   [title]="title"  
-   [type]="type"  
-   [data]="data"  
-   [columnNames]="columnNames"  
-   [options]="options"  
-   [width]="width"  
-   [height]="height">  
-</google-chart> 
+<!-- <google-chart
+  #chart
+  [title]="title"
+  [type]="type"
+  [data]="data"
+  [columnNames]="columnNames"
+  [options]="options"
+  [width]="width"
+  [height]="height"
+>
+</google-chart> -->
+<div class="contenedor">
+  <app-sidebar></app-sidebar>
+  <div class="cuerpo">
+    <div
+      class="reportes"
+      [routerLink]="['/reportes-indicadores']"
+      routerLinkActive="router-link-active"
+    >
+      <img src="../../../assets/imagenes/reporteIndicador.svg" alt="" />
+      <p>Reporte de Indicadores</p>
+    </div>
+    <div class="reportes">
+      <img src="../../../assets/imagenes/reportesTableros.svg" alt="" />
+      <p>Tableros</p>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

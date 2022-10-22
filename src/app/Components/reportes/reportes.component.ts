@@ -4,7 +4,7 @@ import { GoogleChartComponent } from "angular-google-charts";
 @Component({
   selector: "app-reportes",
   templateUrl: "./reportes.component.html",
-  styleUrls: ["./reportes.component.css"],
+  styleUrls: ["./reportes.component.scss"],
 })
 export class ReportesComponent implements OnInit {
   constructor() {}

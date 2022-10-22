@@ -168,8 +168,7 @@ export class AuthService {
 
     let result = this.http.post(
       `${this.URL_SER}/api/archivos/postArchivos`,
-      nuevoIndicador,
-      headers
+      nuevoIndicador
     );
     return result;
   }
@@ -226,16 +225,20 @@ export class AuthService {
     return resultado;
   }
 
-  setConfiguracion(confi: any){
-   // const headers =this.cabecera();
-    let res = this.http.post(`${this.URL_SER}/api/Configuracions/guardarConfiguracion`,
+  setConfiguracion(confi: any) {
+    // const headers =this.cabecera();
+    let res = this.http.post(
+      `${this.URL_SER}/api/Configuracions/guardarConfiguracion`,
       confi
-      );
+    );
     return res;
   }
 
-  enviarSoloArchivo(formato: any){
-    let res = this.http.post(`${this.URL_SER}/api/FormatoArchivoes/guardarFormato`, formato);
+  enviarSoloArchivo(formato: any) {
+    let res = this.http.post(
+      `${this.URL_SER}/api/FormatoArchivoes/guardarFormato`,
+      formato
+    );
     return res;
   }
 }
