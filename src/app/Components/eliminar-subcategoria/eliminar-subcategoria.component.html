@@ -1,9 +1,14 @@
 <div class="contenedor">
-  <form class="form-box">
+  <form class="form-box ">
+    <div class="text-center mx-5 px-5">
+      <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" [dismissible]="false" id="Alert"
+        (closed)="successMessage = ''">{{ successMessage }}
+      </ngb-alert>
+    </div>
     <h1 class="Form-title" align="center">Eliminar subcategoría</h1>
-    <div class="form-group col">      
+    <div class="form-group ">      
         <label for="estandar">Estándar</label>
-        <br />
+
         <select
           name="estandar"
           type="selectbox"
@@ -19,7 +24,7 @@
           </option>
         </select>
         <label for="categoria">Categoría</label>
-        <br />
+
         <select
           name="categoria"
           type="selectbox"
@@ -35,7 +40,7 @@
           </option>
         </select>
         <label for="select">Subcategoría</label>
-        <br />
+
         <select
           name="select"
           type="selectbox"

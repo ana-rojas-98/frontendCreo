@@ -4,9 +4,14 @@
     <div class="titulo">
       <h1>{{titulo}}</h1>
     </div>
+    <div class="text-center mx-5 px-5">
+      <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" [dismissible]="false" id="Alert"
+        (closed)="successMessage = ''">{{ successMessage }}
+      </ngb-alert>
+    </div>
     <div class="container-input">
       <div>
-        <p>Nombre</p>
+        <p>Nombre*</p>
         <input
           class="input"
           type="text"
@@ -15,7 +20,7 @@
         />
       </div>
       <div>
-        <p>Correo electrónico</p>
+        <p>Correo electrónico*</p>
         <input
           class="input"
           type="email"
@@ -52,7 +57,7 @@
       </div>
     </div>
     <div class="container-tipos-usuarios">
-      <h3>Tipos de usuario</h3>
+      <h3>Tipo de usuario*</h3>
       <label
         >Super Administrador
         <input

@@ -31,26 +31,24 @@
     height: 624px; 
     background: #FFFFFF;
     border-radius: 15px;
-    text-align: center;
 }
 .Form-title{
     @include tittleCard(700, 24px);
 }
 .form-group{
-    position: absolute;
-    display: flex;  
     flex-direction: column;
     align-items: baseline;
+    justify-content: center;
     width: 308px;
-    height: 350px;
-    left: 160px;
-    top: 123px;
+    margin-left: 170px;
 }
 .form-group label{
     @include label;
 }
 .form-group select{
     @include select;
+    height: 40px;
+    width: 280;
 }
 .botones{
     border: 1px red solid;
@@ -60,12 +58,10 @@
     width: 130px;
     height: 47px;
     left: calc(50% - 130px/2 - 103.5px);
-    top: calc(50% - 47px/2 + 214.5px);
 }
 .bot_est{
     @include buttonCard($buttonPrimary);
     width: 123px;
     height: 47px;
     left: calc(50% - 123px/2 + 118px);
-    top: calc(50% - 47px/2 + 214.5px);
 }

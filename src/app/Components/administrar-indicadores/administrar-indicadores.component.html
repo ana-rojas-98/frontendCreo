@@ -69,15 +69,14 @@
       <button
         *ngIf="crear"
         [routerLink]="['/categorias']"
-        [routerLinkActive]="['link-active']"
-      >
+        [routerLinkActive]="['link-active']">
         Crear nueva categoría
       </button>
 
       <button
         *ngIf="crear"
         [routerLink]="['/subcatego']"
-        [routerLinkActive]="['link-active']"
+        [routerLinkActive]="['link-active']" class="crear-sub"
       >
         Crear nueva subcategoría
       </button>
@@ -128,29 +127,25 @@
             <th>
               <img
                 src="../../../assets/imagenes/nombreIndicador.png"
-                alt="icono-nombre"
-              />
+                alt="icono-nombre" class="mx-1"/>
               Nombre indicador
             </th>
             <th>
               <img
                 src="../../../assets/imagenes/creador.svg"
-                alt="icono-creador"
-              />
+                alt="icono-creador" class="mx-1"/>
               Creador
             </th>
             <th>
               <img
                 src="../../../assets/imagenes/fechaHora.png"
-                alt="icono-fecha"
-              />
-              Fecha y hora Creación
+                alt="icono-fecha" class="mx-1"/>
+              Fecha y hora creación
             </th>
             <th>
               <img
                 src="../../../assets/imagenes/archivo.png"
-                alt="icono-archivo"
-              />
+                alt="icono-archivo" class="mx-1"/>
               Archivo
             </th>
             <th *ngIf="ver">
@@ -161,20 +156,17 @@
                 src="../../../assets/imagenes/editar.png"
                 alt="icono-editar"
                 [routerLink]="['/editar-icono']"
-                [routerLinkActive]="['link-active']"
-              />
+                [routerLinkActive]="['link-active']"/>
             </th>
             <th *ngIf="eliminar">
               <img
                 src="../../../assets/imagenes/eliminar.png"
-                alt="icono-eliminar"
-              />
+                alt="icono-eliminar"/>
             </th>
             <th>
               <img
                 src="../../../assets/imagenes/duplicar.png"
-                alt="icono-duplicar"
-              />
+                alt="icono-duplicar"/>
             </th>
             <th>
               <img src="../../../assets/imagenes/excel.png" alt="excel-icono" />
