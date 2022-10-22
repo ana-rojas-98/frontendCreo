@@ -79,9 +79,8 @@ export class NuevoIndicadorComponent implements OnInit {
     },
   ];
   seleccionado = {
-    id: "",
+    periodicidadId: "",
   };
-  variableP = this.seleccionado.id;
 
   estandar() {
     this.estandarFil = this.Estandar.estandar;
@@ -184,9 +183,6 @@ export class NuevoIndicadorComponent implements OnInit {
     console.log("el excelData", this.ExcelData);
   }
 
-  Periodicidad() {
-    console.log(this.variableP);
-  }
 
   ShowData() {
     this.element = true;
@@ -199,38 +195,30 @@ export class NuevoIndicadorComponent implements OnInit {
 
   nuevoIndicador = {
     archivo: this.archivos,
-    IdEstandar: 21,
-    IdCategoria: 67,
-    Idsubcategoria: 14,
-    periodicidad: 6,
+    IdEstandar: this.Estandar.estandar,
+    IdCategoria: this.Categoria.categoria1,
+    Idsubcategoria: this.SubCategoria.subcategoria1,
+    periodicidad: "",
   };
 
   setNuevoIndicador() {
     console.log(this.archivos); 
+    const formData = new FormData();
+    formData.append("archivo", this.archivos); 
+    formData.append("IdEstandar", this.Estandar.estandar); 
+    formData.append("IdCategoria", this.Categoria.categoria1); 
+    formData.append("Idsubcategoria", this.SubCategoria.subcategoria1); 
+    formData.append("periodicidad", this.seleccionado.periodicidadId); 
+    console.log("este es lel mensaje", formData); 
+    console.log("con estandar", this.Estandar.estandar);
+    console.log("concategoria", this.Categoria.categoria1);
+    console.log("con estandar", this.SubCategoria.subcategoria1);
+    console.log("con periodicidad", this.seleccionado.periodicidadId);
 
-    // const formData = new FormData();
-    // formData.append("archivo", this.archivos); 
-    // formData.append("IdEstandar", "21"); 
-    // formData.append("IdCategoria", "67"); 
-    // formData.append("Idsubcategoria", "14"); 
-    // formData.append("periodicidad", "6"); 
-    // console.log("este es lel mensaje", formData); 
-
-    //  this.authService.setIndicadorNuevo(formData).subscribe((res: any) => {
-    //   console.log(res);
-    //  });
-    // return formData;
-
-  }
-  archivo(){
-    console.log('entra a archivo');
-    const soloArchivo = new FormData();
-    soloArchivo.append("archivo",this.archivos);
-    this.authService.enviarSoloArchivo(soloArchivo).subscribe((res:any) =>{
+     this.authService.setIndicadorNuevo(formData).subscribe((res: any) => {
       console.log(res);
-      console.log('entra al segundo');
-    });
-    return soloArchivo;
+     });
+    return formData;
   }
 
   descargarArchivo() {

@@ -164,12 +164,9 @@ export class AuthService {
   }
 
   setIndicadorNuevo(nuevoIndicador: any) {
-    const headers = this.fnSetDefineTokenAuthorization();
-
     let result = this.http.post(
-      `${this.URL_SER}/api/archivos/postArchivos`,
-      nuevoIndicador,
-      headers
+      `${this.URL_SER}/api/FormatoIndicadors/indicadorIndividual`,
+      nuevoIndicador
     );
     return result;
   }
@@ -234,8 +231,4 @@ export class AuthService {
     return res;
   }
 
-  enviarSoloArchivo(formato: any){
-    let res = this.http.post(`${this.URL_SER}/api/FormatoArchivoes/guardarFormato`, formato);
-    return res;
-  }
 }
