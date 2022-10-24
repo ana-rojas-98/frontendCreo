@@ -213,15 +213,6 @@ export class AuthService {
     return resul;
   }
 
-  masivos(archivos: any) {
-    const headers = this.fnSetDefineTokenAuthorization();
-    let resultado = this.http.post(
-      `${this.URL_SER}/api/archivos/postArchivos`,
-      archivos,
-      headers
-    );
-    return resultado;
-  }
 
   setConfiguracion(confi: any){
    // const headers =this.cabecera();
@@ -229,6 +220,15 @@ export class AuthService {
       confi
       );
     return res;
+  }
+  traerDatosConf(config: any){
+    let resultado = this.http.get(`${this.URL_SER}/api/configuracions`,config);
+    return resultado;
+  }
+
+  getImagen(){
+    let resultado = this.http.get(`${this.URL_SER}/api/configuracions/enviarImagen`);
+    return resultado;
   }
 
 }
