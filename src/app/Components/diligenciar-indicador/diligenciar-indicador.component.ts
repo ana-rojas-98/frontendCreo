@@ -18,7 +18,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
     this.accionVerModificar = this.route.snapshot.paramMap.get("accion");
     if (this.accionVerModificar == "ver") {
       this.ver = true;
-      alert("vas a ver");
+      alert("vas a ver ");
     }
     if (this.accionVerModificar == "editar") {
       this.modificar = true;

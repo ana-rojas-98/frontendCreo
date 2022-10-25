@@ -119,7 +119,7 @@ import { ReportesNuevoTablero1Component } from './Components/reportes-nuevo-tabl
       { path: 'crear-usuarios/:v/:usuario', component: CrearUsuarioComponent, canActivate:[AuthGuard]},
       { path: 'indicadores', component: IndicadoresComponent, canActivate:[AuthGuard]},
       { path: 'diligenciar-indicador/:id/:accion', component: DiligenciarIndicadorComponent, canActivate:[AuthGuard]},
-      { path: 'diligenciar-indicador', component: DiligenciarIndicadorComponent, canActivate:[AuthGuard]},
+      //{ path: 'diligenciar-indicador', component: DiligenciarIndicadorComponent, canActivate:[AuthGuard]},
       { path: 'asignar-indicadores/:id/:usuario', component: AsignarIndicadoresComponent, canActivate:[AuthGuard]},
       { path: 'configuracion', component: ConfiguracionComponent, canActivate:[AuthGuard]},
       { path: 'asignar-indicador', component: AsignarIndicadorComponent , canActivate:[AuthGuard]},
