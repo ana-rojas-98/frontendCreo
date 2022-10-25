@@ -42,15 +42,6 @@ export class AuthService {
     const requestOptions = { headers: headers };
     return requestOptions;
   }
-  cabecera() {
-    const token = localStorage.getItem("token");
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    });
-    const requestOptions = { headers: headers };
-    return requestOptions;
-  }
 
   singup(user_reg: any) {
     return this.http.post(`${this.URL_SER}/api/Usuarios/PostUsuario`, user_reg);
@@ -215,19 +206,22 @@ export class AuthService {
 
 
   setConfiguracion(confi: any){
-   // const headers =this.cabecera();
     let res = this.http.post(`${this.URL_SER}/api/Configuracions/guardarConfiguracion`,
       confi
       );
-    return res;
+      return res;
   }
+
   traerDatosConf(config: any){
     let resultado = this.http.get(`${this.URL_SER}/api/configuracions`,config);
     return resultado;
   }
 
+
   getImagen(){
-    let resultado = this.http.get(`${this.URL_SER}/api/configuracions/enviarImagen`);
+    let resultado = this.http.get(`${this.URL_SER}/api/configuracions/mostarImg`,
+    { observe: "response", responseType: "blob" }
+    );
     return resultado;
   }
 

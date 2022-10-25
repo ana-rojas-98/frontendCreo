@@ -74,7 +74,7 @@ export class ConfiguracionComponent implements OnInit {
     }else{
       this.authService.setConfiguracion(enviarimg).subscribe((res:any)=>
       {
-        console.log(res)
+        console.log('hola',res);
       });
       return enviarimg;
     }

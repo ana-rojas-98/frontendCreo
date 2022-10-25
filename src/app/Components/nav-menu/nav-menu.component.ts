@@ -1,6 +1,7 @@
 import { Component , OnInit } from '@angular/core';
 import { AuthService } from "src/app/services/auth.service";
 import { DomSanitizer } from '@angular/platform-browser';
+import { promise } from 'protractor';
 
 @Component({
   selector: 'app-nav-menu',
@@ -11,9 +12,8 @@ export class NavMenuComponent implements OnInit{
 
   constructor(private authService: AuthService, private sanitizer:DomSanitizer){}
   isExpanded = false;
-  logo : string;
+  logo;
   ngOnInit (){
-    this.mostrarImg();
   }
   collapse() {
     this.isExpanded = false;
@@ -21,38 +21,19 @@ export class NavMenuComponent implements OnInit{
 
   toggle() {
     this.isExpanded = !this.isExpanded;
-  }
-  
+  }  
 
-  mostrarImg(){
-    console.log('aqui va una imagen');
+
+
+  mostrarImg(){    
+    console.log("dispara el metodo")
     this.authService.getImagen().subscribe((res) =>{
-      this.extraerBase64(res).then((i:any)=>{
-        this.logo=i.base;
-      }); 
+      let nombreArchivo = res.headers.get("content-disposition");
+      let tipo: Blob = res.body as Blob;
+      const b = URL.createObjectURL(tipo);
+      const im = this.sanitizer.bypassSecurityTrustUrl(b);
+      this.logo=im;
+      console.log("entra para mostrar")
     })
-
-  }
-
-  extraerBase64 = async (imagen: any) => new Promise((resolve, reject)=>{
-    try{
-      const leer = window.URL.createObjectURL(imagen);
-      const im = this.sanitizer.bypassSecurityTrustUrl(leer);
-      const reader = new FileReader();
-      reader.readAsDataURL(imagen);
-      reader.onload = () =>{
-        resolve({
-          base: reader.result
-        });
-      };
-      reader.onerror = () =>{
-        resolve({
-          base: null
-        });
-      }
-    }
-    catch (e){
-      return null;
-    }
-  });
+  };
 }
