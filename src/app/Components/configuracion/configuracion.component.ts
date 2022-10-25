@@ -13,10 +13,12 @@ export class ConfiguracionComponent implements OnInit {
 
   constructor(private authService: AuthService, private sanitizer:DomSanitizer) { }
 
-  ngOnInit() {
+  ngOnInit() {  
   }
+    fecha = new Date();
+    year = this.fecha.getFullYear();   
 
-   logo: File = null;
+  logo: File = null;
    prev : string; 
 
   captImg(event){
@@ -54,19 +56,34 @@ export class ConfiguracionComponent implements OnInit {
     final:"",
   }
 
-  guardarConfiguracion(){    
-  const enviarimg = new FormData ();
-  
-  enviarimg.append('logo',this.logo);
+ resultado={};
+
+  guardarConfiguracion(){  
+  const enviarimg = new FormData ();  
+
   enviarimg.append('nombre', this.configuracion.nombreEmpresa);
   enviarimg.append('inicio',this.configuracion.inicial);
   enviarimg.append('final',this.configuracion.final);
+  enviarimg.append('logo',this.logo);
 
-  this.authService.setConfiguracion(enviarimg).subscribe((res:any)=>
-  {
-    console.log(res)
-  });
-  return enviarimg;
+  console.log('año inicial',this.configuracion.inicial);
+  console.log('año final',this.configuracion.final);
+
+    if(this.configuracion.inicial>this.configuracion.final){
+      alert("El año inicial debe ser mayor que el año final");
+    }else{
+      this.authService.setConfiguracion(enviarimg).subscribe((res:any)=>
+      {
+        console.log(res)
+      });
+      return enviarimg;
+    }
+  } 
+
+  getConfiguracion(){
+    this.authService.traerDatosConf(this.configuracion).subscribe((res: any) => {
+      this.resultado= res;
+        return res;
+      });
   }
-  
 }

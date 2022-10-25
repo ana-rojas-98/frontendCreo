@@ -7,6 +7,8 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
+import { EMPTY, empty } from "rxjs";
+import { element } from "protractor";
 
 @Component({
   selector: "app-indicadores-masivos",
@@ -174,14 +176,24 @@ export class IndicadoresMasivosComponent implements OnInit {
   }
 
   GuardarIndicadores() {
+    console.log("entra al metodo")
+    var completo = 0;
     const formD = new FormData();
-    this.Registros.forEach((arra) => {
-      formD.append("archivo", arra);
-      console.log(arra);
+    this.Registros.forEach((arra)=>{
+       arra.forEach((ele)=>{
+        if(ele == null || ele == ""){
+          console.log("llenaDatos")
+          completo++;
+        }
+       });
+       if(completo == 0){
+        formD.append("archivo", arra);
+        console.log("llena el formData",arra);
+        this.authService.setIndicadorNuevo(formD).subscribe((res: any) => {
+          console.log("res",res);
+          console.log("envia",formD)
+        }); 
+       }
     });
-    this.authService.masivos(formD).subscribe((res: any) => {
-      console.log(res);
-    });
-    return formD;
   }
 }

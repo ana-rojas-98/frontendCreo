@@ -27,7 +27,7 @@
             <div class="nombre">
                 <h5>Nombre empresa</h5>
                 <br>
-                <input 
+                <input                
                 type="text"
                 [(ngModel)]="configuracion.nombreEmpresa"
                 >
@@ -40,8 +40,9 @@
             <div class="inicio">
                 <h5>Año inicial</h5>
                 <br>
-                <input 
+                <input                
                 type="text"
+                maxlength="4"
                 [(ngModel)]="configuracion.inicial"
                 >
             </div>
@@ -49,7 +50,8 @@
                 <h5>Año final</h5>
                 <br>
                 <input 
-                type="text"
+                type="datetime"
+                maxlength="4"
                 [(ngModel)]="configuracion.final"
                 >
             </div>
