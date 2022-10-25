@@ -57,7 +57,7 @@
         </div>
         <div class="box">
           <h3>Subcategoría</h3>
-          <select class="selector" name="select" type="selectbox">
+          <select class="selector" name="select" [(ngModel)]="SubCategoria.subcategoria1" type="selectbox">
             <option>Seleccionar</option>
             <option
               *ngFor="let item of resultadosSubCategoria"
@@ -93,8 +93,7 @@
       <select
         name="select"
         type="selectbox"
-        [(ngModel)]="nuevoIndicador.periodicidad"
-        (change)="Periodicidad()"
+        [(ngModel)]="seleccionado.periodicidadId"
       >
         <option value="">Seleccionar</option>
         <option *ngFor="let nombre of nombres" [value]="nombre.id">

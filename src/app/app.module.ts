@@ -44,6 +44,9 @@ import { AsignarIndicadorComponent } from './Components/asignar-indicador/asigna
 import { GoogleChartsModule } from 'angular-google-charts';
 import { ReportesComponent } from './Components/reportes/reportes.component';
 import { ReportesIndicadoresComponent } from './Components/reportes-indicadores/reportes-indicadores.component';
+import { ReportesTablerosComponent } from './Components/reportes-tableros/reportes-tableros.component';
+import { ReportesNuevoTableroComponent } from './Components/reportes-nuevo-tablero/reportes-nuevo-tablero.component';
+import { ReportesNuevoTablero1Component } from './Components/reportes-nuevo-tablero1/reportes-nuevo-tablero1.component';
 
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
@@ -81,6 +84,9 @@ import { ReportesIndicadoresComponent } from './Components/reportes-indicadores/
     AsignarIndicadorComponent,
     ReportesComponent,
     ReportesIndicadoresComponent,
+    ReportesTablerosComponent,
+    ReportesNuevoTableroComponent,
+    ReportesNuevoTablero1Component,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -115,9 +121,12 @@ import { ReportesIndicadoresComponent } from './Components/reportes-indicadores/
       { path: 'diligenciar-indicador', component: DiligenciarIndicadorComponent, canActivate:[AuthGuard]},
       { path: 'asignar-indicadores/:id/:usuario', component: AsignarIndicadoresComponent, canActivate:[AuthGuard]},
       { path: 'configuracion', component: ConfiguracionComponent, canActivate:[AuthGuard]},
-      { path: 'asignar-indicador', component: AsignarIndicadorComponent},
-      { path: 'reportes', component: ReportesComponent},
-      { path: 'reportes-indicadores', component: ReportesIndicadoresComponent},
+      { path: 'asignar-indicador', component: AsignarIndicadorComponent , canActivate:[AuthGuard]},
+      { path: 'reportes', component: ReportesComponent, canActivate:[AuthGuard]},
+      { path: 'reportes-indicadores', component: ReportesIndicadoresComponent, canActivate:[AuthGuard]},
+      { path: 'reportes-tableros', component: ReportesTablerosComponent, canActivate:[AuthGuard]},
+      { path: 'reportes-nuevo-tablero', component: ReportesNuevoTableroComponent, canActivate:[AuthGuard]},
+      { path: 'nuevo-tablero', component: ReportesNuevoTablero1Component, canActivate:[AuthGuard]},
     ])
   ],
   providers: [

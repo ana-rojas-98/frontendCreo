@@ -1,0 +1,96 @@
+<div class="contenedor">
+  <app-sidebar></app-sidebar>
+  <div class="cuerpo">
+    <h1 class="titulo">Tableros</h1>
+    <button
+      [routerLink]="['/reportes-nuevo-tablero']"
+      routerLinkActive="router-link-active"
+      class="guardar"
+    >
+      Crear nuevo
+    </button>
+    <div class="resultados-tabla">
+      <table class="tabla-indicadores">
+        <thead>
+          <tr>
+            <th>
+              <img
+                src="../../../assets/imagenes/fechaHora.png"
+                alt="icono-nombre"
+              />
+              Fecha de creación
+            </th>
+            <th>
+              <img
+                src="../../../assets/imagenes/creador.svg"
+                alt="icono-creador"
+              />
+              Creador
+            </th>
+            <th>
+              <img
+                src="../../../assets/imagenes/mensaje.svg"
+                alt="icono-nombre"
+              />
+              Nombre
+            </th>
+            <th>
+              <img
+                id="imgPorcentaje"
+                src="../../../assets/imagenes/ver.png"
+                alt="icono-nombre"
+                class="mx-1 mt-1"
+              />
+              Ver
+            </th>
+            <th>
+              <img
+                src="../../../assets/imagenes/editar.png"
+                alt="icono-nombre"
+                class="mx-1"
+              />
+              Editar
+            </th>
+            <th>
+              <img
+                src="../../../assets/imagenes/eliminar.png"
+                alt="icono-nombre"
+                class="mx-1"
+              />
+              Eliminar
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>fecha</td>
+            <td>nombre</td>
+            <td>101</td>
+            <td>
+              <img
+                src="../../../assets/imagenes/ver.png"
+                alt="icono-nombre"
+                class="mx-1"
+              />
+            </td>
+            <td>
+              <img
+                src="../../../assets/imagenes/editar.png"
+                alt="icono-nombre"
+                class="mx-1"
+              />
+            </td>
+            <td>
+              <img
+                src="../../../assets/imagenes/eliminar.png"
+                alt="icono-nombre"
+                class="mx-1"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

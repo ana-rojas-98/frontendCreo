@@ -10,25 +10,29 @@
     width: 25px;
     height: 25px;
   }
+  h3{
+    margin-left: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+  p{
+    margin-bottom: 10px;
+  }
+
+  input{
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+  }
 }
 
-.contenedorDescargas {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  margin-right: 20px;
-  margin-top: 27px;
-  button {
-    width: 350px;
-    height: 30px;
-    background: $buttonDownload;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45), 0px 0px 1px rgba(0, 0, 0, 0.45);
-    border-radius: 25px;
-    border: 1px;
-    margin-right: 20px;
-    color: #ffffff;
-  }
+.button {
+    button{
+        @include centerFlex;
+    }
+  @include centerFlex;
+  margin-bottom: 20px;
 }
 
 h1 {
@@ -39,7 +43,11 @@ h1 {
 }
 
 .contenedorSelect {
-  @include grid(3, 2);
+  @include grid(3, 1);
+  width: 98%;
+  margin-left: 20px;
+  margin-right: 20px;
+  gap: 20px;
 }
 
 .selector {
