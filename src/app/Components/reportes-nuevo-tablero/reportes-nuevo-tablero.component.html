@@ -1,0 +1,83 @@
+<div class="contenedor">
+  <app-sidebar></app-sidebar>
+  <div class="cuerpo">
+    <h1 class="titulo">Nuevo tablero</h1>
+    <h3>Seleccione los indicadores que va a usar:</h3>
+    <div class="contenedorSelect">
+      <div class="box">
+        <p>Estándar:</p>
+        <select class="selector">
+          <option value="">Seleccione estándar</option>
+        </select>
+      </div>
+      <div class="box">
+        <p>Categoría</p>
+        <select class="selector">
+          <option value="">Seleccione categoría</option>
+        </select>
+      </div>
+      <div class="box">
+        <p>Sub categoría</p>
+        <select class="selector">
+          <option value="">Seleccione sub categoría</option>
+        </select>
+      </div>
+    </div>
+    <div class="resultados-tabla">
+      <table class="tabla-indicadores">
+        <thead>
+          <tr>
+            <th>
+              <img
+                src="../../../assets/imagenes/indicadores.png"
+                alt="icono-indicador"
+              />
+              Nombre indicador
+            </th>
+            <th>
+              <img
+                src="../../../assets/imagenes/estandar.svg"
+                alt="icono-estandar"
+              />
+              Estandar
+            </th>
+            <th>
+              <img
+                src="../../../assets/imagenes/categoria.svg"
+                alt="icono-categoria"
+              />
+              Categoría
+            </th>
+            <th>
+              <img
+                id="imgPorcentaje"
+                src="../../../assets/imagenes/subCategoria.svg"
+                alt="icono-subCategoria"
+                class="mx-1 mt-1"
+              />
+              Categoría
+            </th>
+            <th>Usar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>fecha</td>
+            <td>nombre</td>
+            <td>101</td>
+            <td>80%</td>
+            <td><input type="checkbox" /></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      class="button"
+      [routerLink]="['/nuevo-tablero']"
+      routerLinkActive="router-link-active"
+    >
+      <button class="guardar">Continuar</button>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

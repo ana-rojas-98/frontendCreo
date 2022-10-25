@@ -1,3 +1,4 @@
+import { FormControl, FormControlName, FormGroup } from "@angular/forms";
 import Swal from "sweetalert2";
 import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -17,7 +18,7 @@ export class CrearUsuarioComponent implements OnInit {
     private serviceAdministaraUsuario: AdministrarUsuariosService,
     private route: ActivatedRoute,
     public router: Router
-  ) { }
+  ) {}
 
   UsuarioRegistrado = {};
   UsuarioIdModificar = "";
@@ -32,11 +33,16 @@ export class CrearUsuarioComponent implements OnInit {
   readonlyAdministrador = false;
   readonlySuperAdministrador = false;
   aux = 1;
+  auxSuper = 0;
   selectEstado = false;
   mostaraAsignarIndicadorModificar = false;
   mostaraAsinnarIndicadorCrear = true;
   idUsuarioIndicadores = 0;
-  titulo = "Crear usuario"
+  titulo = "Crear usuario";
+
+  permisosReportes = new FormGroup({
+    permisosReportes: new FormControl(""),
+  });
 
   permisoAdministrarIndicadores = {
     Crear: false,
@@ -84,6 +90,7 @@ export class CrearUsuarioComponent implements OnInit {
     Ver: false,
     Editar: false,
     Eliminat: false,
+    Reportes: "",
   };
 
   administrarPermisos = {
@@ -172,6 +179,12 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   datosCargadosUsuario(res) {
+    if (res.typeuser == "1" && this.auxSuper == 0) {
+      this.auxSuper = 1;
+      this.permisoTabala(true);
+    }
+
+    this.administrarIndicadores.Reportes = res.indicadorReportes;
     if (this.aux == 1 && this.modificar == true && res.typeuser == "3") {
       this.aux = 2;
       this.NuevoUsuario.usuarioId = res.usuarioid;
@@ -191,7 +204,7 @@ export class CrearUsuarioComponent implements OnInit {
       this.administrarPermisos.Crear = false;
       this.administrarPermisos.Ver = false;
       this.administrarPermisos.Editar = false;
-      this.administrarPermisos.Eliminat = res.permisosEliminar;
+      this.administrarPermisos.Eliminat = false;
 
       this.visorEventos.Ver = false;
 
@@ -234,6 +247,8 @@ export class CrearUsuarioComponent implements OnInit {
       this.gestorNotificaciones.Ver = false;
       this.gestorNotificaciones.Editar = false;
       this.gestorNotificaciones.Eliminat = false;
+
+      this.administrarIndicadores.Reportes = res.indicadorReportes;
       return true;
     }
 
@@ -271,6 +286,8 @@ export class CrearUsuarioComponent implements OnInit {
     this.reportes.Eliminat = res.reportesEliminar;
 
     this.configuracion.Editar = res.configuracionEditar;
+
+    this.administrarIndicadores.Reportes = res.indicadorReportes;
   }
 
   permisoTabala(permiso) {
@@ -355,6 +372,7 @@ export class CrearUsuarioComponent implements OnInit {
       this.permisoReportes.Eliminat = usarioLocalStote.reportesEliminar;
 
       this.permisoConfiguracion.Editar = false;
+
       return true;
     }
 
@@ -389,6 +407,7 @@ export class CrearUsuarioComponent implements OnInit {
       this.permisoReportes.Eliminat = usarioLocalStote.reportesEliminar;
 
       this.permisoConfiguracion.Editar = usarioLocalStote.configuracionEditar;
+
       return true;
     }
 
@@ -445,13 +464,25 @@ export class CrearUsuarioComponent implements OnInit {
     this.permisos("administrador");
     if (this.modificar == true) {
       this.getUsuarioModificar(this.usarioConsultarApi);
+      this.permisoTabala(false);
     }
     this.auxTypeUsuario = "2";
   }
 
   ngOnInit() {
+    let id = "";
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
     this._success.subscribe((message) => (this.successMessage = message));
+    id = this.route.snapshot.paramMap.get("id");
+
+    let usuarioLogueado = parseInt(usarioLocalStote.typeuser);
+    let idAeditar = parseInt(id);
+
+    if (usuarioLogueado > idAeditar) {
+      this.alert("No puedes editar a este usuario");
+      this.router.navigate(["administrar-usuarios"]);
+      return true;
+    }
 
     if (usarioLocalStote.typeuser == "3") {
       this.readonlyAdministrador = true;
@@ -461,18 +492,17 @@ export class CrearUsuarioComponent implements OnInit {
       this.readonlySuperAdministrador = true;
     }
     this.permisos(false);
-    let id = "";
-    id = this.route.snapshot.paramMap.get("id");
+
     let usuario = this.route.snapshot.paramMap.get("usuario");
     let idVer = this.route.snapshot.paramMap.get("v");
     console.log("usuario: ", usuario);
     let idp = parseInt(id);
     let usuaarioVer = parseInt(idVer);
     if (id) {
-      this.titulo = "Editar usuario"
+      this.titulo = "Editar usuario";
       this.idUsuarioIndicadores = parseInt(id);
       if (usarioLocalStote.permisosEditar == false) {
-        this.router.navigate(["administrar-usuarios"]);
+        this.router.navigate(["private"]);
         return true;
       }
       this.selectEstado = true;
@@ -506,26 +536,26 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   asignarIndicadores() {
-    if (this.NuevoUsuario.Fullname == '') {
+    if (this.NuevoUsuario.Fullname == "") {
       this.changeSuccessMessage(1);
-    }
-    else {
-      if (this.NuevoUsuario.Email == '') {
+    } else {
+      if (this.NuevoUsuario.Email == "") {
         this.changeSuccessMessage(2);
-      }
-      else {
-        if (this.NuevoUsuario.Typeuser == '') {
+      } else {
+        if (this.NuevoUsuario.Typeuser == "") {
           this.changeSuccessMessage(3);
-        }
-        else {
+        } else {
           if (this.modificar == true) {
+            console.log(this.NuevoUsuario);
             this.authService
               .ModificarUsuario(this.NuevoUsuario)
               .subscribe((res: any) => {
                 this.UsuarioRegistrado = res;
                 if (res.resul == "Registro actualizado correctamente") {
                   return this.alert("Registro actualizado correctamente");
-                } else if (res.resul == "el usuario no se encuentra registrado") {
+                } else if (
+                  res.resul == "el usuario no se encuentra registrado"
+                ) {
                   this.changeSuccessMessage(4);
                 } else {
                   return this.alert("Error al modificar el usuario");
@@ -539,7 +569,9 @@ export class CrearUsuarioComponent implements OnInit {
                 if (res.mensaje == "Usuario registrado correctamente") {
                   this.idUsuarioIndicadores = res.usuarioid;
                   return this.alert("Registro exitoso");
-                } else if (res.resul == "El correo ya se encuentra registrado") {
+                } else if (
+                  res.resul == "El correo ya se encuentra registrado"
+                ) {
                   this.changeSuccessMessage(4);
                 } else {
                   return this.alert("Error al registrar el usuario");
@@ -547,10 +579,8 @@ export class CrearUsuarioComponent implements OnInit {
               });
           }
         }
-
       }
     }
-
   }
 
   public changeSuccessMessage(i: number) {
@@ -558,7 +588,9 @@ export class CrearUsuarioComponent implements OnInit {
       this._success.next("¡Error!, el campo nombre no puede estar vacío");
     }
     if (i == 2) {
-      this._success.next("¡Error!, el campo correo electrónico no puede estar vacío");
+      this._success.next(
+        "¡Error!, el campo correo electrónico no puede estar vacío"
+      );
     }
     if (i == 3) {
       this._success.next("¡Error!, debe seleccionar un tipo de usuario");
@@ -576,11 +608,15 @@ export class CrearUsuarioComponent implements OnInit {
 
     if (this.idUsuarioIndicadores != 0) {
       if (this.NuevoUsuario.Typeuser == "2") {
-        this.alert("El usuario es administrador, no requiere asignar indicadores");
+        this.alert(
+          "El usuario es administrador, no requiere asignar indicadores"
+        );
         return true;
       }
       if (this.NuevoUsuario.Typeuser == "1") {
-        this.alert("El usuario es super administrador, no requiere asignar indicadores");
+        this.alert(
+          "El usuario es super administrador, no requiere asignar indicadores"
+        );
         return true;
       }
       if (this.NuevoUsuario.Typeuser == "3") {

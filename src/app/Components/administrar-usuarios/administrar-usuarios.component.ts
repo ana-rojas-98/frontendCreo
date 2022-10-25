@@ -83,10 +83,8 @@ export class AdministrarUsuariosComponent implements OnInit {
   }
 
   tipoUsuarioFiltro() {
-    console.log("aqui");
     if (this.tipoUsuario.typeuser == "") {
       this.getUsuariosApi();
-      this.getUsuarioApi();
       return true;
     }
     this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {

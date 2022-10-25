@@ -2,11 +2,17 @@
   <app-sidebar></app-sidebar>
   <div class="cuerpo">
     <div class="titulo">
-      <h1>{{titulo}}</h1>
+      <h1>{{ titulo }}</h1>
     </div>
     <div class="text-center mx-5 px-5">
-      <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" [dismissible]="false" id="Alert"
-        (closed)="successMessage = ''">{{ successMessage }}
+      <ngb-alert
+        #selfClosingAlert
+        *ngIf="successMessage"
+        type="danger"
+        [dismissible]="false"
+        id="Alert"
+        (closed)="successMessage = ''"
+        >{{ successMessage }}
       </ngb-alert>
     </div>
     <div class="container-input">
@@ -52,7 +58,6 @@
           type="button"
           value="Asignar indicadores"
           (click)="enviarUsuarioId()"
-          
         />
       </div>
     </div>
@@ -298,6 +303,29 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="indicadoresReportes" [formGroup]="permisosReportes">
+      <p>Indicadores para reportes:</p>
+      <label
+        >Asignados<input
+          type="radio"
+          class="checkbox"
+          value="asignados"
+          [(ngModel)]="administrarIndicadores.Reportes"
+          formControlName="permisosReportes"
+          [disabled]="readonlyAdministrador"
+        />
+      </label>
+      <label
+        >Todos<input
+          type="radio"
+          class="checkbox"
+          value="todos"
+          formControlName="permisosReportes"
+          [(ngModel)]="administrarIndicadores.Reportes"
+          [disabled]="readonlyAdministrador"
+        />
+      </label>
     </div>
     <div class="container-button">
       <input

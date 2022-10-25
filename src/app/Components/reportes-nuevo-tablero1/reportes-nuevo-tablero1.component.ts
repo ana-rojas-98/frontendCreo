@@ -1,17 +1,18 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { GoogleChartComponent } from "angular-google-charts";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: "app-reportes",
-  templateUrl: "./reportes.component.html",
-  styleUrls: ["./reportes.component.scss"],
+  selector: "app-reportes-nuevo-tablero1",
+  templateUrl: "./reportes-nuevo-tablero1.component.html",
+  styleUrls: ["./reportes-nuevo-tablero1.component.scss"],
 })
-export class ReportesComponent implements OnInit {
+export class ReportesNuevoTablero1Component implements OnInit {
   constructor() {}
+
+  ngOnInit() {}
 
   columnNames = ["Browser", "Percentage"];
   title = "googlechart";
-  type = "PieChart";
+  type = "ColumnChart";
   data = [
     ["Name1", 5.0],
     ["Name2", 36.8],
@@ -26,5 +27,5 @@ export class ReportesComponent implements OnInit {
   };
   width = 500;
   height = 300;
-  ngOnInit() {}
+  
 }

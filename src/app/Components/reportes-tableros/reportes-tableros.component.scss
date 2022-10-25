@@ -1,0 +1,27 @@
+@import "../../../assets/styles/main.scss";
+
+.contenedor {
+  @include contenedor;
+}
+.cuerpo {
+  @include body;
+  //@include centerFlex;
+  img {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+.guardar {
+  width: 163px;
+  height: 47px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  @include h1Body;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  margin-top: 34px;
+}

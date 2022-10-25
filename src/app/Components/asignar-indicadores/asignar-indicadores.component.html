@@ -5,7 +5,7 @@
     <div class="nombre-usuario">
       <h3>Nombre de usuario:</h3>
       <p>
-        {{nombre}}
+        {{ nombre }}
       </p>
     </div>
     <div class="seleccion">
@@ -113,27 +113,44 @@
             <td>{{ item.categoria }}</td>
             <td>{{ item.subCategoria }}</td>
             <td>
-              <input [(ngModel)]="item.ver" type="checkbox" class="checkbox" />
-            </td>
-            <td>
               <input
-                [(ngModel)]="item.diligenciar"
+                [(ngModel)]="item.ver"
+                (change)="habilitar()"
                 type="checkbox"
                 class="checkbox"
               />
             </td>
             <td>
-              <input [(ngModel)]="item.pdf" type="checkbox" class="checkbox" />
+              <input
+                [(ngModel)]="item.diligenciar"
+                (change)="habilitar()"
+                type="checkbox"
+                class="checkbox"
+              />
             </td>
             <td>
               <input
+                [disabled]="item.permisoDocumento"
+                [(ngModel)]="item.pdf"
+                type="checkbox"
+                class="checkbox"
+              />
+            </td>
+            <td>
+              <input
+                [disabled]="item.permisoDocumento"
                 [(ngModel)]="item.excel"
                 type="checkbox"
                 class="checkbox"
               />
             </td>
             <td>
-              <input [(ngModel)]="item.word" type="checkbox" class="checkbox" />
+              <input
+                [disabled]="item.permisoDocumento"
+                [(ngModel)]="item.word"
+                type="checkbox"
+                class="checkbox"
+              />
             </td>
           </tr>
         </tbody>
