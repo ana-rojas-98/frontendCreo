@@ -5,29 +5,47 @@
     <div class="contenedorSelect">
       <div class="box">
         <p>Usuario</p>
-        <select class="selector">
+        <select
+          (change)="getUsuarioFilter()"
+          [(ngModel)]="Usuario.usuario"
+          class="selector"
+        >
           <option value="">Seleccione un usuario</option>
-          <option *ngFor="let item of resultadosUsuario" value="item.usuarioid">
+          <option
+            *ngFor="let item of resultadosUsuario"
+            [value]="item.usuarioid"
+          >
             {{ item.nombre }}
           </option>
         </select>
       </div>
       <div class="box">
         <p>Estándar:</p>
-        <select class="selector">
+        <select
+          class="selector"
+          [(ngModel)]="Estandar.estandar"
+          (change)="getEstandarFilter()"
+        >
           <option value="">Seleccione estándar</option>
-          <option *ngFor="let item of resultadoEstandar" value="item.estandar">
+          <option
+            *ngFor="let item of resultadoEstandar"
+            [value]="item.estandar"
+          >
             {{ item.nombreEstandar }}
           </option>
         </select>
       </div>
       <div class="box">
         <p>Categoría</p>
-        <select class="selector">
+        <select
+          [(ngModel)]="Categoria.categoria1"
+          (change)="getCategoriaFilter()"
+          class="selector"
+        >
           <option value="">Seleccione categoría</option>
           <option
             *ngFor="let item of resultadosCategoria"
-            value="item.categoria1"
+            [value]="item.categoria1"
           >
             {{ item.nombreCategoria }}
           </option>
@@ -39,7 +57,7 @@
           <option value="">Seleccione sub categoría</option>
           <option
             *ngFor="let item of resultadosSubCategoria"
-            value="item.subcategoria1"
+            [value]="item.subcategoria1"
           >
             {{ item.nombreSubcategoria }}
           </option>
@@ -49,7 +67,9 @@
         <p>Indicador</p>
         <select class="selector">
           <option value="">Seleccione un indicador</option>
-          <option *ngFor="let item of resultadoIndicadores" value="">{{item.indicador}}</option>
+          <option *ngFor="let item of resultadoIndicadores" value="">
+            {{ item.indicador }}
+          </option>
         </select>
       </div>
     </div>
@@ -98,12 +118,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>fecha</td>
-            <td>nombre</td>
-            <td>101</td>
-            <td>80%</td>
-            <td>N/A</td>
+          <tr *ngFor="let item of resultadosTabla">
+            <td>{{ item.fechaModificacion }}</td>
+            <td>{{ item.usuario }}</td>
+            <td>{{ item.indicador }}</td>
+            <td>{{ item.avance }}%</td>
+            <td>{{ item.urlArchivo }}</td>
           </tr>
         </tbody>
       </table>

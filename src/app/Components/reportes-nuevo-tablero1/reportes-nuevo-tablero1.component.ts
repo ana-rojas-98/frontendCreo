@@ -1,6 +1,4 @@
-import { ReportesService } from './../../services/reportes.service';
 import { Component, OnInit } from "@angular/core";
-
 
 @Component({
   selector: "app-reportes-nuevo-tablero1",
@@ -8,10 +6,9 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./reportes-nuevo-tablero1.component.scss"],
 })
 export class ReportesNuevoTablero1Component implements OnInit {
-  constructor(private ReportesService: ReportesService) {}
+  constructor() {}
 
   ngOnInit() {}
-
 
   columnNames = ["Browser", "Percentage"];
   title = "googlechart";
@@ -30,8 +27,5 @@ export class ReportesNuevoTablero1Component implements OnInit {
   };
   width = 500;
   height = 300;
-
-
   
-
 }

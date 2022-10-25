@@ -13,11 +13,31 @@ export class ReportesIndicadoresComponent implements OnInit {
     private reportesService: ReportesService
   ) {}
 
+  Estandar = {
+    estandar: "",
+  };
+
+  Usuario = {
+    usuario: "",
+  };
+
+  Categoria = {
+    categoria1: "",
+    NombreCategoria: "",
+  };
+
+  SubCategoria = {
+    subcategoria1: "",
+    nombreSubcategoria: "",
+  };
+
   resultadosUsuario: {};
   resultadosCategoria: {};
   resultadoEstandar: {};
   resultadosSubCategoria: {};
-  resultadoIndicadores: {};
+  resultadoIndicadores: [];
+  resultadosTabla= [];
+  estado = [];
 
   ngOnInit() {
     this.GetUsuarios();
@@ -25,6 +45,62 @@ export class ReportesIndicadoresComponent implements OnInit {
     this.getStandares();
     this.getSubCategoria();
     this.getindIcadores();
+  }
+
+  getUsuarioFilter() {
+    if (this.Usuario.usuario == "") {
+      this.getindIcadores();
+      return true;
+    }
+
+    this.reportesService
+      .ConsultarIndicadoresAsignados()
+      .subscribe((res: any) => {
+        this.resultadosTabla = res.filter((item) => {
+          return item.idUsuario == parseInt(this.Usuario.usuario);
+        });
+        this.estado = this.resultadosTabla;
+      });
+  }
+
+  getEstandarFilter() {
+    if (this.Estandar.estandar == "") {
+      this.getUsuarioFilter();
+      return true;
+    }
+
+    // this.resultadosTabla = this.estado.filter((item) => {
+    //   return item.estado == parseInt(this.estadoSelecionado.id);
+    // });
+
+  }
+
+  getCategoriaFilter() {
+    if (this.Categoria.categoria1 == "") {
+      this.getEstandarFilter();
+      return true;
+    }
+    this.getEstandarFilter();
+    if (
+      this.Usuario.usuario != "" &&
+      this.Estandar.estandar != "" &&
+      this.Categoria.categoria1 != ""
+    ) {
+      this.reportesService
+        .ConsultarIndicadoresAsignados()
+        .subscribe((res: any) => {
+          this.resultadosTabla = res.filter((item) => {
+            return (
+              item.idUsuario == parseInt(this.Usuario.usuario) &&
+              item.idEstandar == parseInt(this.Estandar.estandar) &&
+              item.idCategoria == parseInt(this.Categoria.categoria1)
+            );
+          });
+        });
+    }
+
+    
+
   }
 
   GetUsuarios() {
@@ -59,10 +135,13 @@ export class ReportesIndicadoresComponent implements OnInit {
     });
   }
   getindIcadores() {
-    this.reportesService.ConsultarIndicadoresAsignados().subscribe((res: any) => {
-      this.resultadoIndicadores = res.map((item) => {
-        return item;
+    this.reportesService
+      .ConsultarIndicadoresAsignados()
+      .subscribe((res: any) => {
+        this.resultadosTabla = res.map((item) => {
+          this.resultadoIndicadores = res;
+          return item;
+        });
       });
-    });
   }
 }
