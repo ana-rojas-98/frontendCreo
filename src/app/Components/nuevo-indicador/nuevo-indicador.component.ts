@@ -209,14 +209,9 @@ export class NuevoIndicadorComponent implements OnInit {
     formData.append("IdCategoria", this.Categoria.categoria1); 
     formData.append("Idsubcategoria", this.SubCategoria.subcategoria1); 
     formData.append("periodicidad", this.seleccionado.periodicidadId); 
-    console.log("este es lel mensaje", formData); 
-    console.log("con estandar", this.Estandar.estandar);
-    console.log("concategoria", this.Categoria.categoria1);
-    console.log("con estandar", this.SubCategoria.subcategoria1);
-    console.log("con periodicidad", this.seleccionado.periodicidadId);
-
+    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    formData.append("IdUsuario", usarioLocalStote.usuarioid);
      this.authService.setIndicadorNuevo(formData).subscribe((res: any) => {
-      console.log(res);
      });
     return formData;
   }
