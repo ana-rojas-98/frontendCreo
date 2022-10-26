@@ -2,13 +2,16 @@
     <app-sidebar></app-sidebar>
     <div class="cuerpo">
         <div class="title">
-            <h1>Indicador 1</h1>
+            <h1>Diligenciar indicador</h1>
         </div>
-        <div class="formatos">
-            <img src="../../../assets/imagenes/excel.png" alt="icono-excel">
-            <img src="../../../assets/imagenes/word.png" alt="icono-word">
-            <img src="../../../assets/imagenes/pdf.png" alt="icono-pdf">
-            <div class="formato">
+        <div class="row formatos">
+            <div class="col-5 d-flex flex-row">
+                <img src="../../../assets/imagenes/excel.png" alt="icono-excel">
+                <img src="../../../assets/imagenes/word.png" alt="icono-word">
+                <img src="../../../assets/imagenes/pdf.png" alt="icono-pdf">
+            </div>
+
+            <div class="col-7 d-flex flex-row-reverse mb-2">
                 <button>
                     Subir archivos adjuntos
                 </button>
@@ -16,68 +19,100 @@
         </div>
         <div class="tablero">
             <div class="title-card">
-              <div class="title-c">
-                <a href="">--anterior </a>
-                <h1>Año 2022</h1>
-                <a href=""> siguiente>></a>
-              </div>
-                <br>
-                <div class="periodicidad">                    
-                <p>Trimestre</p>
-                <a href=""> siguiente>></a>
+                <div class="title-c m-2">
+                    <a href=""><< anterior </a>
+                    <h1>Año 2022</h1>
+                    <a href=""> siguiente >></a>
                 </div>
-                <br>
-                <p>Indicador 1 Contenidos generales</p>
-            </div>
-            <div class="nombre-organizacion">
-                <label for="nombre-indicador">Nombre de la organización</label>
-                <br>
-                <br>
-                <input type="text">
-            </div>
-            <div class="title-finanzas">
-                <h5>Finanzas</h5>
-            </div>
-            <div class="campos">
-            <div class="campos-activos">
-                <div>
-                <p>Activos</p>
+                <div class="periodicidad m-2">
+                    <a href=""><< anterior </a>
+                    <p>Trimestre 1</p>
+                    <a href=""> siguiente >></a>
                 </div>
-                <br>
-                <br>
-                <div class="corriente">
-                    <div>
-                        <label for="corrientes">Corrientes</label>
-                        <br>
-                        <input type="text">
-                    </div>
-                    <div>
-                        <label for="no-corrientes">No corrientes</label>
-                        <br>
-                        <input type="text">
+            </div>
+            <div class="row border mb-2 mx-2">
+
+            </div>
+            <!------------------------------------------------------------------------------------------------------------------>
+            <div class="mb-5 mt-3">
+                <div class='row'>
+                    <div class='col-12 px-2'>
+                        <p
+                            style='font-size:16px;color: #000;font-weight: bold;font-style: regular;text-align: center;background-color: transparent;'>
+                            Indicador 1. Contenidos generales</p>
                     </div>
                 </div>
-            </div>
-            <div class="campos-pasivos">                
-               <div>
-                <p>Pasivos</p>
-                </div>                
-                <br>
-                <br>
-                <div class="corriente">
-                    <div>
-                        <label for="corrientes">Corrientes</label>
-                        <br>
-                        <input type="text">
+                <div class='row'>
+                    <div class='col-12 px-2'>
+                        <p
+                            style='font-size:14px;color: #000;font-weight: regular;font-style: regular;text-align: start;background-color: transparent;'>
+                            Nombre de la organización</p>
                     </div>
-                <div>
-                    <label for="no-corrientes">No corrientes</label>
-                    <br>
-                    <input type="text">
                 </div>
+                <div class='row'>
+                    <div class='col-5 px-2'><textarea name='textarea4' rows='2'
+                            style='width:100%;font-size:14px;color: #000;font-weight: regular;font-style: regular;text-align: start;background-color: transparent;border-radius: 10px;'></textarea>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-12 px-2'>
+                        <p
+                            style='font-size:14px;color: #000;font-weight: regular;font-style: regular;text-align: start;background-color: transparent;'>
+                            Finanzas</p>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-6 px-2'>
+                        <p
+                            style='font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
+                            Activos</p>
+                    </div>
+                    <div class='col-6 px-2'>
+                        <p
+                            style='font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
+                            Pasivos</p>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-3 px-2'>
+                        <p
+                            style='font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
+                            Corrientes</p>
+                    </div>
+                    <div class='col-3 px-2'>
+                        <p
+                            style='font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
+                            No corrientes</p>
+                    </div>
+                    <div class='col-3 px-2'>
+                        <p
+                            style='font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
+                            Corrientes</p>
+                    </div>
+                    <div class='col-3 px-2'>
+                        <p
+                            style='font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
+                            No corrientes</p>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-3 px-2'><input type='number'
+                            style='border-radius: 10px;padding: 5px;height: 100%;width: 100%;font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
+                    </div>
+                    <div class='col-3 px-2'><input type='number'
+                            style='border-radius: 10px;padding: 5px;height: 100%;width: 100%;font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
+                    </div>
+                    <div class='col-3 px-2'><input type='number'
+                            style='border-radius: 10px;padding: 5px;height: 100%;width: 100%;font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
+                    </div>
+                    <div class='col-3 px-2'><input type='number'
+                            style='border-radius: 10px;padding: 5px;height: 100%;width: 100%;font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
+                    </div>
                 </div>
             </div>
-            </div>
+            
+            <!------------------------------------------------------------------------------------------------------------------>
+
         </div>
         <div class="botones">
             <button class="guardar-indicador">Guardar</button>
