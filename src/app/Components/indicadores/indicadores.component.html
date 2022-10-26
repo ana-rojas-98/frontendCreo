@@ -6,26 +6,30 @@
     </div>
     <div class="selectores">
       <div class="box">
-        <h3>Estándar</h3>
-        <select class="selector" name="estandar" type="selectbox">
+        <p>Estándar:</p>
+        <select class="selector" [formControl] = "Estandar" (change)="estandar()">
           <option value="">Seleccione estándar</option>
-          <option>
-            <h1>opcion generada</h1>
+          <option *ngFor="let item of resultados" [value]="item.estandar">
+            {{ item.nombreEstandar }}
           </option>
         </select>
       </div>
       <div class="box">
-        <h3>Categoria</h3>
-        <select class="selector" name="categoria" type="selectbox">
+        <p>Categoría</p>
+        <select [formControl] = "Categoria" (change)="categoria()" class="selector">
           <option value="">Seleccione categoría</option>
-          <option>opcion generada</option>
+          <option *ngFor="let item of resultadosCategoria" [value]="item.categoria1">
+            {{ item.nombreCategoria }}
+          </option>
         </select>
       </div>
       <div class="box">
-        <h3>Sub categoría</h3>
-        <select>
-          <option>Seleccione subcategoria</option>
-          <option>opcion generada</option>
+        <p>Subcategoría</p>
+        <select class="selector" [formControl] = "Subcategoria" (change) = "subcategoria()">
+          <option value="">Seleccione subcategoría</option>
+          <option *ngFor="let item of resultadosSubCategoria" [value]="item.subcategoria1">
+            {{ item.nombreSubcategoria }}
+          </option>
         </select>
       </div>
     </div>
@@ -34,52 +38,28 @@
         <thead>
           <tr>
             <th>
-              <img
-                src="../../../assets/imagenes/nombreIndicador.png"
-                alt="icono-indicador"
-                class="mx-1"
-              />
+              <img src="../../../assets/imagenes/nombreIndicador.png" alt="icono-indicador" class="mx-1" />
               Nombre indicador
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/creador.png"
-                alt="icono-diligenciador"
-                class="mx-1"
-              />
+              <img src="../../../assets/imagenes/creador.png" alt="icono-diligenciador" class="mx-1" />
               Ultimo que diligencio
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/fechaHora.png"
-                alt="icono-fecha"
-                class="mx-1"
-              />
+              <img src="../../../assets/imagenes/fechaHora.png" alt="icono-fecha" class="mx-1" />
               Fecha y hora
             </th>
             <th>% Avance</th>
             <th>
-              <img
-                src="../../../assets/imagenes/archivo.png"
-                alt="icono-archivo"
-                class="mx-1"
-              />
+              <img src="../../../assets/imagenes/archivo.png" alt="icono-archivo" class="mx-1" />
               Archivo
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/ver.png"
-                alt="icono-ver"
-                class="mx-1"
-              />
+              <img src="../../../assets/imagenes/ver.png" alt="icono-ver" class="mx-1" />
               Ver
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/editar.png"
-                alt="icono-editar"
-                class="mx-1"
-              />
+              <img src="../../../assets/imagenes/editar.png" alt="icono-editar" class="mx-1" />
               Diligenciar
             </th>
             <th></th>
@@ -95,28 +75,18 @@
             <td>{{ item.avance }}%</td>
             <td>{{ item.urlArchivo }}</td>
             <td>
-              <img
-                src="../../../assets/imagenes/ver.png"
-                alt="icono-ver"
-                [routerLink]="[
+              <img src="../../../assets/imagenes/ver.png" alt="icono-ver" [routerLink]="[
                   '/diligenciar-indicador',
                   item.idIndicador,
                   'ver'
-                ]"
-                [routerLinkActive]="['link-active']"
-              />
+                ]" [routerLinkActive]="['link-active']" />
             </td>
             <td>
-              <img
-                src="../../../assets/imagenes/editar.png"
-                alt="icono-editar"
-                [routerLink]="[
+              <img src="../../../assets/imagenes/editar.png" alt="icono-editar" [routerLink]="[
                   '/diligenciar-indicador',
                   item.idIndicador,
                   'editar'
-                ]"
-                [routerLinkActive]="['link-active']"
-              />
+                ]" [routerLinkActive]="['link-active']" />
             </td>
             <td>
               <img src="../../../assets/imagenes/excel.png" alt="icono-excel" />

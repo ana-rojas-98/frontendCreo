@@ -11,79 +11,79 @@ import { AuthService } from "src/app/services/auth.service";
 })
 export class ConfiguracionComponent implements OnInit {
 
-  constructor(private authService: AuthService, private sanitizer:DomSanitizer) { }
+  constructor(private authService: AuthService, private sanitizer: DomSanitizer) { }
 
-  ngOnInit() {  
+  ngOnInit() {
   }
-    fecha = new Date();
-    year = this.fecha.getFullYear();   
+  fecha = new Date();
+  year = this.fecha.getFullYear();
 
   logo: File = null;
-   prev : string; 
+  prev: string;
 
-  captImg(event){
+  captImg(event) {
     const imagen = event.target.files[0];
-    this.extraerBase64(imagen).then((i:any) => {
+    this.extraerBase64(imagen).then((i: any) => {
       this.prev = i.base;
     })
     this.logo = imagen;
   }
-  extraerBase64 = async ($event: any) => new Promise((resolve, reject)=>{
-    try{
+  extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
+    try {
       const leer = window.URL.createObjectURL($event);
       const im = this.sanitizer.bypassSecurityTrustUrl(leer);
       const reader = new FileReader();
       reader.readAsDataURL($event);
-      reader.onload = () =>{
+      reader.onload = () => {
         resolve({
           base: reader.result
         });
       };
-      reader.onerror = () =>{
+      reader.onerror = () => {
         resolve({
           base: null
         });
       }
     }
-    catch (e){
+    catch (e) {
       return null;
     }
   });
 
-  configuracion={
-    nombreEmpresa:"",
-    inicial:"",
-    final:"",
+  configuracion = {
+    nombreEmpresa: "",
+    inicial: "",
+    final: "",
   }
 
- resultado={};
+  resultado = {};
 
-  guardarConfiguracion(){  
-  const enviarimg = new FormData ();  
+  guardarConfiguracion() {
+    const enviarimg = new FormData();
 
-  enviarimg.append('nombre', this.configuracion.nombreEmpresa);
-  enviarimg.append('inicio',this.configuracion.inicial);
-  enviarimg.append('final',this.configuracion.final);
-  enviarimg.append('logo',this.logo);
+    enviarimg.append('nombre', this.configuracion.nombreEmpresa);
+    enviarimg.append('inicio', this.configuracion.inicial);
+    enviarimg.append('final', this.configuracion.final);
+    enviarimg.append('logo', this.logo);
 
-  console.log('año inicial',this.configuracion.inicial);
-  console.log('año final',this.configuracion.final);
+    console.log('año inicial', this.configuracion.inicial);
+    console.log('año final', this.configuracion.final);
 
-    if(this.configuracion.inicial>this.configuracion.final){
+    if (this.configuracion.inicial > this.configuracion.final) {
       alert("El año inicial debe ser mayor que el año final");
-    }else{
-      this.authService.setConfiguracion(enviarimg).subscribe((res:any)=>
-      {
-        console.log('hola',res);
+    } else {
+      this.authService.setConfiguracion(enviarimg).subscribe((res: any) => {
+        console.log('hola', res);
       });
+
       return enviarimg;
     }
-  } 
+  }
 
-  getConfiguracion(){
+  getConfiguracion() {
     this.authService.traerDatosConf(this.configuracion).subscribe((res: any) => {
-      this.resultado= res;
-        return res;
-      });
+      this.resultado = res;
+      return res;
+    });
   }
 }
