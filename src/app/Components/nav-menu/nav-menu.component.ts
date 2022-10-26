@@ -14,6 +14,7 @@ export class NavMenuComponent implements OnInit{
   isExpanded = false;
   logo;
   ngOnInit (){
+    this.mostrarImg();
   }
   collapse() {
     this.isExpanded = false;

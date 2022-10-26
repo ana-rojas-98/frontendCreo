@@ -8,18 +8,9 @@
       <div class="box">
         <h3>Estándar</h3>
         <br />
-        <select
-          class="selector"
-          name="estandar"
-          type="selectbox"
-          [(ngModel)]="Estandar.estandar"
-          (change)="estandar()"
-        >
+        <select class="selector" name="estandar" type="selectbox" [(ngModel)]="Estandar.estandar" (change)="estandar()">
           <option value="">Seleccionar estándar</option>
-          <option
-            *ngFor="let resultado of resultados"
-            [value]="resultado.estandar"
-          >
+          <option *ngFor="let resultado of resultados" [value]="resultado.estandar">
             {{ resultado.nombreEstandar }}
           </option>
         </select>
@@ -27,18 +18,10 @@
       <div class="box">
         <h3>Categoría</h3>
         <br />
-        <select
-          class="selector"
-          name="categoria"
-          type="selectbox"
-          [(ngModel)]="Categoria.categoria1"
-          (change)="categoria()"
-        >
+        <select class="selector" name="categoria" type="selectbox" [(ngModel)]="Categoria.categoria1"
+          (change)="categoria()">
           <option value="">Seleccionar categoría</option>
-          <option
-            *ngFor="let resultadoCategoria of resultadosCategoria"
-            [value]="resultadoCategoria.categoria1"
-          >
+          <option *ngFor="let resultadoCategoria of resultadosCategoria" [value]="resultadoCategoria.categoria1">
             {{ resultadoCategoria.nombreCategoria }}
           </option>
         </select>
@@ -48,75 +31,41 @@
         <br />
         <select class="selector" name="select" type="selectbox">
           <option>Seleccionar subcategoría</option>
-          <option
-            *ngFor="let item of resultadosSubCategoria"
-            [value]="item.subcategoria1"
-          >
+          <option *ngFor="let item of resultadosSubCategoria" [value]="item.subcategoria1">
             {{ item.nombreSubcategoria }}
           </option>
         </select>
       </div>
     </div>
     <div class="botones-crear">
-      <button
-        *ngIf="crear"
-        [routerLink]="['/estandares']"
-        [routerLinkActive]="['link-active']"
-      >
+      <button *ngIf="crear" [routerLink]="['/estandares']" [routerLinkActive]="['link-active']">
         Crear nuevo estándar
       </button>
 
-      <button
-        *ngIf="crear"
-        [routerLink]="['/categorias']"
-        [routerLinkActive]="['link-active']">
+      <button *ngIf="crear" [routerLink]="['/categorias']" [routerLinkActive]="['link-active']">
         Crear nueva categoría
       </button>
 
-      <button
-        *ngIf="crear"
-        [routerLink]="['/subcatego']"
-        [routerLinkActive]="['link-active']" class="crear-sub"
-      >
+      <button *ngIf="crear" [routerLink]="['/subcatego']" [routerLinkActive]="['link-active']" class="crear-sub">
         Crear nueva subcategoría
       </button>
 
-      <button
-        *ngIf="crear"
-        [routerLink]="['/nuevo-indicador']"
-        [routerLinkActive]="['link-active']"
-      >
+      <button *ngIf="crear" [routerLink]="['/nuevo-indicador']" [routerLinkActive]="['link-active']">
         Crear nuevo indicador
       </button>
 
-      <button
-        *ngIf="crear"
-        [routerLink]="['/indicadores-masivos']"
-        [routerLinkActive]="['link-active']"
-      >
+      <button *ngIf="crear" [routerLink]="['/indicadores-masivos']" [routerLinkActive]="['link-active']">
         Crear indicadores masivamente
       </button>
     </div>
     <div class="botones-eliminar">
-      <button
-        *ngIf="eliminar"
-        [routerLink]="['/eliminar-estandar']"
-        [routerLinkActive]="['link-active']"
-      >
+      <button *ngIf="eliminar" [routerLink]="['/eliminar-estandar']" [routerLinkActive]="['link-active']">
         Eliminar estándar
       </button>
-      <button
-        *ngIf="eliminar"
-        [routerLink]="['/eliminar-categoria']"
-        [routerLinkActive]="['link-active']"
-      >
+      <button *ngIf="eliminar" [routerLink]="['/eliminar-categoria']" [routerLinkActive]="['link-active']">
         Eliminar categoría
       </button>
-      <button
-      *ngIf="eliminar"
-        [routerLink]="['/eliminar-subcategoria']"
-        [routerLinkActive]="['link-active']"
-      >
+      <button *ngIf="eliminar" [routerLink]="['/eliminar-subcategoria']" [routerLinkActive]="['link-active']">
         Eliminar subcategoría
       </button>
     </div>
@@ -125,48 +74,33 @@
         <thead>
           <tr>
             <th>
-              <img
-                src="../../../assets/imagenes/nombreIndicador.png"
-                alt="icono-nombre" class="mx-1"/>
+              <img src="../../../assets/imagenes/nombreIndicador.png" alt="icono-nombre" class="mx-1" />
               Nombre indicador
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/creador.svg"
-                alt="icono-creador" class="mx-1"/>
+              <img src="../../../assets/imagenes/creador.svg" alt="icono-creador" class="mx-1" />
               Creador
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/fechaHora.png"
-                alt="icono-fecha" class="mx-1"/>
+              <img src="../../../assets/imagenes/fechaHora.png" alt="icono-fecha" class="mx-1" />
               Fecha y hora creación
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/archivo.png"
-                alt="icono-archivo" class="mx-1"/>
+              <img src="../../../assets/imagenes/archivo.png" alt="icono-archivo" class="mx-1" />
               Archivo
             </th>
             <th *ngIf="ver">
               <img src="../../../assets/imagenes/ver.png" alt="icono-ver" />
             </th>
             <th *ngIf="editar">
-              <img
-                src="../../../assets/imagenes/editar.png"
-                alt="icono-editar"
-                [routerLink]="['/editar-icono']"
-                [routerLinkActive]="['link-active']"/>
+              <img src="../../../assets/imagenes/editar.png" alt="icono-editar" [routerLink]="['/editar-icono']"
+                [routerLinkActive]="['link-active']" />
             </th>
             <th *ngIf="eliminar">
-              <img
-                src="../../../assets/imagenes/eliminar.png"
-                alt="icono-eliminar"/>
+              <img src="../../../assets/imagenes/eliminar.png" alt="icono-eliminar" />
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/duplicar.png"
-                alt="icono-duplicar"/>
+              <img src="../../../assets/imagenes/duplicar.png" alt="icono-duplicar" />
             </th>
             <th>
               <img src="../../../assets/imagenes/excel.png" alt="excel-icono" />
@@ -189,24 +123,14 @@
               <img src="../../../assets/imagenes/ver.png" alt="ver-icono" />
             </td>
             <td *ngIf="editar">
-              <img
-                [routerLink]="['/editar-indicador']"
-                [routerLinkActive]="['link-active']"
-                src="../../../assets/imagenes/editar.png"
-                alt="editar-icono"
-              />
+              <img [routerLink]="['/editar-indicador']" [routerLinkActive]="['link-active']"
+                src="../../../assets/imagenes/editar.png" alt="editar-icono" />
             </td>
             <td *ngIf="eliminar">
-              <img
-                src="../../../assets/imagenes/eliminar.png"
-                alt="eliminar-icono"
-              />
+              <img src="../../../assets/imagenes/eliminar.png" alt="eliminar-icono" />
             </td>
             <td>
-              <img
-                src="../../../assets/imagenes/duplicar.png"
-                alt="duplicar-icono"
-              />
+              <img src="../../../assets/imagenes/duplicar.png" alt="duplicar-icono" />
             </td>
             <td>
               <img src="../../../assets/imagenes/excel.png" alt="excel-icono" />

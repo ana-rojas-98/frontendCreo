@@ -3,7 +3,7 @@ nav{
   height: 98px;
 }
 .container{
-  width: 100%;
+  width: important 100%;
   margin: 20px;
 }
  .container img{
@@ -16,14 +16,20 @@ a.navbar-brand {
   word-break: break-all;
 }
 .imagenLogo{
-  width: 200px;
-  height: 100px;
+  width: 50%;
+  height: 48%;
+  text-align: end;
 }
+
+.logo-creo{
+  width: 50%;
+  height: 50%;
+}
+
 html {
   font-size: 14px;
 }
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+
+.contenedor{
+  height: 200px;
 }

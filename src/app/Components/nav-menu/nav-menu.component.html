@@ -1,51 +1,15 @@
 <header>
-  <nav
-    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-0"
-  >
-    <div class="container">
-      <img src="../../../assets/imagenes/logo-creo.png" alt="logo-creo">
-      <a class="navbar-brand" [routerLink]="['/']"></a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
-        [ngClass]="{ show: isExpanded }"
-      >
-        <ul class="navbar-nav flex-grow">
-      <!--    <li
-            class="nav-item"
-            [routerLinkActive]="['link-active']"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
-          </li>                    
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/login']"
-              >Login</a
-            >
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/register']"
-              >Register</a
-            >
-          </li> 
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/administrar-indicadores']"
-              >Permisos y Registro</a
-            >
-          </li>-->
-        </ul>
+  <div class="container-fluid border">
+    <div class="d-flex justify-content-between">
+      <div class="col-2 d-flex flex-row">
+        <img class="img-fluid float-left" src="../../../assets/imagenes/logo-creo.png" alt="Responsive image" width="300px" height="110px">
       </div>
-        <button (click)="mostrarImg()"><img [src]="logo" class="imagenLogo"  alt="logo"></button>
+      <div class="col-8">
+
+      </div>
+      <div class="col-2 d-flex flex-row-reverse m-2">
+        <img (click)="mostrarImg()"><img [src]="logo" class="img-fluid float-right" alt="Responsive image" width="300px" height="110px">
+      </div>
     </div>
-  </nav>
+  </div>
 </header>
