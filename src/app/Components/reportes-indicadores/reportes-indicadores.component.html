@@ -53,7 +53,11 @@
       </div>
       <div class="box">
         <p>Sub categoría</p>
-        <select class="selector">
+        <select
+          [(ngModel)]="SubCategoria.subcategoria1"
+          (change)="geSubtCategoriaFilter()"
+          class="selector"
+        >
           <option value="">Seleccione sub categoría</option>
           <option
             *ngFor="let item of resultadosSubCategoria"
@@ -65,9 +69,16 @@
       </div>
       <div class="box">
         <p>Indicador</p>
-        <select class="selector">
+        <select
+          [(ngModel)]="Indicador.idIndicador"
+          (change)="getIndicadorFilter()"
+          class="selector"
+        >
           <option value="">Seleccione un indicador</option>
-          <option *ngFor="let item of resultadoIndicadores" value="">
+          <option
+            *ngFor="let item of resultadoIndicadores"
+            [value]="item.idIndicador"
+          >
             {{ item.indicador }}
           </option>
         </select>
