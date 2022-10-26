@@ -98,9 +98,6 @@ export class ReportesIndicadoresComponent implements OnInit {
           });
         });
     }
-
-    
-
   }
 
   GetUsuarios() {

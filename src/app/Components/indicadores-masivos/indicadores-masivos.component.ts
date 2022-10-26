@@ -140,9 +140,7 @@ export class IndicadoresMasivosComponent implements OnInit {
   }
 
   getSubCategoriaFilter(Posicion, categoria) {
-    this.authService
-      .getSubCategoria(this.Subcategoria)
-      .subscribe((res: any) => {
+    this.authService.getSubCategoria(this.Subcategoria).subscribe((res: any) => {
         this.SubcategoriaOpciones[Posicion] = res.filter(
           (item) => item.idCategoria == categoria
         );
