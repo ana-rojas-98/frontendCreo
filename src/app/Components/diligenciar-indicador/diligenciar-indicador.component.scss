@@ -41,6 +41,7 @@
     margin: 50px;
     border: 1px black solid;
     border-radius: 10px;
+    padding: 50px;
 }
 .title-card{
     text-align: center;
@@ -62,6 +63,17 @@
         
     }
 }
+
+h3{
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+h2{
+    font-size: x-large;
+    font-weight: bold;
+}
+
 .periodicidad{
     display: flex;
     justify-content: center; 
@@ -77,6 +89,17 @@
         margin-right: 10px;
     }
 }
+.selector {
+    background-color: #ffffff;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border: 1px;
+    height: 40px;
+    width: 280px;
+    font-family: "Montserrat";
+    text-align: center;
+  }
+  
 .nombre-organizacion{
     height: max-content;
     margin: 20px;
@@ -169,4 +192,12 @@
     left: calc(50% - 130px/2 - 109.5px);
     top: calc(50% - 47px/2 + 369.5px);
     margin-right: 100px;
+}
+
+.prueba{
+    input{
+        border-color: yellow;
+        border: 1px solid yellow;
+        background-color: yellow !important;
+    }
 }

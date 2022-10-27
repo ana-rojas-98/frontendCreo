@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import {
@@ -7,8 +7,10 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
-import { EMPTY, empty } from "rxjs";
+import { EMPTY, empty, Subject } from "rxjs";
 import { element } from "protractor";
+import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-indicadores-masivos",
@@ -16,9 +18,13 @@ import { element } from "protractor";
   styleUrls: ["./indicadores-masivos.component.scss"],
 })
 export class IndicadoresMasivosComponent implements OnInit {
-  constructor(private authService: AuthService, public router: Router) {}
+  constructor(private authService: AuthService, public router: Router) { }
   archivos: File = null;
   ensayo = [];
+
+  private _success = new Subject<string>();
+  successMessage = "";
+  @ViewChild("selfClosingAlert", { static: false }) selfClosingAlert: NgbAlert;
 
   Estandar = new FormControl("");
   Categoria = new FormControl("");
@@ -104,6 +110,7 @@ export class IndicadoresMasivosComponent implements OnInit {
     this.getStandares();
     this.getCategoria();
     this.getSubCategoria();
+    this._success.subscribe((message) => (this.successMessage = message));
   }
   getStandares() {
     this.authService.getStandares(this.Estandar).subscribe((res: any) => {
@@ -141,10 +148,10 @@ export class IndicadoresMasivosComponent implements OnInit {
 
   getSubCategoriaFilter(Posicion, categoria) {
     this.authService.getSubCategoria(this.Subcategoria).subscribe((res: any) => {
-        this.SubcategoriaOpciones[Posicion] = res.filter(
-          (item) => item.idCategoria == categoria
-        );
-      });
+      this.SubcategoriaOpciones[Posicion] = res.filter(
+        (item) => item.idCategoria == categoria
+      );
+    });
   }
 
   capturarArchivo() {
@@ -174,24 +181,72 @@ export class IndicadoresMasivosComponent implements OnInit {
   }
 
   GuardarIndicadores() {
-    console.log("entra al metodo")
-    var completo = 0;
-    const formD = new FormData();
-    this.Registros.forEach((arra)=>{
-       arra.forEach((ele)=>{
-        if(ele == null || ele == ""){
-          console.log("llenaDatos")
-          completo++;
-        }
-       });
-       if(completo == 0){
-        formD.append("archivo", arra);
-        console.log("llena el formData",arra);
+    let j = 0;
+    let contador = 0;
+    this.ensayo.forEach((item) => {
+      const formD = new FormData();
+      if (this.ensayo[j] == null) {
+        return this.changeSuccessMessage(5, j);
+      } else if (this.Registros[j][0] == '') {
+        return this.changeSuccessMessage(1, j);
+      } else if (this.Registros[j][1] == '') {
+        return this.changeSuccessMessage(2, j);
+      } else if (this.Registros[j][2] == '') {
+        return this.changeSuccessMessage(3, j);
+      } else if (this.Registros[j][3] == '') {
+        return this.changeSuccessMessage(4, j);
+      } else {
+        contador++;
+      }
+      j++;
+    })
+    if (contador == this.ensayo.length) {
+      let comp = 0;
+      let i = 0;
+      this.ensayo.forEach((item) => {
+        const formD = new FormData();
+        formD.append("archivo", this.ensayo[i]);
+        formD.append("IdEstandar", this.Registros[i][0]);
+        formD.append("IdCategoria", this.Registros[i][1]);
+        formD.append("Idsubcategoria", this.Registros[i][2]);
+        formD.append("periodicidad", this.Registros[i][3]);
+        let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+        formD.append("IdUsuario", usarioLocalStote.usuarioid);
+        i++;
         this.authService.setIndicadorNuevo(formD).subscribe((res: any) => {
-          console.log("res",res);
-          console.log("envia",formD)
-        }); 
-       }
-    });
+          if (res.result == 'Exitoso'){
+            comp ++;
+            if (comp == i){
+              this.alerta("¡Indicadores creados exitosamente!")
+              this.router.navigate(['administrar-indicadores'])
+            }
+          }
+        });
+
+      })
+    }
+  }
+
+
+  public changeSuccessMessage(i: number, Posicion) {
+    if (i == 1) {
+      return this._success.next("¡Error!, debe seleccionar el estándar en la posición " + (Posicion + 1));
+    }
+    if (i == 2) {
+      return this._success.next("¡Error!, debe seleccionar la categoría en la posición " + (Posicion + 1));
+    }
+    if (i == 3) {
+      return this._success.next("¡Error!, debe seleccionar la subcategoría en la posición " + (Posicion + 1));
+    }
+    if (i == 4) {
+      return this._success.next("¡Error!, debe seleccionar la periodicidad en la posición " + (Posicion + 1));
+    }
+    if (i == 5) {
+      return this._success.next("¡Error!, en el archivo " + (Posicion + 1));
+    }
+  }
+
+  alerta(mensaje: any) {
+    Swal.fire(mensaje);
   }
 }

@@ -4,6 +4,11 @@
         <div class="title-body">
             <h1>Nuevos indicadores</h1>
         </div>
+        <div class="text-center mx-5 px-5">
+            <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" [dismissible]="false" id="Alert"
+              (closed)="successMessage = ''">{{ successMessage }}
+            </ngb-alert>
+          </div>
         <div class="archivo-ejemplo">
             <p>A continuación por favor ingrese el archivo Excel para ccrear el indicador,
                 puede descargar un ejemplo del archivo en el siguiente enlace.

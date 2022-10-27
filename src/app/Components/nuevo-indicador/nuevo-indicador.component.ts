@@ -3,10 +3,14 @@ import { Router } from "@angular/router";
 import {
   Component,
   OnInit,
+  ViewChild,
   ɵflushModuleScopingQueueAsMuchAsPossible,
 } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
 import * as XSLX from "xlsx";
+import { Subject } from "rxjs";
+import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -15,7 +19,11 @@ import * as XSLX from "xlsx";
   styleUrls: ["./nuevo-indicador.component.scss"],
 })
 export class NuevoIndicadorComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
+
+  private _success = new Subject<string>();
+  successMessage = "";
+  @ViewChild("selfClosingAlert", { static: false }) selfClosingAlert: NgbAlert;
 
   archivos: File = null;
   ExcelData: any;
@@ -104,6 +112,7 @@ export class NuevoIndicadorComponent implements OnInit {
       return true;
     }
     this.getStandares();
+    this._success.subscribe((message) => (this.successMessage = message));
   }
 
   getStandares() {
@@ -202,18 +211,34 @@ export class NuevoIndicadorComponent implements OnInit {
   };
 
   setNuevoIndicador() {
-    console.log(this.archivos); 
+    console.log(this.archivos);
     const formData = new FormData();
-    formData.append("archivo", this.archivos); 
-    formData.append("IdEstandar", this.Estandar.estandar); 
-    formData.append("IdCategoria", this.Categoria.categoria1); 
-    formData.append("Idsubcategoria", this.SubCategoria.subcategoria1); 
-    formData.append("periodicidad", this.seleccionado.periodicidadId); 
-    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
-    formData.append("IdUsuario", usarioLocalStote.usuarioid);
-     this.authService.setIndicadorNuevo(formData).subscribe((res: any) => {
-     });
-    return formData;
+    if (this.archivos == null){
+      this.changeSuccessMessage(5);
+    } else if (this.Estandar.estandar == '') {
+      this.changeSuccessMessage(1);
+    } else if (this.Categoria.categoria1 == '') {
+      this.changeSuccessMessage(2);
+    } else if (this.SubCategoria.subcategoria1 == '') {
+      this.changeSuccessMessage(3);
+    } else if (this.seleccionado.periodicidadId == '') {
+      this.changeSuccessMessage(4);
+    } else {
+      formData.append("archivo", this.archivos);
+      formData.append("IdEstandar", this.Estandar.estandar);
+      formData.append("IdCategoria", this.Categoria.categoria1);
+      formData.append("Idsubcategoria", this.SubCategoria.subcategoria1);
+      formData.append("periodicidad", this.seleccionado.periodicidadId);
+      let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+      formData.append("IdUsuario", usarioLocalStote.usuarioid);
+      this.authService.setIndicadorNuevo(formData).subscribe((res: any) => {
+        if (res.result == 'Exitoso'){
+          this.alerta("¡Indicador creado exitosamente!")
+          this.router.navigate(['administrar-indicadores'])
+        }
+      });
+      return formData;
+    }
   }
 
   descargarArchivo() {
@@ -226,5 +251,27 @@ export class NuevoIndicadorComponent implements OnInit {
       a.href = window.URL.createObjectURL(tipo);
       a.click();
     });
+  }
+
+  public changeSuccessMessage(i: number) {
+    if (i == 1) {
+      this._success.next("¡Error!, debe seleccionar el estándar");
+    }
+    if (i == 2) {
+      this._success.next("¡Error!, debe seleccionar la categoría");
+    }
+    if (i == 3) {
+      this._success.next("¡Error!, debe seleccionar la subcategoría");
+    }
+    if (i == 4) {
+      this._success.next("¡Error!, debe seleccionar la periodicidad");
+    }
+    if (i == 5) {
+      this._success.next("¡Error!, debe subir el archivo");
+    }
+  }
+
+  alerta(mensaje: any) {
+    Swal.fire(mensaje);
   }
 }
