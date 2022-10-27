@@ -19,7 +19,8 @@
   justify-content: flex-end;
   margin-right: 20px;
   margin-top: 27px;
-  button {
+  margin-bottom: 20px;
+  .button {
     width: 350px;
     height: 30px;
     background: $buttonDownload;
@@ -28,6 +29,13 @@
     border: 1px;
     margin-right: 20px;
     color: #ffffff;
+  }
+  .botonImagen {
+    padding: 0;
+    border: 0;
+    margin-right: 10px;
+    width: 25px;
+    height: 25px;
   }
 }
 
