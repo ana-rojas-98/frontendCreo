@@ -3,6 +3,7 @@ import { ReportesService } from "./../../services/reportes.service";
 import { AuthService } from "src/app/services/auth.service";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import * as XLSX from "xlsx";
 
 @Component({
   selector: "app-reportes-indicadores",
@@ -14,6 +15,24 @@ export class ReportesIndicadoresComponent implements OnInit {
     private authService: AuthService,
     private reportesService: ReportesService
   ) {}
+
+  title = "angular-app";
+  fileName = "Indicadores.xlsx";
+
+  downloadExcel() {
+    {
+      /* pass here the table id */
+      let element = document.getElementById("tableIndicadores");
+      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+      /* generate workbook and add the worksheet */
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+      /* save to file */
+      XLSX.writeFile(wb, this.fileName);
+    }
+  }
 
   Estandar = {
     estandar: "",
