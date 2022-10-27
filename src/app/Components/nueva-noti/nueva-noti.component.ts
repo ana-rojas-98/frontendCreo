@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: 'app-nueva-noti',
@@ -7,8 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NuevaNotiComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
+  usuarios = {
+    tipoUsuario: "",
+    nombre: "",
+    telefono: "",
+    correo: "",
+  };
+  resultadosUsuarios=[];
+  ensayo = [];
   estado = false;
   checkUno = false;
   checkDos = false;
@@ -18,8 +27,22 @@ export class NuevaNotiComponent implements OnInit {
   mostrarPeriodico = false;
   cantidadIndicadores = false;
   ngOnInit() {
+    this.getUsuarios();    
   }
 
+getUsuarios() {
+  console.log("en efecto se dispara")
+  this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
+    console.log("entra el auth")
+    this.resultadosUsuarios = res.map((item) => {
+      console.log('antes del r',this.resultadosUsuarios) 
+      return item;
+    });
+    console.log('despues del r',this.resultadosUsuarios) 
+  });
+ console.log('usuarios',this.usuarios) 
+ console.log('fuerade r',this.resultadosUsuarios) 
+}
 
 BoxUno(){
  if(this.estado != this.checkUno ){
@@ -82,14 +105,5 @@ BoxCuatro(){
     this.cantidadIndicadores = true;
   }
 }
-
-  // ShowData() {
-  //   this.element = true;
-  //   console.log(this.element);
-  // }
-  // HiddenData() {
-  //   this.element = false;
-  //   console.log(this.element);
-  // }
 
 }
