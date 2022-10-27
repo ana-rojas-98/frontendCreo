@@ -43,34 +43,38 @@
     border-radius: 10px;
 }
 .title-card{
-    margin: 20px;
     text-align: center;
     font-family: 'Montserrat';
     h1{
         font-weight: bold;
+        font-size: xx-large;
     }
 }
 .title-c{
     display: flex;
     justify-content: center;
-    a{
-        text-decoration: none;
-        margin-left: 10px;
-        margin-right: 10px;        
+    align-items: center;
+    a{      
         text-decoration: none;
         color: black;
+        margin-left: 10px;
+        margin-right: 10px;
+        
     }
 }
 .periodicidad{
     display: flex;
-    justify-content: center;    
+    justify-content: center; 
+    align-items: center; 
     p{
         font-weight: bold;
+        font-size: x-large;
     }
     a{
         text-decoration: none;
-        margin-left: 5px;
         color: black;
+        margin-left: 10px;
+        margin-right: 10px;
     }
 }
 .nombre-organizacion{

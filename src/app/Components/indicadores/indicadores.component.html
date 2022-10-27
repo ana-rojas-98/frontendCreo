@@ -7,7 +7,7 @@
     <div class="selectores">
       <div class="box">
         <p>Estándar:</p>
-        <select class="selector" [formControl] = "Estandar" (change)="estandar()">
+        <select class="selector" [formControl]="Estandar" (change)="estandar()">
           <option value="">Seleccione estándar</option>
           <option *ngFor="let item of resultados" [value]="item.estandar">
             {{ item.nombreEstandar }}
@@ -16,7 +16,7 @@
       </div>
       <div class="box">
         <p>Categoría</p>
-        <select [formControl] = "Categoria" (change)="categoria()" class="selector">
+        <select [formControl]="Categoria" (change)="categoria()" class="selector">
           <option value="">Seleccione categoría</option>
           <option *ngFor="let item of resultadosCategoria" [value]="item.categoria1">
             {{ item.nombreCategoria }}
@@ -25,7 +25,7 @@
       </div>
       <div class="box">
         <p>Subcategoría</p>
-        <select class="selector" [formControl] = "Subcategoria" (change) = "subcategoria()">
+        <select class="selector" [formControl]="Subcategoria" (change)="subcategoria()">
           <option value="">Seleccione subcategoría</option>
           <option *ngFor="let item of resultadosSubCategoria" [value]="item.subcategoria1">
             {{ item.nombreSubcategoria }}
@@ -76,17 +76,11 @@
             <td>{{ item.urlArchivo }}</td>
             <td>
               <img src="../../../assets/imagenes/ver.png" alt="icono-ver" [routerLink]="[
-                  '/diligenciar-indicador',
-                  item.idIndicador,
-                  'ver'
-                ]" [routerLinkActive]="['link-active']" />
+                  '/diligenciar-indicador',item.idIndicador,'ver']" [routerLinkActive]="['link-active']" />
             </td>
             <td>
               <img src="../../../assets/imagenes/editar.png" alt="icono-editar" [routerLink]="[
-                  '/diligenciar-indicador',
-                  item.idIndicador,
-                  'editar'
-                ]" [routerLinkActive]="['link-active']" />
+                  '/diligenciar-indicador',item.idIndicador,'editar']" [routerLinkActive]="['link-active']" />
             </td>
             <td>
               <img src="../../../assets/imagenes/excel.png" alt="icono-excel" />
@@ -100,8 +94,7 @@
           </tr>
         </tbody>
       </table>
-      <br />
-      <button>Descargar todos los archivos adjuntos</button>
+      <button class="mt-3">Descargar todos los archivos adjuntos</button>
     </div>
   </div>
 </div>
