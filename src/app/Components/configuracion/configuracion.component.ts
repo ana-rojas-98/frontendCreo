@@ -14,13 +14,14 @@ export class ConfiguracionComponent implements OnInit {
   constructor(private authService: AuthService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.getConfiguracion();
   }
   fecha = new Date();
   year = this.fecha.getFullYear();
 
   logo: File = null;
   prev: string;
-
+  logoEstatico;
   captImg(event) {
     const imagen = event.target.files[0];
     this.extraerBase64(imagen).then((i: any) => {
@@ -74,6 +75,9 @@ export class ConfiguracionComponent implements OnInit {
     } else {
       this.authService.setConfiguracion(enviarimg).subscribe((res: any) => {
         console.log('hola', res);
+        if(res){
+          location.reload();
+        }
       });
 
       return enviarimg;
@@ -82,8 +86,20 @@ export class ConfiguracionComponent implements OnInit {
 
   getConfiguracion() {
     this.authService.traerDatosConf(this.configuracion).subscribe((res: any) => {
-      this.resultado = res;
-      return res;
+      this.resultado = res.map((item)=>{
+        let ultimo= item[item.length-1];
+        console.log("ultimo",ultimo)
+          return ultimo;
+      });
     });
+
+    this.authService.getImagen().subscribe((res) =>{
+      let nombreArchivo = res.headers.get("content-disposition");
+      let tipo: Blob = res.body as Blob;
+      const b = URL.createObjectURL(tipo);
+      const im = this.sanitizer.bypassSecurityTrustUrl(b);
+      this.logoEstatico=im;
+      console.log("entra para mostrar")
+    })
   }
 }

@@ -5,27 +5,48 @@
     <div class="contenedorSelect">
       <div class="box">
         <p>Usuario</p>
-        <select (change)="getUsuarioFilter()" [(ngModel)]="Usuario.usuario" class="selector">
+        <select
+          (change)="getUsuarioFilter()"
+          [(ngModel)]="Usuario.usuario"
+          class="selector"
+        >
           <option value="">Seleccione un usuario</option>
-          <option *ngFor="let item of resultadosUsuario" [value]="item.usuarioid">
+          <option
+            *ngFor="let item of resultadosUsuario"
+            [value]="item.usuarioid"
+          >
             {{ item.nombre }}
           </option>
         </select>
       </div>
       <div class="box">
         <p>Estándar:</p>
-        <select class="selector" [(ngModel)]="Estandar.estandar" (change)="getEstandarFilter()">
+        <select
+          class="selector"
+          [(ngModel)]="Estandar.estandar"
+          (change)="getEstandarFilter()"
+        >
           <option value="">Seleccione estándar</option>
-          <option *ngFor="let item of resultadoEstandar" [value]="item.estandar">
+          <option
+            *ngFor="let item of resultadoEstandar"
+            [value]="item.estandar"
+          >
             {{ item.nombreEstandar }}
           </option>
         </select>
       </div>
       <div class="box">
         <p>Categoría</p>
-        <select [(ngModel)]="Categoria.categoria1" (change)="getCategoriaFilter()" class="selector">
+        <select
+          [(ngModel)]="Categoria.categoria1"
+          (change)="getCategoriaFilter()"
+          class="selector"
+        >
           <option value="">Seleccione categoría</option>
-          <option *ngFor="let item of resultadosCategoria" [value]="item.categoria1">
+          <option
+            *ngFor="let item of resultadosCategoria"
+            [value]="item.categoria1"
+          >
             {{ item.nombreCategoria }}
           </option>
         </select>
@@ -63,29 +84,46 @@
         </select>
       </div>
     </div>
-    <div class="resultados-tabla">
+    <div class="resultados-tabla" id="tableIndicadores">
       <table class="tabla-indicadores">
         <thead>
           <tr>
             <th>
-              <img src="../../../assets/imagenes/fechaHora.png" alt="icono-nombre" />
+              <img
+                src="../../../assets/imagenes/fechaHora.png"
+                alt="icono-nombre"
+              />
               Fecha de última modificación
             </th>
             <th>
-              <img src="../../../assets/imagenes/creador.svg" alt="icono-creador" />
+              <img
+                src="../../../assets/imagenes/creador.svg"
+                alt="icono-creador"
+              />
               Usuario
             </th>
             <th>
-              <img src="../../../assets/imagenes/indicadores.png" alt="icono-nombre" />
+              <img
+                src="../../../assets/imagenes/indicadores.png"
+                alt="icono-nombre"
+              />
               Indicador
             </th>
             <th>
-              <img id="imgPorcentaje" src="../../../assets/imagenes/porcentaje.svg" alt="icono-nombre"
-                class="mx-1 mt-1" />
+              <img
+                id="imgPorcentaje"
+                src="../../../assets/imagenes/porcentaje.svg"
+                alt="icono-nombre"
+                class="mx-1 mt-1"
+              />
               Avance
             </th>
             <th>
-              <img src="../../../assets/imagenes/archivo.png" alt="icono-nombre" class="mx-1" />
+              <img
+                src="../../../assets/imagenes/archivo.png"
+                alt="icono-nombre"
+                class="mx-1"
+              />
               Archivo
             </th>
           </tr>
@@ -102,9 +140,21 @@
       </table>
     </div>
     <div class="contenedorDescargas">
-      <button>Descargar todos los archivos adjuntos</button>
-      <img src="../../../assets/imagenes/excel.png" alt="icono-nombre" class="mx-1" />
-      <img src="../../../assets/imagenes/pdf.png" alt="icono-nombre" class="mx-1" />
+      <button class="button">Descargar todos los archivos adjuntos</button>
+      <button class="botonImagen">
+        <img
+          src="../../../assets/imagenes/excel.png"
+          alt="icono-excel"
+          class="mx-1"
+        />
+      </button>
+      <button class="botonImagen" (click)="createPDF()">
+        <img
+          src="../../../assets/imagenes/pdf.png"
+          alt="icono-pdf"
+          class="mx-1"
+        />
+      </button>
     </div>
   </div>
 </div>

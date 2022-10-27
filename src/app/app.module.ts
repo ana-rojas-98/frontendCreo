@@ -47,6 +47,8 @@ import { ReportesIndicadoresComponent } from './Components/reportes-indicadores/
 import { ReportesTablerosComponent } from './Components/reportes-tableros/reportes-tableros.component';
 import { ReportesNuevoTableroComponent } from './Components/reportes-nuevo-tablero/reportes-nuevo-tablero.component';
 import { ReportesNuevoTablero1Component } from './Components/reportes-nuevo-tablero1/reportes-nuevo-tablero1.component';
+import { GestorNotiComponent } from './Components/gestor-noti/gestor-noti.component';
+import { NuevaNotiComponent } from './Components/nueva-noti/nueva-noti.component';
 
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
@@ -87,6 +89,8 @@ import { ReportesNuevoTablero1Component } from './Components/reportes-nuevo-tabl
     ReportesTablerosComponent,
     ReportesNuevoTableroComponent,
     ReportesNuevoTablero1Component,
+    GestorNotiComponent,
+    NuevaNotiComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -128,6 +132,8 @@ import { ReportesNuevoTablero1Component } from './Components/reportes-nuevo-tabl
       { path: 'reportes-tableros', component: ReportesTablerosComponent, canActivate:[AuthGuard]},
       { path: 'reportes-nuevo-tablero', component: ReportesNuevoTableroComponent, canActivate:[AuthGuard]},
       { path: 'nuevo-tablero', component: ReportesNuevoTablero1Component, canActivate:[AuthGuard]},
+      { path: 'gestor-noti', component: GestorNotiComponent},
+      { path: 'nueva-noti', component: NuevaNotiComponent},
     ])
   ],
   providers: [

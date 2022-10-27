@@ -9,6 +9,7 @@
                 <h5>Logo empresa</h5>
                 <div >
                 <img [src]="prev" alt="logo-empresa">
+                <img [src]="logoEstatico" alt=".">
                 </div>
                 <button 
                     class="cambiar-logo"
@@ -28,7 +29,7 @@
                 <h5 class="mb-2">Nombre empresa</h5>
                 <input                
                 type="text"
-                [(ngModel)]="configuracion.nombreEmpresa"
+                [(ngModel)]="resultado.NombreEmpresa"
                 >
             </div>
         </div>
@@ -41,15 +42,15 @@
                 <input                
                 type="number"
                 maxlength="4"
-                [(ngModel)]="configuracion.inicial"
+                [(ngModel)]="resultado.AnoInicial"
                 >
             </div>
             <div class="final">
                 <h5 class="mb-2">Año final</h5>
                 <input 
-                type="number"
-                max="4"
-                [(ngModel)]="configuracion.final"
+                type="datetime"
+                maxlength="4"
+                [(ngModel)]="resultado.AnoFinal"
                 >
             </div>
         </div>

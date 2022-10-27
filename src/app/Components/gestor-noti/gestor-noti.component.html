@@ -1,0 +1,41 @@
+<div class="contenedor">
+    <app-sidebar></app-sidebar>
+    <div class="cuerpo">
+        <div class="title">
+            <h1>Gestor de notificaciones</h1>
+        </div>
+        <br>
+        <br>
+        <div class="boton">
+            <button         
+                [routerLink]="['/nueva-noti']"
+                [routerLinkActive]="['link-active']">
+                Nueva notificación
+            </button>
+        </div>
+        <br>
+        <br>
+        <div class="tabla">
+            <table>
+                <thead>
+                    <tr>
+                        <th><img src="../../../assets/imagenes/fechaHora.png">Fecha de creación</th>
+                        <th><img src="../../../assets/imagenes/creador.svg"> Creador</th>
+                        <th><img src="../../../assets/imagenes/asunto.png"> Asunto</th>
+                        <th> <img src="../../../assets/imagenes/perio.png"> Periodicidad</th>
+                        <th><img src="../../../assets/imagenes/fechaHora.png"> Fecha de envio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>08/07/2022</td>
+                        <td>Luis</td>
+                        <td>Bienvenida</td>
+                        <td>No</td>
+                        <td>08/07/2022</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

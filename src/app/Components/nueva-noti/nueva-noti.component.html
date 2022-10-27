@@ -1,0 +1,128 @@
+<div class="contenedor">
+    <app-sidebar></app-sidebar>
+    <div class="cuerpo">
+        <div class="title">
+            <h1>Nueva notificación</h1>
+        </div>
+        <div class="linea1">
+        <div class="correo">
+            <p>Asunto</p>
+            <input type="text">
+            <br>
+            <br>
+            <p>Cuerpo de correo</p>
+            <textarea name="" id="" cols="30" rows="10"></textarea>
+        </div>
+        <div class="enviar">
+            <div class="title-variante">
+                <p>Destinatarios</p>
+            </div>
+            <br>
+            <div class="checkbox-correo">
+                <label for="">
+                    <input type="checkbox" name="Todos" id="">
+                    Todos
+                </label>
+                <label for="">
+                    <input type="checkbox" name="Todos" id="">
+                    Jose
+                </label>
+            </div>
+        </div>
+        </div>
+        <div class="tiempo">
+            <div class="title-variante">
+                <p>Configuración</p>
+            </div>
+            <br>
+            <div class="checbox-enviar">
+                
+                <label for="">
+                    <input type="checkbox" (click)="BoxUno()" [disabled]="checkUno">
+                    Enviar Inmediatamente        
+                </label>
+                <label for="">
+                    <input type="checkbox" (click)="BoxDos()" [disabled]="checkDos">
+                    Otra fecha
+                    <div *ngIf="mostrarFecha==true">
+                        <label for="">Fecha:  <input type="date"></label>
+                        
+                    </div>
+                </label>
+                <label for="">
+                    <input type="checkbox" (click)="BoxTres()" [disabled]="checkTres">
+                    Recordatorio periódico
+                    <div *ngIf="mostrarPeriodico==true" class="periodico">
+                        <div class="semana">
+                        <label for="">
+                            <input type="checkbox" name="" id="">
+                            Semana
+                        </label>
+                        </div>
+                        <div class="dias-semana">
+                        <label for="">
+                            <input type="checkbox" name="" id="">
+                            Lunes
+                        </label>
+                        <label for="">
+                            <input type="checkbox" name="" id="">
+                            Martes
+                        </label>
+                        <label for="">
+                            <input type="checkbox" name="" id="">
+                            Miercoles
+                        </label>
+                        <label for="">
+                            <input type="checkbox" name="" id="">
+                            Jueves
+                        </label>
+                        <label for="">
+                            <input type="checkbox" name="" id="">
+                            Viernes
+                        </label>
+                        <label for="">
+                            <input type="checkbox" name="" id="">
+                            Sábado
+                        </label>
+                        </div>
+                        <div class="dias">
+                        <label for="">
+                            <input type="checkbox" name="" id="">
+                            Días
+                        </label>
+                    </div>
+                    <div class="numeroDias">
+                        <label for="">
+                            Cada
+                            <input type="text" name="" id="">
+                            días
+                        </label>
+                    </div>
+                    </div>
+                </label>
+                <label for="">
+                    <input type="checkbox" (click)="BoxCuatro()"  [disabled]="checkCua">
+                    Fecha y cantidad de indicadores faltantes
+                    <div *ngIf="cantidadIndicadores== true">
+                        <label for="">
+                            Fecha:
+                            <input type="date" name="" id="">
+                        </label>
+                        <div class="indicadores">
+                        <label for="">
+                            <input type="text" name="" id="">
+                            indicadores
+                        </label>
+                    </div>
+                    </div>
+                </label>
+                
+            </div>
+        </div>
+        <div class="botones">
+            <button class="cancelar">Cancelar</button>
+            <button class="guardar">Guardar</button>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

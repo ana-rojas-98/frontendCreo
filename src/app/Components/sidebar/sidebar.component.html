@@ -44,7 +44,7 @@
     </div>
     <div class="link-sidebar" *ngIf="notificaciones">
       <img src="../../../assets/imagenes/notificaciones.png" alt="indicador" />
-      <a> Notificaciones </a>
+      <a [routerLink]="['/gestor-noti']" [routerLinkActive]="['link-active']"> Notificaciones </a>
     </div>
     <div class="link-sidebar" *ngIf="configuraciones">
       <img src="../../../assets/imagenes/configuracion.png" alt="indicador" />

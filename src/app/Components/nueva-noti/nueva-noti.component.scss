@@ -1,0 +1,71 @@
+@import "../../../assets/styles/main.scss";
+
+.contenedor {
+    @include contenedor;
+  }
+  .cuerpo {
+    @include body;
+  }
+  .title {
+    @include titleBody;
+  }
+  h1 {
+    @include h1Body;
+  }
+
+.linea1{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    margin: 3%;
+}
+
+.correo{
+    width: 130%;
+    input{
+        @include inputCard(300px, 40px);
+    }
+    textarea{
+        @include inputCard(500px, 250px);
+        padding: 2%;
+        resize: none;
+    }
+}
+.title-variante p{
+    font-weight: 600;
+}
+
+.enviar{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+.tiempo{
+    margin: 3%;
+}
+.checbox-enviar{
+    display: flex;
+    flex-direction: column;
+}
+.checkbox-correo{
+    display: flex;
+    flex-direction: column;
+}
+.botones{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+.botones .guardar{
+    margin-left: 10% ;
+}
+.periodico{
+   display: flex;
+   flex-direction: column;
+}
+.numeroDias input{
+    @include inputCard(50px, 30px);
+}
+.indicadores input{
+    @include inputCard(50px, 30px);
+}
