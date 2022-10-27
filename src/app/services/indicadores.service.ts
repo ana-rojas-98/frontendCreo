@@ -39,4 +39,11 @@ export class IndicadoresService {
     );
     return resul;
   }
+
+  VerDiligenciarIndicador(idArchivo) {
+    let resul = this.http.post(
+      `${this.URL_SER}/api/indicadores/VerDiligenciarIndicador`,idArchivo
+    );
+    return resul;
+  }
 }

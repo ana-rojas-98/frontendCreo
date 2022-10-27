@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ReportesService } from "./../../services/reportes.service";
 import { AuthService } from "src/app/services/auth.service";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 @Component({
   selector: "app-reportes-indicadores",
@@ -34,13 +36,20 @@ export class ReportesIndicadoresComponent implements OnInit {
     nombreSubcategoria: "",
   };
 
-  resultadosUsuario: {};
+  resultadosUsuario = [];
   resultadosCategoria: {};
   resultadoEstandar: {};
   resultadosSubCategoria: {};
   resultadoIndicadores: [];
-  resultadosTabla = [];
+  resultadosTabla: any = [];
   estado = [];
+  variable: any = [
+    {
+      nombre: "1",
+      nombre1: "1",
+      nombre2: "1",
+    },
+  ];
 
   ngOnInit() {
     this.GetUsuarios(0);
@@ -48,6 +57,25 @@ export class ReportesIndicadoresComponent implements OnInit {
     this.getStandares(0);
     this.getSubCategoria(0);
     this.getindIcadores(0);
+  }
+  createPDF() {
+    let DATA: any = document.getElementById("tableIndicadores");
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 208;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL("image/png");
+      let PDF = new jsPDF("p", "mm", "a4");
+      let position = 0;
+      PDF.addImage(FILEURI, "PNG", 0, position, fileWidth, fileHeight);
+      PDF.save("Indicadores.pdf");
+    });
+  }
+
+  prueba() {
+    let prueba = this.resultadosTabla.map((item) => {
+      return [item.fechaModificacion, item.usuario];
+    });
+    return prueba;
   }
 
   getUsuarioFilter() {

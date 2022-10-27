@@ -19,98 +19,33 @@
         </div>
         <div class="tablero">
             <div class="title-card">
-                <div class="title-c m-2">
-                    <a href=""><< anterior </a>
-                    <h1>Año 2022</h1>
-                    <a href=""> siguiente >></a>
+                <div class="box my-2">
+                    <h3>Año</h3>
+                    <select class="selector mt-2" name="estandar" type="select" [(ngModel)]="Anio"
+                        (change)="estandar()">
+                        <option value="" selected>Seleccione Año</option>
+                        <option *ngFor="let resultado of uniqueYears" [value]="resultado">
+                            {{ resultado }}
+                        </option>
+                    </select>
                 </div>
-                <div class="periodicidad m-2">
-                    <a href=""><< anterior </a>
-                    <p>Trimestre 1</p>
-                    <a href=""> siguiente >></a>
+                <div class="box my-4">
+                    <h2>Periodo</h2>
+                    <select class="selector mt-2" name="estandar" type="select" [(ngModel)]="Periodo"
+                        (change)="estandar()">
+                        <option value="" selected>Seleccione Periodo</option>
+                        <option *ngFor="let resultado of uniquePeriod" [value]="resultado">
+                            {{ resultado }}
+                        </option>
+                    </select>
                 </div>
             </div>
             <div class="row border mb-2 mx-2">
-
             </div>
             <!------------------------------------------------------------------------------------------------------------------>
-            <div class="mb-5 mt-3">
-                <div class='row'>
-                    <div class='col-12 px-2'>
-                        <p
-                            style='font-size:16px;color: #000;font-weight: bold;font-style: regular;text-align: center;background-color: transparent;'>
-                            Indicador 1. Contenidos generales</p>
-                    </div>
-                </div>
-                <div class='row'>
-                    <div class='col-12 px-2'>
-                        <p
-                            style='font-size:14px;color: #000;font-weight: regular;font-style: regular;text-align: start;background-color: transparent;'>
-                            Nombre de la organización</p>
-                    </div>
-                </div>
-                <div class='row'>
-                    <div class='col-5 px-2'><textarea name='textarea4' rows='2'
-                            style='width:100%;font-size:14px;color: #000;font-weight: regular;font-style: regular;text-align: start;background-color: transparent;border-radius: 10px;'></textarea>
-                    </div>
-                </div>
-                <div class='row'>
-                    <div class='col-12 px-2'>
-                        <p
-                            style='font-size:14px;color: #000;font-weight: regular;font-style: regular;text-align: start;background-color: transparent;'>
-                            Finanzas</p>
-                    </div>
-                </div>
-                <div class='row'>
-                    <div class='col-6 px-2'>
-                        <p
-                            style='font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
-                            Activos</p>
-                    </div>
-                    <div class='col-6 px-2'>
-                        <p
-                            style='font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
-                            Pasivos</p>
-                    </div>
-                </div>
-                <div class='row'>
-                    <div class='col-3 px-2'>
-                        <p
-                            style='font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
-                            Corrientes</p>
-                    </div>
-                    <div class='col-3 px-2'>
-                        <p
-                            style='font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
-                            No corrientes</p>
-                    </div>
-                    <div class='col-3 px-2'>
-                        <p
-                            style='font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
-                            Corrientes</p>
-                    </div>
-                    <div class='col-3 px-2'>
-                        <p
-                            style='font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
-                            No corrientes</p>
-                    </div>
-                </div>
-                <div class='row'>
-                    <div class='col-3 px-2'><input type='number'
-                            style='border-radius: 10px;padding: 5px;height: 100%;width: 100%;font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
-                    </div>
-                    <div class='col-3 px-2'><input type='number'
-                            style='border-radius: 10px;padding: 5px;height: 100%;width: 100%;font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
-                    </div>
-                    <div class='col-3 px-2'><input type='number'
-                            style='border-radius: 10px;padding: 5px;height: 100%;width: 100%;font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
-                    </div>
-                    <div class='col-3 px-2'><input type='number'
-                            style='border-radius: 10px;padding: 5px;height: 100%;width: 100%;font-size:12px;color: #000;font-weight: regular;font-style: regular;text-align: center;background-color: transparent;'>
-                    </div>
-                </div>
+            <div id="prueba" class="prueba">
+
             </div>
-            
             <!------------------------------------------------------------------------------------------------------------------>
 
         </div>

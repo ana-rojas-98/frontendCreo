@@ -8,6 +8,9 @@ import { Router, ActivatedRoute } from "@angular/router";
   providedIn: "root",
 })
 export class ReportesService {
+  VerDiligenciarIndicador() {
+    throw new Error("Method not implemented.");
+  }
   private URL_SER = environment.apiUrl;
   constructor(
     private http: HttpClient,
