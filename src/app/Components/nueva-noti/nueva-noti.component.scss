@@ -17,18 +17,55 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-around;
-    border: 1px red solid;
+    margin: 3%;
 }
+
 .correo{
-    border:1px blue solid;
-    width: 100%;
+    width: 130%;
+    input{
+        @include inputCard(300px, 40px);
+    }
+    textarea{
+        @include inputCard(500px, 250px);
+        padding: 2%;
+        resize: none;
+    }
 }
+.title-variante p{
+    font-weight: 600;
+}
+
 .enviar{
-    border: 1px black solid;
-    width: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
 }
 .tiempo{
-    border:1px green solid;
+    margin: 3%;
+}
+.checbox-enviar{
     display: flex;
-    flex-wrap: wrap; 
+    flex-direction: column;
+}
+.checkbox-correo{
+    display: flex;
+    flex-direction: column;
+}
+.botones{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+.botones .guardar{
+    margin-left: 10% ;
+}
+.periodico{
+   display: flex;
+   flex-direction: column;
+}
+.numeroDias input{
+    @include inputCard(50px, 30px);
+}
+.indicadores input{
+    @include inputCard(50px, 30px);
 }
