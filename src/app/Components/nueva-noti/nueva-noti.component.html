@@ -23,9 +23,9 @@
                     <input type="checkbox" name="Todos" id="">
                     Todos
                 </label>
-                <label for="">
-                    <input type="checkbox" name="Todos" id="">
-                    Jose
+                <label  *ngFor="let usuario of resultadosUsuarios">
+                    <input type="checkbox">
+                    {{usuario.nombre}}
                 </label>
             </div>
         </div>

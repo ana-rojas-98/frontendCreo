@@ -4,6 +4,11 @@
     <div class="title-indicador">
       <h1>Nuevo indicador</h1>
     </div>
+    <div class="text-center mx-5 px-5">
+      <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" [dismissible]="false" id="Alert"
+        (closed)="successMessage = ''">{{ successMessage }}
+      </ngb-alert>
+    </div>
     <div class="ingreso-archivo">
       <p>
         A continuación porfavor ingrese el archivo Excel para crear el
