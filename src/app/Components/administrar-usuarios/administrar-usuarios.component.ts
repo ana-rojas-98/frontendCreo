@@ -37,7 +37,7 @@ export class AdministrarUsuariosComponent implements OnInit {
     usarioid: "",
   };
 
-  resultadosTabla = [];
+  resultadosTabla: any = [];
   resultadosTipoUsuario = {};
   resultadosEstado = {};
   estado = [];
@@ -46,13 +46,14 @@ export class AdministrarUsuariosComponent implements OnInit {
   permisoVer = true;
   permioEliminar = true;
   permisoCrear = true;
+  eliminarMe = true;
   usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
   typeuser = parseInt(this.usarioLocalStote.typeuser);
 
   ngOnInit() {
     if (this.usarioLocalStote.typeuser == "3") {
-      this.router.navigate(['private'])
-      return true
+      this.router.navigate(["private"]);
+      return true;
     }
     if (this.usarioLocalStote.permisosEditar == false) {
       this.permisoModificar = false;
@@ -66,6 +67,7 @@ export class AdministrarUsuariosComponent implements OnInit {
     if (this.usarioLocalStote.permisosCrear == false) {
       this.permisoCrear = false;
     }
+
     this.getUsuariosApi();
     this.getTipoUsuarioApi();
     this.getUsuarioApi();
@@ -143,6 +145,10 @@ export class AdministrarUsuariosComponent implements OnInit {
   }
 
   eliminarUsuario(usuarioid) {
+    if (usuarioid == this.usarioLocalStote.usuarioid) {
+      this.alert("No puedes eliminar a este usuario");
+      return true;
+    }
     this.authService.eliminarUsuario(usuarioid).subscribe((res: any) => {
       if (res.codigo == 1) {
         this.getUsuariosApi();
@@ -150,7 +156,7 @@ export class AdministrarUsuariosComponent implements OnInit {
         this.getUsuarioApi();
         return this.alert("Usuario eliminado");
       } else {
-        return this.alert("No se pudo eliminar");
+        return this.alert("No se pudo eliminar el usuario");
       }
     });
   }

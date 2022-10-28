@@ -52,7 +52,7 @@ export class AsignarIndicadoresComponent implements OnInit {
   };
 
   usarioConsultarApi = {
-    Usuarioid: 1,
+    Usuarioid: 0,
   };
 
   idUsuarioIndicador = 0;
@@ -167,12 +167,35 @@ export class AsignarIndicadoresComponent implements OnInit {
       });
   }
 
+  getUsuarioModificar(usarioConsultarApi) {
+    this.authService
+      .getUsuarioModificar(usarioConsultarApi)
+      .subscribe((res: any) => {
+        if (res.typeuser == "2") {
+          this.router.navigate(["administrar-usuarios"]);
+          this.alert(
+            "El usuario es administrador, no requiere asignar indicadores"
+          );
+        }
+        if (res.typeuser == "1") {
+          this.router.navigate(["administrar-usuarios"]);
+          this.alert(
+            "El usuario es super administrador, no requiere asignar indicadores"
+          );
+        }
+        return res;
+      });
+  }
+
   ngOnInit() {
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
     this.idUsuarioIndicador = parseInt(this.route.snapshot.paramMap.get("id"));
     this.indicadorEditarCrear = this.route.snapshot.paramMap.get("usuario");
     this.idUsuarioConsultarApi.id = this.idUsuarioIndicador;
     this.getUsuarioApi(this.idUsuarioIndicador);
+
+    this.usarioConsultarApi.Usuarioid = this.idUsuarioIndicador;
+    this.getUsuarioModificar(this.usarioConsultarApi);
 
     if (this.indicadorEditarCrear != "modificar") {
       if (this.indicadorEditarCrear != "crear") {
@@ -285,7 +308,7 @@ export class AsignarIndicadoresComponent implements OnInit {
             res.pdf = false;
             res.excel = false;
             res.word = false;
-          } 
+          }
           return true;
         }
       });

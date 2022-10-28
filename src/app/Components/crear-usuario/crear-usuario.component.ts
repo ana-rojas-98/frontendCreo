@@ -20,6 +20,7 @@ export class CrearUsuarioComponent implements OnInit {
     public router: Router
   ) {}
 
+  contrasenaAleatoria =""
   UsuarioRegistrado = {};
   UsuarioIdModificar = "";
   mostaraGuardar = true;
@@ -32,6 +33,7 @@ export class CrearUsuarioComponent implements OnInit {
   usarioLocalStote = "";
   readonlyAdministrador = false;
   readonlySuperAdministrador = false;
+  readonlyReportes = false;
   aux = 1;
   auxSuper = 0;
   selectEstado = false;
@@ -39,6 +41,7 @@ export class CrearUsuarioComponent implements OnInit {
   mostaraAsinnarIndicadorCrear = true;
   idUsuarioIndicadores = 0;
   titulo = "Crear usuario";
+  idAeditar
 
   permisosReportes = new FormGroup({
     permisosReportes: new FormControl(""),
@@ -154,6 +157,29 @@ export class CrearUsuarioComponent implements OnInit {
   successMessage = "";
   @ViewChild("selfClosingAlert", { static: false }) selfClosingAlert: NgbAlert;
 
+  generarClave() {
+    const generateRandomString = (num) => {
+      const characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let result1 = " ";
+      const charactersLength = characters.length;
+      for (let i = 0; i < num; i++) {
+        result1 += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+
+      return result1;
+    };
+
+    const displayRandomString = () => {
+      let randomStringContainer = document.getElementById("random_string");
+      return randomStringContainer.innerHTML = generateRandomString(8);
+    };
+
+    this.contrasenaAleatoria = generateRandomString(8);
+  }
+
   getUsuarioId() {
     this.serviceAdministaraUsuario.UsuarioIdModificar.subscribe(
       (UsuarioIdModificar) => {
@@ -162,7 +188,7 @@ export class CrearUsuarioComponent implements OnInit {
           this.usarioConsultarApi.Usuarioid = UsuarioIdModificar;
           this.getUsuarioModificar(this.usarioConsultarApi);
         } else {
-          console.log("id a modificar: ", this.UsuarioIdModificar);
+          
         }
       }
     );
@@ -172,7 +198,6 @@ export class CrearUsuarioComponent implements OnInit {
     this.authService
       .getUsuarioModificar(usarioConsultarApi)
       .subscribe((res: any) => {
-        this.prueba = res;
         this.datosCargadosUsuario(res);
         return res;
       });
@@ -187,6 +212,7 @@ export class CrearUsuarioComponent implements OnInit {
     this.administrarIndicadores.Reportes = res.indicadorReportes;
     if (this.aux == 1 && this.modificar == true && res.typeuser == "3") {
       this.aux = 2;
+      this.readonlyReportes = true
       this.NuevoUsuario.usuarioId = res.usuarioid;
       this.NuevoUsuario.Fullname = res.nombre;
       this.NuevoUsuario.Email = res.correo;
@@ -443,6 +469,8 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   inputUsuario() {
+    this.administrarIndicadores.Reportes = "asignados"
+    this.readonlyReportes = true
     if (this.modificar == true) {
       this.getUsuarioModificar(this.usarioConsultarApi);
       this.permisoTabala(false);
@@ -455,11 +483,15 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   inputSuperAdministrador() {
+    this.readonlyReportes = false
+    this.administrarIndicadores.Reportes = "todos"
     this.permisoTabala(true);
     this.permisos(true);
   }
 
   inputAdministrador() {
+    this.administrarIndicadores.Reportes = "todos"
+    this.readonlyReportes = false
     this.permisoTabala(false);
     this.permisos("administrador");
     if (this.modificar == true) {
@@ -470,15 +502,16 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.generarClave();
     let id = "";
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
     this._success.subscribe((message) => (this.successMessage = message));
     id = this.route.snapshot.paramMap.get("id");
 
     let usuarioLogueado = parseInt(usarioLocalStote.typeuser);
-    let idAeditar = parseInt(id);
+    this.idAeditar = parseInt(id);
 
-    if (usuarioLogueado > idAeditar) {
+    if (usuarioLogueado > this.idAeditar) {
       this.alert("No puedes editar a este usuario");
       this.router.navigate(["administrar-usuarios"]);
       return true;
@@ -495,11 +528,12 @@ export class CrearUsuarioComponent implements OnInit {
 
     let usuario = this.route.snapshot.paramMap.get("usuario");
     let idVer = this.route.snapshot.paramMap.get("v");
-    console.log("usuario: ", usuario);
+
     let idp = parseInt(id);
     let usuaarioVer = parseInt(idVer);
     if (id) {
       this.titulo = "Editar usuario";
+      
       this.idUsuarioIndicadores = parseInt(id);
       if (usarioLocalStote.permisosEditar == false) {
         this.router.navigate(["private"]);
@@ -546,7 +580,7 @@ export class CrearUsuarioComponent implements OnInit {
           this.changeSuccessMessage(3);
         } else {
           if (this.modificar == true) {
-            console.log(this.NuevoUsuario);
+
             this.authService
               .ModificarUsuario(this.NuevoUsuario)
               .subscribe((res: any) => {
@@ -562,6 +596,7 @@ export class CrearUsuarioComponent implements OnInit {
                 }
               });
           } else {
+            this.NuevoUsuario.Pass = this.contrasenaAleatoria
             this.authService
               .CrearNuevoUsuario(this.NuevoUsuario)
               .subscribe((res: any) => {
