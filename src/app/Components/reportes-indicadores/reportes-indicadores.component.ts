@@ -99,6 +99,7 @@ export class ReportesIndicadoresComponent implements OnInit {
 
   getUsuarioFilter() {
     if (this.Usuario.usuario == "") {
+      this.getindIcadores(0);
       return true;
     }
 
@@ -117,7 +118,6 @@ export class ReportesIndicadoresComponent implements OnInit {
   getEstandarFilter() {
     if (this.Estandar.estandar == "") {
       this.getUsuarioFilter();
-      this.getCategoria(0);
       return true;
     }
     let dato = parseInt(this.Estandar.estandar);
