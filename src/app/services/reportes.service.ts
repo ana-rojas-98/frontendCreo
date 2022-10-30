@@ -29,4 +29,11 @@ export class ReportesService {
     );
     return resul;
   }
+
+  UpdateAchivos(idIndicador) {
+    let resul = this.http.post(
+      `${this.URL_SER}/api/archivos/UpdateAchivos/`,idIndicador
+    );
+    return resul;
+  }
 }

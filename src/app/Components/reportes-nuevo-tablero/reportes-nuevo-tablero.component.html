@@ -6,20 +6,50 @@
     <div class="contenedorSelect">
       <div class="box">
         <p>Estándar:</p>
-        <select class="selector">
+        <select
+          [(ngModel)]="Estandar.estandar"
+          (change)="getEstandarFilter()"
+          class="selector"
+        >
           <option value="">Seleccione estándar</option>
+          <option
+            *ngFor="let item of resultadoEstandar"
+            [value]="item.estandar"
+          >
+            {{ item.nombreEstandar }}
+          </option>
         </select>
       </div>
       <div class="box">
         <p>Categoría</p>
-        <select class="selector">
+        <select
+          [(ngModel)]="Categoria.categoria1"
+          (change)="getCategoriaFilter()"
+          class="selector"
+        >
           <option value="">Seleccione categoría</option>
+          <option
+            *ngFor="let item of resultadosCategoria"
+            [value]="item.categoria1"
+          >
+            {{ item.nombreCategoria }}
+          </option>
         </select>
       </div>
       <div class="box">
         <p>Sub categoría</p>
-        <select class="selector">
+        <select
+          [(ngModel)]="SubCategoria.subcategoria1"
+          (change)="geSubtCategoriaFilter()"
+          class="selector"
+        >
           <option value="">Seleccione sub categoría</option>
+          <option
+            *ngFor="let item of resultadosSubCategoria"
+            [value]="item.subcategoria1"
+          >
+            {{ item.nombreSubcategoria }}
+          </option>
         </select>
       </div>
     </div>
@@ -55,18 +85,24 @@
                 alt="icono-subCategoria"
                 class="mx-1 mt-1"
               />
-              Categoría
+              Sub categoría
             </th>
             <th>Usar</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>fecha</td>
-            <td>nombre</td>
-            <td>101</td>
-            <td>80%</td>
-            <td><input type="checkbox" /></td>
+          <tr *ngFor="let item of resultadosTabla">
+            <td>{{ item.indicador }}</td>
+            <td>{{ item.estandar }}</td>
+            <td>{{ item.categoria }}</td>
+            <td>{{ item.subCategoria }}</td>
+            <td [formGroup]="FormIndicador">
+              <input
+                formControlName="idIndicado"
+                (change)="updateIndicado(item.idIndicador)"
+                type="checkbox"
+              />
+            </td>
           </tr>
         </tbody>
       </table>
