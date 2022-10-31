@@ -20,11 +20,11 @@
             <br>
             <div class="checkbox-correo">
                 <label for="">
-                    <input type="checkbox" name="Todos" id="">
+                    <input type="checkbox" name="Todos" (change)="todosCorreos($event)" >
                     Todos
                 </label>
-                <label  *ngFor="let usuario of resultadosUsuarios">
-                    <input type="checkbox">
+                <label  *ngFor="let usuario of aux" >
+                    <input type="checkbox" [(ngModel)]="usuario.checked">
                     {{usuario.nombre}}
                 </label>
             </div>
@@ -45,7 +45,7 @@
                     <input type="checkbox" (click)="BoxDos()" [disabled]="checkDos">
                     Otra fecha
                     <div *ngIf="mostrarFecha==true">
-                        <label for="">Fecha:  <input type="date"></label>
+                        <label for="">Fecha:  <input type="date" [(ngModel)]="fechaEspera"></label>
                         
                     </div>
                 </label>
@@ -121,7 +121,7 @@
         </div>
         <div class="botones">
             <button class="cancelar">Cancelar</button>
-            <button class="guardar">Guardar</button>
+            <button class="guardar" (click)="Guardar()">Guardar</button>
         </div>
     </div>
 </div>
