@@ -304,7 +304,7 @@
         </tbody>
       </table>
     </div>
-    <div class="indicadoresReportes" [formGroup]="permisosReportes">
+    <div *ngIf="readonlyReportes" class="indicadoresReportes" [formGroup]="permisosReportes">
       <p>Indicadores para reportes:</p>
       <label
         >Asignados<input
@@ -313,7 +313,7 @@
           value="asignados"
           [(ngModel)]="administrarIndicadores.Reportes"
           formControlName="permisosReportes"
-          [disabled]="readonlyAdministrador"
+          
         />
       </label>
       <label
@@ -323,7 +323,6 @@
           value="todos"
           formControlName="permisosReportes"
           [(ngModel)]="administrarIndicadores.Reportes"
-          [disabled]="readonlyAdministrador"
         />
       </label>
     </div>

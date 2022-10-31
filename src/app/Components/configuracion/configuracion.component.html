@@ -4,6 +4,11 @@
         <div class="title">
             <h1>Configuración</h1>
         </div>
+        <div class="text-center mx-5 px-5">
+            <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" [dismissible]="false" id="Alert"
+              (closed)="successMessage = ''">{{ successMessage }}
+            </ngb-alert>
+          </div>
         <div class="logo-nombre">
             <div class="logo">
                 <h5>Logo empresa</h5>
@@ -29,8 +34,7 @@
                 <h5 class="mb-2">Nombre empresa</h5>
                 <input                
                 type="text"
-                [(ngModel)]="resultado.NombreEmpresa"
-                >
+                [(ngModel)]="configuracion.nombreEmpresa">
             </div>
         </div>
         <div class="titulo">
@@ -42,15 +46,15 @@
                 <input                
                 type="number"
                 maxlength="4"
-                [(ngModel)]="resultado.AnoInicial"
+                [(ngModel)]="configuracion.inicial"
                 >
             </div>
             <div class="final">
                 <h5 class="mb-2">Año final</h5>
                 <input 
-                type="datetime"
+                type="number"
                 maxlength="4"
-                [(ngModel)]="resultado.AnoFinal"
+                [(ngModel)]="configuracion.final"
                 >
             </div>
         </div>
