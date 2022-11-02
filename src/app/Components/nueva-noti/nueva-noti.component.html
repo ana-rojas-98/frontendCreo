@@ -7,11 +7,9 @@
         <div class="linea1">
         <div class="correo">
             <p>Asunto</p>
-            <input type="text">
-            <br>
-            <br>
+            <input type="text" [(ngModel)]="envios.asunto">
             <p>Cuerpo de correo</p>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
+            <textarea name="" id="" cols="30" rows="10" [(ngModel)]="envios.mensaje"></textarea>
         </div>
         <div class="enviar">
             <div class="title-variante">
@@ -55,46 +53,46 @@
                     <div *ngIf="mostrarPeriodico==true" class="periodico">
                         <div class="semana">
                         <label for="">
-                            <input type="checkbox" name="" id="">
+                            <input type="checkbox" (click)="casillaBoxTres()" [disabled]="semana">
                             Semana
                         </label>
                         </div>
-                        <div class="dias-semana">
+                        <div class="dias-semana" *ngIf="semana==false">
                         <label for="">
-                            <input type="checkbox" name="" id="">
+                            <input type="checkbox" [(ngModel)]="lunes" (change)="diasElectos()">
                             Lunes
                         </label>
                         <label for="">
-                            <input type="checkbox" name="" id="">
+                            <input type="checkbox" [(ngModel)]="martes" (change)="diasElectos()">
                             Martes
                         </label>
                         <label for="">
-                            <input type="checkbox" name="" id="">
+                            <input type="checkbox" [(ngModel)]="miercoles" (change)="diasElectos()">
                             Miercoles
                         </label>
                         <label for="">
-                            <input type="checkbox" name="" id="">
+                            <input type="checkbox" [(ngModel)]="jueves" (change)="diasElectos()">
                             Jueves
                         </label>
                         <label for="">
-                            <input type="checkbox" name="" id="">
+                            <input type="checkbox" [(ngModel)]="viernes" (change)="diasElectos()">
                             Viernes
                         </label>
                         <label for="">
-                            <input type="checkbox" name="" id="">
+                            <input type="checkbox" [(ngModel)]="sabado" (change)="diasElectos()">
                             Sábado
                         </label>
                         </div>
                         <div class="dias">
                         <label for="">
-                            <input type="checkbox" name="" id="">
+                            <input type="checkbox" (click)="boxtresDias()" [disabled]="dias">
                             Días
                         </label>
                     </div>
-                    <div class="numeroDias">
+                    <div class="numeroDias" *ngIf="dias == false">
                         <label for="">
                             Cada
-                            <input type="text" name="" id="">
+                            <input type="text" maxlength="3">
                             días
                         </label>
                     </div>

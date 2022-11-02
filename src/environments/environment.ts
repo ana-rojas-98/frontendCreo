@@ -6,7 +6,7 @@
 
 export const environment = {
   production: false, 
-  apiUrl: 'http://www.creo.somee.com',
+  apiUrl: '//www.creo.somee.com',
 };
 
 /*

@@ -146,19 +146,19 @@ export class NuevoIndicadorComponent implements OnInit {
     this.archivos = this.archivoCapturado;
     this.archivoleer.push(this.archivoCapturado);
     //otro metodo
-    this.leer(this.archivoCapturado);
+    //this.leer(this.archivoCapturado);
   }
 
-  leer(event: any) {
-    //this.archivoCapturado = event.target.files[0];
-    let leerArchivo = new FileReader();
-    leerArchivo.readAsBinaryString(this.archivoCapturado);
-    leerArchivo.onload = (e) => {
-      let libro = XSLX.read(leerArchivo.result, { type: "binary" });
-      let hoja = libro.SheetNames;
-      this.resultadoExcel = XSLX.utils.sheet_to_json(libro.Sheets[hoja[0]]);
-    };
-  }
+  // leer(event: any) {
+  //   //this.archivoCapturado = event.target.files[0];
+  //   let leerArchivo = new FileReader();
+  //   leerArchivo.readAsBinaryString(this.archivoCapturado);
+  //   leerArchivo.onload = (e) => {
+  //     let libro = XSLX.read(leerArchivo.result, { type: "binary" });
+  //     let hoja = libro.SheetNames;
+  //     this.resultadoExcel = XSLX.utils.sheet_to_json(libro.Sheets[hoja[0]]);
+  //   };
+  // }
 
   NuevoIndicadorRegistro = {
     Entrada: "",
