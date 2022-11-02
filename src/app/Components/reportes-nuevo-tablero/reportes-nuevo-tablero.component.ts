@@ -23,9 +23,7 @@ export class ReportesNuevoTableroComponent implements OnInit {
   resultadosTabla: any = [];
   estado = [];
 
-  FormIndicador = new FormGroup({
-    idIndicado: new FormControl(""),
-  });
+  
 
   Indicador = {
     IdArchivo: 0,
@@ -152,10 +150,9 @@ export class ReportesNuevoTableroComponent implements OnInit {
     }
   }
 
-  updateIndicado(idIndicador) {
+  updateIndicado(idIndicador, usar) {
     this.Indicador.IdArchivo = idIndicador;
-    this.Indicador.Usar = this.FormIndicador.get("idIndicado").value;
-    console.log(this.Indicador);
+    this.Indicador.Usar = usar;
     this.reportesService.UpdateAchivos(this.Indicador).subscribe((res: any) => {
       console.log(res);
       return res;

@@ -6,12 +6,11 @@
       <p>Título del tablero</p>
       <input type="text" />
     </div>
-    <div class="contenedorNumeroColumnas">
-      <p>Número de columnas</p>
-      <select class="selector">
-        <option value="">Seleccione una opción</option>
-      </select>
-    </div>
+    <div class="contenedorNumeroColumnas container">
+      <div class="contenedorAgregar1 w-100 row" id="contenedor">
+        
+      </div>
+      <!--  </div>
     <div class="contenedorAgregar">
       <div class="contenedorSelect1">
         <p>Agregar</p>
@@ -54,8 +53,8 @@
       class="button"
       [routerLink]="['/nuevo-tablero']"
       routerLinkActive="router-link-active"
-    >
-      <button class="guardar">Agregar Fila</button>
+    > -->
+      <button id="addbutton" class="guardar" (click)="agregarFila()">Agregar Fila</button>
     </div>
   </div>
 </div>

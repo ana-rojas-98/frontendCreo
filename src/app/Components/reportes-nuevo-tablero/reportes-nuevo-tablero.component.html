@@ -96,10 +96,10 @@
             <td>{{ item.estandar }}</td>
             <td>{{ item.categoria }}</td>
             <td>{{ item.subCategoria }}</td>
-            <td [formGroup]="FormIndicador">
+            <td>
               <input
-                formControlName="idIndicado"
-                (change)="updateIndicado(item.idIndicador)"
+                [(ngModel)]="item.usar"
+                (change)="updateIndicado(item.idIndicador, item.usar)"
                 type="checkbox"
               />
             </td>
