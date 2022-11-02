@@ -21,8 +21,7 @@ export class ConfiguracionComponent implements OnInit {
     this._success.subscribe((message) => (this.successMessage = message));
 
   }
-  fecha = new Date();
-  year = this.fecha.getFullYear();
+
   private _success = new Subject<string>();
   successMessage = "";
   @ViewChild("selfClosingAlert", { static: false }) selfClosingAlert: NgbAlert;
