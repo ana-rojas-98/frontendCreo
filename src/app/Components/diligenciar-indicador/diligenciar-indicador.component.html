@@ -2,7 +2,7 @@
   <app-sidebar></app-sidebar>
   <div class="cuerpo">
     <div class="title">
-      <h1>Diligenciar indicador</h1>
+      <h1>Indicador</h1>
     </div>
     <div class="row formatos">
       <div class="col-5 d-flex flex-row">
@@ -12,33 +12,26 @@
       </div>
 
       <div class="col-7 d-flex flex-row-reverse mb-2">
-        <button>Subir archivos adjuntos</button>
+        <button class="" (click)="capturar.click()">
+          Archivo adjunto
+        </button>
+        <input type="file" hidden (change)="archivoCapt($event)" #capturar id="in"  accept=".xlsx,.pdf,.jpg,.png"/>
       </div>
     </div>
-    <div class="tablero">
-      <div class="title-card">
-        <div class="box my-2">
+    <div class="tablero mb-2">
+      <div class="title-card row">
+        <div class="box mb-2 col-6">
           <h3>Año</h3>
-          <select
-            class="selector mt-2"
-            name="estandar"
-            type="select"
-            [(ngModel)]="Anio"
-          >
+          <select class="selector mt-2" name="anio" type="select" [(ngModel)]="Anio" (change)="ChangeAnio()">
             <option value="" selected>Seleccione Año</option>
             <option *ngFor="let resultado of uniqueYears" [value]="resultado">
               {{ resultado }}
             </option>
           </select>
         </div>
-        <div class="box my-4">
-          <h2>Periodo</h2>
-          <select
-            class="selector mt-2"
-            name="estandar"
-            type="select"
-            [(ngModel)]="Periodo"
-          >
+        <div class="box mb-2 col-6">
+          <h3>Periodo</h3>
+          <select class="selector mt-2" name="periodo" type="select" [(ngModel)]="Periodo" (change)="ChangePeriodo()">
             <option value="" selected>Seleccione Periodo</option>
             <option *ngFor="let resultado of uniquePeriod" [value]="resultado">
               {{ resultado }}
@@ -46,14 +39,14 @@
           </select>
         </div>
       </div>
-      <div class="row border mb-2 mx-2"></div>
+      <div class="row border my-2 mx-2"></div>
       <!------------------------------------------------------------------------------------------------------------------>
       <div id="prueba" class="prueba"></div>
       <!------------------------------------------------------------------------------------------------------------------>
     </div>
     <div class="botones">
-      <button class="guardar-indicador">Guardar</button>
-      <button class="finalizar">Finalizar</button>
+      <button id="Guardar" class="guardar-indicador" (click)="fnGuardar()">Guardar</button>
+      <button id="Finalizar" class="finalizar" (click)="fnFinalizar()">Finalizar</button>
     </div>
   </div>
 </div>

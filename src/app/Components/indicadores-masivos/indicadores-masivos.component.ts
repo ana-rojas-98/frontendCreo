@@ -212,6 +212,7 @@ export class IndicadoresMasivosComponent implements OnInit {
         formD.append("periodicidad", this.Registros[i][3]);
         let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
         formD.append("IdUsuario", usarioLocalStote.usuarioid);
+        formD.append("Nombre", this.archivos.name);
         i++;
         this.authService.setIndicadorNuevo(formD).subscribe((res: any) => {
           if (res.result == 'Exitoso'){

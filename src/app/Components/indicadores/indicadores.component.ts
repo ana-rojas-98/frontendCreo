@@ -4,6 +4,7 @@ import { AuthService } from "src/app/services/auth.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormControl } from "@angular/forms";
 import { isNull } from "@angular/compiler/src/output/output_ast";
+import { IndicadoresService } from "src/app/services/indicadores.service";
 
 @Component({
   selector: "app-indicadores",
@@ -14,6 +15,7 @@ export class IndicadoresComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private reportesService: ReportesService,
+    private indicadoresservice: IndicadoresService,
 
   ) { }
   Estandar = new FormControl("");
@@ -141,4 +143,19 @@ export class IndicadoresComponent implements OnInit {
         );
       });
   }
+
+  descargarArchivo(urlArchivo) {
+    const formData = new FormData();
+    formData.append("Archivo", urlArchivo);
+    this.indicadoresservice.descarga(formData).subscribe((res) => {
+      let nombreArchivo = res.headers.get("content-disposition");
+      //?.split(';')[1].split('=')[1];
+      let tipo: Blob = res.body as Blob;
+      let a = document.createElement("a");
+      a.download = "urlArchivo";
+      a.href = window.URL.createObjectURL(tipo);
+      a.click();
+    });
+  }
+
 }
