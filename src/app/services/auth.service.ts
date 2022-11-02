@@ -225,4 +225,12 @@ export class AuthService {
     return resultado;
   }
 
+  enviarCorreo(correo: any) {
+    let resul = this.http.post(
+      `${this.URL_SER}/api/configuracions/enviarNotificacion`,
+      correo
+    );
+    return resul;
+  }
+
 }

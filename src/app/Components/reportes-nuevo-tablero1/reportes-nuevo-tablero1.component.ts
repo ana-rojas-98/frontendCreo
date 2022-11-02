@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import * as $ from "jquery";
 
 @Component({
   selector: "app-reportes-nuevo-tablero1",
@@ -8,7 +9,98 @@ import { Component, OnInit } from "@angular/core";
 export class ReportesNuevoTablero1Component implements OnInit {
   constructor() {}
 
+  //cadenas de html
+  con = 0;
+  Select3 = "";
+  fila = 0;
+  select =
+    "<div class='row'> <div class='col-4'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='1'>1</option> <option ='2'>2</option> <option ='3'>3</option> <option ='4'>4</option> </select> </div> </div>";
+
+  select2 =
+    "<div class='row'> <div class='col-4'> <select id='" +
+    this.con.toString() +
+    "' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div> <div class='col-4'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div>  </div>";
+
+  select3 =
+    "<div class='row'> <div class='col-4'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div> <div class='col-4'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div> <div class='col-4'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div>  </div>";
+  select4 =
+    "<div class='row'> <div class='col-3'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div> <div class='col-3'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div> <div class='col-3'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div> <div class='col-3'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div> </div>";
+
+  div = "<div class='contenedorAgregar1'>";
+  input = "<input class='rounded-pill text-center h-40px w-25' type='text'/>";
+
+  d =
+    "<select id='selector1'  class='selector' [(ngModel)]='Select3' (ngModelChange)='prueba()'><option value='3'>Selecciona tipo de usuario</option> <option value='p'>Selecciona tipo de usuario</option></select>";
+  array: any = [];
+
   ngOnInit() {}
+
+  resultado = $("#selector1").change(function () {
+    var estado = $("#selector1").val();
+    alert(estado);
+  });
+
+  prueba() {}
+
+  agregarFila() {
+    let myParent = document.getElementById("contenedor");
+
+    let selectList = document.createElement("select");
+
+    //Create array of options to be added
+    var array = ["Seleccione una opcion", "1", "2", "3", "4"];
+    var opciones = [
+      "Seleccione una opcion",
+      "Texto/numero",
+      "Diagrama de barras",
+      "Diagrama de torta",
+      "Diagrama de puntos",
+    ];
+
+    selectList.id = "mySelect";
+    selectList.className = "rounded";
+    selectList.style.cssText =
+      "width:22%; height:40px; grid-row: '"+ this.fila++ +"'/ '"+ this.fila++ +"'; grid-column: 1/5;";
+
+    //selectList.style.height = "40px";
+    myParent.appendChild(selectList);
+
+    //Create and append the options
+    for (var i = 0; i < array.length; i++) {
+      var option = document.createElement("option");
+      option.value = array[i];
+      option.text = array[i];
+      selectList.appendChild(option);
+    }
+
+    let cont = 0;
+    let selectOpciones;
+    selectList.addEventListener("change", () => {
+      let axt = parseInt(selectList.value);
+      for (let i = 1; i <= axt; i++) {
+        selectOpciones = document.createElement("select");
+
+        selectOpciones.id = "selectOpciones";
+        selectOpciones.className = "rounded";
+        selectOpciones.style.cssText = "width:90%; height:40px";
+
+        myParent.appendChild(selectOpciones);
+
+        for (let i = 0; i < opciones.length; i++) {
+          var option = document.createElement("option");
+          option.value = opciones[i];
+          option.text = opciones[i];
+          selectOpciones.appendChild(option);
+        }
+      }
+
+      // let input = document.createElement("input");
+      // input.type = "text";
+      // myParent.appendChild(input);
+    });
+
+    console.log("hola: ",this.fila)
+  }
 
   columnNames = ["Browser", "Percentage"];
   title = "googlechart";
@@ -27,5 +119,4 @@ export class ReportesNuevoTablero1Component implements OnInit {
   };
   width = 500;
   height = 300;
-  
 }

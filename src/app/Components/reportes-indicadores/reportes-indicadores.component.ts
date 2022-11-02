@@ -90,12 +90,6 @@ export class ReportesIndicadoresComponent implements OnInit {
     });
   }
 
-  prueba() {
-    let prueba = this.resultadosTabla.map((item) => {
-      return [item.fechaModificacion, item.usuario];
-    });
-    return prueba;
-  }
 
   getUsuarioFilter() {
     if (this.Usuario.usuario == "") {
@@ -156,6 +150,7 @@ export class ReportesIndicadoresComponent implements OnInit {
       return item.idSubCategoria == dato;
     });
   }
+  
   getIndicadorFilter() {
     if (this.Indicador.idIndicador == "") {
       this.geSubtCategoriaFilter();
