@@ -75,26 +75,19 @@
       </div>
     </div>
     <div class="subir-archivo">
-      <p>Subir el archivo excel:</p>
-      <button class="button-interactivo" (click)="capturar.click()">
+      <p class="mb-2">Subir el archivo excel:</p>
+      <!-- <button class="button-interactivo" (click)="capturar.click()">
         Subir
-      </button>
+      </button> -->
       <!--defino el boton que me va a mostrar la información en el ensayo-->
       <!-- <button (click)="mostrar()">Mostrar</button> -->
-      <input
-        type="file"
-        hidden
-        (change)="archivoCapt($event)"
-        #capturar
-        id="in"
-        accept=".xlsx"
-      />
+      <input type="file" class="" (change)="archivoCapt($event)" #capturar id="in"  accept=".xlsx"/>
     </div>
     <div class="perioricidad-indicador">
-      <p>Seleccione la periodicidad de este indicador</p>
-      <br />
+      <p class="mb-2">Seleccione la periodicidad de este indicador</p>
+
       <h3>Periodicidad</h3>
-      <br />
+
       <select
         name="select"
         type="selectbox"
@@ -109,14 +102,10 @@
     <div class="previsualizar-indicador">
       <p>A continuación revise la previsualización del indicador:</p>
       <button
-        class="button-interactivo"
-        (click)="ShowData()"
-        (click)="leerArchivo()"
-      >
+        class="button-interactivo" (click)="ShowData()" (click)="leerArchivo()">
         Previsualización del indicador
       </button>
-      <br />
-      <div *ngIf="element == true">
+      <div class="mt-3" *ngIf="element == true">
         <table>
           <thead align="center">
             <tr>

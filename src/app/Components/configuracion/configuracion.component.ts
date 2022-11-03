@@ -82,7 +82,6 @@ export class ConfiguracionComponent implements OnInit {
       this.changeSuccessMessage(1);
     } else {
       this.authService.setConfiguracion(enviarimg).subscribe((res: any) => {
-        console.log('hola', res);
         if(res){
           this.alerta("Configuración cambiada")
           location.reload();
@@ -107,7 +106,6 @@ export class ConfiguracionComponent implements OnInit {
       const b = URL.createObjectURL(tipo);
       const im = this.sanitizer.bypassSecurityTrustUrl(b);
       this.logoEstatico=im;
-      console.log("entra para mostrar")
     })
   }
 

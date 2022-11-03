@@ -32,7 +32,7 @@ export class ReportesService {
 
   UpdateAchivos(idIndicador) {
     let resul = this.http.post(
-      `${this.URL_SER}/api/archivos/UpdateAchivos/`,idIndicador
+      `${this.URL_SER}/api/indicadores/UpdateAchivos/`,idIndicador
     );
     return resul;
   }
