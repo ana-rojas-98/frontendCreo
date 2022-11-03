@@ -83,34 +83,9 @@ todosCorreos(event){
   const eve=event.target.checked;
   this.aux.forEach((check)=>{
     check.checked = eve;
-    check.asunto = this.envios.asunto;
-    check.mensaje = this.envios.mensaje;
-    if(check.checked===true){
-      this.enviarCorreo.push(
-        {
-        correo: check.correo,
-        asunto:check.asunto,
-        mensaje:check.mensaje,
-        }
-      );
-    }else if (check.checked===false){
+if (check.checked===false){
      this.enviarCorreo.pop();
    }
-  });
- 
-}
-algunosCorreos(){
-  const algunosC = this.aux.filter(hola=>hola.checked===true);
-  algunosC.forEach((m)=>{
-    m.asunto = this.envios.asunto;
-    m.mensaje = this.envios.mensaje;
-    this.enviarCorreo.push(
-      {
-      correo: m.correo,
-      asunto:m.asunto,
-      mensaje:m.mensaje,
-      }
-    );
   });
 }
 
@@ -221,32 +196,31 @@ boxtresDias(){
   }
 }
 enviar(){
-  // console.log("Asunto", this.envios.asunto)
-  // console.log("Mensaje", this.envios.mensaje)
-  console.log("Envios ", this.envios)
+  const hola=this.aux.filter(hola=>hola.checked===true);
+  hola.forEach((m)=>{
+    m.asunto = this.envios.asunto;
+    m.mensaje = this.envios.mensaje;
+    this.enviarCorreo.push(
+      {
+      correo: m.correo,
+      asunto:m.asunto,
+      mensaje:m.mensaje,
+      }
+    );
+    });
   console.log("Enviar a ", this.enviarCorreo)
-//     var form = new FormData();
-//     form.append("asunto", this.envios.asunto);
-//     form.append("mensaje",this.envios.mensaje); 
-//     form.append("correo",this.enviarCorreo);
-//       console.log("dentroforeach",this.enviarCorreo)
-    
-   // form.append("correos",this.enviarCorreo);
-    this.authService.enviarCorreo(this.enviarCorreo).subscribe((res:any)=>{
+  for(let i=0; i<this.enviarCorreo.length;i++){
+   var form=new FormData();
+   form.append("asunto",this.enviarCorreo[i].asunto)
+   form.append("mensaje",this.enviarCorreo[i].mensaje)
+   form.append("correo",this.enviarCorreo[i].correo)
+    this.authService.enviarCorreo(form).subscribe((res:any)=>{
       return res;
     }); 
-  
-//   var form = new FormData();
-//   form.append("asunto", this.envios.asunto);
-//   form.append("mensaje",this.envios.mensaje); 
-//   form.append("correo",this.enviarCorreo);
-//     console.log("dentroforeach",this.enviarCorreo)   
-//  // form.append("correos",this.enviarCorreo);
-//   this.authService.enviarCorreo(form).subscribe((res:any)=>{
-//     return res;
-//   });
-  this.algunosCorreos();
+  }
+    this.limpiar();
 }
+
 Guardar(){
 if(this.estadoi===true){
   console.log("enviar de inmediato")
@@ -277,4 +251,15 @@ if(this.estadoiv===true){
 }
 }
 
+limpiar(){
+  console.log("Enviar a ", this.enviarCorreo)
+  this.aux.forEach((item) => {
+    item.checked=false;
+  });    
+  for (let index = 0; index < this.enviarCorreo.length; index++) {
+    this.enviarCorreo.splice(this.enviarCorreo[index]);
+    console.log("eliminando")
+  }
+  console.log("Enviar a ", this.enviarCorreo)
+}
 }
