@@ -46,4 +46,33 @@ export class IndicadoresService {
     );
     return resul;
   }
+
+  GuardarRespuestasIndicador(Respuestas) {
+    let resul = this.http.post(
+      `${this.URL_SER}/api/indicadores/GuardarRespuestasIndicador`,Respuestas
+    );
+    return resul;
+  }
+
+  FinalizarIndicador(Respuestas) {
+    let resul = this.http.post(
+      `${this.URL_SER}/api/indicadores/FinalizarInidicador`,Respuestas
+    );
+    return resul;
+  }
+
+  GuardarAdjunto(Respuestas: any) {
+    let resul = this.http.post(
+      `${this.URL_SER}/api/indicadores/GuardarAdjunto`,Respuestas
+    );
+    return resul;
+  }
+
+  descarga(Archivo) {
+    let resu = this.http.get(
+      `${this.URL_SER}/api/indicadores/descargarArchivo`,
+      { observe: "response", responseType: "blob" , params: {'NombreArchivo': Archivo} }
+    );
+    return resu;
+  }
 }

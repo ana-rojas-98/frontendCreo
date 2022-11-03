@@ -41,7 +41,7 @@
     margin: 50px;
     border: 1px black solid;
     border-radius: 10px;
-    padding: 50px;
+    padding: 10px 50px 50px 50px;
 }
 .title-card{
     text-align: center;
@@ -194,10 +194,3 @@ h2{
     margin-right: 100px;
 }
 
-.prueba{
-    input{
-        border-color: yellow;
-        border: 1px solid yellow;
-        background-color: yellow !important;
-    }
-}

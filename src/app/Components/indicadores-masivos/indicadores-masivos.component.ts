@@ -174,7 +174,7 @@ export class IndicadoresMasivosComponent implements OnInit {
       //?.split(';')[1].split('=')[1];
       let tipo: Blob = res.body as Blob;
       let a = document.createElement("a");
-      a.download = "ArchivoEjemplo.xlsx";
+      a.download = "Ejemplo.xlsx";
       a.href = window.URL.createObjectURL(tipo);
       a.click();
     });
@@ -212,6 +212,7 @@ export class IndicadoresMasivosComponent implements OnInit {
         formD.append("periodicidad", this.Registros[i][3]);
         let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
         formD.append("IdUsuario", usarioLocalStote.usuarioid);
+        formD.append("Nombre", this.archivos.name);
         i++;
         this.authService.setIndicadorNuevo(formD).subscribe((res: any) => {
           if (res.result == 'Exitoso'){

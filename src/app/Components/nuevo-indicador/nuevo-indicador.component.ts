@@ -144,7 +144,7 @@ export class NuevoIndicadorComponent implements OnInit {
   archivoCapt(event) {
     this.archivoCapturado = event.target.files[0];
     this.archivos = this.archivoCapturado;
-    this.archivoleer.push(this.archivoCapturado);
+    this.archivoleer[0] = this.archivoCapturado;
     //otro metodo
     //this.leer(this.archivoCapturado);
   }
@@ -159,6 +159,21 @@ export class NuevoIndicadorComponent implements OnInit {
   //     this.resultadoExcel = XSLX.utils.sheet_to_json(libro.Sheets[hoja[0]]);
   //   };
   // }
+
+  leerArchivo() {
+    const archivoleido = new FileReader();
+    const archi = this.archivoleer[0];
+    archivoleido.readAsBinaryString(archi);
+    console.log("el archivo", archi);
+    archivoleido.onload = (e) => {
+      const workArchi = XSLX.read(archivoleido.result, { type: "binary" });
+      const nombreHojas = workArchi.SheetNames;
+      this.ExcelData = XSLX.utils.sheet_to_json(
+        workArchi.Sheets[nombreHojas[0]]
+      );
+    };
+    console.log("el excelData", this.ExcelData);
+  }
 
   NuevoIndicadorRegistro = {
     Entrada: "",
@@ -176,22 +191,6 @@ export class NuevoIndicadorComponent implements OnInit {
     FinColumna: "",
     SaltoLinea: "",
   };
-
-  leerArchivo() {
-    const archivoleido = new FileReader();
-    const archi = this.archivoleer[0];
-    archivoleido.readAsBinaryString(archi);
-    console.log("el archivo", archi);
-    archivoleido.onload = (e) => {
-      const workArchi = XSLX.read(archivoleido.result, { type: "binary" });
-      const nombreHojas = workArchi.SheetNames;
-      this.ExcelData = XSLX.utils.sheet_to_json(
-        workArchi.Sheets[nombreHojas[0]]
-      );
-    };
-    console.log("el excelData", this.ExcelData);
-  }
-
 
   ShowData() {
     this.element = true;
@@ -231,6 +230,7 @@ export class NuevoIndicadorComponent implements OnInit {
       formData.append("periodicidad", this.seleccionado.periodicidadId);
       let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
       formData.append("IdUsuario", usarioLocalStote.usuarioid);
+      formData.append("Nombre", this.archivos.name);
       this.authService.setIndicadorNuevo(formData).subscribe((res: any) => {
         if (res.result == 'Exitoso'){
           this.alerta("¡Indicador creado exitosamente!")
@@ -247,7 +247,7 @@ export class NuevoIndicadorComponent implements OnInit {
       //?.split(';')[1].split('=')[1];
       let tipo: Blob = res.body as Blob;
       let a = document.createElement("a");
-      a.download = "ArchivoEjemplo.xlsx";
+      a.download = "Ejemplo.xlsx";
       a.href = window.URL.createObjectURL(tipo);
       a.click();
     });
