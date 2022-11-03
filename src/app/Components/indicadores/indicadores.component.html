@@ -73,7 +73,7 @@
             <td>{{ item.usuario }}</td>
             <td>{{ item.fechaModificacion }}</td>
             <td>{{ item.avance }}%</td>
-            <td><a (click)="descargarArchivo(item.urlArchivo)">{{ item.urlArchivo }}</a></td>
+            <td><a (click)="descargarArchivo(item.idIndicador,item.urlArchivo)">{{ item.urlArchivo }}</a></td>
             <td>
               <img src="../../../assets/imagenes/ver.png" alt="icono-ver" [routerLink]="[
                   '/diligenciar-indicador',item.idIndicador,'ver']" [routerLinkActive]="['link-active']" />

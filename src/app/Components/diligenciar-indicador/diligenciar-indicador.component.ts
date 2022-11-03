@@ -135,7 +135,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
       formData.append("Archivo", this.archivos);
       formData.append("Nombre", this.nombreArchivo);
       formData.append("idArchivo", this.idDeArchivo);
-      formData.append("Extension", this.archivos.name.toString().split('.').pop())
+      formData.append("Extension", this.archivos.name.toString().split('.').pop());
       this.indicadoresservice.GuardarAdjunto(formData).subscribe((res: any) => {
         if (res.resul == "Se guardo con exito") {
           this.alert("Archivo adjunto guardado");
