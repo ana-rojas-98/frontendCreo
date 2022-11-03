@@ -198,72 +198,72 @@ if (check.checked===false){
       this.boxtresI = true;
     }
   }
-}
-enviar(){
-  const hola=this.aux.filter(hola=>hola.checked===true);
-  hola.forEach((m)=>{
-    m.asunto = this.envios.asunto;
-    m.mensaje = this.envios.mensaje;
-    this.enviarCorreo.push(
-      {
-      correo: m.correo,
-      asunto:m.asunto,
-      mensaje:m.mensaje,
-      }
-    );
-    });
-  console.log("Enviar a ", this.enviarCorreo)
-  for(let i=0; i<this.enviarCorreo.length;i++){
-   var form=new FormData();
-   form.append("asunto",this.enviarCorreo[i].asunto)
-   form.append("mensaje",this.enviarCorreo[i].mensaje)
-   form.append("correo",this.enviarCorreo[i].correo)
-    this.authService.enviarCorreo(form).subscribe((res:any)=>{
-      return res;
-    }); 
+  enviar(){
+    const hola=this.aux.filter(hola=>hola.checked===true);
+    hola.forEach((m)=>{
+      m.asunto = this.envios.asunto;
+      m.mensaje = this.envios.mensaje;
+      this.enviarCorreo.push(
+        {
+        correo: m.correo,
+        asunto:m.asunto,
+        mensaje:m.mensaje,
+        }
+      );
+      });
+    console.log("Enviar a ", this.enviarCorreo)
+    for(let i=0; i<this.enviarCorreo.length;i++){
+     var form=new FormData();
+     form.append("asunto",this.enviarCorreo[i].asunto)
+     form.append("mensaje",this.enviarCorreo[i].mensaje)
+     form.append("correo",this.enviarCorreo[i].correo)
+      this.authService.enviarCorreo(form).subscribe((res:any)=>{
+        return res;
+      }); 
+    }
+      this.limpiar();
   }
-    this.limpiar();
-}
-
-Guardar(){
-if(this.estadoi===true){
-  console.log("enviar de inmediato")
-  this.enviar();
-}
-if(this.estadoii===true){
-  console.log("enviar con fecha");
-  var f1 =Date.parse(this.fechaEspera.toString());
-  var f= Date.parse(this.completa);
-  if(f1<f){
-    console.log("La fecha digitada es anterior a hoy");
-  }else if(f1===f){
-    console.log("La fecha digitada es hoy, selecciona enviar inmediatamente")
-  }else if(f1>f){
-    console.log("Correo programado exitosamente")
+  
+  Guardar(){
+  if(this.estadoi===true){
+    console.log("enviar de inmediato")
     this.enviar();
-    // if(this.fechaEspera.toString()==this.completa){
-    //        console.log("enviar correo") 
-    // }
   }
-}
-if(this.estadoiii===true){
-  console.log("enviar varias veces")
-  console.log("dias",this.lunes)
-}
-if(this.estadoiv===true){
-  console.log("enviar cierta fecha")
-}
+  if(this.estadoii===true){
+    console.log("enviar con fecha");
+    var f1 =Date.parse(this.fechaEspera.toString());
+    var f= Date.parse(this.completa);
+    if(f1<f){
+      console.log("La fecha digitada es anterior a hoy");
+    }else if(f1===f){
+      console.log("La fecha digitada es hoy, selecciona enviar inmediatamente")
+    }else if(f1>f){
+      console.log("Correo programado exitosamente")
+      this.enviar();
+      // if(this.fechaEspera.toString()==this.completa){
+      //        console.log("enviar correo") 
+      // }
+    }
+  }
+  if(this.estadoiii===true){
+    console.log("enviar varias veces")
+    console.log("dias",this.lunes)
+  }
+  if(this.estadoiv===true){
+    console.log("enviar cierta fecha")
+  }
+  }
+  
+  limpiar(){
+    console.log("Enviar a ", this.enviarCorreo)
+    this.aux.forEach((item) => {
+      item.checked=false;
+    });    
+    for (let index = 0; index < this.enviarCorreo.length; index++) {
+      this.enviarCorreo.splice(this.enviarCorreo[index]);
+      console.log("eliminando")
+    }
+    console.log("Enviar a ", this.enviarCorreo)
+  }
 }
 
-limpiar(){
-  console.log("Enviar a ", this.enviarCorreo)
-  this.aux.forEach((item) => {
-    item.checked=false;
-  });    
-  for (let index = 0; index < this.enviarCorreo.length; index++) {
-    this.enviarCorreo.splice(this.enviarCorreo[index]);
-    console.log("eliminando")
-  }
-  console.log("Enviar a ", this.enviarCorreo)
-}
-}
