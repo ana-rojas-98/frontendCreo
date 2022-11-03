@@ -13,6 +13,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
   con = 0;
   Select3 = "";
   fila = 0;
+  idSelec = 0;
   select =
     "<div class='row'> <div class='col-4'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='1'>1</option> <option ='2'>2</option> <option ='3'>3</option> <option ='4'>4</option> </select> </div> </div>";
 
@@ -30,7 +31,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
   input = "<input class='rounded-pill text-center h-40px w-25' type='text'/>";
 
   d =
-    "<select id='selector1'  class='selector' [(ngModel)]='Select3' (ngModelChange)='prueba()'><option value='3'>Selecciona tipo de usuario</option> <option value='p'>Selecciona tipo de usuario</option></select>";
+    "<select id='selector1'  class='selector' [(ngModel)]='Select3' onchange='prueba()'><option value='3'>Selecciona tipo de usuario</option> <option value='p'>Selecciona tipo de usuario</option></select>";
   array: any = [];
 
   ngOnInit() {}
@@ -40,10 +41,27 @@ export class ReportesNuevoTablero1Component implements OnInit {
     alert(estado);
   });
 
-  prueba() {}
+  prueba() {
+    alert("hola")
+  }
 
   agregarFila() {
     let myParent = document.getElementById("contenedor");
+    // prueba.innerHTML = this.d;
+    // prueba.addEventListener("change", () => {
+    //   alert("hola");
+    // });
+
+    
+    //let select = document.querySelector(".selector");
+
+    //myParent.innerHTML += this.d
+
+    //let select = document.querySelector(".selector");
+
+    // select.addEventListener("change", ()=>{
+    //     alert("hola: ")
+    // })
 
     let selectList = document.createElement("select");
 
@@ -57,10 +75,16 @@ export class ReportesNuevoTablero1Component implements OnInit {
       "Diagrama de puntos",
     ];
 
-    selectList.id = "mySelect";
+    this.idSelec++;
+    selectList.id = this.idSelec.toString();
+    console.log("id selec: ", this.idSelec)
     selectList.className = "rounded";
     selectList.style.cssText =
-      "width:22%; height:40px; grid-row: '"+ this.fila++ +"'/ '"+ this.fila++ +"'; grid-column: 1/5;";
+      "width:22%; height:40px; grid-row: '" +
+      this.fila++ +
+      "'/ '" +
+      this.fila++ +
+      "'; grid-column: 1/5;";
 
     //selectList.style.height = "40px";
     myParent.appendChild(selectList);
@@ -75,6 +99,8 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
     let cont = 0;
     let selectOpciones;
+
+    
     selectList.addEventListener("change", () => {
       let axt = parseInt(selectList.value);
       for (let i = 1; i <= axt; i++) {
@@ -94,12 +120,22 @@ export class ReportesNuevoTablero1Component implements OnInit {
         }
       }
 
-      // let input = document.createElement("input");
-      // input.type = "text";
-      // myParent.appendChild(input);
+    //   let input = document.createElement("input");
+    //   input.type = "text";
+    //   myParent.appendChild(input);
+
+    //  let idEjemplo = document.getElementById("mySelect").value
+
+    //   console.log(idEjemplo)
+
     });
 
-    console.log("hola: ",this.fila)
+    console.log("hola: ", this.fila);
+  }
+
+  guardar(){
+    let html = document.getElementById("contenedor").innerHTML
+    console.log(html)
   }
 
   columnNames = ["Browser", "Percentage"];
