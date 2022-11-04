@@ -1,0 +1,36 @@
+<div class="contenedor">
+    <app-sidebar></app-sidebar>
+    <div class="cuerpo">
+        <div class="title">
+            <h1>Indicadores</h1>
+        </div>
+        <div class="resultados-tabla">
+            <table class="tabla-indicadores">
+                <thead>
+                    <tr>
+                        <th>
+                            <img src="../../../assets/imagenes/archivo.png" alt="icono-archivo" class="mx-1" />
+                            Nombre Archivo
+                        </th>
+                        <th>
+                            <img src="../../../assets/imagenes/descarga.png" alt="icono-diligenciador" class="mx-1" />
+                            Descargar
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of resultadosTabla">
+                        <td>{{ item.nombreArchivo }}</td>
+                        <td>
+                            <a (click)="descargarArchivo(item.id,item.urlReducido)">
+                                <img src="../../../assets/imagenes/descarga.png" alt="icono-diligenciador" />
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="mt-3">Descargar todos los archivos adjuntos</button>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { timeStamp } from "console";
 import { IndicadoresService } from "src/app/services/indicadores.service";
+import { ReportesService } from "src/app/services/reportes.service";
 import Swal from "sweetalert2";
 
 
@@ -11,7 +12,7 @@ import Swal from "sweetalert2";
   styleUrls: ["./diligenciar-indicador.component.scss"],
 })
 export class DiligenciarIndicadorComponent implements OnInit {
-  constructor(private route: ActivatedRoute, public router: Router, private indicadoresservice: IndicadoresService) { }
+  constructor(private route: ActivatedRoute, public router: Router, private indicadoresservice: IndicadoresService, private reportesService: ReportesService,) { }
   id = 0;
   accionVerModificar = "";
   modificar = false;
@@ -39,6 +40,8 @@ export class DiligenciarIndicadorComponent implements OnInit {
   archivos: File = null;
   archivoCapturado: File;
 
+  resultadosIndicador = {};
+
   Valores = {
     idFormato: 0,
     idFila: 0,
@@ -63,7 +66,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
     }
     this.idArchivo.idArchivo = this.id;
     this.VerDiligenciarIndicador();
-
+    this.getIndicadoresFilter();
   }
 
   filtrarInfo() {
@@ -78,7 +81,6 @@ export class DiligenciarIndicadorComponent implements OnInit {
         this.preciodicidadesArray.push(item.periodicidad);
         return item;
       });
-      this.nombreArchivo = this.resultadosTabla[0].valor;
       this.idDeArchivo = this.resultadosTabla[0].idArchivo;
       this.filtrarInfo();
     });
@@ -127,9 +129,15 @@ export class DiligenciarIndicadorComponent implements OnInit {
     document.getElementById('prueba').innerHTML = contents;
   }
 
-
+  getIndicadoresFilter() {
+    this.reportesService.ConsultarIndicadoresAsignados().subscribe((res: any) => {
+        this.resultadosIndicador = res.filter((item) => (item.idIndicador == this.id));
+      });
+    this.nombreArchivo = this.resultadosIndicador[0].indicador;
+  }
 
   fnGuardar() {
+    this.getIndicadoresFilter();
     if (this.archivos != null) {
       const formData = new FormData();
       formData.append("Archivo", this.archivos);
@@ -143,52 +151,11 @@ export class DiligenciarIndicadorComponent implements OnInit {
         return res;
       });
     }
-    if (this.Anio == "" || this.Anio == null || this.Periodo == "" || this.Periodo == null){
+    if (this.Anio == "" || this.Anio == null || this.Periodo == "" || this.Periodo == null) {
       this.alert("Debe seleccionar año y periodo antes de guardar");
     }
-    else{
+    else {
       this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
-    this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
-    let i = 0;
-    var contents;
-    let contenidos = [];
-    this.resultadosHTML.map(item => (
-      contents = document.getElementById((item.idFila - 1).toString()),
-      item.valor = contents.value,
-      contenidos.push(item),
-      i++
-    ));
-    this.indicadoresservice.GuardarRespuestasIndicador(contenidos).subscribe((res: any) => {
-      if (res.resul == "Se guardo con exito") {
-        this.alert("Respuestas guardadas");
-        location.reload();
-      }
-      return res;
-    });
-    } 
-  }
-
-  fnFinalizar() {
-    let a = confirm("¿Está seguro que ya finalizó este indicador?")
-    if (a == true) {
-      if (this.archivos != null) {
-        const formData = new FormData();
-        formData.append("Archivo", this.archivos);
-        formData.append("Nombre", this.nombreArchivo);
-        formData.append("idArchivo", this.idDeArchivo);
-        formData.append("Extension", this.archivos.name.toString().split('.').pop())
-        this.indicadoresservice.GuardarAdjunto(formData).subscribe((res: any) => {
-          if (res.resul == "Se guardo con exito") {
-            this.alert("Archivo adjunto guardado");
-          }
-          return res;
-        });
-      }
-      if (this.Anio == "" || this.Anio == null || this.Periodo == "" || this.Periodo == null){
-        this.alert("Debe seleccionar año y periodo antes de guardar");
-      }
-      else{
-        this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
       this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
       let i = 0;
       var contents;
@@ -206,7 +173,49 @@ export class DiligenciarIndicadorComponent implements OnInit {
         }
         return res;
       });
-      } 
+    }
+  }
+
+  fnFinalizar() {
+    this.getIndicadoresFilter();
+    let a = confirm("¿Está seguro que ya finalizó este indicador?")
+    if (a == true) {
+      if (this.archivos != null) {
+        const formData = new FormData();
+        formData.append("Archivo", this.archivos);
+        formData.append("Nombre", this.nombreArchivo);
+        formData.append("idArchivo", this.idDeArchivo);
+        formData.append("Extension", this.archivos.name.toString().split('.').pop())
+        this.indicadoresservice.GuardarAdjunto(formData).subscribe((res: any) => {
+          if (res.resul == "Se guardo con exito") {
+            this.alert("Archivo adjunto guardado");
+          }
+          return res;
+        });
+      }
+      if (this.Anio == "" || this.Anio == null || this.Periodo == "" || this.Periodo == null) {
+        this.alert("Debe seleccionar año y periodo antes de guardar");
+      }
+      else {
+        this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
+        this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
+        let i = 0;
+        var contents;
+        let contenidos = [];
+        this.resultadosHTML.map(item => (
+          contents = document.getElementById((item.idFila - 1).toString()),
+          item.valor = contents.value,
+          contenidos.push(item),
+          i++
+        ));
+        this.indicadoresservice.GuardarRespuestasIndicador(contenidos).subscribe((res: any) => {
+          if (res.resul == "Se guardo con exito") {
+            this.alert("Respuestas guardadas");
+            location.reload();
+          }
+          return res;
+        });
+      }
     }
   }
 

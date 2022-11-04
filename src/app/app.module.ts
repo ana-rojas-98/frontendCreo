@@ -49,6 +49,7 @@ import { ReportesNuevoTableroComponent } from './Components/reportes-nuevo-table
 import { ReportesNuevoTablero1Component } from './Components/reportes-nuevo-tablero1/reportes-nuevo-tablero1.component';
 import { GestorNotiComponent } from './Components/gestor-noti/gestor-noti.component';
 import { NuevaNotiComponent } from './Components/nueva-noti/nueva-noti.component';
+import { ArchivosAdjuntosComponent } from './Components/archivos-adjuntos/archivos-adjuntos.component';
 
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
@@ -91,6 +92,7 @@ import { NuevaNotiComponent } from './Components/nueva-noti/nueva-noti.component
     ReportesNuevoTablero1Component,
     GestorNotiComponent,
     NuevaNotiComponent,
+    ArchivosAdjuntosComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),

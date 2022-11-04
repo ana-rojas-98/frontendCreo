@@ -145,23 +145,6 @@ export class IndicadoresComponent implements OnInit {
       });
   }
 
-  descargarArchivo(id,url) {
-    if (url != "Vacío"){
-      this.indicadoresservice.descarga(id).subscribe((res) => {
-        let nombreArchivo = res.headers.get("content-disposition");
-        //?.split(';')[1].split('=')[1];
-        let tipo: Blob = res.body as Blob;
-        let a = document.createElement("a");
-        a.download = url;
-        a.href = window.URL.createObjectURL(tipo);
-        a.click();
-      });
-    }
-    else{
-      this.alert("No tiene archivo adjunto");
-    }
-  }
-
   alert(mensaje) {
     Swal.fire(mensaje);
   }
