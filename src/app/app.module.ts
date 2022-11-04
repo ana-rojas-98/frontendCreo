@@ -131,7 +131,8 @@ import { NuevaNotiComponent } from './Components/nueva-noti/nueva-noti.component
       { path: 'reportes-indicadores', component: ReportesIndicadoresComponent, canActivate:[AuthGuard]},
       { path: 'reportes-tableros', component: ReportesTablerosComponent, canActivate:[AuthGuard]},
       { path: 'reportes-nuevo-tablero', component: ReportesNuevoTableroComponent, canActivate:[AuthGuard]},
-      { path: 'nuevo-tablero', component: ReportesNuevoTablero1Component, canActivate:[AuthGuard]},
+      //{ path: 'nuevo-tablero', component: ReportesNuevoTablero1Component, canActivate:[AuthGuard]},
+      { path: 'nuevo-tablero/:array', component: ReportesNuevoTablero1Component, canActivate:[AuthGuard]},
       { path: 'gestor-noti', component: GestorNotiComponent},
       { path: 'nueva-noti', component: NuevaNotiComponent},
     ])

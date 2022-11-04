@@ -1,3 +1,4 @@
+import { ReportesService } from "./../../services/reportes.service";
 import { Component, OnInit } from "@angular/core";
 import * as $ from "jquery";
 
@@ -7,13 +8,14 @@ import * as $ from "jquery";
   styleUrls: ["./reportes-nuevo-tablero1.component.scss"],
 })
 export class ReportesNuevoTablero1Component implements OnInit {
-  constructor() {}
+  constructor(private ReportesService: ReportesService) {}
 
   //cadenas de html
   con = 0;
   Select3 = "";
   fila = 0;
   idSelec = 0;
+  indicadores: any = [];
   select =
     "<div class='row'> <div class='col-4'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='1'>1</option> <option ='2'>2</option> <option ='3'>3</option> <option ='4'>4</option> </select> </div> </div>";
 
@@ -34,7 +36,12 @@ export class ReportesNuevoTablero1Component implements OnInit {
     "<select id='selector1'  class='selector' [(ngModel)]='Select3' onchange='prueba()'><option value='3'>Selecciona tipo de usuario</option> <option value='p'>Selecciona tipo de usuario</option></select>";
   array: any = [];
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.ReportesService.reportesUsar.subscribe((res) => {
+      this.indicadores = res;
+    });
+    console.log("prueba : ", this.indicadores);
+  }
 
   resultado = $("#selector1").change(function () {
     var estado = $("#selector1").val();
@@ -42,7 +49,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
   });
 
   prueba() {
-    alert("hola")
+    alert("hola");
   }
 
   agregarFila() {
@@ -52,7 +59,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
     //   alert("hola");
     // });
 
-    
     //let select = document.querySelector(".selector");
 
     //myParent.innerHTML += this.d
@@ -77,7 +83,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
     this.idSelec++;
     selectList.id = this.idSelec.toString();
-    console.log("id selec: ", this.idSelec)
+    console.log("id selec: ", this.idSelec);
     selectList.className = "rounded";
     selectList.style.cssText =
       "width:22%; height:40px; grid-row: '" +
@@ -100,7 +106,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
     let cont = 0;
     let selectOpciones;
 
-    
     selectList.addEventListener("change", () => {
       let axt = parseInt(selectList.value);
       for (let i = 1; i <= axt; i++) {
@@ -120,22 +125,28 @@ export class ReportesNuevoTablero1Component implements OnInit {
         }
       }
 
-    //   let input = document.createElement("input");
-    //   input.type = "text";
-    //   myParent.appendChild(input);
+      // let p = document.getElementById("selectOpciones");
+      // p.addEventListener("change", () => {
+      //   if (p.value == "Texto/numero") {
+      //     alert("hola");
+      //   }
+      // });
 
-    //  let idEjemplo = document.getElementById("mySelect").value
+      //   let input = document.createElement("input");
+      //   input.type = "text";
+      //   myParent.appendChild(input);
 
-    //   console.log(idEjemplo)
+      //  let idEjemplo = document.getElementById("mySelect").value
 
+      //   console.log(idEjemplo)
     });
 
     console.log("hola: ", this.fila);
   }
 
-  guardar(){
-    let html = document.getElementById("contenedor").innerHTML
-    console.log(html)
+  guardar() {
+    let html = document.getElementById("contenedor").innerHTML;
+    console.log(html);
   }
 
   columnNames = ["Browser", "Percentage"];
