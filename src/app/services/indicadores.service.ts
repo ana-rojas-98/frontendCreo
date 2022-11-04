@@ -75,4 +75,10 @@ export class IndicadoresService {
     );
     return resu;
   }
+
+  ObtenerAdjuntos(id) {
+    let result = this.http.post(
+      `${this.URL_SER}/api/indicadores/ObtenerAdjuntos`, id);
+    return result;
+  }
 }
