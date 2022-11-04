@@ -125,12 +125,12 @@ export class ReportesNuevoTablero1Component implements OnInit {
         }
       }
 
-      // let p = document.getElementById("selectOpciones");
-      // p.addEventListener("change", () => {
-      //   if (p.value == "Texto/numero") {
-      //     alert("hola");
-      //   }
-      // });
+      let p = document.getElementById("selectOpciones");
+      p.addEventListener("change", () => {
+        if (p.value == "Texto/numero") {
+          alert("hola");
+        }
+      });
 
       //   let input = document.createElement("input");
       //   input.type = "text";
