@@ -8,7 +8,7 @@ import * as $ from "jquery";
   styleUrls: ["./reportes-nuevo-tablero1.component.scss"],
 })
 export class ReportesNuevoTablero1Component implements OnInit {
-  constructor(private ReportesService: ReportesService) {}
+  constructor(private ReportesService: ReportesService) { }
 
   //cadenas de html
   con = 0;
@@ -73,24 +73,13 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
     //Create array of options to be added
     var array = ["Seleccione una opcion", "1", "2", "3", "4"];
-    var opciones = [
-      "Seleccione una opcion",
-      "Texto/numero",
-      "Diagrama de barras",
-      "Diagrama de torta",
-      "Diagrama de puntos",
-    ];
+
 
     this.idSelec++;
     selectList.id = this.idSelec.toString();
     console.log("id selec: ", this.idSelec);
     selectList.className = "rounded";
-    selectList.style.cssText =
-      "width:22%; height:40px; grid-row: '" +
-      this.fila++ +
-      "'/ '" +
-      this.fila++ +
-      "'; grid-column: 1/5;";
+    selectList.style.cssText = "width:22%; height:40px; grid-row: '" + this.fila++ + "'/ '" + this.fila++ + "'; grid-column: 1/5;";
 
     //selectList.style.height = "40px";
     myParent.appendChild(selectList);
@@ -103,34 +92,21 @@ export class ReportesNuevoTablero1Component implements OnInit {
       selectList.appendChild(option);
     }
 
-    let cont = 0;
-    let selectOpciones;
+
 
     selectList.addEventListener("change", () => {
       let axt = parseInt(selectList.value);
       for (let i = 1; i <= axt; i++) {
-        selectOpciones = document.createElement("select");
-
-        selectOpciones.id = "selectOpciones";
-        selectOpciones.className = "rounded";
-        selectOpciones.style.cssText = "width:90%; height:40px";
-
-        myParent.appendChild(selectOpciones);
-
-        for (let i = 0; i < opciones.length; i++) {
-          var option = document.createElement("option");
-          option.value = opciones[i];
-          option.text = opciones[i];
-          selectOpciones.appendChild(option);
-        }
+        this.CrearColumna(myParent);
       }
 
-      let p = document.getElementById("selectOpciones");
-      p.addEventListener("change", () => {
-        if (p.value == "Texto/numero") {
-          alert("hola");
-        }
-      });
+
+      // let p = document.getElementById("selectOpciones");
+      // p.addEventListener("change", () => {
+      //   if (p.value == "Texto/numero") {
+      //     alert("hola");
+      //   }
+      // });
 
       //   let input = document.createElement("input");
       //   input.type = "text";
@@ -142,6 +118,38 @@ export class ReportesNuevoTablero1Component implements OnInit {
     });
 
     console.log("hola: ", this.fila);
+  }
+
+  CrearColumna(myParent) {
+    let cont = 0;
+    let selectOpciones;
+    var opciones = [
+      "Seleccione una opcion",
+      "Texto/numero",
+      "Diagrama de barras",
+      "Diagrama de torta",
+      "Diagrama de puntos",
+    ];
+
+    selectOpciones = document.createElement("select");
+
+    selectOpciones.id = "selectOpciones" + this.con;
+    selectOpciones.className = "rounded";
+    selectOpciones.style.cssText = "width:90%; height:40px";
+
+    myParent.appendChild(selectOpciones);
+
+    for (let i = 0; i < opciones.length; i++) {
+      var option = document.createElement("option");
+      option.value = opciones[i];
+      option.text = opciones[i];
+      selectOpciones.appendChild(option);
+    }
+    selectOpciones.addEventListener("change", () => {
+      if (selectOpciones.value == "Texto/numero") {
+        alert("hola");
+      }
+    });
   }
 
   guardar() {
