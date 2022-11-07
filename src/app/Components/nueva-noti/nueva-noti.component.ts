@@ -22,10 +22,12 @@ export class NuevaNotiComponent implements OnInit {
     asunto: "",
     mensaje: "",
   };
+
   resultadosUsuarios: any = [];
   ensayoUsuarios: any = [];
   aux: any = [];
   enviarCorreo: any = [];
+ 
   estadoi = false;
   estadoii = false;
   estadoiii = false;
@@ -49,6 +51,7 @@ export class NuevaNotiComponent implements OnInit {
   sabado = false;
   estadoDias = false;
   todo = false;
+  periodicidad:string;
   quedia = [];
   fechaEspera: Date;
   fecha = new Date();
@@ -58,6 +61,10 @@ export class NuevaNotiComponent implements OnInit {
   completa = `${this.year}-${this.mes}-${this.dia}`;
   ensayo = this.fecha.toLocaleDateString();
   ahora = Date.parse(this.ensayo);
+
+  
+  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+  usuarioid = parseInt(this.usarioLocalStote.usuarioid);
   ngOnInit() {
     this.getUsuarios();
     this.elegitTodos();
@@ -198,7 +205,9 @@ if (check.checked===false){
       this.boxtresI = true;
     }
   }
+
   enviar(){
+    console.log("nombre usuario", this.usuarioid)
     const hola=this.aux.filter(hola=>hola.checked===true);
     hola.forEach((m)=>{
       m.asunto = this.envios.asunto;
@@ -211,22 +220,29 @@ if (check.checked===false){
         }
       );
       });
-    console.log("Enviar a ", this.enviarCorreo)
+   
     for(let i=0; i<this.enviarCorreo.length;i++){
      var form=new FormData();
      form.append("asunto",this.enviarCorreo[i].asunto)
      form.append("mensaje",this.enviarCorreo[i].mensaje)
      form.append("correo",this.enviarCorreo[i].correo)
+     form.append("periodicidad",this.periodicidad)
+     form.append("fechaEnvio",this.ensayo)
+     form.append("usuario",this.usuarioid.toString())
       this.authService.enviarCorreo(form).subscribe((res:any)=>{
         return res;
       }); 
     }
+       this.authService.enviarCorreo(form).subscribe((res:any)=>{
+          return res;
+        }); 
       this.limpiar();
   }
   
   Guardar(){
   if(this.estadoi===true){
     console.log("enviar de inmediato")
+    this.periodicidad="No";
     this.enviar();
   }
   if(this.estadoii===true){
@@ -253,16 +269,18 @@ if (check.checked===false){
     console.log("enviar cierta fecha")
   }
   }
+
+
   
   limpiar(){
     console.log("Enviar a ", this.enviarCorreo)
     this.aux.forEach((item) => {
       item.checked=false;
     });    
-    for (let index = 0; index < this.enviarCorreo.length; index++) {
-      this.enviarCorreo.splice(this.enviarCorreo[index]);
-      console.log("eliminando")
-    }
+    // for (let index = 0; index < this.enviarCorreo.length; index++) {
+    //   this.enviarCorreo.splice(this.enviarCorreo[index]);
+    //   console.log("eliminando")
+    // }
     console.log("Enviar a ", this.enviarCorreo)
   }
 }

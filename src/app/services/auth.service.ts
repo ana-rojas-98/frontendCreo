@@ -227,10 +227,14 @@ export class AuthService {
 
   enviarCorreo(correo: any) {
     let resul = this.http.post(
-      `${this.URL_SER}/api/configuracions/enviarNotificacion`,
+      `${this.URL_SER}/api/Notificaciones/enviarNotificacion`,
       correo
     );
     return resul;
   }
 
+  getNotificacion(notificacion: any){
+    let resultado = this.http.get(`${this.URL_SER}/api/configuracions`,notificacion);
+    return resultado;
+  }
 }

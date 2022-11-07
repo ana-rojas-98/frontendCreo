@@ -144,15 +144,26 @@ export class IndicadoresComponent implements OnInit {
       });
   }
 
-  descargarArchivo(urlArchivo) {
-    const formData = new FormData();
-    formData.append("Archivo", urlArchivo);
-    this.indicadoresservice.descarga(formData).subscribe((res) => {
+  // descargarArchivo(urlArchivo) {
+  //   const formData = new FormData();
+  //   formData.append("Archivo", urlArchivo);
+  //   this.indicadoresservice.descarga(formData).subscribe((res) => {
+  //     let nombreArchivo = res.headers.get("content-disposition");
+  //     //?.split(';')[1].split('=')[1];
+  //     let tipo: Blob = res.body as Blob;
+  //     let a = document.createElement("a");
+  //     a.download = "urlArchivo";
+  //     a.href = window.URL.createObjectURL(tipo);
+  //     a.click();
+  //   });
+  // }
+  descargarArchivo() {
+    this.authService.descarga().subscribe((res) => {
       let nombreArchivo = res.headers.get("content-disposition");
       //?.split(';')[1].split('=')[1];
       let tipo: Blob = res.body as Blob;
       let a = document.createElement("a");
-      a.download = "urlArchivo";
+      a.download = "ArchivoEjemplo.xlsx";
       a.href = window.URL.createObjectURL(tipo);
       a.click();
     });

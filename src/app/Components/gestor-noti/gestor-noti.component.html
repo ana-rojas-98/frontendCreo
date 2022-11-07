@@ -27,12 +27,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>08/07/2022</td>
+                    <tr *ngFor="let item of resultadosNotificaciones">
+                        <td>{{item.fechaCreacion}}</td>
                         <td>Luis</td>
-                        <td>Bienvenida</td>
-                        <td>No</td>
-                        <td>08/07/2022</td>
+                        <td>{{item.asunto}}</td>
+                        <td>{{item.periodicidad}}</td>
+                        <td>0{{item.fechaEnvio}}</td>
                     </tr>
                 </tbody>
             </table>
