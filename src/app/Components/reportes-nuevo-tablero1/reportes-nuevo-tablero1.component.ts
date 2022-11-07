@@ -1,3 +1,4 @@
+import { ReportesService } from "./../../services/reportes.service";
 import { Component, OnInit } from "@angular/core";
 import * as $ from "jquery";
 
@@ -7,12 +8,14 @@ import * as $ from "jquery";
   styleUrls: ["./reportes-nuevo-tablero1.component.scss"],
 })
 export class ReportesNuevoTablero1Component implements OnInit {
-  constructor() {}
+  constructor(private ReportesService: ReportesService) { }
 
   //cadenas de html
   con = 0;
   Select3 = "";
   fila = 0;
+  idSelec = 0;
+  indicadores: any = [];
   select =
     "<div class='row'> <div class='col-4'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='1'>1</option> <option ='2'>2</option> <option ='3'>3</option> <option ='4'>4</option> </select> </div> </div>";
 
@@ -30,37 +33,53 @@ export class ReportesNuevoTablero1Component implements OnInit {
   input = "<input class='rounded-pill text-center h-40px w-25' type='text'/>";
 
   d =
-    "<select id='selector1'  class='selector' [(ngModel)]='Select3' (ngModelChange)='prueba()'><option value='3'>Selecciona tipo de usuario</option> <option value='p'>Selecciona tipo de usuario</option></select>";
+    "<select id='selector1'  class='selector' [(ngModel)]='Select3' onchange='prueba()'><option value='3'>Selecciona tipo de usuario</option> <option value='p'>Selecciona tipo de usuario</option></select>";
   array: any = [];
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.ReportesService.reportesUsar.subscribe((res) => {
+      this.indicadores = res;
+    });
+    console.log("prueba : ", this.indicadores);
+  }
 
   resultado = $("#selector1").change(function () {
     var estado = $("#selector1").val();
     alert(estado);
   });
 
-  prueba() {}
+  prueba() {
+    alert("hola");
+  }
 
   agregarFila() {
     let myParent = document.getElementById("contenedor");
+    // prueba.innerHTML = this.d;
+    // prueba.addEventListener("change", () => {
+    //   alert("hola");
+    // });
+
+    //let select = document.querySelector(".selector");
+
+    //myParent.innerHTML += this.d
+
+    //let select = document.querySelector(".selector");
+
+    // select.addEventListener("change", ()=>{
+    //     alert("hola: ")
+    // })
 
     let selectList = document.createElement("select");
 
     //Create array of options to be added
     var array = ["Seleccione una opcion", "1", "2", "3", "4"];
-    var opciones = [
-      "Seleccione una opcion",
-      "Texto/numero",
-      "Diagrama de barras",
-      "Diagrama de torta",
-      "Diagrama de puntos",
-    ];
 
-    selectList.id = "mySelect";
+
+    this.idSelec++;
+    selectList.id = this.idSelec.toString();
+    console.log("id selec: ", this.idSelec);
     selectList.className = "rounded";
-    selectList.style.cssText =
-      "width:22%; height:40px; grid-row: '"+ this.fila++ +"'/ '"+ this.fila++ +"'; grid-column: 1/5;";
+    selectList.style.cssText = "width:22%; height:40px; grid-row: '" + this.fila++ + "'/ '" + this.fila++ + "'; grid-column: 1/5;";
 
     //selectList.style.height = "40px";
     myParent.appendChild(selectList);
@@ -73,33 +92,69 @@ export class ReportesNuevoTablero1Component implements OnInit {
       selectList.appendChild(option);
     }
 
-    let cont = 0;
-    let selectOpciones;
+
+
     selectList.addEventListener("change", () => {
       let axt = parseInt(selectList.value);
       for (let i = 1; i <= axt; i++) {
-        selectOpciones = document.createElement("select");
-
-        selectOpciones.id = "selectOpciones";
-        selectOpciones.className = "rounded";
-        selectOpciones.style.cssText = "width:90%; height:40px";
-
-        myParent.appendChild(selectOpciones);
-
-        for (let i = 0; i < opciones.length; i++) {
-          var option = document.createElement("option");
-          option.value = opciones[i];
-          option.text = opciones[i];
-          selectOpciones.appendChild(option);
-        }
+        this.CrearColumna(myParent);
       }
 
-      // let input = document.createElement("input");
-      // input.type = "text";
-      // myParent.appendChild(input);
+
+      // let p = document.getElementById("selectOpciones");
+      // p.addEventListener("change", () => {
+      //   if (p.value == "Texto/numero") {
+      //     alert("hola");
+      //   }
+      // });
+
+      //   let input = document.createElement("input");
+      //   input.type = "text";
+      //   myParent.appendChild(input);
+
+      //  let idEjemplo = document.getElementById("mySelect").value
+
+      //   console.log(idEjemplo)
     });
 
-    console.log("hola: ",this.fila)
+    console.log("hola: ", this.fila);
+  }
+
+  CrearColumna(myParent) {
+    let cont = 0;
+    let selectOpciones;
+    var opciones = [
+      "Seleccione una opcion",
+      "Texto/numero",
+      "Diagrama de barras",
+      "Diagrama de torta",
+      "Diagrama de puntos",
+    ];
+
+    selectOpciones = document.createElement("select");
+
+    selectOpciones.id = "selectOpciones" + this.con;
+    selectOpciones.className = "rounded";
+    selectOpciones.style.cssText = "width:90%; height:40px";
+
+    myParent.appendChild(selectOpciones);
+
+    for (let i = 0; i < opciones.length; i++) {
+      var option = document.createElement("option");
+      option.value = opciones[i];
+      option.text = opciones[i];
+      selectOpciones.appendChild(option);
+    }
+    selectOpciones.addEventListener("change", () => {
+      if (selectOpciones.value == "Texto/numero") {
+        alert("hola");
+      }
+    });
+  }
+
+  guardar() {
+    let html = document.getElementById("contenedor").innerHTML;
+    console.log(html);
   }
 
   columnNames = ["Browser", "Percentage"];

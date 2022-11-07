@@ -27,14 +27,12 @@ export class NavMenuComponent implements OnInit{
 
 
   mostrarImg(){    
-    console.log("dispara el metodo")
     this.authService.getImagen().subscribe((res) =>{
       let nombreArchivo = res.headers.get("content-disposition");
       let tipo: Blob = res.body as Blob;
       const b = URL.createObjectURL(tipo);
       const im = this.sanitizer.bypassSecurityTrustUrl(b);
       this.logo=im;
-      console.log("entra para mostrar")
     })
   };
 }

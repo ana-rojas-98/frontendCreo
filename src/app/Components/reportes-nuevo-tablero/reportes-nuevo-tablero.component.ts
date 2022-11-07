@@ -1,3 +1,4 @@
+import { Router } from "@angular/router";
 import { FormControl } from "@angular/forms";
 import { FormGroup } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
@@ -12,7 +13,8 @@ import { AuthService } from "src/app/services/auth.service";
 export class ReportesNuevoTableroComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private reportesService: ReportesService
+    private reportesService: ReportesService,
+    private route: Router
   ) {}
 
   resultadosUsuario = [];
@@ -22,8 +24,7 @@ export class ReportesNuevoTableroComponent implements OnInit {
   resultadoIndicadores: [];
   resultadosTabla: any = [];
   estado = [];
-
-  
+  indicadorUsar: any = [];
 
   Indicador = {
     IdArchivo: 0,
@@ -49,6 +50,11 @@ export class ReportesNuevoTableroComponent implements OnInit {
     this.getStandares(0);
     this.getSubCategoria(0);
     this.getindIcadores(0);
+  }
+  
+  continuar() {
+    this.route.navigate(["/nuevo-tablero", this.indicadorUsar.toString()]);
+    //
   }
 
   getEstandarFilter() {
@@ -151,11 +157,25 @@ export class ReportesNuevoTableroComponent implements OnInit {
   }
 
   updateIndicado(idIndicador, usar) {
-    this.Indicador.IdArchivo = idIndicador;
-    this.Indicador.Usar = usar;
-    this.reportesService.UpdateAchivos(this.Indicador).subscribe((res: any) => {
-      console.log(res);
-      return res;
-    });
+    console.log("usar", usar);
+    if (usar == true) {
+      this.indicadorUsar.push(idIndicador);
+      console.log("indicaod: ", this.indicadorUsar);
+    }
+
+    if (usar == false) {
+      this.indicadorUsar = this.indicadorUsar.filter(
+        (item) => item != idIndicador
+      );
+      console.log("false: ", this.indicadorUsar);
+    }
+    //   this.Indicador.IdArchivo = idIndicador;
+    //   this.Indicador.Usar = usar;
+    //   this.reportesService.UpdateAchivos(this.Indicador).subscribe((res: any) => {
+    //     console.log(res);
+    //     return res;
+    //   });
+
+    this.reportesService.reportesUsar.emit(this.indicadorUsar);
   }
 }

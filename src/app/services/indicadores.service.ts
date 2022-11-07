@@ -71,8 +71,14 @@ export class IndicadoresService {
   descarga(Archivo) {
     let resu = this.http.get(
       `${this.URL_SER}/api/indicadores/descargarArchivo`,
-      { observe: Archivo, responseType: "blob" }
+      { observe: "response", responseType: "blob" , params: {'NombreArchivo': Archivo} }
     );
     return resu;
+  }
+
+  ObtenerAdjuntos(id) {
+    let result = this.http.post(
+      `${this.URL_SER}/api/indicadores/ObtenerAdjuntos`, id);
+    return result;
   }
 }

@@ -180,7 +180,7 @@ export class AuthService {
 
   descarga() {
     let resu = this.http.get(
-      `${this.URL_SER}/api/FormatoArchivoes/descargarArchivo`,
+      `${this.URL_SER}/api/FormatoIndicadors/descargarArchivo`,
       { observe: "response", responseType: "blob" }
     );
     return resu;

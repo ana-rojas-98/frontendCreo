@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
 import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
+import Swal from "sweetalert2";
+import { ActivatedRoute, Router } from "@angular/router";
 @Component({
   selector: "app-nueva-noti",
   templateUrl: "./nueva-noti.component.html",
@@ -9,8 +11,9 @@ import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
 export class NuevaNotiComponent implements OnInit {
   constructor(
     private authService: AuthService,
+    public router: Router,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   usuarios = {
     tipoUsuario: "",
@@ -89,15 +92,15 @@ export class NuevaNotiComponent implements OnInit {
     });
   }
 
-todosCorreos(event){
-  const eve=event.target.checked;
-  this.aux.forEach((check)=>{
-    check.checked = eve;
-if (check.checked===false){
-     this.enviarCorreo.pop();
-   }
-  });
-}
+  todosCorreos(event) {
+    const eve = event.target.checked;
+    this.aux.forEach((check) => {
+      check.checked = eve;
+      if (check.checked === false) {
+        this.enviarCorreo.pop();
+      }
+    });
+  }
 
 
   BoxUno() {
@@ -214,9 +217,9 @@ if (check.checked===false){
       m.mensaje = this.envios.mensaje;
       this.enviarCorreo.push(
         {
-        correo: m.correo,
-        asunto:m.asunto,
-        mensaje:m.mensaje,
+          correo: m.correo,
+          asunto: m.asunto,
+          mensaje: m.mensaje,
         }
       );
       });
@@ -231,7 +234,8 @@ if (check.checked===false){
      form.append("usuario",this.usuarioid.toString())
       this.authService.enviarCorreo(form).subscribe((res:any)=>{
         return res;
-      }); 
+
+      });
     }
        this.authService.enviarCorreo(form).subscribe((res:any)=>{
           return res;
@@ -256,9 +260,29 @@ if (check.checked===false){
     }else if(f1>f){
       console.log("Correo programado exitosamente")
       this.enviar();
-      // if(this.fechaEspera.toString()==this.completa){
-      //        console.log("enviar correo") 
-      // }
+    }
+    if (this.estadoii === true) {
+      console.log("enviar con fecha");
+      var f1 = Date.parse(this.fechaEspera.toString());
+      var f = Date.parse(this.completa);
+      if (f1 < f) {
+        console.log("La fecha digitada es anterior a hoy");
+      } else if (f1 === f) {
+        console.log("La fecha digitada es hoy, selecciona enviar inmediatamente")
+      } else if (f1 > f) {
+        console.log("Correo programado exitosamente")
+        this.enviar();
+        // if(this.fechaEspera.toString()==this.completa){
+        //        console.log("enviar correo") 
+        // }
+      }
+    }
+    if (this.estadoiii === true) {
+      console.log("enviar varias veces")
+      console.log("dias", this.lunes)
+    }
+    if (this.estadoiv === true) {
+      console.log("enviar cierta fecha")
     }
   }
   if(this.estadoiii===true){
@@ -282,6 +306,10 @@ if (check.checked===false){
     //   console.log("eliminando")
     // }
     console.log("Enviar a ", this.enviarCorreo)
+  }
+
+  alerta(mensaje: any) {
+    Swal.fire(mensaje);
   }
 }
 

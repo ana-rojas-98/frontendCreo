@@ -247,7 +247,7 @@ export class NuevoIndicadorComponent implements OnInit {
       //?.split(';')[1].split('=')[1];
       let tipo: Blob = res.body as Blob;
       let a = document.createElement("a");
-      a.download = "ArchivoEjemplo.xlsx";
+      a.download = "Ejemplo.xlsx";
       a.href = window.URL.createObjectURL(tipo);
       a.click();
     });

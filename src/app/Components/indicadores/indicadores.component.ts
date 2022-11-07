@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { FormControl } from "@angular/forms";
 import { isNull } from "@angular/compiler/src/output/output_ast";
 import { IndicadoresService } from "src/app/services/indicadores.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-indicadores",
@@ -167,6 +168,8 @@ export class IndicadoresComponent implements OnInit {
       a.href = window.URL.createObjectURL(tipo);
       a.click();
     });
-  }
-
+}
+alert(mensaje) {
+  Swal.fire(mensaje);
+}
 }
