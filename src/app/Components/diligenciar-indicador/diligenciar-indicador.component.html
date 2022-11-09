@@ -6,19 +6,20 @@
     </div>
     <div class="row formatos">
       <div class="col-5 d-flex flex-row">
-        <img src="../../../assets/imagenes/excel.png" alt="icono-excel" />
-        <img src="../../../assets/imagenes/word.png" alt="icono-word" />
-        <img src="../../../assets/imagenes/pdf.png" alt="icono-pdf" />
+        <a type="button" (click)="DescargarEx()"><img src="../../../assets/imagenes/excel.png" alt="icono-excel" /></a>
+        <a type="button" (click)="DescargarWd()"><img src="../../../assets/imagenes/word.png" alt="icono-word" /></a>
+        <a type="button" (click)="DescargarPDF()"><img src="../../../assets/imagenes/pdf.png" alt="icono-pdf" /></a>
       </div>
 
       <div class="col-7 d-flex flex-row-reverse mb-2">
-        <button class="" (click)="capturar.click()">
+        <button class="" [routerLink]="['/Archivos-Adjuntos',id]"
+        [routerLinkActive]="['link-active']" >
           Archivo adjunto
         </button>
-        <input type="file" hidden (change)="archivoCapt($event)" #capturar id="in"  accept=".xlsx,.pdf,.jpg,.png"/>
       </div>
     </div>
-    <div class="tablero mb-2">
+    <div id="exportContent" class="tablero mb-2">
+
       <div class="title-card row">
         <div class="box mb-2 col-6">
           <h3>Año</h3>
@@ -32,7 +33,7 @@
         <div class="box mb-2 col-6">
           <h3>Periodo</h3>
           <select class="selector mt-2" name="periodo" type="select" [(ngModel)]="Periodo" (change)="ChangePeriodo()">
-            <option value="" selected>Seleccione Periodo</option>
+            <option value="">Seleccione Periodo</option>
             <option *ngFor="let resultado of uniquePeriod" [value]="resultado">
               {{ resultado }}
             </option>
@@ -43,6 +44,7 @@
       <!------------------------------------------------------------------------------------------------------------------>
       <div id="prueba" class="prueba"></div>
       <!------------------------------------------------------------------------------------------------------------------>
+
     </div>
     <div class="botones">
       <button id="Guardar" class="guardar-indicador" (click)="fnGuardar()">Guardar</button>

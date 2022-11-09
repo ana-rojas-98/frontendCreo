@@ -4,6 +4,8 @@ import { timeStamp } from "console";
 import { IndicadoresService } from "src/app/services/indicadores.service";
 import { ReportesService } from "src/app/services/reportes.service";
 import Swal from "sweetalert2";
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
 
 
 @Component({
@@ -72,6 +74,9 @@ export class DiligenciarIndicadorComponent implements OnInit {
   filtrarInfo() {
     this.uniqueYears = [...new Set(this.anioArray)];
     this.uniquePeriod = [...new Set(this.preciodicidadesArray)];
+    this.Anio = this.uniqueYears[this.uniqueYears.length - 1];
+    this.Periodo = this.uniquePeriod[this.uniquePeriod.length - 1];
+    this.ChangeAnio();
   }
 
   VerDiligenciarIndicador() {
@@ -131,8 +136,8 @@ export class DiligenciarIndicadorComponent implements OnInit {
 
   getIndicadoresFilter() {
     this.reportesService.ConsultarIndicadoresAsignados().subscribe((res: any) => {
-        this.resultadosIndicador = res.filter((item) => (item.idIndicador == this.id));
-      });
+      this.resultadosIndicador = res.filter((item) => (item.idIndicador == this.id));
+    });
     this.nombreArchivo = this.resultadosIndicador[0].indicador;
   }
 
@@ -208,7 +213,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
           contenidos.push(item),
           i++
         ));
-        this.indicadoresservice.GuardarRespuestasIndicador(contenidos).subscribe((res: any) => {
+        this.indicadoresservice.FinalizarIndicador(contenidos).subscribe((res: any) => {
           if (res.resul == "Se guardo con exito") {
             this.alert("Respuestas guardadas");
             location.reload();
@@ -227,7 +232,67 @@ export class DiligenciarIndicadorComponent implements OnInit {
   alert(mensaje) {
     Swal.fire(mensaje);
   }
+
+  DescargarPDF() {
+    this.alert("Prueba pdf")
+    let DATA: any = document.getElementById("exportContent");
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 210;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL("image/png");
+      let PDF = new jsPDF("p", "mm", "a4");
+      let position = 0;
+      PDF.addImage(FILEURI, "PNG", 0, position, fileWidth, fileHeight);
+      PDF.save("Indicadores.pdf");
+    });
+  }
+
+  DescargarEx() {
+    this.alert("Prueba excel")
+  }
+
+  DescargarWd() {
+    Export2Word('exportContent', 'word-content');
+  }
 }
+
 function getFileExtension(filename) {
   /*TODO*/
+}
+
+function Export2Word(element, filename = '') {
+  const nav = (window.navigator as any);
+  var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'><head><meta charset='utf-8'></head><body>";
+  var postHtml = "</body></html>";
+  var html = preHtml + document.getElementById(element).innerHTML + postHtml;
+
+  var blob = new Blob(['\ufeff', html], {
+    type: 'application/msword'
+  });
+
+  // Specify link url
+  var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+
+  // Specify file name
+  filename = filename ? filename + '.doc' : 'document.doc';
+
+  // Create download link element
+  var downloadLink = document.createElement("a");
+
+  document.body.appendChild(downloadLink);
+
+  if (nav.msSaveOrOpenBlob) {
+    nav.msSaveOrOpenBlob(blob, filename);
+  } else {
+    // Create a link to the file
+    downloadLink.href = url;
+
+    // Setting the file name
+    downloadLink.download = filename;
+
+    //triggering the function
+    downloadLink.click();
+  }
+
+  document.body.removeChild(downloadLink);
 }

@@ -135,8 +135,9 @@ import { ArchivosAdjuntosComponent } from './Components/archivos-adjuntos/archiv
       { path: 'reportes-nuevo-tablero', component: ReportesNuevoTableroComponent, canActivate:[AuthGuard]},
       //{ path: 'nuevo-tablero', component: ReportesNuevoTablero1Component, canActivate:[AuthGuard]},
       { path: 'nuevo-tablero/:array', component: ReportesNuevoTablero1Component, canActivate:[AuthGuard]},
-      { path: 'gestor-noti', component: GestorNotiComponent},
-      { path: 'nueva-noti', component: NuevaNotiComponent},
+      { path: 'gestor-noti', component: GestorNotiComponent, canActivate:[AuthGuard]},
+      { path: 'nueva-noti', component: NuevaNotiComponent, canActivate:[AuthGuard]},
+      { path: 'Archivos-Adjuntos/:id', component: ArchivosAdjuntosComponent, canActivate:[AuthGuard]},
     ])
   ],
   providers: [

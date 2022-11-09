@@ -148,4 +148,28 @@ export class IndicadoresComponent implements OnInit {
   alert(mensaje) {
     Swal.fire(mensaje);
   }
+
+  descargarArchivo(id, url) {
+    this.indicadoresservice.descarga(id).subscribe((res) => {
+      let nombreArchivo = res.headers.get("content-disposition");
+      //?.split(';')[1].split('=')[1];
+      let tipo: Blob = res.body as Blob;
+      let a = document.createElement("a");
+      a.download = url;
+      a.href = window.URL.createObjectURL(tipo);
+      a.click();
+    });
+  }
+
+  DescargarTodosAdjuntos(){
+    this.indicadoresservice.DescargarTodosAdjuntos().subscribe((res) => {
+      let nombreArchivo = res.headers.get("content-disposition");
+      //?.split(';')[1].split('=')[1];
+      let tipo: Blob = res.body as Blob;
+      let a = document.createElement("a");
+      a.download = "TodosAdjuntos";
+      a.href = window.URL.createObjectURL(tipo);
+      a.click();
+    });
+  }
 }

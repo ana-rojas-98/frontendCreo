@@ -73,7 +73,8 @@
             <td>{{ item.usuario }}</td>
             <td>{{ item.fechaModificacion }}</td>
             <td>{{ item.avance }}%</td>
-            <td><a [routerLink]="['/Archivos-Adjuntos',item.idIndicador]" [routerLinkActive]="['link-active']">Archivos</a></td>
+            <td><a [routerLink]="['/Archivos-Adjuntos',item.idIndicador]"
+                [routerLinkActive]="['link-active']">Archivos</a></td>
             <td>
               <img src="../../../assets/imagenes/ver.png" alt="icono-ver" [routerLink]="[
                   '/diligenciar-indicador',item.idIndicador,'ver']" [routerLinkActive]="['link-active']" />
@@ -94,7 +95,16 @@
           </tr>
         </tbody>
       </table>
-      <button class="mt-3">Descargar todos los archivos adjuntos</button>
+      <div class="d-flex flex-row-reverse final">
+        <div class="p-2">
+          <img class="final-img" src="../../../assets/imagenes/excel.png" alt="icono-excel" />
+          <img class="final-img" src="../../../assets/imagenes/word.png" alt="icono-word" />
+          <img class="final-img" src="../../../assets/imagenes/pdf.png" alt="icono-pdf" />
+        </div>
+        <div class="mx-5">
+          <button (click)="DescargarTodosAdjuntosIndividual()" class="">Descargar todos los archivos adjuntos</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
