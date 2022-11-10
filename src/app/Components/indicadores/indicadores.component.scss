@@ -1,29 +1,35 @@
 @import "../../../assets/styles/main.scss";
 
-.contenedor{
+.contenedor {
     @include contenedor;
 }
-.cuerpo{
+
+.cuerpo {
     @include body;
 }
-.title{
-  @include titleBody;
-    h1{
+
+.title {
+    @include titleBody;
+
+    h1 {
         @include h1Body;
     }
 }
-.selectores{
+
+.selectores {
     display: flex;
     flex-wrap: wrap;
     font-weight: 500;
     font-size: 16px;
     justify-content: space-around;
     height: max-content;
-    
+
 }
-select{
+
+select {
     @include select;
 }
+
 .resultados-tabla thead th {
     width: min-content;
     text-align: center;
@@ -31,9 +37,20 @@ select{
     font-size: 14px;
     height: 30px;
 
-  }
-  table img {
+}
+
+table img {
     width: 20px;
     height: 20px;
     padding-top: 5px;
-  }
+}
+
+.final{
+    align-items: center;
+}
+.final-img {
+    width: 30px;
+    height: 30px;
+    margin-right: 0px;
+    align-items: center;
+}

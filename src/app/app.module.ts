@@ -138,10 +138,11 @@ import { VerIndicadorComponent } from './Components/ver-indicador/ver-indicador.
       { path: 'reportes-nuevo-tablero', component: ReportesNuevoTableroComponent, canActivate:[AuthGuard]},
       //{ path: 'nuevo-tablero', component: ReportesNuevoTablero1Component, canActivate:[AuthGuard]},
       { path: 'nuevo-tablero/:array', component: ReportesNuevoTablero1Component, canActivate:[AuthGuard]},
-      { path: 'gestor-noti', component: GestorNotiComponent},
-      { path: 'nueva-noti', component: NuevaNotiComponent},
-      //{ path: 'ver-indicador', component: VerIndicadorComponent},
+    //{ path: 'ver-indicador', component: VerIndicadorComponent},
       { path: 'ver-indicador/:id/:accion', component: VerIndicadorComponent, canActivate:[AuthGuard]},
+      { path: 'gestor-noti', component: GestorNotiComponent, canActivate:[AuthGuard]},
+      { path: 'nueva-noti', component: NuevaNotiComponent, canActivate:[AuthGuard]},
+      { path: 'Archivos-Adjuntos/:id', component: ArchivosAdjuntosComponent, canActivate:[AuthGuard]},
     ])
   ],
   providers: [

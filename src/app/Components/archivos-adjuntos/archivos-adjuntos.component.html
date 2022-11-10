@@ -5,6 +5,13 @@
             <h1>Indicadores</h1>
         </div>
         <div class="resultados-tabla">
+            <div class="d-flex flex-row-reverse mb-4">
+                <button class="botton-agregar" (click)="capturar.click()">
+                    Agregar archivo adjunto
+                </button>
+                <input type="file" hidden (change)="archivoCapt($event)" #capturar id="in"
+                    accept=".xlsx,.pdf,.jpg,.png" />
+            </div>
             <table class="tabla-indicadores">
                 <thead>
                     <tr>
@@ -16,6 +23,10 @@
                             <img src="../../../assets/imagenes/descarga.png" alt="icono-diligenciador" class="mx-1" />
                             Descargar
                         </th>
+                        <th>
+                            <img src="../../../assets/imagenes/eliminar.png" alt="icono-eliminar" />
+                            Eliminar
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,10 +37,17 @@
                                 <img src="../../../assets/imagenes/descarga.png" alt="icono-diligenciador" />
                             </a>
                         </td>
+                        <td>
+                            <a (click)="EliminarArchivo(item.id)">
+                                <img src="../../../assets/imagenes/eliminar.png" alt="eliminar-icono" />
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-            <button class="mt-3">Descargar todos los archivos adjuntos</button>
+            <div class="d-flex flex-row-reverse ">
+                <button (click)="DescargarTodosAdjuntosIndividual()" class="mt-3">Descargar todos los archivos adjuntos</button>
+            </div>
         </div>
     </div>
 </div>

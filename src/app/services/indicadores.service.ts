@@ -81,4 +81,28 @@ export class IndicadoresService {
       `${this.URL_SER}/api/indicadores/ObtenerAdjuntos`, id);
     return result;
   }
+
+  DescargarTodosAdjuntos() {
+    let resu = this.http.get(
+      `${this.URL_SER}/api/indicadores/DescargarTodosAdjuntos`,
+      { observe: "response", responseType: "blob" }
+    );
+    return resu;
+  }
+
+  EliminarArchivo(id: any) {
+    let resul = this.http.post(
+      `${this.URL_SER}/api/indicadores/EliminarArchivo`,id
+    );
+    return resul;
+  }
+
+  DescargarTodosAdjuntosIndividual(Archivo) {
+    let resu = this.http.get(
+      `${this.URL_SER}/api/indicadores/DescargarTodosAdjuntosIndividual`,
+      { observe: "response", responseType: "blob" , params: {'NombreArchivo': Archivo} }
+    );
+    return resu;
+  }
+
 }

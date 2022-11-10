@@ -4,6 +4,8 @@ import { timeStamp } from "console";
 import { IndicadoresService } from "src/app/services/indicadores.service";
 import { ReportesService } from "src/app/services/reportes.service";
 import Swal from "sweetalert2";
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
 
 
 @Component({
@@ -66,12 +68,15 @@ export class DiligenciarIndicadorComponent implements OnInit {
     }
     this.idArchivo.idArchivo = this.id;
     this.VerDiligenciarIndicador();
-    this.getIndicadoresFilter();
+    //this.getIndicadoresFilter();
   }
 
   filtrarInfo() {
     this.uniqueYears = [...new Set(this.anioArray)];
     this.uniquePeriod = [...new Set(this.preciodicidadesArray)];
+    this.Anio = this.uniqueYears[this.uniqueYears.length - 1];
+    this.Periodo = this.uniquePeriod[this.uniquePeriod.length - 1];
+    this.ChangeAnio();
   }
 
   VerDiligenciarIndicador() {
@@ -83,16 +88,19 @@ export class DiligenciarIndicadorComponent implements OnInit {
       });
       this.idDeArchivo = this.resultadosTabla[0].idArchivo;
       this.filtrarInfo();
+      this.AsignarChange();
     });
   }
 
   ChangePeriodo() {
+    
     this.prueba = "";
     if (this.Anio != '') {
       if (this.Periodo != '') {
         this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
         this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
         this.resultadosHTML.forEach(item => (this.prueba += item.html, this.Respuestas.push(item.valor)));
+        
       }
       else {
         this.prueba = "No se encuentra resultados";
@@ -103,6 +111,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
     document.getElementById('prueba').innerHTML = this.prueba;
     console.log(this.prueba);
     console.log('Respuestas', this.Respuestas);
+    this.AsignarChange();
   }
 
   ChangeAnio() {
@@ -117,6 +126,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
           this.prueba += item.html,
           this.Respuestas.push(item.valor)
         ));
+        
       }
       else {
         this.prueba = "No se encuentra resultados";
@@ -127,30 +137,18 @@ export class DiligenciarIndicadorComponent implements OnInit {
     document.getElementById('prueba').innerHTML = this.prueba;
     let contents = document.getElementById('prueba').innerHTML;
     document.getElementById('prueba').innerHTML = contents;
+    this.AsignarChange();
   }
 
   getIndicadoresFilter() {
     this.reportesService.ConsultarIndicadoresAsignados().subscribe((res: any) => {
-        this.resultadosIndicador = res.filter((item) => (item.idIndicador == this.id));
-      });
+      this.resultadosIndicador = res.filter((item) => (item.idIndicador == this.id));
+    });
     this.nombreArchivo = this.resultadosIndicador[0].indicador;
   }
 
   fnGuardar() {
-    this.getIndicadoresFilter();
-    if (this.archivos != null) {
-      const formData = new FormData();
-      formData.append("Archivo", this.archivos);
-      formData.append("Nombre", this.nombreArchivo);
-      formData.append("idArchivo", this.idDeArchivo);
-      formData.append("Extension", this.archivos.name.toString().split('.').pop());
-      this.indicadoresservice.GuardarAdjunto(formData).subscribe((res: any) => {
-        if (res.resul == "Se guardo con exito") {
-          this.alert("Archivo adjunto guardado");
-        }
-        return res;
-      });
-    }
+
     if (this.Anio == "" || this.Anio == null || this.Periodo == "" || this.Periodo == null) {
       this.alert("Debe seleccionar año y periodo antes de guardar");
     }
@@ -177,22 +175,9 @@ export class DiligenciarIndicadorComponent implements OnInit {
   }
 
   fnFinalizar() {
-    this.getIndicadoresFilter();
+
     let a = confirm("¿Está seguro que ya finalizó este indicador?")
     if (a == true) {
-      if (this.archivos != null) {
-        const formData = new FormData();
-        formData.append("Archivo", this.archivos);
-        formData.append("Nombre", this.nombreArchivo);
-        formData.append("idArchivo", this.idDeArchivo);
-        formData.append("Extension", this.archivos.name.toString().split('.').pop())
-        this.indicadoresservice.GuardarAdjunto(formData).subscribe((res: any) => {
-          if (res.resul == "Se guardo con exito") {
-            this.alert("Archivo adjunto guardado");
-          }
-          return res;
-        });
-      }
       if (this.Anio == "" || this.Anio == null || this.Periodo == "" || this.Periodo == null) {
         this.alert("Debe seleccionar año y periodo antes de guardar");
       }
@@ -208,7 +193,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
           contenidos.push(item),
           i++
         ));
-        this.indicadoresservice.GuardarRespuestasIndicador(contenidos).subscribe((res: any) => {
+        this.indicadoresservice.FinalizarIndicador(contenidos).subscribe((res: any) => {
           if (res.resul == "Se guardo con exito") {
             this.alert("Respuestas guardadas");
             location.reload();
@@ -227,7 +212,203 @@ export class DiligenciarIndicadorComponent implements OnInit {
   alert(mensaje) {
     Swal.fire(mensaje);
   }
+
+  formulados = [];
+
+  AsignarChange() {
+    this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
+    this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
+    let i = 0;
+    var contents;
+    let contenidos = [];
+    this.resultadosHTML.map(item => {
+      contents = document.getElementById((item.idFila - 1).toString());
+      item.valor = contents.value;
+      contenidos.push(item);
+      if (item.entrada == "input" && item.formulap == "no") {
+        let a = document.getElementById((item.idFila - 1).toString());
+        a.addEventListener("change", () => {
+          this.formulados = this.resultadosHTML.filter(an => an.formulap == "si");
+          this.formulados.forEach(item2 => {
+            let valor = 0;
+            let operacion = item2.formula;
+            //-------------------------------------------------------------------------------------------------------------
+            console.log(operacion);
+            let band = 0;
+            let carac = "";
+            let array = [];
+            for (let i = 0; i < operacion.length; i++) {
+              if (band = 0) {
+                carac = "";
+              }
+              else {
+                if (operacion[i] == "+" || operacion[i] == "-" || operacion[i] == "/" || operacion[i] == "*") {
+                  array.push(carac);
+                  band = 1;
+                  carac = "";
+                  array.push(operacion[i]);
+                }
+                else {
+                  carac += operacion[i];
+                }
+              }
+            }
+            array.push(carac);
+            //--------------------------------------------------------------------------------
+            console.log("Array: ", array);
+            let bandera = 0;
+            let array2 = [];
+            for (let i = 0; i < array.length; i++) {
+              if (array[i] == "*") {
+                if (bandera == 1) {
+                  array2.push(array2[array2.length - 1] * document.getElementById((array[i + 1]-2).toString()).value);
+                  array2.splice(array2.length - 2, 1);
+
+                }
+                else {
+                  array2.pop();
+                  array2.push(document.getElementById((array[i - 1]-2).toString()).value * document.getElementById((array[i + 1]-2).toString()).value);
+
+                }
+                bandera = 1;
+                i += 1;
+              }
+              else if (array[i] == "/") {
+
+                if (bandera == 1) {
+                  array2.push(array2[array2.length - 1] / document.getElementById((array[i + 1]-2).toString()).value);
+                  array2.splice(array2.length - 2, 1);
+                }
+                else {
+                  array2.pop();
+                  array2.push(document.getElementById((array[i - 1]-2).toString()).value / document.getElementById((array[i + 1]-2).toString()).value);
+                }
+                bandera = 1;
+                i += 1;
+              }
+              else {
+                bandera = 0;
+                if (array[i] == "+" || array[i] == "-"){
+                  array2.push(array[i]);
+                }
+                else{
+                  array2.push(document.getElementById((array[i]-2).toString()).value);
+                }
+                console.log(array[i].toString());
+                
+                console.log("Array2: ", array2);
+              }
+            }
+            console.log("Array2: ", array2);
+//-------------------------------------------------------------------------------------------------------------------------
+            let bandera2 = 0;
+            let array3 = [];
+            for (let i = 0; i < array2.length; i++) {
+              if (array2[i] == "+") {
+                if (bandera2 == 1) {
+                  array3.push(parseFloat(array3[array3.length - 1]) + parseFloat(array2[i + 1]));
+                  array3.splice(array3.length - 2, 1);
+                }
+                else {
+                  array3.pop();
+                  array3.push(parseFloat(array2[i - 1]) + parseFloat(array2[i + 1]));
+
+                }
+                bandera2 = 1;
+                i += 1;
+              }
+              else if (array2[i] == "-") {
+
+                if (bandera2 == 1) {
+                  array3.push(array3[array3.length - 1] - array2[i + 1]);
+                  array3.splice(array3.length - 2, 1);
+                }
+                else {
+                  array3.pop();
+                  array3.push(array2[i - 1] - array2[i + 1]);
+                }
+                bandera2 = 1;
+                i += 1;
+              }
+              else {
+                bandera2 = 0;
+                array3.push(array[i]);
+              }
+            }
+            console.log("Array3: ", array3);
+            //---------------------------------------------------------------------------------------------------------
+            document.getElementById((item2.idFila - 1).toString()).value = array3;
+          })
+        });
+      }
+      i++;
+    });
+  }
+
+  operaciones() {
+
+  }
+
+  DescargarPDF() {
+    this.alert("Prueba pdf")
+    let DATA: any = document.getElementById("exportContent");
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 210;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL("image/png");
+      let PDF = new jsPDF("p", "mm", "a4");
+      let position = 0;
+      PDF.addImage(FILEURI, "PNG", 0, position, fileWidth, fileHeight);
+      PDF.save("Indicadores.pdf");
+    });
+  }
+
+  DescargarEx() {
+    this.alert("Prueba excel")
+  }
+
+  DescargarWd() {
+    Export2Word('exportContent', 'word-content');
+  }
 }
+
 function getFileExtension(filename) {
   /*TODO*/
+}
+
+function Export2Word(element, filename = '') {
+  const nav = (window.navigator as any);
+  var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'><head><meta charset='utf-8'></head><body>";
+  var postHtml = "</body></html>";
+  var html = preHtml + document.getElementById(element).innerHTML + postHtml;
+
+  var blob = new Blob(['\ufeff', html], {
+    type: 'application/msword'
+  });
+
+  // Specify link url
+  var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+
+  // Specify file name
+  filename = filename ? filename + '.doc' : 'document.doc';
+
+  // Create download link element
+  var downloadLink = document.createElement("a");
+
+  document.body.appendChild(downloadLink);
+
+  if (nav.msSaveOrOpenBlob) {
+    nav.msSaveOrOpenBlob(blob, filename);
+  } else {
+    // Create a link to the file
+    downloadLink.href = url;
+
+    // Setting the file name
+    downloadLink.download = filename;
+
+    //triggering the function
+    downloadLink.click();
+  }
+
+  document.body.removeChild(downloadLink);
 }
