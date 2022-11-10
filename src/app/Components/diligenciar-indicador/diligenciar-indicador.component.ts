@@ -257,17 +257,25 @@ export class DiligenciarIndicadorComponent implements OnInit {
             //--------------------------------------------------------------------------------
             console.log("Array: ", array);
             let bandera = 0;
+            var var1;            
+            var var2;           
+            var var3;  
+            var var4;
+
             let array2 = [];
             for (let i = 0; i < array.length; i++) {
+              var1 = document.getElementById((array[i + 1]-2).toString());
+              var2 = document.getElementById((array[i - 1]-2).toString());
+              var3 = document.getElementById((array[i]-2).toString());
               if (array[i] == "*") {
                 if (bandera == 1) {
-                  array2.push(array2[array2.length - 1] * document.getElementById((array[i + 1]-2).toString()).value);
+                  array2.push(array2[array2.length - 1] * var1.value);
                   array2.splice(array2.length - 2, 1);
 
                 }
                 else {
                   array2.pop();
-                  array2.push(document.getElementById((array[i - 1]-2).toString()).value * document.getElementById((array[i + 1]-2).toString()).value);
+                  array2.push(var2.value * var1.value);
 
                 }
                 bandera = 1;
@@ -276,12 +284,12 @@ export class DiligenciarIndicadorComponent implements OnInit {
               else if (array[i] == "/") {
 
                 if (bandera == 1) {
-                  array2.push(array2[array2.length - 1] / document.getElementById((array[i + 1]-2).toString()).value);
+                  array2.push(array2[array2.length - 1] / var1.value);
                   array2.splice(array2.length - 2, 1);
                 }
                 else {
                   array2.pop();
-                  array2.push(document.getElementById((array[i - 1]-2).toString()).value / document.getElementById((array[i + 1]-2).toString()).value);
+                  array2.push(var2.value / var1.value);
                 }
                 bandera = 1;
                 i += 1;
@@ -292,7 +300,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
                   array2.push(array[i]);
                 }
                 else{
-                  array2.push(document.getElementById((array[i]-2).toString()).value);
+                  array2.push(var3.value);
                 }
                 console.log(array[i].toString());
                 
@@ -337,7 +345,8 @@ export class DiligenciarIndicadorComponent implements OnInit {
             }
             console.log("Array3: ", array3);
             //---------------------------------------------------------------------------------------------------------
-            document.getElementById((item2.idFila - 1).toString()).value = array3;
+            var4 = document.getElementById((item2.idFila - 1).toString()); 
+            var4.value = array3;
           })
         });
       }
