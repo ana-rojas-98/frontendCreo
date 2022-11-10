@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
+import { ReportesService } from "./../../services/reportes.service";
+import { FormControl } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -8,26 +10,18 @@ import { Router, ActivatedRoute } from "@angular/router";
   styleUrls: ["./administrar-indicadores.component.scss"],
 })
 export class AdministrarIndicadoresComponent implements OnInit {
-  constructor(private authService: AuthService, public router: Router) {}
-  Estandar = {
-    NombreEstandar: "",
-    estandar: "",
-  };
+  constructor(
+    private authService: AuthService,
+    public router: Router,
+    private reportesService: ReportesService
+  ) {}
 
-  estandarId = {
-    id: "",
-  };
 
-  Categoria = {
-    categoria1: "",
-    NombreCategoria: "",
-  };
-
-  SubCategoria = {
-    subcategoria1: "",
-    nombreSubcategoria: "",
-  };
-
+  Estandar = new FormControl("");
+  Categoria = new FormControl("");
+  Subcategoria = new FormControl("");
+  Periodicidad = new FormControl("");
+  
   resultados = {};
   resultadosCategoria = {};
   resultadosSubCategoria = {};
@@ -37,15 +31,17 @@ export class AdministrarIndicadoresComponent implements OnInit {
   ver = false;
   editar = false;
   eliminar = false;
+  tablaIndicadores={};
+  resultado: any =[];
 
   estandar() {
-    this.estandarFil = this.Estandar.estandar;
+    this.estandarFil = this.Estandar.value;
     this.getCategoria(this.estandarFil);
     this.getSubCategoria(-1);
   }
 
   categoria() {
-    this.categoriaFil = this.Categoria.categoria1;
+    this.categoriaFil = this.Categoria.value;
     this.getSubCategoria(this.categoriaFil);
   }
 
@@ -71,10 +67,12 @@ export class AdministrarIndicadoresComponent implements OnInit {
     this.getStandares();
     this.getCategoria(0);
     this.getSubCategoria(0);
+    this.administrarIndicadores();
   }
+ 
 
   getStandares() {
-    this.authService.getStandares(this.Estandar).subscribe((res: any) => {
+    this.authService.getStandares("").subscribe((res: any) => {
       this.resultados = res.map((item) => {
         return item;
       });
@@ -83,13 +81,13 @@ export class AdministrarIndicadoresComponent implements OnInit {
 
   getCategoria(estandar) {
     if (estandar == 0) {
-      this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
+      this.authService.getCategoria("").subscribe((res: any) => {
         this.resultadosCategoria = res.map((item) => {
           return item;
         });
       });
     } else {
-      this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
+      this.authService.getCategoria("").subscribe((res: any) => {
         this.resultadosCategoria = res.filter(
           (item) => item.idEstandar == estandar
         );
@@ -100,7 +98,7 @@ export class AdministrarIndicadoresComponent implements OnInit {
   getSubCategoria(categoria) {
     if (categoria == 0) {
       this.authService
-        .getSubCategoria(this.SubCategoria)
+        .getSubCategoria("")
         .subscribe((res: any) => {
           this.resultadosSubCategoria = res.map((item) => {
             return item;
@@ -108,12 +106,32 @@ export class AdministrarIndicadoresComponent implements OnInit {
         });
     } else {
       this.authService
-        .getSubCategoria(this.SubCategoria)
+        .getSubCategoria("")
         .subscribe((res: any) => {
           this.resultadosSubCategoria = res.filter(
             (item) => item.idCategoria == categoria
           );
         });
     }
+  }
+
+  getIndicadoresFilter() {
+    this.reportesService
+      .ConsultarIndicadoresAsignados()
+      .subscribe((res: any) => {
+        this.resultado = res.filter(
+          (item) => (item.idCategoria == this.Categoria.value || item.idEstandar == this.Estandar.value || item.idSubCategoria == this.Subcategoria.value)
+        );
+      });
+  }
+
+  administrarIndicadores(){
+    this.authService.tablaAdminIndicadores().subscribe((registro: any)=>{
+      this.tablaIndicadores = registro.map((item)=>{
+        console.log("resultado",item)
+        console.log("objeto",this.tablaIndicadores)
+        return item;
+      });
+    });
   }
 }

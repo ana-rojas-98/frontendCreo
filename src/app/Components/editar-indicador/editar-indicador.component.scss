@@ -33,11 +33,7 @@ img{
 select{
     @include select;
 }
-.tablero{
-    margin: 50px;
-    border: 1px black solid;
-    border-radius: 10px;
-}
+
 .title-card{
     margin: 20px;
     text-align: center;
@@ -46,58 +42,18 @@ select{
         font-weight: bold;
     }
 }
-.nombre-organizacion{
-    height: max-content;
-    margin: 20px;
-    label{
-        @include label;
-    }
-    input{
-        @include inputCard (369px, 45.86px);
-    }
+.tablero{
+    padding: 2%;
 }
-.title-finanzas{
-    margin: 20px;
+input{
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #d0d4d9;
 }
-.campos{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    p{
-        text-align: center;
-    }
-}
-.campos-activos{
-    margin: 20px;
-    height: max-content;
-    label{
-        @include label;
-    }
-    input{
-        @include inputCard (202px, 45.86px);
-        margin-right: 10px;
-    }
-}
-.campos-pasivos{
-    margin: 20px;
-    height: max-content;
-    label{
-        @include label;
-    }
-    input{
-        @include inputCard (202px, 45.86px);
-        margin-right: 10px;
-    }
-}
-.corriente{
-    display: flex;
-    flex-wrap: wrap;
-    text-align: center;
-    margin-bottom: 50px;
-}
+
 .botones{
-    margin: 20px;
     display: flex;
+    flex-wrap:nowrap;
     justify-content: center;
 }
 .cancelar{

@@ -1,0 +1,61 @@
+<div class="contenedor">
+    <app-sidebar></app-sidebar>
+    <div class="cuerpo">
+        <div class="registro">
+            <div class="box">
+            <label for="">Estándar: </label>
+            <input type="text" [(ngModel)]="datos.Estandar" readonly>
+            </div>
+            <div class="box">
+            <label for="">Categoría: </label>
+            <input type="text" [(ngModel)]="datos.Categoria" readonly>
+            </div>
+            <div class="box">
+            <label for="">Subcategoría: </label>
+            <input type="text" [(ngModel)]="datos.Subcategoria" readonly>
+        </div>
+    </div>       
+        <div class="tabla">
+        <table>
+            <thead align="center">
+                <tr>
+                    <th>Entero</th>
+                    <th>Numero?</th>
+                    <th>Formula?</th>
+                    <th>Formula</th>
+                    <th>Valor</th>
+                    <th>Ttexto</th>
+                    <th>C</th>
+                    <th>N</th>
+                    <th>S</th>
+                    <th>K</th>
+                    <th>InCol</th>
+                    <th>FiCol</th>
+                    <th>SLinea</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let linea of resultadosTabla">
+                    <td>{{ linea.entrada }}</td>
+                    <td>{{ linea.numerop }}</td>
+                    <td>{{ linea.formulap }}</td>
+                    <td>{{ linea.formula }}</td>
+                    <td>{{ linea.valor }}</td>
+                    <td>{{ linea.tamanoTexto }}</td>
+                    <td>{{ linea.color }}</td>
+                    <td>{{ linea.negrilla }}</td>
+                    <td>{{ linea.subrayado }}</td>
+                    <td>{{ linea.cursiva }}</td>
+                    <td>{{ linea.inicioCol }}</td>
+                    <td>{{ linea.finCol }}</td>
+                    <td>{{ linea.saltoLinea }}</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="formato">
+        <div class="imagen" id="imagen"></div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

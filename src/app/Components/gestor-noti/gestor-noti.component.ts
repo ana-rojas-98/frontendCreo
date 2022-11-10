@@ -13,6 +13,7 @@ export class GestorNotiComponent implements OnInit {
   resultadosNotificaciones:any=[];
   notificacion={
     asunto:"",
+    creador:"",
     fechaCreacion:"",
     periodicidad:"",
     FechaEnvio:"",

@@ -4,89 +4,78 @@
         <div class="title-body">
             <h1>Editar indicador</h1>
         </div>
-        <div class="formatos">
-            <img src="../../../assets/imagenes/excel.png" alt="icono-excel">
-            <img src="../../../assets/imagenes/word.png" alt="icono-word">
-            <img src="../../../assets/imagenes/pdf.png" alt="icono-pdf">
-        </div>
         <div class="seleccion">
             <div class="box">
             <h3>Estandar</h3>
-            <select name="select">
-                <option value="" selected>estandar1</option>
-            </select>
+            <select class="selector" name="estandar" type="selectbox" [(ngModel)]="datos.Estandar" (change)="estandar()">
+                <option>{{datos.Estandar}}</option>
+                <option *ngFor="let resultado of resultados" [value]="datos.Estandar">
+                  {{ resultado.nombreEstandar }}
+                </option>
+              </select>
             </div>
             <div class="box">
             <h3>Categoria</h3>
-            <select name="select">
-                <option value="" selected>categoria 1</option>
+            <select  name="categoria" type="selectbox" [(ngModel)]="datos.Categoria" (change)="categoria()">
+                <option>{{datos.Categoria}}</option>
+                <option *ngFor="let resultadoCategoria of resultadosCategoria" [value]="datos.Categoria">
+                    {{ resultadoCategoria.nombreCategoria }}
+                  </option>
             </select>
             </div>
             <div class="box">
             <h3>Subcategoria</h3>
-            <select name="select">
-                <option value="" selected>subcategoria 1</option>
+            <select name="select"  [(ngModel)]="datos.SubCategoria">
+                <option>{{datos.Subcategoria}}</option>
+                <option *ngFor="let item of resultadosSubCategoria">
+                    {{ item.nombreSubcategoria }}
+                </option>
             </select>
             </div>
         </div>
         <div class="tablero">
-            <div class="title-card">
-                <h1>Año 2022</h1>
-                <p>Indicador 1 Contenidos generales</p>
-            </div>
-            <div class="nombre-organizacion">
-                <label for="nombre-indicador">Nombre de la organización</label>
-                <br>
-                <br>
-                <input type="text">
-            </div>
-            <div class="title-finanzas">
-                <h5>Finanzas</h5>
-            </div>
-            <div class="campos">
-            <div class="campos-activos">
-                <div>
-                <p>Activos</p>
-                </div>
-                <br>
-                <br>
-                <div class="corriente">
-                    <div>
-                        <label for="corrientes">Corrientes</label>
-                        <br>
-                        <input type="text">
-                    </div>
-                    <div>
-                        <label for="no-corrientes">No corrientes</label>
-                        <br>
-                        <input type="text">
-                    </div>
-                </div>
-            </div>
-            <div class="campos-pasivos">                
-               <div>
-                <p>Pasivos</p>
-                </div>                
-                <br>
-                <br>
-                <div class="corriente">
-                    <div>
-                        <label for="corrientes">Corrientes</label>
-                        <br>
-                        <input type="text">
-                    </div>
-                <div>
-                    <label for="no-corrientes">No corrientes</label>
-                    <br>
-                    <input type="text">
-                </div>
-                </div>
-            </div>
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Entero</th>
+                        <th>Numero?</th>
+                        <th>Formula?</th>
+                        <th>Formula</th>
+                        <th>Valor</th>
+                        <th>Ttexto</th>
+                        <th>C</th>
+                        <th>N</th>
+                        <th>S</th>
+                        <th>K</th>
+                        <th>InCol</th>
+                        <th>FiCol</th>
+                        <th>SLinea</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let linea of resultadosTabla">
+                        <td><input type="text" [(ngModel)]="linea.entrada" value="{{ linea.entrada }}"></td>
+                        <td><input type="text" [(ngModel)]="linea.numerop " value="{{ linea.numerop }}"></td>
+                        <td><input type="text" [(ngModel)]="linea.formulap" value=" {{ linea.formulap }}"></td>
+                        <td><input type="text" [(ngModel)]="linea.formula" value="{{ linea.formula }}"></td>
+                        <td><input type="text" [(ngModel)]="linea.valor" value="{{ linea.valor }}"></td>
+                        <td><input type="text" [(ngModel)]="linea.tamanoTexto" value="{{ linea.tamanoTexto }}"></td>
+                        <td><input type="text" [(ngModel)]="linea.color" value="{{ linea.color }}"></td>
+                        <td><input type="text" [(ngModel)]="linea.negrilla" value="{{ linea.negrilla }}"></td>
+                        <td><input type="text" [(ngModel)]="linea.subrayado" value="{{ linea.subrayado }}"></td>
+                        <td><input type="text" [(ngModel)]="linea.cursiva" value="{{ linea.cursiva }}"></td>
+                        <td><input type="text" [(ngModel)]="linea.inicioCol " value="{{ linea.inicioCol }}"></td>
+                        <td><input type="text" [(ngModel)]="linea.finCol" value="{{ linea.finCol }}"></td>
+                        <td><input type="text" [(ngModel)]="linea.saltoLinea" value="{{ linea.saltoLinea }}"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div class="botones">
-            <button class="cancelar">Cancelar</button>
-            <button class="guardar">Guardar</button>
+            <button class="cancelar"
+            [routerLink]="['/administrar-indicadores']"
+            [routerLinkActive]="['link-active']">Cancelar</button>
+            <button class="guardar" (click)="guardar()">Guardar</button>
         </div>
     </div>
 </div>

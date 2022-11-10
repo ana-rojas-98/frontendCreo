@@ -68,6 +68,7 @@ export class IndicadoresComponent implements OnInit {
   getindIcadores() {
     this.reportesService.ConsultarIndicadoresAsignados().subscribe((res: any) => {
       this.resultadosTabla = res.map((item) => {
+        console.log("reportes indicaadores", item)
         return item;
       });
     });

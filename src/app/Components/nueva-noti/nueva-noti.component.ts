@@ -13,7 +13,7 @@ export class NuevaNotiComponent implements OnInit {
     private authService: AuthService,
     public router: Router,
     private formBuilder: FormBuilder
-  ) { }
+  ) {}
 
   usuarios = {
     tipoUsuario: "",
@@ -30,7 +30,7 @@ export class NuevaNotiComponent implements OnInit {
   ensayoUsuarios: any = [];
   aux: any = [];
   enviarCorreo: any = [];
- 
+
   estadoi = false;
   estadoii = false;
   estadoiii = false;
@@ -54,8 +54,8 @@ export class NuevaNotiComponent implements OnInit {
   sabado = false;
   estadoDias = false;
   todo = false;
-  periodicidad:string;
-  quedia = [];
+  periodicidad: string;
+  quedia: any = [];
   fechaEspera: Date;
   fecha = new Date();
   dia = this.fecha.getDate();
@@ -63,9 +63,8 @@ export class NuevaNotiComponent implements OnInit {
   year = this.fecha.getFullYear();
   completa = `${this.year}-${this.mes}-${this.dia}`;
   ensayo = this.fecha.toLocaleDateString();
-  ahora = Date.parse(this.ensayo);
+  fechaConvertida: string;
 
-  
   usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
   usuarioid = parseInt(this.usarioLocalStote.usuarioid);
   ngOnInit() {
@@ -85,10 +84,8 @@ export class NuevaNotiComponent implements OnInit {
     this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
       this.ensayoUsuarios = res.forEach((item) => {
         item.checked = false;
-        console.log("item", item);
         this.aux.push(item);
       });
-      console.log("resultados", this.aux);
     });
   }
 
@@ -101,7 +98,6 @@ export class NuevaNotiComponent implements OnInit {
       }
     });
   }
-
 
   BoxUno() {
     if (this.estadoi != this.checkUno) {
@@ -174,30 +170,91 @@ export class NuevaNotiComponent implements OnInit {
     }
   }
   diasElectos() {
-    if (this.lunes.valueOf() == true) {
-      this.quedia.push("lunes");
-      this.lunes = false;
-    }
-    if (this.martes.valueOf() == true) {
-      this.quedia.push("martes");
-      this.martes = false;
-    }
-    if (this.miercoles.valueOf() == true) {
-      this.quedia.push("miercoles");
-      this.miercoles = false;
-    }
-    if (this.jueves.valueOf() == true) {
-      this.quedia.push("jueves");
-      this.jueves = false;
-    }
-    if (this.viernes.valueOf() == true) {
-      this.quedia.push("viernes");
-      this.viernes = false;
-    }
-    if (this.sabado.valueOf() == true) {
-      this.quedia.push("sabado");
-      this.sabado = false;
-    }
+    
+     if(this.lunes.valueOf()==false){
+      console.log("false")
+      this.quedia.slice({"lunes":this.lunes})
+     }else if(this.lunes.valueOf()==true){
+        console.log("hacer el push")
+        this.quedia.push({dia:"lunes"})
+        this.lunes=false;
+     }
+     if(this.martes.valueOf()==false){
+      console.log("false")
+     }else if(this.martes.valueOf()==true){
+        console.log("hacer el push")
+        this.quedia.push({dia:"martes"})
+        this.martes=false;
+     }
+     if(this.miercoles.valueOf()==false){
+      console.log("false")
+     }else if(this.miercoles.valueOf()==true){
+        console.log("hacer el push")
+        this.quedia.push({dia:"miercoles"})
+        this.miercoles=false;
+     }
+     if(this.jueves.valueOf()==false){
+      console.log("false")
+     }else if(this.jueves.valueOf()==true){
+        console.log("hacer el push")
+        this.quedia.push({dia:"jueves"})
+        this.jueves=false;
+     }
+     if(this.viernes.valueOf()==false){
+      console.log("false")
+     }else if(this.viernes.valueOf()==true){
+        console.log("hacer el push")
+        this.quedia.push({dia:"viernes"})
+        this.viernes=false;
+     }
+     if(this.sabado.valueOf()==false){
+      console.log("false")
+     }else if(this.sabado.valueOf()==true){
+        console.log("hacer el push")
+        this.quedia.push({dia:"sabado"})
+        this.sabado=false;
+     }
+      console.log("lunes",this.lunes)
+      console.log("martes",this.martes)
+      console.log("miencoles",this.miercoles)
+      console.log("jueves",this.jueves)
+      console.log("viernes",this.viernes)
+      console.log("sabado",this.sabado)
+    // var dia;
+    // if (this.lunes.valueOf() == true) {
+    //   dia= "lunes";
+    //   this.quedia.push({dia});
+    //   this.lunes= false;
+    // }else if(this.lunes.valueOf() == false){
+    //   console.log("se volvio false")
+    //   console.log("filter",this.quedia.filter((item) => item === "lunes")) 
+    //   console.log("despues de filter",this.quedia)
+    // }
+    // if (this.martes.valueOf() == true) {
+    //   dia= "martes";
+    //   this.quedia.push({dia});
+    //   this.martes = false;
+    // }
+    // if (this.miercoles.valueOf() == true) {
+    //   dia= "miercoles";
+    //   this.quedia.push({dia});
+    //   this.miercoles = false;
+    // }
+    // if (this.jueves.valueOf() == true) {
+    //   dia= "jueves";
+    //   this.quedia.push({dia});
+    //   this.jueves = false;
+    // }
+    // if (this.viernes.valueOf() == true) {
+    //   dia= "viernes";
+    //   this.quedia.push({dia});
+    //   this.viernes = false;
+    // }
+    // if (this.sabado.valueOf() == true) {
+    //   dia= "sabado";
+    //   this.quedia.push({dia});
+    //   this.sabado = false;
+    // }
   }
   boxtresDias() {
     if (this.boxtresI !== this.dias) {
@@ -209,56 +266,58 @@ export class NuevaNotiComponent implements OnInit {
     }
   }
 
-  enviar(){
-    console.log("nombre usuario", this.usuarioid)
-    const hola=this.aux.filter(hola=>hola.checked===true);
-    hola.forEach((m)=>{
+  enviar() {
+    const hola = this.aux.filter((hola) => hola.checked === true);
+    hola.forEach((m) => {
       m.asunto = this.envios.asunto;
       m.mensaje = this.envios.mensaje;
-      this.enviarCorreo.push(
-        {
-          correo: m.correo,
-          asunto: m.asunto,
-          mensaje: m.mensaje,
-        }
-      );
+      this.enviarCorreo.push({
+        correo: m.correo,
+        asunto: m.asunto,
+        mensaje: m.mensaje,
       });
-   
-    for(let i=0; i<this.enviarCorreo.length;i++){
-     var form=new FormData();
-     form.append("asunto",this.enviarCorreo[i].asunto)
-     form.append("mensaje",this.enviarCorreo[i].mensaje)
-     form.append("correo",this.enviarCorreo[i].correo)
-     form.append("periodicidad",this.periodicidad)
-     form.append("fechaEnvio",this.ensayo)
-     form.append("usuario",this.usuarioid.toString())
-      this.authService.enviarCorreo(form).subscribe((res:any)=>{
-        return res;
+    });
 
+    for (let i = 0; i < this.enviarCorreo.length; i++) {
+      var form = new FormData();
+      form.append("asunto", this.enviarCorreo[i].asunto);
+      form.append("mensaje", this.enviarCorreo[i].mensaje);
+      form.append("correo", this.enviarCorreo[i].correo);
+      form.append("periodicidad", this.periodicidad);
+      form.append("fechaEnvio", this.ensayo);
+      form.append("usuario", this.usuarioid.toString());
+      this.authService.enviarCorreo(form).subscribe((res: any) => {
+        if (res.a == "ok") {
+          this.alerta("Correo enviado correctamente");
+          this.router.navigate(["gestor-noti"]);
+        }
+        return res;
       });
     }
-       this.authService.enviarCorreo(form).subscribe((res:any)=>{
-          return res;
-        }); 
-      this.limpiar();
+    this.limpiar();
   }
-  
-  Guardar(){
-  if(this.estadoi===true){
-    console.log("enviar de inmediato")
-    this.periodicidad="No";
-    this.enviar();
+
+  programado() {
+    const hola = this.aux.filter((hola) => hola.checked === true);
+    hola.forEach((m) => {
+      m.asunto = this.envios.asunto;
+      m.mensaje = this.envios.mensaje;
+      this.enviarCorreo.push({
+        usuarioEnvia: this.usuarioid,
+        usuarioRecibe: m.usuarioid,
+        fechaEnvia: this.fechaConvertida,
+        periodicidad: this.periodicidad,
+        asunto: m.asunto,
+        mensaje: m.mensaje,
+      });
+    });
+    console.log("array", this.enviarCorreo);
   }
-  if(this.estadoii===true){
-    console.log("enviar con fecha");
-    var f1 =Date.parse(this.fechaEspera.toString());
-    var f= Date.parse(this.completa);
-    if(f1<f){
-      console.log("La fecha digitada es anterior a hoy");
-    }else if(f1===f){
-      console.log("La fecha digitada es hoy, selecciona enviar inmediatamente")
-    }else if(f1>f){
-      console.log("Correo programado exitosamente")
+
+  Guardar() {
+    if (this.estadoi === true) {
+      console.log("enviar de inmediato");
+      this.periodicidad = "No";
       this.enviar();
     }
     if (this.estadoii === true) {
@@ -268,48 +327,43 @@ export class NuevaNotiComponent implements OnInit {
       if (f1 < f) {
         console.log("La fecha digitada es anterior a hoy");
       } else if (f1 === f) {
-        console.log("La fecha digitada es hoy, selecciona enviar inmediatamente")
+        console.log(
+          "La fecha digitada es hoy, selecciona enviar inmediatamente"
+        );
       } else if (f1 > f) {
-        console.log("Correo programado exitosamente")
-        this.enviar();
-        // if(this.fechaEspera.toString()==this.completa){
-        //        console.log("enviar correo") 
-        // }
+        console.log("Correo programado exitosamente");
+        this.periodicidad = "0";
+        this.fechaConvertida = this.fechaEspera
+          .toString()
+          .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
+        console.log("fecha digitada en replace", this.fechaConvertida);
+        this.programado();
+        // this.enviar();
       }
     }
     if (this.estadoiii === true) {
-      console.log("enviar varias veces")
-      console.log("dias", this.lunes)
+      console.log("enviar varias veces");
+      console.log("dias", this.quedia);
+      // for (let i =0; i<this.quedia.length;i++ ){
+      //   var hola= this.quedia[i];
+      //   console.log("item", hola)
+      // }
     }
     if (this.estadoiv === true) {
-      console.log("enviar cierta fecha")
+      console.log("enviar cierta fecha");
     }
   }
-  if(this.estadoiii===true){
-    console.log("enviar varias veces")
-    console.log("dias",this.lunes)
-  }
-  if(this.estadoiv===true){
-    console.log("enviar cierta fecha")
-  }
-  }
 
-
-  
-  limpiar(){
-    console.log("Enviar a ", this.enviarCorreo)
+  limpiar() {
     this.aux.forEach((item) => {
-      item.checked=false;
-    });    
+      item.checked = false;
+    });
     // for (let index = 0; index < this.enviarCorreo.length; index++) {
     //   this.enviarCorreo.splice(this.enviarCorreo[index]);
     //   console.log("eliminando")
     // }
-    console.log("Enviar a ", this.enviarCorreo)
   }
-
   alerta(mensaje: any) {
     Swal.fire(mensaje);
   }
 }
-

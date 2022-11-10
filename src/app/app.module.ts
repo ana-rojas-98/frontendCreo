@@ -50,6 +50,7 @@ import { ReportesNuevoTablero1Component } from './Components/reportes-nuevo-tabl
 import { GestorNotiComponent } from './Components/gestor-noti/gestor-noti.component';
 import { NuevaNotiComponent } from './Components/nueva-noti/nueva-noti.component';
 import { ArchivosAdjuntosComponent } from './Components/archivos-adjuntos/archivos-adjuntos.component';
+import { VerIndicadorComponent } from './Components/ver-indicador/ver-indicador.component';
 
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
@@ -93,6 +94,7 @@ import { ArchivosAdjuntosComponent } from './Components/archivos-adjuntos/archiv
     GestorNotiComponent,
     NuevaNotiComponent,
     ArchivosAdjuntosComponent,
+    VerIndicadorComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -118,7 +120,8 @@ import { ArchivosAdjuntosComponent } from './Components/archivos-adjuntos/archiv
       { path: 'eliminar-subcategoria', component: EliminarSubcategoriaComponent, canActivate:[AuthGuard]},
       { path: 'nuevo-indicador', component: NuevoIndicadorComponent, canActivate:[AuthGuard]},
       { path: 'indicadores-masivos', component: IndicadoresMasivosComponent, canActivate:[AuthGuard]},
-      { path: 'editar-indicador', component: EditarIndicadorComponent, canActivate:[AuthGuard]},
+      { path: 'editar-indicador/:id/:accion', component: EditarIndicadorComponent, canActivate:[AuthGuard]},
+      //{ path: 'editar-indicador', component: EditarIndicadorComponent, canActivate:[AuthGuard]},
       { path: 'administrar-usuarios', component: AdministrarUsuariosComponent, canActivate:[AuthGuard]},
       { path: 'crear-usuarios', component: CrearUsuarioComponent, canActivate:[AuthGuard]},
       { path: 'crear-usuarios/:id', component: CrearUsuarioComponent, canActivate:[AuthGuard]},
@@ -137,6 +140,8 @@ import { ArchivosAdjuntosComponent } from './Components/archivos-adjuntos/archiv
       { path: 'nuevo-tablero/:array', component: ReportesNuevoTablero1Component, canActivate:[AuthGuard]},
       { path: 'gestor-noti', component: GestorNotiComponent},
       { path: 'nueva-noti', component: NuevaNotiComponent},
+      //{ path: 'ver-indicador', component: VerIndicadorComponent},
+      { path: 'ver-indicador/:id/:accion', component: VerIndicadorComponent, canActivate:[AuthGuard]},
     ])
   ],
   providers: [

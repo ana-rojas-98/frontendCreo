@@ -234,7 +234,18 @@ export class AuthService {
   }
 
   getNotificacion(notificacion: any){
-    let resultado = this.http.get(`${this.URL_SER}/api/configuracions`,notificacion);
+    let resultado = this.http.get(`${this.URL_SER}/api/Notificaciones`,notificacion);
     return resultado;
   }
+
+  tablaAdminIndicadores(){
+    let tabla = this.http.get(`${this.URL_SER}/api/archivos`);
+    return tabla;
+  }
+
+  EditarIndicador(){
+    let formato = this.http.get(`${this.URL_SER}/api/FormatoIndicadors`);
+    return formato;
+  }
+
 }

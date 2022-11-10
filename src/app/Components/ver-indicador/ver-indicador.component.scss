@@ -1,0 +1,28 @@
+@import "../../../assets/styles/main.scss";
+
+.contenedor{
+    @include contenedor;
+}
+.cuerpo{
+    @include body;
+    padding: 2%;
+}
+.title-indicador{
+   @include titleBody;
+}
+h1{
+    @include h1Body;
+}
+.tabla{
+    margin: 0px 20px 20px 20px;
+}
+.registro{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    margin-bottom: 5%;
+}
+input{
+    @include inputCard(150px, 30px);
+    display: block;
+}

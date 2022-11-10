@@ -94,8 +94,7 @@
               <img src="../../../assets/imagenes/ver.png" alt="icono-ver" />
             </th>
             <th *ngIf="editar">
-              <img src="../../../assets/imagenes/editar.png" alt="icono-editar" [routerLink]="['/editar-icono']"
-                [routerLinkActive]="['link-active']" />
+              <img src="../../../assets/imagenes/editar.png" alt="icono-editar"  />
             </th>
             <th *ngIf="eliminar">
               <img src="../../../assets/imagenes/eliminar.png" alt="icono-eliminar" />
@@ -115,17 +114,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>indicador1</td>
-            <td>creador</td>
-            <td>2022/12/05</td>
-            <td>Archivo</td>
+          
+          <tr *ngFor="let item of tablaIndicadores">
+            <td>{{item.archivo}}</td>
+            <td>{{item.fullname}}</td>
+            <td>{{item.dateCreate}}</td>
+            <td><a [routerLink]="['/Archivos-Adjuntos',item.idArchivo]" [routerLinkActive]="['link-active']">Archivos</a> </td>
             <td *ngIf="ver">
-              <img src="../../../assets/imagenes/ver.png" alt="ver-icono" />
+              <img src="../../../assets/imagenes/ver.png" alt="ver-icono" [routerLink]="[
+              '/ver-indicador', item.idArchivo,'ver']" [routerLinkActive]="['link-active']"/>
             </td>
             <td *ngIf="editar">
-              <img [routerLink]="['/editar-indicador']" [routerLinkActive]="['link-active']"
-                src="../../../assets/imagenes/editar.png" alt="editar-icono" />
+              <img src="../../../assets/imagenes/editar.png" alt="editar-icono" [routerLink]="[
+              '/editar-indicador', item.idArchivo,'editar']" [routerLinkActive]="['link-active']"
+                 />
             </td>
             <td *ngIf="eliminar">
               <img src="../../../assets/imagenes/eliminar.png" alt="eliminar-icono" />
