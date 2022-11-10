@@ -248,4 +248,8 @@ export class AuthService {
     return formato;
   }
 
+  enviarProgramados(programados){
+    let resultado = this.http.get(`${this.URL_SER}/api/CorreosProgramados`,programados);
+    return resultado;
+  }
 }

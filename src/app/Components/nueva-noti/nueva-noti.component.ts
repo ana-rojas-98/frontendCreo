@@ -55,6 +55,8 @@ export class NuevaNotiComponent implements OnInit {
   estadoDias = false;
   todo = false;
   periodicidad: string;
+  indicadoresFalta:"";
+  fechaCaducidad: Date;
   quedia: any = [];
   fechaEspera: Date;
   fecha = new Date();
@@ -309,7 +311,15 @@ export class NuevaNotiComponent implements OnInit {
         periodicidad: this.periodicidad,
         asunto: m.asunto,
         mensaje: m.mensaje,
+        indicadorFaltante: this.indicadoresFalta,
       });
+    });
+    this.authService.enviarProgramados(hola).subscribe((res: any) => {
+      if (res.resul == "ok") {
+        this.alerta("Correo enviado correctamente");
+        this.router.navigate(["gestor-noti"]);
+      }
+      return res;
     });
     console.log("array", this.enviarCorreo);
   }
@@ -317,7 +327,7 @@ export class NuevaNotiComponent implements OnInit {
   Guardar() {
     if (this.estadoi === true) {
       console.log("enviar de inmediato");
-      this.periodicidad = "No";
+      this.periodicidad = "0";
       this.enviar();
     }
     if (this.estadoii === true) {
@@ -325,11 +335,9 @@ export class NuevaNotiComponent implements OnInit {
       var f1 = Date.parse(this.fechaEspera.toString());
       var f = Date.parse(this.completa);
       if (f1 < f) {
-        console.log("La fecha digitada es anterior a hoy");
+        this.alerta("La fecha digitada es anterior a hoy");
       } else if (f1 === f) {
-        console.log(
-          "La fecha digitada es hoy, selecciona enviar inmediatamente"
-        );
+        this.alerta("La fecha digitada es hoy, selecciona enviar inmediatamente");
       } else if (f1 > f) {
         console.log("Correo programado exitosamente");
         this.periodicidad = "0";
@@ -351,6 +359,11 @@ export class NuevaNotiComponent implements OnInit {
     }
     if (this.estadoiv === true) {
       console.log("enviar cierta fecha");
+      this.fechaConvertida = this.fechaEspera
+      .toString()
+      .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
+      this.periodicidad = "0";
+      this.programado();
     }
   }
 
