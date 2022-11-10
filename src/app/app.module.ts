@@ -51,6 +51,7 @@ import { GestorNotiComponent } from './Components/gestor-noti/gestor-noti.compon
 import { NuevaNotiComponent } from './Components/nueva-noti/nueva-noti.component';
 import { ArchivosAdjuntosComponent } from './Components/archivos-adjuntos/archivos-adjuntos.component';
 import { VerIndicadorComponent } from './Components/ver-indicador/ver-indicador.component';
+import { LicenciaComponent } from './components/licencia/licencia.component';
 
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
@@ -95,6 +96,7 @@ import { VerIndicadorComponent } from './Components/ver-indicador/ver-indicador.
     NuevaNotiComponent,
     ArchivosAdjuntosComponent,
     VerIndicadorComponent,
+    LicenciaComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -143,6 +145,8 @@ import { VerIndicadorComponent } from './Components/ver-indicador/ver-indicador.
       { path: 'gestor-noti', component: GestorNotiComponent, canActivate:[AuthGuard]},
       { path: 'nueva-noti', component: NuevaNotiComponent, canActivate:[AuthGuard]},
       { path: 'Archivos-Adjuntos/:id', component: ArchivosAdjuntosComponent, canActivate:[AuthGuard]},
+      { path: 'licencia', component: LicenciaComponent, canActivate:[AuthGuard]},
+
     ])
   ],
   providers: [

@@ -54,7 +54,7 @@
     </div>
     <div class="link-sidebar" *ngIf="licenciar">
       <img src="../../../assets/imagenes/licencias.png" alt="indicador" />
-      <a>Licenciar</a>
+      <a [routerLink]="['/licencia']" [routerLinkActive]="['link-active']">Licenciar</a>
     </div>
 
     <div class="link-sidebar">
