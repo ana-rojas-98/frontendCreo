@@ -253,4 +253,8 @@ export class AuthService {
     let resultado = this.http.get(`${this.URL_SER}/api/CorreosProgramados`,programados);
     return resultado;
   }
+  enviarIndicadorEsitado(array:any){
+    let formato = this.http.post(`${this.URL_SER}/api/FormatoIndicadors/actualizarTabla`,array);
+    return formato;
+  }
 }
