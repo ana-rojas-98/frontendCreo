@@ -55,7 +55,7 @@ export class NuevaNotiComponent implements OnInit {
   estadoDias = false;
   todo = false;
   periodicidad: string;
-  indicadoresFalta:"";
+  indicadoresFalta:0;
   fechaCaducidad: Date;
   quedia: any = [];
   fechaEspera: Date;
@@ -307,14 +307,14 @@ export class NuevaNotiComponent implements OnInit {
       this.enviarCorreo.push({
         usuarioEnvia: this.usuarioid,
         usuarioRecibe: m.usuarioid,
-        fechaEnvia: this.fechaConvertida,
+        FechaEnvio: this.fechaConvertida,
         periodicidad: this.periodicidad,
         asunto: m.asunto,
         mensaje: m.mensaje,
         indicadorFaltante: this.indicadoresFalta,
       });
     });
-    this.authService.enviarProgramados(hola).subscribe((res: any) => {
+    this.authService.enviarProgramados(this.enviarCorreo).subscribe((res: any) => {
       if (res.resul == "ok") {
         this.alerta("Correo enviado correctamente");
         this.router.navigate(["gestor-noti"]);

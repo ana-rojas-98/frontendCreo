@@ -49,14 +49,12 @@ export class EditarIndicadorComponent implements OnInit {
     this.getSubCategoria(0);
   }
   TraerFormato(){
-    console.log("Trae formato");
     this.authService.EditarIndicador().subscribe((respuesta: any)=>{
       this.resultado = respuesta.map((item)=>{
         console.log("item",item);
         if(this.idArchivo.idArchivo == item.idArchivo){
           this.resultadosTabla.push(item)
           this.datos.Estandar = item.nombreEstandar;
-          console.log("estandar",this.datos.Estandar);
           this.datos.Categoria = item.nombreCategoria;
           this.datos.Subcategoria = item.nombreSubcategoria;
         }

@@ -249,7 +249,17 @@ export class AuthService {
   }
 
   enviarProgramados(programados){
-    let resultado = this.http.get(`${this.URL_SER}/api/CorreosProgramados`,programados);
+    let resultado = this.http.post(`${this.URL_SER}/api/CorreosProgramados`,programados);
+    return resultado;
+  }
+
+  enviarCorreos(){
+    let resultado = this.http.get(`${this.URL_SER}/api/CorreosProgramados/PutCorreoProgramado`);
+    return resultado;
+  }
+
+  enviarCorreosIndicadores(){
+    let resultado = this.http.get(`${this.URL_SER}/api/CorreosProgramados/CorreoIndicadoresFaltantes`);
     return resultado;
   }
 }
