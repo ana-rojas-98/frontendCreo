@@ -1,6 +1,5 @@
+import { animate } from '@angular/animations';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { RouteConfigLoadEnd } from '@angular/router';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,11 +15,18 @@ export class LicenciaComponent implements OnInit {
   sanitizer: any;
 
   constructor(private authService: AuthService, private licenciaService: LicenciaService) { }
+
+  usarioLocalStote= {
+    usuarioid: 1,
+  };
+
   Licencia = {
     Licencia1: "",
+    idUsuario: 0,
   }
 
   ngOnInit() {
+    this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
     this.GetLicencia();
   }
   private _success = new Subject<string>();
@@ -30,6 +36,8 @@ export class LicenciaComponent implements OnInit {
   prev: string;
 
   UpdateLicencia() {
+    this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    this.Licencia.idUsuario = this.usarioLocalStote.usuarioid;
     this.licenciaService.UpdateLicencia(this.Licencia).subscribe((res: any) => {
       if (res.resul == "ok") {
         this.alerta("Licencia actualizada");
