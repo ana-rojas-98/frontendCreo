@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { LicenciaService } from 'src/app/services/licencia.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private authService: AuthService, private licenciaService: LicenciaService) { }
+  Licencia = {
+    Licencia1: "",
   }
-
+  ngOnInit() {
+    this.GetLicencia();
+  }
+  GetLicencia() {
+    this.licenciaService.GetLicencia(this.Licencia).subscribe((res: any) => {
+      this.Licencia.Licencia1 = res.licencia1;
+    });
+  }
 }

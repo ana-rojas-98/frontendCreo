@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from "@angular/router";
   providedIn: "root",
 })
 export class AuthService {
+  
   data_headers_request: any = "";
 
   //https://localhost:5001

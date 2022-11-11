@@ -1,0 +1,89 @@
+<div class="contenedor">
+    <app-sidebar></app-sidebar>
+    <div class="cuerpo">
+        <h1 class="titulo">Visor de eventos</h1>
+        <div class="contenedorSelect">
+            <div class="box">
+                <p>Fecha inicial</p>
+                <select class="selector" [(ngModel)]="Estandar.estandar" (change)="getEstandarFilter()">
+                    <option value="">Seleccione estándar</option>
+                    <option *ngFor="let item of resultadoEstandar" [value]="item.estandar">
+                        {{ item.nombreEstandar }}
+                    </option>
+                </select>
+            </div>
+            <div class="box">
+                <p>Fecha final</p>
+                <select class="selector" [(ngModel)]="Estandar.estandar" (change)="getEstandarFilter()">
+                    <option value="">Seleccione estándar</option>
+                    <option *ngFor="let item of resultadoEstandar" [value]="item.estandar">
+                        {{ item.nombreEstandar }}
+                    </option>
+                </select>
+            </div>
+            <div class="box">
+                <p>Usuario</p>
+                <select (change)="getUsuarioFilter()" [(ngModel)]="Usuario.usuario" class="selector">
+                    <option value="">Seleccione un usuario</option>
+                    <option *ngFor="let item of resultadosUsuario" [value]="item.usuarioid">
+                        {{ item.nombre }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="box">
+                <p>Módulo</p>
+                <select [(ngModel)]="Categoria.categoria1" (change)="getCategoriaFilter()" class="selector">
+                    <option value="">Seleccione categoría</option>
+                    <option *ngFor="let item of resultadosCategoria" [value]="item.categoria1">
+                        {{ item.nombreCategoria }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="resultados-tabla" id="tableIndicadores">
+            <table class="tabla-indicadores">
+                <thead>
+                    <tr>
+                        <th>
+                            <img src="../../../assets/imagenes/fechaHora.png" alt="icono-nombre" />
+                            Fecha y hora
+                        </th>
+                        <th>
+                            <img src="../../../assets/imagenes/creador.svg" alt="icono-creador" />
+                            Usuario
+                        </th>
+                        <th>
+                            <img src="../../../assets/imagenes/indicadores.png" alt="icono-nombre" />
+                            Módulo
+                        </th>
+                        <th>
+                            <img id="imgPorcentaje" src="../../../assets/imagenes/porcentaje.svg" alt="icono-nombre"
+                                class="mx-1 mt-1" />
+                            Acción
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of resultadosTabla">
+                        <td>{{ item.fechaModificacion }}</td>
+                        <td>{{ item.usuario }}</td>
+                        <td>{{ item.indicador }}</td>
+                        <td>{{ item.avance }}%</td>
+                        <td>{{ item.urlArchivo }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="contenedorDescargas">
+            <button class="button">Descargar todos los archivos adjuntos</button>
+            <button class="botonImagen" (click)="downloadExcel()">
+                <img src="../../../assets/imagenes/excel.png" alt="icono-excel" class="mx-1" />
+            </button>
+            <button class="botonImagen" (click)="createPDF()">
+                <img src="../../../assets/imagenes/pdf.png" alt="icono-pdf" class="mx-1" />
+            </button>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
