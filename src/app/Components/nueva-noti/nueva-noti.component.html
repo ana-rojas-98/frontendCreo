@@ -57,7 +57,7 @@
                             Semana
                         </label>
                         </div>
-                        <div class="dias-semana" *ngIf="semana==false">
+                        <div class="dias-semana" *ngIf="boxtres==true">
                         <label for="">
                             <input type="checkbox" [(ngModel)]="lunes" (change)="diasElectos()">
                             Lunes
@@ -89,12 +89,15 @@
                             Días
                         </label>
                     </div>
-                    <div class="numeroDias" *ngIf="dias == false">
+                    <div class="numeroDias" *ngIf="boxtresI == true">
                         <label for="">
                             Cada
                             <input type="text" maxlength="3">
                             días
                         </label>
+                    </div>
+                    <div>
+                        <label for="">Fecha Caducidad:  <input type="date" [(ngModel)]="fechaCaducidad"></label>
                     </div>
                     </div>
                 </label>
@@ -108,7 +111,7 @@
                         </label>
                         <div class="indicadores">
                         <label for="">
-                            <input type="text" name="" id="" [(ngModel)]="indicadoresFalta">
+                            <input type="number" name="" id="" [(ngModel)]="indicadoresFalta">
                             indicadores
                         </label>
                     </div>

@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from "@angular/router";
   providedIn: "root",
 })
 export class AuthService {
+  
   data_headers_request: any = "";
 
   //https://localhost:5001
@@ -261,5 +262,10 @@ export class AuthService {
   enviarCorreosIndicadores(){
     let resultado = this.http.get(`${this.URL_SER}/api/CorreosProgramados/CorreoIndicadoresFaltantes`);
     return resultado;
+  }
+
+  enviarIndicadorEsitado(array:any){
+    let formato = this.http.post(`${this.URL_SER}/api/FormatoIndicadors/actualizarTabla`,array);
+    return formato;
   }
 }

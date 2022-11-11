@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 import { FormControl } from "@angular/forms";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-indicador',
@@ -51,7 +52,6 @@ export class EditarIndicadorComponent implements OnInit {
   TraerFormato(){
     this.authService.EditarIndicador().subscribe((respuesta: any)=>{
       this.resultado = respuesta.map((item)=>{
-        console.log("item",item);
         if(this.idArchivo.idArchivo == item.idArchivo){
           this.resultadosTabla.push(item)
           this.datos.Estandar = item.nombreEstandar;
@@ -108,6 +108,14 @@ export class EditarIndicadorComponent implements OnInit {
 
   guardar(){
     console.log("resulatado",this.resultadosTabla)
+    this.authService.enviarIndicadorEsitado(this.resultadosTabla).subscribe((res)=>{
+      if(res){
+        this.alerta("Editado")
+      }
+      return res;
+    });
   }
-
+  alerta(mensaje: any) {
+    Swal.fire(mensaje);
+  }
 }
