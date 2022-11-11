@@ -5,20 +5,14 @@
         <div class="contenedorSelect">
             <div class="box">
                 <p>Fecha inicial</p>
-                <select class="selector" [(ngModel)]="Estandar.estandar" (change)="getEstandarFilter()">
+                <select class="selector" (change)="getEstandarFilter()">
                     <option value="">Seleccione estándar</option>
-                    <option *ngFor="let item of resultadoEstandar" [value]="item.estandar">
-                        {{ item.nombreEstandar }}
-                    </option>
                 </select>
             </div>
             <div class="box">
                 <p>Fecha final</p>
-                <select class="selector" [(ngModel)]="Estandar.estandar" (change)="getEstandarFilter()">
+                <select class="selector" (change)="getEstandarFilter()">
                     <option value="">Seleccione estándar</option>
-                    <option *ngFor="let item of resultadoEstandar" [value]="item.estandar">
-                        {{ item.nombreEstandar }}
-                    </option>
                 </select>
             </div>
             <div class="box">
@@ -33,10 +27,10 @@
 
             <div class="box">
                 <p>Módulo</p>
-                <select [(ngModel)]="Categoria.categoria1" (change)="getCategoriaFilter()" class="selector">
+                <select [(ngModel)]="resultadosModulos1" (change)="getCategoriaFilter()" class="selector">
                     <option value="">Seleccione categoría</option>
-                    <option *ngFor="let item of resultadosCategoria" [value]="item.categoria1">
-                        {{ item.nombreCategoria }}
+                    <option *ngFor="let item of resultadosModulos" [value]="resultadosModulos">
+                        {{ item }}
                     </option>
                 </select>
             </div>
@@ -66,17 +60,15 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of resultadosTabla">
-                        <td>{{ item.fechaModificacion }}</td>
+                        <td>{{ item.fecha }}</td>
                         <td>{{ item.usuario }}</td>
-                        <td>{{ item.indicador }}</td>
-                        <td>{{ item.avance }}%</td>
-                        <td>{{ item.urlArchivo }}</td>
+                        <td>{{ item.modulo }}</td>
+                        <td>{{ item.accion }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="contenedorDescargas">
-            <button class="button">Descargar todos los archivos adjuntos</button>
             <button class="botonImagen" (click)="downloadExcel()">
                 <img src="../../../assets/imagenes/excel.png" alt="icono-excel" class="mx-1" />
             </button>
