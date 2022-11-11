@@ -40,7 +40,7 @@
     </div>
     <div class="link-sidebar" *ngIf="visorEventos">
       <img src="../../../assets/imagenes/visor-eventos.png" alt="indicador" />
-      <a>Visor de eventos</a>
+      <a [routerLink]="['/visor-eventos']" [routerLinkActive]="['link-active']">Visor de eventos</a>
     </div>
     <div class="link-sidebar" *ngIf="notificaciones">
       <img src="../../../assets/imagenes/notificaciones.png" alt="indicador" />

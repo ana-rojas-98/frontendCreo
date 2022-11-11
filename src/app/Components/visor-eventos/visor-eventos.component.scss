@@ -1,0 +1,69 @@
+@import "../../../assets/styles/main.scss";
+
+.contenedor {
+  @include contenedor;
+}
+.cuerpo {
+  @include body;
+  //@include centerFlex;
+  img {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+.contenedorDescargas {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 20px;
+  margin-top: 27px;
+  margin-bottom: 20px;
+  .button {
+    width: 350px;
+    height: 30px;
+    background: $buttonDownload;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45), 0px 0px 1px rgba(0, 0, 0, 0.45);
+    border-radius: 25px;
+    border: 1px;
+    margin-right: 20px;
+    color: #ffffff;
+  }
+  .botonImagen {
+    padding: 0;
+    border: 0;
+    margin-right: 10px;
+    width: 25px;
+    height: 25px;
+  }
+}
+
+h1 {
+  @include h1Body;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  margin-top: 34px;
+}
+
+.contenedorSelect {
+  @include grid(3, 2);
+}
+
+.selector {
+  background: #ffffff;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 90%;
+  height: 40px;
+  border: 1px;
+  margin-bottom: 30px;
+  margin-right: 20px;
+  font-family: "Montserrat";
+}
+
+#imgPorcentaje {
+  margin: 0;
+  width: 20px;
+  height: 20px;
+}
