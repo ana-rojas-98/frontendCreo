@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./archivos-adjuntos.component.scss']
 })
 export class ArchivosAdjuntosComponent implements OnInit {
+  usarioLocalStote: any;
 
   constructor(private route: ActivatedRoute, public router: Router, private indicadoresservice: IndicadoresService, private reportesService: ReportesService) { }
 
@@ -78,6 +79,9 @@ export class ArchivosAdjuntosComponent implements OnInit {
       formData.append("Nombre", this.nombreArchivo);
       formData.append("idArchivo", this.id.toString());
       formData.append("Extension", this.archivos.name.toString().split('.').pop());
+      this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+      let Usuarioid = this.usarioLocalStote.usuarioid
+      formData.append("UsuarioID", Usuarioid);
       this.indicadoresservice.GuardarAdjunto(formData).subscribe((res: any) => {
         if (res.resul == "Se guardo con exito") {
           this.alert("Archivo adjunto guardado");

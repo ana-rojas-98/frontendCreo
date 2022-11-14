@@ -27,9 +27,13 @@ export class EliminarSubcategoriaComponent implements OnInit {
     NombreCategoria: "",
   };
 
+  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+  Usuarioid = this.usarioLocalStote.usuarioid;
+
   SubCategoria = {
     subcategoria1: "",
     nombreSubcategoria: "",
+    IdUsuario: this.Usuarioid,
   };
 
   resultados = {};

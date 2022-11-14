@@ -8,7 +8,7 @@ import { Router, ActivatedRoute } from "@angular/router";
   styleUrls: ["./sidebar.component.scss"],
 })
 export class SidebarComponent implements OnInit {
-  constructor(private authService: AuthService, public router: Router) {}
+  constructor(private authService: AuthService, public router: Router) { }
   usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
   visorEventos = true;
@@ -19,6 +19,12 @@ export class SidebarComponent implements OnInit {
   notificaciones = true;
   configuraciones = true;
   licenciar = true;
+
+  Usuarioid = this.usarioLocalStote.usuarioid
+
+  Usuario = {
+    IdUsuario: this.Usuarioid,
+  };
 
   ngOnInit() {
     if (this.usarioLocalStote.typeuser == "3") {
@@ -40,9 +46,10 @@ export class SidebarComponent implements OnInit {
   }
 
   CerrarSesion() {
-    this.authService.fnDestroySessionData(function (res_clean_session) {
-      if (res_clean_session) {
-      }
+    this.authService.CerrarSesion(this.Usuario).subscribe((res: any) => {
+      this.authService.fnDestroySessionData(function (res_clean_session) {
+        if (res_clean_session) { }
+      });
     });
   }
 }

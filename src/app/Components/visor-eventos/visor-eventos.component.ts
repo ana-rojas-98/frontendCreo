@@ -39,6 +39,8 @@ export class VisorEventosComponent implements OnInit {
         this.resultadosModulos.push(item.modulo);
         return item;
       });
+      this.resultadosTabla = this.resultadosTabla.sort();
+      this.resultadosTabla = this.resultadosTabla.reverse();
     });
   }
 

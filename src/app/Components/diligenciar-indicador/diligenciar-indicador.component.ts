@@ -54,6 +54,10 @@ export class DiligenciarIndicadorComponent implements OnInit {
     anio: 0,
   };
 
+  usarioLocalStote = {
+    usuarioid: 1,
+  };
+
   ngOnInit() {
     this.id = parseInt(this.route.snapshot.paramMap.get("id"));
     this.accionVerModificar = this.route.snapshot.paramMap.get("accion");
@@ -93,14 +97,14 @@ export class DiligenciarIndicadorComponent implements OnInit {
   }
 
   ChangePeriodo() {
-    
+
     this.prueba = "";
     if (this.Anio != '') {
       if (this.Periodo != '') {
         this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
         this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
         this.resultadosHTML.forEach(item => (this.prueba += item.html, this.Respuestas.push(item.valor)));
-        
+
       }
       else {
         this.prueba = "No se encuentra resultados";
@@ -126,7 +130,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
           this.prueba += item.html,
           this.Respuestas.push(item.valor)
         ));
-        
+
       }
       else {
         this.prueba = "No se encuentra resultados";
@@ -158,9 +162,12 @@ export class DiligenciarIndicadorComponent implements OnInit {
       let i = 0;
       var contents;
       let contenidos = [];
+      this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+
       this.resultadosHTML.map(item => (
         contents = document.getElementById((item.idFila - 1).toString()),
         item.valor = contents.value,
+        item.Usuarioid = this.usarioLocalStote.usuarioid,
         contenidos.push(item),
         i++
       ));
@@ -187,9 +194,11 @@ export class DiligenciarIndicadorComponent implements OnInit {
         let i = 0;
         var contents;
         let contenidos = [];
+        this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
         this.resultadosHTML.map(item => (
           contents = document.getElementById((item.idFila - 1).toString()),
           item.valor = contents.value,
+          item.Usuarioid = this.usarioLocalStote.usuarioid,
           contenidos.push(item),
           i++
         ));
@@ -257,16 +266,16 @@ export class DiligenciarIndicadorComponent implements OnInit {
             //--------------------------------------------------------------------------------
             console.log("Array: ", array);
             let bandera = 0;
-            var var1;            
-            var var2;           
-            var var3;  
+            var var1;
+            var var2;
+            var var3;
             var var4;
 
             let array2 = [];
             for (let i = 0; i < array.length; i++) {
-              var1 = document.getElementById((array[i + 1]-2).toString());
-              var2 = document.getElementById((array[i - 1]-2).toString());
-              var3 = document.getElementById((array[i]-2).toString());
+              var1 = document.getElementById((array[i + 1] - 2).toString());
+              var2 = document.getElementById((array[i - 1] - 2).toString());
+              var3 = document.getElementById((array[i] - 2).toString());
               if (array[i] == "*") {
                 if (bandera == 1) {
                   array2.push(array2[array2.length - 1] * var1.value);
@@ -296,19 +305,19 @@ export class DiligenciarIndicadorComponent implements OnInit {
               }
               else {
                 bandera = 0;
-                if (array[i] == "+" || array[i] == "-"){
+                if (array[i] == "+" || array[i] == "-") {
                   array2.push(array[i]);
                 }
-                else{
+                else {
                   array2.push(var3.value);
                 }
                 console.log(array[i].toString());
-                
+
                 console.log("Array2: ", array2);
               }
             }
             console.log("Array2: ", array2);
-//-------------------------------------------------------------------------------------------------------------------------
+            //-------------------------------------------------------------------------------------------------------------------------
             let bandera2 = 0;
             let array3 = [];
             for (let i = 0; i < array2.length; i++) {
@@ -345,17 +354,13 @@ export class DiligenciarIndicadorComponent implements OnInit {
             }
             console.log("Array3: ", array3);
             //---------------------------------------------------------------------------------------------------------
-            var4 = document.getElementById((item2.idFila - 1).toString()); 
+            var4 = document.getElementById((item2.idFila - 1).toString());
             var4.value = array3;
           })
         });
       }
       i++;
     });
-  }
-
-  operaciones() {
-
   }
 
   DescargarPDF() {

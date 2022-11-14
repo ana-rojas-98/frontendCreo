@@ -11,9 +11,14 @@ import Swal from "sweetalert2";
   styleUrls: ["./subcatego.component.scss"],
 })
 export class SubcategoComponent implements OnInit {
+  
+  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+  Usuarioid = this.usarioLocalStote.usuarioid
+
   Subcategoria = {
     NombreSubcategoria: "",
-    Subcategoria1: ""
+    Subcategoria1: "",
+    IdUsuario: this.Usuarioid,
   };
 
   Categoria = {

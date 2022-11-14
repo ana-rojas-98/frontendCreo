@@ -11,9 +11,14 @@ import Swal from "sweetalert2";
   styleUrls: ["./categorias.component.scss"],
 })
 export class CategoriasComponent implements OnInit {
+
+  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+  Usuarioid = this.usarioLocalStote.usuarioid
+
   Categoria = {
     NombreCategoria: "",
     IdEstandar: "",
+    IdUsuario: this.Usuarioid,
   };
   resultados = {};
 

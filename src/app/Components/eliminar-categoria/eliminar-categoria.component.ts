@@ -23,9 +23,13 @@ export class EliminarCategoriaComponent implements OnInit {
     id: "",
   };
 
+  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+  Usuarioid = this.usarioLocalStote.usuarioid;
+
   Categoria = {
     categoria1: "",
     NombreCategoria: "",
+    IdUsuario: this.Usuarioid,
   };
 
   SubCategoria = {
