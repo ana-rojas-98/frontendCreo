@@ -52,11 +52,11 @@ export class AdministrarIndicadoresComponent implements OnInit {
   tablaIndicadores = {};
   resultado: any = [];
 
-  estandar() {
-    this.estandarFil = this.Estandar.estandar;
-    this.getCategoria(this.estandarFil);
-    this.getSubCategoria(0);
-  }
+  // estandar() {
+  //   this.estandarFil = this.Estandar.estandar;
+  //   this.getCategoria(this.estandarFil);
+  //   this.getSubCategoria(0);
+  // }
 
   categoria() {
     this.categoriaFil = this.Categoria.categoria1;
@@ -149,7 +149,7 @@ export class AdministrarIndicadoresComponent implements OnInit {
     this.indicador.id = id2;
     this.authService.DuplicarIndicador(this.indicador).subscribe((res: any) => {
       if (res.resul == "ok") {
-        this.alerta("Eliminado correctamente");
+        this.alerta("Duplicado correctamente");
         this.administrarIndicadores();
       }
       return res;

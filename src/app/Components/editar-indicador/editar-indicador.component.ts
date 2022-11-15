@@ -15,9 +15,9 @@ export class EditarIndicadorComponent implements OnInit {
     private route: ActivatedRoute,
     public router: Router
   ) {}
-  Estandar = new FormControl("");
-  Categoria = new FormControl("");
-  Subcategoria = new FormControl("");
+  // Estandar = new FormControl("");
+   Categoria = new FormControl("");
+  // Subcategoria = new FormControl("");
 
   id = 0;
   accionEditar = "";

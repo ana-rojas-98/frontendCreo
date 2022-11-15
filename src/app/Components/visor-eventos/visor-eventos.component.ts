@@ -4,7 +4,10 @@ import { Subject } from 'rxjs';
 import { NgModule } from '@angular/core';
 import { ReportesService } from 'src/app/services/reportes.service';
 import { VisorEventosService } from 'src/app/services/visor-eventos.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+import * as XLSX from "xlsx";
+import {FormGroup, FormControl} from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -31,6 +34,8 @@ export class VisorEventosComponent implements OnInit {
     modulo: "",
   };
 
+  fileName = "Visor de eventos.xlsx";
+
   Usuario = {
     usuario: "",
   };
@@ -43,7 +48,35 @@ export class VisorEventosComponent implements OnInit {
     this.GetUsuarios(0);
   }
 
-  GetEventos() {
+  createPDF() {
+    let DATA: any = document.getElementById("tableIndicadores");
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 208;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL("image/png");
+      let PDF = new jsPDF("p", "mm", "a4");
+      let position = 0;
+      PDF.addImage(FILEURI, "PNG", 0, position, fileWidth, fileHeight);
+      PDF.save("Visor de eventos.pdf");
+    });
+  }
+
+   downloadExcel() {
+    {
+      /* pass here the table id */
+      let element = document.getElementById("tableIndicadores");
+      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+      /* generate workbook and add the worksheet */
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+      /* save to file */
+      XLSX.writeFile(wb, this.fileName);
+    }
+  }
+
+  GetEventos(){
     this.VisorEventosService.GetEventos().subscribe((res: any) => {
       this.resultadosTabla = res.map((item) => {
         this.resultadosModuloss.push(item.modulo);
@@ -80,7 +113,7 @@ export class VisorEventosComponent implements OnInit {
           this.resultadosTabla = this.resultadosTabla.filter((item) => (item.modulo == this.resultadosModulo.modulo && item.idusuario == this.Usuario.usuario));
         }
         else {
-          
+
           this.resultadosTabla = this.resultadosTabla.filter((item) => (item.idusuario == this.Usuario.usuario));
         }
       }

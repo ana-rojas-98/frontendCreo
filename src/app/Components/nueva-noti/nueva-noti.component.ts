@@ -13,7 +13,7 @@ export class NuevaNotiComponent implements OnInit {
     private authService: AuthService,
     public router: Router,
     private formBuilder: FormBuilder
-  ) { }
+  ) {}
 
   usuarios = {
     tipoUsuario: "",
@@ -69,7 +69,7 @@ export class NuevaNotiComponent implements OnInit {
   fechaConvertida: string;
   usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
   usuarioid = parseInt(this.usarioLocalStote.usuarioid);
-  
+
   ngOnInit() {
     this.getUsuarios();
     this.elegitTodos();
@@ -176,34 +176,34 @@ export class NuevaNotiComponent implements OnInit {
 
   diasElectos() {
     if (this.lunes.valueOf() == false) {
-      this.quedia.slice({ "lunes": this.lunes })
+      this.quedia.slice({ lunes: this.lunes });
     } else if (this.lunes.valueOf() == true) {
-      this.quedia.push({ dia: "lunes" })
+      this.quedia.push({ dia: "lunes" });
       this.lunes = false;
     }
     if (this.martes.valueOf() == false) {
     } else if (this.martes.valueOf() == true) {
-      this.quedia.push({ dia: "martes" })
+      this.quedia.push({ dia: "martes" });
       this.martes = false;
     }
     if (this.miercoles.valueOf() == false) {
     } else if (this.miercoles.valueOf() == true) {
-      this.quedia.push({ dia: "miercoles" })
+      this.quedia.push({ dia: "miercoles" });
       this.miercoles = false;
     }
     if (this.jueves.valueOf() == false) {
     } else if (this.jueves.valueOf() == true) {
-      this.quedia.push({ dia: "jueves" })
+      this.quedia.push({ dia: "jueves" });
       this.jueves = false;
     }
     if (this.viernes.valueOf() == false) {
     } else if (this.viernes.valueOf() == true) {
-      this.quedia.push({ dia: "viernes" })
+      this.quedia.push({ dia: "viernes" });
       this.viernes = false;
     }
     if (this.sabado.valueOf() == false) {
     } else if (this.sabado.valueOf() == true) {
-      this.quedia.push({ dia: "sabado" })
+      this.quedia.push({ dia: "sabado" });
       this.sabado = false;
     }
   }
@@ -238,6 +238,7 @@ export class NuevaNotiComponent implements OnInit {
       form.append("periodicidad", this.periodicidad);
       form.append("fechaEnvio", this.ensayo);
       form.append("usuario", this.usuarioid.toString());
+      console.log("correo: ", this.enviarCorreo);
       this.authService.enviarCorreo(form).subscribe((res: any) => {
         if (res.a == "ok") {
           this.alerta("Correo enviado correctamente");
@@ -250,7 +251,7 @@ export class NuevaNotiComponent implements OnInit {
   }
 
   programado() {
-    console.log("programado")
+    console.log("programado");
     const hola = this.aux.filter((hola) => hola.checked === true);
     hola.forEach((m) => {
       m.asunto = this.envios.asunto;
@@ -263,18 +264,20 @@ export class NuevaNotiComponent implements OnInit {
         asunto: m.asunto,
         mensaje: m.mensaje,
         cantidadIndicadores: this.indicadoresFalta,
-        caducidadPeriodicidad:this.caducidad,
+        caducidadPeriodicidad: this.caducidad,
       });
-      console.log("cantidad de veces que entra")
+      console.log("cantidad de veces que entra");
     });
-   
-    this.authService.enviarProgramados(this.enviarCorreo).subscribe((res: any) => {
-      if (res.resul == "ok") {
-        this.alerta("Correo enviado correctamente");
-        this.router.navigate(["gestor-noti"]);
-      }
-      return res;
-    });
+
+    this.authService
+      .enviarProgramados(this.enviarCorreo)
+      .subscribe((res: any) => {
+        if (res.resul == "ok") {
+          this.alerta("Correo enviado correctamente");
+          this.router.navigate(["gestor-noti"]);
+        }
+        return res;
+      });
     console.log("array a enviar", this.enviarCorreo);
   }
 
@@ -291,7 +294,9 @@ export class NuevaNotiComponent implements OnInit {
       if (f1 < f) {
         this.alerta("La fecha digitada es anterior a hoy");
       } else if (f1 === f) {
-        this.alerta("La fecha digitada es hoy, selecciona enviar inmediatamente");
+        this.alerta(
+          "La fecha digitada es hoy, selecciona enviar inmediatamente"
+        );
       } else if (f1 > f) {
         console.log("Correo programado exitosamente");
         this.periodicidad = "0";
