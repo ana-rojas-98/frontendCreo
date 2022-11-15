@@ -580,7 +580,6 @@ export class CrearUsuarioComponent implements OnInit {
           this.changeSuccessMessage(3);
         } else {
           if (this.modificar == true) {
-
             this.authService
               .ModificarUsuario(this.NuevoUsuario)
               .subscribe((res: any) => {

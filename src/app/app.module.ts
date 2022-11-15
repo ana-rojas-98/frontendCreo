@@ -51,8 +51,8 @@ import { GestorNotiComponent } from './Components/gestor-noti/gestor-noti.compon
 import { NuevaNotiComponent } from './Components/nueva-noti/nueva-noti.component';
 import { ArchivosAdjuntosComponent } from './Components/archivos-adjuntos/archivos-adjuntos.component';
 import { VerIndicadorComponent } from './Components/ver-indicador/ver-indicador.component';
-import { LicenciaComponent } from './components/licencia/licencia.component';
-import { VisorEventosComponent } from './components/visor-eventos/visor-eventos.component';
+import { LicenciaComponent } from './Components/licencia/licencia.component';
+import { VisorEventosComponent } from './Components/visor-eventos/visor-eventos.component';
 
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
@@ -149,7 +149,6 @@ import { VisorEventosComponent } from './components/visor-eventos/visor-eventos.
       { path: 'Archivos-Adjuntos/:id', component: ArchivosAdjuntosComponent, canActivate:[AuthGuard]},
       { path: 'licencia', component: LicenciaComponent, canActivate:[AuthGuard]},
       { path: 'visor-eventos', component: VisorEventosComponent, canActivate:[AuthGuard]},
-
     ])
   ],
   providers: [

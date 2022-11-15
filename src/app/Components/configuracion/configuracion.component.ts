@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./configuracion.component.scss']
 })
 export class ConfiguracionComponent implements OnInit {
+  usarioLocalStote: any;
 
   constructor(private authService: AuthService, private sanitizer: DomSanitizer) { }
 
@@ -72,17 +73,20 @@ export class ConfiguracionComponent implements OnInit {
     enviarimg.append('inicio', this.configuracion.inicial);
     enviarimg.append('final', this.configuracion.final);
     enviarimg.append('logo', this.logo);
-    if (this.configuracion.nombreEmpresa == ""){
+    this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    let Usuarioid = this.usarioLocalStote.usuarioid
+    enviarimg.append("UsuarioID", Usuarioid);
+    if (this.configuracion.nombreEmpresa == "") {
       this.changeSuccessMessage(2);
-    }else if (this.configuracion.inicial == null){
+    } else if (this.configuracion.inicial == null) {
       this.changeSuccessMessage(3);
-    }else if (this.configuracion.final == null){
+    } else if (this.configuracion.final == null) {
       this.changeSuccessMessage(4);
     } else if (this.configuracion.inicial > this.configuracion.final) {
       this.changeSuccessMessage(1);
     } else {
       this.authService.setConfiguracion(enviarimg).subscribe((res: any) => {
-        if(res){
+        if (res) {
           this.alerta("Configuración cambiada")
           location.reload();
         }
@@ -100,12 +104,12 @@ export class ConfiguracionComponent implements OnInit {
       this.configuracion.final = res.añoFinal;
     });
 
-    this.authService.getImagen().subscribe((res) =>{
+    this.authService.getImagen().subscribe((res) => {
       let nombreArchivo = res.headers.get("content-disposition");
       let tipo: Blob = res.body as Blob;
       const b = URL.createObjectURL(tipo);
       const im = this.sanitizer.bypassSecurityTrustUrl(b);
-      this.logoEstatico=im;
+      this.logoEstatico = im;
     })
   }
 
