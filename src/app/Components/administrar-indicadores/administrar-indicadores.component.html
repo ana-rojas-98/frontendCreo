@@ -24,10 +24,7 @@
           type="selectbox" 
           [(ngModel)]="Categoria.categoria1"
           (change)="categoria()">
-          <option 
-            value="">
-            Seleccionar categoría
-          </option>
+          <option value="">Seleccionar categoría</option>
           <option 
             *ngFor="let resultadoCategoria of resultadosCategoria"
             [value]="resultadoCategoria.categoria1">
