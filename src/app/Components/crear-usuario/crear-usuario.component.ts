@@ -502,6 +502,9 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+    
     this.generarClave();
     let id = "";
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));

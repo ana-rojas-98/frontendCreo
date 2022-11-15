@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IndicadoresService } from 'src/app/services/indicadores.service';
 import { ReportesService } from 'src/app/services/reportes.service';
 import Swal from 'sweetalert2';
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: 'app-archivos-adjuntos',
@@ -12,7 +13,7 @@ import Swal from 'sweetalert2';
 export class ArchivosAdjuntosComponent implements OnInit {
   usarioLocalStote: any;
 
-  constructor(private route: ActivatedRoute, public router: Router, private indicadoresservice: IndicadoresService, private reportesService: ReportesService) { }
+  constructor(private authService: AuthService,private route: ActivatedRoute, public router: Router, private indicadoresservice: IndicadoresService, private reportesService: ReportesService) { }
 
   archivos: File = null;
   archivoCapturado: File;
@@ -34,6 +35,9 @@ export class ArchivosAdjuntosComponent implements OnInit {
 
 
   ngOnInit() {
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+
     this.id = parseInt(this.route.snapshot.paramMap.get("id"));
     this.Adjunto.idArchivo = this.id;
     this.getAdjuntos();

@@ -6,6 +6,7 @@ import { ReportesService } from "src/app/services/reportes.service";
 import Swal from "sweetalert2";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
+import { AuthService } from "src/app/services/auth.service";
 
 
 @Component({
@@ -14,7 +15,7 @@ import html2canvas from "html2canvas";
   styleUrls: ["./diligenciar-indicador.component.scss"],
 })
 export class DiligenciarIndicadorComponent implements OnInit {
-  constructor(private route: ActivatedRoute, public router: Router, private indicadoresservice: IndicadoresService, private reportesService: ReportesService,) { }
+  constructor(private authService: AuthService,private route: ActivatedRoute, public router: Router, private indicadoresservice: IndicadoresService, private reportesService: ReportesService,) { }
   id = 0;
   accionVerModificar = "";
   modificar = false;
@@ -59,6 +60,9 @@ export class DiligenciarIndicadorComponent implements OnInit {
   };
 
   ngOnInit() {
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+
     this.id = parseInt(this.route.snapshot.paramMap.get("id"));
     this.accionVerModificar = this.route.snapshot.paramMap.get("accion");
     if (this.accionVerModificar == "ver") {

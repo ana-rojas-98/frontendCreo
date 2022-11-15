@@ -18,6 +18,9 @@ export class ConfiguracionComponent implements OnInit {
   constructor(private authService: AuthService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+    
     this.getConfiguracion();
     this._success.subscribe((message) => (this.successMessage = message));
 

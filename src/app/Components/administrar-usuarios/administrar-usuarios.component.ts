@@ -51,6 +51,9 @@ export class AdministrarUsuariosComponent implements OnInit {
   typeuser = parseInt(this.usarioLocalStote.typeuser);
 
   ngOnInit() {
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+    
     if (this.usarioLocalStote.typeuser == "3") {
       this.router.navigate(["private"]);
       return true;

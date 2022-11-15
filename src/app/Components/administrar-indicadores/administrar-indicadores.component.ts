@@ -3,6 +3,7 @@ import { AuthService } from "src/app/services/auth.service";
 import { ReportesService } from "./../../services/reportes.service";
 import { FormControl } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-administrar-indicadores",
@@ -34,7 +35,7 @@ export class AdministrarIndicadoresComponent implements OnInit {
     subcategoria1: "",
     nombreSubcategoria: "",
   };
-  
+
   resultados = {};
   resultadosCategoria = {};
   resultadosSubCategoria = {};
@@ -44,8 +45,8 @@ export class AdministrarIndicadoresComponent implements OnInit {
   ver = false;
   editar = false;
   eliminar = false;
-  tablaIndicadores={};
-  resultado: any =[];
+  tablaIndicadores = {};
+  resultado: any = [];
 
   estandar() {
     this.estandarFil = this.Estandar.estandar;
@@ -58,10 +59,13 @@ export class AdministrarIndicadoresComponent implements OnInit {
     this.getSubCategoria(this.categoriaFil);
   }
   ngOnInit() {
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+    
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
     if (usarioLocalStote.typeuser == "3") {
-      this.router.navigate(['private'])
+      this.router.navigate(["private"]);
       return true;
     }
     if (usarioLocalStote.indicadorCrear == true) {
@@ -79,7 +83,6 @@ export class AdministrarIndicadoresComponent implements OnInit {
     this.getStandares();
     this.administrarIndicadores();
   }
- 
 
   getStandares() {
     this.authService.getStandares(this.Estandar).subscribe((res: any) => {
@@ -90,23 +93,19 @@ export class AdministrarIndicadoresComponent implements OnInit {
   }
 
   getCategoria(estandar) {
-      this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
-        this.resultadosCategoria = res.filter(
-          (item) => item.nombreEstandar == estandar
-        );
-      });
-    
+    this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
+      this.resultadosCategoria = res.filter(
+        (item) => item.nombreEstandar == estandar
+      );
+    });
   }
 
   getSubCategoria(categoria) {
-      this.authService
-        .getSubCategoria("")
-        .subscribe((res: any) => {
-          this.resultadosSubCategoria = res.filter(
-            (item) => item.idCategoria == categoria
-          );
-        });
-    
+    this.authService.getSubCategoria("").subscribe((res: any) => {
+      this.resultadosSubCategoria = res.filter(
+        (item) => item.idCategoria == categoria
+      );
+    });
   }
 
   // getIndicadoresFilter() {
@@ -119,13 +118,41 @@ export class AdministrarIndicadoresComponent implements OnInit {
   //     });
   // }
 
-  administrarIndicadores(){
-    this.authService.tablaAdminIndicadores().subscribe((registro: any)=>{
-      this.tablaIndicadores = registro.map((item)=>{
-        console.log("resultado",item)
-        console.log("objeto",this.tablaIndicadores)
+  administrarIndicadores() {
+    this.authService.tablaAdminIndicadores().subscribe((registro: any) => {
+      this.tablaIndicadores = registro.map((item) => {
         return item;
       });
     });
+  }
+
+  Eliminar(id) {
+    let indicador: any = {
+      id: id,
+    };
+    this.authService.Eliminar(indicador).subscribe((res: any) => {
+      if (res.resul == "ok") {
+        this.alerta("Eliminado correctamente");
+        this.administrarIndicadores();
+      }
+      return res;
+    });
+  }
+
+  DuplicarIndicador(id) {
+    let indicar: any = {
+      id: id,
+    };
+    this.authService.DuplicarIndicador(indicar).subscribe((res: any) => {
+      if (res.resul == "ok") {
+        this.alerta("Eliminado correctamente");
+        this.administrarIndicadores();
+      }
+      return res;
+    });
+  }
+
+  alerta(mensaje: any) {
+    Swal.fire(mensaje);
   }
 }

@@ -79,6 +79,8 @@ export class AsignarIndicadorComponent implements OnInit {
  
 
   ngOnInit() {
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
     
     this.getUsuarioId();
     this.getStandares();

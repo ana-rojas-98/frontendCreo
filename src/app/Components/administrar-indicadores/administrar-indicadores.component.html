@@ -148,10 +148,10 @@
                  />
             </td>
             <td *ngIf="eliminar">
-              <img src="../../../assets/imagenes/eliminar.png" alt="eliminar-icono" />
+              <img (click)="Eliminar(item.idArchivo)" src="../../../assets/imagenes/eliminar.png" alt="eliminar-icono" />
             </td>
             <td>
-              <img src="../../../assets/imagenes/duplicar.png" alt="duplicar-icono" />
+              <img (click)="DuplicarIndicador(item.idArchivo)" src="../../../assets/imagenes/duplicar.png" alt="duplicar-icono" />
             </td>
             <td>
               <img src="../../../assets/imagenes/excel.png" alt="excel-icono" />

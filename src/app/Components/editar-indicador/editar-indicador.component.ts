@@ -40,6 +40,9 @@ export class EditarIndicadorComponent implements OnInit {
   };
 
   ngOnInit() {
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+
     this.id = parseInt(this.route.snapshot.paramMap.get("id"));
     this.accionEditar = this.route.snapshot.paramMap.get("accion");
     if (this.accionEditar == "editar") {
@@ -50,7 +53,6 @@ export class EditarIndicadorComponent implements OnInit {
     this.getStandares();
   }
   TraerFormato() {
-    console.log("Trae formato");
     this.authService.EditarIndicador().subscribe((respuesta: any) => {
       this.resultado = respuesta.map((item) => {
         if (this.idArchivo.idArchivo == item.idArchivo) {
@@ -58,7 +60,6 @@ export class EditarIndicadorComponent implements OnInit {
           this.datos.Estandar = item.nombreEstandar;
           this.datos.Categoria = item.nombreCategoria;
           this.datos.Subcategoria = item.nombreSubcategoria;
-          console.log("formato", this.resultadosTabla);
         }
         return item;
       });
@@ -91,35 +92,35 @@ export class EditarIndicadorComponent implements OnInit {
   }
   enviar: any = [];
   guardar() {
-    console.log("resulatado", this.resultadosTabla);
-    console.log("resulatado", this.datos.Estandar);
     this.resultadosTabla.map((item) => {
       this.enviar.push({
+        idFormato: item.idFormato,
         entrada: item.entrada,
         numerop: item.numerop,
         formulap: item.formulap,
         formula: item.formula,
         valor: item.valor,
         titulo: item.titulo,
-        tamanoTexto: item.tamanoTexto,
+        tamanoTexto: parseInt(item.tamanoTexto),
         color: item.color,
         negrilla: item.negrilla,
         subrayado: item.subrayado,
         cursiva: item.cursiva,
-        inicioCol: item.inicioCol,
-        finCol: item.finCol,
+        inicioCol: parseInt(item.inicioCol),
+        finCol: parseInt(item.finCol),
         saltoLinea: item.saltoLinea,
         html: item.html,
-        idArchivo: item.idArchivo,
+        idArchivo: parseInt(item.idArchivo),
         nombreEstandar: this.datos.Estandar,
         nombreCategoria: this.datos.Categoria,
         nombreSubcategoria: this.datos.Subcategoria,
       });
     });
-    console.log("enviar", this.enviar);
+
     this.authService.enviarIndicadorEsitado(this.enviar).subscribe((res) => {
       if (res) {
         this.alerta("Editado");
+        this.router.navigate(["administrar-indicadores"])
       }
       return res;
     });

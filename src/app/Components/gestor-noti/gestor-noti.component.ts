@@ -19,6 +19,9 @@ export class GestorNotiComponent implements OnInit {
     FechaEnvio:"",
   }
   ngOnInit() {
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+    
     this.traer();
   }
 

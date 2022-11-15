@@ -188,6 +188,9 @@ export class AsignarIndicadoresComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+    
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
     this.idUsuarioIndicador = parseInt(this.route.snapshot.paramMap.get("id"));
     this.indicadorEditarCrear = this.route.snapshot.paramMap.get("usuario");

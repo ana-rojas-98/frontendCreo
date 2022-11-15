@@ -14,6 +14,9 @@ export class FooterComponent implements OnInit {
     Licencia1: "",
   }
   ngOnInit() {
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+    
     this.GetLicencia();
   }
   GetLicencia() {

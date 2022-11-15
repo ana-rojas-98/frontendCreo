@@ -58,6 +58,9 @@ export class EliminarSubcategoriaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+    
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
     if (usarioLocalStote.typeuser == "3") {
       this.router.navigate(["private"]);

@@ -275,4 +275,13 @@ export class AuthService {
     return formato;
   }
 
+  Eliminar(id:any){
+    let formato = this.http.post(`${this.URL_SER}/api/FormatoIndicadors/EliminarIndicador`,id);
+    return formato;
+  }
+  DuplicarIndicador(id:any){
+    let formato = this.http.post(`${this.URL_SER}/api/FormatoIndicadors/DuplicarIndicar`,id);
+    return formato;
+  }
+
 }
