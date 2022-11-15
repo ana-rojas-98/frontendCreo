@@ -280,7 +280,7 @@ export class AuthService {
     return formato;
   }
   DuplicarIndicador(id:any){
-    let formato = this.http.post(`${this.URL_SER}/api/FormatoIndicadors/DuplicarIndicar`,id);
+    let formato = this.http.post(`${this.URL_SER}/api/FormatoIndicadors/DuplicarIndicador`,id);
     return formato;
   }
 
