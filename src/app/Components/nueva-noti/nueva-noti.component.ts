@@ -247,6 +247,7 @@ export class NuevaNotiComponent implements OnInit {
   }
 
   programado() {
+    console.log("programado")
     const hola = this.aux.filter((hola) => hola.checked === true);
     hola.forEach((m) => {
       m.asunto = this.envios.asunto;
@@ -258,12 +259,13 @@ export class NuevaNotiComponent implements OnInit {
         periodicidad: this.periodicidad,
         asunto: m.asunto,
         mensaje: m.mensaje,
-        indicadorFaltante: this.indicadoresFalta,
+        cantidadIndicadores: this.indicadoresFalta,
         caducidadPeriodicidad:this.caducidad,
       });
+      console.log("cantidad de veces que entra")
     });
    
-    this.authService.enviarProgramados(hola).subscribe((res: any) => {
+    this.authService.enviarProgramados(this.enviarCorreo).subscribe((res: any) => {
       if (res.resul == "ok") {
         this.alerta("Correo enviado correctamente");
         this.router.navigate(["gestor-noti"]);

@@ -46,8 +46,6 @@ export class EditarIndicadorComponent implements OnInit {
     this.idArchivo.idArchivo = this.id;
     this.TraerFormato();
     this.getStandares();
-    this.getCategoria(0);
-    this.getSubCategoria(0);
   }
   TraerFormato(){
     console.log("Trae formato");
@@ -58,13 +56,14 @@ export class EditarIndicadorComponent implements OnInit {
           this.datos.Estandar = item.nombreEstandar;
           this.datos.Categoria = item.nombreCategoria;
           this.datos.Subcategoria = item.nombreSubcategoria;
+          console.log("formato", this.resultadosTabla);
         }
         return item;
       });           
     });
   }
   getStandares() {
-    this.authService.getStandares("").subscribe((res: any) => {
+    this.authService.getStandares(this.datos.Estandar).subscribe((res: any) => {
       this.resultados = res.map((item) => {
         return item;
       });
@@ -72,44 +71,53 @@ export class EditarIndicadorComponent implements OnInit {
   }
 
   getCategoria(estandar) {
-    if (estandar == 0) {
-      this.authService.getCategoria("").subscribe((res: any) => {
-        this.resultadosCategoria = res.map((item) => {
-          return item;
-        });
-      });
-    } else {
-      this.authService.getCategoria("").subscribe((res: any) => {
-        this.resultadosCategoria = res.filter(
-          (item) => item.idEstandar == estandar
-        );
-      });
-    }
+    this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
+      this.resultadosCategoria = res.filter(
+        (item) => item.nombreEstandar == estandar
+      );
+    });
   }
 
   getSubCategoria(categoria) {
-    if (categoria == 0) {
       this.authService
-        .getSubCategoria("")
-        .subscribe((res: any) => {
-          this.resultadosSubCategoria = res.map((item) => {
-            return item;
-          });
-        });
-    } else {
-      this.authService
-        .getSubCategoria("")
+        .getSubCategoria(this.datos.Categoria)
         .subscribe((res: any) => {
           this.resultadosSubCategoria = res.filter(
-            (item) => item.idCategoria == categoria
+            (item) => item.nombreCategoria == categoria
           );
         });
-    }
   }
-
+enviar:any = [];
   guardar(){
     console.log("resulatado",this.resultadosTabla)
-    this.authService.enviarIndicadorEsitado(this.resultadosTabla).subscribe((res)=>{
+    console.log("resulatado",this.datos.Estandar)
+    this.resultadosTabla.map((item)=>{
+        this.enviar.push(
+          {
+            entrada: item.entrada,
+            numerop: item.numerop,
+            formulap: item.formulap,
+            formula: item.formula,
+            valor: item.valor,
+            titulo: item.titulo,
+            tamanoTexto: item.tamanoTexto,
+            color: item.color,
+            negrilla: item.negrilla,
+            subrayado: item.subrayado,
+            cursiva: item.cursiva,
+            inicioCol: item.inicioCol,
+            finCol: item.finCol,
+            saltoLinea: item.saltoLinea,
+            html:item.html,
+            idArchivo: item.idArchivo,
+            nombreEstandar :this.datos.Estandar,
+            nombreCategoria: this.datos.Categoria,
+            nombreSubcategoria: this.datos.Subcategoria,
+          }
+        ); 
+    });
+    console.log("enviar",this.enviar)
+    this.authService.enviarIndicadorEsitado(this.enviar).subscribe((res)=>{
       if(res){
         this.alerta("Editado")
       }

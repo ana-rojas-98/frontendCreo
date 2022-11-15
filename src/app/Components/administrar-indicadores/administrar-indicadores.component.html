@@ -18,10 +18,19 @@
       <div class="box">
         <h3>Categoría</h3>
         <br />
-        <select class="selector" name="categoria" type="selectbox" [(ngModel)]="Categoria.categoria1"
+        <select 
+          class="selector"
+          name="categoria" 
+          type="selectbox" 
+          [(ngModel)]="Categoria.categoria1"
           (change)="categoria()">
-          <option value="">Seleccionar categoría</option>
-          <option *ngFor="let resultadoCategoria of resultadosCategoria" [value]="resultadoCategoria.categoria1">
+          <option 
+            value="">
+            Seleccionar categoría
+          </option>
+          <option 
+            *ngFor="let resultadoCategoria of resultadosCategoria"
+            [value]="resultadoCategoria.categoria1">
             {{ resultadoCategoria.nombreCategoria }}
           </option>
         </select>
@@ -29,9 +38,18 @@
       <div class="box">
         <h3>Subcategoría</h3>
         <br />
-        <select class="selector" name="select" type="selectbox">
-          <option>Seleccionar subcategoría</option>
-          <option *ngFor="let item of resultadosSubCategoria" [value]="item.subcategoria1">
+        <select 
+          class="selector" 
+          name="select" 
+          type="selectbox"
+        >
+          <option>
+            Seleccionar subcategoría
+          </option>
+          <option 
+            *ngFor="let item of resultadosSubCategoria" 
+            [value]="item.subcategoria1"
+            >
             {{ item.nombreSubcategoria }}
           </option>
         </select>
