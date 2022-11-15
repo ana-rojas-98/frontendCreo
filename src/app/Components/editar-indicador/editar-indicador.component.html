@@ -25,16 +25,16 @@
             </div>
             <div class="box">
             <h3>Subcategoria</h3>
-            <select name="select"  [(ngModel)]="datos.SubCategoria">
+            <select name="select"  [(ngModel)]="datos.Subcategoria">
                 <option>{{datos.Subcategoria}}</option>
-                <option *ngFor="let item of resultadosSubCategoria">
+                <!-- <option *ngFor="let item of resultadosSubCategoria">
                     {{ item.nombreSubcategoria }}
-                </option>
+                </option> -->
             </select>
             </div>
         </div>
         <div class="tablero">
-            <table>
+            <table id="tabla">
                 <thead>
                     <tr>
                         <th>Entero</th>
@@ -72,6 +72,7 @@
                     </tr>
                 </tbody>
             </table>
+            <input type="button" (click)="insertarFila()">
         </div>
         <div class="botones">
             <button class="cancelar"
