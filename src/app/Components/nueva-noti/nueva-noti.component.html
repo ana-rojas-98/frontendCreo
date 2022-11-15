@@ -59,31 +59,31 @@
                         </div>
                         <div class="dias-semana" *ngIf="boxtres==true">
                         <label for="">
-                            <input type="checkbox" [(ngModel)]="lunes" (change)="diasElectos()">
                             Lunes
+                            <input type="checkbox" [(ngModel)]="lunes" (change)="diasElectos()">
                         </label>
                         <label for="">
-                            <input type="checkbox" [(ngModel)]="martes" (change)="diasElectos()">
                             Martes
+                            <input type="checkbox" [(ngModel)]="martes" (change)="diasElectos()">
                         </label>
                         <label for="">
-                            <input type="checkbox" [(ngModel)]="miercoles" (change)="diasElectos()">
                             Miercoles
+                            <input type="checkbox" [(ngModel)]="miercoles" (change)="diasElectos()">
                         </label>
                         <label for="">
-                            <input type="checkbox" [(ngModel)]="jueves" (change)="diasElectos()">
                             Jueves
+                            <input type="checkbox" [(ngModel)]="jueves" (change)="diasElectos()">
                         </label>
                         <label for="">
                             <input type="checkbox" [(ngModel)]="viernes" (change)="diasElectos()">
                             Viernes
                         </label>
                         <label for="">
-                            <input type="checkbox" [(ngModel)]="sabado" (change)="diasElectos()">
                             Sábado
+                            <input type="checkbox" [(ngModel)]="sabado" (change)="diasElectos()">
                         </label>
                         </div>
-                        <div class="dias">
+                        <div class="dias" *ngIf="diaas == true">
                         <label for="">
                             <input type="checkbox" (click)="boxtresDias()" [disabled]="dias">
                             Días

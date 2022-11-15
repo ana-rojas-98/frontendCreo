@@ -69,3 +69,9 @@
 .indicadores input{
     @include inputCard(50px, 30px);
 }
+
+.dias-semana{
+    label{
+        margin-left: 20px;
+    }
+}

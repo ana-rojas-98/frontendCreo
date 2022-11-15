@@ -266,7 +266,7 @@ export class AuthService {
   }
 
   enviarIndicadorEsitado(array:any){
-    let formato = this.http.post(`${this.URL_SER}/api/FormatoIndicadors/actualizarTabla`,array);
+    let formato = this.http.post(`${this.URL_SER}/api/Notificaciones/actualizarTabla`,array);
     return formato;
   }
 
@@ -275,12 +275,12 @@ export class AuthService {
     return formato;
   }
 
-  Eliminar(id:any){
-    let formato = this.http.post(`${this.URL_SER}/api/FormatoIndicadors/EliminarIndicador`,id);
+  Eliminar(id){
+    let formato = this.http.post(`${this.URL_SER}/api/Notificaciones/EliminarIndicador`,id);
     return formato;
   }
-  DuplicarIndicador(id:any){
-    let formato = this.http.post(`${this.URL_SER}/api/FormatoIndicadors/DuplicarIndicar`,id);
+  DuplicarIndicador(id){
+    let formato = this.http.post(`${this.URL_SER}/api/Notificaciones/DuplicarIndicador`,id);
     return formato;
   }
 
