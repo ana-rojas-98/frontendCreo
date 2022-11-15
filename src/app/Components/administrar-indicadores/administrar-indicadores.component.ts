@@ -149,11 +149,7 @@ export class AdministrarIndicadoresComponent implements OnInit {
     this.indicador.id = id2;
     this.authService.DuplicarIndicador(this.indicador).subscribe((res: any) => {
       if (res.resul == "ok") {
-<<<<<<< HEAD
-        this.alerta("Duplicado");
-=======
         this.alerta("Duplicado correctamente");
->>>>>>> 45f786203ee560157e6a0ef3af8f26e5ee054c2c
         this.administrarIndicadores();
       }
       return res;

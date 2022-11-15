@@ -19,20 +19,7 @@ export class ReportesIndicadoresComponent implements OnInit {
   title = "angular-app";
   fileName = "Indicadores.xlsx";
 
-  downloadExcel() {
-    {
-      /* pass here the table id */
-      let element = document.getElementById("tableIndicadores");
-      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-
-      /* generate workbook and add the worksheet */
-      const wb: XLSX.WorkBook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-
-      /* save to file */
-      XLSX.writeFile(wb, this.fileName);
-    }
-  }
+ 
 
   Estandar = {
     estandar: "",
@@ -88,6 +75,21 @@ export class ReportesIndicadoresComponent implements OnInit {
       PDF.addImage(FILEURI, "PNG", 0, position, fileWidth, fileHeight);
       PDF.save("Indicadores.pdf");
     });
+  }
+
+   downloadExcel() {
+    {
+      /* pass here the table id */
+      let element = document.getElementById("tableIndicadores");
+      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+      /* generate workbook and add the worksheet */
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+      /* save to file */
+      XLSX.writeFile(wb, this.fileName);
+    }
   }
 
 
