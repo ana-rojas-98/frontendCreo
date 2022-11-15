@@ -19,6 +19,7 @@ export class SubcategoComponent implements OnInit {
     NombreSubcategoria: "",
     Subcategoria1: "",
     IdUsuario: this.Usuarioid,
+    IdEstandar: "",
   };
 
   Categoria = {
@@ -79,11 +80,15 @@ export class SubcategoComponent implements OnInit {
     this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
       this.resultados = res.filter(
         (item) => item.idEstandar == estandar
+        
       );
+      this.Subcategoria.IdEstandar = estandar;
     });
+    
   }
 
   SetSubCategoria() {
+    
     if (this.Estandar.estandar == '') {
       this.changeSuccessMessage(2);
     }
@@ -96,6 +101,7 @@ export class SubcategoComponent implements OnInit {
           this.changeSuccessMessage(4);
         }
         else {
+          console.log(this.Subcategoria);
           this.authService
             .crear_subcategoria(this.Subcategoria)
             .subscribe((res: any) => {

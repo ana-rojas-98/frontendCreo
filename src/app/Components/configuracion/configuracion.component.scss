@@ -18,14 +18,21 @@ h5{
 .logo-nombre{
     display: flex;
     flex-wrap: nowrap;
-    margin: 5%;
+    margin: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
+    
 }
 .logo{
     width: 100%;
+    align-items: center;
+    text-align: center;
 }
 .logo img{
     width: 207px;
     height: 110px;
+    text-align: center;
+    align-items: center;
 }
 .nombre{
     width: 100%;
@@ -40,9 +47,9 @@ h5{
 .tiempo{
     display: flex;
     flex-wrap: nowrap;
+    margin: 10px;
     margin-left: 5%;
     margin-right: 5%;
-    margin-top: 2%;
 }
 .inicio{
     width: 100%;
@@ -60,10 +67,14 @@ h5{
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-    margin: 5%;
+    margin: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
+    align-items: center;
+    text-align: center;
 }
 .guardar{
-    margin-left: 10%;
+    margin-left: 5%;
 }
 .cambiar-logo{
     display: flex;

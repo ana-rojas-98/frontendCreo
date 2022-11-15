@@ -97,7 +97,7 @@ export class ArchivosAdjuntosComponent implements OnInit {
   }
 
   EliminarArchivo(id) {
-    let a = confirm("¿Está seguro que desea borrar el archivo adjunto?")
+    let a = confirm("¿Está seguro que desea borrar el archivo adjunto?");
     if (a == true) {
       this.Adjunto2.idArchivo = id;
       this.indicadoresservice.EliminarArchivo(this.Adjunto2).subscribe((res: any) => {

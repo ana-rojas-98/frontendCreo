@@ -76,13 +76,12 @@ export class IndicadoresComponent implements OnInit {
 
   estandar() {
     this.getCategoriaFilter(this.Estandar.value);
-    this.getSubCategoriaFilter(this.Categoria.value);
+    this.getSubCategoriaFilter(this.Estandar.value,this.Categoria.value);
     if (this.Estandar.value != "") {
       this.getIndicadoresFilter();
     }
-    else {
-      this.categoria();
-      this.subcategoria();
+    else{
+      this.getCategoria();
     }
     if (this.Estandar.value == "" && this.Categoria.value == "" && this.Subcategoria.value == "") {
       this.getindIcadores();
@@ -93,12 +92,13 @@ export class IndicadoresComponent implements OnInit {
   }
 
   categoria() {
-    this.getSubCategoriaFilter(this.Categoria.value);
+    this.getSubCategoriaFilter(this.Estandar.value,this.Categoria.value);
     if (this.Categoria.value != "") {
       this.getIndicadoresFilter();
     }
     else {
-      this.subcategoria();
+      this.estandar();
+      this.getSubCategoria();
     }
     if (this.Estandar.value == "" && this.Categoria.value == "" && this.Subcategoria.value == "") {
       this.getindIcadores();
@@ -112,6 +112,9 @@ export class IndicadoresComponent implements OnInit {
     if (this.Subcategoria.value != "") {
       this.getIndicadoresFilter();
     }
+    else {
+      this.categoria();
+    }
     if (this.Estandar.value == "" && this.Categoria.value == "" && this.Subcategoria.value == "") {
       this.getindIcadores();
       this.getCategoria();
@@ -123,16 +126,14 @@ export class IndicadoresComponent implements OnInit {
   getCategoriaFilter(estandar) {
     this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
       this.resultadosCategoria = res.filter(
-        (item) => item.idEstandar == estandar
+        (item) => item.idEstandar == estandar 
       );
     });
   }
 
-  getSubCategoriaFilter(categoria) {
+  getSubCategoriaFilter(estandar,categoria) {
     this.authService.getSubCategoria(this.Subcategoria).subscribe((res: any) => {
-      this.resultadosSubCategoria = res.filter(
-        (item) => item.idCategoria == categoria
-      );
+      this.resultadosSubCategoria = res.filter((item) => item.idCategoria == categoria || item.idEstandar == estandar);
     });
   }
 
@@ -140,9 +141,13 @@ export class IndicadoresComponent implements OnInit {
     this.reportesService
       .ConsultarIndicadoresAsignados()
       .subscribe((res: any) => {
-        this.resultadosTabla = res.filter(
-          (item) => (item.idCategoria == this.Categoria.value || item.idEstandar == this.Estandar.value || item.idSubCategoria == this.Subcategoria.value)
-        );
+        if (this.Subcategoria.value != ""){
+        this.resultadosTabla = res.filter((item) => item.idSubCategoria == this.Subcategoria.value);
+
+        }
+        else {
+        this.resultadosTabla = res.filter((item) => (item.idCategoria == this.Categoria.value || item.idEstandar == this.Estandar.value || item.idSubCategoria == this.Subcategoria.value));         
+        }
       });
   }
 
