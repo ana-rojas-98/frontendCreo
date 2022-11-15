@@ -15,7 +15,7 @@ export class AdministrarIndicadoresComponent implements OnInit {
     private authService: AuthService,
     public router: Router,
     private reportesService: ReportesService
-  ) {}
+  ) { }
 
   Estandar = {
     NombreEstandar: "",
@@ -29,6 +29,10 @@ export class AdministrarIndicadoresComponent implements OnInit {
   Categoria = {
     categoria1: "",
     NombreCategoria: "",
+  };
+
+  indicador = {
+    id: 0,
   };
 
   SubCategoria = {
@@ -59,8 +63,8 @@ export class AdministrarIndicadoresComponent implements OnInit {
     this.getSubCategoria(this.categoriaFil);
   }
   ngOnInit() {
-    this.authService.enviarCorreos().subscribe((res: any) => {});
-    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+    this.authService.enviarCorreos().subscribe((res: any) => { });
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
 
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
@@ -126,24 +130,24 @@ export class AdministrarIndicadoresComponent implements OnInit {
     });
   }
 
-  Eliminar(id) {
-    let indicador: any = {
-      id: id,
-    };
-    this.authService.Eliminar(indicador).subscribe((res: any) => {
-      if (res.resul == "ok") {
-        this.alerta("Eliminado correctamente");
-        this.administrarIndicadores();
-      }
-      return res;
-    });
+  Eliminar(id2) {
+    let a = confirm("¿Está seguro que desea borrar el indicador?");
+    if (a) {
+      this.indicador.id = id2;
+      this.authService.Eliminar(this.indicador).subscribe((res: any) => {
+        if (res.resul == "ok") {
+          this.alerta("Eliminado correctamente");
+          this.administrarIndicadores();
+        }
+        return res;
+      });
+    }
+
   }
 
-  DuplicarIndicador(id) {
-    let indicar: any = {
-      id: id,
-    };
-    this.authService.DuplicarIndicador(indicar).subscribe((res: any) => {
+  DuplicarIndicador(id2) {
+    this.indicador.id = id2;
+    this.authService.DuplicarIndicador(this.indicador).subscribe((res: any) => {
       if (res.resul == "ok") {
         this.alerta("Duplicado");
         this.administrarIndicadores();
