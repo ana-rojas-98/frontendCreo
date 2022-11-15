@@ -27,8 +27,12 @@ export class EstandaresComponent implements OnInit {
     }
   }
 
+  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+  Usuarioid = this.usarioLocalStote.usuarioid
+
   Estandar = {
     NombreEstandar: "",
+    IdUsuario: this.Usuarioid,
   };
   constructor(private authService: AuthService, private router: Router) { }
 

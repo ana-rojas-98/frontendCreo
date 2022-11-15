@@ -186,6 +186,7 @@ export class AuthService {
     );
     return resu;
   }
+  
   ModificarUsuario(id) {
     let resul = this.http.post(
       `${this.URL_SER}/api/Usuarios/ModificarUsuario`,
@@ -268,4 +269,10 @@ export class AuthService {
     let formato = this.http.post(`${this.URL_SER}/api/FormatoIndicadors/actualizarTabla`,array);
     return formato;
   }
+
+  CerrarSesion(array:any){
+    let formato = this.http.post(`${this.URL_SER}/api/Usuarios/CerrarSesion`,array);
+    return formato;
+  }
+
 }

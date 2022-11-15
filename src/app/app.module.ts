@@ -149,7 +149,6 @@ import { VisorEventosComponent } from './Components/visor-eventos/visor-eventos.
       { path: 'Archivos-Adjuntos/:id', component: ArchivosAdjuntosComponent, canActivate:[AuthGuard]},
       { path: 'licencia', component: LicenciaComponent, canActivate:[AuthGuard]},
       { path: 'visor-eventos', component: VisorEventosComponent, canActivate:[AuthGuard]},
-
     ])
   ],
   providers: [

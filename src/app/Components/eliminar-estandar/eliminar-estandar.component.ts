@@ -11,8 +11,14 @@ import Swal from "sweetalert2";
   styleUrls: ["./eliminar-estandar.component.scss"],
 })
 export class EliminarEstandarComponent implements OnInit {
+
+  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+  Usuarioid = this.usarioLocalStote.usuarioid
+
   Estandar = {
     IdEstandar: "",
+    IdUsuario: this.Usuarioid,
+    NombreCategoria: "",
   };
   constructor(private authService: AuthService, private router: Router) { }
 

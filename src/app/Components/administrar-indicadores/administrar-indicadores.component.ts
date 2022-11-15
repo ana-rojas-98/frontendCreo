@@ -16,11 +16,24 @@ export class AdministrarIndicadoresComponent implements OnInit {
     private reportesService: ReportesService
   ) {}
 
+  Estandar = {
+    NombreEstandar: "",
+    estandar: "",
+  };
 
-  Estandar = new FormControl("");
-  Categoria = new FormControl("");
-  Subcategoria = new FormControl("");
-  Periodicidad = new FormControl("");
+  estandarId = {
+    id: "",
+  };
+
+  Categoria = {
+    categoria1: "",
+    NombreCategoria: "",
+  };
+
+  SubCategoria = {
+    subcategoria1: "",
+    nombreSubcategoria: "",
+  };
   
   resultados = {};
   resultadosCategoria = {};
@@ -35,16 +48,15 @@ export class AdministrarIndicadoresComponent implements OnInit {
   resultado: any =[];
 
   estandar() {
-    this.estandarFil = this.Estandar.value;
+    this.estandarFil = this.Estandar.estandar;
     this.getCategoria(this.estandarFil);
-    this.getSubCategoria(-1);
+    this.getSubCategoria(0);
   }
 
   categoria() {
-    this.categoriaFil = this.Categoria.value;
+    this.categoriaFil = this.Categoria.categoria1;
     this.getSubCategoria(this.categoriaFil);
   }
-
   ngOnInit() {
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
@@ -65,14 +77,12 @@ export class AdministrarIndicadoresComponent implements OnInit {
       this.eliminar = true;
     }
     this.getStandares();
-    this.getCategoria(0);
-    this.getSubCategoria(0);
     this.administrarIndicadores();
   }
  
 
   getStandares() {
-    this.authService.getStandares("").subscribe((res: any) => {
+    this.authService.getStandares(this.Estandar).subscribe((res: any) => {
       this.resultados = res.map((item) => {
         return item;
       });
@@ -80,31 +90,15 @@ export class AdministrarIndicadoresComponent implements OnInit {
   }
 
   getCategoria(estandar) {
-    if (estandar == 0) {
-      this.authService.getCategoria("").subscribe((res: any) => {
-        this.resultadosCategoria = res.map((item) => {
-          return item;
-        });
-      });
-    } else {
-      this.authService.getCategoria("").subscribe((res: any) => {
+      this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
         this.resultadosCategoria = res.filter(
-          (item) => item.idEstandar == estandar
+          (item) => item.nombreEstandar == estandar
         );
       });
-    }
+    
   }
 
   getSubCategoria(categoria) {
-    if (categoria == 0) {
-      this.authService
-        .getSubCategoria("")
-        .subscribe((res: any) => {
-          this.resultadosSubCategoria = res.map((item) => {
-            return item;
-          });
-        });
-    } else {
       this.authService
         .getSubCategoria("")
         .subscribe((res: any) => {
@@ -112,18 +106,18 @@ export class AdministrarIndicadoresComponent implements OnInit {
             (item) => item.idCategoria == categoria
           );
         });
-    }
+    
   }
 
-  getIndicadoresFilter() {
-    this.reportesService
-      .ConsultarIndicadoresAsignados()
-      .subscribe((res: any) => {
-        this.resultado = res.filter(
-          (item) => (item.idCategoria == this.Categoria.value || item.idEstandar == this.Estandar.value || item.idSubCategoria == this.Subcategoria.value)
-        );
-      });
-  }
+  // getIndicadoresFilter() {
+  //   this.reportesService
+  //     .ConsultarIndicadoresAsignados()
+  //     .subscribe((res: any) => {
+  //       this.resultado = res.filter(
+  //         (item) => (item.idCategoria == this.Categoria.value || item.idEstandar == this.Estandar.value || item.idSubCategoria == this.Subcategoria.value)
+  //       );
+  //     });
+  // }
 
   administrarIndicadores(){
     this.authService.tablaAdminIndicadores().subscribe((registro: any)=>{

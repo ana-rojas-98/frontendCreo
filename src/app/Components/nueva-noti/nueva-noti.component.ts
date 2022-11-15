@@ -13,7 +13,7 @@ export class NuevaNotiComponent implements OnInit {
     private authService: AuthService,
     public router: Router,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   usuarios = {
     tipoUsuario: "",
@@ -55,9 +55,9 @@ export class NuevaNotiComponent implements OnInit {
   estadoDias = false;
   todo = false;
   periodicidad: string;
-  indicadoresFalta=0;
+  indicadoresFalta = 0;
   fechaCaducidad: Date;
-  caducidad:string;
+  caducidad: string;
   quedia: any = [];
   fechaEspera: Date;
   fecha = new Date();
@@ -69,6 +69,7 @@ export class NuevaNotiComponent implements OnInit {
   fechaConvertida: string;
   usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
   usuarioid = parseInt(this.usarioLocalStote.usuarioid);
+  
   ngOnInit() {
     this.getUsuarios();
     this.elegitTodos();
@@ -162,6 +163,7 @@ export class NuevaNotiComponent implements OnInit {
       this.cantidadIndicadores = true;
     }
   }
+
   casillaBoxTres() {
     if (this.boxtres !== this.semana) {
       this.dias = false;
@@ -171,40 +173,41 @@ export class NuevaNotiComponent implements OnInit {
       this.boxtres = true;
     }
   }
+
   diasElectos() {
-    
-     if(this.lunes.valueOf()==false){
-      this.quedia.slice({"lunes":this.lunes})
-     }else if(this.lunes.valueOf()==true){
-        this.quedia.push({dia:"lunes"})
-        this.lunes=false;
-     }
-     if(this.martes.valueOf()==false){
-     }else if(this.martes.valueOf()==true){
-        this.quedia.push({dia:"martes"})
-        this.martes=false;
-     }
-     if(this.miercoles.valueOf()==false){
-     }else if(this.miercoles.valueOf()==true){
-        this.quedia.push({dia:"miercoles"})
-        this.miercoles=false;
-     }
-     if(this.jueves.valueOf()==false){
-     }else if(this.jueves.valueOf()==true){
-        this.quedia.push({dia:"jueves"})
-        this.jueves=false;
-     }
-     if(this.viernes.valueOf()==false){
-     }else if(this.viernes.valueOf()==true){
-        this.quedia.push({dia:"viernes"})
-        this.viernes=false;
-     }
-     if(this.sabado.valueOf()==false){
-     }else if(this.sabado.valueOf()==true){
-        this.quedia.push({dia:"sabado"})
-        this.sabado=false;
-     }
+    if (this.lunes.valueOf() == false) {
+      this.quedia.slice({ "lunes": this.lunes })
+    } else if (this.lunes.valueOf() == true) {
+      this.quedia.push({ dia: "lunes" })
+      this.lunes = false;
+    }
+    if (this.martes.valueOf() == false) {
+    } else if (this.martes.valueOf() == true) {
+      this.quedia.push({ dia: "martes" })
+      this.martes = false;
+    }
+    if (this.miercoles.valueOf() == false) {
+    } else if (this.miercoles.valueOf() == true) {
+      this.quedia.push({ dia: "miercoles" })
+      this.miercoles = false;
+    }
+    if (this.jueves.valueOf() == false) {
+    } else if (this.jueves.valueOf() == true) {
+      this.quedia.push({ dia: "jueves" })
+      this.jueves = false;
+    }
+    if (this.viernes.valueOf() == false) {
+    } else if (this.viernes.valueOf() == true) {
+      this.quedia.push({ dia: "viernes" })
+      this.viernes = false;
+    }
+    if (this.sabado.valueOf() == false) {
+    } else if (this.sabado.valueOf() == true) {
+      this.quedia.push({ dia: "sabado" })
+      this.sabado = false;
+    }
   }
+
   boxtresDias() {
     if (this.boxtresI !== this.dias) {
       this.semana = false;
@@ -247,6 +250,7 @@ export class NuevaNotiComponent implements OnInit {
   }
 
   programado() {
+    console.log("programado")
     const hola = this.aux.filter((hola) => hola.checked === true);
     hola.forEach((m) => {
       m.asunto = this.envios.asunto;
@@ -258,9 +262,10 @@ export class NuevaNotiComponent implements OnInit {
         periodicidad: this.periodicidad,
         asunto: m.asunto,
         mensaje: m.mensaje,
-        indicadorFaltante: this.indicadoresFalta,
+        cantidadIndicadores: this.indicadoresFalta,
         caducidadPeriodicidad:this.caducidad,
       });
+      console.log("cantidad de veces que entra")
     });
    
     this.authService.enviarProgramados(this.enviarCorreo).subscribe((res: any) => {
@@ -294,30 +299,30 @@ export class NuevaNotiComponent implements OnInit {
         this.fechaConvertida = this.fechaEspera
           .toString()
           .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
-        this.indicadoresFalta=0;
+        this.indicadoresFalta = 0;
         this.programado();
       }
     }
     if (this.estadoiii === true) {
       console.log("enviar varias veces");
       this.caducidad = this.fechaCaducidad
-      .toString()
-      .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
-      this.indicadoresFalta=0;
-      this.fechaConvertida="0";
-      for (let i =0; i<this.quedia.length;i++ ){
-        var hola= this.quedia[i];
-        this.periodicidad=hola.dia;
+        .toString()
+        .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
+      this.indicadoresFalta = 0;
+      this.fechaConvertida = "0";
+      for (let i = 0; i < this.quedia.length; i++) {
+        var hola = this.quedia[i];
+        this.periodicidad = hola.dia;
         this.programado();
-      }      
+      }
     }
     if (this.estadoiv === true) {
       console.log("enviar cierta fecha");
       this.fechaConvertida = this.fechaEspera
-      .toString()
-      .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
+        .toString()
+        .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
       this.periodicidad = "0";
-      this.caducidad="0";
+      this.caducidad = "0";
       this.programado();
     }
   }
