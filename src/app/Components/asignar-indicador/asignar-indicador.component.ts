@@ -72,7 +72,6 @@ export class AsignarIndicadorComponent implements OnInit {
   getUsuarioId() {
     this.serviceAdministaraUsuario.UsuarioId.subscribe((Usuarioid) => {
       this.usuarioId = Usuarioid;
-      console.log("hola: ", this.usuarioId);
     });
   }
 
@@ -136,7 +135,6 @@ export class AsignarIndicadorComponent implements OnInit {
   GetIndicadoresPermisos() {
     this.IndicadoresService.GetIndicadoresPermisos("").subscribe((res: any) => {
       this.resultadosTabla = res;
-      console.log("indicadores: ", res);
       return res;
     });
   }

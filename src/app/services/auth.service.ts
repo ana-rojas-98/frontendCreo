@@ -18,9 +18,11 @@ export class AuthService {
     private jwtHelper: JwtHelperService,
     public router: Router
   ) {}
+
   signin(user: any) {
     return this.http.post(`${this.URL_SER}/api/Usuarios/Authenticate`, user);
   }
+
   isAuth(): boolean {
     const token = localStorage.getItem("token");
     if (
@@ -36,7 +38,6 @@ export class AuthService {
     const token = localStorage.getItem("token");
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
-
       Authorization: `Bearer ${token}`,
     });
     const requestOptions = { headers: headers };
@@ -70,82 +71,94 @@ export class AuthService {
   }
 
   getTipoUsuario(tipoUsuario: any) {
+    const headers = this.fnSetDefineTokenAuthorization();
     return this.http.get(
       `${this.URL_SER}/api/Usuarios/GeTipotUsuario`,
-      tipoUsuario
+      headers
     );
   }
 
   crear_estandar(estandar: any) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let result = this.http.post(
       `${this.URL_SER}/api/Estandares/PostEstandar`,
-      estandar
+      estandar,
+      headers
     );
     return result;
   }
 
   crear_categoria(categoria: any) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let result = this.http.post(
       `${this.URL_SER}/api/Categoria/PostCategoria`,
-      categoria
+      categoria,
+      headers
     );
     return result;
   }
 
   crear_subcategoria(subcategoria: any) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
       `${this.URL_SER}/api/Subcategoria/PostSubcategoria`,
-      subcategoria
+      subcategoria,
+      headers
     );
     return resul;
   }
 
   getStandares(estandar: any) {
-    let result = this.http.get(`${this.URL_SER}/api/Estandares`, estandar);
+    const headers = this.fnSetDefineTokenAuthorization();
+    let result = this.http.get(`${this.URL_SER}/api/Estandares`, headers);
     return result;
   }
 
   getCategoria(categorias: any) {
-    let result = this.http.get(`${this.URL_SER}/api/Categoria/`, categorias);
+    const headers = this.fnSetDefineTokenAuthorization();
+    let result = this.http.get(`${this.URL_SER}/api/Categoria/`, headers);
     return result;
   }
 
   getSubCategoria(subCategorias: any) {
-    let result = this.http.get(
-      `${this.URL_SER}/api/SubCategoria`,
-      subCategorias
-    );
+    const headers = this.fnSetDefineTokenAuthorization();
+    let result = this.http.get(`${this.URL_SER}/api/SubCategoria`, headers);
     return result;
   }
 
   deleteEstandar(estandar: any) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let result = this.http.post(
       `${this.URL_SER}/api/Estandares/DeleteEstandar`,
-      estandar
+      estandar,
+      headers
     );
     return result;
   }
 
   eliminarSubcategoria(subcategoria: any) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let result = this.http.post(
       `${this.URL_SER}/api/SubCategoria/DeleteSubcategoria`,
-      subcategoria
+      subcategoria,
+      headers
     );
     return result;
   }
 
   eliminarCategoria(categoria: any) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let result = this.http.post(
       `${this.URL_SER}/api/Categoria/DeleteCategoria`,
-      categoria
+      categoria,
+      headers
     );
     return result;
   }
 
   getUsuarios(usuario: any) {
     const headers = this.fnSetDefineTokenAuthorization();
-    let result = this.http.get(`${this.URL_SER}/api/Usuarios`,
-    headers);
+    let result = this.http.get(`${this.URL_SER}/api/Usuarios`, headers);
     return result;
   }
   CrearNuevoUsuario(usuario: any) {
@@ -153,15 +166,17 @@ export class AuthService {
     let resul = this.http.post(
       `${this.URL_SER}/api/Usuarios/PostNuevoUsuario`,
       usuario,
-      headers,
+      headers
     );
     return resul;
   }
 
   setIndicadorNuevo(nuevoIndicador: any) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let result = this.http.post(
       `${this.URL_SER}/api/FormatoIndicadors/indicadorIndividual`,
-      nuevoIndicador
+      nuevoIndicador,
+      headers
     );
     return result;
   }
@@ -175,25 +190,30 @@ export class AuthService {
   }
 
   getUsuarioModificar(id) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
       `${this.URL_SER}/api/Usuarios/GetUsuarioModificar`,
-      id
+      id,
+      headers
     );
     return resul;
   }
 
   descarga() {
+    const headers = this.fnSetDefineTokenAuthorization();
     let resu = this.http.get(
       `${this.URL_SER}/api/FormatoIndicadors/descargarArchivo`,
-      { observe: "response", responseType: "blob" }
+      { observe: "response", responseType: "blob"}
     );
     return resu;
   }
 
   ModificarUsuario(id) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
       `${this.URL_SER}/api/Usuarios/ModificarUsuario`,
-      id
+      id,
+      headers
     );
     return resul;
   }
@@ -202,23 +222,27 @@ export class AuthService {
     let usuarioid = {
       usuarioid: id,
     };
+    const headers = this.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
       `${this.URL_SER}/api/Usuarios/EliminarUsuario`,
-      usuarioid
+      usuarioid,
+      headers
     );
     return resul;
   }
 
   setConfiguracion(confi: any) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let res = this.http.post(
       `${this.URL_SER}/api/Configuracions/guardarConfiguracion`,
-      confi
+      confi, headers
     );
     return res;
   }
 
   traerDatosConf(config: any) {
-    let resultado = this.http.get(`${this.URL_SER}/api/configuracions`, config);
+    const headers = this.fnSetDefineTokenAuthorization();
+    let resultado = this.http.get(`${this.URL_SER}/api/configuracions`, headers);
     return resultado;
   }
 
@@ -231,80 +255,91 @@ export class AuthService {
   }
 
   enviarCorreo(correo: any) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
       `${this.URL_SER}/api/Notificaciones/enviarNotificacion`,
-      correo
+      correo, headers
     );
     return resul;
   }
 
   getNotificacion(notificacion: any) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let resultado = this.http.get(
       `${this.URL_SER}/api/Notificaciones`,
-      notificacion
+      headers
     );
     return resultado;
   }
 
   tablaAdminIndicadores() {
-    let tabla = this.http.get(`${this.URL_SER}/api/archivos`);
+    const headers = this.fnSetDefineTokenAuthorization();
+    let tabla = this.http.get(`${this.URL_SER}/api/archivos`, headers);
     return tabla;
   }
 
   EditarIndicador() {
-    let formato = this.http.get(`${this.URL_SER}/api/FormatoIndicadors`);
+    const headers = this.fnSetDefineTokenAuthorization();
+    let formato = this.http.get(`${this.URL_SER}/api/FormatoIndicadors`, headers);
     return formato;
   }
 
   enviarProgramados(programados) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let resultado = this.http.post(
       `${this.URL_SER}/api/CorreosProgramados`,
-      programados
+      programados, headers
     );
     return resultado;
   }
 
   enviarCorreos() {
+    const headers = this.fnSetDefineTokenAuthorization();
     let resultado = this.http.get(
-      `${this.URL_SER}/api/CorreosProgramados/PutCorreoProgramado`
+      `${this.URL_SER}/api/CorreosProgramados/PutCorreoProgramado`, headers
     );
     return resultado;
   }
 
   enviarCorreosIndicadores() {
+    const headers = this.fnSetDefineTokenAuthorization();
     let resultado = this.http.get(
-      `${this.URL_SER}/api/CorreosProgramados/CorreoIndicadoresFaltantes`
+      `${this.URL_SER}/api/CorreosProgramados/CorreoIndicadoresFaltantes`, headers
     );
     return resultado;
   }
 
   enviarIndicadorEsitado(array: any) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let formato = this.http.post(
       `${this.URL_SER}/api/Notificaciones/actualizarTabla`,
-      array
+      array, headers
     );
     return formato;
   }
 
   CerrarSesion(array: any) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let formato = this.http.post(
       `${this.URL_SER}/api/Usuarios/CerrarSesion`,
-      array
+      array, headers
     );
     return formato;
   }
 
   Eliminar(id) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let formato = this.http.post(
       `${this.URL_SER}/api/Notificaciones/EliminarIndicador`,
-      id
+      id, headers
     );
     return formato;
   }
   DuplicarIndicador(id) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let formato = this.http.post(
       `${this.URL_SER}/api/Notificaciones/DuplicarIndicador`,
-      id
+      id, headers
     );
     return formato;
   }

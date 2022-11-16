@@ -101,7 +101,6 @@ export class SubcategoComponent implements OnInit {
           this.changeSuccessMessage(4);
         }
         else {
-          console.log(this.Subcategoria);
           this.authService
             .crear_subcategoria(this.Subcategoria)
             .subscribe((res: any) => {

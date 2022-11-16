@@ -30,6 +30,8 @@ export class GestorNotiComponent implements OnInit {
       this.resultadosNotificaciones = res.map((item)=>{
         return item;
       });
+      this.resultadosNotificaciones = this.resultadosNotificaciones.sort();
+      this.resultadosNotificaciones = this.resultadosNotificaciones.reverse();
     })
   }
 

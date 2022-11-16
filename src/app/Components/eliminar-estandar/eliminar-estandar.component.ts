@@ -60,7 +60,6 @@ export class EliminarEstandarComponent implements OnInit {
     }
     else {
       this.authService.deleteEstandar(this.Estandar).subscribe((res: any) => {
-        console.log('Result', res);
         if (res.resul == "Estandar eliminado correctamente") {
           this.router.navigate(["administrar-indicadores"]);
           this.alerta(res.resul);

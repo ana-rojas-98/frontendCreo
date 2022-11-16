@@ -47,7 +47,7 @@ h1 {
 }
 
 .contenedorSelect {
-  @include grid(3, 2);
+  @include grid(3,1);
 }
 
 .selector {

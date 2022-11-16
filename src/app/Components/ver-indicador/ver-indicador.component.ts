@@ -43,7 +43,6 @@ export class VerIndicadorComponent implements OnInit {
   }
 
   TraerFormato(){
-    console.log("Trae formato");
     this.authService.EditarIndicador().subscribe((respuesta: any)=>{
       this.resultado = respuesta.map((item)=>{
         if(this.idArchivo.idArchivo == item.idArchivo){
@@ -61,7 +60,6 @@ export class VerIndicadorComponent implements OnInit {
   }
 
   vistaPrevia(){
-    console.log("se ejecuto");
   }
  
 }

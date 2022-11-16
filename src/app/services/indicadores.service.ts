@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { environment } from "src/environments/environment";
 import { Router, ActivatedRoute } from "@angular/router";
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: "root",
@@ -16,38 +17,44 @@ export class IndicadoresService {
   constructor(
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
-    public router: Router
+    public router: Router,
+    private authService: AuthService,
   ) {}
 
   GetIndicadoresPermisos(id) {
-    let resul = this.http.get(`${this.URL_SER}/api/indicadores`);
+    const headers = this.authService.fnSetDefineTokenAuthorization();
+    let resul = this.http.get(`${this.URL_SER}/api/indicadores`, headers);
     return resul;
   }
 
   CerarPermisosIndicador(permisos) {
+    const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
       `${this.URL_SER}/api/indicadores/RegistroIndicadores`,
-      permisos
+      permisos, headers
     );
     return resul;
   }
 
 
   ConsultarIndicadoresAsignados(permisos) {
+    const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
-      `${this.URL_SER}/api/indicadores/ConsultarUsuarios`,permisos
+      `${this.URL_SER}/api/indicadores/ConsultarUsuarios`,permisos, headers
     );
     return resul;
   }
 
   VerDiligenciarIndicador(idArchivo) {
+    const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
-      `${this.URL_SER}/api/indicadores/VerDiligenciarIndicador`,idArchivo
+      `${this.URL_SER}/api/indicadores/VerDiligenciarIndicador`,idArchivo, headers
     );
     return resul;
   }
 
   GuardarRespuestasIndicador(Respuestas) {
+    const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
       `${this.URL_SER}/api/indicadores/GuardarRespuestasIndicador`,Respuestas
     );
@@ -55,15 +62,17 @@ export class IndicadoresService {
   }
 
   FinalizarIndicador(Respuestas) {
+    const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
-      `${this.URL_SER}/api/indicadores/FinalizarInidicador`,Respuestas
+      `${this.URL_SER}/api/indicadores/FinalizarInidicador`,Respuestas, headers
     );
     return resul;
   }
 
   GuardarAdjunto(Respuestas: any) {
+    const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
-      `${this.URL_SER}/api/indicadores/GuardarAdjunto`,Respuestas
+      `${this.URL_SER}/api/indicadores/GuardarAdjunto`,Respuestas, headers
     );
     return resul;
   }
@@ -77,8 +86,9 @@ export class IndicadoresService {
   }
 
   ObtenerAdjuntos(id) {
+    const headers = this.authService.fnSetDefineTokenAuthorization();
     let result = this.http.post(
-      `${this.URL_SER}/api/indicadores/ObtenerAdjuntos`, id);
+      `${this.URL_SER}/api/indicadores/ObtenerAdjuntos`, id, headers);
     return result;
   }
 
@@ -91,8 +101,9 @@ export class IndicadoresService {
   }
 
   EliminarArchivo(id: any) {
+    const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
-      `${this.URL_SER}/api/indicadores/EliminarArchivo`,id
+      `${this.URL_SER}/api/indicadores/EliminarArchivo`,id, headers
     );
     return resul;
   }

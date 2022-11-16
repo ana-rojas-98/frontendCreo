@@ -157,22 +157,18 @@ export class ReportesNuevoTableroComponent implements OnInit {
   }
 
   updateIndicado(idIndicador, usar) {
-    console.log("usar", usar);
     if (usar == true) {
       this.indicadorUsar.push(idIndicador);
-      console.log("indicaod: ", this.indicadorUsar);
     }
 
     if (usar == false) {
       this.indicadorUsar = this.indicadorUsar.filter(
         (item) => item != idIndicador
       );
-      console.log("false: ", this.indicadorUsar);
     }
     //   this.Indicador.IdArchivo = idIndicador;
     //   this.Indicador.Usar = usar;
     //   this.reportesService.UpdateAchivos(this.Indicador).subscribe((res: any) => {
-    //     console.log(res);
     //     return res;
     //   });
 
