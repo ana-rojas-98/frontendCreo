@@ -9,6 +9,8 @@ export class ReportesTablerosComponent implements OnInit {
 
   constructor() { }
 
+  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+
   ngOnInit() {
   }
 

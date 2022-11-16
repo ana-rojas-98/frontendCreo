@@ -27,6 +27,9 @@ export class SidebarComponent implements OnInit {
   };
 
   ngOnInit() {
+    if (this.usarioLocalStote.usauarioid != 1) {
+      this.licenciar = false;
+    }
     if (
       this.usarioLocalStote.permisosCrear == false &&
       this.usarioLocalStote.permisosVer == false &&
@@ -34,6 +37,14 @@ export class SidebarComponent implements OnInit {
       this.usarioLocalStote.permisosEliminar == false
     ) {
       this.administrarUsuarios = false;
+    }
+    if (
+      this.usarioLocalStote.notificacionesCrear == false &&
+      this.usarioLocalStote.notificacionesVer == false &&
+      this.usarioLocalStote.notificacionesEditar == false &&
+      this.usarioLocalStote.notificacionesEliminar == false
+    ) {
+      this.notificaciones = false;
     }
     if (
       this.usarioLocalStote.indicadorCrear == false &&

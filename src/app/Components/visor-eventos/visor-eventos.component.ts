@@ -17,6 +17,7 @@ import { Router } from "@angular/router";
   styleUrls: ["./visor-eventos.component.scss"],
 })
 export class VisorEventosComponent implements OnInit {
+  [x: string]: any;
 
   fechaInicial = "2022-11-16";
   fechaFinal = "2022-11-16";
@@ -24,12 +25,13 @@ export class VisorEventosComponent implements OnInit {
   resultadosModuloss = [];
 
   constructor(private VisorEventosService: VisorEventosService,
-    private reportesService: ReportesService) { }
+    private reportesService: ReportesService, public router: Router) { }
 
   resultadosTabla = [];
   resultadosTabla2 = [];
   resultadosUsuario = [];
   resultadosModulos: any;
+  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
   resultadosModulo = {
     modulo: "",
@@ -44,6 +46,11 @@ export class VisorEventosComponent implements OnInit {
   ngOnInit() {
     this.fechaInicial = "2022-11-16";
     this.fechaFinal = "2022-11-16";
+
+    if (this.usarioLocalStote.configuracionEditar == false) {
+      this.router.navigate(["private"]);
+      return true;
+    }
 
     this.GetEventos();
     this.GetUsuarios(0);

@@ -25,6 +25,7 @@ export class ReportesNuevoTableroComponent implements OnInit {
   resultadosTabla: any = [];
   estado = [];
   indicadorUsar: any = [];
+  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
   Indicador = {
     IdArchivo: 0,

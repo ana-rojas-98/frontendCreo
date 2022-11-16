@@ -1,32 +1,41 @@
-import { animate } from '@angular/animations';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
-import { Subject } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
-import { LicenciaService } from 'src/app/services/licencia.service';
-import Swal from 'sweetalert2';
+import { animate } from "@angular/animations";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
+import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
+import { Subject } from "rxjs";
+import { AuthService } from "src/app/services/auth.service";
+import { LicenciaService } from "src/app/services/licencia.service";
+import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-licencia',
-  templateUrl: './licencia.component.html',
-  styleUrls: ['./licencia.component.scss']
+  selector: "app-licencia",
+  templateUrl: "./licencia.component.html",
+  styleUrls: ["./licencia.component.scss"],
 })
 export class LicenciaComponent implements OnInit {
   sanitizer: any;
 
-  constructor(private authService: AuthService, private licenciaService: LicenciaService) { }
+  constructor(
+    public router: Router,
+    private authService: AuthService,
+    private licenciaService: LicenciaService
+  ) {}
 
-  usarioLocalStote= {
+  usarioLocalStote: any = {
     usuarioid: 1,
   };
 
   Licencia = {
     Licencia1: "",
     idUsuario: 0,
-  }
+  };
 
   ngOnInit() {
     this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    //let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    if (this.usarioLocalStote.usauarioid != 1) {
+      this.router.navigate(["private"]);
+    }
     this.GetLicencia();
   }
   private _success = new Subject<string>();
@@ -52,11 +61,11 @@ export class LicenciaComponent implements OnInit {
     });
   }
 
-  
-
   public changeSuccessMessage(i: number) {
     if (i == 1) {
-      this._success.next("¡Error!, El año inicial debe ser mayor que el año final");
+      this._success.next(
+        "¡Error!, El año inicial debe ser mayor que el año final"
+      );
     }
     if (i == 2) {
       this._success.next("¡Error!, debe ingresar nombre empresa");
