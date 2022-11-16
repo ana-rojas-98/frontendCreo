@@ -164,7 +164,6 @@ export class NuevoIndicadorComponent implements OnInit {
     const archivoleido = new FileReader();
     const archi = this.archivoleer[0];
     archivoleido.readAsBinaryString(archi);
-    console.log("el archivo", archi);
     archivoleido.onload = (e) => {
       const workArchi = XSLX.read(archivoleido.result, { type: "binary" });
       const nombreHojas = workArchi.SheetNames;
@@ -172,7 +171,7 @@ export class NuevoIndicadorComponent implements OnInit {
         workArchi.Sheets[nombreHojas[0]]
       );
     };
-    console.log("el excelData", this.ExcelData);
+
   }
 
   NuevoIndicadorRegistro = {
@@ -194,11 +193,11 @@ export class NuevoIndicadorComponent implements OnInit {
 
   ShowData() {
     this.element = true;
-    console.log(this.element);
+
   }
   HiddenData() {
     this.element = false;
-    console.log(this.element);
+
   }
 
   nuevoIndicador = {
@@ -210,7 +209,7 @@ export class NuevoIndicadorComponent implements OnInit {
   };
 
   setNuevoIndicador() {
-    console.log(this.archivos);
+
     const formData = new FormData();
     if (this.archivos == null){
       this.changeSuccessMessage(5);

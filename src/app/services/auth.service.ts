@@ -19,9 +19,11 @@ export class AuthService {
     private jwtHelper: JwtHelperService,
     public router: Router
   ) {}
+
   signin(user: any) {
     return this.http.post(`${this.URL_SER}/api/Usuarios/Authenticate`, user);
   }
+
   isAuth(): boolean {
     const token = localStorage.getItem("token");
     if (
@@ -37,7 +39,6 @@ export class AuthService {
     const token = localStorage.getItem("token");
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
-
       Authorization: `Bearer ${token}`,
     });
     const requestOptions = { headers: headers };

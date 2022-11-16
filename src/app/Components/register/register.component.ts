@@ -22,9 +22,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
   Sing_up(){
-    console.log(this.user_reg);
-    this.authService.singup(this.user_reg).subscribe((res:any)=>{
-      console.log(res);      
+    this.authService.singup(this.user_reg).subscribe((res:any)=>{     
     })
   }
 

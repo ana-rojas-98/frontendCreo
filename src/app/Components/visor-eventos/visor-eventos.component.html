@@ -3,21 +3,17 @@
     <div class="cuerpo">
         <h1 class="titulo">Visor de eventos</h1>
         <div class="contenedorSelect">
-            <div class="box">
-                <p>Fecha inicial</p>
-                <select class="selector" (change)="getEstandarFilter()">
-                    <option value="">Seleccione estándar</option>
-                </select>
-            </div>
-            <div class="box">
-                <p>Fecha final</p>
-                <select class="selector" (change)="getEstandarFilter()">
-                    <option value="">Seleccione estándar</option>
-                </select>
+            <div class="row">
+                <div class="">
+                    <label for="">Fecha inicial: <input type="date" [(ngModel)]="fechaInicial" (change)="changeFecha()"></label>
+                </div>
+                <div class="">
+                    <label for="">Fecha final: <input type="date" [(ngModel)]="fechaFinal" (change)="changeFecha()"></label>
+                </div>
             </div>
             <div class="box">
                 <p>Usuario</p>
-                <select (change)="getUsuarioFilter()" [(ngModel)]="Usuario.usuario" class="selector">
+                <select (change)="usuarioFilter()" [(ngModel)]="Usuario.usuario" class="selector">
                     <option value="">Seleccione un usuario</option>
                     <option *ngFor="let item of resultadosUsuario" [value]="item.usuarioid">
                         {{ item.nombre }}
@@ -27,9 +23,9 @@
 
             <div class="box">
                 <p>Módulo</p>
-                <select [(ngModel)]="resultadosModulos1" (change)="getCategoriaFilter()" class="selector">
+                <select  (change)="moduloFilter()" [(ngModel)]="resultadosModulo.modulo" class="selector">
                     <option value="">Seleccione categoría</option>
-                    <option *ngFor="let item of resultadosModulos" [value]="resultadosModulos">
+                    <option *ngFor="let item of resultadosModulos" [value]="item">
                         {{ item }}
                     </option>
                 </select>
@@ -48,11 +44,11 @@
                             Usuario
                         </th>
                         <th>
-                            <img src="../../../assets/imagenes/indicadores.png" alt="icono-nombre" />
+                            <img src="../../../assets/imagenes/modulo.png" alt="icono-nombre" />
                             Módulo
                         </th>
                         <th>
-                            <img id="imgPorcentaje" src="../../../assets/imagenes/porcentaje.svg" alt="icono-nombre"
+                            <img id="imgPorcentaje" src="../../../assets/imagenes/accion.png" alt="icono-nombre"
                                 class="mx-1 mt-1" />
                             Acción
                         </th>

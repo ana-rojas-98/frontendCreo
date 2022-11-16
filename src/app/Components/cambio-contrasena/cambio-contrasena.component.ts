@@ -54,7 +54,6 @@ export class CambioContrasenaComponent implements OnInit {
         } else {
           this.changeSuccessMessage(3);
           this.router.navigate(['login']);
-          console.log("Cambio exitoso: ", res);
         }
       });
     } else {

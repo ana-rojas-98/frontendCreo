@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
     Usuarioid: 107,
   };
 
+  
   private _success = new Subject<string>();
 
   successMessage = '';
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
   getPermisos(id) {
     this.authService.getUsuarioModificar(id).subscribe((res: any) => {
       localStorage.setItem("usario", JSON.stringify(res));
-      console.log(res);
+      this.router.navigate(["private"]);
     });
   }
 
@@ -51,7 +52,6 @@ export class LoginComponent implements OnInit {
         this.id.Usuarioid = res.usuario.usuarioid;
         this.getPermisos(this.id);
         localStorage.setItem("token", res.payload);
-        this.router.navigate(["private"]);
         localStorage.setItem("idUsuario", res.usuario.usuarioid);
         this.id.Usuarioid = res.usuario.usuarioid;
         return res;
