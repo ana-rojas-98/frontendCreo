@@ -1,27 +1,30 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
-import { Subject } from 'rxjs';
-import { ReportesService } from 'src/app/services/reportes.service';
-import { VisorEventosService } from 'src/app/services/visor-eventos.service';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
+import { Subject } from "rxjs";
+import { ReportesService } from "src/app/services/reportes.service";
+import { VisorEventosService } from "src/app/services/visor-eventos.service";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import * as XLSX from "xlsx";
-import {FormGroup, FormControl} from '@angular/forms';
-import Swal from 'sweetalert2';
+import { FormGroup, FormControl } from "@angular/forms";
+import Swal from "sweetalert2";
+import { Router } from "@angular/router";
 
 const today = new Date();
 const month = today.getMonth();
 const year = today.getFullYear();
 
 @Component({
-  selector: 'app-visor-eventos',
-  templateUrl: './visor-eventos.component.html',
-  styleUrls: ['./visor-eventos.component.scss']
+  selector: "app-visor-eventos",
+  templateUrl: "./visor-eventos.component.html",
+  styleUrls: ["./visor-eventos.component.scss"],
 })
 export class VisorEventosComponent implements OnInit {
-
-  constructor(private VisorEventosService: VisorEventosService,
-    private reportesService: ReportesService) { }
+  constructor(
+    private VisorEventosService: VisorEventosService,
+    public router: Router,
+    private reportesService: ReportesService
+  ) {}
 
   resultadosTabla = [];
   resultadosUsuario = [];
@@ -34,6 +37,10 @@ export class VisorEventosComponent implements OnInit {
   };
 
   ngOnInit() {
+    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    if (usarioLocalStote.visorEventosVer != true) {
+      this.router.navigate(["private"])
+    }
     this.GetEventos();
     this.GetUsuarios(0);
   }
@@ -51,7 +58,7 @@ export class VisorEventosComponent implements OnInit {
     });
   }
 
-   downloadExcel() {
+  downloadExcel() {
     {
       /* pass here the table id */
       let element = document.getElementById("tableIndicadores");
@@ -66,7 +73,7 @@ export class VisorEventosComponent implements OnInit {
     }
   }
 
-  GetEventos(){
+  GetEventos() {
     this.VisorEventosService.GetEventos().subscribe((res: any) => {
       this.resultadosTabla = res.map((item) => {
         this.resultadosModulos.push(item.modulo);
@@ -86,5 +93,4 @@ export class VisorEventosComponent implements OnInit {
       });
     }
   }
-
 }

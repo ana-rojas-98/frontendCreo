@@ -53,7 +53,7 @@ export class AdministrarUsuariosComponent implements OnInit {
   ngOnInit() {
     this.authService.enviarCorreos().subscribe((res: any) => {});
     this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
-    
+
     if (this.usarioLocalStote.typeuser == "3") {
       this.router.navigate(["private"]);
       return true;
@@ -69,6 +69,16 @@ export class AdministrarUsuariosComponent implements OnInit {
     }
     if (this.usarioLocalStote.permisosCrear == false) {
       this.permisoCrear = false;
+    }
+
+    if (
+      this.usarioLocalStote.permisosCrear == false &&
+      this.usarioLocalStote.permisosVer == false &&
+      this.usarioLocalStote.permisosEditar == false &&
+      this.usarioLocalStote.permisosEliminar == false
+    ) {
+      this.router.navigate(["private"]);
+      return true;
     }
 
     this.getUsuariosApi();

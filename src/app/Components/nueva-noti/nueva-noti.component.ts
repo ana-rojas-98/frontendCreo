@@ -238,7 +238,6 @@ export class NuevaNotiComponent implements OnInit {
       form.append("periodicidad", this.periodicidad);
       form.append("fechaEnvio", this.ensayo);
       form.append("usuario", this.usuarioid.toString());
-      console.log("correo: ", this.enviarCorreo);
       this.authService.enviarCorreo(form).subscribe((res: any) => {
         if (res.a == "ok") {
           this.alerta("Correo enviado correctamente");

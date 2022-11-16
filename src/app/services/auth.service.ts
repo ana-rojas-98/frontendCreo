@@ -8,7 +8,6 @@ import { Router, ActivatedRoute } from "@angular/router";
   providedIn: "root",
 })
 export class AuthService {
-  
   data_headers_request: any = "";
 
   //https://localhost:5001
@@ -144,13 +143,17 @@ export class AuthService {
   }
 
   getUsuarios(usuario: any) {
-    let result = this.http.get(`${this.URL_SER}/api/Usuarios`, usuario);
+    const headers = this.fnSetDefineTokenAuthorization();
+    let result = this.http.get(`${this.URL_SER}/api/Usuarios`,
+    headers);
     return result;
   }
   CrearNuevoUsuario(usuario: any) {
+    const headers = this.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
       `${this.URL_SER}/api/Usuarios/PostNuevoUsuario`,
-      usuario
+      usuario,
+      headers,
     );
     return resul;
   }
@@ -186,7 +189,7 @@ export class AuthService {
     );
     return resu;
   }
-  
+
   ModificarUsuario(id) {
     let resul = this.http.post(
       `${this.URL_SER}/api/Usuarios/ModificarUsuario`,
@@ -206,23 +209,23 @@ export class AuthService {
     return resul;
   }
 
-
-  setConfiguracion(confi: any){
-    let res = this.http.post(`${this.URL_SER}/api/Configuracions/guardarConfiguracion`,
+  setConfiguracion(confi: any) {
+    let res = this.http.post(
+      `${this.URL_SER}/api/Configuracions/guardarConfiguracion`,
       confi
-      );
-      return res;
+    );
+    return res;
   }
 
-  traerDatosConf(config: any){
-    let resultado = this.http.get(`${this.URL_SER}/api/configuracions`,config);
+  traerDatosConf(config: any) {
+    let resultado = this.http.get(`${this.URL_SER}/api/configuracions`, config);
     return resultado;
   }
 
-
-  getImagen(){
-    let resultado = this.http.get(`${this.URL_SER}/api/configuracions/mostarImg`,
-    { observe: "response", responseType: "blob" }
+  getImagen() {
+    let resultado = this.http.get(
+      `${this.URL_SER}/api/configuracions/mostarImg`,
+      { observe: "response", responseType: "blob" }
     );
     return resultado;
   }
@@ -235,53 +238,74 @@ export class AuthService {
     return resul;
   }
 
-  getNotificacion(notificacion: any){
-    let resultado = this.http.get(`${this.URL_SER}/api/Notificaciones`,notificacion);
+  getNotificacion(notificacion: any) {
+    let resultado = this.http.get(
+      `${this.URL_SER}/api/Notificaciones`,
+      notificacion
+    );
     return resultado;
   }
 
-  tablaAdminIndicadores(){
+  tablaAdminIndicadores() {
     let tabla = this.http.get(`${this.URL_SER}/api/archivos`);
     return tabla;
   }
 
-  EditarIndicador(){
+  EditarIndicador() {
     let formato = this.http.get(`${this.URL_SER}/api/FormatoIndicadors`);
     return formato;
   }
 
-  enviarProgramados(programados){
-    let resultado = this.http.post(`${this.URL_SER}/api/CorreosProgramados`,programados);
+  enviarProgramados(programados) {
+    let resultado = this.http.post(
+      `${this.URL_SER}/api/CorreosProgramados`,
+      programados
+    );
     return resultado;
   }
 
-  enviarCorreos(){
-    let resultado = this.http.get(`${this.URL_SER}/api/CorreosProgramados/PutCorreoProgramado`);
+  enviarCorreos() {
+    let resultado = this.http.get(
+      `${this.URL_SER}/api/CorreosProgramados/PutCorreoProgramado`
+    );
     return resultado;
   }
 
-  enviarCorreosIndicadores(){
-    let resultado = this.http.get(`${this.URL_SER}/api/CorreosProgramados/CorreoIndicadoresFaltantes`);
+  enviarCorreosIndicadores() {
+    let resultado = this.http.get(
+      `${this.URL_SER}/api/CorreosProgramados/CorreoIndicadoresFaltantes`
+    );
     return resultado;
   }
 
-  enviarIndicadorEsitado(array:any){
-    let formato = this.http.post(`${this.URL_SER}/api/Notificaciones/actualizarTabla`,array);
+  enviarIndicadorEsitado(array: any) {
+    let formato = this.http.post(
+      `${this.URL_SER}/api/Notificaciones/actualizarTabla`,
+      array
+    );
     return formato;
   }
 
-  CerrarSesion(array:any){
-    let formato = this.http.post(`${this.URL_SER}/api/Usuarios/CerrarSesion`,array);
+  CerrarSesion(array: any) {
+    let formato = this.http.post(
+      `${this.URL_SER}/api/Usuarios/CerrarSesion`,
+      array
+    );
     return formato;
   }
 
-  Eliminar(id){
-    let formato = this.http.post(`${this.URL_SER}/api/Notificaciones/EliminarIndicador`,id);
+  Eliminar(id) {
+    let formato = this.http.post(
+      `${this.URL_SER}/api/Notificaciones/EliminarIndicador`,
+      id
+    );
     return formato;
   }
-  DuplicarIndicador(id){
-    let formato = this.http.post(`${this.URL_SER}/api/Notificaciones/DuplicarIndicador`,id);
+  DuplicarIndicador(id) {
+    let formato = this.http.post(
+      `${this.URL_SER}/api/Notificaciones/DuplicarIndicador`,
+      id
+    );
     return formato;
   }
-
 }
