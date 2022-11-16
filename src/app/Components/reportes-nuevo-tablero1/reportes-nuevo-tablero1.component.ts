@@ -40,7 +40,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
     this.ReportesService.reportesUsar.subscribe((res) => {
       this.indicadores = res;
     });
-    console.log("prueba : ", this.indicadores);
   }
 
   resultado = $("#selector1").change(function () {
@@ -77,7 +76,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
     this.idSelec++;
     selectList.id = this.idSelec.toString();
-    console.log("id selec: ", this.idSelec);
     selectList.className = "rounded";
     selectList.style.cssText = "width:22%; height:40px; grid-row: '" + this.fila++ + "'/ '" + this.fila++ + "'; grid-column: 1/5;";
 
@@ -114,10 +112,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
       //  let idEjemplo = document.getElementById("mySelect").value
 
-      //   console.log(idEjemplo)
     });
-
-    console.log("hola: ", this.fila);
   }
 
   CrearColumna(myParent) {
@@ -154,7 +149,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
   guardar() {
     let html = document.getElementById("contenedor").innerHTML;
-    console.log(html);
   }
 
   columnNames = ["Browser", "Percentage"];

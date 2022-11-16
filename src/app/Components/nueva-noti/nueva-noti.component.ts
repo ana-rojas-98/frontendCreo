@@ -238,7 +238,6 @@ export class NuevaNotiComponent implements OnInit {
       form.append("periodicidad", this.periodicidad);
       form.append("fechaEnvio", this.ensayo);
       form.append("usuario", this.usuarioid.toString());
-      console.log("correo: ", this.enviarCorreo);
       this.authService.enviarCorreo(form).subscribe((res: any) => {
         if (res.a == "ok") {
           this.alerta("Correo enviado correctamente");
@@ -251,7 +250,7 @@ export class NuevaNotiComponent implements OnInit {
   }
 
   programado() {
-    console.log("programado");
+
     const hola = this.aux.filter((hola) => hola.checked === true);
     hola.forEach((m) => {
       m.asunto = this.envios.asunto;
@@ -266,7 +265,7 @@ export class NuevaNotiComponent implements OnInit {
         cantidadIndicadores: this.indicadoresFalta,
         caducidadPeriodicidad: this.caducidad,
       });
-      console.log("cantidad de veces que entra");
+
     });
 
     this.authService
@@ -278,17 +277,17 @@ export class NuevaNotiComponent implements OnInit {
         }
         return res;
       });
-    console.log("array a enviar", this.enviarCorreo);
+
   }
 
   Guardar() {
     if (this.estadoi === true) {
-      console.log("enviar de inmediato");
+
       this.periodicidad = "0";
       this.enviar();
     }
     if (this.estadoii === true) {
-      console.log("enviar con fecha");
+
       var f1 = Date.parse(this.fechaEspera.toString());
       var f = Date.parse(this.completa);
       if (f1 < f) {
@@ -298,7 +297,7 @@ export class NuevaNotiComponent implements OnInit {
           "La fecha digitada es hoy, selecciona enviar inmediatamente"
         );
       } else if (f1 > f) {
-        console.log("Correo programado exitosamente");
+
         this.periodicidad = "0";
         this.caducidad = "0";
         this.fechaConvertida = this.fechaEspera
@@ -309,7 +308,7 @@ export class NuevaNotiComponent implements OnInit {
       }
     }
     if (this.estadoiii === true) {
-      console.log("enviar varias veces");
+
       this.caducidad = this.fechaCaducidad
         .toString()
         .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
@@ -322,7 +321,7 @@ export class NuevaNotiComponent implements OnInit {
       }
     }
     if (this.estadoiv === true) {
-      console.log("enviar cierta fecha");
+
       this.fechaConvertida = this.fechaEspera
         .toString()
         .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
@@ -338,7 +337,6 @@ export class NuevaNotiComponent implements OnInit {
     });
     // for (let index = 0; index < this.enviarCorreo.length; index++) {
     //   this.enviarCorreo.splice(this.enviarCorreo[index]);
-    //   console.log("eliminando")
     // }
   }
   alerta(mensaje: any) {

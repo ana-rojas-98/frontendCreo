@@ -117,8 +117,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
       this.prueba = "No se encuentra resultados";
     }
     document.getElementById('prueba').innerHTML = this.prueba;
-    console.log(this.prueba);
-    console.log('Respuestas', this.Respuestas);
+
     this.AsignarChange();
   }
 
@@ -246,7 +245,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
             let valor = 0;
             let operacion = item2.formula;
             //-------------------------------------------------------------------------------------------------------------
-            console.log(operacion);
+
             let band = 0;
             let carac = "";
             let array = [];
@@ -268,7 +267,6 @@ export class DiligenciarIndicadorComponent implements OnInit {
             }
             array.push(carac);
             //--------------------------------------------------------------------------------
-            console.log("Array: ", array);
             let bandera = 0;
             var var1;
             var var2;
@@ -315,12 +313,8 @@ export class DiligenciarIndicadorComponent implements OnInit {
                 else {
                   array2.push(var3.value);
                 }
-                console.log(array[i].toString());
-
-                console.log("Array2: ", array2);
               }
             }
-            console.log("Array2: ", array2);
             //-------------------------------------------------------------------------------------------------------------------------
             let bandera2 = 0;
             let array3 = [];
@@ -356,7 +350,6 @@ export class DiligenciarIndicadorComponent implements OnInit {
                 array3.push(array[i]);
               }
             }
-            console.log("Array3: ", array3);
             //---------------------------------------------------------------------------------------------------------
             var4 = document.getElementById((item2.idFila - 1).toString());
             var4.value = array3;

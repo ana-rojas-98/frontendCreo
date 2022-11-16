@@ -31,7 +31,6 @@ export class OlvideClaveComponent implements OnInit {
 
 
   validateEmail() {
-    console.log(this.email);
     this.authService.validar_correo(this.email).subscribe((res: any) => {
       if (res.resul == 'El correo no existe') {
         this.changeSuccessMessage();

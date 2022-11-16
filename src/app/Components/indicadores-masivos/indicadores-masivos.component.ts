@@ -76,25 +76,25 @@ export class IndicadoresMasivosComponent implements OnInit {
 
   periodicidad(Posicion) {
     this.Registros[Posicion][3] = this.Periodicidad.value;
-    console.log("Registros", this.Registros);
+
   }
 
   estandar(Posicion) {
     this.Registros[Posicion][0] = this.Estandar.value;
-    console.log("Registros", this.Registros);
+
     this.getCategoriaFilter(Posicion, this.Estandar.value);
     this.getSubCategoriaFilter(Posicion, this.Categoria.value);
   }
 
   categoria(Posicion) {
     this.Registros[Posicion][1] = this.Categoria.value;
-    console.log("Registros", this.Registros);
+
     this.getSubCategoriaFilter(Posicion, this.Categoria.value);
   }
 
   subcategoria(Posicion) {
     this.Registros[Posicion][2] = this.Subcategoria.value;
-    console.log("Registros", this.Registros);
+
   }
 
   ngOnInit() {

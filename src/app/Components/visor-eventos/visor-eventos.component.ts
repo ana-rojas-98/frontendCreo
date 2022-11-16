@@ -102,7 +102,7 @@ export class VisorEventosComponent implements OnInit {
 
   moduloFilter() {
     this.resultadosTabla = this.resultadosTabla2.filter(fecha => {
-      return (Date.parse(fecha.fecha) >= Date.parse(this.fechaInicial) && Date.parse(fecha.fecha) <= Date.parse(this.fechaFinal));
+      return (Date.parse(fecha.fecha2) >= Date.parse(this.fechaInicial) && Date.parse(fecha.fecha2) <= Date.parse(this.fechaFinal));
     });
     if (this.Usuario.usuario == "" && this.resultadosModulo.modulo == "") {
       this.changeFecha();
@@ -124,7 +124,7 @@ export class VisorEventosComponent implements OnInit {
 
   usuarioFilter() {
     this.resultadosTabla = this.resultadosTabla2.filter(fecha => {
-      return (Date.parse(fecha.fecha) >= Date.parse(this.fechaInicial) && Date.parse(fecha.fecha) <= Date.parse(this.fechaFinal));
+      return (Date.parse(fecha.fecha2) >= Date.parse(this.fechaInicial) && Date.parse(fecha.fecha2) <= Date.parse(this.fechaFinal));
     });
     if (this.Usuario.usuario == "" && this.resultadosModulo.modulo == "") {
       this.changeFecha();
@@ -149,7 +149,7 @@ export class VisorEventosComponent implements OnInit {
       this.fechaFinal = this.fechaInicial;
     }
     this.resultadosTabla = this.resultadosTabla2.filter(fecha => {
-      return (Date.parse(fecha.fecha) >= Date.parse(this.fechaInicial) && Date.parse(fecha.fecha) <= Date.parse(this.fechaFinal));
+      return (Date.parse(fecha.fecha2) >= Date.parse(this.fechaInicial) && Date.parse(fecha.fecha2) <= Date.parse(this.fechaFinal));
     });
     if (this.Usuario.usuario != "") {
       this.resultadosTabla = this.resultadosTabla.filter((item) => (item.modulo == this.resultadosModulo.modulo && item.idusuario == this.Usuario.usuario));
