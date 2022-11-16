@@ -1,100 +1,218 @@
 <div class="contenedor">
-    <app-sidebar></app-sidebar>
-    <div class="cuerpo">
-        <div class="title-body">
-            <h1>Editar indicador</h1>
-        </div>
-        <div class="seleccion">
-            <div class="box">
-            <h3>Estandar</h3>
-            <select class="selector" name="estandar" type="selectbox" [(ngModel)]="datos.Estandar" (change)="estandar()">
-                <option>{{datos.Estandar}}</option>
-                <option *ngFor="let resultado of resultados" [value]="datos.Estandar">
-                  {{ resultado.nombreEstandar }}
-                </option>
-              </select>
-            </div>
-            <div class="box">
-            <h3>Categoria</h3>
-            <select  name="categoria" type="selectbox" [(ngModel)]="datos.Categoria" (change)="categoria()">
-                <option>{{datos.Categoria}}</option>
-                <option *ngFor="let resultadoCategoria of resultadosCategoria" [value]="datos.Categoria">
-                    {{ resultadoCategoria.nombreCategoria }}
-                  </option>
-            </select>
-            </div>
-            <div class="box">
-            <h3>Subcategoria</h3>
-            <select name="select"  [(ngModel)]="datos.Subcategoria">
-                <option>{{datos.Subcategoria}}</option>
-                <!-- <option *ngFor="let item of resultadosSubCategoria">
+  <app-sidebar></app-sidebar>
+  <div class="cuerpo">
+    <div class="title-body">
+      <h1>Editar indicador</h1>
+    </div>
+    <div class="tiempo">
+      <div class="box mb-2 col-6">
+        <h3>Año</h3>
+        <select
+          class="selector mt-2"
+          type="select"
+          [(ngModel)]="Anio"
+          (change)="cambioAnio()"
+        >
+          <option value="" selected>Seleccione Año</option>
+          <option *ngFor="let resultado of uniqueYears" [value]="resultado">
+            {{ resultado }}
+          </option>
+        </select>
+      </div>
+      <div class="box mb-2 col-6">
+        <h3>Periodo</h3>
+        <select
+          class="selector mt-2"
+          name="periodo"
+          type="select"
+          [(ngModel)]="Periodo"
+          (change)="cambioPeriodo()"
+        >
+          <option value="">Seleccione Periodo</option>
+          <option *ngFor="let resultado of uniquePeriod" [value]="resultado">
+            {{ resultado }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="seleccion">
+      <div class="box">
+        <h3>Estandar</h3>
+        <select
+          class="selector"
+          name="estandar"
+          type="selectbox"
+          [(ngModel)]="datos.Estandar"
+          (change)="estandar()"
+        >
+          <option>{{ datos.Estandar }}</option>
+          <option *ngFor="let resultado of resultados" [value]="datos.Estandar">
+            {{ resultado.nombreEstandar }}
+          </option>
+        </select>
+      </div>
+      <div class="box">
+        <h3>Categoria</h3>
+        <select
+          name="categoria"
+          type="selectbox"
+          [(ngModel)]="datos.Categoria"
+          (change)="categoria()"
+        >
+          <option>{{ datos.Categoria }}</option>
+          <option
+            *ngFor="let resultadoCategoria of resultadosCategoria"
+            [value]="datos.Categoria"
+          >
+            {{ resultadoCategoria.nombreCategoria }}
+          </option>
+        </select>
+      </div>
+      <div class="box">
+        <h3>Subcategoria</h3>
+        <select name="select" [(ngModel)]="datos.Subcategoria">
+          <option>{{ datos.Subcategoria }}</option>
+          <!-- <option *ngFor="let item of resultadosSubCategoria">
                     {{ item.nombreSubcategoria }}
                 </option> -->
-            </select>
-            </div>
-        </div>
-        <div class="tiempo">
-            <h3>año</h3>
-            <select class="selector mt-2" type="select" [(ngModel)]="Anio" (change)="ChangeAnio()">
-                <option value="" selected>Seleccione Año</option>
-                <option *ngFor="let resultado of uniqueYears" [value]="resultado">{{ resultado }}
-                </option>
-              </select>
-              <h3>Periodo</h3>
-              <select class="selector mt-2" name="periodo" type="select" [(ngModel)]="Periodo" (change)="ChangePeriodo()">
-                <option value="">Seleccione Periodo</option>
-                <option *ngFor="let resultado of uniquePeriod" [value]="resultado">
-                  {{ resultado }}
-                </option>
-              </select>
-        </div>
-        <div class="tablero">
-            <table id="tabla">
-                <thead>
-                    <tr>
-                        <th>Entero</th>
-                        <th>Numero?</th>
-                        <th>Formula?</th>
-                        <th>Formula</th>
-                        <th>Valor</th>
-                        <th>T</th>
-                        <th>Ttexto</th>
-                        <th>C</th>
-                        <th>N</th>
-                        <th>S</th>
-                        <th>K</th>
-                        <th>InCol</th>
-                        <th>FiCol</th>
-                        <th>SLinea</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let linea of resultadosTabla">
-                        <td><input type="text" [(ngModel)]="linea.entrada" value="{{ linea.entrada }}"></td>
-                        <td><input type="text" [(ngModel)]="linea.numerop " value="{{ linea.numerop }}"></td>
-                        <td><input type="text" [(ngModel)]="linea.formulap" value=" {{ linea.formulap }}"></td>
-                        <td><input type="text" [(ngModel)]="linea.formula" value="{{ linea.formula }}"></td>
-                        <td><input type="text" [(ngModel)]="linea.valor" value="{{ linea.valor }}"></td>
-                        <td><input type="text" [(ngModel)]="linea.titulo" value="{{ linea.titulo}}"></td>
-                        <td><input type="text" [(ngModel)]="linea.tamanoTexto" value="{{ linea.tamanoTexto }}"></td>
-                        <td><input type="text" [(ngModel)]="linea.color" value="{{ linea.color }}"></td>
-                        <td><input type="text" [(ngModel)]="linea.negrilla" value="{{ linea.negrilla }}"></td>
-                        <td><input type="text" [(ngModel)]="linea.subrayado" value="{{ linea.subrayado }}"></td>
-                        <td><input type="text" [(ngModel)]="linea.cursiva" value="{{ linea.cursiva }}"></td>
-                        <td><input type="text" [(ngModel)]="linea.inicioCol " value="{{ linea.inicioCol }}"></td>
-                        <td><input type="text" [(ngModel)]="linea.finCol" value="{{ linea.finCol }}"></td>
-                        <td><input type="text" [(ngModel)]="linea.saltoLinea" value="{{ linea.saltoLinea }}"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <button (click)="insertarFila()">+</button>
-        </div>
-        <div class="botones">
-            <button class="cancelar"
-            [routerLink]="['/administrar-indicadores']"
-            [routerLinkActive]="['link-active']">Cancelar</button>
-            <button class="guardar" (click)="guardar()">Guardar</button>
-        </div>
+        </select>
+      </div>
     </div>
+    <div class="tablero">
+      <table id="tabla">
+        <thead>
+          <tr>
+            <th>Entero</th>
+            <th>Numero?</th>
+            <th>Formula?</th>
+            <th>Formula</th>
+            <th>Valor</th>
+            <th>T</th>
+            <th>Ttexto</th>
+            <th>C</th>
+            <th>N</th>
+            <th>S</th>
+            <th>K</th>
+            <th>InCol</th>
+            <th>FiCol</th>
+            <th>SLinea</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let linea of mostrar">
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="linea.entrada"
+                value="{{ linea.entrada }}"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="linea.numerop"
+                value="{{ linea.numerop }}"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="linea.formulap"
+                value=" {{ linea.formulap }}"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="linea.formula"
+                value="{{ linea.formula }}"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="linea.valor"
+                value="{{ linea.valor }}"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="linea.titulo"
+                value="{{ linea.titulo }}"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="linea.tamanoTexto"
+                value="{{ linea.tamanoTexto }}"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="linea.color"
+                value="{{ linea.color }}"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="linea.negrilla"
+                value="{{ linea.negrilla }}"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="linea.subrayado"
+                value="{{ linea.subrayado }}"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="linea.cursiva"
+                value="{{ linea.cursiva }}"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="linea.inicioCol"
+                value="{{ linea.inicioCol }}"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="linea.finCol"
+                value="{{ linea.finCol }}"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="linea.saltoLinea"
+                value="{{ linea.saltoLinea }}"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button (click)="insertarFila()">+</button>
+    </div>
+    <div class="botones">
+      <button
+        class="cancelar"
+        [routerLink]="['/administrar-indicadores']"
+        [routerLinkActive]="['link-active']"
+      >
+        Cancelar
+      </button>
+      <button class="guardar" (click)="guardar()">Guardar</button>
+    </div>
+  </div>
 </div>
 <app-footer></app-footer>

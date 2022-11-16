@@ -20,27 +20,38 @@ export class EditarIndicadorComponent implements OnInit {
   // Subcategoria = new FormControl("");
 
   id = 0;
-  accionEditar = "";
+
   editar = false;
-  resultadosTabla = [];
+
+  accionEditar = "";
+  Anio: "";
+  Periodo = "";
+  
+  mostrar:any=[];
   resultado: any = [];
+  enviar: any = [];
+  resultadosTabla = []; 
   resultadosHTML = [];
-  Respuestas = [];
-  prueba = "";
-  idArchivo = {
-    idArchivo: 1,
-  };
   resultados = [];
+  anioArray = [];
+  preciodicidadesArray = []; 
+  uniqueYears = [];
+  uniquePeriod = [];
+
   resultadosCategoria = {};
   resultadosSubCategoria = {};
+  idArchivo = {
+    idArchivo: 1,
+  };   
   datos = {
     Estandar: "",
     Categoria: "",
     Subcategoria: "",
-  };
+  }; 
 
-  anioArray = [];
-  preciodicidadesArray = [];
+  //variables de ensayo
+  ensayo: any = [];
+  posicion: any;
 
   ngOnInit() {
     this.authService.enviarCorreos().subscribe((res: any) => {});
@@ -55,11 +66,6 @@ export class EditarIndicadorComponent implements OnInit {
     this.TraerFormato();
     this.getStandares();
   }
-  uniqueYears = [];
-  uniquePeriod = [];
-  Anio: "";
-  Periodo = "";
-
 
   TraerFormato() {
     this.authService.EditarIndicador().subscribe((respuesta: any) => {
@@ -86,23 +92,31 @@ export class EditarIndicadorComponent implements OnInit {
   }
 
   cambioAnio(){
-    this.Respuestas = [];
+    if (this.Anio != '') {
+       if (this.Periodo != '') {
+        this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
+        this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
+       // this.mostrar=this.resultadosHTML;
+        // this.resultadosHTML.forEach(item => (
+        //   this.Respuestas.push(item.valor)
+        // ));
+      console.log("mostrar",this.mostrar)
+      console.log("añoDentro",this.resultadosHTML)
+      console.log("periodo",this.Periodo)
+       }
+    } 
+    //console.log("itemvalor",this.Respuestas)
+  }
+
+  cambioPeriodo(){
     if (this.Anio != '') {
       if (this.Periodo != '') {
         this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
         this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
-        let i = 2;
-        this.resultadosHTML.forEach(item => (
-          this.Respuestas.push(item.valor)
-        ));
-
+        console.log("periodo",this.Periodo)
+        this.mostrar=this.resultadosHTML;
       }
-      else {
-        this.prueba = "No se encuentra resultados";
-      }
-    } else {
-      this.prueba = "No se encuentra resultados";
-    }
+    } 
   }
 
   getStandares() {
@@ -130,14 +144,16 @@ export class EditarIndicadorComponent implements OnInit {
         );
       });
   }
-  ensayo: any = [];
-  posicion: any;
+
   insertarFila() {
     let fila: any;
     let i = 1;
     console.log("entra");
     fila = document.getElementById("tabla");
-    this.posicion = this.resultadosTabla.length++ + i;
+    //this.posicion = this.resultadosHTML[this.resultadosHTML.length+i];
+    this.posicion = this.resultadosHTML[this.resultadosHTML.length+i];
+    //this.posicion = this.resultadosHTML.length++ + i;
+   // this.posicion = this.resultadosTabla.length++ + i;
     var row = fila.insertRow(this.posicion);
     // console.log("fila", fila);
     // console.log("row", row);
@@ -159,26 +175,42 @@ export class EditarIndicadorComponent implements OnInit {
     let cel13 = row.insertCell(12);
     let cel14 = row.insertCell(13);
 
-    cel1.innerHTML = '<input id ="entrada">';
-    cel2.innerHTML = "<td></td>";
-    cel3.innerHTML = "<td></td>";
-    cel4.innerHTML = "<td></td>";
-    cel5.innerHTML = "<td></td>";
-    cel6.innerHTML = "<td></td>";
-    cel7.innerHTML = "<td></td>";
-    cel8.innerHTML = "<td></td>";
-    cel9.innerHTML = "<td></td>";
-    cel10.innerHTML = "<td></td>";
-    cel11.innerHTML = "<td></td>";
-    cel12.innerHTML = "<td></td>";
-    cel13.innerHTML = "<td></td>";
-    cel14.innerHTML = "<td></td>";
-    let e = <HTMLInputElement>document.getElementById("entrada");
-    let ens = e.value;
-    this.ensayo.push({ entrada: ens });
+    
+    cel1.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel2.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel3.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel4.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel5.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel6.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel7.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel8.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel9.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel10.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel11.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel12.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel13.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel14.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+
+
+    // cel1.innerHTML = '<input id ="entrada">';
+    // cel2.innerHTML = "<td></td>";
+    // cel3.innerHTML = "<td></td>";
+    // cel4.innerHTML = "<td></td>";
+    // cel5.innerHTML = "<td></td>";
+    // cel6.innerHTML = "<td></td>";
+    // cel7.innerHTML = "<td></td>";
+    // cel8.innerHTML = "<td></td>";
+    // cel9.innerHTML = "<td></td>";
+    // cel10.innerHTML = "<td></td>";
+    // cel11.innerHTML = "<td></td>";
+    // cel12.innerHTML = "<td></td>";
+    // cel13.innerHTML = "<td></td>";
+    // cel14.innerHTML = "<td></td>";
+    // let e = <HTMLInputElement>document.getElementById("entrada");
+    // let ens = e.value;
+    // this.ensayo.push({ entrada: ens });
   }
 
-  enviar: any = [];
   guardar() {
     console.log("nuevos", this.ensayo);
     this.resultadosTabla.map((item) => {
