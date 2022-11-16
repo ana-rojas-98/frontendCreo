@@ -12,6 +12,10 @@
         @include h1Body;
     }
 }
+.tiempo{
+    display:flex;
+    justify-content: center;
+}
 .formatos{
     border-bottom:1px gray solid;
     margin: 20px;
