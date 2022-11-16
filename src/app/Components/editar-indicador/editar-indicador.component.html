@@ -33,6 +33,21 @@
             </select>
             </div>
         </div>
+        <div class="tiempo">
+            <h3>año</h3>
+            <select class="selector mt-2" type="select" [(ngModel)]="Anio" (change)="ChangeAnio()">
+                <option value="" selected>Seleccione Año</option>
+                <option *ngFor="let resultado of uniqueYears" [value]="resultado">{{ resultado }}
+                </option>
+              </select>
+              <h3>Periodo</h3>
+              <select class="selector mt-2" name="periodo" type="select" [(ngModel)]="Periodo" (change)="ChangePeriodo()">
+                <option value="">Seleccione Periodo</option>
+                <option *ngFor="let resultado of uniquePeriod" [value]="resultado">
+                  {{ resultado }}
+                </option>
+              </select>
+        </div>
         <div class="tablero">
             <table id="tabla">
                 <thead>
@@ -72,7 +87,7 @@
                     </tr>
                 </tbody>
             </table>
-            <input type="button" (click)="insertarFila()">
+            <button (click)="insertarFila()">+</button>
         </div>
         <div class="botones">
             <button class="cancelar"
