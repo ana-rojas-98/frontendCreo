@@ -78,6 +78,7 @@ export class EditarIndicadorComponent implements OnInit {
           this.anioArray.push(item.anio);
           this.preciodicidadesArray.push(item.periodicidad);
         }
+        console.log("resouesta", respuesta)
         return item;
       });
       this.filtrar();

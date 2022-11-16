@@ -281,6 +281,7 @@ export class AuthService {
   EditarIndicador() {
     const headers = this.fnSetDefineTokenAuthorization();
     let formato = this.http.get(`${this.URL_SER}/api/FormatoIndicadors`, headers);
+    
     return formato;
   }
 
