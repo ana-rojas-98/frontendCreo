@@ -7,13 +7,14 @@ import { VisorEventosService } from 'src/app/services/visor-eventos.service';
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import * as XLSX from "xlsx";
-import {FormGroup, FormControl} from '@angular/forms';
-import Swal from 'sweetalert2';
+import { FormGroup, FormControl } from "@angular/forms";
+import Swal from "sweetalert2";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-visor-eventos',
-  templateUrl: './visor-eventos.component.html',
-  styleUrls: ['./visor-eventos.component.scss']
+  selector: "app-visor-eventos",
+  templateUrl: "./visor-eventos.component.html",
+  styleUrls: ["./visor-eventos.component.scss"],
 })
 export class VisorEventosComponent implements OnInit {
 
@@ -61,7 +62,7 @@ export class VisorEventosComponent implements OnInit {
     });
   }
 
-   downloadExcel() {
+  downloadExcel() {
     {
       /* pass here the table id */
       let element = document.getElementById("tableIndicadores");
@@ -76,7 +77,7 @@ export class VisorEventosComponent implements OnInit {
     }
   }
 
-  GetEventos(){
+  GetEventos() {
     this.VisorEventosService.GetEventos().subscribe((res: any) => {
       this.resultadosTabla = res.map((item) => {
         this.resultadosModuloss.push(item.modulo);

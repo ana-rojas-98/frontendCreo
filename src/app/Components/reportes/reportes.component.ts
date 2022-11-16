@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
 import { GoogleChartComponent } from "angular-google-charts";
 
 @Component({
@@ -7,7 +8,7 @@ import { GoogleChartComponent } from "angular-google-charts";
   styleUrls: ["./reportes.component.scss"],
 })
 export class ReportesComponent implements OnInit {
-  constructor() {}
+  constructor(public router: Router) {}
 
   columnNames = ["Browser", "Percentage"];
   title = "googlechart";
@@ -26,5 +27,16 @@ export class ReportesComponent implements OnInit {
   };
   width = 500;
   height = 300;
-  ngOnInit() {}
+  ngOnInit() {
+    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    if (
+      usarioLocalStote.reportesCrear == false &&
+      usarioLocalStote.reportesVer == false &&
+      usarioLocalStote.reportesEditar == false &&
+      usarioLocalStote.reportesEliminar == false
+    ) {
+      this.router.navigate(["private"]);
+      return true;
+    }
+  }
 }
