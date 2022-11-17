@@ -102,6 +102,8 @@
             <th>InCol</th>
             <th>FiCol</th>
             <th>SLinea</th>
+            <th>Ali</th>
+            <th>CFon</th>
           </tr>
         </thead>
         <tbody>
@@ -202,6 +204,20 @@
                 type="text"
                 [(ngModel)]="linea.saltoLinea"
                 value="{{ linea.saltoLinea }}"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="linea.alinear"
+                value="{{ linea.alinear }}"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="linea.colorFondo"
+                value="{{ linea.colorFondo}}"
               />
             </td>
           </tr>
