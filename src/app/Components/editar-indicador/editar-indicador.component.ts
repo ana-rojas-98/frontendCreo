@@ -300,7 +300,7 @@ export class EditarIndicadorComponent implements OnInit {
         anio: parseInt(item.anio),
         alinear: "center",
         colorFondo:"transparent",
-        usuarioId: this.usuarioid,
+        usuarioid: this.usuarioid,
         nombreEstandar: this.datos.Estandar,
         nombreCategoria: this.datos.Categoria,
         nombreSubcategoria: this.datos.Subcategoria,
