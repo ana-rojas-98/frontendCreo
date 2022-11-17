@@ -71,13 +71,4 @@ export class SidebarComponent implements OnInit {
       this.configuraciones = false;
     }
   }
-
-  CerrarSesion() {
-    this.authService.CerrarSesion(this.Usuario).subscribe((res: any) => {
-      this.authService.fnDestroySessionData(function (res_clean_session) {
-        if (res_clean_session) {
-        }
-      });
-    });
-  }
 }

@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 
 
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './Components/nav-menu/nav-menu.component';
 import { HomeComponent } from './Components/home/home.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
@@ -53,6 +52,10 @@ import { ArchivosAdjuntosComponent } from './Components/archivos-adjuntos/archiv
 import { VerIndicadorComponent } from './Components/ver-indicador/ver-indicador.component';
 import { LicenciaComponent } from './Components/licencia/licencia.component';
 import { VisorEventosComponent } from './Components/visor-eventos/visor-eventos.component';
+import { MiPerfilComponent } from './Components/mi-perfil/mi-perfil.component';
+import { CambiarContrasenaComponent } from './Components/cambiar-contrasena/cambiar-contrasena.component';
+import { NavMenuComponent } from './Components/nav-menu/nav-menu.component';
+import { NavMenu2Component } from './Components/nav-menu2/nav-menu2.component';
 
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
@@ -99,6 +102,9 @@ import { VisorEventosComponent } from './Components/visor-eventos/visor-eventos.
     VerIndicadorComponent,
     LicenciaComponent,
     VisorEventosComponent,
+    MiPerfilComponent,
+    CambiarContrasenaComponent,
+    NavMenu2Component,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -149,6 +155,8 @@ import { VisorEventosComponent } from './Components/visor-eventos/visor-eventos.
       { path: 'Archivos-Adjuntos/:id', component: ArchivosAdjuntosComponent, canActivate:[AuthGuard]},
       { path: 'licencia', component: LicenciaComponent, canActivate:[AuthGuard]},
       { path: 'visor-eventos', component: VisorEventosComponent, canActivate:[AuthGuard]},
+      { path: 'mi-perfil', component: MiPerfilComponent, canActivate:[AuthGuard]},
+      { path: 'cambiar-contrasena', component: CambiarContrasenaComponent, canActivate:[AuthGuard]},
     ])
   ],
   providers: [

@@ -1,14 +1,25 @@
 <header>
   <div class="container-fluid border">
     <div class="d-flex justify-content-between">
-      <div class="col-2 d-flex flex-row">
-        <img class="img-fluid float-left" src="../../../assets/imagenes/logo-creo.png" alt="Responsive image" width="231px">
+      <div class="col-2 flex-row">
+        <img class="img-fluid float-left" src="../../../assets/imagenes/logo-creo.png" alt="Responsive image"
+          width="231px">
       </div>
       <div class="col-8">
-
+        <div class="text-center nombre">
+          <div class="dropdown">
+            <span>Nombre y empresa</span>
+            <div class="dropdown-content">
+              <div><a type="button" [routerLink]="['/mi-perfil']" [routerLinkActive]="['link-active']">Mi perfil</a></div>
+              <div class="border"></div>
+              <div><a type="button" (click)="CerrarSesion()">Cerrar sesión</a></div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-2 d-flex flex-row-reverse m-2">
-        <img (click)="mostrarImg()"><img [src]="logo" class="img-fluid float-right" alt="Responsive image" width="230px">
+      <div class="col-2 flex-row-reverse m-2">
+        <img (click)="mostrarImg()"><img [src]="logo" class="img-fluid float-right" alt="Responsive image"
+          width="230px">
       </div>
     </div>
   </div>

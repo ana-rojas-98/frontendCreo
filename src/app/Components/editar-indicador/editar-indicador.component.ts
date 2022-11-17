@@ -30,7 +30,7 @@ export class EditarIndicadorComponent implements OnInit {
   mostrar: any = [];
   resultado: any = [];
   enviar: any = [];
-  resultadosTabla = [];
+  resultadosTabla= []; 
   resultadosHTML = [];
   resultados = [];
   anioArray = [];
@@ -116,37 +116,25 @@ export class EditarIndicadorComponent implements OnInit {
     this.uniquePeriod = [...new Set(this.preciodicidadesArray)];
     this.Anio = this.uniqueYears[this.uniqueYears.length - 1];
     this.Periodo = this.uniquePeriod[this.uniquePeriod.length - 1];
+    this.cambioAnio();
   }
 
-  cambioAnio() {
-    if (this.Anio != "") {
-      if (this.Periodo != "") {
-        this.resultadosHTML = this.resultadosTabla.filter(
-          (an) => an.anio == this.Anio
-        );
-        this.resultadosHTML = this.resultadosHTML.filter(
-          (pe) => pe.periodicidad == this.Periodo
-        );
-        // this.mostrar=this.resultadosHTML;
-        // this.resultadosHTML.forEach(item => (
-        //   this.Respuestas.push(item.valor)
-        // ));
-      }
-    }
-    //console.log("itemvalor",this.Respuestas)
+  cambioAnio(){
+    if (this.Anio != '') {
+       if (this.Periodo != '') {
+        this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
+        this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
+        this.mostrar=this.resultadosHTML;
+       }
+    } 
   }
 
-  cambioPeriodo() {
-    if (this.Anio != "") {
-      if (this.Periodo != "") {
-        this.resultadosHTML = this.resultadosTabla.filter(
-          (an) => an.anio == this.Anio
-        );
-        this.resultadosHTML = this.resultadosHTML.filter(
-          (pe) => pe.periodicidad == this.Periodo
-        );
-        console.log("periodo", this.Periodo);
-        this.mostrar = this.resultadosHTML;
+  cambioPeriodo(){
+    if (this.Anio != '') {
+      if (this.Periodo != '') {
+        this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
+        this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
+        this.mostrar=this.resultadosHTML;
       }
     }
   }
@@ -241,86 +229,47 @@ export class EditarIndicadorComponent implements OnInit {
  
 
   insertarFila() {
+    this.resultadosHTML.push({
+      idFormato:parseInt("0") ,
+      entrada: "text",
+      numerop: "no",
+      formulap: "no",
+      formula: "no",
+      valor:"",
+      titulo: "no",
+      tamanoTexto: parseInt("12"),
+      color: "#000",
+      negrilla: "no",
+      subrayado:"no",
+      cursiva: "no",
+      inicioCol: parseInt("1"),
+      finCol: parseInt("3"),
+      saltoLinea: "no",
+      html: "",
+      idArchivo: this.idArchivo.idArchivo,
+      periodicidad: this.Periodo,
+    })
     let fila: any;
-    let i = 1;
-    console.log("entra");
-    fila = document.getElementById("tabla");
-    //this.posicion = this.resultadosHTML[this.resultadosHTML.length+i];
-    this.posicion = this.resultadosHTML[this.resultadosHTML.length + i];
-    //this.posicion = this.resultadosHTML.length++ + i;
-    // this.posicion = this.resultadosTabla.length++ + i;
-    var row = fila.insertRow(this.posicion);
-    // console.log("fila", fila);
-    // console.log("row", row);
-    // console.log("posicion variable", posicion);
-    //console.log("posicion array", this.resultadosTabla[this.resultadosTabla.length]);
-    //console.log("posicion", this.resultadosTabla.length++);
-    let cel1 = row.insertCell(0);
-    let cel2 = row.insertCell(1);
-    let cel3 = row.insertCell(2);
-    let cel4 = row.insertCell(3);
-    let cel5 = row.insertCell(4);
-    let cel6 = row.insertCell(5);
-    let cel7 = row.insertCell(6);
-    let cel8 = row.insertCell(7);
-    let cel9 = row.insertCell(8);
-    let cel10 = row.insertCell(9);
-    let cel11 = row.insertCell(10);
-    let cel12 = row.insertCell(11);
-    let cel13 = row.insertCell(12);
-    let cel14 = row.insertCell(13);
+    fila = document.getElementById("tabla");    
+    this.posicion = this.resultadosHTML[this.resultadosHTML.length];
+    this.elimi=fila.insertRow(this.posicion);
+    console.log("fila",fila);
+  }
 
-    cel1.innerHTML =
-      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel2.innerHTML =
-      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel3.innerHTML =
-      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel4.innerHTML =
-      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel5.innerHTML =
-      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel6.innerHTML =
-      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel7.innerHTML =
-      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel8.innerHTML =
-      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel9.innerHTML =
-      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel10.innerHTML =
-      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel11.innerHTML =
-      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel12.innerHTML =
-      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel13.innerHTML =
-      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel14.innerHTML =
-      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-
-    // cel1.innerHTML = '<input id ="entrada">';
-    // cel2.innerHTML = "<td></td>";
-    // cel3.innerHTML = "<td></td>";
-    // cel4.innerHTML = "<td></td>";
-    // cel5.innerHTML = "<td></td>";
-    // cel6.innerHTML = "<td></td>";
-    // cel7.innerHTML = "<td></td>";
-    // cel8.innerHTML = "<td></td>";
-    // cel9.innerHTML = "<td></td>";
-    // cel10.innerHTML = "<td></td>";
-    // cel11.innerHTML = "<td></td>";
-    // cel12.innerHTML = "<td></td>";
-    // cel13.innerHTML = "<td></td>";
-    // cel14.innerHTML = "<td></td>";
-    // let e = <HTMLInputElement>document.getElementById("entrada");
-    // let ens = e.value;
-    // this.ensayo.push({ entrada: ens });
+  eliminarFila(){
+    // let fila: any;
+    // fila = document.getElementById("tabla");    
+    // this.posicion = this.resultadosHTML.length++;
+    // //fila.removeChild(this.elimi);
+    // console.log("posicion",this.posicion);
+    // console.log("posicion",this.elimi);
+    // let ola= this.elimi.remove(this.posicion);
+     console.log("elimina");
   }
 
   guardar() {
-    console.log("nuevos", this.ensayo);
-    this.resultadosTabla.map((item) => {
+    console.log("entra")
+    this.resultadosHTML.map((item) => {
       this.enviar.push({
         idFormato: item.idFormato,
         entrada: item.entrada,
@@ -344,14 +293,14 @@ export class EditarIndicadorComponent implements OnInit {
         nombreSubcategoria: this.datos.Subcategoria,
       });
     });
-    console.log("envia : ", this.enviar);
-    // this.authService.enviarIndicadorEsitado(this.enviar).subscribe((res) => {
-    //   if (res) {
-    //     this.alerta("Editado");
-    //     this.router.navigate(["administrar-indicadores"])
-    //   }
-    //   return res;
-    // });
+    console.log("envia",this.enviar)
+    this.authService.enviarIndicadorEsitado(this.enviar).subscribe((res) => {
+      if (res) {
+        this.alerta("Editado");
+        this.router.navigate(["administrar-indicadores"])
+      }
+      return res;
+    });
   }
   alerta(mensaje: any) {
     Swal.fire(mensaje);
