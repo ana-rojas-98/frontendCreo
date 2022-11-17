@@ -38,6 +38,9 @@ export class EditarIndicadorComponent implements OnInit {
   uniqueYears = [];
   uniquePeriod = [];
   estado = [];
+  elimi: any;
+  resultadoEstandar = [];
+
   
 
   resultadosCategoria = {};

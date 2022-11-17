@@ -6,13 +6,20 @@
           width="231px">
       </div>
       <div class="col-8">
-        <div class="text-center nombre">
-          <div class="dropdown">
-            <span>Nombre y empresa</span>
-            <div class="dropdown-content">
-              <div><a type="button" [routerLink]="['/mi-perfil']" [routerLinkActive]="['link-active']">Mi perfil</a></div>
-              <div class="border"></div>
-              <div><a type="button" (click)="CerrarSesion()">Cerrar sesión</a></div>
+        <div class="nombre">
+          <div class="row">
+            <h1 class="empresa"><strong>Empresa:</strong> aaaaaaaaaaaaaa</h1>
+          </div>
+          <div class="row">
+            <div class="dropdown">
+              <img src="../../../assets/imagenes/administardor-usuarios.png" alt="indicador" />
+              <h2>{{nombreUsuario}}</h2>
+              <div class="dropdown-content">
+                <div><a type="button" [routerLink]="['/mi-perfil']" [routerLinkActive]="['link-active']">Mi perfil</a>
+                </div>
+                <div class="border"></div>
+                <div><a type="button" (click)="CerrarSesion()">Cerrar sesión</a></div>
+              </div>
             </div>
           </div>
         </div>
