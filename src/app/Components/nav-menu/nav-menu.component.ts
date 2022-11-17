@@ -24,7 +24,22 @@ export class NavMenuComponent implements OnInit{
     this.isExpanded = !this.isExpanded;
   }  
 
+  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
+  visorEventos = true;
+  indicadores = true;
+  reportes = true;
+  administrarIndicadores = true;
+  administrarUsuarios = true;
+  notificaciones = true;
+  configuraciones = true;
+  licenciar = true;
+
+  Usuarioid = this.usarioLocalStote.usuarioid;
+
+  Usuario = {
+    IdUsuario: this.Usuarioid,
+  };
 
   mostrarImg(){    
     this.authService.getImagen().subscribe((res) =>{
@@ -35,4 +50,13 @@ export class NavMenuComponent implements OnInit{
       this.logo=im;
     })
   };
+
+  CerrarSesion() {
+    this.authService.CerrarSesion(this.Usuario).subscribe((res: any) => {
+      this.authService.fnDestroySessionData(function (res_clean_session) {
+        if (res_clean_session) {
+        }
+      });
+    });
+  }
 }
