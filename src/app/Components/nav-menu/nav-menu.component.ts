@@ -35,6 +35,8 @@ export class NavMenuComponent implements OnInit{
   configuraciones = true;
   licenciar = true;
 
+  nombreUsuario = this.usarioLocalStote.nombre;
+
   Usuarioid = this.usarioLocalStote.usuarioid;
 
   Usuario = {
