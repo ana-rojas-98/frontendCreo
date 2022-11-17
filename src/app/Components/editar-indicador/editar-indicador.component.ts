@@ -30,6 +30,7 @@ export class EditarIndicadorComponent implements OnInit {
   mostrar: any = [];
   resultado: any = [];
   enviar: any = [];
+  resultadoEstandar: any = [];
   resultadosTabla= []; 
   resultadosHTML = [];
   resultados = [];
@@ -38,6 +39,8 @@ export class EditarIndicadorComponent implements OnInit {
   uniqueYears = [];
   uniquePeriod = [];
   estado = [];
+  elimi:any;
+
   
 
   resultadosCategoria = {};
