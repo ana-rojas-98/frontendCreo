@@ -42,11 +42,14 @@
           class="selector"
           name="estandar"
           type="selectbox"
-          [(ngModel)]="datos.Estandar"
-          (change)="estandar()"
+          [(ngModel)]="Estandar.estandar"
+          (change)="getStandares()"
         >
           <option>{{ datos.Estandar }}</option>
-          <option *ngFor="let resultado of resultados" [value]="datos.Estandar">
+          <option
+            *ngFor="let resultado of resultadoEstandar"
+            [value]="datos.Estandar"
+          >
             {{ resultado.nombreEstandar }}
           </option>
         </select>
@@ -57,7 +60,7 @@
           name="categoria"
           type="selectbox"
           [(ngModel)]="datos.Categoria"
-          (change)="categoria()"
+          (change)="getCategoria()"
         >
           <option>{{ datos.Categoria }}</option>
           <option
@@ -70,11 +73,15 @@
       </div>
       <div class="box">
         <h3>Subcategoria</h3>
-        <select name="select" [(ngModel)]="datos.Subcategoria">
+        <select
+          (change)="getSubCategoria()"
+          name="select"
+          [(ngModel)]="datos.Subcategoria"
+        >
           <option>{{ datos.Subcategoria }}</option>
-          <!-- <option *ngFor="let item of resultadosSubCategoria">
-                    {{ item.nombreSubcategoria }}
-                </option> -->
+          <option *ngFor="let item of resultadosSubCategoria">
+            {{ item.nombreSubcategoria }}
+          </option>
         </select>
       </div>
     </div>

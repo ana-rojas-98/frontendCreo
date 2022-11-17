@@ -26,28 +26,52 @@ export class EditarIndicadorComponent implements OnInit {
   accionEditar = "";
   Anio: "";
   Periodo = "";
-  
-  mostrar:any=[];
+
+  mostrar: any = [];
   resultado: any = [];
   enviar: any = [];
-  resultadosTabla = []; 
+  resultadosTabla = [];
   resultadosHTML = [];
   resultados = [];
   anioArray = [];
-  preciodicidadesArray = []; 
+  preciodicidadesArray = [];
   uniqueYears = [];
   uniquePeriod = [];
+  estado = [];
+  
 
   resultadosCategoria = {};
   resultadosSubCategoria = {};
   idArchivo = {
     idArchivo: 1,
-  };   
+  };
+
   datos = {
     Estandar: "",
     Categoria: "",
     Subcategoria: "",
-  }; 
+  };
+
+  Estandar = {
+    estandar: "",
+  };
+  Indicador = {
+    idIndicador: "",
+  };
+
+  Usuario = {
+    usuario: "",
+  };
+
+  Categoria1 = {
+    categoria1: "",
+    NombreCategoria: "",
+  };
+
+  SubCategoria = {
+    subcategoria1: "",
+    nombreSubcategoria: "",
+  };
 
   //variables de ensayo
   ensayo: any = [];
@@ -64,7 +88,10 @@ export class EditarIndicadorComponent implements OnInit {
     }
     this.idArchivo.idArchivo = this.id;
     this.TraerFormato();
-    this.getStandares();
+    this.getCategoria(0);
+    this.getStandares(0);
+    this.getSubCategoria(0);
+    
   }
 
   TraerFormato() {
@@ -78,73 +105,140 @@ export class EditarIndicadorComponent implements OnInit {
           this.anioArray.push(item.anio);
           this.preciodicidadesArray.push(item.periodicidad);
         }
-        console.log("resouesta", respuesta)
         return item;
       });
       this.filtrar();
     });
   }
 
-  filtrar(){
+  filtrar() {
     this.uniqueYears = [...new Set(this.anioArray)];
     this.uniquePeriod = [...new Set(this.preciodicidadesArray)];
     this.Anio = this.uniqueYears[this.uniqueYears.length - 1];
     this.Periodo = this.uniquePeriod[this.uniquePeriod.length - 1];
   }
 
-  cambioAnio(){
-    if (this.Anio != '') {
-       if (this.Periodo != '') {
-        this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
-        this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
-       // this.mostrar=this.resultadosHTML;
+  cambioAnio() {
+    if (this.Anio != "") {
+      if (this.Periodo != "") {
+        this.resultadosHTML = this.resultadosTabla.filter(
+          (an) => an.anio == this.Anio
+        );
+        this.resultadosHTML = this.resultadosHTML.filter(
+          (pe) => pe.periodicidad == this.Periodo
+        );
+        // this.mostrar=this.resultadosHTML;
         // this.resultadosHTML.forEach(item => (
         //   this.Respuestas.push(item.valor)
         // ));
-      console.log("mostrar",this.mostrar)
-      console.log("añoDentro",this.resultadosHTML)
-      console.log("periodo",this.Periodo)
-       }
-    } 
+      }
+    }
     //console.log("itemvalor",this.Respuestas)
   }
 
-  cambioPeriodo(){
-    if (this.Anio != '') {
-      if (this.Periodo != '') {
-        this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
-        this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
-        console.log("periodo",this.Periodo)
-        this.mostrar=this.resultadosHTML;
-      }
-    } 
-  }
-
-  getStandares() {
-    this.authService.getStandares(this.datos.Estandar).subscribe((res: any) => {
-      this.resultados = res.map((item) => {
-        return item;
-      });
-    });
-  }
-
-  getCategoria(estandar) {
-    this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
-      this.resultadosCategoria = res.filter(
-        (item) => item.nombreEstandar == estandar
-      );
-    });
-  }
-
-  getSubCategoria(categoria) {
-    this.authService
-      .getSubCategoria(this.datos.Categoria)
-      .subscribe((res: any) => {
-        this.resultadosSubCategoria = res.filter(
-          (item) => item.nombreCategoria == categoria
+  cambioPeriodo() {
+    if (this.Anio != "") {
+      if (this.Periodo != "") {
+        this.resultadosHTML = this.resultadosTabla.filter(
+          (an) => an.anio == this.Anio
         );
-      });
+        this.resultadosHTML = this.resultadosHTML.filter(
+          (pe) => pe.periodicidad == this.Periodo
+        );
+        console.log("periodo", this.Periodo);
+        this.mostrar = this.resultadosHTML;
+      }
+    }
   }
+
+
+  getEstandarFilter() {
+    if (this.Estandar.estandar == "") {
+      return true;
+    }
+    let dato = parseInt(this.Estandar.estandar);
+    this.getCategoria(dato);
+    this.resultadosTabla = this.estado.filter((item) => {
+      return item.idEstandar == dato;
+    });
+  }
+
+  getCategoriaFilter() {
+    if (this.Categoria1.categoria1 == "") {
+      this.getEstandarFilter();
+      this.getSubCategoria(0);
+      return true;
+    }
+
+    let dato = parseInt(this.Categoria1.categoria1);
+    this.getSubCategoria(dato);
+
+    this.resultadosTabla = this.estado.filter((item) => {
+      return item.idCategoria == dato;
+    });
+  }
+
+  geSubtCategoriaFilter() {
+    if (this.SubCategoria.subcategoria1 == "") {
+      this.getCategoriaFilter();
+      return true;
+    }
+
+    let dato = parseInt(this.SubCategoria.subcategoria1);
+
+    this.resultadosTabla = this.estado.filter((item) => {
+      return item.idSubCategoria == dato;
+    });
+  }
+  
+
+
+  getStandares(dato) {
+    if (dato == 0) {
+      this.authService.getStandares("").subscribe((res: any) => {
+        this.resultadoEstandar = res.map((item) => {
+          return item;
+        });
+      });
+      return true;
+    }
+  }
+
+  getCategoria(dato) {
+    if (dato == 0) {
+      this.authService.getCategoria("").subscribe((res: any) => {
+        this.resultadosCategoria = res.map((item) => {
+          return item;
+        });
+      });
+      return true;
+    }
+    this.authService.getCategoria("").subscribe((res: any) => {
+      this.resultadosCategoria = res.filter((item) => {
+        return item.idEstandar == dato;
+      });
+    });
+  }
+
+  getSubCategoria(dato) {
+    if (dato == 0) {
+      this.authService.getSubCategoria("").subscribe((res: any) => {
+        this.resultadosSubCategoria = res.map((item) => {
+          return item;
+        });
+      });
+      return true;
+    }
+
+    this.authService.getSubCategoria("").subscribe((res: any) => {
+      this.resultadosSubCategoria = res.filter((item) => {
+        return item.idCategoria == dato;
+      });
+    });
+  }
+
+
+ 
 
   insertarFila() {
     let fila: any;
@@ -152,9 +246,9 @@ export class EditarIndicadorComponent implements OnInit {
     console.log("entra");
     fila = document.getElementById("tabla");
     //this.posicion = this.resultadosHTML[this.resultadosHTML.length+i];
-    this.posicion = this.resultadosHTML[this.resultadosHTML.length+i];
+    this.posicion = this.resultadosHTML[this.resultadosHTML.length + i];
     //this.posicion = this.resultadosHTML.length++ + i;
-   // this.posicion = this.resultadosTabla.length++ + i;
+    // this.posicion = this.resultadosTabla.length++ + i;
     var row = fila.insertRow(this.posicion);
     // console.log("fila", fila);
     // console.log("row", row);
@@ -176,22 +270,34 @@ export class EditarIndicadorComponent implements OnInit {
     let cel13 = row.insertCell(12);
     let cel14 = row.insertCell(13);
 
-    
-    cel1.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel2.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel3.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel4.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel5.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel6.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel7.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel8.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel9.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel10.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel11.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel12.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel13.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-    cel14.innerHTML = '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
-
+    cel1.innerHTML =
+      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel2.innerHTML =
+      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel3.innerHTML =
+      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel4.innerHTML =
+      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel5.innerHTML =
+      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel6.innerHTML =
+      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel7.innerHTML =
+      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel8.innerHTML =
+      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel9.innerHTML =
+      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel10.innerHTML =
+      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel11.innerHTML =
+      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel12.innerHTML =
+      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel13.innerHTML =
+      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
+    cel14.innerHTML =
+      '<input type="text" [(ngModel)]="linea.entrada" style="width:100%">';
 
     // cel1.innerHTML = '<input id ="entrada">';
     // cel2.innerHTML = "<td></td>";

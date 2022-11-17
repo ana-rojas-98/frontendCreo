@@ -9,6 +9,4 @@ export class AdministrarUsuariosService {
   @Output() UsuarioId: EventEmitter<any> = new EventEmitter<any>();
   @Output() UsuarioIdModificar: EventEmitter<any> = new EventEmitter<any>();
   constructor() {}
-
-
 }
