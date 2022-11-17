@@ -31,20 +31,18 @@ export class EditarIndicadorComponent implements OnInit {
   resultado: any = [];
   enviar: any = [];
   resultadoEstandar: any = [];
-  resultadosTabla= []; 
-  resultadosHTML = [];
-  resultados = [];
-  anioArray = [];
-  preciodicidadesArray = [];
-  uniqueYears = [];
-  uniquePeriod = [];
-  estado = [];
-  elimi:any;
+  resultadosTabla: any = [];
+  resultadosHTML: any = [];
+  resultados: any = [];
+  anioArray: any = [];
+  preciodicidadesArray: any = [];
+  uniqueYears: any = [];
+  uniquePeriod: any = [];
+  estado: any = [];
+  elimi: any;
 
-  
-
-  resultadosCategoria = {};
-  resultadosSubCategoria = {};
+  resultadosCategoria: any = [];
+  resultadosSubCategoria: any = [];
   idArchivo = {
     idArchivo: 1,
   };
@@ -95,7 +93,6 @@ export class EditarIndicadorComponent implements OnInit {
     this.getCategoria(0);
     this.getStandares(0);
     this.getSubCategoria(0);
-    
   }
 
   TraerFormato() {
@@ -121,26 +118,33 @@ export class EditarIndicadorComponent implements OnInit {
     this.cambioAnio();
   }
 
-  cambioAnio(){
-    if (this.Anio != '') {
-       if (this.Periodo != '') {
-        this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
-        this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
-        this.mostrar=this.resultadosHTML;
-       }
-    } 
-  }
-
-  cambioPeriodo(){
-    if (this.Anio != '') {
-      if (this.Periodo != '') {
-        this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
-        this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
-        this.mostrar=this.resultadosHTML;
+  cambioAnio() {
+    if (this.Anio != "") {
+      if (this.Periodo != "") {
+        this.resultadosHTML = this.resultadosTabla.filter(
+          (an) => an.anio == this.Anio
+        );
+        this.resultadosHTML = this.resultadosHTML.filter(
+          (pe) => pe.periodicidad == this.Periodo
+        );
+        this.mostrar = this.resultadosHTML;
       }
     }
   }
 
+  cambioPeriodo() {
+    if (this.Anio != "") {
+      if (this.Periodo != "") {
+        this.resultadosHTML = this.resultadosTabla.filter(
+          (an) => an.anio == this.Anio
+        );
+        this.resultadosHTML = this.resultadosHTML.filter(
+          (pe) => pe.periodicidad == this.Periodo
+        );
+        this.mostrar = this.resultadosHTML;
+      }
+    }
+  }
 
   getEstandarFilter() {
     if (this.Estandar.estandar == "") {
@@ -180,8 +184,6 @@ export class EditarIndicadorComponent implements OnInit {
       return item.idSubCategoria == dato;
     });
   }
-  
-
 
   getStandares(dato) {
     if (dato == 0) {
@@ -227,43 +229,40 @@ export class EditarIndicadorComponent implements OnInit {
     });
   }
 
-
- 
-
   insertarFila() {
     this.resultadosHTML.push({
-      idFormato:parseInt("0") ,
+      idFormato: parseInt("0"),
       entrada: "text",
       numerop: "no",
       formulap: "no",
       formula: "no",
-      valor:"",
+      valor: "",
       titulo: "no",
       tamanoTexto: parseInt("12"),
       color: "#000",
       negrilla: "no",
-      subrayado:"no",
+      subrayado: "no",
       cursiva: "no",
       inicioCol: parseInt("1"),
       finCol: parseInt("12"),
       saltoLinea: "si",
       html: "",
       alinear: "center",
-      colorFondo:"transparent",
+      colorFondo: "transparent",
       usuarioId: this.usuarioid,
       idArchivo: this.idArchivo.idArchivo,
       periodicidad: this.Periodo,
       anio: this.Anio,
-    })
+    });
     let fila: any;
-    fila = document.getElementById("tabla");    
+    fila = document.getElementById("tabla");
     this.posicion = this.resultadosHTML[this.resultadosHTML.length];
-    this.elimi=fila.insertRow(this.posicion);
-    console.log("fila",fila);
+    this.elimi = fila.insertRow(this.posicion);
+    console.log("fila", fila);
   }
 
-  eliminarFila(){
-    console.log("elimina");   
+  eliminarFila() {
+    console.log("elimina");
     // this.posicion = this.resultadosHTML.length++;
     // console.log("posicion",this.posicion);
     // console.log("posicion",this.elimi);
@@ -271,7 +270,7 @@ export class EditarIndicadorComponent implements OnInit {
   }
 
   guardar() {
-    console.log("entra")
+    console.log("entra");
     this.resultadosHTML.map((item) => {
       this.enviar.push({
         idFormato: item.idFormato,
@@ -294,18 +293,18 @@ export class EditarIndicadorComponent implements OnInit {
         periodicidad: item.periodicidad,
         anio: parseInt(item.anio),
         alinear: "center",
-        colorFondo:"transparent",
+        colorFondo: "transparent",
         usuarioid: this.usuarioid,
         nombreEstandar: this.datos.Estandar,
         nombreCategoria: this.datos.Categoria,
         nombreSubcategoria: this.datos.Subcategoria,
       });
     });
-    console.log("envia",this.enviar)
+    console.log("envia", this.enviar);
     this.authService.enviarIndicadorEsitado(this.enviar).subscribe((res) => {
       if (res) {
         this.alerta("Editado");
-        this.router.navigate(["administrar-indicadores"])
+        this.router.navigate(["administrar-indicadores"]);
       }
       return res;
     });
