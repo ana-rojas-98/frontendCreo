@@ -13,7 +13,6 @@
           [(ngModel)]="Anio"
           (change)="cambioAnio()"
         >
-          <option value="" selected>Seleccione Año</option>
           <option *ngFor="let resultado of uniqueYears" [value]="resultado">
             {{ resultado }}
           </option>
@@ -28,7 +27,6 @@
           [(ngModel)]="Periodo"
           (change)="cambioPeriodo()"
         >
-          <option value="">Seleccione Periodo</option>
           <option *ngFor="let resultado of uniquePeriod" [value]="resultado">
             {{ resultado }}
           </option>
@@ -201,7 +199,10 @@
           </tr>
         </tbody>
       </table>
-      <button (click)="insertarFila()">+</button>
+      <div class="insertarEliminar">
+        <button (click)="insertarFila()">+</button>
+        <button (click)="eliminarFila()">--</button>
+      </div>
     </div>
     <div class="botones">
       <button
