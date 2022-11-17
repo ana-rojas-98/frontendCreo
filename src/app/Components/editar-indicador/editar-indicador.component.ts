@@ -75,7 +75,8 @@ export class EditarIndicadorComponent implements OnInit {
     subcategoria1: "",
     nombreSubcategoria: "",
   };
-
+  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+  usuarioid = parseInt(this.usarioLocalStote.usuarioid);
   //variables de ensayo
   ensayo: any = [];
   posicion: any;
@@ -249,8 +250,12 @@ export class EditarIndicadorComponent implements OnInit {
       finCol: parseInt("3"),
       saltoLinea: "no",
       html: "",
+      alinear: "center",
+      colorFondo:"transparent",
+      usuarioId: this.usuarioid,
       idArchivo: this.idArchivo.idArchivo,
       periodicidad: this.Periodo,
+      anio: this.Anio,
     })
     let fila: any;
     fila = document.getElementById("tabla");    
@@ -291,6 +296,11 @@ export class EditarIndicadorComponent implements OnInit {
         saltoLinea: item.saltoLinea,
         html: item.html,
         idArchivo: parseInt(item.idArchivo),
+        periodicidad: item.periodicidad,
+        anio: parseInt(item.anio),
+        alinear: "center",
+        colorFondo:"transparent",
+        usuarioId: this.usuarioid,
         nombreEstandar: this.datos.Estandar,
         nombreCategoria: this.datos.Categoria,
         nombreSubcategoria: this.datos.Subcategoria,
