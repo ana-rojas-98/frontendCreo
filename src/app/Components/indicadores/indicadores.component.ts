@@ -16,23 +16,22 @@ export class IndicadoresComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private reportesService: ReportesService,
-    private indicadoresservice: IndicadoresService,
-
-  ) { }
+    private indicadoresservice: IndicadoresService
+  ) {}
   Estandar = new FormControl("");
   Categoria = new FormControl("");
   Subcategoria = new FormControl("");
   Periodicidad = new FormControl("");
 
-  resultados = {};
-  resultadosCategoria = {};
-  resultadosSubCategoria = {};
-  resultadosTabla = {};
+  resultados: any = [];
+  resultadosCategoria: any = [];
+  resultadosSubCategoria: any = [];
+  resultadosTabla: any = [];
 
-  Registros = [];
-  EstandarOpciones = [];
-  CategoriaOpciones = [];
-  SubcategoriaOpciones = [];
+  Registros: any = [];
+  EstandarOpciones: any = [];
+  CategoriaOpciones: any = [];
+  SubcategoriaOpciones: any = [];
 
   ngOnInit() {
     this.getindIcadores();
@@ -66,23 +65,28 @@ export class IndicadoresComponent implements OnInit {
   }
 
   getindIcadores() {
-    this.reportesService.ConsultarIndicadoresAsignados().subscribe((res: any) => {
-      this.resultadosTabla = res.map((item) => {
-        return item;
+    this.reportesService
+      .ConsultarIndicadoresAsignados()
+      .subscribe((res: any) => {
+        this.resultadosTabla = res.map((item) => {
+          return item;
+        });
       });
-    });
   }
 
   estandar() {
     this.getCategoriaFilter(this.Estandar.value);
-    this.getSubCategoriaFilter(this.Estandar.value,this.Categoria.value);
+    this.getSubCategoriaFilter(this.Estandar.value, this.Categoria.value);
     if (this.Estandar.value != "") {
       this.getIndicadoresFilter();
-    }
-    else{
+    } else {
       this.getCategoria();
     }
-    if (this.Estandar.value == "" && this.Categoria.value == "" && this.Subcategoria.value == "") {
+    if (
+      this.Estandar.value == "" &&
+      this.Categoria.value == "" &&
+      this.Subcategoria.value == ""
+    ) {
       this.getindIcadores();
       this.getCategoria();
       this.getStandares();
@@ -91,15 +95,18 @@ export class IndicadoresComponent implements OnInit {
   }
 
   categoria() {
-    this.getSubCategoriaFilter(this.Estandar.value,this.Categoria.value);
+    this.getSubCategoriaFilter(this.Estandar.value, this.Categoria.value);
     if (this.Categoria.value != "") {
       this.getIndicadoresFilter();
-    }
-    else {
+    } else {
       this.estandar();
       this.getSubCategoria();
     }
-    if (this.Estandar.value == "" && this.Categoria.value == "" && this.Subcategoria.value == "") {
+    if (
+      this.Estandar.value == "" &&
+      this.Categoria.value == "" &&
+      this.Subcategoria.value == ""
+    ) {
       this.getindIcadores();
       this.getCategoria();
       this.getStandares();
@@ -110,11 +117,14 @@ export class IndicadoresComponent implements OnInit {
   subcategoria() {
     if (this.Subcategoria.value != "") {
       this.getIndicadoresFilter();
-    }
-    else {
+    } else {
       this.categoria();
     }
-    if (this.Estandar.value == "" && this.Categoria.value == "" && this.Subcategoria.value == "") {
+    if (
+      this.Estandar.value == "" &&
+      this.Categoria.value == "" &&
+      this.Subcategoria.value == ""
+    ) {
       this.getindIcadores();
       this.getCategoria();
       this.getStandares();
@@ -125,27 +135,36 @@ export class IndicadoresComponent implements OnInit {
   getCategoriaFilter(estandar) {
     this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
       this.resultadosCategoria = res.filter(
-        (item) => item.idEstandar == estandar 
+        (item) => item.idEstandar == estandar
       );
     });
   }
 
-  getSubCategoriaFilter(estandar,categoria) {
-    this.authService.getSubCategoria(this.Subcategoria).subscribe((res: any) => {
-      this.resultadosSubCategoria = res.filter((item) => item.idCategoria == categoria || item.idEstandar == estandar);
-    });
+  getSubCategoriaFilter(estandar, categoria) {
+    this.authService
+      .getSubCategoria(this.Subcategoria)
+      .subscribe((res: any) => {
+        this.resultadosSubCategoria = res.filter(
+          (item) => item.idCategoria == categoria || item.idEstandar == estandar
+        );
+      });
   }
 
   getIndicadoresFilter() {
     this.reportesService
       .ConsultarIndicadoresAsignados()
       .subscribe((res: any) => {
-        if (this.Subcategoria.value != ""){
-        this.resultadosTabla = res.filter((item) => item.idSubCategoria == this.Subcategoria.value);
-
-        }
-        else {
-        this.resultadosTabla = res.filter((item) => (item.idCategoria == this.Categoria.value || item.idEstandar == this.Estandar.value || item.idSubCategoria == this.Subcategoria.value));         
+        if (this.Subcategoria.value != "") {
+          this.resultadosTabla = res.filter(
+            (item) => item.idSubCategoria == this.Subcategoria.value
+          );
+        } else {
+          this.resultadosTabla = res.filter(
+            (item) =>
+              item.idCategoria == this.Categoria.value ||
+              item.idEstandar == this.Estandar.value ||
+              item.idSubCategoria == this.Subcategoria.value
+          );
         }
       });
   }
@@ -166,7 +185,7 @@ export class IndicadoresComponent implements OnInit {
     });
   }
 
-  DescargarTodosAdjuntos(){
+  DescargarTodosAdjuntos() {
     this.indicadoresservice.DescargarTodosAdjuntos().subscribe((res) => {
       let nombreArchivo = res.headers.get("content-disposition");
       //?.split(';')[1].split('=')[1];

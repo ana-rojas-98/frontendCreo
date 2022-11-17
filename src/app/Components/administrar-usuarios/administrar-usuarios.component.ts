@@ -38,9 +38,9 @@ export class AdministrarUsuariosComponent implements OnInit {
   };
 
   resultadosTabla: any = [];
-  resultadosTipoUsuario = {};
-  resultadosEstado = {};
-  estado = [];
+  resultadosTipoUsuario:any = [];
+  resultadosEstado:any = [];
+  estado:any = [];
   buscarInput: String;
   permisoModificar = true;
   permisoVer = true;
@@ -162,16 +162,32 @@ export class AdministrarUsuariosComponent implements OnInit {
       this.alert("No puedes eliminar a este usuario");
       return true;
     }
-    this.authService.eliminarUsuario(usuarioid).subscribe((res: any) => {
-      if (res.codigo == 1) {
-        this.getUsuariosApi();
-        this.getTipoUsuarioApi();
-        this.getUsuarioApi();
-        return this.alert("Usuario eliminado");
-      } else {
-        return this.alert("No se pudo eliminar el usuario");
+
+    Swal.fire({
+      title: "Esta seguro de eliminar este usuario",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Confirmar",
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.authService.eliminarUsuario(usuarioid).subscribe((res: any) => {
+          if (res.codigo == 1) {
+            this.getUsuariosApi();
+            this.getTipoUsuarioApi();
+            this.getUsuarioApi();
+            return this.alert("Usuario eliminado");
+          } else {
+            return this.alert("No se pudo eliminar el usuario");
+          }
+        });
+      } else if (result.isDenied) {
+        Swal.fire("Se cancelo la petición");
       }
-    });
+    })
+    
+    
   }
   alert(mensaje) {
     Swal.fire(mensaje);
