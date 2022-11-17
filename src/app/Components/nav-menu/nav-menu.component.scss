@@ -46,7 +46,11 @@ html {
   height: 100%;
 }
 
-
+.icono{
+  width: 30px;
+  height: 30px;
+  margin-right: 6px;
+}
 
 .dropdown-content {
   display: none;
@@ -58,6 +62,7 @@ html {
   margin-top: 100px;
   z-index: 1;
   text-decoration: none;
+  border: 10px;
 }
 
 .dropdown:hover .dropdown-content {
@@ -68,11 +73,14 @@ html {
 .empresa {
   @include centerFlex;
   height: 63px;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
 }
 
 .dropdown {
   @include centerFlex;
   height: 63px;
-  font-size: 1.7rem;
+}
+
+.nombreusuario{
+  font-size: 1.4rem;
 }
