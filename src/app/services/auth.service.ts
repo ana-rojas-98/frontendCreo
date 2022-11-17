@@ -272,6 +272,15 @@ export class AuthService {
     return resultado;
   }
 
+  EliminarNotificacion(notificacion: any) {
+    const headers = this.fnSetDefineTokenAuthorization();
+    let resultado = this.http.post(
+      `${this.URL_SER}/api/Notificaciones/EliminarNotificacion`,notificacion,
+      headers
+    );
+    return resultado;
+  }
+
   tablaAdminIndicadores() {
     const headers = this.fnSetDefineTokenAuthorization();
     let tabla = this.http.get(`${this.URL_SER}/api/archivos`, headers);

@@ -20,9 +20,9 @@ export class AsignarIndicadorComponent implements OnInit {
     public router: Router
   ) {}
 
-  resultados = {};
-  resultadosCategoria = {};
-  resultadosSubCategoria = {};
+  resultados:any = [];
+  resultadosCategoria :any = [];
+  resultadosSubCategoria :any = [];
   estandarFil = "";
   categoriaFil = "";
   resultadosTabla: [];

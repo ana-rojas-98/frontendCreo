@@ -1,43 +1,66 @@
 <app-nav-menu></app-nav-menu>
 <div class="contenedor">
-    <app-sidebar></app-sidebar>
-    <div class="cuerpo">
-        <div class="title">
-            <h1>Gestor de notificaciones</h1>
-        </div>
-        <br>
-        <br>
-        <div class="boton">
-            <button         
-                [routerLink]="['/nueva-noti']"
-                [routerLinkActive]="['link-active']">
-                Nueva notificación
-            </button>
-        </div>
-        <br>
-        <br>
-        <div class="tabla">
-            <table>
-                <thead>
-                    <tr>
-                        <th><img src="../../../assets/imagenes/fechaHora.png">Fecha de creación</th>
-                        <th><img src="../../../assets/imagenes/creador.svg"> Creador</th>
-                        <th><img src="../../../assets/imagenes/asunto.png"> Asunto</th>
-                        <th> <img src="../../../assets/imagenes/perio.png"> Periodicidad</th>
-                        <th><img src="../../../assets/imagenes/fechaHora.png"> Fecha de envio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let noti of resultadosNotificaciones">
-                        <td>{{noti.fechaCreacion}}</td>
-                        <td>{{noti.fullname}}</td>
-                        <td>{{noti.asunto}}</td>
-                        <td>{{noti.periodicidad}}</td>
-                        <td>{{noti.fechaEnvio}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <app-sidebar></app-sidebar>
+  <div class="cuerpo">
+    <div class="title">
+      <h1>Gestor de notificaciones</h1>
     </div>
+    <br />
+    <br />
+    <div class="boton">
+      <button
+        [routerLink]="['/nueva-noti']"
+        [routerLinkActive]="['link-active']"
+      >
+        Nueva notificación
+      </button>
+    </div>
+    <br />
+    <br />
+    <div class="tabla">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <img src="../../../assets/imagenes/fechaHora.png" />Fecha de
+              creación
+            </th>
+            <th><img src="../../../assets/imagenes/creador.svg" /> Creador</th>
+            <th><img src="../../../assets/imagenes/asunto.png" /> Asunto</th>
+            <th>
+              <img src="../../../assets/imagenes/perio.png" /> Periodicidad
+            </th>
+            <th>
+              <img src="../../../assets/imagenes/fechaHora.png" /> Fecha de
+              envio
+            </th>
+            <th>
+              <img
+                src="../../../assets/imagenes/eliminar.png"
+                alt="icono-eliminar"
+              />
+              Eliminar
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let noti of resultadosNotificaciones">
+            <td>{{ noti.fechaCreacion }}</td>
+            <td>{{ noti.fullname }}</td>
+            <td>{{ noti.asunto }}</td>
+            <td>{{ noti.periodicidad }}</td>
+            <td>{{ noti.fechaEnvio }}</td>
+            <td>
+              <img
+                (click)="eliminarNotificacion(noti.idNotificacion)"
+                src="../../../assets/imagenes/eliminar.png"
+                alt="icono-eliminar"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 <app-footer></app-footer>

@@ -30,6 +30,7 @@ export class EditarIndicadorComponent implements OnInit {
   mostrar: any = [];
   resultado: any = [];
   enviar: any = [];
+  resultadoEstandar: any = [];
   resultadosTabla= []; 
   resultadosHTML = [];
   resultados = [];
@@ -38,8 +39,9 @@ export class EditarIndicadorComponent implements OnInit {
   uniqueYears = [];
   uniquePeriod = [];
   estado = [];
-  resultadoEstandar = [];
   elimi:any;
+
+  
 
   resultadosCategoria = {};
   resultadosSubCategoria = {};
@@ -295,7 +297,7 @@ export class EditarIndicadorComponent implements OnInit {
         anio: parseInt(item.anio),
         alinear: "center",
         colorFondo:"transparent",
-        usuarioId: this.usuarioid,
+        usuarioid: this.usuarioid,
         nombreEstandar: this.datos.Estandar,
         nombreCategoria: this.datos.Categoria,
         nombreSubcategoria: this.datos.Subcategoria,

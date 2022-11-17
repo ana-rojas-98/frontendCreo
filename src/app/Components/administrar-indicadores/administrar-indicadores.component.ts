@@ -15,7 +15,7 @@ export class AdministrarIndicadoresComponent implements OnInit {
     private authService: AuthService,
     public router: Router,
     private reportesService: ReportesService
-  ) { }
+  ) {}
 
   Estandar = {
     NombreEstandar: "",
@@ -40,16 +40,16 @@ export class AdministrarIndicadoresComponent implements OnInit {
     nombreSubcategoria: "",
   };
 
-  resultados = {};
-  resultadosCategoria = {};
-  resultadosSubCategoria = {};
+  resultados: any = [];
+  resultadosCategoria: any = [];
+  resultadosSubCategoria: any = [];
   estandarFil = "";
   categoriaFil = "";
   crear = false;
   ver = false;
   editar = false;
   eliminar = false;
-  tablaIndicadores = {};
+  tablaIndicadores: any = [];
   resultado: any = [];
 
   // estandar() {
@@ -63,8 +63,8 @@ export class AdministrarIndicadoresComponent implements OnInit {
     this.getSubCategoria(this.categoriaFil);
   }
   ngOnInit() {
-    this.authService.enviarCorreos().subscribe((res: any) => { });
-    this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
 
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
@@ -142,7 +142,6 @@ export class AdministrarIndicadoresComponent implements OnInit {
         return res;
       });
     }
-
   }
 
   DuplicarIndicador(id2) {
