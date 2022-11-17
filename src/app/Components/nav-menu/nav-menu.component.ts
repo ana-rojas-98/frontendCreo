@@ -1,4 +1,4 @@
-import { Component , OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from "src/app/services/auth.service";
 import { DomSanitizer } from '@angular/platform-browser';
 import { promise } from 'protractor';
@@ -8,13 +8,14 @@ import { promise } from 'protractor';
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.scss']
 })
-export class NavMenuComponent implements OnInit{
+export class NavMenuComponent implements OnInit {
 
-  constructor(private authService: AuthService, private sanitizer:DomSanitizer){}
+  constructor(private authService: AuthService, private sanitizer: DomSanitizer) { }
   isExpanded = false;
   logo;
-  ngOnInit (){
+  ngOnInit() {
     this.mostrarImg();
+    this.getConfiguracion();
   }
   collapse() {
     this.isExpanded = false;
@@ -22,7 +23,7 @@ export class NavMenuComponent implements OnInit{
 
   toggle() {
     this.isExpanded = !this.isExpanded;
-  }  
+  }
 
   usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
@@ -36,6 +37,7 @@ export class NavMenuComponent implements OnInit{
   licenciar = true;
 
   nombreUsuario = this.usarioLocalStote.nombre;
+  nombreempresa = "";
 
   Usuarioid = this.usarioLocalStote.usuarioid;
 
@@ -43,13 +45,13 @@ export class NavMenuComponent implements OnInit{
     IdUsuario: this.Usuarioid,
   };
 
-  mostrarImg(){    
-    this.authService.getImagen().subscribe((res) =>{
+  mostrarImg() {
+    this.authService.getImagen().subscribe((res) => {
       let nombreArchivo = res.headers.get("content-disposition");
       let tipo: Blob = res.body as Blob;
       const b = URL.createObjectURL(tipo);
       const im = this.sanitizer.bypassSecurityTrustUrl(b);
-      this.logo=im;
+      this.logo = im;
     })
   };
 
@@ -60,5 +62,19 @@ export class NavMenuComponent implements OnInit{
         }
       });
     });
+  }
+
+  configuracion = {
+    nombreEmpresa: "",
+    inicial: "",
+    final: "",
+  };
+
+  getConfiguracion() {
+    this.authService
+      .traerDatosConf(this.configuracion)
+      .subscribe((res: any) => {
+        this.nombreempresa = res.nombreEmpresa;
+      });
   }
 }

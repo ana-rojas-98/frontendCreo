@@ -8,12 +8,12 @@
       <div class="col-8">
         <div class="nombre">
           <div class="row">
-            <h1 class="empresa"><strong>Empresa:</strong> aaaaaaaaaaaaaa</h1>
+            <h1 class="empresa"><strong>Empresa:&nbsp;</strong>{{nombreempresa}}</h1>
           </div>
           <div class="row">
             <div class="dropdown">
-              <img src="../../../assets/imagenes/administardor-usuarios.png" alt="indicador" />
-              <h2>{{nombreUsuario}}</h2>
+              <img class="icono" src="../../../assets/imagenes/creador.png" alt="indicador" />
+              <h2 class="nombreusuario">{{nombreUsuario}} &nbsp;</h2><p>▼</p>
               <div class="dropdown-content">
                 <div><a type="button" [routerLink]="['/mi-perfil']" [routerLinkActive]="['link-active']">Mi perfil</a>
                 </div>
