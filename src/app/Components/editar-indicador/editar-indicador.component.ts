@@ -104,8 +104,6 @@ export class EditarIndicadorComponent implements OnInit {
         if (this.idArchivo.idArchivo == item.idArchivo) {
           this.resultadosTabla.push(item);
           this.datos.Estandar = item.nombreEstandar;
-          this.datos.Categoria = item.nombreCategoria;
-          this.datos.Subcategoria = item.nombreSubcategoria;
           this.anioArray.push(item.anio);
           this.preciodicidadesArray.push(item.periodicidad);
         }
