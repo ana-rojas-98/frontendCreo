@@ -6,7 +6,7 @@
       <h1>Editar indicador</h1>
     </div>
     <div class="tiempo">
-      <div class="box mb-2 col-6">
+      <div>
         <h3>Año</h3>
         <select
           class="selector mt-2"
@@ -19,7 +19,7 @@
           </option>
         </select>
       </div>
-      <div class="box mb-2 col-6">
+      <div>
         <h3>Periodo</h3>
         <select
           class="selector mt-2"
@@ -102,8 +102,10 @@
             <th>InCol</th>
             <th>FiCol</th>
             <th>SLinea</th>
-            <th>Ali</th>
-            <th>CFon</th>
+            <th>Alinear</th>
+            <th>CFondo</th>
+            <th>E</th>
+            <th>A</th>
           </tr>
         </thead>
         <tbody>
@@ -225,7 +227,7 @@
       </table>
       <div class="insertarEliminar">
         <button (click)="insertarFila()">+</button>
-        <button (click)="eliminarFila()">--</button>
+        <!-- <button (click)="eliminarFila()">--</button> -->
       </div>
     </div>
     <div class="botones">

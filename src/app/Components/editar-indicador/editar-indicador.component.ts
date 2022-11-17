@@ -263,14 +263,11 @@ export class EditarIndicadorComponent implements OnInit {
   }
 
   eliminarFila(){
-    // let fila: any;
-    // fila = document.getElementById("tabla");    
+    console.log("elimina");   
     // this.posicion = this.resultadosHTML.length++;
-    // //fila.removeChild(this.elimi);
     // console.log("posicion",this.posicion);
     // console.log("posicion",this.elimi);
     // let ola= this.elimi.remove(this.posicion);
-     console.log("elimina");
   }
 
   guardar() {
