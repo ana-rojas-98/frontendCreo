@@ -31,20 +31,18 @@ export class EditarIndicadorComponent implements OnInit {
   resultado: any = [];
   enviar: any = [];
   resultadoEstandar: any = [];
-  resultadosTabla= []; 
-  resultadosHTML = [];
-  resultados = [];
-  anioArray = [];
-  preciodicidadesArray = [];
-  uniqueYears = [];
-  uniquePeriod = [];
-  estado = [];
-  elimi:any;
+  resultadosTabla: any = [];
+  resultadosHTML: any = [];
+  resultados: any = [];
+  anioArray: any = [];
+  preciodicidadesArray: any = [];
+  uniqueYears: any = [];
+  uniquePeriod: any = [];
+  estado: any = [];
+  elimi: any;
 
-  
-
-  resultadosCategoria = {};
-  resultadosSubCategoria = {};
+  resultadosCategoria: any = [];
+  resultadosSubCategoria: any = [];
   idArchivo = {
     idArchivo: 1,
   };
@@ -95,7 +93,6 @@ export class EditarIndicadorComponent implements OnInit {
     this.getCategoria(0);
     this.getStandares(0);
     this.getSubCategoria(0);
-    
   }
 
   TraerFormato() {
@@ -104,8 +101,6 @@ export class EditarIndicadorComponent implements OnInit {
         if (this.idArchivo.idArchivo == item.idArchivo) {
           this.resultadosTabla.push(item);
           this.datos.Estandar = item.nombreEstandar;
-          this.datos.Categoria = item.nombreCategoria;
-          this.datos.Subcategoria = item.nombreSubcategoria;
           this.anioArray.push(item.anio);
           this.preciodicidadesArray.push(item.periodicidad);
         }
@@ -123,26 +118,33 @@ export class EditarIndicadorComponent implements OnInit {
     this.cambioAnio();
   }
 
-  cambioAnio(){
-    if (this.Anio != '') {
-       if (this.Periodo != '') {
-        this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
-        this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
-        this.mostrar=this.resultadosHTML;
-       }
-    } 
-  }
-
-  cambioPeriodo(){
-    if (this.Anio != '') {
-      if (this.Periodo != '') {
-        this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
-        this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
-        this.mostrar=this.resultadosHTML;
+  cambioAnio() {
+    if (this.Anio != "") {
+      if (this.Periodo != "") {
+        this.resultadosHTML = this.resultadosTabla.filter(
+          (an) => an.anio == this.Anio
+        );
+        this.resultadosHTML = this.resultadosHTML.filter(
+          (pe) => pe.periodicidad == this.Periodo
+        );
+        this.mostrar = this.resultadosHTML;
       }
     }
   }
 
+  cambioPeriodo() {
+    if (this.Anio != "") {
+      if (this.Periodo != "") {
+        this.resultadosHTML = this.resultadosTabla.filter(
+          (an) => an.anio == this.Anio
+        );
+        this.resultadosHTML = this.resultadosHTML.filter(
+          (pe) => pe.periodicidad == this.Periodo
+        );
+        this.mostrar = this.resultadosHTML;
+      }
+    }
+  }
 
   getEstandarFilter() {
     if (this.Estandar.estandar == "") {
@@ -182,8 +184,6 @@ export class EditarIndicadorComponent implements OnInit {
       return item.idSubCategoria == dato;
     });
   }
-  
-
 
   getStandares(dato) {
     if (dato == 0) {
@@ -245,7 +245,7 @@ eliminarFila(event){
 
 
   guardar() {
-    console.log("entra")
+    console.log("entra");
     this.resultadosHTML.map((item) => {
       this.enviar.push({
         idFormato: item.idFormato,
@@ -268,21 +268,21 @@ eliminarFila(event){
         periodicidad: item.periodicidad,
         anio: parseInt(item.anio),
         alinear: "center",
-        colorFondo:"transparent",
+        colorFondo: "transparent",
         usuarioid: this.usuarioid,
         nombreEstandar: this.datos.Estandar,
         nombreCategoria: this.datos.Categoria,
         nombreSubcategoria: this.datos.Subcategoria,
       });
     });
-    console.log("envia",this.enviar)
-    // this.authService.enviarIndicadorEsitado(this.enviar).subscribe((res) => {
-    //   if (res) {
-    //     this.alerta("Editado");
-    //     this.router.navigate(["administrar-indicadores"])
-    //   }
-    //   return res;
-    // });
+    console.log("envia", this.enviar);
+    this.authService.enviarIndicadorEsitado(this.enviar).subscribe((res) => {
+      if (res) {
+        this.alerta("Editado");
+        this.router.navigate(["administrar-indicadores"]);
+      }
+      return res;
+    });
   }
   alerta(mensaje: any) {
     Swal.fire(mensaje);

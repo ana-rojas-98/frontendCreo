@@ -175,8 +175,7 @@ export class AuthService {
     const headers = this.fnSetDefineTokenAuthorization();
     let result = this.http.post(
       `${this.URL_SER}/api/FormatoIndicadors/indicadorIndividual`,
-      nuevoIndicador,
-      headers
+      nuevoIndicador
     );
     return result;
   }
