@@ -30,6 +30,7 @@ export class NuevaNotiComponent implements OnInit {
   ensayoUsuarios: any = [];
   aux: any = [];
   enviarCorreo: any = [];
+  faltantes:any=[];
 
   estadoi = false;
   estadoii = false;
@@ -279,6 +280,28 @@ export class NuevaNotiComponent implements OnInit {
       });
 
   }
+  
+  indicadoresFaltantes(){
+    this.faltantes=[{
+      usuarioEnvia: this.usuarioid,
+      FechaEnvio: this.fechaConvertida,
+      periodicidad: this.periodicidad,
+      asunto: this.envios.asunto,
+      mensaje:this.envios.mensaje,
+      cantidadIndicadores: this.indicadoresFalta,
+      caducidadPeriodicidad: this.caducidad,
+    }];
+    console.log("envio en indicador faltante", this.faltantes)
+    this.authService
+    .enviarProgramados(this.faltantes)
+    .subscribe((res: any) => {
+      if (res.resul == "ok") {
+        this.alerta("Correo enviado correctamente");
+        this.router.navigate(["gestor-noti"]);
+      }
+      return res;
+    });
+  }
 
   Guardar() {
     if (this.estadoi === true) {
@@ -321,13 +344,13 @@ export class NuevaNotiComponent implements OnInit {
       }
     }
     if (this.estadoiv === true) {
-
       this.fechaConvertida = this.fechaEspera
         .toString()
         .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
       this.periodicidad = "0";
       this.caducidad = "0";
-      this.programado();
+      this.indicadoresFaltantes()
+      //this.programado();
     }
   }
 

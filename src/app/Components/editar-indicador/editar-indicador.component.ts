@@ -229,48 +229,20 @@ export class EditarIndicadorComponent implements OnInit {
     });
   }
 
-
+insertarFila(){
+  //inserta
+}
+eliminarFila(event){
+  //elimina
+  let e=event.target;
+  console.log("elimina");
+  let fila: any;
+  fila = document.getElementById("eliminar");    
+  // this.posicion = this.resultadosHTML.length++;
+  let ola=e.parentNode.parentNode.remove(e);
+}
  
 
-  insertarFila() {
-    this.resultadosHTML.push({
-      idFormato:parseInt("0") ,
-      entrada: "text",
-      numerop: "no",
-      formulap: "no",
-      formula: "no",
-      valor:"",
-      titulo: "no",
-      tamanoTexto: parseInt("12"),
-      color: "#000",
-      negrilla: "no",
-      subrayado:"no",
-      cursiva: "no",
-      inicioCol: parseInt("1"),
-      finCol: parseInt("12"),
-      saltoLinea: "si",
-      html: "",
-      alinear: "center",
-      colorFondo:"transparent",
-      usuarioId: this.usuarioid,
-      idArchivo: this.idArchivo.idArchivo,
-      periodicidad: this.Periodo,
-      anio: this.Anio,
-    })
-    let fila: any;
-    fila = document.getElementById("tabla");    
-    this.posicion = this.resultadosHTML[this.resultadosHTML.length];
-    this.elimi=fila.insertRow(this.posicion);
-    console.log("fila",fila);
-  }
-
-  eliminarFila(){
-    console.log("elimina");   
-    // this.posicion = this.resultadosHTML.length++;
-    // console.log("posicion",this.posicion);
-    // console.log("posicion",this.elimi);
-    // let ola= this.elimi.remove(this.posicion);
-  }
 
   guardar() {
     console.log("entra")
@@ -304,13 +276,13 @@ export class EditarIndicadorComponent implements OnInit {
       });
     });
     console.log("envia",this.enviar)
-    this.authService.enviarIndicadorEsitado(this.enviar).subscribe((res) => {
-      if (res) {
-        this.alerta("Editado");
-        this.router.navigate(["administrar-indicadores"])
-      }
-      return res;
-    });
+    // this.authService.enviarIndicadorEsitado(this.enviar).subscribe((res) => {
+    //   if (res) {
+    //     this.alerta("Editado");
+    //     this.router.navigate(["administrar-indicadores"])
+    //   }
+    //   return res;
+    // });
   }
   alerta(mensaje: any) {
     Swal.fire(mensaje);
