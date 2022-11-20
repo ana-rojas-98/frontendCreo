@@ -229,17 +229,45 @@ export class EditarIndicadorComponent implements OnInit {
     });
   }
 
-insertarFila(){
-  //inserta
+insertarFila(event) {     
+  let evento = event.target;
+  console.log("evento solo", evento.parentNode.parentNode.rowIndex)
+  let insertar=evento.parentNode.parentNode.rowIndex;
+/// (posicion a añadir, posicion eliminar, que cosa agregar o eliminar)
+this.resultadosHTML.splice(insertar,0,{
+  idFormato:parseInt("0") ,
+  entrada: "text",
+  numerop: "no",
+  formulap: "no",
+  formula: "no",
+  valor:"",
+  titulo: "no",
+  tamanoTexto: parseInt("12"),
+  color: "#000",
+  negrilla: "no",
+  subrayado:"no",
+  cursiva: "no",
+  inicioCol: parseInt("1"),
+  finCol: parseInt("12"),
+  saltoLinea: "si",
+  html: "",
+  alinear: "ensayo",
+  colorFondo:"ensayos",
+  usuarioId: this.usuarioid,
+  idArchivo: this.idArchivo.idArchivo,
+  periodicidad: this.Periodo,
+  anio: this.Anio,
+})
+console.log("html",this.resultadosHTML)
 }
+
 eliminarFila(event){
-  //elimina
   let e=event.target;
-  console.log("elimina");
-  let fila: any;
-  fila = document.getElementById("eliminar");    
-  // this.posicion = this.resultadosHTML.length++;
-  let ola=e.parentNode.parentNode.remove(e);
+  console.log("evento",e.parentNode.parentNode.rowIndex);
+  let eliminar=e.parentNode.parentNode.rowIndex-1;
+  /// (posicion eliminar, cantidad a eliminar)
+  this.resultadosHTML.splice(eliminar,1);
+   console.log("elimina arra",this.resultadosHTML);
 }
  
 
@@ -276,13 +304,13 @@ eliminarFila(event){
       });
     });
     console.log("envia", this.enviar);
-    this.authService.enviarIndicadorEsitado(this.enviar).subscribe((res) => {
-      if (res) {
-        this.alerta("Editado");
-        this.router.navigate(["administrar-indicadores"]);
-      }
-      return res;
-    });
+    // this.authService.enviarIndicadorEsitado(this.enviar).subscribe((res) => {
+    //   if (res) {
+    //     this.alerta("Editado");
+    //     this.router.navigate(["administrar-indicadores"]);
+    //   }
+    //   return res;
+    // });
   }
   alerta(mensaje: any) {
     Swal.fire(mensaje);
