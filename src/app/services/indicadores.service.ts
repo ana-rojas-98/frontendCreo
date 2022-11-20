@@ -72,7 +72,7 @@ export class IndicadoresService {
   GuardarAdjunto(Respuestas: any) {
     const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
-      `${this.URL_SER}/api/indicadores/GuardarAdjunto`,Respuestas, headers
+      `${this.URL_SER}/api/indicadores/GuardarAdjunto`,Respuestas
     );
     return resul;
   }
@@ -88,7 +88,7 @@ export class IndicadoresService {
   ObtenerAdjuntos(id) {
     const headers = this.authService.fnSetDefineTokenAuthorization();
     let result = this.http.post(
-      `${this.URL_SER}/api/indicadores/ObtenerAdjuntos`, id, headers);
+      `${this.URL_SER}/api/Notificaciones/ObtenerAdjuntos`, id, headers);
     return result;
   }
 
@@ -103,7 +103,7 @@ export class IndicadoresService {
   EliminarArchivo(id: any) {
     const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
-      `${this.URL_SER}/api/indicadores/EliminarArchivo`,id, headers
+      `${this.URL_SER}/api/Notificaciones/EliminarArchivo`,id, headers
     );
     return resul;
   }
