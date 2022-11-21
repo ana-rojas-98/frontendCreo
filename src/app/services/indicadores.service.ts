@@ -30,7 +30,7 @@ export class IndicadoresService {
   CerarPermisosIndicador(permisos) {
     const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
-      `${this.URL_SER}/api/indicadores/RegistroIndicadores`,
+      `${this.URL_SER}/api/Notificaciones/RegistroIndicadores`,
       permisos, headers
     );
     return resul;
@@ -40,7 +40,7 @@ export class IndicadoresService {
   ConsultarIndicadoresAsignados(permisos) {
     const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
-      `${this.URL_SER}/api/indicadores/ConsultarUsuarios`,permisos, headers
+      `${this.URL_SER}/api/Notificaciones/ConsultarUsuarios`,permisos, headers
     );
     return resul;
   }
@@ -48,7 +48,7 @@ export class IndicadoresService {
   VerDiligenciarIndicador(idArchivo) {
     const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
-      `${this.URL_SER}/api/indicadores/VerDiligenciarIndicador`,idArchivo, headers
+      `${this.URL_SER}/api/Notificaciones/VerDiligenciarIndicador`,idArchivo, headers
     );
     return resul;
   }
@@ -56,7 +56,7 @@ export class IndicadoresService {
   GuardarRespuestasIndicador(Respuestas) {
     const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
-      `${this.URL_SER}/api/indicadores/GuardarRespuestasIndicador`,Respuestas
+      `${this.URL_SER}/api/Notificaciones/GuardarRespuestasIndicador`,Respuestas, headers
     );
     return resul;
   }
@@ -64,7 +64,7 @@ export class IndicadoresService {
   FinalizarIndicador(Respuestas) {
     const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
-      `${this.URL_SER}/api/indicadores/FinalizarInidicador`,Respuestas, headers
+      `${this.URL_SER}/api/Notificaciones/FinalizarInidicador`,Respuestas, headers
     );
     return resul;
   }
@@ -72,7 +72,7 @@ export class IndicadoresService {
   GuardarAdjunto(Respuestas: any) {
     const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
-      `${this.URL_SER}/api/indicadores/GuardarAdjunto`,Respuestas, headers
+      `${this.URL_SER}/api/indicadores/GuardarAdjunto`,Respuestas
     );
     return resul;
   }
@@ -88,7 +88,7 @@ export class IndicadoresService {
   ObtenerAdjuntos(id) {
     const headers = this.authService.fnSetDefineTokenAuthorization();
     let result = this.http.post(
-      `${this.URL_SER}/api/indicadores/ObtenerAdjuntos`, id, headers);
+      `${this.URL_SER}/api/Notificaciones/ObtenerAdjuntos`, id, headers);
     return result;
   }
 
@@ -103,7 +103,7 @@ export class IndicadoresService {
   EliminarArchivo(id: any) {
     const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
-      `${this.URL_SER}/api/indicadores/EliminarArchivo`,id, headers
+      `${this.URL_SER}/api/Notificaciones/EliminarArchivo`,id, headers
     );
     return resul;
   }
