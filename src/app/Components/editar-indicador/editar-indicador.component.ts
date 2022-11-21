@@ -273,7 +273,6 @@ eliminarFila(event){
 
 
   guardar() {
-    console.log("entra");
     this.resultadosHTML.map((item) => {
       this.enviar.push({
         idFormato: item.idFormato,
@@ -304,13 +303,13 @@ eliminarFila(event){
       });
     });
     console.log("envia", this.enviar);
-    // this.authService.enviarIndicadorEsitado(this.enviar).subscribe((res) => {
-    //   if (res) {
-    //     this.alerta("Editado");
-    //     this.router.navigate(["administrar-indicadores"]);
-    //   }
-    //   return res;
-    // });
+    this.authService.enviarIndicadorEsitado(this.enviar).subscribe((res) => {
+      if (res) {
+        this.alerta("Editado");
+        this.router.navigate(["administrar-indicadores"]);
+      }
+      return res;
+    });
   }
   alerta(mensaje: any) {
     Swal.fire(mensaje);
