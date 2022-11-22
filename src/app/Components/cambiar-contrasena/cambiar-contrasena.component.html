@@ -1,1 +1,37 @@
 <app-nav-menu></app-nav-menu>
+<div class="contenedor">
+    <app-sidebar></app-sidebar>
+    <div class="cuerpo">
+        <div class="title">
+            <h1>Cambio de contraseña</h1>
+        </div>
+        <div class="text-center mx-5">
+            <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" [dismissible]="false" id="Alert"
+              (closed)="successMessage = ''">{{ successMessage }}
+            </ngb-alert>
+          </div>
+        <div class="logo-nombre">
+            <div class="nombre">
+                <h5 class="mb-2">Ingrese contraseña actual*</h5>
+                <input type="password" [(ngModel)]="contrasenaActual">
+            </div>
+            <div class="nombre">
+                <h5 class="mb-2">Ingrese nueva contraseña*</h5>
+                <input type="password" [(ngModel)]="contrasenaNueva">
+            </div>
+        </div>
+        <div class="tiempo">
+            <div class="inicio">
+            </div>
+            <div class="inicio">
+                <h5 class="mb-2">Confirme su nueva contraseña*</h5>
+                <input type="password" [(ngModel)]="contrasenaNuevaConfirma">
+            </div>
+        </div>
+        <div class="botones">
+            <button class="cancelar" [routerLink]="['/mi-perfil']" [routerLinkActive]="['link-active']">Cancelar</button>
+            <button class="guardar" (click)="guardarConfiguracion()">Guardar</button>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

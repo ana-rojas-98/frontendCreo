@@ -3,7 +3,7 @@
     <app-sidebar></app-sidebar>
     <div class="cuerpo">
         <div class="title">
-            <h1>Configuración</h1>
+            <h1>Mi perfil</h1>
         </div>
         <div class="text-center mx-5">
             <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" [dismissible]="false" id="Alert"
@@ -11,54 +11,26 @@
             </ngb-alert>
           </div>
         <div class="logo-nombre">
-            <div class="logo">
-                <h5>Logo empresa</h5>
-                <div >
-                <img [src]="prev" alt="logo-empresa">
-                <img [src]="logoEstatico" alt=".">
-                </div>
-                <button 
-                    class="cambiar-logo"
-                    (click)="capturado.click()">
-                    Cambiar logo
-                </button>
-                <input 
-                    type="file" 
-                    hidden (change)="captImg($event)" 
-                    #capturado 
-                    id="image"
-                    accept=".jpg,.png">
+            <div class="nombre">
+                <h5 class="mb-2">Nombre*</h5>
+                <input type="text" [(ngModel)]="nombre">
             </div>
             <div class="nombre">
-                <h5 class="mb-2">Nombre empresa</h5>
-                <input                
-                type="text"
-                [(ngModel)]="configuracion.nombreEmpresa">
+                <h5 class="mb-2">Correo electrónico*</h5>
+                <input type="text" [(ngModel)]="email" readonly>
             </div>
-        </div>
-        <div class="titulo">
-            <h5>Horizonte de tiempo</h5>
         </div>
         <div class="tiempo">
             <div class="inicio">
-                <h5 class="mb-2">Año inicial</h5>
-                <input                
-                type="number"
-                maxlength="4"
-                [(ngModel)]="configuracion.inicial"
-                >
+                <h5 class="mb-2">Teléfono</h5>
+                <input type="text" [(ngModel)]="telefono">
             </div>
             <div class="final">
-                <h5 class="mb-2">Año final</h5>
-                <input 
-                type="number"
-                maxlength="4"
-                [(ngModel)]="configuracion.final"
-                >
+                <button class="cambio-contraseña-btn" [routerLink]="['/cambiar-contrasena']" [routerLinkActive]="['link-active']">Cambiar contraseña</button>
             </div>
         </div>
         <div class="botones">
-            <button class="cancelar">Cancelar</button>
+            <button class="cancelar" (click)="cancelar()">Cancelar</button>
             <button class="guardar" (click)="guardarConfiguracion()">Guardar</button>
         </div>
     </div>
