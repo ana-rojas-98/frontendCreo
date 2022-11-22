@@ -89,8 +89,8 @@ export class EditarIndicadorComponent implements OnInit {
     }
     this.idArchivo.idArchivo = this.id;
     this.TraerFormato();
-    this.getCategoria(0);
     this.getStandares(0);
+    this.getCategoria(0);
     this.getSubCategoria(0);
   }
 

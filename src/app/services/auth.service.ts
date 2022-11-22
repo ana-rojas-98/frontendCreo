@@ -352,4 +352,18 @@ export class AuthService {
     );
     return formato;
   }
+
+  GuardarMiPerfil(perfil) {
+    const headers = this.fnSetDefineTokenAuthorization();
+    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    let formato = this.http.post(`${this.URL_SER}/api/Notificaciones/GuardarMiPerfil`,perfil, headers);
+    return formato;
+  }
+
+  CambioContrasena(contrasenas){
+    const headers = this.fnSetDefineTokenAuthorization();
+    let formato = this.http.post(`${this.URL_SER}/api/Notificaciones/CambioContrasena`,contrasenas, headers);
+    return formato;
+  }
+
 }
