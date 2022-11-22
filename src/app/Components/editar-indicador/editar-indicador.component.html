@@ -5,6 +5,14 @@
     <div class="title-body">
       <h1>Editar indicador</h1>
     </div>
+    <div class="nombreIndicador">
+      <div class="n">
+        <label for="">
+         Nombre indicador: 
+        </label>
+        <input type="text" [(ngModel)]="Nombre.indicador" >     
+      </div> 
+    </div>
     <div class="tiempo">
       <div>
         <h3>Año</h3>
@@ -223,10 +231,10 @@
               />
             </td>
             <td>
-              <button id="fila" (click)="insertarFila($event)">+</button>
+              <img (click)="insertarFila($event)" src="../../../assets/imagenes/insertar.png" alt="eliminar">
             </td>
             <td>
-              <button id="eliminar" (click)="eliminarFila($event)">-</button>
+              <img (click)="eliminarFila($event)" src="../../../assets/imagenes/eliminar.png" alt="eliminar">
             </td>
           </tr>
         </tbody>

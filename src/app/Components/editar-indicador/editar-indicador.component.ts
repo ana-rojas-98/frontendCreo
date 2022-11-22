@@ -63,7 +63,9 @@ export class EditarIndicadorComponent implements OnInit {
   Usuario = {
     usuario: "",
   };
-
+Nombre={
+  indicador:"",
+}
   Categoria1 = {
     categoria1: "",
     NombreCategoria: "",
@@ -78,6 +80,8 @@ export class EditarIndicadorComponent implements OnInit {
   posicion: any;
   eliminarObj:any;
   eliminados:any=[];
+  super:any=[];
+  nombreArchivo
   ngOnInit() {
     this.authService.enviarCorreos().subscribe((res: any) => {});
     this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
@@ -102,6 +106,7 @@ export class EditarIndicadorComponent implements OnInit {
           this.datos.Estandar = item.nombreEstandar;
           this.anioArray.push(item.anio);
           this.preciodicidadesArray.push(item.periodicidad);
+          this.Nombre.indicador=item.archivo;
         }
         return item;
       });
@@ -249,14 +254,16 @@ this.resultadosHTML.splice(insertar,0,{
   finCol: parseInt("12"),
   saltoLinea: "si",
   html: "",
-  alinear: "ensayo",
-  colorFondo:"ensayos",
+  alinear: "center",
+  colorFondo:"transparent",
   eliminar:"0",
   usuarioId: this.usuarioid,
   idArchivo: this.idArchivo.idArchivo,
+  archivo: this.Nombre.indicador,
   periodicidad: this.Periodo,
   anio: this.Anio,
 })
+this.super=this.resultadosHTML;
 }
 
 
@@ -292,18 +299,20 @@ eliminarFila(event){
         alinear: "center",
         colorFondo: "transparent",
         usuarioid: this.usuarioid,
+        archivo: this.Nombre.indicador,
         nombreEstandar: this.datos.Estandar,
         nombreCategoria: this.datos.Categoria,
         nombreSubcategoria: this.datos.Subcategoria,
       })
    })
+   this.super=this.resultadosHTML;
 }
  
-
-
-  guardar() {   
+  guardar() { 
+    this.super = this.resultadosHTML;
+    console.log("nombreindicador", this.Nombre.indicador)
     this.eliminados.map((item1)=>{
-        this.resultadosHTML.splice(item1.posicion,0,{
+        this.super.splice(item1.posicion,0,{
           idFormato:item1.idFormato,
           eliminar:item1.eliminar,
           entrada: item1.entrada,
@@ -327,12 +336,13 @@ eliminarFila(event){
           alinear: "center",
           colorFondo: "transparent",
           usuarioid: this.usuarioid,
+          archivo: this.Nombre.indicador,
           nombreEstandar: this.datos.Estandar,
           nombreCategoria: this.datos.Categoria,
           nombreSubcategoria: this.datos.Subcategoria,
         });
     });
-    this.resultadosHTML.map((item) => {
+    this.super.map((item) => {
       this.enviar.push({
         idFormato: item.idFormato,
         entrada: item.entrada,
@@ -356,6 +366,7 @@ eliminarFila(event){
         alinear: "center",
         colorFondo: "transparent",
         usuarioid: this.usuarioid,
+        archivo: this.Nombre.indicador,
         eliminar:item.eliminar,
         nombreEstandar: this.datos.Estandar,
         nombreCategoria: this.datos.Categoria,
