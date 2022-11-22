@@ -16,6 +16,16 @@
     display:flex;
     justify-content: space-around;
 }
+.nombreIndicador {
+   display: flex;
+   justify-content: center;
+   .n{    
+    input{
+        @include inputCard(200px, 30px);    
+        display: block;    
+    }
+   }
+}
 .formatos{
     border-bottom:1px gray solid;
     margin: 20px;

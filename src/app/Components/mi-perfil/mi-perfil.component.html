@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="botones">
-            <button class="cancelar" (click)="cancelar()">Cancelar</button>
+            <button class="cancelar" [routerLink]="['/private']" [routerLinkActive]="['link-active']">Cancelar</button>
             <button class="guardar" (click)="guardarConfiguracion()">Guardar</button>
         </div>
     </div>
