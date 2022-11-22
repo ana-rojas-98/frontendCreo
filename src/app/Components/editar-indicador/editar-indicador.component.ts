@@ -90,8 +90,6 @@ Nombre={
     nombreSubcategoria: "",
   };
 
-  eliminarObj:any;
-  eliminados:any=[];
   ngOnInit() {
     this.authService.enviarCorreos().subscribe((res: any) => { });
     this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
