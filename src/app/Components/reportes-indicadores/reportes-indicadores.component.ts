@@ -4,6 +4,7 @@ import { AuthService } from "src/app/services/auth.service";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import * as XLSX from "xlsx";
+import { IndicadoresService } from "src/app/services/indicadores.service";
 
 @Component({
   selector: "app-reportes-indicadores",
@@ -13,13 +14,14 @@ import * as XLSX from "xlsx";
 export class ReportesIndicadoresComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private reportesService: ReportesService
-  ) {}
+    private reportesService: ReportesService,
+    private indicadoresservice: IndicadoresService
+  ) { }
 
   title = "angular-app";
   fileName = "Indicadores.xlsx";
 
- 
+
 
   Estandar = {
     estandar: "",
@@ -77,7 +79,7 @@ export class ReportesIndicadoresComponent implements OnInit {
     });
   }
 
-   downloadExcel() {
+  downloadExcel() {
     {
       /* pass here the table id */
       let element = document.getElementById("tableIndicadores");
@@ -121,6 +123,8 @@ export class ReportesIndicadoresComponent implements OnInit {
     this.resultadosTabla = this.estado.filter((item) => {
       return item.idEstandar == dato;
     });
+    this.resultadosTabla = this.resultadosTabla.sort();
+    this.resultadosTabla = this.resultadosTabla.reverse();
   }
 
   getCategoriaFilter() {
@@ -152,7 +156,7 @@ export class ReportesIndicadoresComponent implements OnInit {
       return item.idSubCategoria == dato;
     });
   }
-  
+
   getIndicadorFilter() {
     if (this.Indicador.idIndicador == "") {
       this.geSubtCategoriaFilter();
@@ -227,8 +231,22 @@ export class ReportesIndicadoresComponent implements OnInit {
             this.resultadoIndicadores = res;
             return item;
           });
+          this.resultadosTabla = this.resultadosTabla.sort();
+          this.resultadosTabla = this.resultadosTabla.reverse();
         });
       return true;
     }
+  }
+
+  DescargarTodosAdjuntos() {
+    this.indicadoresservice.DescargarTodosAdjuntos().subscribe((res) => {
+      let nombreArchivo = res.headers.get("content-disposition");
+      //?.split(';')[1].split('=')[1];
+      let tipo: Blob = res.body as Blob;
+      let a = document.createElement("a");
+      a.download = "TodosAdjuntos";
+      a.href = window.URL.createObjectURL(tipo);
+      a.click();
+    });
   }
 }

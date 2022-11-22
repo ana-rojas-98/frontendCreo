@@ -367,20 +367,20 @@ eliminarFila(event){
         colorFondo: "transparent",
         usuarioid: this.usuarioid,
         archivo: this.Nombre.indicador,
-        eliminar:item.eliminar,
+        eliminar:parseInt(item.eliminar),
         nombreEstandar: this.datos.Estandar,
         nombreCategoria: this.datos.Categoria,
         nombreSubcategoria: this.datos.Subcategoria,
       });
     });
     console.log("envia", this.enviar);
-    // this.authService.enviarIndicadorEditado(this.enviar).subscribe((res) => {
-    //   if (res) {
-    //     this.alerta("Editado");
-    //     this.router.navigate(["administrar-indicadores"]);
-    //   }
-    //   return res;
-    // });
+    this.authService.enviarIndicadorEditado(this.enviar).subscribe((res) => {
+      if (res) {
+        this.alerta("Editado");
+        this.router.navigate(["administrar-indicadores"]);
+      }
+      return res;
+    });
   }
   alerta(mensaje: any) {
     Swal.fire(mensaje);
