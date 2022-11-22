@@ -362,7 +362,6 @@ eliminarFila(event){
         nombreSubcategoria: this.datos.Subcategoria,
       });
     });
-    console.log("envia", this.enviar);
     this.authService.enviarIndicadorEditado(this.enviar).subscribe((res) => {
       if (res) {
         this.alerta("Editado");
