@@ -77,9 +77,10 @@ export class EditarIndicadorComponent implements OnInit {
 
   bandera = 1;
 
-Nombre={
-  indicador:"",
-}
+  Nombre = {
+    indicador: "",
+  }
+  super: any = [];
   Categoria1 = {
     categoria1: "",
     NombreCategoria: "",
@@ -113,7 +114,7 @@ Nombre={
           this.resultadosTabla.push(item);
           this.anioArray.push(item.anio);
           this.preciodicidadesArray.push(item.periodicidad);
-          this.Nombre.indicador=item.archivo;
+          this.Nombre.indicador = item.archivo;
         }
         return item;
       });
@@ -383,7 +384,7 @@ Nombre={
         colorFondo: "transparent",
         usuarioid: this.usuarioid,
         archivo: this.Nombre.indicador,
-        eliminar:parseInt(item.eliminar),
+        eliminar: parseInt(item.eliminar),
         nombreEstandar: this.datos.Estandar,
         nombreCategoria: this.datos.Categoria,
         nombreSubcategoria: this.datos.Subcategoria,
