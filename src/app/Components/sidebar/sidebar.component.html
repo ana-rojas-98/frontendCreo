@@ -45,12 +45,15 @@
     <div class="link-sidebar" *ngIf="configuraciones">
       <img src="../../../assets/imagenes/configuracion.png" alt="indicador" />
       <a [routerLink]="['/configuracion']" [routerLinkActive]="['link-active']"
-        >Configuraciones</a
-      >
+        >Configuraciones</a>
     </div>
     <div class="link-sidebar" *ngIf="licenciar">
       <img src="../../../assets/imagenes/licencias.png" alt="indicador" />
       <a [routerLink]="['/licencia']" [routerLinkActive]="['link-active']">Licenciar</a>
+    </div>
+    <div class="link-sidebar">
+      <img src="../../../assets/imagenes/cerrarsesion.png" alt="indicador" />
+      <a type="button" (click)="CerrarSesion()">Cerrar sesión</a>
     </div>
   </div>
 </div>
