@@ -17,7 +17,7 @@ export class IndicadoresComponent implements OnInit {
     private authService: AuthService,
     private reportesService: ReportesService,
     private indicadoresservice: IndicadoresService
-  ) {}
+  ) { }
   Estandar = new FormControl("");
   Categoria = new FormControl("");
   Subcategoria = new FormControl("");
@@ -69,8 +69,11 @@ export class IndicadoresComponent implements OnInit {
       .ConsultarIndicadoresAsignados()
       .subscribe((res: any) => {
         this.resultadosTabla = res.map((item) => {
+          
           return item;
         });
+        this.resultadosTabla = this.resultadosTabla.sort();
+        this.resultadosTabla = this.resultadosTabla.reverse();
       });
   }
 
@@ -166,6 +169,8 @@ export class IndicadoresComponent implements OnInit {
               item.idSubCategoria == this.Subcategoria.value
           );
         }
+        this.resultadosTabla = this.resultadosTabla.sort();
+        this.resultadosTabla = this.resultadosTabla.reverse();
       });
   }
 
