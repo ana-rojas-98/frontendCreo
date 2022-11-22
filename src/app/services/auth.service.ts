@@ -318,7 +318,7 @@ export class AuthService {
     return resultado;
   }
 
-  enviarIndicadorEsitado(array: any) {
+  enviarIndicadorEditado(array: any) {
     const headers = this.fnSetDefineTokenAuthorization();
     let formato = this.http.post(
       `${this.URL_SER}/api/Notificaciones/actualizarTabla`,
