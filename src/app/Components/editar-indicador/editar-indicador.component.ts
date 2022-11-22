@@ -77,6 +77,21 @@ export class EditarIndicadorComponent implements OnInit {
 
   bandera = 1;
 
+Nombre={
+  indicador:"",
+}
+  Categoria1 = {
+    categoria1: "",
+    NombreCategoria: "",
+  };
+
+  SubCategoria = {
+    subcategoria1: "",
+    nombreSubcategoria: "",
+  };
+
+  eliminarObj:any;
+  eliminados:any=[];
   ngOnInit() {
     this.authService.enviarCorreos().subscribe((res: any) => { });
     this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
@@ -100,6 +115,7 @@ export class EditarIndicadorComponent implements OnInit {
           this.resultadosTabla.push(item);
           this.anioArray.push(item.anio);
           this.preciodicidadesArray.push(item.periodicidad);
+          this.Nombre.indicador=item.archivo;
         }
         return item;
       });
@@ -305,6 +321,7 @@ export class EditarIndicadorComponent implements OnInit {
           alinear: "center",
           colorFondo: "transparent",
           usuarioid: this.usuarioid,
+          archivo: this.Nombre.indicador,
           nombreEstandar: this.datos.Estandar,
           nombreCategoria: this.datos.Categoria,
           nombreSubcategoria: this.datos.Subcategoria,
@@ -343,7 +360,7 @@ export class EditarIndicadorComponent implements OnInit {
         nombreSubcategoria: this.datos.Subcategoria,
       });
     });
-    this.resultadosHTML.map((item) => {
+    this.super.map((item) => {
       this.enviar.push({
         idFormato: item.idFormato,
         entrada: item.entrada,
@@ -367,7 +384,8 @@ export class EditarIndicadorComponent implements OnInit {
         alinear: "center",
         colorFondo: "transparent",
         usuarioid: this.usuarioid,
-        eliminar: parseInt(item.eliminar),
+        archivo: this.Nombre.indicador,
+        eliminar:parseInt(item.eliminar),
         nombreEstandar: this.datos.Estandar,
         nombreCategoria: this.datos.Categoria,
         nombreSubcategoria: this.datos.Subcategoria,
