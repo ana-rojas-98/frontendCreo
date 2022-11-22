@@ -119,9 +119,9 @@ export class EditarIndicadorComponent implements OnInit {
         return item;
       });
       this.filtrar();
-      // selectElement("estandar", this.resultadosTabla[0].estandar);
-      // selectElement("categoria", this.resultadosTabla[0].categoria1);
-      // selectElement("subcategoria", this.resultadosTabla[0].subcategoria1);
+      selectElement("estandar", this.resultadosTabla[0].estandar);
+      selectElement("categoria", this.resultadosTabla[0].categoria1);
+      selectElement("subcategoria", this.resultadosTabla[0].subcategoria1);
     });
   }
 
@@ -404,9 +404,11 @@ guardar() {
   alerta(mensaje: any) {
     Swal.fire(mensaje);
   }
+
 }
 
-// function selectElement(id, valueToSelect) {
-//   let element = document.getElementById(id);
-//   element.value = valueToSelect;
-// }
+function selectElement(id, valueToSelect) {
+  let element;
+  element = document.getElementById(id);
+  element.value = valueToSelect;
+}
