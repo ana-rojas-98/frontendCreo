@@ -310,7 +310,6 @@ eliminarFila(event){
  
   guardar() { 
     this.super = this.resultadosHTML;
-    console.log("nombreindicador", this.Nombre.indicador)
     this.eliminados.map((item1)=>{
         this.super.splice(item1.posicion,0,{
           idFormato:item1.idFormato,
