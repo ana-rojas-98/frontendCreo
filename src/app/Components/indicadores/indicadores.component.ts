@@ -17,7 +17,7 @@ export class IndicadoresComponent implements OnInit {
     private authService: AuthService,
     private reportesService: ReportesService,
     private indicadoresservice: IndicadoresService
-  ) {}
+  ) { }
   Estandar = new FormControl("");
   Categoria = new FormControl("");
   Subcategoria = new FormControl("");
@@ -32,8 +32,9 @@ export class IndicadoresComponent implements OnInit {
   EstandarOpciones: any = [];
   CategoriaOpciones: any = [];
   SubcategoriaOpciones: any = [];
-
+  usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
   ngOnInit() {
+    this.usuarioLocalStote;
     this.getindIcadores();
     this.getCategoria();
     this.getStandares();
@@ -46,6 +47,14 @@ export class IndicadoresComponent implements OnInit {
         return item;
       });
     });
+
+    // if(this.usuarioLocalStote.typeuser == "3"){
+    //   this.authService.getStandares("").subscribe((res: any) => {
+    //     this.resultados = res.map((item) => {
+    //       return item;
+    //     });
+    //   });
+    // }
   }
 
   getCategoria() {
@@ -65,13 +74,30 @@ export class IndicadoresComponent implements OnInit {
   }
 
   getindIcadores() {
+    if(this.usuarioLocalStote.typeuser != "3"){
     this.reportesService
       .ConsultarIndicadoresAsignados()
       .subscribe((res: any) => {
         this.resultadosTabla = res.map((item) => {
           return item;
         });
+        this.resultadosTabla = this.resultadosTabla.sort();
+        this.resultadosTabla = this.resultadosTabla.reverse();
       });
+    }
+    if(this.usuarioLocalStote.typeuser == "3"){
+      let id = {
+        id:this.usuarioLocalStote.usuarioid
+      }
+      this.reportesService
+        .IndicadoresAsignados(id)
+        .subscribe((res: any) => {
+          this.resultadosTabla = res.map((item) => {
+            console.log(res);
+            return item;
+          });
+        });
+      }
   }
 
   estandar() {
@@ -166,6 +192,8 @@ export class IndicadoresComponent implements OnInit {
               item.idSubCategoria == this.Subcategoria.value
           );
         }
+        this.resultadosTabla = this.resultadosTabla.sort();
+        this.resultadosTabla = this.resultadosTabla.reverse();
       });
   }
 

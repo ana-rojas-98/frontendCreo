@@ -38,6 +38,14 @@ export class ReportesService {
     );
     return resul;
   }
+  
+  IndicadoresAsignados(id) {
+    const headers = this.authService.fnSetDefineTokenAuthorization();
+    let resul = this.http.post(
+      `${this.URL_SER}/api/Notificaciones/IndicadoresAsignados`, id, headers
+    );
+    return resul;
+  }
 
   UpdateAchivos(idIndicador) {
     const headers = this.authService.fnSetDefineTokenAuthorization();

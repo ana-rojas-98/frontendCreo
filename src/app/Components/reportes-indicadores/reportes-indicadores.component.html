@@ -135,13 +135,15 @@
             <td>{{ item.usuario }}</td>
             <td>{{ item.indicador }}</td>
             <td>{{ item.avance }}%</td>
-            <td>{{ item.urlArchivo }}</td>
+            <td><a [routerLink]="['/Archivos-Adjuntos',item.idIndicador]"
+              [routerLinkActive]="['link-active']">Archivos</a></td>
+          <td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="contenedorDescargas">
-      <button class="button">Descargar todos los archivos adjuntos</button>
+      <button (click)="DescargarTodosAdjuntos()" class="button">Descargar todos los archivos adjuntos</button>
       <button class="botonImagen" (click)="downloadExcel()">
         <img
           src="../../../assets/imagenes/excel.png"

@@ -2,7 +2,7 @@
 .contenedor {
   @include contenedor;
 }
-.container {
+.cuerpo {
   @include body;
   display: grid;
   grid-gap: 0.5rem;
