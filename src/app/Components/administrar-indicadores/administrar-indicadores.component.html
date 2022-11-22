@@ -97,8 +97,7 @@
               <img
                 src="../../../assets/imagenes/nombreIndicador.png"
                 alt="icono-nombre"
-                class="mx-1"
-              />
+                class="mx-1"/>
               Nombre indicador
             </th>
             <th>
@@ -128,20 +127,17 @@
             <th *ngIf="editar">
               <img
                 src="../../../assets/imagenes/editar.png"
-                alt="icono-editar"
-              />
+                alt="icono-editar"/>
             </th>
             <th *ngIf="eliminar">
               <img
                 src="../../../assets/imagenes/eliminar.png"
-                alt="icono-eliminar"
-              />
+                alt="icono-eliminar"/>
             </th>
             <th>
               <img
                 src="../../../assets/imagenes/duplicar.png"
-                alt="icono-duplicar"
-              />
+                alt="icono-duplicar"/>
             </th>
             <th>
               <img src="../../../assets/imagenes/excel.png" alt="excel-icono" />
@@ -161,7 +157,7 @@
             <td>{{ item.fechaModificacion }}</td>
             <td>
               <a
-                [routerLink]="['/Archivos-Adjuntos', item.idArchivo]"
+                [routerLink]="['/Archivos-Adjuntos', item.idIndicador]"
                 [routerLinkActive]="['link-active']"
                 >Archivos</a
               >
@@ -170,7 +166,7 @@
               <img
                 src="../../../assets/imagenes/ver.png"
                 alt="ver-icono"
-                [routerLink]="['/ver-indicador', item.idArchivo, 'ver']"
+                [routerLink]="['/ver-indicador', item.idIndicador, 'ver']"
                 [routerLinkActive]="['link-active']"
               />
             </td>
@@ -178,20 +174,20 @@
               <img
                 src="../../../assets/imagenes/editar.png"
                 alt="editar-icono"
-                [routerLink]="['/editar-indicador', item.idArchivo, 'editar']"
+                [routerLink]="['/editar-indicador', item.idIndicador, 'editar']"
                 [routerLinkActive]="['link-active']"
               />
             </td>
             <td *ngIf="eliminar">
               <img
-                (click)="Eliminar(item.idArchivo)"
+                (click)="Eliminar(item.idIndicador)"
                 src="../../../assets/imagenes/eliminar.png"
                 alt="eliminar-icono"
               />
             </td>
             <td>
               <img
-                (click)="DuplicarIndicador(item.idArchivo)"
+                (click)="DuplicarIndicador(item.idIndicador)"
                 src="../../../assets/imagenes/duplicar.png"
                 alt="duplicar-icono"
               />
