@@ -1,8 +1,74 @@
 <app-nav-menu></app-nav-menu>
 <div class="contenedor">
-    <app-sidebar></app-sidebar>
-    <div class="container">
-        
+  <app-sidebar></app-sidebar>
+  <div class="container" *ngIf="mostrar == true">
+    <div class="v-indicadores">
+      <div class="imagen">
+        <img src="../../../assets/imagenes/indicadores.png" alt="indicador" />
+      </div>
+      <div class="valores">
+        <h3>Indicadores asignados</h3>
+        <p>Completados: {{completados}}</p>
+        <p>Faltantes: {{faltantes}}</p>
+        <p>Total: {{totales}}</p>
+      </div>
     </div>
+    <div class="horizontal">
+      <h3>Usuarios</h3>
+      <img
+        src="../../../assets/imagenes/administardor-usuarios.png"
+        alt="indicador"
+      />
+      <div class="parrafo">
+        <p>Activos: {{activos}}</p>
+        <p>Inactivos: {{inactivos}}</p>
+        <p>Total: {{total}}</p>
+      </div>
+    </div>
+    <div class="reportes">
+      <div class="tituloR">
+        <h3>Reportes</h3>
+      </div>
+      <img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
+      <div class="nombres">
+        <p>Nombre reporte</p>
+        <img src="../../../assets/imagenes/ver.png" alt="indicador" />
+      </div>
+    </div>
+  </div>
+  <div class="container" *ngIf="mostrar == false">
+    <div class="v-indicadores">
+        <div class="imagen">
+          <img src="../../../assets/imagenes/indicadores.png" alt="indicador" />
+        </div>
+        <div class="valores">
+          <h3>Indicadores asignados</h3>
+          <p>Completados: {{completados}} </p>
+          <p>Faltantes: {{faltantes}}</p>
+          <p>Total: {{totales}}</p>
+        </div>
+      </div>
+      <div class="horizontal">
+        <h3>Último indicador trabajado</h3>
+        <img
+          src="../../../assets/imagenes/privateAdmin.png"
+          alt="indicador"
+        />
+        <div class="parrafo">
+          <p>Nombre indicador</p>
+          <button class="continuar">Continuar</button>
+        </div>
+      </div>
+      <div class="reportes">
+        <div class="tituloR">
+          <h3>Reportes</h3>
+        </div>
+        <img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
+        <div class="nombres">
+          <p>Nombre reporte</p>
+          <img src="../../../assets/imagenes/ver.png" alt="indicador" />
+        </div>
+      </div>
+  </div>
 </div>
 <app-footer></app-footer>

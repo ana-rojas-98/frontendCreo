@@ -75,10 +75,9 @@ export class EditarIndicadorComponent implements OnInit {
   };
   usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
   usuarioid = parseInt(this.usarioLocalStote.usuarioid);
-  //variables de ensayo
-  ensayo: any = [];
   posicion: any;
-
+  eliminarObj:any;
+  eliminados:any=[];
   ngOnInit() {
     this.authService.enviarCorreos().subscribe((res: any) => {});
     this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
@@ -231,7 +230,6 @@ export class EditarIndicadorComponent implements OnInit {
 
 insertarFila(event) {     
   let evento = event.target;
-  console.log("evento solo", evento.parentNode.parentNode.rowIndex)
   let insertar=evento.parentNode.parentNode.rowIndex;
 /// (posicion a añadir, posicion eliminar, que cosa agregar o eliminar)
 this.resultadosHTML.splice(insertar,0,{
@@ -253,29 +251,26 @@ this.resultadosHTML.splice(insertar,0,{
   html: "",
   alinear: "ensayo",
   colorFondo:"ensayos",
+  eliminar:"0",
   usuarioId: this.usuarioid,
   idArchivo: this.idArchivo.idArchivo,
   periodicidad: this.Periodo,
   anio: this.Anio,
 })
-console.log("html",this.resultadosHTML)
 }
+
 
 eliminarFila(event){
   let e=event.target;
-  console.log("evento",e.parentNode.parentNode.rowIndex);
   let eliminar=e.parentNode.parentNode.rowIndex-1;
   /// (posicion eliminar, cantidad a eliminar)
-  this.resultadosHTML.splice(eliminar,1);
-   console.log("elimina arra",this.resultadosHTML);
-}
- 
-
-
-  guardar() {
-    this.resultadosHTML.map((item) => {
-      this.enviar.push({
-        idFormato: item.idFormato,
+  this.eliminarObj=this.resultadosHTML.splice(eliminar,1);
+   this.eliminarObj.map((item)=>{
+    this.eliminados.push(
+      {
+        idFormato:item.idFormato,
+        eliminar:"1",
+        posicion:eliminar,
         entrada: item.entrada,
         numerop: item.numerop,
         formulap: item.formulap,
@@ -300,16 +295,81 @@ eliminarFila(event){
         nombreEstandar: this.datos.Estandar,
         nombreCategoria: this.datos.Categoria,
         nombreSubcategoria: this.datos.Subcategoria,
+      })
+   })
+}
+ 
+
+
+  guardar() {   
+    this.eliminados.map((item1)=>{
+        this.resultadosHTML.splice(item1.posicion,0,{
+          idFormato:item1.idFormato,
+          eliminar:item1.eliminar,
+          entrada: item1.entrada,
+          numerop: item1.numerop,
+          formulap: item1.formulap,
+          formula: item1.formula,
+          valor: item1.valor,
+          titulo: item1.titulo,
+          tamanoTexto: parseInt(item1.tamanoTexto),
+          color: item1.color,
+          negrilla: item1.negrilla,
+          subrayado: item1.subrayado,
+          cursiva: item1.cursiva,
+          inicioCol: parseInt(item1.inicioCol),
+          finCol: parseInt(item1.finCol),
+          saltoLinea: item1.saltoLinea,
+          html: item1.html,
+          idArchivo: parseInt(item1.idArchivo),
+          periodicidad: item1.periodicidad,
+          anio: parseInt(item1.anio),
+          alinear: "center",
+          colorFondo: "transparent",
+          usuarioid: this.usuarioid,
+          nombreEstandar: this.datos.Estandar,
+          nombreCategoria: this.datos.Categoria,
+          nombreSubcategoria: this.datos.Subcategoria,
+        });
+    });
+    this.resultadosHTML.map((item) => {
+      this.enviar.push({
+        idFormato: item.idFormato,
+        entrada: item.entrada,
+        numerop: item.numerop,
+        formulap: item.formulap,
+        formula: item.formula,
+        valor: item.valor,
+        titulo: item.titulo,
+        tamanoTexto: parseInt(item.tamanoTexto),
+        color: item.color,
+        negrilla: item.negrilla,
+        subrayado: item.subrayado,
+        cursiva: item.cursiva,
+        inicioCol: parseInt(item.inicioCol),
+        finCol: parseInt(item.finCol),
+        saltoLinea: item.saltoLinea,
+        html: item.html,
+        idArchivo: parseInt(item.idArchivo),
+        periodicidad: item.periodicidad,
+        anio: parseInt(item.anio),
+        alinear: "center",
+        colorFondo: "transparent",
+        usuarioid: this.usuarioid,
+        eliminar:item.eliminar,
+        nombreEstandar: this.datos.Estandar,
+        nombreCategoria: this.datos.Categoria,
+        nombreSubcategoria: this.datos.Subcategoria,
       });
     });
     console.log("envia", this.enviar);
-    this.authService.enviarIndicadorEsitado(this.enviar).subscribe((res) => {
-      if (res) {
-        this.alerta("Editado");
-        this.router.navigate(["administrar-indicadores"]);
-      }
-      return res;
-    });
+    // this.authService.enviarIndicadorEditado(this.enviar).subscribe((res) => {
+    //   if (res) {
+    //     this.alerta("Editado");
+    //     this.router.navigate(["administrar-indicadores"]);
+    //   }
+    //   return res;
+    // });
   }
   alerta(mensaje: any) {
     Swal.fire(mensaje);
