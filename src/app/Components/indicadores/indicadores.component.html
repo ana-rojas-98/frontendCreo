@@ -17,18 +17,32 @@
       </div>
       <div class="box">
         <p>Categoría</p>
-        <select [formControl]="Categoria" (change)="categoria()" class="selector">
+        <select
+          [formControl]="Categoria"
+          (change)="categoria()"
+          class="selector"
+        >
           <option value="">Seleccione categoría</option>
-          <option *ngFor="let item of resultadosCategoria" [value]="item.categoria1">
+          <option
+            *ngFor="let item of resultadosCategoria"
+            [value]="item.categoria1"
+          >
             {{ item.nombreCategoria }}
           </option>
         </select>
       </div>
       <div class="box">
         <p>Subcategoría</p>
-        <select class="selector" [formControl]="Subcategoria" (change)="subcategoria()">
+        <select
+          class="selector"
+          [formControl]="Subcategoria"
+          (change)="subcategoria()"
+        >
           <option value="">Seleccione subcategoría</option>
-          <option *ngFor="let item of resultadosSubCategoria" [value]="item.subcategoria1">
+          <option
+            *ngFor="let item of resultadosSubCategoria"
+            [value]="item.subcategoria1"
+          >
             {{ item.nombreSubcategoria }}
           </option>
         </select>
@@ -39,28 +53,52 @@
         <thead>
           <tr>
             <th>
-              <img src="../../../assets/imagenes/nombreIndicador.png" alt="icono-indicador" class="mx-1" />
+              <img
+                src="../../../assets/imagenes/nombreIndicador.png"
+                alt="icono-indicador"
+                class="mx-1"
+              />
               Nombre indicador
             </th>
             <th>
-              <img src="../../../assets/imagenes/creador.png" alt="icono-diligenciador" class="mx-1" />
+              <img
+                src="../../../assets/imagenes/creador.png"
+                alt="icono-diligenciador"
+                class="mx-1"
+              />
               Ultimo que diligencio
             </th>
             <th>
-              <img src="../../../assets/imagenes/fechaHora.png" alt="icono-fecha" class="mx-1" />
+              <img
+                src="../../../assets/imagenes/fechaHora.png"
+                alt="icono-fecha"
+                class="mx-1"
+              />
               Fecha y hora
             </th>
             <th>% Avance</th>
             <th>
-              <img src="../../../assets/imagenes/archivo.png" alt="icono-archivo" class="mx-1" />
+              <img
+                src="../../../assets/imagenes/archivo.png"
+                alt="icono-archivo"
+                class="mx-1"
+              />
               Archivo
             </th>
             <th>
-              <img src="../../../assets/imagenes/ver.png" alt="icono-ver" class="mx-1" />
+              <img
+                src="../../../assets/imagenes/ver.png"
+                alt="icono-ver"
+                class="mx-1"
+              />
               Ver
             </th>
             <th>
-              <img src="../../../assets/imagenes/editar.png" alt="icono-editar" class="mx-1" />
+              <img
+                src="../../../assets/imagenes/editar.png"
+                alt="icono-editar"
+                class="mx-1"
+              />
               Diligenciar
             </th>
             <th></th>
@@ -74,23 +112,91 @@
             <td>{{ item.usuario }}</td>
             <td>{{ item.fechaModificacion }}</td>
             <td>{{ item.avance }}%</td>
-            <td><a [routerLink]="['/Archivos-Adjuntos',item.idIndicador]"
-                [routerLinkActive]="['link-active']">Archivos</a></td>
             <td>
-              <img src="../../../assets/imagenes/ver.png" alt="icono-ver" [routerLink]="[
-                  '/diligenciar-indicador',item.idIndicador,'ver']" [routerLinkActive]="['link-active']" />
+              <a
+                [routerLink]="['/Archivos-Adjuntos', item.idIndicador]"
+                [routerLinkActive]="['link-active']"
+                >Archivos</a
+              >
             </td>
-            <td>
-              <img src="../../../assets/imagenes/editar.png" alt="icono-editar" [routerLink]="[
-                  '/diligenciar-indicador',item.idIndicador,'editar']" [routerLinkActive]="['link-active']" />
+            <td *ngIf="usuario">
+              <img
+                *ngIf="item.ver"
+                src="../../../assets/imagenes/ver.png"
+                alt="icono-ver"
+                [routerLink]="[
+                  '/diligenciar-indicador',
+                  item.idIndicador,
+                  'ver'
+                ]"
+                [routerLinkActive]="['link-active']"
+              />
             </td>
-            <td>
+            <td *ngIf="!usuario">
+              <img
+                src="../../../assets/imagenes/ver.png"
+                alt="icono-ver"
+                [routerLink]="[
+                  '/diligenciar-indicador',
+                  item.idIndicador,
+                  'ver'
+                ]"
+                [routerLinkActive]="['link-active']"
+              />
+            </td>
+            <td *ngIf="usuario">
+              <img
+                *ngIf="item.diligenciar"
+                src="../../../assets/imagenes/editar.png"
+                alt="icono-editar"
+                [routerLink]="[
+                  '/diligenciar-indicador',
+                  item.idIndicador,
+                  'editar'
+                ]"
+                [routerLinkActive]="['link-active']"
+              />
+            </td>
+            <td *ngIf="!usuario">
+              <img
+                src="../../../assets/imagenes/editar.png"
+                alt="icono-editar"
+                [routerLink]="[
+                  '/diligenciar-indicador',
+                  item.idIndicador,
+                  'editar'
+                ]"
+                [routerLinkActive]="['link-active']"
+              />
+            </td>
+            <td *ngIf="usuario">
+              <img
+                *ngIf="item.excel"
+                src="../../../assets/imagenes/excel.png"
+                alt="icono-excel"
+              />
+            </td>
+            <td *ngIf="usuario">
+              <img
+                *ngIf="item.word"
+                src="../../../assets/imagenes/word.png"
+                alt="icono-word"
+              />
+            </td>
+            <td *ngIf="usuario">
+              <img
+                *ngIf="item.pdf"
+                src="../../../assets/imagenes/pdf.png"
+                alt="icono-pdf"
+              />
+            </td>
+            <td *ngIf="!usuario">
               <img src="../../../assets/imagenes/excel.png" alt="icono-excel" />
             </td>
-            <td>
+            <td *ngIf="!usuario">
               <img src="../../../assets/imagenes/word.png" alt="icono-word" />
             </td>
-            <td>
+            <td *ngIf="!usuario">
               <img src="../../../assets/imagenes/pdf.png" alt="icono-pdf" />
             </td>
           </tr>
@@ -98,12 +204,26 @@
       </table>
       <div class="d-flex flex-row-reverse final">
         <div class="p-2">
-          <img class="final-img" src="../../../assets/imagenes/excel.png" alt="icono-excel" />
-          <img class="final-img" src="../../../assets/imagenes/word.png" alt="icono-word" />
-          <img class="final-img" src="../../../assets/imagenes/pdf.png" alt="icono-pdf" />
+          <img
+            class="final-img"
+            src="../../../assets/imagenes/excel.png"
+            alt="icono-excel"
+          />
+          <img
+            class="final-img"
+            src="../../../assets/imagenes/word.png"
+            alt="icono-word"
+          />
+          <img
+            class="final-img"
+            src="../../../assets/imagenes/pdf.png"
+            alt="icono-pdf"
+          />
         </div>
         <div class="mx-5">
-          <button (click)="DescargarTodosAdjuntos()" class="">Descargar todos los archivos adjuntos</button>
+          <button (click)="DescargarTodosAdjuntos()" class="">
+            Descargar todos los archivos adjuntos
+          </button>
         </div>
       </div>
     </div>

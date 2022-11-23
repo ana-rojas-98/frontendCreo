@@ -17,7 +17,9 @@ export class IndicadoresComponent implements OnInit {
     private authService: AuthService,
     private reportesService: ReportesService,
     private indicadoresservice: IndicadoresService
-  ) { }
+  ) {}
+
+  usuario = false;
   Estandar = new FormControl("");
   Categoria = new FormControl("");
   Subcategoria = new FormControl("");
@@ -39,6 +41,21 @@ export class IndicadoresComponent implements OnInit {
     this.getCategoria();
     this.getStandares();
     this.getSubCategoria();
+    this.getIndicadoresAsignados();
+  }
+
+  getIndicadoresAsignados() {
+    let id = {
+      id: 5,
+    };
+    this.indicadoresservice
+      .getIndicadoresAsignados(id)
+      .subscribe((res: any) => {
+        this.resultados = res.map((item) => {
+          console.log("indicadores: ", res);
+          return item;
+        });
+      });
   }
 
   getStandares() {
@@ -74,10 +91,23 @@ export class IndicadoresComponent implements OnInit {
   }
 
   getindIcadores() {
-    if(this.usuarioLocalStote.typeuser != "3"){
-    this.reportesService
-      .ConsultarIndicadoresAsignados()
-      .subscribe((res: any) => {
+    if (this.usuarioLocalStote.typeuser != "3") {
+      this.reportesService
+        .ConsultarIndicadoresAsignados()
+        .subscribe((res: any) => {
+          this.resultadosTabla = res.map((item) => {
+            return item;
+          });
+          this.resultadosTabla = this.resultadosTabla.sort();
+          this.resultadosTabla = this.resultadosTabla.reverse();
+        });
+    }
+    if (this.usuarioLocalStote.typeuser == "3") {
+      this.usuario = true;
+      let id = {
+        id: this.usuarioLocalStote.usuarioid,
+      };
+      this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
         this.resultadosTabla = res.map((item) => {
           return item;
         });
@@ -85,19 +115,6 @@ export class IndicadoresComponent implements OnInit {
         this.resultadosTabla = this.resultadosTabla.reverse();
       });
     }
-    if(this.usuarioLocalStote.typeuser == "3"){
-      let id = {
-        id:this.usuarioLocalStote.usuarioid
-      }
-      this.reportesService
-        .IndicadoresAsignados(id)
-        .subscribe((res: any) => {
-          this.resultadosTabla = res.map((item) => {
-            console.log(res);
-            return item;
-          });
-        });
-      }
   }
 
   estandar() {
@@ -177,9 +194,32 @@ export class IndicadoresComponent implements OnInit {
   }
 
   getIndicadoresFilter() {
-    this.reportesService
-      .ConsultarIndicadoresAsignados()
-      .subscribe((res: any) => {
+    if (this.usuarioLocalStote.typeuser != "3") {
+      this.reportesService
+        .ConsultarIndicadoresAsignados()
+        .subscribe((res: any) => {
+          if (this.Subcategoria.value != "") {
+            this.resultadosTabla = res.filter(
+              (item) => item.idSubCategoria == this.Subcategoria.value
+            );
+          } else {
+            this.resultadosTabla = res.filter(
+              (item) =>
+                item.idCategoria == this.Categoria.value ||
+                item.idEstandar == this.Estandar.value ||
+                item.idSubCategoria == this.Subcategoria.value
+            );
+          }
+          this.resultadosTabla = this.resultadosTabla.sort();
+          this.resultadosTabla = this.resultadosTabla.reverse();
+        });
+    }
+
+    if (this.usuarioLocalStote.typeuser == "3") {
+      let id = {
+        id: this.usuarioLocalStote.usuarioid,
+      };
+      this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
         if (this.Subcategoria.value != "") {
           this.resultadosTabla = res.filter(
             (item) => item.idSubCategoria == this.Subcategoria.value
@@ -195,6 +235,7 @@ export class IndicadoresComponent implements OnInit {
         this.resultadosTabla = this.resultadosTabla.sort();
         this.resultadosTabla = this.resultadosTabla.reverse();
       });
+    }
   }
 
   alert(mensaje) {

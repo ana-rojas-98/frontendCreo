@@ -7,20 +7,28 @@
     </div>
     <div class="row formatos">
       <div class="col-5 d-flex flex-row">
-        <a type="button" (click)="DescargarEx()"><img src="../../../assets/imagenes/excel.png" alt="icono-excel" /></a>
-        <a type="button" (click)="DescargarWd()"><img src="../../../assets/imagenes/word.png" alt="icono-word" /></a>
-        <a type="button" (click)="DescargarPDF()"><img src="../../../assets/imagenes/pdf.png" alt="icono-pdf" /></a>
+        <a *ngIf="excel" type="button" (click)="DescargarEx()"
+          ><img src="../../../assets/imagenes/excel.png" alt="icono-excel"
+        /></a>
+        <a *ngIf="word" type="button" (click)="DescargarWd()"
+          ><img src="../../../assets/imagenes/word.png" alt="icono-word"
+        /></a>
+        <a *ngIf="pdf" type="button" (click)="DescargarPDF()"
+          ><img src="../../../assets/imagenes/pdf.png" alt="icono-pdf"
+        /></a>
       </div>
 
       <div class="col-7 d-flex flex-row-reverse mb-2">
-        <button class="" [routerLink]="['/Archivos-Adjuntos',id]"
-        [routerLinkActive]="['link-active']" >
+        <button
+          class=""
+          [routerLink]="['/Archivos-Adjuntos', id]"
+          [routerLinkActive]="['link-active']"
+        >
           Archivo adjunto
         </button>
       </div>
     </div>
     <div id="exportContent" class="tablero mb-2">
-
       <div class="title-card row">
         <div class="box mb-2 col-6">
           <h3>Año</h3>
@@ -47,8 +55,12 @@
       <!------------------------------------------------------------------------------------------------------------------>
     </div>
     <div class="botones">
-      <button id="Guardar" class="guardar-indicador" (click)="fnGuardar()">Guardar</button>
-      <button id="Finalizar" class="finalizar" (click)="fnFinalizar()">Finalizar</button>
+      <button id="Guardar" class="guardar-indicador" (click)="fnGuardar()">
+        Guardar
+      </button>
+      <button id="Finalizar" class="finalizar" (click)="fnFinalizar()">
+        Finalizar
+      </button>
     </div>
   </div>
 </div>
