@@ -8,14 +8,19 @@ import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import { AuthService } from "src/app/services/auth.service";
 
-
 @Component({
   selector: "app-diligenciar-indicador",
   templateUrl: "./diligenciar-indicador.component.html",
   styleUrls: ["./diligenciar-indicador.component.scss"],
 })
 export class DiligenciarIndicadorComponent implements OnInit {
-  constructor(private authService: AuthService, private route: ActivatedRoute, public router: Router, private indicadoresservice: IndicadoresService, private reportesService: ReportesService,) { }
+  constructor(
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    public router: Router,
+    private indicadoresservice: IndicadoresService,
+    private reportesService: ReportesService
+  ) {}
   id = 0;
   accionVerModificar = "";
   modificar = false;
@@ -28,7 +33,11 @@ export class DiligenciarIndicadorComponent implements OnInit {
   resultadosHTML = [];
   Respuestas = [];
   prueba = "";
+  excel = false;
+  word = false;
+  pdf = false;
   el: any;
+  usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
   Anio: "";
   Periodo = "";
@@ -43,7 +52,8 @@ export class DiligenciarIndicadorComponent implements OnInit {
   archivos: File = null;
   archivoCapturado: File;
 
-  resultadosIndicador = {};
+  resultadosIndicador: any = [];
+  resultados: any = [];
 
   Valores = {
     idFormato: 0,
@@ -60,9 +70,11 @@ export class DiligenciarIndicadorComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.authService.enviarCorreos().subscribe((res: any) => { });
-    this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
 
+    this.usuarioLocalStote;
+    this.consultarIndicador();
     this.id = parseInt(this.route.snapshot.paramMap.get("id"));
     this.accionVerModificar = this.route.snapshot.paramMap.get("accion");
     if (this.accionVerModificar == "ver") {
@@ -79,6 +91,32 @@ export class DiligenciarIndicadorComponent implements OnInit {
     //this.getIndicadoresFilter();
   }
 
+  consultarIndicador() {
+    if (this.usuarioLocalStote.typeuser == "3") {
+      let id = {
+        id: this.usuarioLocalStote.usuarioid,
+      };
+      this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
+        console.log("res: ", res);
+        res.map((item) => {
+          if (item.idIndicador == this.id) {
+            this.excel = item.excel;
+            this.word = item.word;
+            this.pdf = item.pdf;
+            this.resultados = true;
+          }
+        });
+        if (this.resultados != true) {
+          this.router.navigate(["private"]);
+        }
+      });
+    } else {
+      this.excel = true;
+      this.word = true;
+      this.pdf = true;
+    }
+  }
+
   filtrarInfo() {
     this.uniqueYears = [...new Set(this.anioArray)];
     this.uniquePeriod = [...new Set(this.preciodicidadesArray)];
@@ -88,35 +126,42 @@ export class DiligenciarIndicadorComponent implements OnInit {
   }
 
   VerDiligenciarIndicador() {
-    this.indicadoresservice.VerDiligenciarIndicador(this.idArchivo).subscribe((res: any) => {
-      this.resultadosTabla = res.map((item) => {
-        this.anioArray.push(item.anio);
-        this.preciodicidadesArray.push(item.periodicidad);
-        return item;
+    this.indicadoresservice
+      .VerDiligenciarIndicador(this.idArchivo)
+      .subscribe((res: any) => {
+        this.resultadosTabla = res.map((item) => {
+          this.anioArray.push(item.anio);
+          this.preciodicidadesArray.push(item.periodicidad);
+          return item;
+        });
+        this.idDeArchivo = this.resultadosTabla[0].idArchivo;
+        this.filtrarInfo();
+        this.AsignarChange();
       });
-      this.idDeArchivo = this.resultadosTabla[0].idArchivo;
-      this.filtrarInfo();
-      this.AsignarChange();
-    });
   }
 
   ChangePeriodo() {
-
     this.prueba = "";
-    if (this.Anio != '') {
-      if (this.Periodo != '') {
-        this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
-        this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
-        this.resultadosHTML.forEach(item => (this.prueba += item.html, this.Respuestas.push(item.valor)));
-
-      }
-      else {
+    if (this.Anio != "") {
+      if (this.Periodo != "") {
+        this.resultadosHTML = this.resultadosTabla.filter(
+          (an) => an.anio == this.Anio
+        );
+        this.resultadosHTML = this.resultadosHTML.filter(
+          (pe) => pe.periodicidad == this.Periodo
+        );
+        this.resultadosHTML.forEach(
+          (item) => (
+            (this.prueba += item.html), this.Respuestas.push(item.valor)
+          )
+        );
+      } else {
         this.prueba = "No se encuentra resultados";
       }
     } else {
       this.prueba = "No se encuentra resultados";
     }
-    document.getElementById('prueba').innerHTML = this.prueba;
+    document.getElementById("prueba").innerHTML = this.prueba;
 
     this.AsignarChange();
   }
@@ -124,94 +169,123 @@ export class DiligenciarIndicadorComponent implements OnInit {
   ChangeAnio() {
     this.prueba = "";
     this.Respuestas = [];
-    if (this.Anio != '') {
-      if (this.Periodo != '') {
-        this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
-        this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
+    if (this.Anio != "") {
+      if (this.Periodo != "") {
+        this.resultadosHTML = this.resultadosTabla.filter(
+          (an) => an.anio == this.Anio
+        );
+        this.resultadosHTML = this.resultadosHTML.filter(
+          (pe) => pe.periodicidad == this.Periodo
+        );
         let i = 2;
-        this.resultadosHTML.forEach(item => (
-          this.prueba += item.html,
-          this.Respuestas.push(item.valor)
-        ));
-
-      }
-      else {
+        this.resultadosHTML.forEach(
+          (item) => (
+            (this.prueba += item.html), this.Respuestas.push(item.valor)
+          )
+        );
+      } else {
         this.prueba = "No se encuentra resultados";
       }
     } else {
       this.prueba = "No se encuentra resultados";
     }
-    document.getElementById('prueba').innerHTML = this.prueba;
-    let contents = document.getElementById('prueba').innerHTML;
-    document.getElementById('prueba').innerHTML = contents;
+    document.getElementById("prueba").innerHTML = this.prueba;
+    let contents = document.getElementById("prueba").innerHTML;
+    document.getElementById("prueba").innerHTML = contents;
     this.AsignarChange();
   }
 
   getIndicadoresFilter() {
-    this.reportesService.ConsultarIndicadoresAsignados().subscribe((res: any) => {
-      this.resultadosIndicador = res.filter((item) => (item.idIndicador == this.id));
-    });
+    this.reportesService
+      .ConsultarIndicadoresAsignados()
+      .subscribe((res: any) => {
+        this.resultadosIndicador = res.filter(
+          (item) => item.idIndicador == this.id
+        );
+      });
     this.nombreArchivo = this.resultadosIndicador[0].indicador;
   }
 
   fnGuardar() {
-
-    if (this.Anio == "" || this.Anio == null || this.Periodo == "" || this.Periodo == null) {
+    if (
+      this.Anio == "" ||
+      this.Anio == null ||
+      this.Periodo == "" ||
+      this.Periodo == null
+    ) {
       this.alert("Debe seleccionar año y periodo antes de guardar");
-    }
-    else {
-      this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
-      this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
+    } else {
+      this.resultadosHTML = this.resultadosTabla.filter(
+        (an) => an.anio == this.Anio
+      );
+      this.resultadosHTML = this.resultadosHTML.filter(
+        (pe) => pe.periodicidad == this.Periodo
+      );
       let i = 0;
       var contents;
       let contenidos = [];
       this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
-      this.resultadosHTML.map(item => (
-        contents = document.getElementById((item.idFila - 1).toString()),
-        item.valor = contents.value,
-        item.Usuarioid = this.usarioLocalStote.usuarioid,
-        contenidos.push(item),
-        i++
-      ));
-      this.indicadoresservice.GuardarRespuestasIndicador(contenidos).subscribe((res: any) => {
-        if (res.resul == "Se guardo con exito") {
-          this.alert("Respuestas guardadas");
-          location.reload();
-        }
-        return res;
-      });
-    }
-  }
-
-  fnFinalizar() {
-
-    let a = confirm("¿Está seguro que ya finalizó este indicador?")
-    if (a == true) {
-      if (this.Anio == "" || this.Anio == null || this.Periodo == "" || this.Periodo == null) {
-        this.alert("Debe seleccionar año y periodo antes de guardar");
-      }
-      else {
-        this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
-        this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
-        let i = 0;
-        var contents;
-        let contenidos = [];
-        this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
-        this.resultadosHTML.map(item => (
-          contents = document.getElementById((item.idFila - 1).toString()),
-          item.valor = contents.value,
-          item.Usuarioid = this.usarioLocalStote.usuarioid,
+      this.resultadosHTML.map(
+        (item) => (
+          (contents = document.getElementById((item.idFila - 1).toString())),
+          (item.valor = contents.value),
+          (item.Usuarioid = this.usarioLocalStote.usuarioid),
           contenidos.push(item),
           i++
-        ));
-        this.indicadoresservice.FinalizarIndicador(contenidos).subscribe((res: any) => {
+        )
+      );
+      this.indicadoresservice
+        .GuardarRespuestasIndicador(contenidos)
+        .subscribe((res: any) => {
           if (res.resul == "Se guardo con exito") {
             this.alert("Respuestas guardadas");
             location.reload();
           }
           return res;
         });
+    }
+  }
+
+  fnFinalizar() {
+    let a = confirm("¿Está seguro que ya finalizó este indicador?");
+    if (a == true) {
+      if (
+        this.Anio == "" ||
+        this.Anio == null ||
+        this.Periodo == "" ||
+        this.Periodo == null
+      ) {
+        this.alert("Debe seleccionar año y periodo antes de guardar");
+      } else {
+        this.resultadosHTML = this.resultadosTabla.filter(
+          (an) => an.anio == this.Anio
+        );
+        this.resultadosHTML = this.resultadosHTML.filter(
+          (pe) => pe.periodicidad == this.Periodo
+        );
+        let i = 0;
+        var contents;
+        let contenidos = [];
+        this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+        this.resultadosHTML.map(
+          (item) => (
+            (contents = document.getElementById((item.idFila - 1).toString())),
+            (item.valor = contents.value),
+            (item.Usuarioid = this.usarioLocalStote.usuarioid),
+            contenidos.push(item),
+            i++
+          )
+        );
+        this.indicadoresservice
+          .FinalizarIndicador(contenidos)
+          .subscribe((res: any) => {
+            if (res.resul == "Se guardo con exito") {
+              this.alert("Respuestas guardadas");
+              location.reload();
+            }
+            return res;
+          });
       }
     }
   }
@@ -228,20 +302,26 @@ export class DiligenciarIndicadorComponent implements OnInit {
   formulados = [];
 
   AsignarChange() {
-    this.resultadosHTML = this.resultadosTabla.filter(an => an.anio == this.Anio);
-    this.resultadosHTML = this.resultadosHTML.filter(pe => pe.periodicidad == this.Periodo);
+    this.resultadosHTML = this.resultadosTabla.filter(
+      (an) => an.anio == this.Anio
+    );
+    this.resultadosHTML = this.resultadosHTML.filter(
+      (pe) => pe.periodicidad == this.Periodo
+    );
     let i = 0;
     var contents;
     let contenidos = [];
-    this.resultadosHTML.map(item => {
+    this.resultadosHTML.map((item) => {
       contents = document.getElementById((item.idFila - 1).toString());
       item.valor = contents.value;
       contenidos.push(item);
       if (item.entrada == "input" && item.numerop == "si") {
         let a = document.getElementById((item.idFila - 1).toString());
         a.addEventListener("change", () => {
-          this.formulados = this.resultadosHTML.filter(an => an.formulap == "si");
-          this.formulados.forEach(item2 => {
+          this.formulados = this.resultadosHTML.filter(
+            (an) => an.formulap == "si"
+          );
+          this.formulados.forEach((item2) => {
             let operacion = item2.formula;
             //-------------------------------------------------------------------------------------------------------------
 
@@ -249,17 +329,20 @@ export class DiligenciarIndicadorComponent implements OnInit {
             let carac = "";
             let array = [];
             for (let i = 0; i < operacion.length; i++) {
-              if (band = 0) {
+              if ((band = 0)) {
                 carac = "";
-              }
-              else {
-                if (operacion[i] == "+" || operacion[i] == "-" || operacion[i] == "/" || operacion[i] == "*") {
+              } else {
+                if (
+                  operacion[i] == "+" ||
+                  operacion[i] == "-" ||
+                  operacion[i] == "/" ||
+                  operacion[i] == "*"
+                ) {
                   array.push(carac);
                   band = 1;
                   carac = "";
                   array.push(operacion[i]);
-                }
-                else {
+                } else {
                   carac += operacion[i];
                 }
               }
@@ -268,7 +351,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
 
             let continuar = 0;
             for (var c = 0; c < array.length; c++) {
-              if ((item.idFila + 1) == array[c]) {
+              if (item.idFila + 1 == array[c]) {
                 console.log("Id Fila: ", item.idFila);
                 console.log("Array[c]: ", array[c]);
                 continuar = 1;
@@ -291,35 +374,27 @@ export class DiligenciarIndicadorComponent implements OnInit {
                   if (bandera == 1) {
                     array2.push(array2[array2.length - 1] * var1.value);
                     array2.splice(array2.length - 2, 1);
-
-                  }
-                  else {
+                  } else {
                     array2.pop();
                     array2.push(var2.value * var1.value);
-
                   }
                   bandera = 1;
                   i += 1;
-                }
-                else if (array[i] == "/") {
-
+                } else if (array[i] == "/") {
                   if (bandera == 1) {
                     array2.push(array2[array2.length - 1] / var1.value);
                     array2.splice(array2.length - 2, 1);
-                  }
-                  else {
+                  } else {
                     array2.pop();
                     array2.push(var2.value / var1.value);
                   }
                   bandera = 1;
                   i += 1;
-                }
-                else {
+                } else {
                   bandera = 0;
                   if (array[i] == "+" || array[i] == "-") {
                     array2.push(array[i]);
-                  }
-                  else {
+                  } else {
                     array2.push(var3.value);
                   }
                 }
@@ -330,31 +405,30 @@ export class DiligenciarIndicadorComponent implements OnInit {
               for (let i = 0; i < array2.length; i++) {
                 if (array2[i] == "+") {
                   if (bandera2 == 1) {
-                    array3.push(parseFloat(array3[array3.length - 1]) + parseFloat(array2[i + 1]));
+                    array3.push(
+                      parseFloat(array3[array3.length - 1]) +
+                        parseFloat(array2[i + 1])
+                    );
                     array3.splice(array3.length - 2, 1);
-                  }
-                  else {
+                  } else {
                     array3.pop();
-                    array3.push(parseFloat(array2[i - 1]) + parseFloat(array2[i + 1]));
-
+                    array3.push(
+                      parseFloat(array2[i - 1]) + parseFloat(array2[i + 1])
+                    );
                   }
                   bandera2 = 1;
                   i += 1;
-                }
-                else if (array2[i] == "-") {
-
+                } else if (array2[i] == "-") {
                   if (bandera2 == 1) {
                     array3.push(array3[array3.length - 1] - array2[i + 1]);
                     array3.splice(array3.length - 2, 1);
-                  }
-                  else {
+                  } else {
                     array3.pop();
                     array3.push(array2[i - 1] - array2[i + 1]);
                   }
                   bandera2 = 1;
                   i += 1;
-                }
-                else {
+                } else {
                   bandera2 = 0;
                   array3.push(array2[i]);
                 }
@@ -363,46 +437,51 @@ export class DiligenciarIndicadorComponent implements OnInit {
               var4 = document.getElementById((item2.idFila - 1).toString());
               var4.value = array3;
             }
-          })
+          });
         });
-        if (item.formulap == "si"){
+        if (item.formulap == "si") {
           a.addEventListener("focus", () => {
-            this.formulados = this.resultadosHTML.filter(an => an.formulap == "si");
-            this.formulados.forEach(item2 => {
+            this.formulados = this.resultadosHTML.filter(
+              (an) => an.formulap == "si"
+            );
+            this.formulados.forEach((item2) => {
               let valor = 0;
               let operacion = item2.formula;
               //-------------------------------------------------------------------------------------------------------------
-  
+
               let band = 0;
               let carac = "";
               let array = [];
               for (let i = 0; i < operacion.length; i++) {
-                if (band = 0) {
+                if ((band = 0)) {
                   carac = "";
-                }
-                else {
-                  if (operacion[i] == "+" || operacion[i] == "-" || operacion[i] == "/" || operacion[i] == "*") {
+                } else {
+                  if (
+                    operacion[i] == "+" ||
+                    operacion[i] == "-" ||
+                    operacion[i] == "/" ||
+                    operacion[i] == "*"
+                  ) {
                     array.push(carac);
                     band = 1;
                     carac = "";
                     array.push(operacion[i]);
-                  }
-                  else {
+                  } else {
                     carac += operacion[i];
                   }
                 }
               }
               array.push(carac);
-  
+
               let continuar = 0;
               for (var c = 0; c < array.length; c++) {
-                if ((item.idFila + 1) == array[c]) {
+                if (item.idFila + 1 == array[c]) {
                   console.log("Id Fila: ", item.idFila);
                   console.log("Array[c]: ", array[c]);
                   continuar = 1;
                 }
               }
-  
+
               //--------------------------------------------------------------------------------
               if (continuar == 1) {
                 let bandera = 0;
@@ -419,35 +498,27 @@ export class DiligenciarIndicadorComponent implements OnInit {
                     if (bandera == 1) {
                       array2.push(array2[array2.length - 1] * var1.value);
                       array2.splice(array2.length - 2, 1);
-  
-                    }
-                    else {
+                    } else {
                       array2.pop();
                       array2.push(var2.value * var1.value);
-  
                     }
                     bandera = 1;
                     i += 1;
-                  }
-                  else if (array[i] == "/") {
-  
+                  } else if (array[i] == "/") {
                     if (bandera == 1) {
                       array2.push(array2[array2.length - 1] / var1.value);
                       array2.splice(array2.length - 2, 1);
-                    }
-                    else {
+                    } else {
                       array2.pop();
                       array2.push(var2.value / var1.value);
                     }
                     bandera = 1;
                     i += 1;
-                  }
-                  else {
+                  } else {
                     bandera = 0;
                     if (array[i] == "+" || array[i] == "-") {
                       array2.push(array[i]);
-                    }
-                    else {
+                    } else {
                       array2.push(var3.value);
                     }
                   }
@@ -458,31 +529,30 @@ export class DiligenciarIndicadorComponent implements OnInit {
                 for (let i = 0; i < array2.length; i++) {
                   if (array2[i] == "+") {
                     if (bandera2 == 1) {
-                      array3.push(parseFloat(array3[array3.length - 1]) + parseFloat(array2[i + 1]));
+                      array3.push(
+                        parseFloat(array3[array3.length - 1]) +
+                          parseFloat(array2[i + 1])
+                      );
                       array3.splice(array3.length - 2, 1);
-                    }
-                    else {
+                    } else {
                       array3.pop();
-                      array3.push(parseFloat(array2[i - 1]) + parseFloat(array2[i + 1]));
-  
+                      array3.push(
+                        parseFloat(array2[i - 1]) + parseFloat(array2[i + 1])
+                      );
                     }
                     bandera2 = 1;
                     i += 1;
-                  }
-                  else if (array2[i] == "-") {
-  
+                  } else if (array2[i] == "-") {
                     if (bandera2 == 1) {
                       array3.push(array3[array3.length - 1] - array2[i + 1]);
                       array3.splice(array3.length - 2, 1);
-                    }
-                    else {
+                    } else {
                       array3.pop();
                       array3.push(array2[i - 1] - array2[i + 1]);
                     }
                     bandera2 = 1;
                     i += 1;
-                  }
-                  else {
+                  } else {
                     bandera2 = 0;
                     array3.push(array2[i]);
                   }
@@ -491,7 +561,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
                 var4 = document.getElementById((item2.idFila - 1).toString());
                 var4.value = array3;
               }
-            })
+            });
           });
         }
       }
@@ -500,7 +570,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
   }
 
   DescargarPDF() {
-    this.alert("Prueba pdf")
+    this.alert("Prueba pdf");
     let DATA: any = document.getElementById("exportContent");
     html2canvas(DATA).then((canvas) => {
       let fileWidth = 210;
@@ -514,11 +584,11 @@ export class DiligenciarIndicadorComponent implements OnInit {
   }
 
   DescargarEx() {
-    this.alert("Prueba excel")
+    this.alert("Prueba excel");
   }
 
   DescargarWd() {
-    Export2Word('exportContent', 'word-content');
+    Export2Word("exportContent", "word-content");
   }
 }
 
@@ -526,21 +596,23 @@ function getFileExtension(filename) {
   /*TODO*/
 }
 
-function Export2Word(element, filename = '') {
-  const nav = (window.navigator as any);
-  var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'><head><meta charset='utf-8'></head><body>";
+function Export2Word(element, filename = "") {
+  const nav = window.navigator as any;
+  var preHtml =
+    "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'><head><meta charset='utf-8'></head><body>";
   var postHtml = "</body></html>";
   var html = preHtml + document.getElementById(element).innerHTML + postHtml;
 
-  var blob = new Blob(['\ufeff', html], {
-    type: 'application/msword'
+  var blob = new Blob(["\ufeff", html], {
+    type: "application/msword",
   });
 
   // Specify link url
-  var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+  var url =
+    "data:application/vnd.ms-word;charset=utf-8," + encodeURIComponent(html);
 
   // Specify file name
-  filename = filename ? filename + '.doc' : 'document.doc';
+  filename = filename ? filename + ".doc" : "document.doc";
 
   // Create download link element
   var downloadLink = document.createElement("a");

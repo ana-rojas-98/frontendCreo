@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 import { FormControl } from "@angular/forms";
 import Swal from "sweetalert2";
+import { ReportesService } from "src/app/services/reportes.service";
 
 @Component({
   selector: "app-editar-indicador",
@@ -13,8 +14,9 @@ export class EditarIndicadorComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
-    public router: Router
-  ) { }
+    public router: Router,
+    private reportesService: ReportesService
+  ) {}
   id = 0;
 
   editar = false;
@@ -74,12 +76,13 @@ export class EditarIndicadorComponent implements OnInit {
   EstandarOpciones: any = [];
   CategoriaOpciones: any = [];
   SubcategoriaOpciones: any = [];
+  
 
   bandera = 1;
 
   Nombre = {
     indicador: "",
-  }
+  };
   super: any = [];
   Categoria1 = {
     categoria1: "",
@@ -92,9 +95,11 @@ export class EditarIndicadorComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.authService.enviarCorreos().subscribe((res: any) => { });
-    this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
+   
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
 
+    
     this.id = parseInt(this.route.snapshot.paramMap.get("id"));
     this.accionEditar = this.route.snapshot.paramMap.get("accion");
     if (this.accionEditar == "editar") {
@@ -105,7 +110,10 @@ export class EditarIndicadorComponent implements OnInit {
     this.getCategoria();
     this.getSubCategoria();
     this.TraerFormato();
+    
   }
+
+ 
 
   TraerFormato() {
     this.authService.EditarIndicador().subscribe((respuesta: any) => {
@@ -130,7 +138,6 @@ export class EditarIndicadorComponent implements OnInit {
       this.subcategoria();
     });
   }
-
 
   filtrar() {
     this.uniqueYears = [...new Set(this.anioArray)];
@@ -290,7 +297,7 @@ export class EditarIndicadorComponent implements OnInit {
       idArchivo: this.idArchivo.idArchivo,
       periodicidad: this.Periodo,
       anio: this.Anio,
-    })
+    });
   }
 
   eliminarFila(event) {
@@ -299,41 +306,39 @@ export class EditarIndicadorComponent implements OnInit {
     /// (posicion eliminar, cantidad a eliminar)
     this.eliminarObj = this.resultadosHTML.splice(eliminar, 1);
     this.eliminarObj.map((item) => {
-      this.eliminados.push(
-        {
-          idFormato: item.idFormato,
-          eliminar: "1",
-          posicion: eliminar,
-          entrada: item.entrada,
-          numerop: item.numerop,
-          formulap: item.formulap,
-          formula: item.formula,
-          valor: item.valor,
-          titulo: item.titulo,
-          tamanoTexto: parseInt(item.tamanoTexto),
-          color: item.color,
-          negrilla: item.negrilla,
-          subrayado: item.subrayado,
-          cursiva: item.cursiva,
-          inicioCol: parseInt(item.inicioCol),
-          finCol: parseInt(item.finCol),
-          saltoLinea: item.saltoLinea,
-          html: item.html,
-          idArchivo: parseInt(item.idArchivo),
-          periodicidad: item.periodicidad,
-          anio: parseInt(item.anio),
-          alinear: "center",
-          colorFondo: "transparent",
-          usuarioid: this.usuarioid,
-          archivo: this.Nombre.indicador,
-          nombreEstandar: (this.Estandar.value).toString(),
-          nombreCategoria: (this.Categoria.value).toString(),
-          nombreSubcategoria: (this.Subcategoria.value).toString(),
-        })
-    })
+      this.eliminados.push({
+        idFormato: item.idFormato,
+        eliminar: "1",
+        posicion: eliminar,
+        entrada: item.entrada,
+        numerop: item.numerop,
+        formulap: item.formulap,
+        formula: item.formula,
+        valor: item.valor,
+        titulo: item.titulo,
+        tamanoTexto: parseInt(item.tamanoTexto),
+        color: item.color,
+        negrilla: item.negrilla,
+        subrayado: item.subrayado,
+        cursiva: item.cursiva,
+        inicioCol: parseInt(item.inicioCol),
+        finCol: parseInt(item.finCol),
+        saltoLinea: item.saltoLinea,
+        html: item.html,
+        idArchivo: parseInt(item.idArchivo),
+        periodicidad: item.periodicidad,
+        anio: parseInt(item.anio),
+        alinear: "center",
+        colorFondo: "transparent",
+        usuarioid: this.usuarioid,
+        archivo: this.Nombre.indicador,
+        nombreEstandar: this.Estandar.value.toString(),
+        nombreCategoria: this.Categoria.value.toString(),
+        nombreSubcategoria: this.Subcategoria.value.toString(),
+      });
+    });
     this.super = this.resultadosHTML;
   }
-
 
   guardar() {
     this.super = this.resultadosHTML;
@@ -362,9 +367,9 @@ export class EditarIndicadorComponent implements OnInit {
         alinear: "center",
         colorFondo: "transparent",
         usuarioid: this.usuarioid,
-        nombreEstandar: (this.Estandar.value).toString(),
-        nombreCategoria: (this.Categoria.value).toString(),
-        nombreSubcategoria: (this.Subcategoria.value).toString(),
+        nombreEstandar: this.Estandar.value.toString(),
+        nombreCategoria: this.Categoria.value.toString(),
+        nombreSubcategoria: this.Subcategoria.value.toString(),
       });
     });
     this.super.map((item) => {
@@ -393,9 +398,9 @@ export class EditarIndicadorComponent implements OnInit {
         usuarioid: this.usuarioid,
         archivo: this.Nombre.indicador,
         eliminar: parseInt(item.eliminar),
-        nombreEstandar: (this.Estandar.value).toString(),
-        nombreCategoria: (this.Categoria.value).toString(),
-        nombreSubcategoria: (this.Subcategoria.value).toString(),
+        nombreEstandar: this.Estandar.value.toString(),
+        nombreCategoria: this.Categoria.value.toString(),
+        nombreSubcategoria: this.Subcategoria.value.toString(),
       });
     });
     this.authService.enviarIndicadorEditado(this.enviar).subscribe((res) => {
