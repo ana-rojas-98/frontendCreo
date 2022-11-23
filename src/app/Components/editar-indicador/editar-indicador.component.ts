@@ -119,9 +119,15 @@ export class EditarIndicadorComponent implements OnInit {
         return item;
       });
       this.filtrar();
-      // selectElement("estandar", this.resultadosTabla[0].estandar);
-      // selectElement("categoria", this.resultadosTabla[0].categoria1);
-      // selectElement("subcategoria", this.resultadosTabla[0].subcategoria1);
+      this.selectElement("estandar", this.resultadosTabla[0].estandar);
+      this.Estandar.setValue(this.resultadosTabla[0].estandar);
+      this.estandar();
+      this.selectElement("categoria", this.resultadosTabla[0].categoria1);
+      this.Categoria.setValue(this.resultadosTabla[0].categoria1);
+      this.categoria();
+      this.selectElement("subcategoria", this.resultadosTabla[0].subcategoria1);
+      this.Subcategoria.setValue(this.resultadosTabla[0].subcategoria1);
+      this.subcategoria();
     });
   }
 
@@ -287,49 +293,49 @@ export class EditarIndicadorComponent implements OnInit {
     })
   }
 
-eliminarFila(event){
-  let e=event.target;
-  let eliminar=e.parentNode.parentNode.rowIndex-1;
-  /// (posicion eliminar, cantidad a eliminar)
-  this.eliminarObj=this.resultadosHTML.splice(eliminar,1);
-   this.eliminarObj.map((item)=>{
-    this.eliminados.push(
-      {
-        idFormato:item.idFormato,
-        eliminar:"1",
-        posicion:eliminar,
-        entrada: item.entrada,
-        numerop: item.numerop,
-        formulap: item.formulap,
-        formula: item.formula,
-        valor: item.valor,
-        titulo: item.titulo,
-        tamanoTexto: parseInt(item.tamanoTexto),
-        color: item.color,
-        negrilla: item.negrilla,
-        subrayado: item.subrayado,
-        cursiva: item.cursiva,
-        inicioCol: parseInt(item.inicioCol),
-        finCol: parseInt(item.finCol),
-        saltoLinea: item.saltoLinea,
-        html: item.html,
-        idArchivo: parseInt(item.idArchivo),
-        periodicidad: item.periodicidad,
-        anio: parseInt(item.anio),
-        alinear: "center",
-        colorFondo: "transparent",
-        usuarioid: this.usuarioid,
-        archivo: this.Nombre.indicador,
-        nombreEstandar: this.datos.Estandar,
-        nombreCategoria: this.datos.Categoria,
-        nombreSubcategoria: this.datos.Subcategoria,
-      })
-   })
-   this.super=this.resultadosHTML;
-}
+  eliminarFila(event) {
+    let e = event.target;
+    let eliminar = e.parentNode.parentNode.rowIndex - 1;
+    /// (posicion eliminar, cantidad a eliminar)
+    this.eliminarObj = this.resultadosHTML.splice(eliminar, 1);
+    this.eliminarObj.map((item) => {
+      this.eliminados.push(
+        {
+          idFormato: item.idFormato,
+          eliminar: "1",
+          posicion: eliminar,
+          entrada: item.entrada,
+          numerop: item.numerop,
+          formulap: item.formulap,
+          formula: item.formula,
+          valor: item.valor,
+          titulo: item.titulo,
+          tamanoTexto: parseInt(item.tamanoTexto),
+          color: item.color,
+          negrilla: item.negrilla,
+          subrayado: item.subrayado,
+          cursiva: item.cursiva,
+          inicioCol: parseInt(item.inicioCol),
+          finCol: parseInt(item.finCol),
+          saltoLinea: item.saltoLinea,
+          html: item.html,
+          idArchivo: parseInt(item.idArchivo),
+          periodicidad: item.periodicidad,
+          anio: parseInt(item.anio),
+          alinear: "center",
+          colorFondo: "transparent",
+          usuarioid: this.usuarioid,
+          archivo: this.Nombre.indicador,
+          nombreEstandar: (this.Estandar.value).toString(),
+          nombreCategoria: (this.Categoria.value).toString(),
+          nombreSubcategoria: (this.Subcategoria.value).toString(),
+        })
+    })
+    this.super = this.resultadosHTML;
+  }
 
 
-guardar() {
+  guardar() {
     this.super = this.resultadosHTML;
     this.eliminados.map((item1) => {
       this.super.splice(item1.posicion, 0, {
@@ -356,9 +362,9 @@ guardar() {
         alinear: "center",
         colorFondo: "transparent",
         usuarioid: this.usuarioid,
-        nombreEstandar: this.datos.Estandar,
-        nombreCategoria: this.datos.Categoria,
-        nombreSubcategoria: this.datos.Subcategoria,
+        nombreEstandar: (this.Estandar.value).toString(),
+        nombreCategoria: (this.Categoria.value).toString(),
+        nombreSubcategoria: (this.Subcategoria.value).toString(),
       });
     });
     this.super.map((item) => {
@@ -387,12 +393,11 @@ guardar() {
         usuarioid: this.usuarioid,
         archivo: this.Nombre.indicador,
         eliminar: parseInt(item.eliminar),
-        nombreEstandar: this.datos.Estandar,
-        nombreCategoria: this.datos.Categoria,
-        nombreSubcategoria: this.datos.Subcategoria,
+        nombreEstandar: (this.Estandar.value).toString(),
+        nombreCategoria: (this.Categoria.value).toString(),
+        nombreSubcategoria: (this.Subcategoria.value).toString(),
       });
     });
-    console.log("envia", this.enviar);
     this.authService.enviarIndicadorEditado(this.enviar).subscribe((res) => {
       if (res) {
         this.alerta("Editado");
@@ -404,9 +409,10 @@ guardar() {
   alerta(mensaje: any) {
     Swal.fire(mensaje);
   }
-}
 
-// function selectElement(id, valueToSelect) {
-//   let element = document.getElementById(id);
-//   element.value = valueToSelect;
-// }
+  selectElement(id, valueToSelect) {
+    let element;
+    element = document.getElementById(id);
+    element.value = valueToSelect;
+  }
+}
