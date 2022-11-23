@@ -242,7 +242,6 @@ export class DiligenciarIndicadorComponent implements OnInit {
         a.addEventListener("change", () => {
           this.formulados = this.resultadosHTML.filter(an => an.formulap == "si");
           this.formulados.forEach(item2 => {
-            let valor = 0;
             let operacion = item2.formula;
             //-------------------------------------------------------------------------------------------------------------
 
