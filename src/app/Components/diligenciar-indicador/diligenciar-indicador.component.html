@@ -24,7 +24,7 @@
       <div class="title-card row">
         <div class="box mb-2 col-6">
           <h3>Año</h3>
-          <select class="selector mt-2" name="anio" type="select" [(ngModel)]="Anio" (change)="ChangeAnio()">
+          <select id="Anios" class="selector mt-2" name="anio" type="select" [(ngModel)]="Anio" (change)="ChangeAnio()">
             <option value="" selected>Seleccione Año</option>
             <option *ngFor="let resultado of uniqueYears" [value]="resultado">
               {{ resultado }}
@@ -33,7 +33,7 @@
         </div>
         <div class="box mb-2 col-6">
           <h3>Periodo</h3>
-          <select class="selector mt-2" name="periodo" type="select" [(ngModel)]="Periodo" (change)="ChangePeriodo()">
+          <select id="Periods" class="selector mt-2" name="periodo" type="select" [(ngModel)]="Periodo" (change)="ChangePeriodo()">
             <option value="">Seleccione Periodo</option>
             <option *ngFor="let resultado of uniquePeriod" [value]="resultado">
               {{ resultado }}
@@ -43,7 +43,7 @@
       </div>
       <div class="row border my-2 mx-2"></div>
       <!------------------------------------------------------------------------------------------------------------------>
-      <div id="prueba" class="prueba"></div>
+      <table id="prueba" class="prueba"></table>
       <!------------------------------------------------------------------------------------------------------------------>
     </div>
     <div class="botones">

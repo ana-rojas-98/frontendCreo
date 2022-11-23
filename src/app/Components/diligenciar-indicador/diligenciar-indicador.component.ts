@@ -365,14 +365,14 @@ export class DiligenciarIndicadorComponent implements OnInit {
             }
           })
         });
-        if (item.formulap == "si"){
+        if (item.formulap == "si") {
           a.addEventListener("focus", () => {
             this.formulados = this.resultadosHTML.filter(an => an.formulap == "si");
             this.formulados.forEach(item2 => {
               let valor = 0;
               let operacion = item2.formula;
               //-------------------------------------------------------------------------------------------------------------
-  
+
               let band = 0;
               let carac = "";
               let array = [];
@@ -393,7 +393,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
                 }
               }
               array.push(carac);
-  
+
               let continuar = 0;
               for (var c = 0; c < array.length; c++) {
                 if ((item.idFila + 1) == array[c]) {
@@ -402,7 +402,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
                   continuar = 1;
                 }
               }
-  
+
               //--------------------------------------------------------------------------------
               if (continuar == 1) {
                 let bandera = 0;
@@ -419,18 +419,18 @@ export class DiligenciarIndicadorComponent implements OnInit {
                     if (bandera == 1) {
                       array2.push(array2[array2.length - 1] * var1.value);
                       array2.splice(array2.length - 2, 1);
-  
+
                     }
                     else {
                       array2.pop();
                       array2.push(var2.value * var1.value);
-  
+
                     }
                     bandera = 1;
                     i += 1;
                   }
                   else if (array[i] == "/") {
-  
+
                     if (bandera == 1) {
                       array2.push(array2[array2.length - 1] / var1.value);
                       array2.splice(array2.length - 2, 1);
@@ -464,13 +464,13 @@ export class DiligenciarIndicadorComponent implements OnInit {
                     else {
                       array3.pop();
                       array3.push(parseFloat(array2[i - 1]) + parseFloat(array2[i + 1]));
-  
+
                     }
                     bandera2 = 1;
                     i += 1;
                   }
                   else if (array2[i] == "-") {
-  
+
                     if (bandera2 == 1) {
                       array3.push(array3[array3.length - 1] - array2[i + 1]);
                       array3.splice(array3.length - 2, 1);
@@ -500,65 +500,88 @@ export class DiligenciarIndicadorComponent implements OnInit {
   }
 
   DescargarPDF() {
-    this.alert("Prueba pdf")
-    let DATA: any = document.getElementById("exportContent");
-    html2canvas(DATA).then((canvas) => {
-      let fileWidth = 210;
-      let fileHeight = (canvas.height * fileWidth) / canvas.width;
-      const FILEURI = canvas.toDataURL("image/png");
-      let PDF = new jsPDF("p", "mm", "a4");
-      let position = 0;
-      PDF.addImage(FILEURI, "PNG", 0, position, fileWidth, fileHeight);
-      PDF.save("Indicadores.pdf");
-    });
+    // let DATA: any = document.getElementById("exportContent");
+    // html2canvas(DATA).then((canvas) => {
+    //   let fileWidth = 210;
+    //   let fileHeight = (canvas.height * fileWidth) / canvas.width;
+    //   const FILEURI = canvas.toDataURL("image/png");
+    //   let PDF = new jsPDF("p", "mm", "a4");
+    //   let position = 0;
+    //   PDF.addImage(FILEURI, "PNG", 0, position, fileWidth, fileHeight);
+    //   PDF.save("Indicadores.pdf");
+    // });
+    this.createPDF();
   }
 
   DescargarEx() {
-    this.alert("Prueba excel")
+    this.ExportToExcel();
   }
 
   DescargarWd() {
-    Export2Word('exportContent', 'word-content');
-  }
-}
-
-function getFileExtension(filename) {
-  /*TODO*/
-}
-
-function Export2Word(element, filename = '') {
-  const nav = (window.navigator as any);
-  var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'><head><meta charset='utf-8'></head><body>";
-  var postHtml = "</body></html>";
-  var html = preHtml + document.getElementById(element).innerHTML + postHtml;
-
-  var blob = new Blob(['\ufeff', html], {
-    type: 'application/msword'
-  });
-
-  // Specify link url
-  var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
-
-  // Specify file name
-  filename = filename ? filename + '.doc' : 'document.doc';
-
-  // Create download link element
-  var downloadLink = document.createElement("a");
-
-  document.body.appendChild(downloadLink);
-
-  if (nav.msSaveOrOpenBlob) {
-    nav.msSaveOrOpenBlob(blob, filename);
-  } else {
-    // Create a link to the file
-    downloadLink.href = url;
-
-    // Setting the file name
-    downloadLink.download = filename;
-
-    //triggering the function
-    downloadLink.click();
+    this.ExportToDoc('archivo');
   }
 
-  document.body.removeChild(downloadLink);
+  ExportToExcel(){
+    var htmltable= document.getElementById('exportContent');
+    var html = htmltable.outerHTML;
+    window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+ }
+
+  ExportToDoc(filename = '') {
+    var HtmlHead = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+
+    var EndHtml = "</body></html>";
+
+    var dochtml = document.getElementById("exportContent").innerHTML;
+    //complete html
+    var html = HtmlHead + dochtml + EndHtml;
+
+    //specify the type
+    var blob = new Blob(['ufeff', html], {
+      type: 'application/msword'
+    });
+
+    // Specify link url
+    var url = URL.createObjectURL(blob);
+
+    // Specify file name
+    filename = filename ? filename + '.doc' : 'document.doc';
+
+    // Create download link element
+    var downloadLink = document.createElement("a");
+
+    document.body.appendChild(downloadLink);
+    const nav = window.navigator as any;
+    if (nav.msSaveOrOpenBlob) {
+      nav.msSaveOrOpenBlob(blob, filename);
+    } else {
+      // Create a link to the file
+      downloadLink.href = url;
+
+      // Setting the file name
+      downloadLink.download = filename;
+
+      //triggering the function
+      downloadLink.click();
+    }
+
+    document.body.removeChild(downloadLink);
+  }
+
+  createPDF() {
+    var sTable = document.getElementById('exportContent').innerHTML;
+    // CREATE A WINDOW OBJECT.
+    var win = window.open('', '', 'height=700,width=700');
+    win.document.write('<html><head>');  // <title> FOR PDF HEADER.       // ADD STYLE INSIDE THE HEAD TAG.
+    win.document.write('</head>');
+    win.document.write('<body>');
+    win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+    win.document.write('</body></html>');
+    win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+    win.print();    // PRINT THE CONTENTS.
 }
+  
+}
+
+
+
