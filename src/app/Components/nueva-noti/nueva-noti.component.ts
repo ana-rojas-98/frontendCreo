@@ -325,7 +325,7 @@ export class NuevaNotiComponent implements OnInit {
         this.caducidad = "0";
         this.fechaConvertida = this.fechaEspera
           .toString()
-          .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
+          // .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
         this.indicadoresFalta = 0;
         this.programado();
       }
@@ -334,7 +334,7 @@ export class NuevaNotiComponent implements OnInit {
 
       this.caducidad = this.fechaCaducidad
         .toString()
-        .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
+        // .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
       this.indicadoresFalta = 0;
       this.fechaConvertida = "0";
       for (let i = 0; i < this.quedia.length; i++) {
@@ -346,7 +346,7 @@ export class NuevaNotiComponent implements OnInit {
     if (this.estadoiv === true) {
       this.fechaConvertida = this.fechaEspera
         .toString()
-        .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
+        // .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
       this.periodicidad = "0";
       this.caducidad = "0";
       this.indicadoresFaltantes()
