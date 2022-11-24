@@ -25,7 +25,7 @@ export class ReportesNuevoTableroComponent implements OnInit {
   resultadosTabla: any = [];
   estado = [];
   indicadorUsar: any = [];
-  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+  usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
   Indicador = {
     IdArchivo: 0,
@@ -52,7 +52,7 @@ export class ReportesNuevoTableroComponent implements OnInit {
     this.getSubCategoria(0);
     this.getindIcadores(0);
   }
-  
+
   continuar() {
     this.route.navigate(["/nuevo-tablero", this.indicadorUsar.toString()]);
     //
@@ -144,15 +144,30 @@ export class ReportesNuevoTableroComponent implements OnInit {
   }
   getindIcadores(dato) {
     if (dato == 0) {
-      this.reportesService
-        .ConsultarIndicadoresAsignados()
-        .subscribe((res: any) => {
+      if (this.usuarioLocalStote.typeuser != "3") {
+        this.reportesService
+          .ConsultarIndicadoresAsignados()
+          .subscribe((res: any) => {
+            this.resultadosTabla = res.map((item) => {
+              this.estado = res;
+              this.resultadoIndicadores = res;
+              return item;
+            });
+          });
+      }
+
+      if (this.usuarioLocalStote.typeuser == "3") {
+        let id = {
+          id: this.usuarioLocalStote.usuarioid,
+        };
+        this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
           this.resultadosTabla = res.map((item) => {
             this.estado = res;
             this.resultadoIndicadores = res;
             return item;
           });
         });
+      }
       return true;
     }
   }

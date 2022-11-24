@@ -12,7 +12,7 @@ export class PrivateComponent implements OnInit {
     private authService: AuthService,
     private reportesService: ReportesService
   ) {}
-  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+  usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
   mostrar = false;
   resultadosTabla: any = [];
   resultados: any = [];
@@ -22,11 +22,11 @@ export class PrivateComponent implements OnInit {
   ngOnInit() {
     this.authService.enviarCorreos().subscribe((res: any) => {});
     this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
-    if (this.usarioLocalStote.typeuser == "1") {
+    if (this.usuarioLocalStote.typeuser == "1") {
       this.mostrar = true;
-    } else if (this.usarioLocalStote.typeuser == "2") {
+    } else if (this.usuarioLocalStote.typeuser == "2") {
       this.mostrar = true;
-    } else if (this.usarioLocalStote.typeuser == "3") {
+    } else if (this.usuarioLocalStote.typeuser == "3") {
       this.mostrar = false;
     }
     this.pantallaPrin();
@@ -54,9 +54,9 @@ export class PrivateComponent implements OnInit {
       console.log("total", this.total);
     });
     console.log("array que trae", this.resultadosTabla);
-    if (this.usarioLocalStote.typeuser == "3") {
+    if (this.usuarioLocalStote.typeuser == "3") {
       let id = {
-        id: this.usarioLocalStote.usuarioid,
+        id: this.usuarioLocalStote.usuarioid,
       };
       this.reportesService
         .IndicadoresAsignados(id)
@@ -75,7 +75,7 @@ export class PrivateComponent implements OnInit {
         });
     }
 
-    if (this.usarioLocalStote.typeuser != "3") {
+    if (this.usuarioLocalStote.typeuser != "3") {
       this.reportesService
         .ConsultarIndicadoresAsignados()
         .subscribe((res: any) => {

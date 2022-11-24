@@ -8,12 +8,14 @@ import * as $ from "jquery";
   styleUrls: ["./reportes-nuevo-tablero1.component.scss"],
 })
 export class ReportesNuevoTablero1Component implements OnInit {
-  constructor(private ReportesService: ReportesService) { }
+  constructor(private ReportesService: ReportesService) {}
 
   //cadenas de html
   con = 0;
   Select3 = "";
   fila = 0;
+  filaInout = 0;
+  filaInoutaux = 0;
   idSelec = 0;
   indicadores: any = [];
   select =
@@ -73,11 +75,15 @@ export class ReportesNuevoTablero1Component implements OnInit {
     //Create array of options to be added
     var array = ["Seleccione una opcion", "1", "2", "3", "4"];
 
-
     this.idSelec++;
     selectList.id = this.idSelec.toString();
     selectList.className = "rounded";
-    selectList.style.cssText = "width:22%; height:40px; grid-row: '" + this.fila++ + "'/ '" + this.fila++ + "'; grid-column: 1/5;";
+    selectList.style.cssText =
+      "width:22%; height:40px; grid-row: '" +
+      this.fila++ +
+      "'/ '" +
+      this.fila++ +
+      "'; grid-column: 1/5;";
 
     //selectList.style.height = "40px";
     myParent.appendChild(selectList);
@@ -90,14 +96,12 @@ export class ReportesNuevoTablero1Component implements OnInit {
       selectList.appendChild(option);
     }
 
-
-
     selectList.addEventListener("change", () => {
       let axt = parseInt(selectList.value);
+      this.filaInout = 0;
       for (let i = 1; i <= axt; i++) {
         this.CrearColumna(myParent);
       }
-
 
       // let p = document.getElementById("selectOpciones");
       // p.addEventListener("change", () => {
@@ -106,12 +110,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
       //   }
       // });
 
-      //   let input = document.createElement("input");
-      //   input.type = "text";
-      //   myParent.appendChild(input);
-
       //  let idEjemplo = document.getElementById("mySelect").value
-
     });
   }
 
@@ -141,8 +140,19 @@ export class ReportesNuevoTablero1Component implements OnInit {
       selectOpciones.appendChild(option);
     }
     selectOpciones.addEventListener("change", () => {
+      
       if (selectOpciones.value == "Texto/numero") {
-        alert("hola");
+        if (this.filaInoutaux == 0) {
+          this.filaInout = this.fila + 1;
+          
+        }
+        let input = document.createElement("input");
+        input.type = "text";
+        input.style.cssText =
+          "width:90%; height:40px; grid-row: '" + this.filaInout;
+        "'/ '" + this.filaInout;
+        ("'; grid-column: 1/2;");
+        myParent.appendChild(input);
       }
     });
   }
