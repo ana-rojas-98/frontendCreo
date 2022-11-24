@@ -22,12 +22,7 @@ export class PrivateComponent implements OnInit {
   ngOnInit() {
     this.authService.enviarCorreos().subscribe((res: any) => {});
     this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
-<<<<<<< HEAD
     if (this.usuarioLocalStote.typeuser == "1") {
-=======
-
-    if (this.usarioLocalStote.typeuser == "1") {
->>>>>>> ceadb6dfea2e5d4e0502d26b5207e9f4031e46c7
       this.mostrar = true;
     } else if (this.usuarioLocalStote.typeuser == "2") {
       this.mostrar = true;
@@ -59,13 +54,8 @@ export class PrivateComponent implements OnInit {
 
       this.total = this.activos + this.inactivos;
     });
-<<<<<<< HEAD
     console.log("array que trae", this.resultadosTabla);
     if (this.usuarioLocalStote.typeuser == "3") {
-=======
-
-    if (this.usarioLocalStote.typeuser == "3") {
->>>>>>> ceadb6dfea2e5d4e0502d26b5207e9f4031e46c7
       let id = {
         id: this.usuarioLocalStote.usuarioid,
       };
