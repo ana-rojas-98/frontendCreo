@@ -61,27 +61,27 @@
                         <div class="dias-semana" *ngIf="boxtres==true">
                         <label for="">
                             Lunes
-                            <input type="checkbox" [(ngModel)]="lunes" (change)="diasElectos()">
+                            <input type="checkbox" [(ngModel)]="lunes" value="1" (change)="diasElectos($event)">
                         </label>
                         <label for="">
                             Martes
-                            <input type="checkbox" [(ngModel)]="martes" (change)="diasElectos()">
+                            <input type="checkbox" [(ngModel)]="martes" value="2" (change)="diasElectos($event)">
                         </label>
                         <label for="">
                             Miercoles
-                            <input type="checkbox" [(ngModel)]="miercoles" (change)="diasElectos()">
+                            <input type="checkbox" [(ngModel)]="miercoles" value="3" (change)="diasElectos($event)">
                         </label>
                         <label for="">
                             Jueves
-                            <input type="checkbox" [(ngModel)]="jueves" (change)="diasElectos()">
+                            <input type="checkbox" [(ngModel)]="jueves" value="4" (change)="diasElectos($event)">
                         </label>
                         <label for="">
-                            <input type="checkbox" [(ngModel)]="viernes" (change)="diasElectos()">
                             Viernes
+                            <input type="checkbox" [(ngModel)]="viernes" value="5" (change)="diasElectos($event)">                            
                         </label>
                         <label for="">
                             Sábado
-                            <input type="checkbox" [(ngModel)]="sabado" (change)="diasElectos()">
+                            <input type="checkbox" [(ngModel)]="sabado" value="6" (change)="diasElectos($event)">
                         </label>
                         </div>
                         <div class="dias" *ngIf="diaas == true">

@@ -30,7 +30,7 @@ export class NuevaNotiComponent implements OnInit {
   ensayoUsuarios: any = [];
   aux: any = [];
   enviarCorreo: any = [];
-  faltantes:any=[];
+  faltantes: any = [];
 
   estadoi = false;
   estadoii = false;
@@ -174,38 +174,79 @@ export class NuevaNotiComponent implements OnInit {
       this.boxtres = true;
     }
   }
+ 
+  diasElectos(evento) {
+    let e = evento.target;
+    if (e.value === "1") {
+      if (this.lunes.valueOf() == false) {
+        for (let i = 0; i < this.quedia.length; i++) {
+          if (this.quedia[i].dia === "lunes") {
+            this.quedia.splice(i, 1);
+          }
+        }
+      } else if (this.lunes.valueOf() == true) {
+        this.quedia.push({ dia: "lunes" });
+      }
+    }
 
-  diasElectos() {
-    if (this.lunes.valueOf() == false) {
-      this.quedia.slice({ lunes: this.lunes });
-    } else if (this.lunes.valueOf() == true) {
-      this.quedia.push({ dia: "lunes" });
-      this.lunes = false;
+    if (e.value === "2") {
+      if (this.martes.valueOf() == false) {
+        for (let i = 0; i < this.quedia.length; i++) {
+          if (this.quedia[i].dia === "martes") {
+            this.quedia.splice(i, 1);
+          }
+        }
+      } else if (this.martes.valueOf() == true) {
+        this.quedia.push({ dia: "martes" });
+      }
     }
-    if (this.martes.valueOf() == false) {
-    } else if (this.martes.valueOf() == true) {
-      this.quedia.push({ dia: "martes" });
-      this.martes = false;
+
+    if (e.value === "3") {
+      if (this.miercoles.valueOf() == false) {
+        for (let i = 0; i < this.quedia.length; i++) {
+          if (this.quedia[i].dia === "miercoles") {
+            this.quedia.splice(i, 1);
+          }
+        }
+      } else if (this.miercoles.valueOf() == true) {
+        this.quedia.push({ dia: "miercoles" });
+      }
     }
-    if (this.miercoles.valueOf() == false) {
-    } else if (this.miercoles.valueOf() == true) {
-      this.quedia.push({ dia: "miercoles" });
-      this.miercoles = false;
+
+    if (e.value === "4") {
+      if (this.jueves.valueOf() == false) {
+        for (let i = 0; i < this.quedia.length; i++) {
+          if (this.quedia[i].dia === "jueves") {
+            this.quedia.splice(i, 1);
+          }
+        }
+      } else if (this.jueves.valueOf() == true) {
+        this.quedia.push({ dia: "jueves" });
+      }
     }
-    if (this.jueves.valueOf() == false) {
-    } else if (this.jueves.valueOf() == true) {
-      this.quedia.push({ dia: "jueves" });
-      this.jueves = false;
+
+    if (e.value === "5") {
+      if (this.viernes.valueOf() == false) {
+        for (let i = 0; i < this.quedia.length; i++) {
+          if (this.quedia[i].dia === "viernes") {
+            this.quedia.splice(i, 1);
+          }
+        }
+      } else if (this.viernes.valueOf() == true) {
+        this.quedia.push({ dia: "viernes" });
+      }
     }
-    if (this.viernes.valueOf() == false) {
-    } else if (this.viernes.valueOf() == true) {
-      this.quedia.push({ dia: "viernes" });
-      this.viernes = false;
-    }
-    if (this.sabado.valueOf() == false) {
-    } else if (this.sabado.valueOf() == true) {
-      this.quedia.push({ dia: "sabado" });
-      this.sabado = false;
+
+    if (e.value === "6") {
+      if (this.sabado.valueOf() == false) {
+        for (let i = 0; i < this.quedia.length; i++) {
+          if (this.quedia[i].dia === "sabado") {
+            this.quedia.splice(i, 1);
+          }
+        }
+      } else if (this.sabado.valueOf() == true) {
+        this.quedia.push({ dia: "sabado" });
+      }
     }
   }
 
@@ -251,7 +292,6 @@ export class NuevaNotiComponent implements OnInit {
   }
 
   programado() {
-
     const hola = this.aux.filter((hola) => hola.checked === true);
     hola.forEach((m) => {
       m.asunto = this.envios.asunto;
@@ -266,7 +306,6 @@ export class NuevaNotiComponent implements OnInit {
         cantidadIndicadores: this.indicadoresFalta,
         caducidadPeriodicidad: this.caducidad,
       });
-
     });
 
     this.authService
@@ -278,23 +317,22 @@ export class NuevaNotiComponent implements OnInit {
         }
         return res;
       });
-
   }
-  
-  indicadoresFaltantes(){
-    this.faltantes=[{
-      usuarioEnvia: this.usuarioid,
-      FechaEnvio: this.fechaConvertida,
-      periodicidad: this.periodicidad,
-      asunto: this.envios.asunto,
-      mensaje:this.envios.mensaje,
-      cantidadIndicadores: this.indicadoresFalta,
-      caducidadPeriodicidad: this.caducidad,
-    }];
-    console.log("envio en indicador faltante", this.faltantes)
-    this.authService
-    .enviarProgramados(this.faltantes)
-    .subscribe((res: any) => {
+
+  indicadoresFaltantes() {
+    this.faltantes = [
+      {
+        usuarioEnvia: this.usuarioid,
+        FechaEnvio: this.fechaConvertida,
+        periodicidad: this.periodicidad,
+        asunto: this.envios.asunto,
+        mensaje: this.envios.mensaje,
+        cantidadIndicadores: this.indicadoresFalta,
+        caducidadPeriodicidad: this.caducidad,
+      },
+    ];
+    console.log("envio en indicador faltante", this.faltantes);
+    this.authService.enviarProgramados(this.faltantes).subscribe((res: any) => {
       if (res.resul == "ok") {
         this.alerta("Correo enviado correctamente");
         this.router.navigate(["gestor-noti"]);
@@ -305,12 +343,10 @@ export class NuevaNotiComponent implements OnInit {
 
   Guardar() {
     if (this.estadoi === true) {
-
       this.periodicidad = "0";
       this.enviar();
     }
     if (this.estadoii === true) {
-
       var f1 = Date.parse(this.fechaEspera.toString());
       var f = Date.parse(this.completa);
       if (f1 < f) {
@@ -320,21 +356,17 @@ export class NuevaNotiComponent implements OnInit {
           "La fecha digitada es hoy, selecciona enviar inmediatamente"
         );
       } else if (f1 > f) {
-
         this.periodicidad = "0";
         this.caducidad = "0";
         this.fechaConvertida = this.fechaEspera
-          .toString()
-          .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
+          .toString();
         this.indicadoresFalta = 0;
         this.programado();
       }
     }
     if (this.estadoiii === true) {
-
       this.caducidad = this.fechaCaducidad
-        .toString()
-        .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
+        .toString();
       this.indicadoresFalta = 0;
       this.fechaConvertida = "0";
       for (let i = 0; i < this.quedia.length; i++) {
@@ -345,11 +377,10 @@ export class NuevaNotiComponent implements OnInit {
     }
     if (this.estadoiv === true) {
       this.fechaConvertida = this.fechaEspera
-        .toString()
-        .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
+        .toString();
       this.periodicidad = "0";
       this.caducidad = "0";
-      this.indicadoresFaltantes()
+      this.indicadoresFaltantes();
       //this.programado();
     }
   }
