@@ -104,7 +104,12 @@
       width: 100px;
       height: 100px; 
      }
-  background: rgba(240,240,240) 
+  background: rgba(240,240,240) ;
+  display: flex;
+  flex-direction: column;
+}
+.tablero{
+  display: flex;
 }
 .tituloR{
   display: flex;
