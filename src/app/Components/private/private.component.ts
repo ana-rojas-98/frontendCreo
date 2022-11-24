@@ -12,7 +12,7 @@ export class PrivateComponent implements OnInit {
     private authService: AuthService,
     private reportesService: ReportesService
   ) {}
-  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+  usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
   mostrar = false;
   resultadosTabla: any = [];
   resultados: any = [];
@@ -22,13 +22,14 @@ export class PrivateComponent implements OnInit {
   ngOnInit() {
     this.authService.enviarCorreos().subscribe((res: any) => {});
     this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
-    if (this.usarioLocalStote.typeuser == "1") {
+    if (this.usuarioLocalStote.typeuser == "1") {
       this.mostrar = true;
-    } else if (this.usarioLocalStote.typeuser == "2") {
+    } else if (this.usuarioLocalStote.typeuser == "2") {
       this.mostrar = true;
-    } else if (this.usarioLocalStote.typeuser == "3") {
+    } else if (this.usuarioLocalStote.typeuser == "3") {
       this.mostrar = false;
     }
+
     this.pantallaPrin();
   }
 
@@ -38,44 +39,39 @@ export class PrivateComponent implements OnInit {
   completados = 0;
   faltantes = 0;
   totales = 0;
+
   pantallaPrin() {
     this.authService.getUsuarios("").subscribe((res: any) => {
       this.resultados = res.map((item) => {
         this.resultadosTabla.push(item);
+
         if (item.estado == "1") {
           this.activos++;
         } else if (item.estado == "0") {
           this.inactivos++;
         }
       });
-      console.log("inactivos", this.inactivos);
-      console.log("activos", this.activos);
+
       this.total = this.activos + this.inactivos;
-      console.log("total", this.total);
     });
     console.log("array que trae", this.resultadosTabla);
-    if (this.usarioLocalStote.typeuser == "3") {
+    if (this.usuarioLocalStote.typeuser == "3") {
       let id = {
-        id: this.usarioLocalStote.usuarioid,
+        id: this.usuarioLocalStote.usuarioid,
       };
-      this.reportesService
-        .IndicadoresAsignados(id)
-        .subscribe((res: any) => {
-          this.indicadores = res.map((item) => {
-            if (item.avance == 100) {
-              this.completados++;
-            } else if (item.avance >= 0 && item.avance < 100) {
-              this.faltantes++;
-            }
-          });
-          console.log("completados", this.completados);
-          console.log("faltantes", this.faltantes);
-          this.totales = this.completados + this.faltantes;
-          console.log("totales", this.totales);
+      this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
+        this.indicadores = res.map((item) => {
+          if (item.avance == 100) {
+            this.completados++;
+          } else if (item.avance >= 0 && item.avance < 100) {
+            this.faltantes++;
+          }
         });
+        this.totales = this.completados + this.faltantes;
+      });
     }
 
-    if (this.usarioLocalStote.typeuser != "3") {
+    if (this.usuarioLocalStote.typeuser != "3") {
       this.reportesService
         .ConsultarIndicadoresAsignados()
         .subscribe((res: any) => {
@@ -86,10 +82,7 @@ export class PrivateComponent implements OnInit {
               this.faltantes++;
             }
           });
-          console.log("completados", this.completados);
-          console.log("faltantes", this.faltantes);
           this.totales = this.completados + this.faltantes;
-          console.log("totales", this.totales);
         });
     }
   }
