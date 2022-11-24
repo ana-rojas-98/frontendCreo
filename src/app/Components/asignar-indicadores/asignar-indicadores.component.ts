@@ -19,7 +19,7 @@ export class AsignarIndicadoresComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     public router: Router
-  ) {}
+  ) { }
 
   public permisosIndicador: FormGroup = new FormGroup({
     id: new FormControl(""),
@@ -188,9 +188,9 @@ export class AsignarIndicadoresComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.enviarCorreos().subscribe((res: any) => {});
-    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
-    
+    this.authService.enviarCorreos().subscribe((res: any) => { });
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
+
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
     this.idUsuarioIndicador = parseInt(this.route.snapshot.paramMap.get("id"));
     this.indicadorEditarCrear = this.route.snapshot.paramMap.get("usuario");
@@ -328,6 +328,8 @@ export class AsignarIndicadoresComponent implements OnInit {
   GetIndicadoresPermisos(resultadosBusquedaIndicadores) {
     this.IndicadoresService.GetIndicadoresPermisos("").subscribe((res: any) => {
       this.resultadosTabla = res;
+      this.resultadosTabla = this.resultadosTabla.sort();
+      this.resultadosTabla = this.resultadosTabla.reverse();
       this.mapearResultadosTabla(resultadosBusquedaIndicadores);
       return res;
     });
