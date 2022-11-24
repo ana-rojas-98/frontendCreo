@@ -227,7 +227,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
       var contents;
       let contenidos = [];
       this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
-
+      this.resultadosHTML.shift();
       this.resultadosHTML.map(
         (item) => (
           (contents = document.getElementById((item.idFila - 1).toString())),
@@ -270,6 +270,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
         var contents;
         let contenidos = [];
         this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+        this.resultadosHTML.shift();
         this.resultadosHTML.map(
           (item) => (
             (contents = document.getElementById((item.idFila - 1).toString())),

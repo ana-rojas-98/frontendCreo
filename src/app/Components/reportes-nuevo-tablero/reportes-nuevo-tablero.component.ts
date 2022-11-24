@@ -15,7 +15,7 @@ export class ReportesNuevoTableroComponent implements OnInit {
     private authService: AuthService,
     private reportesService: ReportesService,
     private route: Router
-  ) {}
+  ) { }
 
   resultadosUsuario = [];
   resultadosCategoria: {};
@@ -51,8 +51,10 @@ export class ReportesNuevoTableroComponent implements OnInit {
     this.getStandares(0);
     this.getSubCategoria(0);
     this.getindIcadores(0);
+    this.resultadosTabla = this.resultadosTabla.sort();
+    this.resultadosTabla = this.resultadosTabla.reverse();
   }
-  
+
   continuar() {
     this.route.navigate(["/nuevo-tablero", this.indicadorUsar.toString()]);
     //
@@ -144,15 +146,15 @@ export class ReportesNuevoTableroComponent implements OnInit {
   }
   getindIcadores(dato) {
     if (dato == 0) {
-      this.reportesService
-        .ConsultarIndicadoresAsignados()
-        .subscribe((res: any) => {
-          this.resultadosTabla = res.map((item) => {
-            this.estado = res;
-            this.resultadoIndicadores = res;
-            return item;
-          });
+      this.reportesService.ConsultarIndicadoresAsignados().subscribe((res: any) => {
+        this.resultadosTabla = res.map((item) => {
+          this.estado = res;
+          this.resultadoIndicadores = res;
+          return item;
         });
+        this.resultadosTabla = this.resultadosTabla.sort();
+        this.resultadosTabla = this.resultadosTabla.reverse();
+      });
       return true;
     }
   }
