@@ -77,15 +77,17 @@ export class DiligenciarIndicadorComponent implements OnInit {
     this.consultarIndicador();
     this.id = parseInt(this.route.snapshot.paramMap.get("id"));
     this.accionVerModificar = this.route.snapshot.paramMap.get("accion");
+
     if (this.accionVerModificar == "ver") {
       this.ver = true;
       document.getElementById("Guardar").style.display = "none";
       document.getElementById("Finalizar").style.display = "none";
-      document.getElementById("Archivo").style.display = "none";
     }
+
     if (this.accionVerModificar == "editar") {
       this.modificar = true;
     }
+
     this.idArchivo.idArchivo = this.id;
     this.VerDiligenciarIndicador();
     //this.getIndicadoresFilter();
