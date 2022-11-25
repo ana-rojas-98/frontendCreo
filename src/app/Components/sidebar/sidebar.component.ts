@@ -27,7 +27,7 @@ export class SidebarComponent implements OnInit {
   };
 
   ngOnInit() {
-    if (this.usarioLocalStote.usauarioid != 1) {
+    if (this.usarioLocalStote.usuarioid != 1) {
       this.licenciar = false;
     }
     if (
