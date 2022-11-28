@@ -17,26 +17,10 @@ export class ReportesNuevoTablero1Component implements OnInit {
   filaInout = 0;
   filaInoutaux = 0;
   idSelec = 0;
+  col1 = 1;
+  col2 = 0;
   indicadores: any = [];
-  select =
-    "<div class='row'> <div class='col-4'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='1'>1</option> <option ='2'>2</option> <option ='3'>3</option> <option ='4'>4</option> </select> </div> </div>";
-
-  select2 =
-    "<div class='row'> <div class='col-4'> <select id='" +
-    this.con.toString() +
-    "' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div> <div class='col-4'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div>  </div>";
-
-  select3 =
-    "<div class='row'> <div class='col-4'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div> <div class='col-4'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div> <div class='col-4'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div>  </div>";
-  select4 =
-    "<div class='row'> <div class='col-3'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div> <div class='col-3'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div> <div class='col-3'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div> <div class='col-3'> <select id='selector' class='rounded' style='width:90%; height:40px; margin-bottom:10px;' [(ngModel)]='Select3' (change)='prueba()' > <option style='width:360px; height:100px;' =''>Seleccione una opción</option> <option ='taxto'>Texto/Numero</option> <option ='barras'>Diagrama de barras</option> <option ='torta'>Diagrama de torta</option> <option ='puntos'>Diagrama de puntos</option> </select> </div> </div>";
-
-  div = "<div class='contenedorAgregar1'>";
-  input = "<input class='rounded-pill text-center h-40px w-25' type='text'/>";
-
-  d =
-    "<select id='selector1'  class='selector' [(ngModel)]='Select3' onchange='prueba()'><option value='3'>Selecciona tipo de usuario</option> <option value='p'>Selecciona tipo de usuario</option></select>";
-  array: any = [];
+  valorSelactNumeos;
 
   ngOnInit() {
     this.ReportesService.reportesUsar.subscribe((res) => {
@@ -44,31 +28,8 @@ export class ReportesNuevoTablero1Component implements OnInit {
     });
   }
 
-  resultado = $("#selector1").change(function () {
-    var estado = $("#selector1").val();
-    alert(estado);
-  });
-
-  prueba() {
-    alert("hola");
-  }
-
   agregarFila() {
     let myParent = document.getElementById("contenedor");
-    // prueba.innerHTML = this.d;
-    // prueba.addEventListener("change", () => {
-    //   alert("hola");
-    // });
-
-    //let select = document.querySelector(".selector");
-
-    //myParent.innerHTML += this.d
-
-    //let select = document.querySelector(".selector");
-
-    // select.addEventListener("change", ()=>{
-    //     alert("hola: ")
-    // })
 
     let selectList = document.createElement("select");
 
@@ -79,11 +40,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
     selectList.id = this.idSelec.toString();
     selectList.className = "rounded";
     selectList.style.cssText =
-      "width:22%; height:40px; grid-row: '" +
-      this.fila++ +
-      "'/ '" +
-      this.fila++ +
-      "'; grid-column: 1/5;";
+      "width:24.5%; height:40px; grid-column: 1/13; margin-top:20px;";
 
     //selectList.style.height = "40px";
     myParent.appendChild(selectList);
@@ -97,20 +54,15 @@ export class ReportesNuevoTablero1Component implements OnInit {
     }
 
     selectList.addEventListener("change", () => {
-      let axt = parseInt(selectList.value);
+      this.col1 = 1;
+      this.col2 = 0;
+      this.valorSelactNumeos = parseInt(selectList.value);
       this.filaInout = 0;
-      for (let i = 1; i <= axt; i++) {
+      for (let i = 1; i <= this.valorSelactNumeos; i++) {
         this.CrearColumna(myParent);
       }
-
-      // let p = document.getElementById("selectOpciones");
-      // p.addEventListener("change", () => {
-      //   if (p.value == "Texto/numero") {
-      //     alert("hola");
-      //   }
-      // });
-
-      //  let idEjemplo = document.getElementById("mySelect").value
+      this.col1 = 1;
+      this.col2 = 0;
     });
   }
 
@@ -127,9 +79,29 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
     selectOpciones = document.createElement("select");
 
-    selectOpciones.id = "selectOpciones" + this.con;
+    selectOpciones.id = " selectOpciones" + this.con++;
     selectOpciones.className = "rounded";
-    selectOpciones.style.cssText = "width:90%; height:40px";
+
+    if (this.valorSelactNumeos == "1") {
+      selectOpciones.style.cssText =
+        "width:100%; height:40px; grid-column: 1/4";
+    }
+
+    if (this.valorSelactNumeos != "1") {
+      let numero = 12 / parseInt(this.valorSelactNumeos);
+
+      this.col2 = this.col2 + numero;
+
+      //this.col2 = numero;
+      selectOpciones.style.cssText =
+        "width:100%; height:40px; grid-column: " +
+        this.col1.toString() +
+        " / " +
+        this.col2.toString() +
+        " ;";
+
+      this.col1 = this.col2 + 1;
+    }
 
     myParent.appendChild(selectOpciones);
 
@@ -139,26 +111,44 @@ export class ReportesNuevoTablero1Component implements OnInit {
       option.text = opciones[i];
       selectOpciones.appendChild(option);
     }
+
     selectOpciones.addEventListener("change", () => {
-      
-      if (selectOpciones.value == "Texto/numero") {
-        if (this.filaInoutaux == 0) {
-          this.filaInout = this.fila + 1;
-          
-        }
-        let input = document.createElement("input");
-        input.type = "text";
+      let input = document.createElement("input");
+      let diagramaBarras = document.createElement("div");
+      let diagramaBarras1 = document.createElement("google-chart");
+
+      if (this.valorSelactNumeos == "1") {
+        input.style.cssText = "width:30%; height:40px; grid-column: 1/12";
+      }
+
+      if (this.valorSelactNumeos != "1") {
+        let numero = 12 / parseInt(this.valorSelactNumeos);
+
+        this.col2 = this.col2 + numero;
+
+        //this.col2 = numero;
         input.style.cssText =
-          "width:90%; height:40px; grid-row: '" + this.filaInout;
-        "'/ '" + this.filaInout;
-        ("'; grid-column: 1/2;");
+          "width:100%; height:40px; grid-column: " +
+          this.col1.toString() +
+          " / " +
+          this.col2.toString() +
+          " ;";
+
+        this.col1 = this.col2 + 1;
+      }
+
+      if (selectOpciones.value == "Texto/numero") {
+        input.type = "text";
+
         myParent.appendChild(input);
       }
-    });
-  }
 
-  guardar() {
-    let html = document.getElementById("contenedor").innerHTML;
+      if (selectOpciones.value == "Diagrama de barras") {
+        diagramaBarras1.id = "piechart";
+        myParent.appendChild(diagramaBarras1);
+        this.guardar();
+      }
+    });
   }
 
   columnNames = ["Browser", "Percentage"];
@@ -178,4 +168,117 @@ export class ReportesNuevoTablero1Component implements OnInit {
   };
   width = 500;
   height = 300;
+
+  guardar() {
+    $(".container").append(
+      '<canvas id="myBarChart" width="100%" height="30"></canvas>'
+    );
+    this.renderizarDashboard();
+
+
+  }
+
+  renderizarDashboard() {
+    $("#myBarChart").remove();
+    $(".container").append(
+      '<canvas id="myBarChart" width="100%" height="30"></canvas>'
+    );
+
+    let data = [1, 5, 10];
+    let semana = ["lunes", "martes", "miercoles"];
+
+    let max = 0;
+    for (let numero of data) {
+      if (max < numero) max = numero;
+    }
+
+    var ctx = document.getElementById("myBarChart");
+    var myBarChart = new $.Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: semana,
+        datasets: [
+          {
+            label: "Valores",
+            backgroundColor: "rgba(0, 97, 242, 1)",
+            hoverBackgroundColor: "rgba(0, 97, 242, 0.9)",
+            borderColor: "#4e73df",
+            data: data,
+            maxBarThickness: 25,
+          },
+        ],
+      },
+      options: {
+        maintainAspectRatio: true,
+        layout: {
+          padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0,
+          },
+        },
+        scales: {
+          xAxes: [
+            {
+              time: {
+                unit: "month",
+              },
+              gridLines: {
+                display: false,
+                drawBorder: false,
+              },
+              ticks: {
+                maxTicksLimit: 6,
+              },
+            },
+          ],
+          yAxes: [
+            {
+              ticks: {
+                min: 0,
+                max: max,
+                maxTicksLimit: 2,
+                padding: 0,
+                // Include a dollar sign in the ticks
+                // callback: function (value, index, values) {
+                //     return "$" + number_format(value);
+                // }
+              },
+              gridLines: {
+                color: "rgb(234, 236, 244)",
+                zeroLineColor: "rgb(234, 236, 244)",
+                drawBorder: false,
+                borderDash: [2],
+                zeroLineBorderDash: [2],
+              },
+            },
+          ],
+        },
+        legend: {
+          display: false,
+        },
+        tooltips: {
+          titleMarginBottom: 10,
+          titleFontColor: "#6e707e",
+          titleFontSize: 14,
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          borderColor: "#dddfeb",
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          caretPadding: 10,
+          // callbacks: {
+          //     // label: function (tooltipItem, chart) {
+          //     //     var datasetLabel =
+          //     //         chart.datasets[tooltipItem.datasetIndex].label || "";
+          //     //     return datasetLabel + ": $" + number_format(tooltipItem.yLabel);
+          //     // }
+          // }
+        },
+      },
+    });
+  }
 }
