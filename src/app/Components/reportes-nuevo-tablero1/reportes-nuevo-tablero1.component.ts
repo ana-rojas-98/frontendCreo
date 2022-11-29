@@ -115,7 +115,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
     selectOpciones.addEventListener("change", () => {
       let input = document.createElement("input");
       let diagramaBarras = document.createElement("div");
-      let diagramaBarras1 = document.createElement("google-chart");
 
       if (this.valorSelactNumeos == "1") {
         input.style.cssText = "width:30%; height:40px; grid-column: 1/12";
@@ -144,8 +143,8 @@ export class ReportesNuevoTablero1Component implements OnInit {
       }
 
       if (selectOpciones.value == "Diagrama de barras") {
-        diagramaBarras1.id = "piechart";
-        myParent.appendChild(diagramaBarras1);
+        diagramaBarras.id = "myPieChart";
+        myParent.appendChild(diagramaBarras);
         this.guardar();
       }
     });
@@ -170,115 +169,25 @@ export class ReportesNuevoTablero1Component implements OnInit {
   height = 300;
 
   guardar() {
-    $(".container").append(
-      '<canvas id="myBarChart" width="100%" height="30"></canvas>'
-    );
-    this.renderizarDashboard();
+    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(drawChart);
 
+    function drawChart() {
+      // Define the chart to be drawn.
+      var data = new google.visualization.DataTable();
+      data.addColumn("string", "Element");
+      data.addColumn("number", "Percentage");
+      data.addRows([
+        ["Nitrogen", 0.78],
+        ["Oxygen", 0.21],
+        ["Other", 0.01],
+      ]);
 
-  }
-
-  renderizarDashboard() {
-    $("#myBarChart").remove();
-    $(".container").append(
-      '<canvas id="myBarChart" width="100%" height="30"></canvas>'
-    );
-
-    let data = [1, 5, 10];
-    let semana = ["lunes", "martes", "miercoles"];
-
-    let max = 0;
-    for (let numero of data) {
-      if (max < numero) max = numero;
+      // Instantiate and draw the chart.
+      var chart = new google.visualization.PieChart(
+        document.getElementById("myPieChart")
+      );
+      chart.draw(data, null);
     }
-
-    var ctx = document.getElementById("myBarChart");
-    var myBarChart = new $.Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: semana,
-        datasets: [
-          {
-            label: "Valores",
-            backgroundColor: "rgba(0, 97, 242, 1)",
-            hoverBackgroundColor: "rgba(0, 97, 242, 0.9)",
-            borderColor: "#4e73df",
-            data: data,
-            maxBarThickness: 25,
-          },
-        ],
-      },
-      options: {
-        maintainAspectRatio: true,
-        layout: {
-          padding: {
-            left: 10,
-            right: 25,
-            top: 25,
-            bottom: 0,
-          },
-        },
-        scales: {
-          xAxes: [
-            {
-              time: {
-                unit: "month",
-              },
-              gridLines: {
-                display: false,
-                drawBorder: false,
-              },
-              ticks: {
-                maxTicksLimit: 6,
-              },
-            },
-          ],
-          yAxes: [
-            {
-              ticks: {
-                min: 0,
-                max: max,
-                maxTicksLimit: 2,
-                padding: 0,
-                // Include a dollar sign in the ticks
-                // callback: function (value, index, values) {
-                //     return "$" + number_format(value);
-                // }
-              },
-              gridLines: {
-                color: "rgb(234, 236, 244)",
-                zeroLineColor: "rgb(234, 236, 244)",
-                drawBorder: false,
-                borderDash: [2],
-                zeroLineBorderDash: [2],
-              },
-            },
-          ],
-        },
-        legend: {
-          display: false,
-        },
-        tooltips: {
-          titleMarginBottom: 10,
-          titleFontColor: "#6e707e",
-          titleFontSize: 14,
-          backgroundColor: "rgb(255,255,255)",
-          bodyFontColor: "#858796",
-          borderColor: "#dddfeb",
-          borderWidth: 1,
-          xPadding: 15,
-          yPadding: 15,
-          displayColors: false,
-          caretPadding: 10,
-          // callbacks: {
-          //     // label: function (tooltipItem, chart) {
-          //     //     var datasetLabel =
-          //     //         chart.datasets[tooltipItem.datasetIndex].label || "";
-          //     //     return datasetLabel + ": $" + number_format(tooltipItem.yLabel);
-          //     // }
-          // }
-        },
-      },
-    });
   }
 }

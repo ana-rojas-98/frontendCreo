@@ -63,7 +63,7 @@ import { NavMenu2Component } from './Components/nav-menu2/nav-menu2.component';
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,        
+    HomeComponent,
     LoginComponent,
     RegisterComponent,
     RegistroSuperComponent,
@@ -114,7 +114,7 @@ import { NavMenu2Component } from './Components/nav-menu2/nav-menu2.component';
     ReactiveFormsModule,
     GoogleChartsModule.forRoot(),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },            
+      { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent, canActivate:[AuthGuard] },
       { path: 'private', component: PrivateComponent,canActivate:[AuthGuard]},
