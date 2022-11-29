@@ -117,8 +117,8 @@ export class EliminarSubcategoriaComponent implements OnInit {
             .eliminarSubcategoria(this.SubCategoria)
             .subscribe((res: any) => {
               if (res.resul == "Subcategoria eliminada correctamente") {
-                this.router.navigate(["categorias"]);
                 this.alerta("Subcategoría eliminada correctamente");
+                this.router.navigate(["/eliminar-categoria"]);
               } else {
                 this.alerta("No se pudo eliminar");
               }
