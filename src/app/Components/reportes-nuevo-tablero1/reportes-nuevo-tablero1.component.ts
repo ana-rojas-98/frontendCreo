@@ -91,13 +91,13 @@ export class ReportesNuevoTablero1Component implements OnInit {
     let selectList = document.createElement("select");
 
     //Create array of options to be added
-    var array = ["Seleccione una opcion", "1", "2", "3", "4"];
+    var array = ["Seleccione número de columnas", "1", "2", "3", "4"];
 
     this.idSelec++;
     selectList.id = this.idSelec.toString();
     selectList.className = "rounded";
     selectList.style.cssText =
-      "width:24.5%; height:40px; grid-column: 1/13; margin-top:20px;";
+      "width:30%; height:40px; grid-column: 1/12; margin-top:20px;";
 
     //selectList.style.height = "40px";
     myParent.appendChild(selectList);
@@ -122,7 +122,11 @@ export class ReportesNuevoTablero1Component implements OnInit {
       this.col2 = 0;
     });
   }
-
+  selectOpciones: any;
+  eliminarFila(){
+    let myParent = document.getElementById("contenedor");
+    myParent.removeChild(this.selectOpciones);
+  }
   CrearColumna(myParent) {
     let cont = 0;
     let selectOpciones;
@@ -133,14 +137,14 @@ export class ReportesNuevoTablero1Component implements OnInit {
       "Diagrama de torta",
       "Diagrama de puntos",
     ];
+    
+    this.selectOpciones = document.createElement("select");
 
-    selectOpciones = document.createElement("select");
-
-    selectOpciones.id = " selectOpciones" + this.con++;
-    selectOpciones.className = "rounded";
+    this.selectOpciones.id = " selectOpciones" + this.con++;
+    this.selectOpciones.className = "rounded";
 
     if (this.valorSelactNumeos == "1") {
-      selectOpciones.style.cssText =
+      this.selectOpciones.style.cssText =
         "width:100%; height:40px; grid-column: 1/4";
     }
 
@@ -150,7 +154,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
       this.col2 = this.col2 + numero;
 
       //this.col2 = numero;
-      selectOpciones.style.cssText =
+      this.selectOpciones.style.cssText =
         "width:100%; height:40px; grid-column: " +
         this.col1.toString() +
         " / " +
@@ -160,13 +164,13 @@ export class ReportesNuevoTablero1Component implements OnInit {
       this.col1 = this.col2 + 1;
     }
 
-    myParent.appendChild(selectOpciones);
+    myParent.appendChild(this.selectOpciones);
 
     for (let i = 0; i < opciones.length; i++) {
       var option = document.createElement("option");
       option.value = opciones[i];
       option.text = opciones[i];
-      selectOpciones.appendChild(option);
+      this.selectOpciones.appendChild(option);
     }
 
     selectOpciones.addEventListener("change", () => {
@@ -206,7 +210,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
         myParent.appendChild(input);
       }
 
-      if (selectOpciones.value == "Diagrama de barras") {
+      if (this.selectOpciones.value == "Diagrama de barras") {
         diagramaBarras.id = "myPieChart";
         myParent.appendChild(diagramaBarras);
         this.guardar();

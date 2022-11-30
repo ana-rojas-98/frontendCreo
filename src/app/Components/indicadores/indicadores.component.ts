@@ -297,10 +297,6 @@ export class IndicadoresComponent implements OnInit {
         return item;
       });
       this.filtrarInfo();
-      console.log("Resultados: ", this.resultIndicadores);
-      console.log("Years: ", this.uniqueYears);
-      console.log("Periods: ", this.uniquePeriod);
-
       for (let i = 0; i < this.uniqueYears.length; i++) {
         for (let j = 0; j < this.uniquePeriod.length; j++) {
           this.filtrados = this.resultIndicadores.filter(
@@ -332,10 +328,6 @@ export class IndicadoresComponent implements OnInit {
         return item;
       });
       this.filtrarInfo();
-      console.log("Resultados: ", this.resultIndicadores);
-      console.log("Years: ", this.uniqueYears);
-      console.log("Periods: ", this.uniquePeriod);
-
       for (let i = 0; i < this.uniqueYears.length; i++) {
         for (let j = 0; j < this.uniquePeriod.length; j++) {
           this.filtrados = this.resultIndicadores.filter(
@@ -365,10 +357,6 @@ export class IndicadoresComponent implements OnInit {
         return item;
       });
       this.filtrarInfo();
-      console.log("Resultados: ", this.resultIndicadores);
-      console.log("Years: ", this.uniqueYears);
-      console.log("Periods: ", this.uniquePeriod);
-
       for (let i = 0; i < this.uniqueYears.length; i++) {
         for (let j = 0; j < this.uniquePeriod.length; j++) {
           this.filtrados = this.resultIndicadores.filter(
