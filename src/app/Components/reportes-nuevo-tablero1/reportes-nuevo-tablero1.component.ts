@@ -122,11 +122,8 @@ export class ReportesNuevoTablero1Component implements OnInit {
       this.col2 = 0;
     });
   }
-  selectOpciones: any;
-  eliminarFila(){
-    let myParent = document.getElementById("contenedor");
-    myParent.removeChild(this.selectOpciones);
-  }
+
+
   CrearColumna(myParent) {
     let cont = 0;
     let selectOpciones;
@@ -138,13 +135,13 @@ export class ReportesNuevoTablero1Component implements OnInit {
       "Diagrama de puntos",
     ];
     
-    this.selectOpciones = document.createElement("select");
+    selectOpciones = document.createElement("select");
 
-    this.selectOpciones.id = " selectOpciones" + this.con++;
-    this.selectOpciones.className = "rounded";
+    selectOpciones.id = " selectOpciones" + this.con++;
+    selectOpciones.className = "rounded";
 
     if (this.valorSelactNumeos == "1") {
-      this.selectOpciones.style.cssText =
+      selectOpciones.style.cssText =
         "width:100%; height:40px; grid-column: 1/4";
     }
 
@@ -154,7 +151,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
       this.col2 = this.col2 + numero;
 
       //this.col2 = numero;
-      this.selectOpciones.style.cssText =
+      selectOpciones.style.cssText =
         "width:100%; height:40px; grid-column: " +
         this.col1.toString() +
         " / " +
@@ -164,13 +161,13 @@ export class ReportesNuevoTablero1Component implements OnInit {
       this.col1 = this.col2 + 1;
     }
 
-    myParent.appendChild(this.selectOpciones);
+    myParent.appendChild(selectOpciones);
 
     for (let i = 0; i < opciones.length; i++) {
       var option = document.createElement("option");
       option.value = opciones[i];
       option.text = opciones[i];
-      this.selectOpciones.appendChild(option);
+      selectOpciones.appendChild(option);
     }
 
     selectOpciones.addEventListener("change", () => {
@@ -210,7 +207,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
         myParent.appendChild(input);
       }
 
-      if (this.selectOpciones.value == "Diagrama de barras") {
+      if (selectOpciones.value == "Diagrama de barras") {
         diagramaBarras.id = "myPieChart";
         myParent.appendChild(diagramaBarras);
         this.guardar();
