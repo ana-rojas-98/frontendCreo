@@ -9,7 +9,21 @@
       <input type="text" />
     </div>
     <div class="contenedorNumeroColumnas container">
-      <div class="contenedorAgregar1 w-100 row" id="contenedor"></div>
+      <div class="contenedorAgregar1 w-100 row" id="contenedor">
+        <div class="chart-bar">
+          <!-- <google-chart
+            #chart
+            [title]="title"
+            [type]="type"
+            [data]="data"
+            [columnNames]="columnNames"
+            [options]="options"
+            [width]="width"
+            [height]="height"
+          >
+          </google-chart> -->
+        </div>
+      </div>
       <!--  </div>
     <div class="contenedorAgregar">
       <div class="contenedorSelect1">
@@ -54,7 +68,11 @@
       [routerLink]="['/nuevo-tablero']"
       routerLinkActive="router-link-active"
     > -->
-      <button id="addbutton" class="guardar agregarFila" (click)="agregarFila()">
+      <button
+        id="addbutton"
+        class="guardar agregarFila"
+        (click)="agregarFila()"
+      >
         Agregar Fila
       </button>
       <button id="addbutton" class="guardar" (click)="guardar()">

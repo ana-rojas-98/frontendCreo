@@ -34,10 +34,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
   resultadosSeleccionados: any = [];
   arrayId = [];
   arrayIndicadores = [];
-  selectAler = {
-    id: 0,
-    indicador: "",
-  };
+
   usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
   ngOnInit() {
@@ -47,6 +44,8 @@ export class ReportesNuevoTablero1Component implements OnInit {
     this.reportesService.reportesUsar.subscribe((res) => {
       this.indicadores = res;
     });
+
+
   }
 
   getindIcadores() {
@@ -171,9 +170,10 @@ export class ReportesNuevoTablero1Component implements OnInit {
     }
 
     selectOpciones.addEventListener("change", () => {
-      $("select").click(function() {
-        console.log($(this).attr("id"))
-        });
+      $(".chart-bar").append(this.googleChart);
+      $("select").click(function () {
+        console.log($(this).attr("id"));
+      });
       let input = document.createElement("textarea");
       let diagramaBarras = document.createElement("div");
 
@@ -270,6 +270,19 @@ export class ReportesNuevoTablero1Component implements OnInit {
   };
   width = 500;
   height = 300;
+
+  googleChart =
+    "<google-chart #chart title=" +
+    this.title +
+    " type=" +
+    this.type +
+    " data=" +
+    this.data +
+    " columnNames=" +
+    this.columnNames +
+    " options=" +
+    this.options +
+    " > </google-chart>";
 
   guardar() {
     google.charts.load("current", { packages: ["corechart"] });
