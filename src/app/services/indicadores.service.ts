@@ -56,6 +56,15 @@ export class IndicadoresService {
     );
     return resul;
   }
+  VerDiligenciarIndicadorReportes(idArchivo) {
+    const headers = this.authService.fnSetDefineTokenAuthorization();
+    let resul = this.http.post(
+      `${this.URL_SER}/api/Notificaciones/VerDiligenciarIndicadorReportes`,
+      idArchivo,
+      headers
+    );
+    return resul;
+  }
 
   GuardarRespuestasIndicador(Respuestas) {
     const headers = this.authService.fnSetDefineTokenAuthorization();
