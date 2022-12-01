@@ -21,7 +21,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
   ) {}
 
   //cadenas de html
-  con = 0;
   Select3 = "";
   fila = 0;
   filaInput = 0;
@@ -36,7 +35,8 @@ export class ReportesNuevoTablero1Component implements OnInit {
   resultadosSeleccionados: any = [];
   arrayId = [];
   arrayIndicadores = [];
-  public chart: any;
+  configuracion = [];
+  hijos = [];
 
   usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
@@ -47,6 +47,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
     this.reportesService.reportesUsar.subscribe((res) => {
       this.indicadores = res;
     });
+    this.configuracion.push(["Posicion", "Cantidad"]);
   }
 
   getindIcadores() {
@@ -98,7 +99,8 @@ export class ReportesNuevoTablero1Component implements OnInit {
     selectList.id = this.idSelec.toString();
     selectList.className = "rounded";
     selectList.style.cssText =
-      "width:30%; height:40px; grid-column: 1/12; margin-top:20px;";
+      "width:100%; height:40px; grid-column: 1/12; margin-top:20px; grid-row: " +
+      this.idSelec * 3;
 
     //selectList.style.height = "40px";
     myParent.appendChild(selectList);
@@ -112,21 +114,27 @@ export class ReportesNuevoTablero1Component implements OnInit {
     }
 
     selectList.addEventListener("change", () => {
+      let idRow = selectList.getAttribute("id");
+      console.log(selectList.getAttribute("id"));
       this.col1 = 1;
       this.col2 = 0;
       this.valorSelactNumeos = parseInt(selectList.value);
       this.filaInput = 0;
-      for (let i = 1; i <= this.valorSelactNumeos; i++) {
-        this.CrearColumna(myParent);
+      this.configuracion[parseInt(idRow)] = [
+        parseInt(idRow) * 3,
+        this.valorSelactNumeos,
+      ];
+      for (let i = 1; i <= this.configuracion[parseInt(idRow)][1]; i++) {
+        this.CrearColumna(myParent, parseInt(idRow) * 3, i);
       }
       this.col1 = 1;
       this.col2 = 0;
     });
   }
 
-  CrearColumna(myParent) {
-    let cont = 0;
+  CrearColumna(myParent, idRow, idCol) {
     let selectOpciones;
+    console.log("idRow: ", idRow);
     var opciones = [
       "Seleccione una opcion",
       "Texto/numero",
@@ -137,16 +145,18 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
     selectOpciones = document.createElement("select");
 
-    selectOpciones.id = " selectOpciones" + this.con++;
+    selectOpciones.id = idRow + "-" + idCol;
     selectOpciones.className = "rounded";
 
     if (this.valorSelactNumeos == "1") {
       selectOpciones.style.cssText =
-        "width:100%; height:40px; grid-column: 1/4";
+        "width:100%; height:40px; grid-column: 1/4;grid-row:" +
+        (parseInt(idRow) + 1) +
+        ";";
     }
 
     if (this.valorSelactNumeos != "1") {
-      let numero = 12 / parseInt(this.valorSelactNumeos);
+      let numero = 12 / this.configuracion[parseInt(idRow) / 3][1];
 
       this.col2 = this.col2 + numero;
 
@@ -156,7 +166,9 @@ export class ReportesNuevoTablero1Component implements OnInit {
         this.col1.toString() +
         " / " +
         this.col2.toString() +
-        " ;";
+        "; grid-row:" +
+        (parseInt(idRow) + 1) +
+        ";";
 
       this.col1 = this.col2 + 1;
     }
@@ -171,35 +183,38 @@ export class ReportesNuevoTablero1Component implements OnInit {
     }
 
     selectOpciones.addEventListener("change", () => {
+      console.log(selectOpciones.getAttribute("id"));
       let input = document.createElement("textarea");
       let diagramaBarras = document.createElement("div");
 
       if (this.valorSelactNumeos == "1") {
-        input.style.cssText = "width:30%; height:100px; grid-column: 1/12";
+        input.style.cssText =
+          "width:30%; height:100px; grid-column: 1/12;grid-row:" +
+          (parseInt(idRow) + 2) +
+          ";";
       }
 
       if (this.valorSelactNumeos != "1") {
-        let numero = 12 / parseInt(this.valorSelactNumeos);
-
-        this.col2 = this.col2 + numero;
-
+        let numero = 12 / this.configuracion[parseInt(idRow) / 3][1];
         //this.col2 = numero;
+        console.log(idCol * numero - numero + 1);
+        console.log(idCol * numero);
         input.style.cssText =
           "width:100%; height:100px; grid-column: " +
-          this.col1.toString() +
+          (idCol * numero - numero + 1) +
           " / " +
-          this.col2.toString() +
-          " ;";
+          idCol * numero +
+          " ;grid-row:" +
+          (parseInt(idRow) + 2) +
+          ";";
 
         this.col1 = this.col2 + 1;
       }
 
       if (selectOpciones.value == "Texto/numero") {
         this.idInput++;
-        input.id = "idInput" + this.idInput;
-
+        input.id = idRow + "-" + idCol + "-i";
         this.selecManulRespuestas();
-
         myParent.appendChild(input);
       }
 
@@ -257,21 +272,28 @@ export class ReportesNuevoTablero1Component implements OnInit {
   contadorId = 0;
   guardar() {
     this.contadorId++;
+    let colores = [
+      "#e0440e",
+      "#e6693e",
+      "#ec8f6e",
+      "#f3b49f",
+      "#f6c7b6",
+      "#e0440e",
+    ];
     let ctx = document.createElement("canvas");
-    let colors: ["#e0440e", "#e6693e", "#ec8f6e", "#f3b49f", "#f6c7b6"];
     let diuv = document.getElementById("contenedor");
     ctx.style.cssText = "width:100%;  grid-column: 1/10";
     ctx.id = "MyChart" + this.contadorId;
     diuv.appendChild(ctx);
     new Chart("MyChart" + this.contadorId, {
-      type: "bar",
+      type: "pie",
       data: {
         labels: this.columnNames,
         datasets: [
           {
             label: "nombres",
             data: this.data,
-            backgroundColor: colors,
+            backgroundColor: colores,
             //borderColor: this.colors,
             borderWidth: 1.5,
           },
