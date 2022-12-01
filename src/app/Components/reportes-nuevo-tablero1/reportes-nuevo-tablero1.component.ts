@@ -4,6 +4,8 @@ import { ReportesService } from "./../../services/reportes.service";
 import * as $ from "jquery";
 import Swal from "sweetalert2";
 import { ActivatedRoute, Router } from "@angular/router";
+import Chart from "chart.js/auto";
+import { color, getRelativePosition } from "chart.js/helpers";
 
 @Component({
   selector: "app-reportes-nuevo-tablero1",
@@ -34,6 +36,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
   resultadosSeleccionados: any = [];
   arrayId = [];
   arrayIndicadores = [];
+  public chart: any;
 
   usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
@@ -44,8 +47,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
     this.reportesService.reportesUsar.subscribe((res) => {
       this.indicadores = res;
     });
-
-
   }
 
   getindIcadores() {
@@ -123,7 +124,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
     });
   }
 
-
   CrearColumna(myParent) {
     let cont = 0;
     let selectOpciones;
@@ -134,7 +134,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
       "Diagrama de torta",
       "Diagrama de puntos",
     ];
-    
+
     selectOpciones = document.createElement("select");
 
     selectOpciones.id = " selectOpciones" + this.con++;
@@ -171,10 +171,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
     }
 
     selectOpciones.addEventListener("change", () => {
-      $(".chart-bar").append(this.googleChart);
-      $("select").click(function () {
-        console.log($(this).attr("id"));
-      });
       let input = document.createElement("textarea");
       let diagramaBarras = document.createElement("div");
 
@@ -254,57 +250,40 @@ export class ReportesNuevoTablero1Component implements OnInit {
     console.log(resultado);
   }
 
-  columnNames = ["Browser", "Percentage"];
+  columnNames = ["Browser", "Percentage", "Browser", "Percentage", "Browser"];
   title = "googlechart";
   type = "ColumnChart";
-  data = [
-    ["Name1", 5.0],
-    ["Name2", 36.8],
-    ["Name3", 42.8],
-    ["Name4", 18.5],
-    ["Name5", 16.2],
-  ];
-
-  options = {
-    colors: ["#e0440e", "#e6693e", "#ec8f6e", "#f3b49f", "#f6c7b6"],
-    is3D: true,
-  };
-  width = 500;
-  height = 300;
-
-  googleChart =
-    "<google-chart #chart title=" +
-    this.title +
-    " type=" +
-    this.type +
-    " data=" +
-    this.data +
-    " columnNames=" +
-    this.columnNames +
-    " options=" +
-    this.options +
-    " > </google-chart>";
-
+  data = [1, 2, 3, 4, 5];
+  contadorId = 0;
   guardar() {
-    google.charts.load("current", { packages: ["corechart"] });
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-      // Define the chart to be drawn.
-      var data = new google.visualization.DataTable();
-      data.addColumn("string", "Element");
-      data.addColumn("number", "Percentage");
-      data.addRows([
-        ["Nitrogen", 0.78],
-        ["Oxygen", 0.21],
-        ["Other", 0.01],
-      ]);
-
-      // Instantiate and draw the chart.
-      var chart = new google.visualization.PieChart(
-        document.getElementById("myPieChart")
-      );
-      chart.draw(data, null);
-    }
+    this.contadorId++;
+    let ctx = document.createElement("canvas");
+    let colors: ["#e0440e", "#e6693e", "#ec8f6e", "#f3b49f", "#f6c7b6"];
+    let diuv = document.getElementById("contenedor");
+    ctx.style.cssText = "width:100%;  grid-column: 1/10";
+    ctx.id = "MyChart" + this.contadorId;
+    diuv.appendChild(ctx);
+    new Chart("MyChart" + this.contadorId, {
+      type: "bar",
+      data: {
+        labels: this.columnNames,
+        datasets: [
+          {
+            label: "nombres",
+            data: this.data,
+            backgroundColor: colors,
+            //borderColor: this.colors,
+            borderWidth: 1.5,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
   }
 }
