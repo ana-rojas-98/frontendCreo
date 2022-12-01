@@ -15,7 +15,7 @@ export class ReportesNuevoTableroComponent implements OnInit {
     private authService: AuthService,
     private reportesService: ReportesService,
     private route: Router
-  ) {}
+  ) { }
 
   resultadosUsuario = [];
   resultadosCategoria: {};
@@ -51,6 +51,8 @@ export class ReportesNuevoTableroComponent implements OnInit {
     this.getStandares(0);
     this.getSubCategoria(0);
     this.getindIcadores(0);
+    this.resultadosTabla = this.resultadosTabla.sort();
+    this.resultadosTabla = this.resultadosTabla.reverse();
   }
 
   continuar() {
@@ -153,6 +155,8 @@ export class ReportesNuevoTableroComponent implements OnInit {
               this.resultadoIndicadores = res;
               return item;
             });
+            this.resultadosTabla = this.resultadosTabla.sort();
+            this.resultadosTabla = this.resultadosTabla.reverse();
           });
       }
 

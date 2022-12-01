@@ -370,10 +370,11 @@ export class NuevaNotiComponent implements OnInit {
         .toString()
         // .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
       this.indicadoresFalta = 0;
-      this.fechaConvertida = "0";
+      
       for (let i = 0; i < this.quedia.length; i++) {
         var hola = this.quedia[i];
         this.periodicidad = hola.dia;
+        this.fechaConvertida = hola.dia;
         this.programado();
       }
     }

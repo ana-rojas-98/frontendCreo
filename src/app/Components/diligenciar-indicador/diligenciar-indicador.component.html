@@ -7,51 +7,46 @@
     </div>
     <div class="row formatos">
       <div class="col-5 d-flex flex-row">
-        <a *ngIf="excel" type="button" (click)="DescargarEx()"
-          ><img src="../../../assets/imagenes/excel.png" alt="icono-excel"
-        /></a>
-        <a *ngIf="word" type="button" (click)="DescargarWd()"
-          ><img src="../../../assets/imagenes/word.png" alt="icono-word"
-        /></a>
-        <a *ngIf="pdf" type="button" (click)="DescargarPDF()"
-          ><img src="../../../assets/imagenes/pdf.png" alt="icono-pdf"
-        /></a>
+        <a *ngIf="excel" type="button" (click)="DescargarEx()"><img src="../../../assets/imagenes/excel.png"
+            alt="icono-excel" /></a>
+        <a *ngIf="word" type="button" (click)="DescargarWd()"><img src="../../../assets/imagenes/word.png"
+            alt="icono-word" /></a>
+        <a *ngIf="pdf" type="button" (click)="DescargarPDF()"><img src="../../../assets/imagenes/pdf.png"
+            alt="icono-pdf" /></a>
       </div>
 
       <div class="col-7 d-flex flex-row-reverse mb-2">
-        <button id="Archivo"
-          class=""
-          [routerLink]="['/Archivos-Adjuntos', id]"
-          [routerLinkActive]="['link-active']"
-        >
+        <button id="Archivo" class="" [routerLink]="['/Archivos-Adjuntos', id]" [routerLinkActive]="['link-active']">
           Archivo adjunto
         </button>
       </div>
     </div>
-    <div id="exportContent" class="tablero mb-2">
-      <div class="title-card row">
-        <div class="box mb-2 col-6">
-          <h3>Año</h3>
-          <select id="Anios" class="selector mt-2" name="anio" type="select" [(ngModel)]="Anio" (change)="ChangeAnio()">
-            <option value="" selected>Seleccione Año</option>
-            <option *ngFor="let resultado of uniqueYears" [value]="resultado">
-              {{ resultado }}
-            </option>
-          </select>
-        </div>
-        <div class="box mb-2 col-6">
-          <h3>Periodo</h3>
-          <select id="Periods" class="selector mt-2" name="periodo" type="select" [(ngModel)]="Periodo" (change)="ChangePeriodo()">
-            <option value="">Seleccione Periodo</option>
-            <option *ngFor="let resultado of uniquePeriod" [value]="resultado">
-              {{ resultado }}
-            </option>
-          </select>
-        </div>
+
+    <div class="title-card row">
+      <div class="box mb-2 col-6">
+        <h3>Año</h3>
+        <select id="Anios" class="selector mt-2" name="anio" type="select" [(ngModel)]="Anio" (change)="ChangeAnio()">
+          <option value="" selected>Seleccione Año</option>
+          <option *ngFor="let resultado of uniqueYears" [value]="resultado">
+            {{ resultado }}
+          </option>
+        </select>
       </div>
-      <div class="row border my-2 mx-2"></div>
+      <div class="box mb-2 col-6">
+        <h3>Periodo</h3>
+        <select id="Periods" class="selector mt-2" name="periodo" type="select" [(ngModel)]="Periodo"
+          (change)="ChangePeriodo()">
+          <option value="">Seleccione Periodo</option>
+          <option *ngFor="let resultado of uniquePeriod" [value]="resultado">
+            {{ resultado }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div id="exportContent" class="tablero">
       <!------------------------------------------------------------------------------------------------------------------>
-      <table id="prueba" class="prueba"></table>
+      <table id="prueba" class="prueba p-3">
+      </table>
       <!------------------------------------------------------------------------------------------------------------------>
     </div>
     <div class="botones">

@@ -105,8 +105,8 @@ export class SubcategoComponent implements OnInit {
             .crear_subcategoria(this.Subcategoria)
             .subscribe((res: any) => {
               if (res.resul == "Subcategoria guardada") {
-                this.router.navigate(['/subcatego']);
-                return this.alerta("Categoría creada exitosamente");
+                this.alerta("Subcategoría creada exitosamente");
+                return this.router.navigate(['/administrar-indicadores']);
               } else {
                 this.changeSuccessMessage(5);
               }
