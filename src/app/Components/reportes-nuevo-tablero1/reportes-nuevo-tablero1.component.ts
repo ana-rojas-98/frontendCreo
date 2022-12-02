@@ -4,7 +4,8 @@ import { ReportesService } from "./../../services/reportes.service";
 import * as $ from "jquery";
 import Swal from "sweetalert2";
 import { ActivatedRoute, Router } from "@angular/router";
-import Chart from "chart.js/auto";
+import { isNullOrUndefined } from "util";
+//import Chart from "chart.js/auto";
 import { color, getRelativePosition } from "chart.js/helpers";
 
 @Component({
@@ -37,6 +38,8 @@ export class ReportesNuevoTablero1Component implements OnInit {
   arrayIndicadores = [];
   configuracion = [];
   hijos = [];
+  hijosdeHijos = [];
+  auxhijos = [];
 
   usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
@@ -48,6 +51,8 @@ export class ReportesNuevoTablero1Component implements OnInit {
       this.indicadores = res;
     });
     this.configuracion.push(["Posicion", "Cantidad"]);
+    this.hijos.push(["Posicion", "Cantidad"]);
+    this.hijosdeHijos.push(["Posicion", "Cantidad"]);
   }
 
   getindIcadores() {
@@ -79,7 +84,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
         };
         this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
           this.resultadosSeleccionados = res.map((item) => {
-            console.log("indicadores: ", this.resultadosSeleccionados);
             return item;
           });
         });
@@ -99,8 +103,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
     selectList.id = this.idSelec.toString();
     selectList.className = "rounded";
     selectList.style.cssText =
-      "width:100%; height:40px; grid-column: 1/12; margin-top:20px; grid-row: " +
-      this.idSelec * 3;
+      "width:30%; height:40px; grid-column: 1/12; margin-top:20px; grid-row: " + (this.idSelec * 3);
 
     //selectList.style.height = "40px";
     myParent.appendChild(selectList);
@@ -112,29 +115,40 @@ export class ReportesNuevoTablero1Component implements OnInit {
       option.text = array[i];
       selectList.appendChild(option);
     }
-
     selectList.addEventListener("change", () => {
       let idRow = selectList.getAttribute("id");
-      console.log(selectList.getAttribute("id"));
       this.col1 = 1;
       this.col2 = 0;
       this.valorSelactNumeos = parseInt(selectList.value);
       this.filaInput = 0;
-      this.configuracion[parseInt(idRow)] = [
-        parseInt(idRow) * 3,
-        this.valorSelactNumeos,
-      ];
+      if (this.hijos[parseInt(idRow)] != undefined) {
+        for (let h = 0; h < this.hijos[parseInt(idRow)].length; h++) {
+          let a = (this.hijos[parseInt(idRow)][h]).toString();
+          for (let k = 0; k < this.hijosdeHijos.length; k++) {
+            if (this.hijosdeHijos[k].includes(a)) {
+              let child = document.getElementById((this.hijosdeHijos[k]).toString());
+              myParent.removeChild(child);
+              this.hijosdeHijos[k] = "";
+            }
+          }
+          let child = document.getElementById(a);
+          myParent.removeChild(child);
+        }
+      }
+      this.configuracion[(parseInt(idRow))] = [(parseInt(idRow) * 3), this.valorSelactNumeos];
       for (let i = 1; i <= this.configuracion[parseInt(idRow)][1]; i++) {
-        this.CrearColumna(myParent, parseInt(idRow) * 3, i);
+        this.auxhijos.push(idRow + "-" + i.toString());
+        this.CrearColumna(myParent, (parseInt(idRow) * 3), i);
       }
       this.col1 = 1;
       this.col2 = 0;
+      this.hijos[(parseInt(idRow))] = this.auxhijos;
+      this.auxhijos = [];
     });
   }
 
   CrearColumna(myParent, idRow, idCol) {
     let selectOpciones;
-    console.log("idRow: ", idRow);
     var opciones = [
       "Seleccione una opcion",
       "Texto/numero",
@@ -145,14 +159,12 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
     selectOpciones = document.createElement("select");
 
-    selectOpciones.id = idRow + "-" + idCol;
+    selectOpciones.id = (parseInt(idRow) / 3) + "-" + idCol;
     selectOpciones.className = "rounded";
 
     if (this.valorSelactNumeos == "1") {
       selectOpciones.style.cssText =
-        "width:100%; height:40px; grid-column: 1/4;grid-row:" +
-        (parseInt(idRow) + 1) +
-        ";";
+        "width:100%; height:40px; grid-column: 1/4;grid-row:" + (parseInt(idRow) + 1) + ";";
     }
 
     if (this.valorSelactNumeos != "1") {
@@ -166,9 +178,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
         this.col1.toString() +
         " / " +
         this.col2.toString() +
-        "; grid-row:" +
-        (parseInt(idRow) + 1) +
-        ";";
+        "; grid-row:" + (parseInt(idRow) + 1) + ";";
 
       this.col1 = this.col2 + 1;
     }
@@ -183,9 +193,16 @@ export class ReportesNuevoTablero1Component implements OnInit {
     }
 
     selectOpciones.addEventListener("change", () => {
-      console.log(selectOpciones.getAttribute("id"));
       let input = document.createElement("textarea");
       let diagramaBarras = document.createElement("div");
+
+      for (let k = 0; k < this.hijosdeHijos.length; k++) {
+        if (this.hijosdeHijos[k].includes(((parseInt(idRow) / 3) + "-" + idCol).toString())) {
+          let child = document.getElementById((this.hijosdeHijos[k]).toString());
+          myParent.removeChild(child);
+          this.hijosdeHijos[k] = "";
+        }
+      }
 
       if (this.valorSelactNumeos == "1") {
         input.style.cssText =
@@ -197,29 +214,26 @@ export class ReportesNuevoTablero1Component implements OnInit {
       if (this.valorSelactNumeos != "1") {
         let numero = 12 / this.configuracion[parseInt(idRow) / 3][1];
         //this.col2 = numero;
-        console.log(idCol * numero - numero + 1);
-        console.log(idCol * numero);
         input.style.cssText =
           "width:100%; height:100px; grid-column: " +
           (idCol * numero - numero + 1) +
           " / " +
           idCol * numero +
-          " ;grid-row:" +
-          (parseInt(idRow) + 2) +
-          ";";
-
+          " ;grid-row:" + (parseInt(idRow) + 2) + ";";
         this.col1 = this.col2 + 1;
       }
 
       if (selectOpciones.value == "Texto/numero") {
         this.idInput++;
-        input.id = idRow + "-" + idCol + "-i";
+        input.id = (parseInt(idRow) / 3) + "-" + idCol + "-i";
+        this.hijosdeHijos.push((parseInt(idRow) / 3) + "-" + idCol + "-i");
         this.selecManulRespuestas();
         myParent.appendChild(input);
       }
 
       if (selectOpciones.value == "Diagrama de barras") {
         diagramaBarras.id = "myPieChart";
+        this.hijosdeHijos.push((parseInt(idRow) / 3) + "-" + idCol + "-db");
         myParent.appendChild(diagramaBarras);
         this.guardar(idRow);
       }
@@ -262,7 +276,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
         });
       },
     });
-    console.log(resultado);
   }
 
   columnNames = ["Browser", "Percentage", "Browser", "Percentage", "Browser"];
