@@ -5,7 +5,7 @@ import * as $ from "jquery";
 import Swal from "sweetalert2";
 import { ActivatedRoute, Router } from "@angular/router";
 import { isNullOrUndefined } from "util";
-//import Chart from "chart.js/auto";
+import Chart from "chart.js/auto";
 import { color, getRelativePosition } from "chart.js/helpers";
 
 @Component({
@@ -195,7 +195,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
     selectOpciones.addEventListener("change", () => {
       let input = document.createElement("textarea");
       let diagramaBarras = document.createElement("div");
-
+      console.log("Hijos de hijos: ", this.hijosdeHijos)
       for (let k = 0; k < this.hijosdeHijos.length; k++) {
         if (this.hijosdeHijos[k].includes(((parseInt(idRow) / 3) + "-" + idCol).toString())) {
           let child = document.getElementById((this.hijosdeHijos[k]).toString());
@@ -232,10 +232,9 @@ export class ReportesNuevoTablero1Component implements OnInit {
       }
 
       if (selectOpciones.value == "Diagrama de barras") {
-        diagramaBarras.id = "myPieChart";
+        diagramaBarras.id = ((parseInt(idRow) / 3) + "-" + idCol + "-db").toString();
         this.hijosdeHijos.push((parseInt(idRow) / 3) + "-" + idCol + "-db");
-        myParent.appendChild(diagramaBarras);
-        this.guardar(idRow);
+        this.guardar(myParent,idRow,idCol);
       }
     });
   }
@@ -285,7 +284,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
   contadorId = 0;
 
 
-  guardar(idRow) {
+  guardar(myParent,idRow,idCol) {
     this.contadorId++;
     let colores = [
       "#e0440e",
@@ -296,11 +295,10 @@ export class ReportesNuevoTablero1Component implements OnInit {
       "#e0440e",
     ];
     let ctx = document.createElement("canvas");
-    let diuv = document.getElementById("contenedor");
 
     if (this.valorSelactNumeos == "1") {
       ctx.style.cssText =
-        "margin-top:20px; width:30%; height:30px; grid-column: 1/12;grid-row:" +
+        "margin-top:20px; width:100%; height:100%; grid-column: 1/12;grid-row:" +
         (parseInt(idRow) + 2) +
         ";";
     }
@@ -312,22 +310,20 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
       //this.col2 = numero;
       ctx.style.cssText =
-        "margin-top:20px; width:100%; height:30px; grid-column: " +
-        this.col1.toString() +
+        "margin-top:20px; width:100%; height:100%; grid-column: " +
+        (idCol * numero - numero + 1) +
         " / " +
-        this.col2.toString() +
-        "; grid-row:" +
-        (parseInt(idRow) + 1) +
-        ";";
+        idCol * numero +
+        " ;grid-row:" + (parseInt(idRow) + 2) + ";";
 
       this.col1 = this.col2 + 1;
     }
 
 
-    ctx.id = "MyChart" + this.contadorId;
-    diuv.appendChild(ctx);
-    new Chart("MyChart" + this.contadorId, {
-      type: "pie",
+    ctx.id = ((parseInt(idRow) / 3) + "-" + idCol + "-db").toString();
+    myParent.appendChild(ctx);
+    new Chart(ctx, {
+      type: "bar",
       data: {
         labels: this.columnNames,
         datasets: [
@@ -337,13 +333,18 @@ export class ReportesNuevoTablero1Component implements OnInit {
             backgroundColor: colores,
             //borderColor: this.colors,
             borderWidth: 1.5,
+
           },
         ],
       },
       options: {
+        responsive: false,
+        maintainAspectRatio: false,
         scales: {
           y: {
             beginAtZero: true,
+            min: 0,
+            max: 5,
           },
         },
       },
