@@ -221,7 +221,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
       if (selectOpciones.value == "Diagrama de barras") {
         diagramaBarras.id = "myPieChart";
         myParent.appendChild(diagramaBarras);
-        this.guardar();
+        this.guardar(idRow);
       }
     });
   }
@@ -270,7 +270,9 @@ export class ReportesNuevoTablero1Component implements OnInit {
   type = "ColumnChart";
   data = [1, 2, 3, 4, 5];
   contadorId = 0;
-  guardar() {
+
+
+  guardar(idRow) {
     this.contadorId++;
     let colores = [
       "#e0440e",
@@ -282,7 +284,33 @@ export class ReportesNuevoTablero1Component implements OnInit {
     ];
     let ctx = document.createElement("canvas");
     let diuv = document.getElementById("contenedor");
-    ctx.style.cssText = "width:100%;  grid-column: 1/10";
+
+    if (this.valorSelactNumeos == "1") {
+      ctx.style.cssText =
+        "margin-top:20px; width:30%; height:30px; grid-column: 1/12;grid-row:" +
+        (parseInt(idRow) + 2) +
+        ";";
+    }
+
+    if (this.valorSelactNumeos != "1") {
+      let numero = 12 / this.configuracion[parseInt(idRow) / 3][1];
+
+      this.col2 = this.col2 + numero;
+
+      //this.col2 = numero;
+      ctx.style.cssText =
+        "margin-top:20px; width:100%; height:30px; grid-column: " +
+        this.col1.toString() +
+        " / " +
+        this.col2.toString() +
+        "; grid-row:" +
+        (parseInt(idRow) + 1) +
+        ";";
+
+      this.col1 = this.col2 + 1;
+    }
+
+
     ctx.id = "MyChart" + this.contadorId;
     diuv.appendChild(ctx);
     new Chart("MyChart" + this.contadorId, {
