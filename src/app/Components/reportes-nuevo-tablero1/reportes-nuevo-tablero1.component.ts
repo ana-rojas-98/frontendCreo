@@ -277,7 +277,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
     });
   }
 
-  columnNames = ["Browser", "Percentage", "Browser", "Percentage", "Browser"];
+  columnNames = [1, 2, 3, 4, 5];
   title = "googlechart";
   type = "ColumnChart";
   data = [1, 2, 3, 4, 5];
@@ -323,12 +323,22 @@ export class ReportesNuevoTablero1Component implements OnInit {
     ctx.id = ((parseInt(idRow) / 3) + "-" + idCol + "-db").toString();
     myParent.appendChild(ctx);
     new Chart(ctx, {
-      type: "bar",
+      type: "line",
       data: {
+        
         labels: this.columnNames,
         datasets: [
           {
             label: "nombres",
+            borderColor: "#000",
+            data: this.data,
+            backgroundColor: colores,
+            //borderColor: this.colors,
+            borderWidth: 1.5,
+
+          },
+          {
+            label: "Apellidos",
             data: this.data,
             backgroundColor: colores,
             //borderColor: this.colors,
@@ -338,13 +348,17 @@ export class ReportesNuevoTablero1Component implements OnInit {
         ],
       },
       options: {
+        plugins: {
+          title: {
+            display: true,
+            text: "Prueba",
+          }
+        },
         responsive: false,
         maintainAspectRatio: false,
         scales: {
           y: {
             beginAtZero: true,
-            min: 0,
-            max: 5,
           },
         },
       },
