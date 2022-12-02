@@ -5,7 +5,7 @@ import * as $ from "jquery";
 import Swal from "sweetalert2";
 import { ActivatedRoute, Router } from "@angular/router";
 import { isNullOrUndefined } from "util";
-import Chart from "chart.js/auto";
+//import Chart from "chart.js/auto";
 import { color, getRelativePosition } from "chart.js/helpers";
 
 @Component({
