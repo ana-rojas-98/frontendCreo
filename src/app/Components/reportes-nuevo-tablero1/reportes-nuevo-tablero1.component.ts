@@ -19,7 +19,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
     private indicadoresService: IndicadoresService,
     private route: ActivatedRoute,
     public router: Router
-  ) {}
+  ) { }
 
   //cadenas de html
   Select3 = "";
@@ -27,7 +27,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
   filaInput = 0;
   filaInputaux = 0;
   idInput = 0;
-  idSelec = 0;
+  idSelec = 1;
   col1 = 1;
   col2 = 0;
   indicadores: any = [];
@@ -53,6 +53,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
     this.configuracion.push(["Posicion", "Cantidad"]);
     this.hijos.push(["Posicion", "Cantidad"]);
     this.hijosdeHijos.push(["Posicion", "Cantidad"]);
+
   }
 
   getindIcadores() {
@@ -96,17 +97,50 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
     let selectList = document.createElement("select");
 
+    let button = document.createElement("button");
     //Create array of options to be added
     var array = ["Seleccione número de columnas", "1", "2", "3", "4"];
-
-    this.idSelec++;
-    selectList.id = this.idSelec.toString();
+    let anterior = document.getElementById(this.idSelec.toString());
+    while (anterior != null) {
+      if (this.idSelec == 1) {
+        this.idSelec++;
+        break;
+      }
+      this.idSelec++;
+      anterior = document.getElementById(this.idSelec.toString());
+    };
+    button.id = this.idSelec.toString();
+    selectList.id = this.idSelec.toString() + "-";
     selectList.className = "rounded";
-    selectList.style.cssText =
-      "width:30%; height:40px; grid-column: 1/12; margin-top:20px; grid-row: " + (this.idSelec * 3);
-
+    button.className = "rounded";
+    selectList.style.cssText = "width:30%; height:40px; grid-column: 1/12; margin-top:20px; grid-row: " + (this.idSelec * 3);
+    button.style.cssText = "width:1%;height:30px;font-size: 2em;color: red;align-items: center;background-color: transparent;border-color: transparent;grid-column: 5/12; margin-top:20px; grid-row: " + (this.idSelec * 3);
+    button.textContent = "x";
     //selectList.style.height = "40px";
     myParent.appendChild(selectList);
+    myParent.appendChild(button);
+
+    button.addEventListener("click", () => {
+      let idRow = button.getAttribute("id");
+      if (this.hijos[parseInt(idRow)] != undefined) {
+        for (let h = 0; h < this.hijos[parseInt(idRow)].length; h++) {
+          let a = (this.hijos[parseInt(idRow)][h]).toString();
+          for (let k = 0; k < this.hijosdeHijos.length; k++) {
+            if (this.hijosdeHijos[k].includes(a)) {
+              let child = document.getElementById((this.hijosdeHijos[k]).toString());
+              myParent.removeChild(child);
+              this.hijosdeHijos[k] = "";
+            }
+          }
+          let child = document.getElementById(a);
+          myParent.removeChild(child);
+        }
+        this.hijos[parseInt(idRow)].splice(0, this.hijos[parseInt(idRow)].length);
+      }
+      let child = document.getElementById(button.getAttribute("id") + "-")
+      myParent.removeChild(child);
+      myParent.removeChild(button);
+    });
 
     //Create and append the options
     for (var i = 0; i < array.length; i++) {
@@ -117,6 +151,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
     }
     selectList.addEventListener("change", () => {
       let idRow = selectList.getAttribute("id");
+      idRow = idRow.substring(0, 1);
       this.col1 = 1;
       this.col2 = 0;
       this.valorSelactNumeos = parseInt(selectList.value);
@@ -195,7 +230,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
     selectOpciones.addEventListener("change", () => {
       let input = document.createElement("textarea");
       let diagramaBarras = document.createElement("div");
-      console.log("Hijos de hijos: ", this.hijosdeHijos)
       for (let k = 0; k < this.hijosdeHijos.length; k++) {
         if (this.hijosdeHijos[k].includes(((parseInt(idRow) / 3) + "-" + idCol).toString())) {
           let child = document.getElementById((this.hijosdeHijos[k]).toString());
@@ -234,7 +268,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
       if (selectOpciones.value == "Diagrama de barras") {
         diagramaBarras.id = ((parseInt(idRow) / 3) + "-" + idCol + "-db").toString();
         this.hijosdeHijos.push((parseInt(idRow) / 3) + "-" + idCol + "-db");
-        this.guardar(myParent,idRow,idCol);
+        this.guardar(myParent, idRow, idCol);
       }
     });
   }
@@ -277,14 +311,14 @@ export class ReportesNuevoTablero1Component implements OnInit {
     });
   }
 
-  columnNames = [1, 2, 3, 4, 5];
+  columnNames = ["Jorge", "juan", "emmanuel", "Rodrigo", "Santiago"];
   title = "googlechart";
   type = "ColumnChart";
-  data = [1, 2, 3, 4, 5];
+  data = [1, "Juan", 3, 4, 5];
   contadorId = 0;
 
 
-  guardar(myParent,idRow,idCol) {
+  guardar(myParent, idRow, idCol) {
     this.contadorId++;
     let colores = [
       "#e0440e",
@@ -323,9 +357,9 @@ export class ReportesNuevoTablero1Component implements OnInit {
     ctx.id = ((parseInt(idRow) / 3) + "-" + idCol + "-db").toString();
     myParent.appendChild(ctx);
     new Chart(ctx, {
-      type: "line",
+      type: "bar",
       data: {
-        
+
         labels: this.columnNames,
         datasets: [
           {
