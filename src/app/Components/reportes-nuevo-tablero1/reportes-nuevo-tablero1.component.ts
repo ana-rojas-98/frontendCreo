@@ -40,6 +40,18 @@ export class ReportesNuevoTablero1Component implements OnInit {
   hijos = [];
   hijosdeHijos = [];
   auxhijos = [];
+  coloresSelect = "";
+  dataInput = "";
+  columnasInput = "";
+  coloresInput = "";
+  auxDataInput = 0;
+  auxColumnaInput = 0;
+  auxColoresInput = 0;
+  nombreGrafica = "";
+  arrayData = [];
+  arrayColumnas = [];
+  arrayColores = [];
+  data = [];
 
   usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
@@ -103,7 +115,8 @@ export class ReportesNuevoTablero1Component implements OnInit {
     selectList.id = this.idSelec.toString();
     selectList.className = "rounded";
     selectList.style.cssText =
-      "width:30%; height:40px; grid-column: 1/12; margin-top:20px; grid-row: " + (this.idSelec * 3);
+      "width:30%; height:40px; grid-column: 1/12; margin-top:20px; grid-row: " +
+      this.idSelec * 3;
 
     //selectList.style.height = "40px";
     myParent.appendChild(selectList);
@@ -123,10 +136,12 @@ export class ReportesNuevoTablero1Component implements OnInit {
       this.filaInput = 0;
       if (this.hijos[parseInt(idRow)] != undefined) {
         for (let h = 0; h < this.hijos[parseInt(idRow)].length; h++) {
-          let a = (this.hijos[parseInt(idRow)][h]).toString();
+          let a = this.hijos[parseInt(idRow)][h].toString();
           for (let k = 0; k < this.hijosdeHijos.length; k++) {
             if (this.hijosdeHijos[k].includes(a)) {
-              let child = document.getElementById((this.hijosdeHijos[k]).toString());
+              let child = document.getElementById(
+                this.hijosdeHijos[k].toString()
+              );
               myParent.removeChild(child);
               this.hijosdeHijos[k] = "";
             }
@@ -135,14 +150,17 @@ export class ReportesNuevoTablero1Component implements OnInit {
           myParent.removeChild(child);
         }
       }
-      this.configuracion[(parseInt(idRow))] = [(parseInt(idRow) * 3), this.valorSelactNumeos];
+      this.configuracion[parseInt(idRow)] = [
+        parseInt(idRow) * 3,
+        this.valorSelactNumeos,
+      ];
       for (let i = 1; i <= this.configuracion[parseInt(idRow)][1]; i++) {
         this.auxhijos.push(idRow + "-" + i.toString());
-        this.CrearColumna(myParent, (parseInt(idRow) * 3), i);
+        this.CrearColumna(myParent, parseInt(idRow) * 3, i);
       }
       this.col1 = 1;
       this.col2 = 0;
-      this.hijos[(parseInt(idRow))] = this.auxhijos;
+      this.hijos[parseInt(idRow)] = this.auxhijos;
       this.auxhijos = [];
     });
   }
@@ -159,12 +177,14 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
     selectOpciones = document.createElement("select");
 
-    selectOpciones.id = (parseInt(idRow) / 3) + "-" + idCol;
+    selectOpciones.id = parseInt(idRow) / 3 + "-" + idCol;
     selectOpciones.className = "rounded";
 
     if (this.valorSelactNumeos == "1") {
       selectOpciones.style.cssText =
-        "width:100%; height:40px; grid-column: 1/4;grid-row:" + (parseInt(idRow) + 1) + ";";
+        "width:100%; height:40px; grid-column: 1/4;grid-row:" +
+        (parseInt(idRow) + 1) +
+        ";";
     }
 
     if (this.valorSelactNumeos != "1") {
@@ -178,7 +198,9 @@ export class ReportesNuevoTablero1Component implements OnInit {
         this.col1.toString() +
         " / " +
         this.col2.toString() +
-        "; grid-row:" + (parseInt(idRow) + 1) + ";";
+        "; grid-row:" +
+        (parseInt(idRow) + 1) +
+        ";";
 
       this.col1 = this.col2 + 1;
     }
@@ -195,10 +217,14 @@ export class ReportesNuevoTablero1Component implements OnInit {
     selectOpciones.addEventListener("change", () => {
       let input = document.createElement("textarea");
       let diagramaBarras = document.createElement("div");
-      console.log("Hijos de hijos: ", this.hijosdeHijos)
+      console.log("Hijos de hijos: ", this.hijosdeHijos);
       for (let k = 0; k < this.hijosdeHijos.length; k++) {
-        if (this.hijosdeHijos[k].includes(((parseInt(idRow) / 3) + "-" + idCol).toString())) {
-          let child = document.getElementById((this.hijosdeHijos[k]).toString());
+        if (
+          this.hijosdeHijos[k].includes(
+            (parseInt(idRow) / 3 + "-" + idCol).toString()
+          )
+        ) {
+          let child = document.getElementById(this.hijosdeHijos[k].toString());
           myParent.removeChild(child);
           this.hijosdeHijos[k] = "";
         }
@@ -219,27 +245,34 @@ export class ReportesNuevoTablero1Component implements OnInit {
           (idCol * numero - numero + 1) +
           " / " +
           idCol * numero +
-          " ;grid-row:" + (parseInt(idRow) + 2) + ";";
+          " ;grid-row:" +
+          (parseInt(idRow) + 2) +
+          ";";
         this.col1 = this.col2 + 1;
       }
 
       if (selectOpciones.value == "Texto/numero") {
         this.idInput++;
-        input.id = (parseInt(idRow) / 3) + "-" + idCol + "-i";
-        this.hijosdeHijos.push((parseInt(idRow) / 3) + "-" + idCol + "-i");
-        this.selecManulRespuestas();
+        input.id = parseInt(idRow) / 3 + "-" + idCol + "-i";
+        this.hijosdeHijos.push(parseInt(idRow) / 3 + "-" + idCol + "-i");
+        //this.selecManulRespuestas();
         myParent.appendChild(input);
       }
 
       if (selectOpciones.value == "Diagrama de barras") {
-        diagramaBarras.id = ((parseInt(idRow) / 3) + "-" + idCol + "-db").toString();
-        this.hijosdeHijos.push((parseInt(idRow) / 3) + "-" + idCol + "-db");
-        this.guardar(myParent,idRow,idCol);
+        diagramaBarras.id = (
+          parseInt(idRow) / 3 +
+          "-" +
+          idCol +
+          "-db"
+        ).toString();
+        this.hijosdeHijos.push(parseInt(idRow) / 3 + "-" + idCol + "-db");
+        //this.datosGrafica(myParent, idRow, idCol);
       }
     });
   }
 
-  selecManulRespuestas() {
+  selecManulRespuestas(funcion) {
     Swal.fire({
       title: "¿Como desea ingresar el valor?",
       showDenyButton: true,
@@ -249,8 +282,9 @@ export class ReportesNuevoTablero1Component implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.selecRespuestasAnteriores();
+        this.selecRespuestasAnteriores(funcion);
       } else if (result.isDenied) {
+        this.datosManual(funcion);
       }
     });
   }
@@ -261,7 +295,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
       HRV: "Croatia",
     },
   };
-  async selecRespuestasAnteriores() {
+  async selecRespuestasAnteriores(funcion) {
     const resultado = await Swal.fire({
       title: "Select field validation",
       input: "select",
@@ -270,7 +304,37 @@ export class ReportesNuevoTablero1Component implements OnInit {
       showCancelButton: true,
       inputValidator: (id) => {
         return new Promise((resolve) => {
-          $("#idInput" + this.idInput).val(this.arrayId[id]);
+          // $("#idInput" + this.idInput).val(this.arrayId[id]);
+          if (this.auxDataInput == 0) {
+            if (funcion == "data") {
+              this.dataInput = this.arrayId[id];
+            }
+          }
+
+          if (this.auxColumnaInput == 0) {
+            if (funcion == "columnas") {
+              this.columnasInput = this.arrayId[id];
+            }
+          }
+
+          if (this.auxDataInput != 0) {
+            if (funcion == "data") {
+              this.dataInput = this.dataInput + "~" + this.arrayId[id];
+            }
+          }
+
+          if (this.auxColumnaInput != 0) {
+            if (funcion == "columnas") {
+              this.columnasInput = this.columnasInput + "~" + this.arrayId[id];
+            }
+          }
+
+          if (funcion == "data") {
+            this.auxDataInput++;
+          }
+          if (funcion == "columnas") {
+            this.auxColumnaInput++;
+          }
           Swal.close();
         });
       },
@@ -280,20 +344,161 @@ export class ReportesNuevoTablero1Component implements OnInit {
   columnNames = ["Browser", "Percentage", "Browser", "Percentage", "Browser"];
   title = "googlechart";
   type = "ColumnChart";
-  data = [1, 2, 3, 4, 5];
   contadorId = 0;
 
 
-  guardar(myParent,idRow,idCol) {
+  coloresFuncion() {
+    if (this.coloresSelect != "colores") {
+      if (this.auxColoresInput == 0) {
+        this.coloresInput = this.coloresSelect;
+      }
+
+      if (this.auxColoresInput != 0) {
+        this.coloresInput = this.coloresInput + "~" + this.coloresSelect;
+      }
+      this.auxColoresInput++;
+    }
+    console.log(this.coloresInput);
+  }
+
+  agregarData(funcion) {
+    this.selecManulRespuestas(funcion);
+  }
+  quitarData(funcion) {
+    let array;
+    if (funcion == "data") {
+      let datos = this.dataInput.toString();
+      array = datos.split("~");
+      this.dataInput = "";
+    }
+    if (funcion == "colores") {
+      let datos = this.coloresInput.toString();
+      array = datos.split("~");
+      this.coloresInput = "";
+    }
+    if (funcion == "columnas") {
+      let datos = this.columnasInput.toString();
+      array = datos.split("~");
+      this.columnasInput = "";
+    }
+    for (let item = 0; item < array.length - 1; item++) {
+      if (this.dataInput == "") {
+        if (funcion == "data") {
+          this.dataInput = array[item];
+        }
+      } else {
+        if (funcion == "data") {
+          this.dataInput = this.dataInput + "~" + array[item];
+        }
+      }
+
+      if (this.coloresInput == "") {
+        if (funcion == "colores") {
+          this.coloresInput = array[item];
+        }
+      } else {
+        if (funcion == "colores") {
+          this.coloresInput = this.coloresInput + "~" + array[item];
+        }
+      }
+
+      if (this.columnasInput == "") {
+        if (funcion == "columnas") {
+          this.columnasInput = array[item];
+        }
+      } else {
+        if (funcion == "columnas") {
+          this.columnasInput = this.columnasInput + "~" + array[item];
+        }
+      }
+    }
+    if (this.dataInput == "") {
+      this.auxDataInput = 0;
+    }
+    if (this.columnasInput == "") {
+      this.auxColumnaInput = 0;
+    }
+  }
+
+  async datosManual(funcion) {
+    const { value: text } = await Swal.fire({
+      input: "text",
+      inputLabel: "Message",
+      inputPlaceholder: "Digite un valor",
+      inputAttributes: {
+        "aria-label": "Type your message here",
+      },
+      showCancelButton: true,
+    });
+
+    if (text) {
+      if (this.auxDataInput == 0) {
+        if (funcion == "data") {
+          this.dataInput = text;
+        }
+      }
+
+      if (this.auxColoresInput == 0) {
+        if (funcion == "colores") {
+          this.coloresInput = text;
+        }
+      }
+
+      if (this.auxColumnaInput == 0) {
+        if (funcion == "columnas") {
+          this.columnasInput = text;
+        }
+      }
+
+      if (this.auxDataInput != 0) {
+        if (funcion == "data") {
+          this.dataInput = this.dataInput + "~" + text;
+        }
+      }
+
+      if (this.auxColoresInput != 0) {
+        if (funcion == "colores") {
+          this.coloresInput = this.coloresInput + "~" + text;
+        }
+      }
+
+      if (this.auxColumnaInput != 0) {
+        if (funcion == "columnas") {
+          this.columnasInput = this.columnasInput + "~" + text;
+        }
+      }
+
+      if (funcion == "data") {
+        this.auxDataInput++;
+      }
+
+      if (funcion == "colores") {
+        this.auxColoresInput++;
+      }
+
+      if (funcion == "columnas") {
+        this.auxColumnaInput++;
+      }
+      Swal.close();
+    }
+  }
+
+  AgregarGrafica() {
+    this.arrayData = this.dataInput.split("~");
+    this.arrayColumnas = this.columnasInput.split("~");
+    this.arrayColores = this.coloresInput.split("~");
+    let grafica = {
+      label: this.nombreGrafica,
+      data: this.arrayData,
+      backgroundColor: this.arrayColores,
+      //borderColor: this.colors,
+      borderWidth: 1.5,
+    };
+    this.data.push(grafica);
+  }
+
+  grafica(myParent, idRow, idCol, data, columnas) {
     this.contadorId++;
-    let colores = [
-      "#e0440e",
-      "#e6693e",
-      "#ec8f6e",
-      "#f3b49f",
-      "#f6c7b6",
-      "#e0440e",
-    ];
     let ctx = document.createElement("canvas");
 
     if (this.valorSelactNumeos == "1") {
@@ -314,28 +519,20 @@ export class ReportesNuevoTablero1Component implements OnInit {
         (idCol * numero - numero + 1) +
         " / " +
         idCol * numero +
-        " ;grid-row:" + (parseInt(idRow) + 2) + ";";
+        " ;grid-row:" +
+        (parseInt(idRow) + 2) +
+        ";";
 
       this.col1 = this.col2 + 1;
     }
 
-
-    ctx.id = ((parseInt(idRow) / 3) + "-" + idCol + "-db").toString();
+    ctx.id = (parseInt(idRow) / 3 + "-" + idCol + "-db").toString();
     myParent.appendChild(ctx);
     new Chart(ctx, {
       type: "bar",
       data: {
-        labels: this.columnNames,
-        datasets: [
-          {
-            label: "nombres",
-            data: this.data,
-            backgroundColor: colores,
-            //borderColor: this.colors,
-            borderWidth: 1.5,
-
-          },
-        ],
+        labels: columnas,
+        datasets: data,
       },
       options: {
         responsive: false,
@@ -343,11 +540,11 @@ export class ReportesNuevoTablero1Component implements OnInit {
         scales: {
           y: {
             beginAtZero: true,
-            min: 0,
-            max: 5,
           },
         },
       },
     });
   }
+
+
 }

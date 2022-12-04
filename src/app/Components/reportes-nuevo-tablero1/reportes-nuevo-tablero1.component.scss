@@ -89,3 +89,20 @@ h1 {
     justify-self: flex-end;
   }
 }
+
+.graficas {
+  width: 100%;
+  .data {
+    @include centerFlex;
+    margin-bottom: 20px;
+    width: 80%;
+    textarea {
+      margin: 0;
+    }
+  }
+  textarea {
+    margin: 0 auto;
+    width: 80%;
+    height: 100px;
+  }
+}
