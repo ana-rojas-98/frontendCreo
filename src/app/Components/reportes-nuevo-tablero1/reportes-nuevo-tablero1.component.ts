@@ -19,17 +19,10 @@ export class ReportesNuevoTablero1Component implements OnInit {
     private indicadoresService: IndicadoresService,
     private route: ActivatedRoute,
     public router: Router
-  ) {}
+  ) { }
 
   //cadenas de html
-  Select3 = "";
-  fila = 0;
-  filaInput = 0;
-  filaInputaux = 0;
-  idInput = 0;
   idSelec = 1;
-  col1 = 1;
-  col2 = 0;
   indicadores: any = [];
   valorSelactNumeos;
   idSelecionados = [];
@@ -173,10 +166,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
     selectList.addEventListener("change", () => {
       let idRow = selectList.getAttribute("id");
       idRow = idRow.substring(0, 1);
-      this.col1 = 1;
-      this.col2 = 0;
       this.valorSelactNumeos = parseInt(selectList.value);
-      this.filaInput = 0;
       if (this.hijos[parseInt(idRow)] != undefined) {
         for (let h = 0; h < this.hijos[parseInt(idRow)].length; h++) {
           let a = this.hijos[parseInt(idRow)][h].toString();
@@ -201,8 +191,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
         this.auxhijos.push(idRow + "-" + i.toString());
         this.CrearColumna(myParent, parseInt(idRow) * 3, i);
       }
-      this.col1 = 1;
-      this.col2 = 0;
       this.hijos[parseInt(idRow)] = this.auxhijos;
       this.auxhijos = [];
     });
@@ -232,20 +220,15 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
     if (this.valorSelactNumeos != "1") {
       let numero = 12 / this.configuracion[parseInt(idRow) / 3][1];
-
-      this.col2 = this.col2 + numero;
-
-      //this.col2 = numero;
       selectOpciones.style.cssText =
         "width:100%; height:40px; grid-column: " +
-        this.col1.toString() +
+        (idCol * numero - numero + 1) +
         " / " +
-        this.col2.toString() +
-        "; grid-row:" +
+        idCol * numero +
+        " ;grid-row:" +
         (parseInt(idRow) + 1) +
         ";";
 
-      this.col1 = this.col2 + 1;
     }
 
     myParent.appendChild(selectOpciones);
@@ -282,7 +265,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
       if (this.valorSelactNumeos != "1") {
         let numero = 12 / this.configuracion[parseInt(idRow) / 3][1];
-        //this.col2 = numero;
         input.style.cssText =
           "width:100%; height:100px; grid-column: " +
           (idCol * numero - numero + 1) +
@@ -291,14 +273,12 @@ export class ReportesNuevoTablero1Component implements OnInit {
           " ;grid-row:" +
           (parseInt(idRow) + 2) +
           ";";
-        this.col1 = this.col2 + 1;
       }
 
       if (selectOpciones.value == "Texto/numero") {
-        this.idInput++;
         input.id = parseInt(idRow) / 3 + "-" + idCol + "-i";
         this.hijosdeHijos.push(parseInt(idRow) / 3 + "-" + idCol + "-i");
-        this.selecManulRespuestas("texto");
+        this.selecManulRespuestas("texto", input.id);
         myParent.appendChild(input);
       }
 
@@ -319,7 +299,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
     });
   }
 
-  selecManulRespuestas(funcion) {
+  selecManulRespuestas(funcion, id) {
     Swal.fire({
       title: "¿Como desea ingresar el valor?",
       showDenyButton: true,
@@ -329,7 +309,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.selecRespuestasAnteriores(funcion);
+        this.selecRespuestasAnteriores(funcion, id);
       } else if (result.isDenied) {
         if (funcion != "texto") {
           this.datosManual(funcion);
@@ -346,16 +326,20 @@ export class ReportesNuevoTablero1Component implements OnInit {
       HRV: "Croatia",
     },
   };
-  async selecRespuestasAnteriores(funcion) {
+  async selecRespuestasAnteriores(funcion, id2) {
     const resultado = await Swal.fire({
-      title: "Select field validation",
+      title: "Seleccione una respuesta",
       input: "select",
       inputOptions: this.arrayIndicadores,
-      inputPlaceholder: "Select a fruit",
+      inputPlaceholder: "Seleccione una respuesta",
       showCancelButton: true,
       inputValidator: (id) => {
         return new Promise((resolve) => {
-          // $("#idInput" + this.idInput).val(this.arrayId[id]);
+          let varInput : any; 
+          varInput = document.getElementById(id2);
+          if (funcion == "texto") {
+            varInput.value = this.arrayId[id];
+          }
           if (this.auxDataInput == 0) {
             if (funcion == "data") {
               this.dataInput = this.arrayId[id];
@@ -455,8 +439,8 @@ export class ReportesNuevoTablero1Component implements OnInit {
     }
   }
 
-  agregarData(funcion) {
-    this.selecManulRespuestas(funcion);
+  agregarData(funcion,id?) {
+    this.selecManulRespuestas(funcion,id);
   }
 
   quitarData(funcion) {
@@ -615,10 +599,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
     if (this.valorSelactNumeos != "1") {
       let numero = 12 / this.configuracion[parseInt(idRow) / 3][1];
-
-      this.col2 = this.col2 + numero;
-
-      //this.col2 = numero;
       ctx.style.cssText =
         "margin-top:20px; width:100%; height:100%; grid-column: " +
         (idCol * numero - numero + 1) +
@@ -628,7 +608,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
         (parseInt(idRow) + 2) +
         ";";
 
-      this.col1 = this.col2 + 1;
     }
 
     ctx.id = (parseInt(idRow) / 3 + "-" + idCol + "-db").toString();
