@@ -54,7 +54,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
   arrayColores = [];
   data = [];
 
-
   usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
   ngOnInit() {
@@ -310,8 +309,12 @@ export class ReportesNuevoTablero1Component implements OnInit {
           idCol +
           "-db"
         ).toString();
+        let valor = 0;
         this.hijosdeHijos.push(parseInt(idRow) / 3 + "-" + idCol + "-db");
-        this.grafica(myParent, idRow, idCol);
+        let datosGrafica = document.getElementById("prueba");
+        myParent.appendChild(datosGrafica);
+        //datosGrafica.id = (valor++).toString();
+        //this.grafica(myParent, idRow, idCol);
       }
     });
   }
@@ -524,7 +527,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
       borderWidth: 1.5,
     };
     this.data.push(grafica);
-
   }
 
   colores = [
