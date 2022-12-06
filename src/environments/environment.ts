@@ -5,7 +5,7 @@
 ///http://www.creo.somee.com
 
 export const environment = {
-  production: false, 
+  production: false,
   apiUrl: 'https://localhost:5001',
 };
 
