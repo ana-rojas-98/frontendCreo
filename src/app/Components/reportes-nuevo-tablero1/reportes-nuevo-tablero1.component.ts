@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { isNullOrUndefined } from "util";
 import Chart from "chart.js/auto";
 import { color, getRelativePosition } from "chart.js/helpers";
+import { NgbModalConfig, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-reportes-nuevo-tablero1",
@@ -18,10 +19,16 @@ export class ReportesNuevoTablero1Component implements OnInit {
     private reportesService: ReportesService,
     private indicadoresService: IndicadoresService,
     private route: ActivatedRoute,
-    public router: Router
-  ) {}
+    public router: Router,
+    config: NgbModalConfig,
+    private modalService: NgbModal
+  ) {
+    config.backdrop = "static";
+    config.keyboard = false;
+  }
 
   //cadenas de html
+
   idSelec = 1;
   indicadores: any = [];
   valorSelactNumeos;
@@ -51,6 +58,14 @@ export class ReportesNuevoTablero1Component implements OnInit {
   idColGrafica;
   nombreVariable = "";
   tipoGrafica = "";
+  columnasplaceholder = "Columnas";
+  contenModal: any;
+  botonGraficar = false;
+  inputColorVisible = true;
+  divVariables = true;
+  dataVisualizar = "";
+  columnasVisualizar = "";
+  coloresVisualizar = [];
 
   usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
@@ -109,8 +124,13 @@ export class ReportesNuevoTablero1Component implements OnInit {
       }
     }
   }
+  contadoModel = 0;
+  agregarFila(content) {
+    if (this.contadoModel == 0) {
+      this.contenModal = content;
+      this.contadoModel++;
+    }
 
-  agregarFila() {
     let myParent = document.getElementById("contenedor");
 
     let selectList = document.createElement("select");
@@ -299,14 +319,15 @@ export class ReportesNuevoTablero1Component implements OnInit {
           parseInt(idRow) / 3 +
           "-" +
           idCol +
-          "-db"
+          "-bar"
         ).toString();
         let valor = 0;
-        this.hijosdeHijos.push(parseInt(idRow) / 3 + "-" + idCol + "-db");
+        this.divVariables = true;
         this.myParentGrafica = myParent;
         this.idRowGrafica = idRow;
         this.idColGrafica = idCol;
         this.tipoGrafica = "bar";
+        this.modalService.open(this.contenModal);
       }
 
       if (selectOpciones.value == "Diagrama de torta") {
@@ -314,14 +335,17 @@ export class ReportesNuevoTablero1Component implements OnInit {
           parseInt(idRow) / 3 +
           "-" +
           idCol +
-          "-db"
+          "-pie"
         ).toString();
         let valor = 0;
-        this.hijosdeHijos.push(parseInt(idRow) / 3 + "-" + idCol + "-db");
+
+        this.divVariables = false;
         this.myParentGrafica = myParent;
         this.idRowGrafica = idRow;
         this.idColGrafica = idCol;
         this.tipoGrafica = "pie";
+        this.columnasplaceholder = "Ingrese el nombre de la variabales ";
+        this.modalService.open(this.contenModal);
       }
 
       if (selectOpciones.value == "Diagrama de puntos") {
@@ -329,14 +353,16 @@ export class ReportesNuevoTablero1Component implements OnInit {
           parseInt(idRow) / 3 +
           "-" +
           idCol +
-          "-db"
+          "-line"
         ).toString();
         let valor = 0;
-        this.hijosdeHijos.push(parseInt(idRow) / 3 + "-" + idCol + "-db");
+
+        this.divVariables = true;
         this.myParentGrafica = myParent;
         this.idRowGrafica = idRow;
         this.idColGrafica = idCol;
         this.tipoGrafica = "line";
+        this.modalService.open(this.contenModal);
       }
     });
   }
@@ -538,13 +564,39 @@ export class ReportesNuevoTablero1Component implements OnInit {
     }
     if (this.coloresInput == "") {
       this.auxColoresInput = 0;
+      this.inputColorVisible = true;
     }
     if (this.columnasInput == "") {
       this.auxColumnaInput = 0;
     }
   }
 
+  contadorAgregarGrafica = 0;
   AgregarGrafica() {
+    if (this.tipoGrafica == "pie") {
+      if (
+        (this.dataInput == "" ||
+          this.columnasInput == "" ||
+          this.coloresInput == "") &&
+        this.contadorAgregarGrafica == 0
+      ) {
+        Swal.fire("Debes completar todos los datos");
+        return true;
+      }
+    } else {
+      if (
+        (this.dataInput == "" ||
+          this.nombreVariable == "" ||
+          this.columnasInput == "" ||
+          this.coloresInput == "") &&
+        this.contadorAgregarGrafica == 0
+      ) {
+        Swal.fire("Debes completar todos los datos");
+        return true;
+      }
+    }
+    this.contadorAgregarGrafica++;
+    this.botonGraficar = true;
     this.arrayData = this.dataInput.split("~");
     this.arrayColumnas = this.columnasInput.split("~");
     this.arrayColores = this.coloresInput.split("~");
@@ -555,6 +607,9 @@ export class ReportesNuevoTablero1Component implements OnInit {
       //borderColor: this.colors,
       borderWidth: 1.5,
     };
+    this.dataVisualizar = this.dataInput;
+    this.columnasVisualizar = this.columnasInput;
+    this.coloresVisualizar = this.coloresInput.split("~");
     this.data.push(grafica);
     this.dataInput = "";
     this.columnasInput = "";
@@ -566,6 +621,14 @@ export class ReportesNuevoTablero1Component implements OnInit {
   }
 
   coloresFuncion() {
+    if (
+      (this.tipoGrafica == "bar" || this.tipoGrafica == "line") &&
+      this.coloresInput != ""
+    ) {
+      Swal.fire("Solo puedes asignar un color para esta variable");
+      return true;
+    }
+
     if (this.coloresSelect != "colores") {
       if (this.auxColoresInput == 0) {
         this.coloresInput = this.coloresSelect;
@@ -598,9 +661,17 @@ export class ReportesNuevoTablero1Component implements OnInit {
     );
     this.data = [];
     this.arrayColumnas = [];
+    this.dataVisualizar = "";
+    this.coloresVisualizar = [];
+    this.columnasVisualizar = "";
+    this.botonGraficar = true;
+    this.modalService.dismissAll();
   }
 
   grafica(myParent, idRow, idCol, data, columnas, type) {
+    this.hijosdeHijos.push(
+      parseInt(idRow) / 3 + "-" + idCol + "-" + type.toString()
+    );
     this.contadorId++;
     let ctx = document.createElement("canvas");
 
@@ -622,8 +693,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
         (parseInt(idRow) + 2) +
         ";";
     }
-    let tipe = "bar";
-    ctx.id = (parseInt(idRow) / 3 + "-" + idCol + "-db").toString();
+    ctx.id = parseInt(idRow) / 3 + "-" + idCol + "-" + type.toString();
     myParent.appendChild(ctx);
     new Chart(ctx, {
       type: type.toString(),
@@ -649,5 +719,22 @@ export class ReportesNuevoTablero1Component implements OnInit {
         tension: 3,
       },
     });
+  }
+
+  cerrarModal() {
+    this.data = [];
+    this.dataInput = "";
+    this.columnasInput = "";
+    this.coloresInput = "";
+    this.nombreVariable = "";
+    this.nombreGrafica = "";
+    this.auxDataInput = 0;
+    this.auxColumnaInput = 0;
+    this.auxColoresInput = 0;
+    this.dataVisualizar = "";
+    this.coloresVisualizar = [];
+    this.columnasVisualizar = "";
+    this.botonGraficar = false;
+    this.modalService.dismissAll();
   }
 }
