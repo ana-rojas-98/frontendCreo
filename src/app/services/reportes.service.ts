@@ -54,4 +54,23 @@ export class ReportesService {
     );
     return resul;
   }
+
+  GuardarReporte(data)
+  {
+    const headers = this.authService.fnSetDefineTokenAuthorization();
+    let resul = this.http.post(
+      `${this.URL_SER}/api/Reportes/GuardarReporte/`,data, headers
+    );
+    return resul;
+  }
+
+  EliminarFila(fila)
+  {
+    const headers = this.authService.fnSetDefineTokenAuthorization();
+    let resul = this.http.post(
+      `${this.URL_SER}/api/Reportes/EliminarFila/`,fila, headers
+    );
+    return resul;
+  }
+
 }

@@ -113,8 +113,6 @@ export class EditarIndicadorComponent implements OnInit {
     
   }
 
- 
-
   TraerFormato() {
     this.authService.EditarIndicador().subscribe((respuesta: any) => {
       this.resultado = respuesta.map((item) => {
