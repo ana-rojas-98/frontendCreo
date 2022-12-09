@@ -63,6 +63,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
   botonGraficar = false;
   inputColorVisible = true;
   divVariables = true;
+  mostrarBotonMenosColumnas = true;
   dataVisualizar = "";
   columnasVisualizar = "";
   coloresVisualizar = [];
@@ -103,11 +104,14 @@ export class ReportesNuevoTablero1Component implements OnInit {
             res.map((item) => {
               if (item.idFila != 1) {
                 this.arrayId.push(item.valor);
-                this.arrayIndicadores.push(item.archivo + "-" + item.anio + "-" + item.valor);
+                this.arrayIndicadores.push(
+                  item.archivo + "-" + item.anio + "-" + item.valor
+                );
               }
             });
             this.resultadosSeleccionados = this.resultadosSeleccionados.sort();
-            this.resultadosSeleccionados = this.resultadosSeleccionados.reverse();
+            this.resultadosSeleccionados =
+              this.resultadosSeleccionados.reverse();
           });
       }
 
@@ -150,8 +154,12 @@ export class ReportesNuevoTablero1Component implements OnInit {
     selectList.id = this.idSelec.toString() + "-";
     selectList.className = "rounded";
     button.className = "rounded";
-    selectList.style.cssText = "width:30%; height:40px; grid-column: 1/12; margin-top:20px; grid-row: " + this.idSelec * 3;
-    button.style.cssText = "width:1%;height:30px;font-size: 2em;color: red;align-items: center;background-color: transparent;border-color: transparent;grid-column: 5/12; margin-top:20px; grid-row: " + this.idSelec * 3;
+    selectList.style.cssText =
+      "width:30%; height:40px; grid-column: 1/12; margin-top:20px; grid-row: " +
+      this.idSelec * 3;
+    button.style.cssText =
+      "width:1%;height:30px;font-size: 2em;color: red;align-items: center;background-color: transparent;border-color: transparent;grid-column: 5/12; margin-top:20px; grid-row: " +
+      this.idSelec * 3;
     button.textContent = "x";
 
     myParent.appendChild(selectList);
@@ -167,7 +175,9 @@ export class ReportesNuevoTablero1Component implements OnInit {
           let a = this.hijos[parseInt(idRow)][h].toString();
           for (let k = 0; k < this.hijosdeHijos.length; k++) {
             if (this.hijosdeHijos[k].includes(a)) {
-              let child = document.getElementById(this.hijosdeHijos[k].toString());
+              let child = document.getElementById(
+                this.hijosdeHijos[k].toString()
+              );
               myParent.removeChild(child);
               this.hijosdeHijos[k] = "";
             }
@@ -175,7 +185,10 @@ export class ReportesNuevoTablero1Component implements OnInit {
           let child = document.getElementById(a);
           myParent.removeChild(child);
         }
-        this.hijos[parseInt(idRow)].splice(0, this.hijos[parseInt(idRow)].length);
+        this.hijos[parseInt(idRow)].splice(
+          0,
+          this.hijos[parseInt(idRow)].length
+        );
       }
       let child = document.getElementById(button.getAttribute("id") + "-");
       myParent.removeChild(child);
@@ -209,7 +222,10 @@ export class ReportesNuevoTablero1Component implements OnInit {
           myParent.removeChild(child);
         }
       }
-      this.configuracion[parseInt(idRow)] = [parseInt(idRow) * 3, this.valorSelactNumeos];
+      this.configuracion[parseInt(idRow)] = [
+        parseInt(idRow) * 3,
+        this.valorSelactNumeos,
+      ];
       for (let i = 1; i <= this.configuracion[parseInt(idRow)][1]; i++) {
         this.auxhijos.push(idRow + "-" + i.toString());
         this.CrearColumna(myParent, parseInt(idRow) * 3, i);
@@ -235,12 +251,22 @@ export class ReportesNuevoTablero1Component implements OnInit {
     selectOpciones.className = "rounded";
 
     if (this.valorSelactNumeos == "1") {
-      selectOpciones.style.cssText = "width:100%; height:40px; grid-column: 1/4;grid-row:" + (parseInt(idRow) + 1) + ";";
+      selectOpciones.style.cssText =
+        "width:100%; height:40px; grid-column: 1/4;grid-row:" +
+        (parseInt(idRow) + 1) +
+        ";";
     }
 
     if (this.valorSelactNumeos != "1") {
       let numero = 12 / this.configuracion[parseInt(idRow) / 3][1];
-      selectOpciones.style.cssText = "width:100%; height:40px; grid-column: " + (idCol * numero - numero + 1) + " / " + idCol * numero + " ;grid-row:" + (parseInt(idRow) + 1) + ";";
+      selectOpciones.style.cssText =
+        "width:100%; height:40px; grid-column: " +
+        (idCol * numero - numero + 1) +
+        " / " +
+        idCol * numero +
+        " ;grid-row:" +
+        (parseInt(idRow) + 1) +
+        ";";
     }
 
     myParent.appendChild(selectOpciones);
@@ -260,7 +286,9 @@ export class ReportesNuevoTablero1Component implements OnInit {
       console.log("Hijos de hijos: ", this.hijosdeHijos);
       for (let k = 0; k < this.hijosdeHijos.length; k++) {
         if (
-          this.hijosdeHijos[k].includes((parseInt(idRow) / 3 + "-" + idCol).toString())
+          this.hijosdeHijos[k].includes(
+            (parseInt(idRow) / 3 + "-" + idCol).toString()
+          )
         ) {
           let child = document.getElementById(this.hijosdeHijos[k].toString());
           myParent.removeChild(child);
@@ -269,12 +297,22 @@ export class ReportesNuevoTablero1Component implements OnInit {
       }
 
       if (this.valorSelactNumeos == "1") {
-        input.style.cssText = "width:30%; height:100px; grid-column: 1/12;grid-row:" + (parseInt(idRow) + 2) + ";";
+        input.style.cssText =
+          "width:30%; height:100px; grid-column: 1/12;grid-row:" +
+          (parseInt(idRow) + 2) +
+          ";";
       }
 
       if (this.valorSelactNumeos != "1") {
         let numero = 12 / this.configuracion[parseInt(idRow) / 3][1];
-        input.style.cssText = "width:100%; height:100px; grid-column: " + (idCol * numero - numero + 1) + " / " + idCol * numero + " ;grid-row:" + (parseInt(idRow) + 2) + ";";
+        input.style.cssText =
+          "width:100%; height:100px; grid-column: " +
+          (idCol * numero - numero + 1) +
+          " / " +
+          idCol * numero +
+          " ;grid-row:" +
+          (parseInt(idRow) + 2) +
+          ";";
       }
 
       if (selectOpciones.value == "Texto/numero") {
@@ -541,52 +579,55 @@ export class ReportesNuevoTablero1Component implements OnInit {
     }
   }
 
-  contadorAgregarGrafica = 0;
   AgregarGrafica() {
     if (this.tipoGrafica == "pie") {
       if (
-        (this.dataInput == "" ||
-          this.columnasInput == "" ||
-          this.coloresInput == "") &&
-        this.contadorAgregarGrafica == 0
+        this.dataInput == "" ||
+        this.columnasInput == "" ||
+        this.coloresInput == ""
       ) {
         Swal.fire("Debes completar todos los datos");
         return true;
       }
     } else {
       if (
-        (this.dataInput == "" ||
-          this.nombreVariable == "" ||
-          this.columnasInput == "" ||
-          this.coloresInput == "") &&
-        this.contadorAgregarGrafica == 0
+        this.dataInput == "" ||
+        this.nombreVariable == "" ||
+        this.columnasInput == "" ||
+        this.coloresInput == ""
       ) {
         Swal.fire("Debes completar todos los datos");
         return true;
       }
     }
-    this.contadorAgregarGrafica++;
+
     this.botonGraficar = true;
     this.arrayData = this.dataInput.split("~");
     this.arrayColumnas = this.columnasInput.split("~");
     this.arrayColores = this.coloresInput.split("~");
+    this.coloresVisualizar = this.coloresInput.split("~");
+    if (this.arrayData.length > this.arrayColumnas.length) {
+      Swal.fire("No puedes tener mas valores que columnas");
+      return true;
+    }
     let grafica = {
       label: this.nombreVariable,
       data: this.arrayData,
       backgroundColor: this.arrayColores,
       //borderColor: this.colors,
+      borderColor: this.coloresInput,
       borderWidth: 1.5,
     };
     this.dataVisualizar = this.dataInput;
     this.columnasVisualizar = this.columnasInput;
-    this.coloresVisualizar = this.coloresInput.split("~");
     this.data.push(grafica);
     this.dataInput = "";
-    this.columnasInput = "";
+    //this.columnasInput = "";
+    this.mostrarBotonMenosColumnas = false;
     this.coloresInput = "";
     this.nombreVariable = "";
     this.auxDataInput = 0;
-    this.auxColumnaInput = 0;
+    //this.auxColumnaInput = 0;
     this.auxColoresInput = 0;
   }
 
@@ -613,14 +654,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
   }
 
   cargarGrafica() {
-    if (
-      this.data.length == 0 ||
-      this.arrayColumnas.length == 0 ||
-      this.nombreGrafica == ""
-    ) {
-      Swal.fire("Debes completar todos los datos");
-      return true;
-    }
     this.grafica(
       this.myParentGrafica,
       this.idRowGrafica,
@@ -634,11 +667,16 @@ export class ReportesNuevoTablero1Component implements OnInit {
     this.dataVisualizar = "";
     this.coloresVisualizar = [];
     this.columnasVisualizar = "";
-    this.botonGraficar = true;
+    this.columnasInput = "";
+    this.coloresInput = "";
+    this.nombreVariable = "";
+    this.nombreGrafica = "";
+    this.botonGraficar = false;
+    this.mostrarBotonMenosColumnas = true;
     this.modalService.dismissAll();
   }
 
-  grafica(myParent, idRow, idCol, data, columnas, type) {
+  grafica(myParent, idRow, idCol, data1, columnas, type) {
     this.hijosdeHijos.push(
       parseInt(idRow) / 3 + "-" + idCol + "-" + type.toString()
     );
@@ -646,12 +684,22 @@ export class ReportesNuevoTablero1Component implements OnInit {
     let ctx = document.createElement("canvas");
 
     if (this.valorSelactNumeos == "1") {
-      ctx.style.cssText = "margin-top:20px; width:100%; height:100%; grid-column: 1/12;grid-row:" + (parseInt(idRow) + 2) + ";";
+      ctx.style.cssText =
+        "margin-top:20px; width:100%; height:100%; grid-column: 1/12;grid-row:" +
+        (parseInt(idRow) + 2) +
+        ";";
     }
 
     if (this.valorSelactNumeos != "1") {
       let numero = 12 / this.configuracion[parseInt(idRow) / 3][1];
-      ctx.style.cssText = "margin-top:20px; width:100%; height:100%; grid-column: " + (idCol * numero - numero + 1) + " / " + idCol * numero + " ;grid-row:" + (parseInt(idRow) + 2) + ";";
+      ctx.style.cssText =
+        "margin-top:20px; width:100%; height:100%; grid-column: " +
+        (idCol * numero - numero + 1) +
+        " / " +
+        idCol * numero +
+        " ;grid-row:" +
+        (parseInt(idRow) + 2) +
+        ";";
     }
     ctx.id = parseInt(idRow) / 3 + "-" + idCol + "-" + type.toString();
     myParent.appendChild(ctx);
@@ -659,7 +707,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
       type: type.toString(),
       data: {
         labels: columnas,
-        datasets: data,
+        datasets: data1,
       },
       options: {
         plugins: {
@@ -674,11 +722,15 @@ export class ReportesNuevoTablero1Component implements OnInit {
           y: {
             beginAtZero: true,
           },
+          x: {
+            beginAtZero: true,
+          },
         },
-        borderColor: "rgb(75, 192, 192)",
+        borderColor: this.arrayColores,
         tension: 3,
       },
     });
+    console.log("hola esta es data", data1);
   }
 
   cerrarModal() {
@@ -695,14 +747,25 @@ export class ReportesNuevoTablero1Component implements OnInit {
     this.coloresVisualizar = [];
     this.columnasVisualizar = "";
     this.botonGraficar = false;
+    this.mostrarBotonMenosColumnas = true;
     this.modalService.dismissAll();
   }
 
-  guardar() {
+  guardar() {}
 
-  }
-
-  addData(item, idRow, idCol, tipo, valor?, texto?, titulo_grafica?, nombre_variable?, datos?, columnas?, color?) {
+  addData(
+    item,
+    idRow,
+    idCol,
+    tipo,
+    valor?,
+    texto?,
+    titulo_grafica?,
+    nombre_variable?,
+    datos?,
+    columnas?,
+    color?
+  ) {
     this.enviar.push({
       color: color,
       columnas: columnas,
@@ -721,9 +784,8 @@ export class ReportesNuevoTablero1Component implements OnInit {
       idusuariocrea: parseInt(item.idArchivo),
       idusuariomodifica: parseInt(item.idArchivo),
       indicadores: parseInt(item.idArchivo),
-      nombrereoirte: parseInt(item.idArchivo)
-    })
+      nombrereoirte: parseInt(item.idArchivo),
+    });
     console.log(item.value);
   }
-
 }

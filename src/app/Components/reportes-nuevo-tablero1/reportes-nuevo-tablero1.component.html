@@ -78,6 +78,7 @@
             >
             </textarea>
             <img
+            *ngIf="mostrarBotonMenosColumnas"
               src="../../../assets/imagenes/menos.png"
               (click)="quitarData('columnas')"
             />
