@@ -59,7 +59,7 @@ export class ReportesService {
   {
     const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
-      `${this.URL_SER}/api/Reportes/GuardarReporte/`,data, headers
+      `${this.URL_SER}/api/Reportes/GuardarNuevoReporte/`,data, headers
     );
     return resul;
   }
@@ -69,6 +69,14 @@ export class ReportesService {
     const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
       `${this.URL_SER}/api/Reportes/EliminarFila/`,fila, headers
+    );
+    return resul;
+  }
+
+  ConsultaReportes() {
+    const headers = this.authService.fnSetDefineTokenAuthorization();
+    let resul = this.http.get(
+      `${this.URL_SER}/api/Reportes/`, headers
     );
     return resul;
   }

@@ -1,0 +1,235 @@
+@import "../../../assets/styles/main.scss";
+
+.contenedor {
+  @include contenedor;
+}
+.cuerpo {
+  @include body;
+  p {
+    margin-bottom: 10px;
+  }
+}
+
+h1 {
+  @include h1Body;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  margin-top: 34px;
+}
+
+.guardar {
+  width: 163px;
+  height: 47px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.guardar2 {
+  width: 120px;
+  height: 47px;
+  align-items: center;
+  background-color: #EE7D00;
+  border-color: transparent;
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 10px 10px 10px 10px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.guardar3 {
+  width: 120px;
+  height: 47px;
+  align-items: center;
+  border-color: transparent;
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 10px 10px 10px 10px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  background-color: #2BAEE5;
+}
+
+.finalizar{
+  align-items: center;
+  display: flex;
+}
+
+.contenedorAgregar1 {
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  gap: 5px;
+  margin-right: 10px;
+}
+
+.contenedorNumeroColumnas {
+  width: 100%;
+  .selector {
+    background: #ffffff;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 280px;
+    height: 40px;
+    border: 1px;
+    font-family: "Montserrat";
+    margin-bottom: 20px;
+  }
+}
+
+.contenedorTitulo {
+  margin-left: 20px;
+  margin-bottom: 20px;
+  input {
+    width: 375px;
+    height: 50px;
+    border-radius: 25px;
+  }
+}
+
+.contenedorGraficos {
+  @include centerFlex;
+}
+
+.contenedorAgregar {
+  @include grid(2, 1);
+  width: 95%;
+  margin: 0;
+  margin-left: 20px;
+  margin-bottom: 20px;
+
+  .selector {
+    background: #ffffff;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 100%;
+    height: 40px;
+    border: 1px;
+    font-family: "Montserrat";
+    margin-bottom: 20px;
+  }
+
+  .contenedorSelect1 {
+    justify-self: flex-start;
+  }
+  .contenedorSelect2 {
+    justify-self: flex-end;
+  }
+}
+
+.graficas {
+  width: 100%;
+  margin: auto;
+
+  textarea {
+    margin: 0 auto;
+    width: 100%;
+    height: 100px;
+    border-radius: 5px;
+  }
+}
+
+.data {
+  margin-top: 30px;
+  img {
+    height: 20px;
+    width: 20px;
+    float: right;
+    margin: 10px;
+  }
+  .img {
+    float: right;
+  }
+}
+
+.data:hover {
+  background-color: rgba(0, 0, 0, 0.126);
+}
+
+.botonesGrafica {
+  @include centerFlex;
+  margin-top: 40px;
+}
+
+.btnGrafica {
+  background-color: #22a9c3;
+  border-radius: 10px;
+  margin: 20px;
+
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+}
+
+.modal-body {
+  padding: 30px;
+}
+
+.tituloGrafica {
+  @include centerFlex;
+
+  input {
+    width: 375px;
+    height: 50px;
+    border-radius: 25px;
+    border: 1 solid black;
+    margin-bottom: 20px;
+    margin-top: 5px;
+  }
+}
+
+.inputVariables {
+  margin-bottom: 10px;
+}
+
+.datosUsuario {
+  margin-top: 50px;
+}
+.colorerVisualizar {
+  display: inline;
+  h3 {
+    display: inline;
+    margin-right: 5px;
+  }
+}
+
+.guardar2 {
+  width: 120px;
+  height: 47px;
+  align-items: center;
+  background-color: #ee7d00;
+  border-color: transparent;
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 10px 10px 10px 10px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.guardar3 {
+  width: 120px;
+  height: 47px;
+  align-items: center;
+  border-color: transparent;
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 10px 10px 10px 10px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  background-color: #2baee5;
+}
+
+.finalizar {
+  align-items: center;
+  display: flex;
+}

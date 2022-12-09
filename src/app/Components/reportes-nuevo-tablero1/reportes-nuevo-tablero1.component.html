@@ -7,14 +7,10 @@
     <h1 class="titulo">Nuevo tablero</h1>
     <div class="contenedorTitulo">
       <p>Título del tablero*</p>
-      <input type="text" />
+      <input type="text" [(ngModel)]="NombreReporte" />
     </div>
     <div class="contenedorAgregar1 w-100 row" id="contenedor"></div>
-    <button
-      id="addbutton"
-      class="guardar agregarFila"
-      (click)="agregarFila(content)"
-    >
+    <button id="addbutton" class="guardar agregarFila" (click)="agregarFila(content)">
       Agregar Fila
     </button>
     <div class="container-fluid my-2">
@@ -37,78 +33,38 @@
         <div class="tituloGrafica">
           <label name="">
             <h2>Nombre de la grafica</h2>
-            <input
-              id="inputTitulo"
-              [(ngModel)]="nombreGrafica"
-              type="text"
-              placeholder="nombre de la grafica"
-            />
+            <input id="inputTitulo" [(ngModel)]="nombreGrafica" type="text" placeholder="nombre de la grafica" />
           </label>
         </div>
         <div class="graficas">
           <div class="data" *ngIf="divVariables">
             <div>Variables*</div>
-            <input
-              class="inputVariables"
-              type="text"
-              placeholder="Variable"
-              [(ngModel)]="nombreVariable"
-            />
+            <input class="inputVariables" type="text" placeholder="Variable" [(ngModel)]="nombreVariable" />
           </div>
 
           <div class="data">
             Valores de la gráfica*
             <textarea readonly [(ngModel)]="dataInput" placeholder="Data">
             </textarea>
-            <img
-              src="../../../assets/imagenes/menos.png"
-              (click)="quitarData('data')"
-            />
-            <img
-              src="../../../assets/imagenes/insertar.png"
-              (click)="agregarData('data')"
-            />
+            <img src="../../../assets/imagenes/menos.png" (click)="quitarData('data')" />
+            <img src="../../../assets/imagenes/insertar.png" (click)="agregarData('data')" />
           </div>
           <div class="data">
             {{ columnasplaceholder }}*
-            <textarea
-              readonly
-              [(ngModel)]="columnasInput"
-              [placeholder]="columnasplaceholder"
-            >
+            <textarea readonly [(ngModel)]="columnasInput" [placeholder]="columnasplaceholder">
             </textarea>
-            <img
-              src="../../../assets/imagenes/menos.png"
-              (click)="quitarData('columnas')"
-            />
-            <img
-              src="../../../assets/imagenes/insertar.png"
-              (click)="agregarData('columnas')"
-            />
+            <img src="../../../assets/imagenes/menos.png" (click)="quitarData('columnas')" />
+            <img src="../../../assets/imagenes/insertar.png" (click)="agregarData('columnas')" />
           </div>
           <div class="data">
             Colores de la gráfica*
-            <textarea
-              class="colores"
-              readonly
-              [(ngModel)]="coloresInput"
-              placeholder="Colores"
-            >
+            <textarea class="colores" readonly [(ngModel)]="coloresInput" placeholder="Colores">
             </textarea>
             <div>
-              <img
-                src="../../../assets/imagenes/menos.png"
-                (click)="quitarData('colores')"
-              />
-              <label class="img"
-                >color
-                <input
-                  type="color"
-                  *ngIf="inputColorVisible"
-                  (change)="coloresFuncion()"
-                  [(ngModel)]="coloresSelect"
-                  value="#22a9c3"
-                />
+              <img src="../../../assets/imagenes/menos.png" (click)="quitarData('colores')" />
+              <label class="img">color
+                <input type="color" *ngIf="inputColorVisible" (change)="coloresFuncion()" [(ngModel)]="coloresSelect"
+                  value="#22a9c3" />
               </label>
             </div>
           </div>
@@ -117,28 +73,16 @@
             <h3>Columnas: {{ columnasVisualizar }}</h3>
             <div class="colorerVisualizar">
               <h3>colores: </h3>
-              <h3
-                *ngFor="let item of coloresVisualizar"
-                [ngStyle]="{ 'background-color': item }"
-              >
+              <h3 *ngFor="let item of coloresVisualizar" [ngStyle]="{ 'background-color': item }">
                 {{ item }}
               </h3>
             </div>
           </div>
           <div class="botonesGrafica">
-            <button
-              id="addbutton"
-              class="btnGrafica"
-              (click)="AgregarGrafica()"
-            >
+            <button id="addbutton" class="btnGrafica" (click)="AgregarGrafica()">
               Agregar
             </button>
-            <button
-              *ngIf="botonGraficar"
-              id="addbutton"
-              class="btnGrafica"
-              (click)="cargarGrafica()"
-            >
+            <button *ngIf="botonGraficar" id="addbutton" class="btnGrafica" (click)="cargarGrafica()">
               Generar gráfica
             </button>
           </div>
@@ -146,11 +90,7 @@
       </div>
 
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-outline-dark"
-          (click)="cerrarModal()"
-        >
+        <button type="button" class="btn btn-outline-dark" (click)="cerrarModal()">
           Cerrar
         </button>
       </div>
