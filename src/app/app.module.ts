@@ -56,6 +56,8 @@ import { MiPerfilComponent } from './Components/mi-perfil/mi-perfil.component';
 import { CambiarContrasenaComponent } from './Components/cambiar-contrasena/cambiar-contrasena.component';
 import { NavMenuComponent } from './Components/nav-menu/nav-menu.component';
 import { NavMenu2Component } from './Components/nav-menu2/nav-menu2.component';
+import { EditarReporteComponent } from './components/editar-reporte/editar-reporte.component';
+import { VerReporteFinalizadoComponent } from './components/ver-reporte-finalizado/ver-reporte-finalizado.component';
 
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
@@ -105,6 +107,8 @@ import { NavMenu2Component } from './Components/nav-menu2/nav-menu2.component';
     MiPerfilComponent,
     CambiarContrasenaComponent,
     NavMenu2Component,
+    EditarReporteComponent,
+    VerReporteFinalizadoComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal'}),
@@ -157,6 +161,8 @@ import { NavMenu2Component } from './Components/nav-menu2/nav-menu2.component';
       { path: 'visor-eventos', component: VisorEventosComponent, canActivate:[AuthGuard]},
       { path: 'mi-perfil', component: MiPerfilComponent, canActivate:[AuthGuard]},
       { path: 'cambiar-contrasena', component: CambiarContrasenaComponent, canActivate:[AuthGuard]},
+      { path: 'editar-reporte/:id/:accion', component: EditarReporteComponent, canActivate:[AuthGuard]},
+      { path: 'reporte-final/:id', component: VerReporteFinalizadoComponent, canActivate:[AuthGuard]},
     ])
   ],
   providers: [
