@@ -4,6 +4,7 @@ import { FormGroup } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
 import { ReportesService } from "./../../services/reportes.service";
 import { AuthService } from "src/app/services/auth.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-reportes-nuevo-tablero",
@@ -15,7 +16,7 @@ export class ReportesNuevoTableroComponent implements OnInit {
     private authService: AuthService,
     private reportesService: ReportesService,
     private route: Router
-  ) { }
+  ) {}
 
   resultadosUsuario = [];
   resultadosCategoria: {};
@@ -62,6 +63,8 @@ export class ReportesNuevoTableroComponent implements OnInit {
 
   getEstandarFilter() {
     if (this.Estandar.estandar == "") {
+      this.getindIcadores(0);
+      this.getCategoria(0);
       return true;
     }
     let dato = parseInt(this.Estandar.estandar);
@@ -89,7 +92,7 @@ export class ReportesNuevoTableroComponent implements OnInit {
   geSubtCategoriaFilter() {
     if (this.SubCategoria.subcategoria1 == "") {
       this.getCategoriaFilter();
-      this.getindIcadores(0);
+      //this.getindIcadores(0);
       return true;
     }
 

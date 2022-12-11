@@ -97,10 +97,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of resultadosTabla">
-            <td>{{ item.indicador }}</td>
-            <td>{{ item.usuario }}</td>
-            <td>{{ item.fechaModificacion }}</td>
-            <td>{{ item.avance }}%</td>
+            <td [routerLink]="['/diligenciar-indicador',item.idIndicador,'editar']">{{ item.indicador }}</td>
+            <td [routerLink]="['/diligenciar-indicador',item.idIndicador,'editar']">{{ item.usuario }}</td>
+            <td [routerLink]="['/diligenciar-indicador',item.idIndicador,'editar']">{{ item.fechaModificacion }}</td>
+            <td [routerLink]="['/diligenciar-indicador',item.idIndicador,'editar']">{{ item.avance }}%</td>
             <td>
               <a
                 [routerLink]="['/Archivos-Adjuntos', item.idIndicador]"

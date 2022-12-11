@@ -20,7 +20,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
     public router: Router,
     private indicadoresservice: IndicadoresService,
     private reportesService: ReportesService
-  ) { }
+  ) {}
   id = 0;
   accionVerModificar = "";
   modificar = false;
@@ -70,13 +70,20 @@ export class DiligenciarIndicadorComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.authService.enviarCorreos().subscribe((res: any) => { });
-    this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
 
     this.usuarioLocalStote;
     this.consultarIndicador();
     this.id = parseInt(this.route.snapshot.paramMap.get("id"));
     this.accionVerModificar = this.route.snapshot.paramMap.get("accion");
+
+    if (
+      this.accionVerModificar != "ver" &&
+      this.accionVerModificar != "editar"
+    ) {
+      this.router.navigate(["/indicadores"]);
+    }
 
     if (this.accionVerModificar == "ver") {
       this.ver = true;
@@ -102,6 +109,22 @@ export class DiligenciarIndicadorComponent implements OnInit {
         console.log("res: ", res);
         res.map((item) => {
           if (item.idIndicador == this.id) {
+            if (
+              item.diligenciar == false &&
+              this.accionVerModificar == "editar" &&
+              this.modificar == true
+            ) {
+              this.router.navigate(["/indicadores"]);
+              return true;
+            }
+            if (
+              item.ver == false &&
+              this.accionVerModificar == "ver" &&
+              this.ver == true
+            ) {
+              this.router.navigate(["/indicadores"]);
+              return true;
+            }
             this.excel = item.excel;
             this.word = item.word;
             this.pdf = item.pdf;
@@ -128,7 +151,9 @@ export class DiligenciarIndicadorComponent implements OnInit {
   }
 
   VerDiligenciarIndicador() {
-    this.indicadoresservice.VerDiligenciarIndicador(this.idArchivo).subscribe((res: any) => {
+    this.indicadoresservice
+      .VerDiligenciarIndicador(this.idArchivo)
+      .subscribe((res: any) => {
         this.resultadosTabla = res.map((item) => {
           this.anioArray.push(item.anio);
           this.preciodicidadesArray.push(item.periodicidad);
@@ -227,10 +252,10 @@ export class DiligenciarIndicadorComponent implements OnInit {
       this.resultadosHTML.shift();
       this.resultadosHTML.map(
         (item) => (
-          console.log("Fila",item.idFila-1),
-          contents = document.getElementById((item.idFila - 1).toString()),
-          item.valor = contents.value,
-          item.Usuarioid = this.usarioLocalStote.usuarioid,
+          console.log("Fila", item.idFila - 1),
+          (contents = document.getElementById((item.idFila - 1).toString())),
+          (item.valor = contents.value),
+          (item.Usuarioid = this.usarioLocalStote.usuarioid),
           contenidos.push(item),
           i++
         )
@@ -312,9 +337,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
     let contenidos = [];
     this.resultadosHTML.map((item) => {
       if (item.idFila == 1) {
-
-      }
-      else {
+      } else {
         console.log("Fila", item.idFila - 1);
         contents = document.getElementById((item.idFila - 1).toString());
         item.valor = contents.value;
@@ -352,14 +375,14 @@ export class DiligenciarIndicadorComponent implements OnInit {
                 }
               }
               array.push(carac);
-              
+
               let continuar = 0;
               for (var c = 0; c < array.length; c++) {
                 if (item.idFila == array[c]) {
                   console.log("Id Fila: ", item.idFila);
                   console.log("Array[c]: ", array[c]);
                   continuar = 1;
-                  console.log(array)
+                  console.log(array);
                 }
               }
 
@@ -373,7 +396,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
                 let array2 = [];
                 for (let i = 0; i < array.length; i++) {
                   var1 = document.getElementById((array[i + 1] - 1).toString());
-                  console.log((array[i] - 1).toString())
+                  console.log((array[i] - 1).toString());
                   var2 = document.getElementById((array[i - 1] - 1).toString());
                   var3 = document.getElementById((array[i] - 1).toString());
                   if (array[i] == "*") {
@@ -405,7 +428,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
                     }
                   }
                 }
-                console.log("Array2: ",array2)
+                console.log("Array2: ", array2);
                 //-------------------------------------------------------------------------------------------------------------------------
                 let bandera2 = 0;
                 let array3 = [];
@@ -414,7 +437,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
                     if (bandera2 == 1) {
                       array3.push(
                         parseFloat(array3[array3.length - 1]) +
-                        parseFloat(array2[i + 1])
+                          parseFloat(array2[i + 1])
                       );
                       array3.splice(array3.length - 2, 1);
                     } else {
@@ -498,25 +521,24 @@ export class DiligenciarIndicadorComponent implements OnInit {
                   var var4;
                   let array2 = [];
                   for (let i = 0; i < array.length; i++) {
-                    var1 = document.getElementById((array[i + 1] - 1).toString());
-                    var2 = document.getElementById((array[i - 1] - 1).toString());
+                    var1 = document.getElementById(
+                      (array[i + 1] - 1).toString()
+                    );
+                    var2 = document.getElementById(
+                      (array[i - 1] - 1).toString()
+                    );
                     var3 = document.getElementById((array[i] - 1).toString());
                     if (array[i] == "*") {
                       if (bandera == 1) {
                         array2.push(array2[array2.length - 1] * var1.value);
                         array2.splice(array2.length - 2, 1);
-
-                      }
-                      else {
+                      } else {
                         array2.pop();
                         array2.push(var2.value * var1.value);
-
                       }
                       bandera = 1;
                       i += 1;
-                    }
-                    else if (array[i] == "/") {
-
+                    } else if (array[i] == "/") {
                       if (bandera == 1) {
                         array2.push(array2[array2.length - 1] / var1.value);
                         array2.splice(array2.length - 2, 1);
@@ -543,19 +565,18 @@ export class DiligenciarIndicadorComponent implements OnInit {
                       if (bandera2 == 1) {
                         array3.push(
                           parseFloat(array3[array3.length - 1]) +
-                          parseFloat(array2[i + 1])
+                            parseFloat(array2[i + 1])
                         );
                         array3.splice(array3.length - 2, 1);
                       } else {
                         array3.pop();
-                        array3.push(parseFloat(array2[i - 1]) + parseFloat(array2[i + 1]));
-
+                        array3.push(
+                          parseFloat(array2[i - 1]) + parseFloat(array2[i + 1])
+                        );
                       }
                       bandera2 = 1;
                       i += 1;
-                    }
-                    else if (array2[i] == "-") {
-
+                    } else if (array2[i] == "-") {
                       if (bandera2 == 1) {
                         array3.push(array3[array3.length - 1] - array2[i + 1]);
                         array3.splice(array3.length - 2, 1);
@@ -603,17 +624,18 @@ export class DiligenciarIndicadorComponent implements OnInit {
   }
 
   DescargarWd() {
-    this.ExportToDoc('archivo');
+    this.ExportToDoc("archivo");
   }
 
   ExportToExcel() {
-    var htmltable = document.getElementById('exportContent');
+    var htmltable = document.getElementById("exportContent");
     var html = htmltable.outerHTML;
-    window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+    window.open("data:application/vnd.ms-excel," + encodeURIComponent(html));
   }
 
-  ExportToDoc(filename = '') {
-    var HtmlHead = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+  ExportToDoc(filename = "") {
+    var HtmlHead =
+      "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
 
     var EndHtml = "</body></html>";
 
@@ -622,15 +644,15 @@ export class DiligenciarIndicadorComponent implements OnInit {
     var html = HtmlHead + dochtml + EndHtml;
 
     //specify the type
-    var blob = new Blob(['ufeff', html], {
-      type: 'application/msword'
+    var blob = new Blob(["ufeff", html], {
+      type: "application/msword",
     });
 
     // Specify link url
     var url = URL.createObjectURL(blob);
 
     // Specify file name
-    filename = filename ? filename + '.doc' : 'document.doc';
+    filename = filename ? filename + ".doc" : "document.doc";
 
     // Create download link element
     var downloadLink = document.createElement("a");
@@ -654,19 +676,15 @@ export class DiligenciarIndicadorComponent implements OnInit {
   }
 
   createPDF() {
-    var sTable = document.getElementById('exportContent').innerHTML;
+    var sTable = document.getElementById("exportContent").innerHTML;
     // CREATE A WINDOW OBJECT.
-    var win = window.open('', '', 'height=700,width=700');
-    win.document.write('<html><head>');  // <title> FOR PDF HEADER.       // ADD STYLE INSIDE THE HEAD TAG.
-    win.document.write('</head>');
-    win.document.write('<body>');
-    win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
-    win.document.write('</body></html>');
-    win.document.close(); 	// CLOSE THE CURRENT WINDOW.
-    win.print();    // PRINT THE CONTENTS.
+    var win = window.open("", "", "height=700,width=700");
+    win.document.write("<html><head>"); // <title> FOR PDF HEADER.       // ADD STYLE INSIDE THE HEAD TAG.
+    win.document.write("</head>");
+    win.document.write("<body>");
+    win.document.write(sTable); // THE TABLE CONTENTS INSIDE THE BODY TAG.
+    win.document.write("</body></html>");
+    win.document.close(); // CLOSE THE CURRENT WINDOW.
+    win.print(); // PRINT THE CONTENTS.
   }
-
 }
-
-
-
