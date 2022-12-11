@@ -63,7 +63,7 @@
             </td>
             <td>
               <img src="../../../assets/imagenes/eliminar.png" alt="icono-nombre" class="mx-1"
-                [routerLink]="['/diligenciar-indicador',item.id,'editar']" [routerLinkActive]="['link-active']" />
+                (click) = "eliminar(item.id)"/>
             </td>
           </tr>
         </tbody>

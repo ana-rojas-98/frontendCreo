@@ -64,11 +64,11 @@ export class ReportesService {
     return resul;
   }
 
-  EliminarFila(fila)
+  EliminarReporte(fila)
   {
     const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
-      `${this.URL_SER}/api/Reportes/EliminarFila/`,fila, headers
+      `${this.URL_SER}/api/Reportes/Eliminar/`,fila, headers
     );
     return resul;
   }
@@ -77,6 +77,24 @@ export class ReportesService {
     const headers = this.authService.fnSetDefineTokenAuthorization();
     let resul = this.http.get(
       `${this.URL_SER}/api/Reportes/`, headers
+    );
+    return resul;
+  }
+
+
+  ConsultaReportesDetail(idTablero) {
+    const headers = this.authService.fnSetDefineTokenAuthorization();
+    let resul = this.http.post(
+      `${this.URL_SER}/api/ReportesDetail/GetTablerosDetail/`,idTablero, headers
+    );
+    return resul;
+  }
+
+  GuardarReporteDetail(data)
+  {
+    const headers = this.authService.fnSetDefineTokenAuthorization();
+    let resul = this.http.post(
+      `${this.URL_SER}/api/ReportesDetail/GuardaReporte/`,data, headers
     );
     return resul;
   }
