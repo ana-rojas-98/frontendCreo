@@ -17,16 +17,34 @@ export class ReportesTablerosComponent implements OnInit {
     this.getReportes();
   }
 
+  Reporte = {
+    id: 0,
+  }
+
   resultadosTabla = [];
 
-  getReportes(){
+  getReportes() {
     this.reportesService.ConsultaReportes().subscribe((res: any) => {
       res.map((item) => {
-        
+
         this.resultadosTabla.push(item);
       })
-    console.log("Resultados: ", this.resultadosTabla);
-  });  
+      console.log("Resultados: ", this.resultadosTabla);
+    });
+  }
+
+  eliminar(id) {
+    console.log(id);
+    this.Reporte.id = id;
+    let a = confirm("Seguro quiere eliminar el reporte?");
+    if (a == true) {
+      this.reportesService.EliminarReporte(this.Reporte).subscribe((res: any) => {
+        if (res.result == "Guardado") {
+          alert("Eliminado con exito");
+          location.reload();
+        }
+      });
+    }
   }
 
 }

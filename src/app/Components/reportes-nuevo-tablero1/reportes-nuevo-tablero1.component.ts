@@ -4,12 +4,9 @@ import { ReportesService } from "./../../services/reportes.service";
 import * as $ from "jquery";
 import Swal from "sweetalert2";
 import { ActivatedRoute, Router } from "@angular/router";
-import { isNullOrUndefined } from "util";
 import Chart from "chart.js/auto";
-import { color, getRelativePosition } from "chart.js/helpers";
 import { NgbModalConfig, NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { element } from "protractor";
-import { sign } from "crypto";
+
 
 @Component({
   selector: "app-reportes-nuevo-tablero1",
@@ -254,7 +251,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
       this.enviar = this.enviar.filter(element => element.guardar == true);
 
     });
-    this.addData(selectList, this.idSelec, 0, "select");
+    this.addData(selectList, this.idSelec, 0, "select1");
     this.addData(button, this.idSelec, 0, "button");
   }
 
@@ -301,7 +298,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
       selectOpciones.appendChild(option);
     }
 
-    this.addData(selectOpciones, parseInt(idRow) / 3, idCol, "select");
+    this.addData(selectOpciones, parseInt(idRow) / 3, idCol, "select2");
 
     selectOpciones.addEventListener("change", () => {
       let input = document.createElement("textarea");
@@ -664,7 +661,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
       this.myParentGrafica,
       this.idRowGrafica,
       this.idColGrafica,
-      this.data,
+      JSON.stringify(this.data),
       this.arrayColumnas,
       this.tipoGrafica
     );
@@ -683,6 +680,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
   }
 
   grafica(myParent, idRow, idCol, data, columnas, type) {
+    data = JSON.parse(data);
     this.hijosdeHijos.push(parseInt(idRow) / 3 + "-" + idCol + "-" + type.toString());
     this.contadorId++;
     let ctx = document.createElement("canvas");
@@ -708,7 +706,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
     ctx.id = parseInt(idRow) / 3 + "-" + idCol + "-" + type.toString();
     console.log(columnas);
     console.log(data)
-    this.addData(ctx, parseInt(idRow) / 3, idCol, type.toString(), "", this.nombreGrafica, data, columnas);
+    this.addData(ctx, parseInt(idRow) / 3, idCol, type.toString(), "","", this.nombreGrafica, JSON.stringify(data), columnas.toString());
     myParent.appendChild(ctx);
     new Chart(ctx, {
       type: type.toString(),
@@ -789,7 +787,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
     this.enviar.push({
       item: item,
       columnas: columnas,
-      datos: JSON.stringify(datos),
+      datos: datos,
       html: (item.innerHTML).toString(),
       idcol: idCol,
       idElement: item.id,
