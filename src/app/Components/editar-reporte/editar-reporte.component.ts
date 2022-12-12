@@ -220,7 +220,7 @@ export class EditarReporteComponent implements OnInit {
     if (this.NombreReporte == "") {
       return alert("Ingrese titulo del tablero antes de continuar")
     }
-    if (this.contadoModel == 0) {
+    if (this.contadoModel >= 0) {
       this.contenModal = content;
       this.contadoModel++;
     }
@@ -726,7 +726,7 @@ export class EditarReporteComponent implements OnInit {
       this.myParentGrafica,
       this.idRowGrafica,
       this.idColGrafica,
-      this.data,
+      JSON.stringify(this.data),
       this.arrayColumnas,
       this.tipoGrafica
     );

@@ -20,7 +20,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
     public router: Router,
     private indicadoresservice: IndicadoresService,
     private reportesService: ReportesService
-  ) {}
+  ) { }
   id = 0;
   accionVerModificar = "";
   modificar = false;
@@ -70,8 +70,8 @@ export class DiligenciarIndicadorComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.authService.enviarCorreos().subscribe((res: any) => {});
-    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+    this.authService.enviarCorreos().subscribe((res: any) => { });
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
 
     this.usuarioLocalStote;
     this.consultarIndicador();
@@ -100,6 +100,8 @@ export class DiligenciarIndicadorComponent implements OnInit {
     //this.getIndicadoresFilter();
   }
 
+  casos = 0;
+
   consultarIndicador() {
     if (this.usuarioLocalStote.typeuser == "3") {
       let id = {
@@ -109,21 +111,13 @@ export class DiligenciarIndicadorComponent implements OnInit {
         console.log("res: ", res);
         res.map((item) => {
           if (item.idIndicador == this.id) {
-            if (
-              item.diligenciar == false &&
-              this.accionVerModificar == "editar" &&
-              this.modificar == true
-            ) {
-              this.router.navigate(["/indicadores"]);
-              return true;
+            if (item.diligenciar == false && this.accionVerModificar == "editar" && this.modificar == true) {
+              this.casos = 1;
+              return this.router.navigate(["/indicadores"]);
             }
-            if (
-              item.ver == false &&
-              this.accionVerModificar == "ver" &&
-              this.ver == true
-            ) {
-              this.router.navigate(["/indicadores"]);
-              return true;
+            if (item.ver == false && this.accionVerModificar == "ver" && this.ver == true) {
+              this.casos = 1;
+              return this.router.navigate(["/indicadores"]);
             }
             this.excel = item.excel;
             this.word = item.word;
@@ -131,7 +125,11 @@ export class DiligenciarIndicadorComponent implements OnInit {
             this.resultados = true;
           }
         });
-        if (this.resultados != true) {
+        if (this.casos == 1)
+        {
+          return this.router.navigate(["/indicadores"]);
+        }
+        else if (this.resultados != true) {
           this.router.navigate(["private"]);
         }
       });
@@ -437,7 +435,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
                     if (bandera2 == 1) {
                       array3.push(
                         parseFloat(array3[array3.length - 1]) +
-                          parseFloat(array2[i + 1])
+                        parseFloat(array2[i + 1])
                       );
                       array3.splice(array3.length - 2, 1);
                     } else {
@@ -565,7 +563,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
                       if (bandera2 == 1) {
                         array3.push(
                           parseFloat(array3[array3.length - 1]) +
-                            parseFloat(array2[i + 1])
+                          parseFloat(array2[i + 1])
                         );
                         array3.splice(array3.length - 2, 1);
                       } else {
