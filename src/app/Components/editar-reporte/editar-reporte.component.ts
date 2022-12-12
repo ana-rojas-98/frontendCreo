@@ -1,5 +1,5 @@
 import { IndicadoresService } from "./../../services/indicadores.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { ReportesService } from "./../../services/reportes.service";
 import * as $ from "jquery";
 import Swal from "sweetalert2";
@@ -13,7 +13,16 @@ import { element } from "protractor";
   templateUrl: './editar-reporte.component.html',
   styleUrls: ['./editar-reporte.component.scss']
 })
+
+
+
 export class EditarReporteComponent implements OnInit {
+
+  @ViewChild('content', {
+    read: TemplateRef,
+    static: false
+  })
+  template!: TemplateRef<any>
 
   constructor(private reportesService: ReportesService,
     private indicadoresService: IndicadoresService,
@@ -83,7 +92,7 @@ export class EditarReporteComponent implements OnInit {
 
     let id = this.route.snapshot.paramMap.get("id");
     let accion = this.route.snapshot.paramMap.get("accion");
-    if (accion == "ver"){
+    if (accion == "ver") {
       document.getElementById("addRow").style.display = "none";
       document.getElementById("saveBtn").style.display = "none";
       document.getElementById("endBtn").style.display = "none";
@@ -141,7 +150,7 @@ export class EditarReporteComponent implements OnInit {
         this.NombreReporte = item.nombreReporte;
         if (item.tipo == "button") {
           let a = document.getElementById("content");
-          this.agregarFila(a);
+          this.agregarFila(this.template);
         }
         else {
           if (item.tipo == "select1") {
@@ -184,17 +193,17 @@ export class EditarReporteComponent implements OnInit {
             myParent.appendChild(input);
             this.addData(input, parseInt(item.idRow) / 3, item.idCol, "input");
           }
-          else if (item.tipo == "bar"){
+          else if (item.tipo == "bar") {
             this.nombreGrafica = item.tituloGrafica;
-            this.grafica(myParent,item.idRow*3,item.idCol,item.datos, (item.columnas).split(","),item.tipo);
+            this.grafica(myParent, item.idRow * 3, item.idCol, item.datos, (item.columnas).split(","), item.tipo);
           }
-          else if (item.tipo == "pie"){
+          else if (item.tipo == "pie") {
             this.nombreGrafica = item.tituloGrafica;
-            this.grafica(myParent,item.idRow*3,item.idCol,item.datos, (item.columnas).split(","),item.tipo);
+            this.grafica(myParent, item.idRow * 3, item.idCol, item.datos, (item.columnas).split(","), item.tipo);
           }
-          else if (item.tipo == "line"){
+          else if (item.tipo == "line") {
             this.nombreGrafica = item.tituloGrafica;
-            this.grafica(myParent,item.idRow*3,item.idCol,item.datos, (item.columnas).split(","),item.tipo);
+            this.grafica(myParent, item.idRow * 3, item.idCol, item.datos, (item.columnas).split(","), item.tipo);
           }
         }
         return item;
@@ -762,7 +771,7 @@ export class EditarReporteComponent implements OnInit {
     ctx.id = parseInt(idRow) / 3 + "-" + idCol + "-" + type.toString();
     console.log(columnas);
     console.log(data)
-    this.addData(ctx, parseInt(idRow) / 3, idCol, type.toString(), "","", this.nombreGrafica, JSON.stringify(data), columnas.toString());
+    this.addData(ctx, parseInt(idRow) / 3, idCol, type.toString(), "", "", this.nombreGrafica, JSON.stringify(data), columnas.toString());
     myParent.appendChild(ctx);
     new Chart(ctx, {
       type: type.toString(),
