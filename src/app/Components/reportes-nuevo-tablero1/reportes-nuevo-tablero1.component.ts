@@ -321,7 +321,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
     selectOpciones.addEventListener("change", () => {
       let input = document.createElement("textarea");
       let diagramaBarras = document.createElement("div");
-      console.log("Hijos de hijos: ", this.hijosdeHijos);
       for (let k = 0; k < this.hijosdeHijos.length; k++) {
         if (
           this.hijosdeHijos[k].includes(
@@ -737,19 +736,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
         ";";
     }
     ctx.id = parseInt(idRow) / 3 + "-" + idCol + "-" + type.toString();
-    console.log(columnas);
-    console.log(data);
-    this.addData(
-      ctx,
-      parseInt(idRow) / 3,
-      idCol,
-      type.toString(),
-      "",
-      "",
-      this.nombreGrafica,
-      JSON.stringify(data),
-      columnas.toString()
-    );
+    this.addData(ctx, parseInt(idRow) / 3, idCol, type.toString(), "","", this.nombreGrafica, JSON.stringify(data), columnas.toString());
     myParent.appendChild(ctx);
     new Chart(ctx, {
       type: type.toString(),
@@ -799,7 +786,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
   }
 
   guardar() {
-    console.log("Enviar1: ", this.enviar);
     if (this.NombreReporte == "") {
       alert("Debe ingresar nombre del reporte");
     } else if (this.enviar[0] == undefined || this.enviar[0] == null) {
@@ -821,6 +807,33 @@ export class ReportesNuevoTablero1Component implements OnInit {
     }
   }
 
+  finalizar(){
+    if (this.NombreReporte == "") {
+      alert("Debe ingresar nombre del reporte")
+    }
+    else if (this.enviar[this.enviar.length - 1] == undefined || this.enviar[this.enviar.length - 1] == null) {
+      alert("Debe ingresar alguna fila")
+    }
+    else {
+      let con = confirm("¿Desea finalizar el reporte?")
+      if (con == true)
+      {
+        this.enviar.forEach(element => {
+          let a: any;
+          a = document.getElementById(element.idElement.toString());
+          element.valor = a.value;
+        });
+        this.enviar[this.enviar.length - 1].nombreReporte = this.NombreReporte;
+        this.reportesService.FinalizarNuevoReporte(this.enviar).subscribe((res: any) => {
+          if (res.result = "Guardado") {
+            alert("Guardado con éxito");
+            this.router.navigate(["reportes-tableros"]);
+          }
+          return res;
+        });
+      }
+    }
+  }
   NombreReporte = "";
 
   addData(

@@ -64,12 +64,11 @@ export class ReportesTablerosComponent implements OnInit {
     this.reportesService.ConsultaReportes().subscribe((res: any) => {
       res.map((item) => {
         this.resultadosTabla.push(item);
-      });
+      })
     });
   }
 
   eliminar(id) {
-    console.log(id);
     this.Reporte.id = id;
     let a = confirm("Seguro quiere eliminar el reporte?");
     if (a == true) {

@@ -54,7 +54,6 @@ export class IndicadoresComponent implements OnInit {
       .getIndicadoresAsignados(id)
       .subscribe((res: any) => {
         this.resultados = res.map((item) => {
-          console.log("indicadores: ", res);
           return item;
         });
       });

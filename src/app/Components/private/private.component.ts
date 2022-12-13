@@ -54,7 +54,6 @@ export class PrivateComponent implements OnInit {
 
       this.total = this.activos + this.inactivos;
     });
-    console.log("array que trae", this.resultadosTabla);
     if (this.usuarioLocalStote.typeuser == "3") {
       let id = {
         id: this.usuarioLocalStote.usuarioid,
