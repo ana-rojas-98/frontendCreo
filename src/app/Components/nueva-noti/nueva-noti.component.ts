@@ -331,7 +331,6 @@ export class NuevaNotiComponent implements OnInit {
         caducidadPeriodicidad: this.caducidad,
       },
     ];
-    console.log("envio en indicador faltante", this.faltantes);
     this.authService.enviarProgramados(this.faltantes).subscribe((res: any) => {
       if (res.resul == "ok") {
         this.alerta("Correo enviado correctamente");

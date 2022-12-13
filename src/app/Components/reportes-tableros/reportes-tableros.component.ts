@@ -29,12 +29,10 @@ export class ReportesTablerosComponent implements OnInit {
 
         this.resultadosTabla.push(item);
       })
-      console.log("Resultados: ", this.resultadosTabla);
     });
   }
 
   eliminar(id) {
-    console.log(id);
     this.Reporte.id = id;
     let a = confirm("Seguro quiere eliminar el reporte?");
     if (a == true) {

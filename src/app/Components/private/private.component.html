@@ -15,10 +15,7 @@
     </div>
     <div class="horizontal">
       <h3>Usuarios</h3>
-      <img
-        src="../../../assets/imagenes/administardor-usuarios.png"
-        alt="indicador"
-      />
+      <img src="../../../assets/imagenes/administardor-usuarios.png" alt="indicador" />
       <div class="parrafo">
         <p>Activos: {{activos}}</p>
         <p>Inactivos: {{inactivos}}</p>
@@ -30,60 +27,57 @@
         <h3>Reportes</h3>
       </div>
       <div class="tablero">
-      <div class="hojas">
-      <img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
-      <div class="nombres">
-        <p>Indicador 1</p>
-        <img src="../../../assets/imagenes/ver.png" alt="indicador" />
-        ver
+        <div class="hojas">
+          <img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
+          <div class="nombres">
+            <p>Indicador 1</p>
+            <img src="../../../assets/imagenes/ver.png" alt="indicador" />
+            ver
+          </div>
+        </div>
+        <div class="hojas">
+          <img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
+          <div class="nombres">
+            <p>Indicador 1</p>
+            <img src="../../../assets/imagenes/ver.png" alt="indicador" />
+            ver
+          </div>
+        </div>
       </div>
     </div>
-    <div class="hojas">
-      <img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
-      <div class="nombres">
-        <p>Indicador 1</p>
-        <img src="../../../assets/imagenes/ver.png" alt="indicador" />
-        ver
-      </div>
-    </div>
-  </div>
-    </div>
-    
+
   </div>
   <div class="cuerpo" *ngIf="mostrar == false">
     <div class="v-indicadores">
-        <div class="imagen">
-          <img src="../../../assets/imagenes/indicadores.png" alt="indicador" />
-        </div>
-        <div class="valores">
-          <h3>Indicadores asignados</h3>
-          <p>Completados: {{completados}} </p>
-          <p>Faltantes: {{faltantes}}</p>
-          <p>Total: {{totales}}</p>
-        </div>
+      <div class="imagen">
+        <img src="../../../assets/imagenes/indicadores.png" alt="indicador" />
       </div>
-      <div class="horizontal">
-        <h3>Último indicador trabajado</h3>
-        <img
-          src="../../../assets/imagenes/privateAdmin.png"
-          alt="indicador"
-        />
-        <div class="parrafo">
-          <p>Indicador 1</p>
-          <button class="continuar">Continuar</button>
-        </div>
+      <div class="valores">
+        <h3>Indicadores asignados</h3>
+        <p>Completados: {{completados}} </p>
+        <p>Faltantes: {{faltantes}}</p>
+        <p>Total: {{totales}}</p>
       </div>
-      <div class="reportes">
-        <div class="tituloR">
-          <h3>Reportes</h3>
-        </div>
-        <img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
-        <div class="nombres">
-          <p>Indicador 1</p>
-          <img src="../../../assets/imagenes/ver.png" alt="indicador" />
-          ver
-        </div>
+    </div>
+    <div class="horizontal">
+      <h3>Último indicador trabajado</h3>
+      <img src="../../../assets/imagenes/privateAdmin.png" alt="indicador" />
+      <div class="parrafo">
+        <p>Indicador 1</p>
+        <button class="continuar">Continuar</button>
       </div>
+    </div>
+    <div class="reportes">
+      <div class="tituloR">
+        <h3>Reportes</h3>
+      </div>
+      <img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
+      <div class="nombres">
+        <p>Indicador 1</p>
+        <img src="../../../assets/imagenes/ver.png" alt="indicador" />
+        ver
+      </div>
+    </div>
   </div>
 </div>
 <app-footer></app-footer>

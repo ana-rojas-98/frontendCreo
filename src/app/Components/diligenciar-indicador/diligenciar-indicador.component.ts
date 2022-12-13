@@ -108,7 +108,6 @@ export class DiligenciarIndicadorComponent implements OnInit {
         id: this.usuarioLocalStote.usuarioid,
       };
       this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
-        console.log("res: ", res);
         res.map((item) => {
           if (item.idIndicador == this.id) {
             if (item.diligenciar == false && this.accionVerModificar == "editar" && this.modificar == true) {
@@ -250,7 +249,6 @@ export class DiligenciarIndicadorComponent implements OnInit {
       this.resultadosHTML.shift();
       this.resultadosHTML.map(
         (item) => (
-          console.log("Fila", item.idFila - 1),
           (contents = document.getElementById((item.idFila - 1).toString())),
           (item.valor = contents.value),
           (item.Usuarioid = this.usarioLocalStote.usuarioid),
@@ -336,7 +334,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
     this.resultadosHTML.map((item) => {
       if (item.idFila == 1) {
       } else {
-        console.log("Fila", item.idFila - 1);
+
         contents = document.getElementById((item.idFila - 1).toString());
         item.valor = contents.value;
         contenidos.push(item);
@@ -377,10 +375,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
               let continuar = 0;
               for (var c = 0; c < array.length; c++) {
                 if (item.idFila == array[c]) {
-                  console.log("Id Fila: ", item.idFila);
-                  console.log("Array[c]: ", array[c]);
                   continuar = 1;
-                  console.log(array);
                 }
               }
 
@@ -394,7 +389,6 @@ export class DiligenciarIndicadorComponent implements OnInit {
                 let array2 = [];
                 for (let i = 0; i < array.length; i++) {
                   var1 = document.getElementById((array[i + 1] - 1).toString());
-                  console.log((array[i] - 1).toString());
                   var2 = document.getElementById((array[i - 1] - 1).toString());
                   var3 = document.getElementById((array[i] - 1).toString());
                   if (array[i] == "*") {
@@ -426,7 +420,6 @@ export class DiligenciarIndicadorComponent implements OnInit {
                     }
                   }
                 }
-                console.log("Array2: ", array2);
                 //-------------------------------------------------------------------------------------------------------------------------
                 let bandera2 = 0;
                 let array3 = [];
@@ -504,8 +497,6 @@ export class DiligenciarIndicadorComponent implements OnInit {
                 let continuar = 0;
                 for (var c = 0; c < array.length; c++) {
                   if (item.idFila == array[c]) {
-                    console.log("Id Fila: ", item.idFila);
-                    console.log("Array[c]: ", array[c]);
                     continuar = 1;
                   }
                 }

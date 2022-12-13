@@ -97,8 +97,6 @@ export class EditarReporteComponent implements OnInit {
       document.getElementById("saveBtn").style.display = "none";
       document.getElementById("endBtn").style.display = "none";
     }
-    console.log("Accion: ", accion)
-    console.log("id: ", id);
     this.Reporte.id = parseInt(id);
     this.getReportesDetail(this.Reporte);
     this.reportesService.reportesUsar.subscribe((res) => {
@@ -146,10 +144,10 @@ export class EditarReporteComponent implements OnInit {
     let myParent = document.getElementById("contenedor");
     this.reportesService.ConsultaReportesDetail(id).subscribe((res: any) => {
       this.resultadosTabla = res.map((item) => {
-        console.log(item);
         this.NombreReporte = item.nombreReporte;
         if (item.tipo == "button") {
           let a = document.getElementById("content");
+          this.idSelec = item.idElement;
           this.agregarFila(this.template);
         }
         else {
@@ -210,7 +208,6 @@ export class EditarReporteComponent implements OnInit {
       });
       this.idSelecionados = this.resultadosTabla[0].indicadores;
       this.getindIcadores();
-      console.log("Resultados: ", this.resultadosTabla);
     });
   }
 
@@ -382,7 +379,6 @@ export class EditarReporteComponent implements OnInit {
     selectOpciones.addEventListener("change", () => {
       let input = document.createElement("textarea");
       let diagramaBarras = document.createElement("div");
-      console.log("Hijos de hijos: ", this.hijosdeHijos);
       for (let k = 0; k < this.hijosdeHijos.length; k++) {
         if (this.hijosdeHijos[k].includes((parseInt(idRow) / 3 + "-" + idCol).toString())) {
           let child = document.getElementById(this.hijosdeHijos[k].toString());
@@ -769,8 +765,6 @@ export class EditarReporteComponent implements OnInit {
         ";";
     }
     ctx.id = parseInt(idRow) / 3 + "-" + idCol + "-" + type.toString();
-    console.log(columnas);
-    console.log(data)
     this.addData(ctx, parseInt(idRow) / 3, idCol, type.toString(), "", "", this.nombreGrafica, JSON.stringify(data), columnas.toString());
     myParent.appendChild(ctx);
     new Chart(ctx, {
@@ -822,7 +816,6 @@ export class EditarReporteComponent implements OnInit {
 
   guardar() {
     this.enviar = this.enviar.filter(element => element.idElement != undefined);
-    console.log("Enviar1: ", this.enviar);
     if (this.NombreReporte == "") {
       alert("Debe ingresar nombre del reporte")
     }
@@ -835,7 +828,7 @@ export class EditarReporteComponent implements OnInit {
         a = document.getElementById(element.idElement.toString());
         element.valor = a.value;
       });
-      this.enviar[0].nombreReporte = this.NombreReporte;
+      this.enviar[this.enviar.length - 1].nombreReporte = this.NombreReporte;
       this.reportesService.GuardarReporteDetail(this.enviar).subscribe((res: any) => {
         if (res.result = "Guardado") {
           alert("Guardado con éxito");
@@ -847,6 +840,36 @@ export class EditarReporteComponent implements OnInit {
 
   }
 
+  finalizar(){
+    this.enviar = this.enviar.filter(element => element.idElement != undefined);
+    if (this.NombreReporte == "") {
+      alert("Debe ingresar nombre del reporte")
+    }
+    else if (this.enviar[0] == undefined || this.enviar[0] == null) {
+      alert("Debe ingresar alguna fila")
+    }
+    else {
+      let con = confirm("¿Desea finalizar el reporte?")
+      if (con == true)
+      {
+          this.enviar.forEach(element => {
+          let a: any;
+          a = document.getElementById(element.idElement.toString());
+          element.valor = a.value;
+        });
+        this.enviar[this.enviar.length - 1].nombreReporte = this.NombreReporte;
+        this.reportesService.FinalizarReporte(this.enviar).subscribe((res: any) => {
+          if (res.result = "Guardado") {
+            alert("Guardado con éxito");
+            this.router.navigate(["reportes-tableros"]);
+          }
+          return res;
+        });
+      }
+    }
+  }
+
+
   NombreReporte = "";
 
   addData(item, idRow, idCol, tipo, valor?, texto?, titulo_grafica?, datos?, columnas?) {
@@ -855,10 +878,10 @@ export class EditarReporteComponent implements OnInit {
       columnas: columnas,
       datos: datos,
       html: (item.innerHTML),
-      idcol: idCol,
+      idcol: parseInt(idCol),
       idElement: item.id,
       idReporte: this.Reporte.id,
-      idRow: idRow,
+      idRow: parseInt(idRow) ,
       tipo: tipo,
       tituloGrafica: titulo_grafica,
       texto: texto,

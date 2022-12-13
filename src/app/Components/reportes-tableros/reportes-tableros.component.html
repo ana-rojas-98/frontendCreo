@@ -46,14 +46,14 @@
             <td>{{item.fechaCreacion}}</td>
             <td>{{item.fullname}}</td>
             <td>{{item.nombreReporte}}</td>
-            <td *ngIf="item.finalizado == false; else empty">
+            <td>
               <img src="../../../assets/imagenes/ver.png" alt="icono-nombre" class="mx-1"
                 [routerLink]="['/editar-reporte',item.id,'ver']" [routerLinkActive]="['link-active']" />
             </td>
             <ng-template #empty>
               <td></td>
             </ng-template>
-            <td *ngIf="item.finalizado == false; else empty">
+            <td>
               <img src="../../../assets/imagenes/editar.png" alt="icono-nombre" class="mx-1"
                 [routerLink]="['/editar-reporte',item.id,'editar']" [routerLinkActive]="['link-active']" />
             </td>
