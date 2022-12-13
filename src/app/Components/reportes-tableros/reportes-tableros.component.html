@@ -3,7 +3,7 @@
   <app-sidebar></app-sidebar>
   <div class="cuerpo">
     <h1 class="titulo">Tableros</h1>
-    <button [routerLink]="['/reportes-nuevo-tablero']" routerLinkActive="router-link-active" class="guardar">
+    <button v-if="btnCrearReporte" [routerLink]="['/reportes-nuevo-tablero']" routerLinkActive="router-link-active" class="guardar">
       Crear nuevo
     </button>
     <div class="resultados-tabla">
@@ -34,11 +34,11 @@
               <img id="imgPorcentaje" src="../../../assets/imagenes/ver.png" alt="icono-nombre" class="mx-1 mt-1" />
               Reporte finalizado
             </th>
-            <th>
+            <th *ngIf="btnEliminarReporte">
               <img src="../../../assets/imagenes/eliminar.png" alt="icono-nombre" class="mx-1" />
               Eliminar
             </th>
-            
+
           </tr>
         </thead>
         <tbody>
@@ -61,7 +61,7 @@
               <img src="../../../assets/imagenes/ver.png" alt="icono-nombre" class="mx-1"
                 [routerLink]="['/reporte-final',item.id]" [routerLinkActive]="['link-active']" />
             </td>
-            <td>
+            <td *ngIf="btnEliminarReporte">
               <img src="../../../assets/imagenes/eliminar.png" alt="icono-nombre" class="mx-1"
                 (click) = "eliminar(item.id)"/>
             </td>

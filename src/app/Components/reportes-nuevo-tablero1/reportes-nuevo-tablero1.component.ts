@@ -7,7 +7,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 import Chart from "chart.js/auto";
 import { NgbModalConfig, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
-
 @Component({
   selector: "app-reportes-nuevo-tablero1",
   templateUrl: "./reportes-nuevo-tablero1.component.html",
@@ -72,6 +71,10 @@ export class ReportesNuevoTablero1Component implements OnInit {
   usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
   ngOnInit() {
+    if (this.usuarioLocalStote.reportesCrear == false) {
+      return this.router.navigate(["reportes"]);
+    }
+
     $(".open").on("click", function () {
       $(".overlay, .modal").addClass("active");
     });
@@ -97,16 +100,21 @@ export class ReportesNuevoTablero1Component implements OnInit {
         let idArchivo = {
           idArchivo: parseInt(this.idSelecionados[i]),
         };
-        this.indicadoresService.VerDiligenciarIndicadorReportes(idArchivo).subscribe((res: any) => {
-          res.map((item) => {
-            if (item.idFila != 1) {
-              this.arrayId.push(item.valor);
-              this.arrayIndicadores.push(item.archivo + "-" + item.anio + "-" + item.valor);
-            }
+        this.indicadoresService
+          .VerDiligenciarIndicadorReportes(idArchivo)
+          .subscribe((res: any) => {
+            res.map((item) => {
+              if (item.idFila != 1) {
+                this.arrayId.push(item.valor);
+                this.arrayIndicadores.push(
+                  item.archivo + "-" + item.anio + "-" + item.valor
+                );
+              }
+            });
+            this.resultadosSeleccionados = this.resultadosSeleccionados.sort();
+            this.resultadosSeleccionados =
+              this.resultadosSeleccionados.reverse();
           });
-          this.resultadosSeleccionados = this.resultadosSeleccionados.sort();
-          this.resultadosSeleccionados = this.resultadosSeleccionados.reverse();
-        });
       }
 
       if (this.usuarioLocalStote.typeuser == "3") {
@@ -124,7 +132,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
   contadoModel = 0;
   agregarFila(content) {
     if (this.NombreReporte == "") {
-      return alert("Ingrese titulo del tablero antes de continuar")
+      return alert("Ingrese titulo del tablero antes de continuar");
     }
     if (this.contadoModel == 0) {
       this.contenModal = content;
@@ -169,8 +177,10 @@ export class ReportesNuevoTablero1Component implements OnInit {
           let a = this.hijos[parseInt(idRow)][h].toString();
           for (let k = 0; k < this.hijosdeHijos.length; k++) {
             if (this.hijosdeHijos[k].includes(a)) {
-              let child = document.getElementById(this.hijosdeHijos[k].toString());
-              this.enviar.forEach(element => {
+              let child = document.getElementById(
+                this.hijosdeHijos[k].toString()
+              );
+              this.enviar.forEach((element) => {
                 if (element.idElement == this.hijosdeHijos[k].toString()) {
                   element.guardar = false;
                 }
@@ -179,8 +189,10 @@ export class ReportesNuevoTablero1Component implements OnInit {
               this.hijosdeHijos[k] = "";
             }
           }
-          this.enviar.forEach(element => {
-            if (element.idElement == this.hijos[parseInt(idRow)][h].toString()) {
+          this.enviar.forEach((element) => {
+            if (
+              element.idElement == this.hijos[parseInt(idRow)][h].toString()
+            ) {
               element.guardar = false;
             }
           });
@@ -193,14 +205,17 @@ export class ReportesNuevoTablero1Component implements OnInit {
         );
       }
       let child = document.getElementById(button.getAttribute("id") + "-");
-      this.enviar.forEach(element => {
-        if (element.idElement == button.getAttribute("id") + "-" || element.idElement == button.getAttribute("id")) {
+      this.enviar.forEach((element) => {
+        if (
+          element.idElement == button.getAttribute("id") + "-" ||
+          element.idElement == button.getAttribute("id")
+        ) {
           element.guardar = false;
         }
       });
       myParent.removeChild(child);
       myParent.removeChild(button);
-      this.enviar = this.enviar.filter(element => element.guardar == true);
+      this.enviar = this.enviar.filter((element) => element.guardar == true);
     });
 
     //Create and append the options
@@ -219,8 +234,10 @@ export class ReportesNuevoTablero1Component implements OnInit {
           let a = this.hijos[parseInt(idRow)][h].toString();
           for (let k = 0; k < this.hijosdeHijos.length; k++) {
             if (this.hijosdeHijos[k].includes(a)) {
-              let child = document.getElementById(this.hijosdeHijos[k].toString());
-              this.enviar.forEach(element => {
+              let child = document.getElementById(
+                this.hijosdeHijos[k].toString()
+              );
+              this.enviar.forEach((element) => {
                 if (element.idElement == this.hijosdeHijos[k].toString()) {
                   element.guardar = false;
                 }
@@ -230,8 +247,10 @@ export class ReportesNuevoTablero1Component implements OnInit {
             }
           }
           let child = document.getElementById(a);
-          this.enviar.forEach(element => {
-            if (element.idElement == this.hijos[parseInt(idRow)][h].toString()) {
+          this.enviar.forEach((element) => {
+            if (
+              element.idElement == this.hijos[parseInt(idRow)][h].toString()
+            ) {
               element.guardar = false;
             }
           });
@@ -248,8 +267,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
       }
       this.hijos[parseInt(idRow)] = this.auxhijos;
       this.auxhijos = [];
-      this.enviar = this.enviar.filter(element => element.guardar == true);
-
+      this.enviar = this.enviar.filter((element) => element.guardar == true);
     });
     this.addData(selectList, this.idSelec, 0, "select1");
     this.addData(button, this.idSelec, 0, "button");
@@ -341,11 +359,15 @@ export class ReportesNuevoTablero1Component implements OnInit {
         this.selecManulRespuestas("texto", input.id);
         myParent.appendChild(input);
         this.addData(input, parseInt(idRow) / 3, idCol, "input");
-
       }
 
       if (selectOpciones.value == "Diagrama de barras") {
-        diagramaBarras.id = (parseInt(idRow) / 3 + "-" + idCol + "-bar").toString();
+        diagramaBarras.id = (
+          parseInt(idRow) / 3 +
+          "-" +
+          idCol +
+          "-bar"
+        ).toString();
         let valor = 0;
         this.divVariables = true;
         this.myParentGrafica = myParent;
@@ -356,7 +378,12 @@ export class ReportesNuevoTablero1Component implements OnInit {
       }
 
       if (selectOpciones.value == "Diagrama de torta") {
-        diagramaBarras.id = (parseInt(idRow) / 3 + "-" + idCol + "-pie").toString();
+        diagramaBarras.id = (
+          parseInt(idRow) / 3 +
+          "-" +
+          idCol +
+          "-pie"
+        ).toString();
         let valor = 0;
 
         this.divVariables = false;
@@ -369,7 +396,12 @@ export class ReportesNuevoTablero1Component implements OnInit {
       }
 
       if (selectOpciones.value == "Diagrama de puntos") {
-        diagramaBarras.id = (parseInt(idRow) / 3 + "-" + idCol + "-line").toString();
+        diagramaBarras.id = (
+          parseInt(idRow) / 3 +
+          "-" +
+          idCol +
+          "-line"
+        ).toString();
         let valor = 0;
 
         this.divVariables = true;
@@ -379,8 +411,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
         this.tipoGrafica = "line";
         this.modalService.open(this.contenModal);
       }
-      this.enviar = this.enviar.filter(element => element.guardar == true);
-
+      this.enviar = this.enviar.filter((element) => element.guardar == true);
     });
   }
 
@@ -681,7 +712,9 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
   grafica(myParent, idRow, idCol, data, columnas, type) {
     data = JSON.parse(data);
-    this.hijosdeHijos.push(parseInt(idRow) / 3 + "-" + idCol + "-" + type.toString());
+    this.hijosdeHijos.push(
+      parseInt(idRow) / 3 + "-" + idCol + "-" + type.toString()
+    );
     this.contadorId++;
     let ctx = document.createElement("canvas");
 
@@ -705,8 +738,18 @@ export class ReportesNuevoTablero1Component implements OnInit {
     }
     ctx.id = parseInt(idRow) / 3 + "-" + idCol + "-" + type.toString();
     console.log(columnas);
-    console.log(data)
-    this.addData(ctx, parseInt(idRow) / 3, idCol, type.toString(), "","", this.nombreGrafica, JSON.stringify(data), columnas.toString());
+    console.log(data);
+    this.addData(
+      ctx,
+      parseInt(idRow) / 3,
+      idCol,
+      type.toString(),
+      "",
+      "",
+      this.nombreGrafica,
+      JSON.stringify(data),
+      columnas.toString()
+    );
     myParent.appendChild(ctx);
     new Chart(ctx, {
       type: type.toString(),
@@ -758,37 +801,44 @@ export class ReportesNuevoTablero1Component implements OnInit {
   guardar() {
     console.log("Enviar1: ", this.enviar);
     if (this.NombreReporte == "") {
-      alert("Debe ingresar nombre del reporte")
-    }
-    else if (this.enviar[0] == undefined || this.enviar[0] == null) {
-      alert("Debe ingresar alguna fila")
-    }
-    else {
-      this.enviar.forEach(element => {
+      alert("Debe ingresar nombre del reporte");
+    } else if (this.enviar[0] == undefined || this.enviar[0] == null) {
+      alert("Debe ingresar alguna fila");
+    } else {
+      this.enviar.forEach((element) => {
         let a: any;
         a = document.getElementById(element.idElement.toString());
         element.valor = a.value;
       });
       this.enviar[0].nombreReporte = this.NombreReporte;
       this.reportesService.GuardarReporte(this.enviar).subscribe((res: any) => {
-        if (res.result = "Guardado") {
+        if ((res.result = "Guardado")) {
           alert("Guardado con éxito");
           this.router.navigate(["reportes-tableros"]);
         }
         return res;
       });
     }
-
   }
 
   NombreReporte = "";
 
-  addData(item, idRow, idCol, tipo, valor?, texto?, titulo_grafica?, datos?, columnas?) {
+  addData(
+    item,
+    idRow,
+    idCol,
+    tipo,
+    valor?,
+    texto?,
+    titulo_grafica?,
+    datos?,
+    columnas?
+  ) {
     this.enviar.push({
       item: item,
       columnas: columnas,
       datos: datos,
-      html: (item.innerHTML).toString(),
+      html: item.innerHTML.toString(),
       idcol: idCol,
       idElement: item.id,
       idReporte: 0,
@@ -803,6 +853,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
       indicadores: this.idSelecionados.toString(),
       nombreReporte: this.NombreReporte,
       guardar: true,
-    })
+    });
   }
 }

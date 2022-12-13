@@ -15,7 +15,7 @@ export class ReportesNuevoTableroComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private reportesService: ReportesService,
-    private route: Router
+    public router: Router
   ) {}
 
   resultadosUsuario = [];
@@ -48,6 +48,15 @@ export class ReportesNuevoTableroComponent implements OnInit {
   };
 
   ngOnInit() {
+if (
+      this.usuarioLocalStote.reportesCrear == false &&
+      this.usuarioLocalStote.reportesVer == false &&
+      this.usuarioLocalStote.reportesEditar == false &&
+      this.usuarioLocalStote.reportesEliminar == false
+    ) {
+      return this.router.navigate(["reportes"]);
+    }
+
     this.getCategoria(0);
     this.getStandares(0);
     this.getSubCategoria(0);
@@ -57,7 +66,7 @@ export class ReportesNuevoTableroComponent implements OnInit {
   }
 
   continuar() {
-    this.route.navigate(["/nuevo-tablero", this.indicadorUsar.toString()]);
+    this.router.navigate(["/nuevo-tablero", this.indicadorUsar.toString()]);
     //
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 import Swal from "sweetalert2";
 
@@ -8,9 +9,12 @@ import Swal from "sweetalert2";
   styleUrls: ["./gestor-noti.component.scss"],
 })
 export class GestorNotiComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, public router: Router) {}
 
   resultadosNotificaciones: any = [];
+  crearNotificacion = true
+  eliminarNotificacionBtn = true
+  usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
   notificacion = {
     asunto: "",
     creador: "",
@@ -19,6 +23,26 @@ export class GestorNotiComponent implements OnInit {
     FechaEnvio: "",
   };
   ngOnInit() {
+    if (
+      this.usuarioLocalStote.notificacionesCrear == false &&
+      this.usuarioLocalStote.notificacionesVer == false
+    ) {
+      return this.router.navigate(["private"]);
+    }
+
+    if (
+      this.usuarioLocalStote.notificacionesCrear == false
+    ) {
+      this.crearNotificacion = false
+    }
+
+    if (
+      this.usuarioLocalStote.notificacionesEliminar == false
+    ) {
+      this.eliminarNotificacionBtn = false
+    }
+
+
     this.authService.enviarCorreos().subscribe((res: any) => {});
     this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
 
@@ -44,7 +68,7 @@ export class GestorNotiComponent implements OnInit {
             if (res.resul == "ok") {
               Swal.fire("Eliminado con exito");
               this.traer();
-            }else{
+            } else {
               Swal.fire("No se pudo eliminar");
             }
           });

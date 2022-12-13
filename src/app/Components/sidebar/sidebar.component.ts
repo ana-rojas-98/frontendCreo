@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute, RouterLinkActive } from "@angular/router";
+
 
 @Component({
   selector: "app-sidebar",
@@ -9,7 +10,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 export class SidebarComponent implements OnInit {
   constructor(private authService: AuthService, public router: Router) {}
-  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+  usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
   visorEventos = true;
   indicadores = true;
@@ -20,41 +21,41 @@ export class SidebarComponent implements OnInit {
   configuraciones = true;
   licenciar = true;
 
-  Usuarioid = this.usarioLocalStote.usuarioid;
+  Usuarioid = this.usuarioLocalStote.usuarioid;
 
   Usuario = {
     IdUsuario: this.Usuarioid,
   };
 
   ngOnInit() {
-    if (this.usarioLocalStote.usuarioid != 1) {
+    if (this.usuarioLocalStote.usuarioid != 1) {
       this.licenciar = false;
     }
     if (
-      this.usarioLocalStote.permisosCrear == false &&
-      this.usarioLocalStote.permisosVer == false &&
-      this.usarioLocalStote.permisosEditar == false &&
-      this.usarioLocalStote.permisosEliminar == false
+      this.usuarioLocalStote.permisosCrear == false &&
+      this.usuarioLocalStote.permisosVer == false &&
+      this.usuarioLocalStote.permisosEditar == false &&
+      this.usuarioLocalStote.permisosEliminar == false
     ) {
       this.administrarUsuarios = false;
     }
     if (
-      this.usarioLocalStote.notificacionesCrear == false &&
-      this.usarioLocalStote.notificacionesVer == false &&
-      this.usarioLocalStote.notificacionesEditar == false &&
-      this.usarioLocalStote.notificacionesEliminar == false
+      this.usuarioLocalStote.notificacionesCrear == false &&
+      this.usuarioLocalStote.notificacionesVer == false &&
+      this.usuarioLocalStote.notificacionesEditar == false &&
+      this.usuarioLocalStote.notificacionesEliminar == false
     ) {
       this.notificaciones = false;
     }
     if (
-      this.usarioLocalStote.indicadorCrear == false &&
-      this.usarioLocalStote.indicadorVer == false &&
-      this.usarioLocalStote.indicadorEditar == false &&
-      this.usarioLocalStote.indicadorEliminar == false
+      this.usuarioLocalStote.indicadorCrear == false &&
+      this.usuarioLocalStote.indicadorVer == false &&
+      this.usuarioLocalStote.indicadorEditar == false &&
+      this.usuarioLocalStote.indicadorEliminar == false
     ) {
       this.administrarIndicadores = false;
     }
-    if (this.usarioLocalStote.typeuser == "3") {
+    if (this.usuarioLocalStote.typeuser == "3") {
       this.visorEventos = false;
       this.indicadores = true;
       this.reportes = true;
@@ -64,10 +65,10 @@ export class SidebarComponent implements OnInit {
       this.configuraciones = false;
       this.licenciar = false;
     }
-    if (this.usarioLocalStote.visorEventosVer == false) {
+    if (this.usuarioLocalStote.visorEventosVer == false) {
       this.visorEventos = false;
     }
-    if (this.usarioLocalStote.configuracionEditar == false) {
+    if (this.usuarioLocalStote.configuracionEditar == false) {
       this.configuraciones = false;
     }
   }

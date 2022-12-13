@@ -68,10 +68,13 @@ export class NuevaNotiComponent implements OnInit {
   completa = `${this.year}-${this.mes}-${this.dia}`;
   ensayo = this.fecha.toLocaleDateString();
   fechaConvertida: string;
-  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
-  usuarioid = parseInt(this.usarioLocalStote.usuarioid);
+  usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+  usuarioid = parseInt(this.usuarioLocalStote.usuarioid);
 
   ngOnInit() {
+    if (this.usuarioLocalStote.notificacionesCrear == false) {
+      return this.router.navigate(["gestor-noti"]);
+    }
     this.getUsuarios();
     this.elegitTodos();
   }
@@ -174,7 +177,7 @@ export class NuevaNotiComponent implements OnInit {
       this.boxtres = true;
     }
   }
- 
+
   diasElectos(evento) {
     let e = evento.target;
     if (e.value === "1") {
@@ -358,19 +361,17 @@ export class NuevaNotiComponent implements OnInit {
       } else if (f1 > f) {
         this.periodicidad = "0";
         this.caducidad = "0";
-        this.fechaConvertida = this.fechaEspera
-          .toString()
-          // .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
+        this.fechaConvertida = this.fechaEspera.toString();
+        // .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
         this.indicadoresFalta = 0;
         this.programado();
       }
     }
     if (this.estadoiii === true) {
-      this.caducidad = this.fechaCaducidad
-        .toString()
-        // .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
+      this.caducidad = this.fechaCaducidad.toString();
+      // .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
       this.indicadoresFalta = 0;
-      
+
       for (let i = 0; i < this.quedia.length; i++) {
         var hola = this.quedia[i];
         this.periodicidad = hola.dia;
@@ -379,9 +380,8 @@ export class NuevaNotiComponent implements OnInit {
       }
     }
     if (this.estadoiv === true) {
-      this.fechaConvertida = this.fechaEspera
-        .toString()
-        // .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
+      this.fechaConvertida = this.fechaEspera.toString();
+      // .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
       this.periodicidad = "0";
       this.caducidad = "0";
       this.indicadoresFaltantes();

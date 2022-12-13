@@ -1,24 +1,33 @@
 @import "../../../assets/styles/main.scss";
 
-.contenedor{
-    @include contenedor;
+.contenedor {
+  @include contenedor;
 }
-.cuerpo{
-    @include body;
-    @include centerFlex;
+.cuerpo {
+  @include body;
+}
+.contenedor-div {
+  @include centerFlex;
 }
 
-.reportes{
-    @include centerFlex;
-    flex-direction: column;
-    margin-right: 154px;
-    width: 216px;
-    height: 176px;
-    background-color: #D9D9D9;
-    border-radius: 15px;
+h1 {
+  @include h1Body;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  margin-top: 34px;
+}
 
-    img{
-        width: 100px;
-        height: 100px;
-    }
+.reportes {
+  @include centerFlex;
+  flex-direction: column;
+  margin-right: 154px;
+  width: 216px;
+  height: 176px;
+  background-color: #d9d9d9;
+  border-radius: 15px;
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
 }

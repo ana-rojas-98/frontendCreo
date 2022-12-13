@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     Usuarioid: 107,
   };
 
-  
+
   private _success = new Subject<string>();
 
   successMessage = '';
@@ -31,9 +31,12 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private serviceAdministaraUsuario: AdministrarUsuariosService) { }
 
   public changeSuccessMessage() { this._success.next('Correo electrónico o contraseña invalidos'); }
-  
-  ngOnInit() 
-  { 
+  usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+  ngOnInit()
+  {
+    if (this.usuarioLocalStote) {
+      return this.router.navigate(["private"]);
+    }
     let UsuarioIdModificar;
     this._success.subscribe(message => this.successMessage = message);
     this.serviceAdministaraUsuario.Prueba.emit(UsuarioIdModificar);

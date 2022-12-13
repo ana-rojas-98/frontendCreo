@@ -9,6 +9,7 @@
     <br />
     <div class="boton">
       <button
+      *ngIf="crearNotificacion"
         [routerLink]="['/nueva-noti']"
         [routerLinkActive]="['link-active']"
       >
@@ -34,7 +35,7 @@
               <img src="../../../assets/imagenes/fechaHora.png" /> Fecha de
               envio
             </th>
-            <th>
+            <th *ngIf="eliminarNotificacionBtn">
               <img
                 src="../../../assets/imagenes/eliminar.png"
                 alt="icono-eliminar"
@@ -50,7 +51,7 @@
             <td>{{ noti.asunto }}</td>
             <td>{{ noti.periodicidad }}</td>
             <td>{{ noti.fechaEnvio }}</td>
-            <td>
+            <td *ngIf="eliminarNotificacionBtn">
               <img
                 (click)="eliminarNotificacion(noti.idNotificacion)"
                 src="../../../assets/imagenes/eliminar.png"

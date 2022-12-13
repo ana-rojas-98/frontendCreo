@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
-import { Subject } from 'rxjs';
-import { NgModule } from '@angular/core';
-import { ReportesService } from 'src/app/services/reportes.service';
-import { VisorEventosService } from 'src/app/services/visor-eventos.service';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
+import { Subject } from "rxjs";
+import { NgModule } from "@angular/core";
+import { ReportesService } from "src/app/services/reportes.service";
+import { VisorEventosService } from "src/app/services/visor-eventos.service";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import * as XLSX from "xlsx";
@@ -24,8 +24,11 @@ export class VisorEventosComponent implements OnInit {
   resultadosModulos1 = "";
   resultadosModuloss = [];
 
-  constructor(private VisorEventosService: VisorEventosService,
-    private reportesService: ReportesService, public router: Router) { }
+  constructor(
+    private VisorEventosService: VisorEventosService,
+    private reportesService: ReportesService,
+    public router: Router
+  ) {}
 
   resultadosTabla = [];
   resultadosTabla2 = [];
@@ -47,7 +50,7 @@ export class VisorEventosComponent implements OnInit {
     this.fechaInicial = "2022-11-16";
     this.fechaFinal = "2022-11-16";
 
-    if (this.usarioLocalStote.configuracionEditar == false) {
+    if ((this.visorEventos = false)) {
       this.router.navigate(["private"]);
       return true;
     }
@@ -109,46 +112,59 @@ export class VisorEventosComponent implements OnInit {
   }
 
   moduloFilter() {
-    this.resultadosTabla = this.resultadosTabla2.filter(fecha => {
-      return (Date.parse(fecha.fecha2) >= Date.parse(this.fechaInicial) && Date.parse(fecha.fecha2) <= Date.parse(this.fechaFinal));
+    this.resultadosTabla = this.resultadosTabla2.filter((fecha) => {
+      return (
+        Date.parse(fecha.fecha2) >= Date.parse(this.fechaInicial) &&
+        Date.parse(fecha.fecha2) <= Date.parse(this.fechaFinal)
+      );
     });
     if (this.Usuario.usuario == "" && this.resultadosModulo.modulo == "") {
       this.changeFecha();
+    } else if (this.Usuario.usuario != "") {
+      if (this.resultadosModulo.modulo != "") {
+        this.resultadosTabla = this.resultadosTabla.filter(
+          (item) =>
+            item.modulo == this.resultadosModulo.modulo &&
+            item.idusuario == this.Usuario.usuario
+        );
+      } else {
+        this.resultadosTabla = this.resultadosTabla.filter(
+          (item) => item.idusuario == this.Usuario.usuario
+        );
+      }
+    } else {
+      this.resultadosTabla = this.resultadosTabla.filter(
+        (item) => item.modulo == this.resultadosModulo.modulo
+      );
     }
-    else
-      if (this.Usuario.usuario != "") {
-        if (this.resultadosModulo.modulo != "") {
-          this.resultadosTabla = this.resultadosTabla.filter((item) => (item.modulo == this.resultadosModulo.modulo && item.idusuario == this.Usuario.usuario));
-        }
-        else {
-
-          this.resultadosTabla = this.resultadosTabla.filter((item) => (item.idusuario == this.Usuario.usuario));
-        }
-      }
-      else {
-        this.resultadosTabla = this.resultadosTabla.filter((item) => (item.modulo == this.resultadosModulo.modulo));
-      }
   }
 
   usuarioFilter() {
-    this.resultadosTabla = this.resultadosTabla2.filter(fecha => {
-      return (Date.parse(fecha.fecha2) >= Date.parse(this.fechaInicial) && Date.parse(fecha.fecha2) <= Date.parse(this.fechaFinal));
+    this.resultadosTabla = this.resultadosTabla2.filter((fecha) => {
+      return (
+        Date.parse(fecha.fecha2) >= Date.parse(this.fechaInicial) &&
+        Date.parse(fecha.fecha2) <= Date.parse(this.fechaFinal)
+      );
     });
     if (this.Usuario.usuario == "" && this.resultadosModulo.modulo == "") {
       this.changeFecha();
+    } else if (this.resultadosModulo.modulo != "") {
+      if (this.Usuario.usuario != "") {
+        this.resultadosTabla = this.resultadosTabla.filter(
+          (item) =>
+            item.modulo == this.resultadosModulo.modulo &&
+            item.idusuario == this.Usuario.usuario
+        );
+      } else {
+        this.resultadosTabla = this.resultadosTabla.filter(
+          (item) => item.modulo == this.resultadosModulo.modulo
+        );
+      }
+    } else {
+      this.resultadosTabla = this.resultadosTabla.filter(
+        (item) => item.idusuario == this.Usuario.usuario
+      );
     }
-    else
-      if (this.resultadosModulo.modulo != "") {
-        if (this.Usuario.usuario != "") {
-          this.resultadosTabla = this.resultadosTabla.filter((item) => (item.modulo == this.resultadosModulo.modulo && item.idusuario == this.Usuario.usuario));
-        }
-        else {
-          this.resultadosTabla = this.resultadosTabla.filter((item) => (item.modulo == this.resultadosModulo.modulo));
-        }
-      }
-      else {
-        this.resultadosTabla = this.resultadosTabla.filter((item) => (item.idusuario == this.Usuario.usuario));
-      }
   }
 
   changeFecha() {
@@ -156,16 +172,25 @@ export class VisorEventosComponent implements OnInit {
       alert("La fecha inicial debe ser mayor a la final");
       this.fechaFinal = this.fechaInicial;
     }
-    this.resultadosTabla = this.resultadosTabla2.filter(fecha => {
-      return (Date.parse(fecha.fecha2) >= Date.parse(this.fechaInicial) && Date.parse(fecha.fecha2) <= Date.parse(this.fechaFinal));
+    this.resultadosTabla = this.resultadosTabla2.filter((fecha) => {
+      return (
+        Date.parse(fecha.fecha2) >= Date.parse(this.fechaInicial) &&
+        Date.parse(fecha.fecha2) <= Date.parse(this.fechaFinal)
+      );
     });
     if (this.Usuario.usuario != "") {
-      this.resultadosTabla = this.resultadosTabla.filter((item) => (item.modulo == this.resultadosModulo.modulo && item.idusuario == this.Usuario.usuario));
+      this.resultadosTabla = this.resultadosTabla.filter(
+        (item) =>
+          item.modulo == this.resultadosModulo.modulo &&
+          item.idusuario == this.Usuario.usuario
+      );
     }
     if (this.resultadosModulo.modulo != "") {
-      this.resultadosTabla = this.resultadosTabla.filter((item) => (item.modulo == this.resultadosModulo.modulo && item.idusuario == this.Usuario.usuario));
+      this.resultadosTabla = this.resultadosTabla.filter(
+        (item) =>
+          item.modulo == this.resultadosModulo.modulo &&
+          item.idusuario == this.Usuario.usuario
+      );
     }
-
   }
-
 }

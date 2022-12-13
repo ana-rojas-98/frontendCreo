@@ -5,6 +5,7 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import * as XLSX from "xlsx";
 import { IndicadoresService } from "src/app/services/indicadores.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-reportes-indicadores",
@@ -15,13 +16,12 @@ export class ReportesIndicadoresComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private reportesService: ReportesService,
-    private indicadoresservice: IndicadoresService
-  ) { }
+    private indicadoresservice: IndicadoresService,
+    public router: Router
+  ) {}
 
   title = "angular-app";
   fileName = "Indicadores.xlsx";
-
-
 
   Estandar = {
     estandar: "",
@@ -59,7 +59,22 @@ export class ReportesIndicadoresComponent implements OnInit {
     },
   ];
 
+  usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
   ngOnInit() {
+    if (
+      this.usuarioLocalStote.reportesCrear == false &&
+      this.usuarioLocalStote.reportesVer == false &&
+      this.usuarioLocalStote.reportesEditar == false &&
+      this.usuarioLocalStote.reportesEliminar == false
+    ) {
+      return this.router.navigate(["reportes"]);
+    }
+    if (
+      this.usuarioLocalStote.reportesCrear == false 
+    ) {
+      return this.router.navigate(["reportes"]);
+    }
+
     this.GetUsuarios(0);
     this.getCategoria(0);
     this.getStandares(0);
@@ -93,7 +108,6 @@ export class ReportesIndicadoresComponent implements OnInit {
       XLSX.writeFile(wb, this.fileName);
     }
   }
-
 
   getUsuarioFilter() {
     if (this.Usuario.usuario == "") {
