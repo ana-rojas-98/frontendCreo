@@ -112,8 +112,6 @@ export class IndicadoresComponent implements OnInit {
         this.resultadosTabla = res.map((item) => {
           return item;
         });
-        this.resultadosTabla = this.resultadosTabla.sort();
-        this.resultadosTabla = this.resultadosTabla.reverse();
       });
     }
   }

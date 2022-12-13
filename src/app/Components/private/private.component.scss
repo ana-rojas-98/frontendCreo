@@ -1,7 +1,9 @@
 @import "../../../assets/styles/main.scss";
+
 .contenedor {
   @include contenedor;
 }
+
 .cuerpo {
   @include body;
   display: grid;
@@ -10,39 +12,44 @@
   grid-template-rows: 0.5fr 1fr 1fr;
   padding: 10px;
 }
-.v-indicadores{
+
+.v-indicadores {
   width: 100%;
   grid-column: 1;
   grid-row: 1 / 4;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color:  #9C9B9B;
-    opacity: 0.9;
-    border-radius: 15px;
-    color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #9C9B9B;
+  opacity: 0.9;
+  border-radius: 15px;
+  color: white;
 
 }
-.imagen{
+
+.imagen {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 50%;
-  img{
+
+  img {
     width: 160px;
     height: 150px;
     opacity: 1;
   }
 }
-.valores{
+
+.valores {
   width: 100%;
   height: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  h3{
+
+  h3 {
     font-size: large;
     font-weight: bold;
     border-bottom: 2px white solid;
@@ -52,7 +59,7 @@
   }
 }
 
-.horizontal{
+.horizontal {
   width: 100%;
   height: 150px;
   grid-column: 2 / 4;
@@ -63,11 +70,13 @@
   border-radius: 15px;
   color: white;
   font-weight: bold;
-  img{
+
+  img {
     width: 125px;
     height: 125px;
-   }
-   h3{
+  }
+
+  h3 {
     font-size: large;
     font-weight: bold;
     border-bottom: 2px white solid;
@@ -75,9 +84,11 @@
     margin-bottom: 20px;
     text-align: center;
   }
-   background: rgba(0,0,0,0.1) 
+
+  background: rgba(0, 0, 0, 0.1)
 }
-.continuar{
+
+.continuar {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -94,28 +105,35 @@
   width: 123px;
   height: 10px;
 }
-.reportes{
+
+.reportes {
   width: 100%;
   grid-column: 2 / 4;
   grid-row: 2 / 4;
   border-radius: 15px;
   padding: 20px;
-    img{
-      width: 100px;
-      height: 100px; 
-     }
-  background: rgba(240,240,240) ;
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
+  background: rgba(240, 240, 240);
   display: flex;
   flex-direction: column;
 }
-.tablero{
+
+.tablero {
   display: flex;
+  height: 100%;
 }
-.tituloR{
+
+.tituloR {
   display: flex;
   justify-content: center;
   align-items: center;
-  h3{
+
+  h3 {
     font-size: large;
     font-weight: bold;
     border-bottom: 1px #9C9B9B solid;
@@ -126,11 +144,22 @@
     opacity: 0.9;
   }
 }
-.nombres{
-  img{
+
+.nombres {
+  align-items: center;
+  text-align: center;
+  .icono {
     width: 20px;
     height: 20px;
-
-   }
+    align-items: center;
+  }
 }
 
+
+.container{
+  height: 100%;
+}
+
+.separador{
+  height: 50%;
+}

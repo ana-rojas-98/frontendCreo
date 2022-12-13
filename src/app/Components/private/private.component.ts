@@ -11,17 +11,20 @@ export class PrivateComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private reportesService: ReportesService
-  ) {}
+  ) { }
   usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
   mostrar = false;
   resultadosTabla: any = [];
+  resultadosTablaIndicadores: any = [];
   resultados: any = [];
   indicadores: any = [];
   avance: any = [];
 
+  indicadoresResultados = [];
+
   ngOnInit() {
-    this.authService.enviarCorreos().subscribe((res: any) => {});
-    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+    this.authService.enviarCorreos().subscribe((res: any) => { });
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
     if (this.usuarioLocalStote.typeuser == "1") {
       this.mostrar = true;
     } else if (this.usuarioLocalStote.typeuser == "2") {
@@ -31,6 +34,7 @@ export class PrivateComponent implements OnInit {
     }
 
     this.pantallaPrin();
+    this.getReportes();
   }
 
   activos = 0;
@@ -39,6 +43,18 @@ export class PrivateComponent implements OnInit {
   completados = 0;
   faltantes = 0;
   totales = 0;
+
+  getReportes() {
+    this.reportesService.ConsultaReportes().subscribe((res: any) => {
+      res.map((item) => {
+        this.resultadosTablaIndicadores.push(item);
+      })
+      this.resultadosTablaIndicadores = this.resultadosTablaIndicadores.filter(item => item.finalizado == true);
+      if (this.usuarioLocalStote.indicadorReportes != "todos" && this.usuarioLocalStote.typeuser == 3) {
+      this.resultadosTablaIndicadores = this.resultadosTablaIndicadores.filter(item => item.idUsuarioCrea == this.usuarioLocalStote.usuarioid);
+      }
+    });
+  }
 
   pantallaPrin() {
     this.authService.getUsuarios("").subscribe((res: any) => {
@@ -60,12 +76,14 @@ export class PrivateComponent implements OnInit {
       };
       this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
         this.indicadores = res.map((item) => {
+          this.indicadoresResultados.push(item);
           if (item.avance == 100) {
             this.completados++;
           } else if (item.avance >= 0 && item.avance < 100) {
             this.faltantes++;
           }
         });
+        console.log(this.indicadoresResultados)
         this.totales = this.completados + this.faltantes;
       });
     }
