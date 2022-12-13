@@ -650,6 +650,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
       //borderColor: this.colors,
       borderColor: this.coloresInput,
       borderWidth: 1.5,
+      tension: 0.1,
     };
     this.dataVisualizar = this.dataInput;
     this.columnasVisualizar = this.columnasInput;
