@@ -56,8 +56,8 @@ import { MiPerfilComponent } from './Components/mi-perfil/mi-perfil.component';
 import { CambiarContrasenaComponent } from './Components/cambiar-contrasena/cambiar-contrasena.component';
 import { NavMenuComponent } from './Components/nav-menu/nav-menu.component';
 import { NavMenu2Component } from './Components/nav-menu2/nav-menu2.component';
-import { EditarReporteComponent } from './components/editar-reporte/editar-reporte.component';
-import { VerReporteFinalizadoComponent } from './components/ver-reporte-finalizado/ver-reporte-finalizado.component';
+import { EditarReporteComponent } from './Components/editar-reporte/editar-reporte.component';
+import { VerReporteFinalizadoComponent } from './Components/ver-reporte-finalizado/ver-reporte-finalizado.component';
 
 //import { TokenInterceptorService } from './services/token-interceptor.service';
 
