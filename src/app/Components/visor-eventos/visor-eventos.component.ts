@@ -50,7 +50,7 @@ export class VisorEventosComponent implements OnInit {
     this.fechaInicial = "2022-11-16";
     this.fechaFinal = "2022-11-16";
 
-    if ((this.visorEventos = false)) {
+    if (this.usarioLocalStote.visorEventos = false) {
       this.router.navigate(["private"]);
       return true;
     }
