@@ -22,25 +22,56 @@
         <p>Total: {{total}}</p>
       </div>
     </div>
-    <div class="reportes">
+    <div class="reportes border">
       <div class="tituloR">
         <h3>Reportes</h3>
       </div>
-      <div class="tablero">
-        <div class="hojas">
-          <img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
-          <div class="nombres">
-            <p>Indicador 1</p>
-            <img src="../../../assets/imagenes/ver.png" alt="indicador" />
-            ver
+      <div class="container-fluid">
+        <div class="row mt-4">
+          <div *ngIf="resultadosTablaIndicadores[0]" class="col-4 nombres">
+            <a [routerLink]="['/reporte-final',resultadosTablaIndicadores[0].id]" [routerLinkActive]="['link-active']" type="button"><img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
+              <p>{{resultadosTablaIndicadores[0].nombreReporte}}</p>
+              <img class="icono" src="../../../assets/imagenes/ver.png" alt="indicador" />
+              ver
+            </a>
+          </div>
+          <div *ngIf="resultadosTablaIndicadores[1]" class="col-4 nombres">
+            <a [routerLink]="['/reporte-final',resultadosTablaIndicadores[1].id]" [routerLinkActive]="['link-active']" type="button"><img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
+              <p>{{resultadosTablaIndicadores[1].nombreReporte}}</p>
+              <img class="icono" src="../../../assets/imagenes/ver.png" alt="indicador" />
+              ver
+            </a>
+          </div>
+          <div *ngIf="resultadosTablaIndicadores[2]" class="col-4 nombres">
+            <a [routerLink]="['/reporte-final',resultadosTablaIndicadores[2].id]" [routerLinkActive]="['link-active']" type="button"><img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
+              <p>{{resultadosTablaIndicadores[2].nombreReporte}}</p>
+              <img class="icono" src="../../../assets/imagenes/ver.png" alt="indicador" />
+              ver
+            </a>
           </div>
         </div>
-        <div class="hojas">
-          <img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
-          <div class="nombres">
-            <p>Indicador 1</p>
-            <img src="../../../assets/imagenes/ver.png" alt="indicador" />
-            ver
+        <div class="row separador"></div>
+        <div class="row">
+          <div *ngIf="resultadosTablaIndicadores[3]" class="col-4 nombres">
+            <a [routerLink]="['/reporte-final',resultadosTablaIndicadores[3].id]" [routerLinkActive]="['link-active']" type="button"><img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
+              <p>{{resultadosTablaIndicadores[3].nombreReporte}}</p>
+              <img class="icono" src="../../../assets/imagenes/ver.png" alt="indicador" />
+              ver
+            </a>
+          </div>
+          <div *ngIf="resultadosTablaIndicadores[4]" class="col-4 nombres">
+            <a [routerLink]="['/reporte-final',resultadosTablaIndicadores[4].id]" [routerLinkActive]="['link-active']" type="button"><img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
+              <p>{{resultadosTablaIndicadores[4].nombreReporte}}</p>
+              <img class="icono" src="../../../assets/imagenes/ver.png" alt="indicador" />
+              ver
+            </a>
+          </div>
+          <div *ngIf="resultadosTablaIndicadores[5]" class="col-4 nombres">
+            <a [routerLink]="['/reporte-final',resultadosTablaIndicadores[5].id]" [routerLinkActive]="['link-active']" type="button"><img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
+              <p>{{resultadosTablaIndicadores[5].nombreReporte}}</p>
+              <img class="icono" src="../../../assets/imagenes/ver.png" alt="indicador" />
+              ver
+            </a>
           </div>
         </div>
       </div>
@@ -64,18 +95,62 @@
       <img src="../../../assets/imagenes/privateAdmin.png" alt="indicador" />
       <div class="parrafo">
         <p>Indicador 1</p>
-        <button class="continuar">Continuar</button>
+        <button [routerLink]="['/diligenciar-indicador',indicadoresResultados[0].idIndicador,'editar']"
+        [routerLinkActive]="['link-active']" class="continuar">Continuar</button>
       </div>
     </div>
     <div class="reportes">
       <div class="tituloR">
         <h3>Reportes</h3>
       </div>
-      <img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
-      <div class="nombres">
-        <p>Indicador 1</p>
-        <img src="../../../assets/imagenes/ver.png" alt="indicador" />
-        ver
+      <div class="container-fluid">
+        <div class="row mt-4">
+          <div *ngIf="resultadosTablaIndicadores[0]" class="col-4 nombres">
+            <a [routerLink]="['/reporte-final',resultadosTablaIndicadores[0].id]" [routerLinkActive]="['link-active']" type="button"><img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
+              <p>{{resultadosTablaIndicadores[0].nombreReporte}}</p>
+              <img class="icono" src="../../../assets/imagenes/ver.png" alt="indicador" />
+              ver
+            </a>
+          </div>
+          <div *ngIf="resultadosTablaIndicadores[1]" class="col-4 nombres">
+            <a [routerLink]="['/reporte-final',resultadosTablaIndicadores[1].id]" [routerLinkActive]="['link-active']" type="button"><img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
+              <p>{{resultadosTablaIndicadores[1].nombreReporte}}</p>
+              <img class="icono" src="../../../assets/imagenes/ver.png" alt="indicador" />
+              ver
+            </a>
+          </div>
+          <div *ngIf="resultadosTablaIndicadores[2]" class="col-4 nombres">
+            <a [routerLink]="['/reporte-final',resultadosTablaIndicadores[2].id]" [routerLinkActive]="['link-active']" type="button"><img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
+              <p>{{resultadosTablaIndicadores[2].nombreReporte}}</p>
+              <img class="icono" src="../../../assets/imagenes/ver.png" alt="indicador" />
+              ver
+            </a>
+          </div>
+        </div>
+        <div class="row separador"></div>
+        <div class="row">
+          <div *ngIf="resultadosTablaIndicadores[3]" class="col-4 nombres">
+            <a [routerLink]="['/reporte-final',resultadosTablaIndicadores[3].id]" [routerLinkActive]="['link-active']" type="button"><img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
+              <p>{{resultadosTablaIndicadores[3].nombreReporte}}</p>
+              <img class="icono" src="../../../assets/imagenes/ver.png" alt="indicador" />
+              ver
+            </a>
+          </div>
+          <div *ngIf="resultadosTablaIndicadores[4]" class="col-4 nombres">
+            <a [routerLink]="['/reporte-final',resultadosTablaIndicadores[4].id]" [routerLinkActive]="['link-active']" type="button"><img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
+              <p>{{resultadosTablaIndicadores[4].nombreReporte}}</p>
+              <img class="icono" src="../../../assets/imagenes/ver.png" alt="indicador" />
+              ver
+            </a>
+          </div>
+          <div *ngIf="resultadosTablaIndicadores[5]" class="col-4 nombres">
+            <a [routerLink]="['/reporte-final',resultadosTablaIndicadores[5].id]" [routerLinkActive]="['link-active']" type="button"><img src="../../../assets/imagenes/reportesB.png" alt="indicadores" />
+              <p>{{resultadosTablaIndicadores[5].nombreReporte}}</p>
+              <img class="icono" src="../../../assets/imagenes/ver.png" alt="indicador" />
+              ver
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
