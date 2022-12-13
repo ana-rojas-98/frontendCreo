@@ -163,6 +163,11 @@ export class AdministrarUsuariosComponent implements OnInit {
       return true;
     }
 
+    let usuarioEliminar ={
+      usuarioid:parseInt(usuarioid),
+      idUsuarioRegistro:this.usarioLocalStote.usuarioid.toString()
+    }
+
     Swal.fire({
       title: "Esta seguro de eliminar este usuario",
       showDenyButton: true,
@@ -172,7 +177,7 @@ export class AdministrarUsuariosComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.authService.eliminarUsuario(usuarioid).subscribe((res: any) => {
+        this.authService.eliminarUsuario(usuarioEliminar).subscribe((res: any) => {
           if (res.codigo == 1) {
             this.getUsuariosApi();
             this.getTipoUsuarioApi();
@@ -186,8 +191,8 @@ export class AdministrarUsuariosComponent implements OnInit {
         Swal.fire("Se cancelo la petición");
       }
     })
-    
-    
+
+
   }
   alert(mensaje) {
     Swal.fire(mensaje);

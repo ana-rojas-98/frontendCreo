@@ -218,13 +218,10 @@ export class AuthService {
   }
 
   eliminarUsuario(id) {
-    let usuarioid = {
-      usuarioid: id,
-    };
     const headers = this.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
       `${this.URL_SER}/api/Usuarios/EliminarUsuario`,
-      usuarioid,
+      id,
       headers
     );
     return resul;
@@ -289,7 +286,7 @@ export class AuthService {
   EditarIndicador() {
     const headers = this.fnSetDefineTokenAuthorization();
     let formato = this.http.get(`${this.URL_SER}/api/FormatoIndicadors`, headers);
-    
+
     return formato;
   }
 
