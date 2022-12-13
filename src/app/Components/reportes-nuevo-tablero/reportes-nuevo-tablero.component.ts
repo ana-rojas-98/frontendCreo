@@ -48,13 +48,17 @@ export class ReportesNuevoTableroComponent implements OnInit {
   };
 
   ngOnInit() {
-if (
+    if (
       this.usuarioLocalStote.reportesCrear == false &&
       this.usuarioLocalStote.reportesVer == false &&
       this.usuarioLocalStote.reportesEditar == false &&
       this.usuarioLocalStote.reportesEliminar == false
     ) {
       return this.router.navigate(["reportes"]);
+    }
+
+    if (this.usuarioLocalStote.reportesCrear == false) {
+      return this.router.navigate(["reportes-tableros"]);
     }
 
     this.getCategoria(0);
@@ -158,7 +162,10 @@ if (
   }
   getindIcadores(dato) {
     if (dato == 0) {
-      if (this.usuarioLocalStote.typeuser != "3") {
+      if (
+        this.usuarioLocalStote.typeuser != "3" ||
+        this.usuarioLocalStote.indicadorReportes == "todos"
+      ) {
         this.reportesService
           .ConsultarIndicadoresAsignados()
           .subscribe((res: any) => {
@@ -172,7 +179,10 @@ if (
           });
       }
 
-      if (this.usuarioLocalStote.typeuser == "3") {
+      if (
+        this.usuarioLocalStote.typeuser == "3" &&
+        this.usuarioLocalStote.indicadorReportes != "todos"
+      ) {
         let id = {
           id: this.usuarioLocalStote.usuarioid,
         };

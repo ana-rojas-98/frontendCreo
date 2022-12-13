@@ -82,6 +82,7 @@ export class EditarReporteComponent implements OnInit {
   }
 
   ngOnInit() {
+
     $(".open").on("click", function () {
       $(".overlay, .modal").addClass("active");
     });
@@ -92,6 +93,15 @@ export class EditarReporteComponent implements OnInit {
 
     let id = this.route.snapshot.paramMap.get("id");
     let accion = this.route.snapshot.paramMap.get("accion");
+    if (this.usuarioLocalStote.reportesEditar == false && accion == "editar") {
+      return this.router.navigate(["reportes"]);
+    }
+    if (this.usuarioLocalStote.reportesVer == false && accion == "ver") {
+      return this.router.navigate(["reportes"]);
+    }
+    if (accion !="editar" && accion != "ver") {
+      return this.router.navigate(["reportes"]);
+    }
     if (accion == "ver") {
       document.getElementById("addRow").style.display = "none";
       document.getElementById("saveBtn").style.display = "none";

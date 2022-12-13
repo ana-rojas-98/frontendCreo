@@ -14,7 +14,7 @@ export class ReportesTablerosComponent implements OnInit {
   ) {}
   btnCrearReporte = true;
   btnEliminarReporte = true;
-  btnVerReportes = true;
+  btnVerReporte = true;
   btnEditarReporte = true;
   usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
@@ -42,7 +42,7 @@ export class ReportesTablerosComponent implements OnInit {
     if (
       this.usuarioLocalStote.reportesVer == false
     ) {
-      this.btnVerReportes = false;
+      this.btnVerReporte = false;
     }
 
     if (

@@ -20,7 +20,7 @@ export class CrearUsuarioComponent implements OnInit {
     public router: Router
   ) {}
 
-  contrasenaAleatoria =""
+  contrasenaAleatoria = "";
   UsuarioRegistrado = {};
   UsuarioIdModificar = "";
   mostaraGuardar = true;
@@ -30,7 +30,7 @@ export class CrearUsuarioComponent implements OnInit {
   readonlyTabla = false;
   prueba = {};
   auxTypeUsuario = "";
-  usarioLocalStote = "";
+  usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
   readonlyAdministrador = false;
   readonlySuperAdministrador = false;
   readonlyReportes = false;
@@ -41,7 +41,7 @@ export class CrearUsuarioComponent implements OnInit {
   mostaraAsinnarIndicadorCrear = true;
   idUsuarioIndicadores = 0;
   titulo = "Crear usuario";
-  idAeditar
+  idAeditar;
 
   permisosReportes = new FormGroup({
     permisosReportes: new FormControl(""),
@@ -174,7 +174,7 @@ export class CrearUsuarioComponent implements OnInit {
 
     const displayRandomString = () => {
       let randomStringContainer = document.getElementById("random_string");
-      return randomStringContainer.innerHTML = generateRandomString(8);
+      return (randomStringContainer.innerHTML = generateRandomString(8));
     };
 
     this.contrasenaAleatoria = generateRandomString(8);
@@ -188,7 +188,6 @@ export class CrearUsuarioComponent implements OnInit {
           this.usarioConsultarApi.Usuarioid = UsuarioIdModificar;
           this.getUsuarioModificar(this.usarioConsultarApi);
         } else {
-          
         }
       }
     );
@@ -198,6 +197,11 @@ export class CrearUsuarioComponent implements OnInit {
     this.authService
       .getUsuarioModificar(usarioConsultarApi)
       .subscribe((res: any) => {
+        if (
+          parseInt(this.usuarioLocalStote.typeuser) > parseInt(res.typeuser)
+        ) {
+          this.router.navigate(["administrar-usuarios"]);
+        }
         this.datosCargadosUsuario(res);
         return res;
       });
@@ -212,7 +216,7 @@ export class CrearUsuarioComponent implements OnInit {
     this.administrarIndicadores.Reportes = res.indicadorReportes;
     if (this.aux == 1 && this.modificar == true && res.typeuser == "3") {
       this.aux = 2;
-      this.readonlyReportes = true
+      this.readonlyReportes = true;
       this.NuevoUsuario.usuarioId = res.usuarioid;
       this.NuevoUsuario.Fullname = res.nombre;
       this.NuevoUsuario.Email = res.correo;
@@ -345,8 +349,6 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   permisos(ver) {
-    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
-
     if (ver == true) {
       this.permisoAdministrarIndicadores.Crear = true;
       this.permisoAdministrarIndicadores.Ver = true;
@@ -392,10 +394,10 @@ export class CrearUsuarioComponent implements OnInit {
       this.permisoGestorNotificaciones.Editar = false;
       this.permisoGestorNotificaciones.Eliminat = false;
 
-      this.permisoReportes.Crear = usarioLocalStote.reportesCrear;
-      this.permisoReportes.Ver = usarioLocalStote.reportesVer;
-      this.permisoReportes.Editar = usarioLocalStote.reportesEditar;
-      this.permisoReportes.Eliminat = usarioLocalStote.reportesEliminar;
+      this.permisoReportes.Crear = this.usuarioLocalStote.reportesCrear;
+      this.permisoReportes.Ver = this.usuarioLocalStote.reportesVer;
+      this.permisoReportes.Editar = this.usuarioLocalStote.reportesEditar;
+      this.permisoReportes.Eliminat = this.usuarioLocalStote.reportesEliminar;
 
       this.permisoConfiguracion.Editar = false;
 
@@ -404,73 +406,84 @@ export class CrearUsuarioComponent implements OnInit {
 
     if (ver == "administrador") {
       this.permisoAdministrarIndicadores.Crear =
-        usarioLocalStote.indicadorCrear;
-      this.permisoAdministrarIndicadores.Ver = usarioLocalStote.indicadorVer;
+        this.usuarioLocalStote.indicadorCrear;
+      this.permisoAdministrarIndicadores.Ver =
+        this.usuarioLocalStote.indicadorVer;
       this.permisoAdministrarIndicadores.Editar =
-        usarioLocalStote.indicadorEditar;
+        this.usuarioLocalStote.indicadorEditar;
       this.permisoAdministrarIndicadores.Eliminat =
-        usarioLocalStote.indicadorEliminar;
+        this.usuarioLocalStote.indicadorEliminar;
 
-      this.permisoAdministrarPermisos.Crear = usarioLocalStote.permisosCrear;
-      this.permisoAdministrarPermisos.Ver = usarioLocalStote.permisosVer;
-      this.permisoAdministrarPermisos.Editar = usarioLocalStote.permisosEditar;
+      this.permisoAdministrarPermisos.Crear =
+        this.usuarioLocalStote.permisosCrear;
+      this.permisoAdministrarPermisos.Ver = this.usuarioLocalStote.permisosVer;
+      this.permisoAdministrarPermisos.Editar =
+        this.usuarioLocalStote.permisosEditar;
       this.permisoAdministrarPermisos.Eliminat =
-        usarioLocalStote.permisosEliminar;
+        this.usuarioLocalStote.permisosEliminar;
 
-      this.permisoVisorEventos.Ver = usarioLocalStote.visorEventosVer;
+      this.permisoVisorEventos.Ver = this.usuarioLocalStote.visorEventosVer;
 
       this.permisoGestorNotificaciones.Crear =
-        usarioLocalStote.notificacionesCrear;
-      this.permisoGestorNotificaciones.Ver = usarioLocalStote.notificacionesVer;
+        this.usuarioLocalStote.notificacionesCrear;
+      this.permisoGestorNotificaciones.Ver =
+        this.usuarioLocalStote.notificacionesVer;
       this.permisoGestorNotificaciones.Editar =
-        usarioLocalStote.notificacionesEditar;
+        this.usuarioLocalStote.notificacionesEditar;
       this.permisoGestorNotificaciones.Eliminat =
-        usarioLocalStote.notificacionesEliminar;
+        this.usuarioLocalStote.notificacionesEliminar;
 
-      this.permisoReportes.Crear = usarioLocalStote.reportesCrear;
-      this.permisoReportes.Ver = usarioLocalStote.reportesVer;
-      this.permisoReportes.Editar = usarioLocalStote.reportesEditar;
-      this.permisoReportes.Eliminat = usarioLocalStote.reportesEliminar;
+      this.permisoReportes.Crear = this.usuarioLocalStote.reportesCrear;
+      this.permisoReportes.Ver = this.usuarioLocalStote.reportesVer;
+      this.permisoReportes.Editar = this.usuarioLocalStote.reportesEditar;
+      this.permisoReportes.Eliminat = this.usuarioLocalStote.reportesEliminar;
 
-      this.permisoConfiguracion.Editar = usarioLocalStote.configuracionEditar;
+      this.permisoConfiguracion.Editar =
+        this.usuarioLocalStote.configuracionEditar;
 
       return true;
     }
 
-    this.permisoAdministrarIndicadores.Crear = usarioLocalStote.indicadorCrear;
-    this.permisoAdministrarIndicadores.Ver = usarioLocalStote.indicadorVer;
+    this.permisoAdministrarIndicadores.Crear =
+      this.usuarioLocalStote.indicadorCrear;
+    this.permisoAdministrarIndicadores.Ver =
+      this.usuarioLocalStote.indicadorVer;
     this.permisoAdministrarIndicadores.Editar =
-      usarioLocalStote.indicadorEditar;
+      this.usuarioLocalStote.indicadorEditar;
     this.permisoAdministrarIndicadores.Eliminat =
-      usarioLocalStote.indicadorEliminar;
+      this.usuarioLocalStote.indicadorEliminar;
 
-    this.permisoAdministrarPermisos.Crear = usarioLocalStote.permisosCrear;
-    this.permisoAdministrarPermisos.Ver = usarioLocalStote.permisosVer;
-    this.permisoAdministrarPermisos.Editar = usarioLocalStote.permisosEditar;
+    this.permisoAdministrarPermisos.Crear =
+      this.usuarioLocalStote.permisosCrear;
+    this.permisoAdministrarPermisos.Ver = this.usuarioLocalStote.permisosVer;
+    this.permisoAdministrarPermisos.Editar =
+      this.usuarioLocalStote.permisosEditar;
     this.permisoAdministrarPermisos.Eliminat =
-      usarioLocalStote.permisosEliminar;
+      this.usuarioLocalStote.permisosEliminar;
 
-    this.permisoVisorEventos.Ver = usarioLocalStote.visorEventosVer;
+    this.permisoVisorEventos.Ver = this.usuarioLocalStote.visorEventosVer;
 
     this.permisoGestorNotificaciones.Crear =
-      usarioLocalStote.notificacionesCrear;
-    this.permisoGestorNotificaciones.Ver = usarioLocalStote.notificacionesVer;
+      this.usuarioLocalStote.notificacionesCrear;
+    this.permisoGestorNotificaciones.Ver =
+      this.usuarioLocalStote.notificacionesVer;
     this.permisoGestorNotificaciones.Editar =
-      usarioLocalStote.notificacionesEditar;
+      this.usuarioLocalStote.notificacionesEditar;
     this.permisoGestorNotificaciones.Eliminat =
-      usarioLocalStote.notificacionesEliminar;
+      this.usuarioLocalStote.notificacionesEliminar;
 
-    this.permisoReportes.Crear = usarioLocalStote.reportesCrear;
-    this.permisoReportes.Ver = usarioLocalStote.reportesVer;
-    this.permisoReportes.Editar = usarioLocalStote.reportesEditar;
-    this.permisoReportes.Eliminat = usarioLocalStote.reportesEliminar;
+    this.permisoReportes.Crear = this.usuarioLocalStote.reportesCrear;
+    this.permisoReportes.Ver = this.usuarioLocalStote.reportesVer;
+    this.permisoReportes.Editar = this.usuarioLocalStote.reportesEditar;
+    this.permisoReportes.Eliminat = this.usuarioLocalStote.reportesEliminar;
 
-    this.permisoConfiguracion.Editar = usarioLocalStote.configuracionEditar;
+    this.permisoConfiguracion.Editar =
+      this.usuarioLocalStote.configuracionEditar;
   }
 
   inputUsuario() {
-    this.administrarIndicadores.Reportes = "asignados"
-    this.readonlyReportes = true
+    this.administrarIndicadores.Reportes = "asignados";
+    this.readonlyReportes = true;
     if (this.modificar == true) {
       this.getUsuarioModificar(this.usarioConsultarApi);
       this.permisoTabala(false);
@@ -483,15 +496,15 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   inputSuperAdministrador() {
-    this.readonlyReportes = false
-    this.administrarIndicadores.Reportes = "todos"
+    this.readonlyReportes = false;
+    this.administrarIndicadores.Reportes = "todos";
     this.permisoTabala(true);
     this.permisos(true);
   }
 
   inputAdministrador() {
-    this.administrarIndicadores.Reportes = "todos"
-    this.readonlyReportes = false
+    this.administrarIndicadores.Reportes = "todos";
+    this.readonlyReportes = false;
     this.permisoTabala(false);
     this.permisos("administrador");
     if (this.modificar == true) {
@@ -504,14 +517,14 @@ export class CrearUsuarioComponent implements OnInit {
   ngOnInit() {
     this.authService.enviarCorreos().subscribe((res: any) => {});
     this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
-    
+
     this.generarClave();
     let id = "";
-    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    this.usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
     this._success.subscribe((message) => (this.successMessage = message));
     id = this.route.snapshot.paramMap.get("id");
 
-    let usuarioLogueado = parseInt(usarioLocalStote.typeuser);
+    let usuarioLogueado = parseInt(this.usuarioLocalStote.typeuser);
     this.idAeditar = parseInt(id);
 
     if (usuarioLogueado > this.idAeditar) {
@@ -520,11 +533,11 @@ export class CrearUsuarioComponent implements OnInit {
       return true;
     }
 
-    if (usarioLocalStote.typeuser == "3") {
+    if (this.usuarioLocalStote.typeuser == "3") {
       this.readonlyAdministrador = true;
       this.readonlySuperAdministrador = true;
       this.permisos("reportes");
-    } else if (usarioLocalStote.typeuser == "2") {
+    } else if (this.usuarioLocalStote.typeuser == "2") {
       this.readonlySuperAdministrador = true;
     }
     this.permisos(false);
@@ -536,9 +549,9 @@ export class CrearUsuarioComponent implements OnInit {
     let usuaarioVer = parseInt(idVer);
     if (id) {
       this.titulo = "Editar usuario";
-      
+
       this.idUsuarioIndicadores = parseInt(id);
-      if (usarioLocalStote.permisosEditar == false) {
+      if (this.usuarioLocalStote.permisosEditar == false) {
         this.router.navigate(["private"]);
         return true;
       }
@@ -552,7 +565,7 @@ export class CrearUsuarioComponent implements OnInit {
       this.permisos(false);
       return true;
     } else if (usuario == "usuario") {
-      if (usarioLocalStote.permisosVer == false) {
+      if (this.usuarioLocalStote.permisosVer == false) {
         this.router.navigate(["administrar-usuarios"]);
         return true;
       }
@@ -566,7 +579,7 @@ export class CrearUsuarioComponent implements OnInit {
       this.readonlyTabla = true;
       this.permisos(true);
       return true;
-    } else if (usarioLocalStote.permisosCrear == false) {
+    } else if (this.usuarioLocalStote.permisosCrear == false) {
       this.router.navigate(["administrar-usuarios"]);
       return true;
     }
@@ -598,7 +611,7 @@ export class CrearUsuarioComponent implements OnInit {
                 }
               });
           } else {
-            this.NuevoUsuario.Pass = this.contrasenaAleatoria
+            this.NuevoUsuario.Pass = this.contrasenaAleatoria;
             this.authService
               .CrearNuevoUsuario(this.NuevoUsuario)
               .subscribe((res: any) => {

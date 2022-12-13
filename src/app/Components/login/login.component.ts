@@ -32,9 +32,10 @@ export class LoginComponent implements OnInit {
 
   public changeSuccessMessage() { this._success.next('Correo electrónico o contraseña invalidos'); }
   usuarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+  token = localStorage.getItem("token");
   ngOnInit()
   {
-    if (this.usuarioLocalStote) {
+    if (this.token) {
       return this.router.navigate(["private"]);
     }
     let UsuarioIdModificar;

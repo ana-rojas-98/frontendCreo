@@ -9,24 +9,25 @@ import { NgbModalConfig, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { element } from "protractor";
 
 @Component({
-  selector: 'app-ver-reporte-finalizado',
-  templateUrl: './ver-reporte-finalizado.component.html',
-  styleUrls: ['./ver-reporte-finalizado.component.scss']
+  selector: "app-ver-reporte-finalizado",
+  templateUrl: "./ver-reporte-finalizado.component.html",
+  styleUrls: ["./ver-reporte-finalizado.component.scss"],
 })
 export class VerReporteFinalizadoComponent implements OnInit {
-
-  @ViewChild('content', {
+  @ViewChild("content", {
     read: TemplateRef,
-    static: false
+    static: false,
   })
-  template!: TemplateRef<any>
+  template!: TemplateRef<any>;
 
-  constructor(private reportesService: ReportesService,
+  constructor(
+    private reportesService: ReportesService,
     private indicadoresService: IndicadoresService,
     private route: ActivatedRoute,
     public router: Router,
     config: NgbModalConfig,
-    private modalService: NgbModal) {
+    private modalService: NgbModal
+  ) {
     config.backdrop = "static";
     config.keyboard = false;
   }
@@ -65,9 +66,12 @@ export class VerReporteFinalizadoComponent implements OnInit {
 
   Reporte = {
     id: 0,
-  }
+  };
 
   ngOnInit() {
+    if (this.usuarioLocalStote.reportesVer == false) {
+      this.router.navigate(["reportes"]);
+    }
     $(".open").on("click", function () {
       $(".overlay, .modal").addClass("active");
     });
@@ -92,51 +96,86 @@ export class VerReporteFinalizadoComponent implements OnInit {
       this.resultadosTabla = res.map((item) => {
         this.NombreReporte = item.nombreReporte;
         if (item.tipo == "button") {
-        }
-        else {
+        } else {
           if (item.tipo == "select1") {
             let a: any;
             this.valorSelactNumeos = item.valor;
-            this.configuracion[parseInt(item.idRow)] = [parseInt(item.idRow) * 3, this.valorSelactNumeos];
-            for (let i = 1; i <= this.configuracion[parseInt(item.idRow)][1]; i++) {
+            this.configuracion[parseInt(item.idRow)] = [
+              parseInt(item.idRow) * 3,
+              this.valorSelactNumeos,
+            ];
+            for (
+              let i = 1;
+              i <= this.configuracion[parseInt(item.idRow)][1];
+              i++
+            ) {
               this.auxhijos.push(item.idRow + "-" + i.toString());
             }
             this.hijos[parseInt(item.idRow)] = this.auxhijos;
             this.auxhijos = [];
-            this.enviar = this.enviar.filter(element => element.guardar == true);
-          }
-          else if (item.tipo == "select2") {
-          }
-          else if (item.tipo == "input") {
+            this.enviar = this.enviar.filter(
+              (element) => element.guardar == true
+            );
+          } else if (item.tipo == "select2") {
+          } else if (item.tipo == "input") {
             let input = document.createElement("div");
             input.id = item.idElement;
             item.idRow *= 3;
 
             if (this.valorSelactNumeos == "1") {
-              input.style.cssText = "width:30%; height:100px; grid-column: 1/12;grid-row:" + (parseInt(item.idRow) + 2) + ";";
+              input.style.cssText =
+                "width:30%; height:100px; grid-column: 1/12;grid-row:" +
+                (parseInt(item.idRow) + 2) +
+                ";";
             }
 
             if (this.valorSelactNumeos != "1") {
               let numero = 12 / this.configuracion[parseInt(item.idRow) / 3][1];
-              input.style.cssText = "width:100%; height:100px; grid-column: " + (item.idCol * numero - numero + 1) + " / " + item.idCol * numero + " ;grid-row:" + (parseInt(item.idRow) + 2) + ";";
+              input.style.cssText =
+                "width:100%; height:100px; grid-column: " +
+                (item.idCol * numero - numero + 1) +
+                " / " +
+                item.idCol * numero +
+                " ;grid-row:" +
+                (parseInt(item.idRow) + 2) +
+                ";";
             }
-            this.hijosdeHijos.push(parseInt(item.idRow) / 3 + "-" + item.idCol + "-i");
-            let contenido = document.createTextNode((item.valor).toString());
+            this.hijosdeHijos.push(
+              parseInt(item.idRow) / 3 + "-" + item.idCol + "-i"
+            );
+            let contenido = document.createTextNode(item.valor.toString());
             input.appendChild(contenido);
             myParent.appendChild(input);
-          }
-          else 
-          if (item.tipo == "bar") {
+          } else if (item.tipo == "bar") {
             this.nombreGrafica = item.tituloGrafica;
-            this.grafica(myParent, item.idRow * 3, item.idCol, item.datos, (item.columnas).split(","), item.tipo);
-          }
-          else if (item.tipo == "pie") {
+            this.grafica(
+              myParent,
+              item.idRow * 3,
+              item.idCol,
+              item.datos,
+              item.columnas.split(","),
+              item.tipo
+            );
+          } else if (item.tipo == "pie") {
             this.nombreGrafica = item.tituloGrafica;
-            this.grafica(myParent, item.idRow * 3, item.idCol, item.datos, (item.columnas).split(","), item.tipo);
-          }
-          else if (item.tipo == "line") {
+            this.grafica(
+              myParent,
+              item.idRow * 3,
+              item.idCol,
+              item.datos,
+              item.columnas.split(","),
+              item.tipo
+            );
+          } else if (item.tipo == "line") {
             this.nombreGrafica = item.tituloGrafica;
-            this.grafica(myParent, item.idRow * 3, item.idCol, item.datos, (item.columnas).split(","), item.tipo);
+            this.grafica(
+              myParent,
+              item.idRow * 3,
+              item.idCol,
+              item.datos,
+              item.columnas.split(","),
+              item.tipo
+            );
           }
         }
         return item;
@@ -146,7 +185,9 @@ export class VerReporteFinalizadoComponent implements OnInit {
 
   grafica(myParent, idRow, idCol, data, columnas, type) {
     data = JSON.parse(data);
-    this.hijosdeHijos.push(parseInt(idRow) / 3 + "-" + idCol + "-" + type.toString());
+    this.hijosdeHijos.push(
+      parseInt(idRow) / 3 + "-" + idCol + "-" + type.toString()
+    );
     this.contadorId++;
     let ctx = document.createElement("canvas");
 
