@@ -1,32 +1,39 @@
 @import "../../../assets/styles/main.scss";
 
-.contenedor{
+.contenedor {
     @include contenedor;
 }
-.cuerpo{
+
+.cuerpo {
     @include body;
 }
-.title{
+
+.title {
     @include titleBody;
-    h1{
+
+    h1 {
         @include h1Body;
     }
 }
-.formatos{
-    border-bottom:1px gray solid;
+
+.formatos {
+    border-bottom: 1px gray solid;
     margin: 20px;
     display: flex;
 }
-.formatos img{
+
+.formatos img {
     width: 20px;
     height: 20px;
     margin-right: 10px;
 }
-.formato{
+
+.formato {
     margin-left: 750px;
     padding-bottom: 10px;
 }
-.formatos button{
+
+.formatos button {
     width: max-content;
     height: 29px;
     background: $buttonDownload;
@@ -37,59 +44,62 @@
     margin-right: 20px;
 }
 
-.tablero{
+.tablero {
     margin: 50px;
     border: 1px black solid;
     border-radius: 10px;
     padding: 10px 10px 10px 10px;
 }
-.title-card{
+
+.title-card {
     text-align: center;
     font-family: 'Montserrat';
-    h1{
+
+    h1 {
         font-weight: bold;
         font-size: xx-large;
     }
 }
-.title-c{
+
+.title-c {
     display: flex;
     justify-content: center;
     align-items: center;
-    a{      
+
+    a {
         text-decoration: none;
         color: black;
         margin-left: 10px;
         margin-right: 10px;
         border: 000;
-        
+
     }
 }
 
-h3{
+h3 {
     font-size: xx-large;
     font-weight: bold;
 }
 
-h2{
-    font-size: x-large;
-    font-weight: bold;
-}
 
-.periodicidad{
+.periodicidad {
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-    p{
+    justify-content: center;
+    align-items: center;
+
+    p {
         font-weight: bold;
         font-size: x-large;
     }
-    a{
+
+    a {
         text-decoration: none;
         color: black;
         margin-left: 10px;
         margin-right: 10px;
     }
 }
+
 .selector {
     background-color: #ffffff;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
@@ -99,63 +109,77 @@ h2{
     width: 280px;
     font-family: "Montserrat";
     text-align: center;
-  }
-  
-.nombre-organizacion{
+}
+
+.nombre-organizacion {
     height: max-content;
     margin: 20px;
-    label{
+
+    label {
         @include label;
     }
-    input{
+
+    input {
         @include inputCard (369px, 45.86px);
     }
 }
-.title-finanzas{
+
+.title-finanzas {
     margin: 20px;
 }
-.campos{
+
+.campos {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    p{
+
+    p {
         text-align: center;
     }
 }
-.campos-activos{
+
+.campos-activos {
     margin: 20px;
     height: max-content;
-    label{
+
+    label {
         @include label;
     }
-    input{
+
+    input {
         @include inputCard (202px, 45.86px);
         margin-right: 10px;
     }
 }
-.campos-pasivos{
+
+.campos-pasivos {
     margin: 20px;
     height: max-content;
-    label{
+
+    label {
         @include label;
     }
-    input{
+
+    input {
         @include inputCard (202px, 45.86px);
         margin-right: 10px;
     }
 }
-.corriente{
+
+.corriente {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
     margin-bottom: 50px;
 }
-.botones{
+
+.botones {
     margin: 20px;
     display: flex;
     justify-content: center;
 }
-.finalizar{
+
+.finalizar {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -168,13 +192,14 @@ h2{
     font-size: 20px;
     line-height: 24px;
     color: #FFFFFF;
-    border: 1px;  
+    border: 1px;
     width: 123px;
     height: 47px;
     left: calc(50% - 123px/2 + 112px);
     top: calc(50% - 47px/2 + 369.5px);
 }
-.guardar-indicador{
+
+.guardar-indicador {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -187,7 +212,7 @@ h2{
     font-size: 20px;
     line-height: 24px;
     color: #FFFFFF;
-    border: 1px;  
+    border: 1px;
     width: 130px;
     height: 47px;
     left: calc(50% - 130px/2 - 109.5px);
@@ -195,3 +220,7 @@ h2{
     margin-right: 100px;
 }
 
+table {
+    table-layout: fixed;
+    border: 1px solid;
+}
