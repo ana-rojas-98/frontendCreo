@@ -38,9 +38,9 @@ export class AdministrarUsuariosComponent implements OnInit {
   };
 
   resultadosTabla: any = [];
-  resultadosTipoUsuario:any = [];
-  resultadosEstado:any = [];
-  estado:any = [];
+  resultadosTipoUsuario: any = [];
+  resultadosEstado: any = [];
+  estado: any = [];
   buscarInput: String;
   permisoModificar = true;
   permisoVer = true;
@@ -83,7 +83,6 @@ export class AdministrarUsuariosComponent implements OnInit {
 
     this.getUsuariosApi();
     this.getTipoUsuarioApi();
-    this.getUsuarioApi();
   }
 
   modificarUsuario(UsuarioIdModificar, typeuserModificar) {
@@ -111,6 +110,24 @@ export class AdministrarUsuariosComponent implements OnInit {
   }
 
   getEstadoFiltro() {
+    if (this.tipoUsuario.typeuser == "") {
+      this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
+        this.resultadosTabla = res.filter((item) => {
+          if (item.estado == 1) {
+            item.estado == "Activo";
+          }
+          if (item.estado == 0) {
+            item.estado == "Inactivo";
+          }
+          return (
+            parseInt(item.typeuser) >=
+              parseInt(this.usarioLocalStote.typeuser) &&
+            item.estado == parseInt(this.estadoSelecionado.id)
+          );
+        });
+      });
+      return true;
+    }
     if (this.estadoSelecionado.id == "") {
       this.tipoUsuarioFiltro();
       return true;
@@ -122,25 +139,27 @@ export class AdministrarUsuariosComponent implements OnInit {
 
   getTipoUsuarioApi() {
     this.authService.getTipoUsuario(this.tipoUsuario).subscribe((res: any) => {
-      this.resultadosTipoUsuario = res.map((item) => {
+      this.resultadosTipoUsuario = res.filter((item) => {
         this.estado = res;
-        return item;
-      });
-    });
-  }
-
-  getUsuarioApi() {
-    this.authService.getUsuarios(this.estado).subscribe((res: any) => {
-      this.estado = res.map((item) => {
-        return item;
+        return (
+          parseInt(item.typeuser) >= parseInt(this.usarioLocalStote.typeuser)
+        );
       });
     });
   }
 
   getUsuariosApi() {
     this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
-      this.resultadosTabla = res.map((item) => {
-        return item;
+      this.resultadosTabla = res.filter((item) => {
+        if (item.estado == 1) {
+          item.estado == "Activo";
+        }
+        if (item.estado == 0) {
+          item.estado == "Inactivo";
+        }
+        return (
+          parseInt(item.typeuser) >= parseInt(this.usarioLocalStote.typeuser)
+        );
       });
     });
   }
@@ -148,10 +167,17 @@ export class AdministrarUsuariosComponent implements OnInit {
   buscar() {
     this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
       this.resultadosTabla = res.filter((item) => {
+        if (item.estado == 1) {
+          item.estado == "Activo";
+        }
+        if (item.estado == 0) {
+          item.estado == "Inactivo";
+        }
         return (
-          item.nombreTipoUsuario.includes(this.buscarInput) ||
-          item.nombre.includes(this.buscarInput) ||
-          item.correo.includes(this.buscarInput)
+          (item.nombreTipoUsuario.includes(this.buscarInput) ||
+            item.nombre.includes(this.buscarInput) ||
+            item.correo.includes(this.buscarInput)) &&
+          parseInt(item.typeuser) >= parseInt(this.usarioLocalStote.typeuser)
         );
       });
     });
@@ -163,10 +189,10 @@ export class AdministrarUsuariosComponent implements OnInit {
       return true;
     }
 
-    let usuarioEliminar ={
-      usuarioid:parseInt(usuarioid),
-      idUsuarioRegistro:this.usarioLocalStote.usuarioid.toString()
-    }
+    let usuarioEliminar = {
+      usuarioid: parseInt(usuarioid),
+      idUsuarioRegistro: this.usarioLocalStote.usuarioid.toString(),
+    };
 
     Swal.fire({
       title: "Esta seguro de eliminar este usuario",
@@ -177,22 +203,22 @@ export class AdministrarUsuariosComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.authService.eliminarUsuario(usuarioEliminar).subscribe((res: any) => {
-          if (res.codigo == 1) {
-            this.getUsuariosApi();
-            this.getTipoUsuarioApi();
-            this.getUsuarioApi();
-            return this.alert("Usuario eliminado");
-          } else {
-            return this.alert("No se pudo eliminar el usuario");
-          }
-        });
+        this.authService
+          .eliminarUsuario(usuarioEliminar)
+          .subscribe((res: any) => {
+            if (res.codigo == 1) {
+              this.getUsuariosApi();
+              this.getTipoUsuarioApi();
+              //this.getUsuarioApi();
+              return this.alert("Usuario eliminado");
+            } else {
+              return this.alert("No se pudo eliminar el usuario");
+            }
+          });
       } else if (result.isDenied) {
         Swal.fire("Se cancelo la petición");
       }
-    })
-
-
+    });
   }
   alert(mensaje) {
     Swal.fire(mensaje);
