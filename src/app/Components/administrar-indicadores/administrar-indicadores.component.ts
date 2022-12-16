@@ -21,9 +21,12 @@ export class AdministrarIndicadoresComponent implements OnInit {
     id: "",
   };
 
+  usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+
 
   indicador = {
     id: 0,
+    userId: this.usarioLocalStote.usuarioid,
   };
 
   SubCategoria = {
@@ -59,22 +62,22 @@ export class AdministrarIndicadoresComponent implements OnInit {
     this.authService.enviarCorreos().subscribe((res: any) => { });
     this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
 
-    let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
-    if (usarioLocalStote.typeuser == "3") {
+    if (this.usarioLocalStote.typeuser == "3") {
       this.router.navigate(["private"]);
       return true;
     }
-    if (usarioLocalStote.indicadorCrear == true) {
+    if (this.usarioLocalStote.indicadorCrear == true) {
       this.crear = true;
     }
-    if (usarioLocalStote.indicadorVer == true) {
+    if (this.usarioLocalStote.indicadorVer == true) {
       this.ver = true;
     }
-    if (usarioLocalStote.indicadorEditar == true) {
+    if (this.usarioLocalStote.indicadorEditar == true) {
       this.editar = true;
     }
-    if (usarioLocalStote.indicadorEliminar == true) {
+    if (this.usarioLocalStote.indicadorEliminar == true) {
       this.eliminar = true;
     }
     this.getindIcadores();
