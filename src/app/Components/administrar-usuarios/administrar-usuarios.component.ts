@@ -152,10 +152,10 @@ export class AdministrarUsuariosComponent implements OnInit {
     this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
       this.resultadosTabla = res.filter((item) => {
         if (item.estado == 1) {
-          item.estado == "Activo";
+          item.estado = "Activo";
         }
         if (item.estado == 0) {
-          item.estado == "Inactivo";
+          item.estado = "Inactivo";
         }
         return (
           parseInt(item.typeuser) >= parseInt(this.usarioLocalStote.typeuser)
@@ -168,10 +168,10 @@ export class AdministrarUsuariosComponent implements OnInit {
     this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
       this.resultadosTabla = res.filter((item) => {
         if (item.estado == 1) {
-          item.estado == "Activo";
+          item.estado = "Activo";
         }
         if (item.estado == 0) {
-          item.estado == "Inactivo";
+          item.estado = "Inactivo";
         }
         return (
           (item.nombreTipoUsuario.includes(this.buscarInput) ||
