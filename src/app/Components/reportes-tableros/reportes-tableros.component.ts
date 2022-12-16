@@ -56,6 +56,7 @@ export class ReportesTablerosComponent implements OnInit {
 
   Reporte = {
     id: 0,
+    idUsuarioModifica: this.usuarioLocalStote.usuarioid,
   };
 
   resultadosTabla = [];
