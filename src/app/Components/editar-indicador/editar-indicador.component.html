@@ -7,16 +7,19 @@
     </div>
     <div class="nombreIndicador">
       <div class="n">
-        <label for="">
-         Nombre indicador: 
-        </label>
-        <input type="text" [(ngModel)]="Nombre.indicador" >     
-      </div> 
+        <label for=""> Nombre indicador: </label>
+        <input type="text" [(ngModel)]="Nombre.indicador" />
+      </div>
     </div>
     <div class="tiempo">
       <div>
         <h3>Año</h3>
-        <select class="selector mt-2" type="select" [(ngModel)]="Anio" (change)="cambioAnio()">
+        <select
+          class="selector mt-2"
+          type="select"
+          [(ngModel)]="Anio"
+          (change)="cambioAnio()"
+        >
           <option *ngFor="let resultado of uniqueYears" [value]="resultado">
             {{ resultado }}
           </option>
@@ -24,7 +27,13 @@
       </div>
       <div>
         <h3>Periodo</h3>
-        <select class="selector mt-2" name="periodo" type="select" [(ngModel)]="Periodo" (change)="cambioPeriodo()">
+        <select
+          class="selector mt-2"
+          name="periodo"
+          type="select"
+          [(ngModel)]="Periodo"
+          (change)="cambioPeriodo()"
+        >
           <option *ngFor="let resultado of uniquePeriod" [value]="resultado">
             {{ resultado }}
           </option>
@@ -34,7 +43,12 @@
     <div class="seleccion">
       <div class="box">
         <p>Estándar:</p>
-        <select class="selector" [formControl]="Estandar" (change)="estandar()" id="estandar">
+        <select
+          class="selector"
+          [formControl]="Estandar"
+          (change)="estandar()"
+          id="estandar"
+        >
           <option value="">Seleccione estándar</option>
           <option *ngFor="let item of resultados" [value]="item.estandar">
             {{ item.nombreEstandar }}
@@ -43,18 +57,34 @@
       </div>
       <div class="box">
         <p>Categoría</p>
-        <select [formControl]="Categoria" (change)="categoria()" class="selector" id="categoria">
+        <select
+          [formControl]="Categoria"
+          (change)="categoria()"
+          class="selector"
+          id="categoria"
+        >
           <option value="">Seleccione categoría</option>
-          <option *ngFor="let item of resultadosCategoria" [value]="item.categoria1">
+          <option
+            *ngFor="let item of resultadosCategoria"
+            [value]="item.categoria1"
+          >
             {{ item.nombreCategoria }}
           </option>
         </select>
       </div>
       <div class="box">
         <p>Subcategoría</p>
-        <select class="selector" [formControl]="Subcategoria" (change)="subcategoria()" id="subcategoria">
+        <select
+          class="selector"
+          [formControl]="Subcategoria"
+          (change)="subcategoria()"
+          id="subcategoria"
+        >
           <option value="">Seleccione subcategoría</option>
-          <option *ngFor="let item of resultadosSubCategoria" [value]="item.subcategoria1">
+          <option
+            *ngFor="let item of resultadosSubCategoria"
+            [value]="item.subcategoria1"
+          >
             {{ item.nombreSubcategoria }}
           </option>
         </select>
@@ -87,65 +117,141 @@
         <tbody>
           <tr *ngFor="let linea of mostrar">
             <td>
-              <input type="text" [(ngModel)]="linea.entrada" value="{{ linea.entrada }}" />
+              <input
+                type="text"
+                [(ngModel)]="linea.entrada"
+                value="{{ linea.entrada }}"
+              />
             </td>
             <td>
-              <input type="text" [(ngModel)]="linea.numerop" value="{{ linea.numerop }}" />
+              <input
+                type="text"
+                [(ngModel)]="linea.numerop"
+                value="{{ linea.numerop }}"
+              />
             </td>
             <td>
-              <input type="text" [(ngModel)]="linea.formulap" value=" {{ linea.formulap }}" />
+              <input
+                type="text"
+                [(ngModel)]="linea.formulap"
+                value=" {{ linea.formulap }}"
+              />
             </td>
             <td>
-              <input type="text" [(ngModel)]="linea.formula" value="{{ linea.formula }}" />
+              <input
+                type="text"
+                [(ngModel)]="linea.formula"
+                value="{{ linea.formula }}"
+              />
             </td>
             <td>
-              <input type="text" [(ngModel)]="linea.valor" value="{{ linea.valor }}" />
+              <input
+                type="text"
+                [(ngModel)]="linea.valor"
+                value="{{ linea.valor }}"
+              />
             </td>
             <td>
-              <input type="text" [(ngModel)]="linea.titulo" value="{{ linea.titulo }}" />
+              <input
+                type="text"
+                [(ngModel)]="linea.titulo"
+                value="{{ linea.titulo }}"
+              />
             </td>
             <td>
-              <input type="text" [(ngModel)]="linea.tamanoTexto" value="{{ linea.tamanoTexto }}" />
+              <input
+                type="text"
+                [(ngModel)]="linea.tamanoTexto"
+                value="{{ linea.tamanoTexto }}"
+              />
             </td>
             <td>
-              <input type="text" [(ngModel)]="linea.color" value="{{ linea.color }}" />
+              <input
+                type="text"
+                [(ngModel)]="linea.color"
+                value="{{ linea.color }}"
+              />
             </td>
             <td>
-              <input type="text" [(ngModel)]="linea.negrilla" value="{{ linea.negrilla }}" />
+              <input
+                type="text"
+                [(ngModel)]="linea.negrilla"
+                value="{{ linea.negrilla }}"
+              />
             </td>
             <td>
-              <input type="text" [(ngModel)]="linea.subrayado" value="{{ linea.subrayado }}" />
+              <input
+                type="text"
+                [(ngModel)]="linea.subrayado"
+                value="{{ linea.subrayado }}"
+              />
             </td>
             <td>
-              <input type="text" [(ngModel)]="linea.cursiva" value="{{ linea.cursiva }}" />
+              <input
+                type="text"
+                [(ngModel)]="linea.cursiva"
+                value="{{ linea.cursiva }}"
+              />
             </td>
             <td>
-              <input type="text" [(ngModel)]="linea.inicioCol" value="{{ linea.inicioCol }}" />
+              <input
+                type="text"
+                [(ngModel)]="linea.inicioCol"
+                value="{{ linea.inicioCol }}"
+              />
             </td>
             <td>
-              <input type="text" [(ngModel)]="linea.finCol" value="{{ linea.finCol }}" />
+              <input
+                type="text"
+                [(ngModel)]="linea.finCol"
+                value="{{ linea.finCol }}"
+              />
             </td>
             <td>
-              <input type="text" [(ngModel)]="linea.saltoLinea" value="{{ linea.saltoLinea }}" />
+              <input
+                type="text"
+                [(ngModel)]="linea.saltoLinea"
+                value="{{ linea.saltoLinea }}"
+              />
             </td>
             <td>
-              <input type="text" [(ngModel)]="linea.alinear" value="{{ linea.alinear }}" />
+              <input
+                type="text"
+                [(ngModel)]="linea.alinear"
+                value="{{ linea.alinear }}"
+              />
             </td>
             <td>
-              <input type="text" [(ngModel)]="linea.colorFondo" value="{{ linea.colorFondo}}" />
+              <input
+                type="text"
+                [(ngModel)]="linea.colorFondo"
+                value="{{ linea.colorFondo }}"
+              />
             </td>
             <td>
-              <img (click)="insertarFila($event)" src="../../../assets/imagenes/insertar.png" alt="eliminar">
+              <img
+                (click)="insertarFila($event)"
+                src="../../../assets/imagenes/insertar.png"
+                alt="eliminar"
+              />
             </td>
             <td>
-              <img (click)="eliminarFila($event)" src="../../../assets/imagenes/eliminar.png" alt="eliminar">
+              <img
+                (click)="eliminarFila($event)"
+                src="../../../assets/imagenes/eliminar.png"
+                alt="eliminar"
+              />
             </td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="botones">
-      <button class="cancelar" [routerLink]="['/administrar-indicadores']" [routerLinkActive]="['link-active']">
+      <button
+        class="cancelar"
+        [routerLink]="['/administrar-indicadores']"
+        [routerLinkActive]="['link-active']"
+      >
         Cancelar
       </button>
       <button class="guardar" (click)="guardar()">Guardar</button>

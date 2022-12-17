@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
 import { AdministrarUsuariosService } from "src/app/services/administrar-usuarios.service";
 import Swal from "sweetalert2";
+import { CargandoService } from "src/app/services/cargando.service";
 
 @Component({
   selector: "app-administrar-usuarios",
@@ -13,7 +14,8 @@ export class AdministrarUsuariosComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private serviceAdministaraUsuario: AdministrarUsuariosService,
-    public router: Router
+    public router: Router,
+    public cargandoService: CargandoService
   ) {}
   usuarios = {
     tipoUsuario: "",
@@ -110,6 +112,10 @@ export class AdministrarUsuariosComponent implements OnInit {
   }
 
   getEstadoFiltro() {
+    if (this.estadoSelecionado.id == "") {
+      this.tipoUsuarioFiltro();
+      return true;
+    }
     if (this.tipoUsuario.typeuser == "") {
       this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
         this.resultadosTabla = res.filter((item) => {
@@ -128,10 +134,7 @@ export class AdministrarUsuariosComponent implements OnInit {
       });
       return true;
     }
-    if (this.estadoSelecionado.id == "") {
-      this.tipoUsuarioFiltro();
-      return true;
-    }
+
     this.resultadosTabla = this.estado.filter((item) => {
       return item.estado == parseInt(this.estadoSelecionado.id);
     });
@@ -149,6 +152,7 @@ export class AdministrarUsuariosComponent implements OnInit {
   }
 
   getUsuariosApi() {
+    this.cargandoService.ventanaCargando();
     this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
       this.resultadosTabla = res.filter((item) => {
         if (item.estado == 1) {
@@ -161,10 +165,14 @@ export class AdministrarUsuariosComponent implements OnInit {
           parseInt(item.typeuser) >= parseInt(this.usarioLocalStote.typeuser)
         );
       });
+      if (this.resultadosTabla) {
+        Swal.close();
+      }
     });
   }
 
   buscar() {
+    this.cargandoService.ventanaCargando();
     this.authService.getUsuarios(this.usuarios).subscribe((res: any) => {
       this.resultadosTabla = res.filter((item) => {
         if (item.estado == 1) {
@@ -180,6 +188,9 @@ export class AdministrarUsuariosComponent implements OnInit {
           parseInt(item.typeuser) >= parseInt(this.usarioLocalStote.typeuser)
         );
       });
+      if (this.resultadosTabla) {
+        Swal.close();
+      }
     });
   }
 
@@ -203,6 +214,7 @@ export class AdministrarUsuariosComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
+        this.cargandoService.ventanaCargando();
         this.authService
           .eliminarUsuario(usuarioEliminar)
           .subscribe((res: any) => {

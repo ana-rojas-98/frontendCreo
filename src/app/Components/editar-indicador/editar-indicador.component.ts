@@ -1,9 +1,11 @@
+import { CargandoService } from "./../../services/cargando.service";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 import { FormControl } from "@angular/forms";
 import Swal from "sweetalert2";
 import { ReportesService } from "src/app/services/reportes.service";
+import * as $ from "jquery";
 
 @Component({
   selector: "app-editar-indicador",
@@ -15,7 +17,8 @@ export class EditarIndicadorComponent implements OnInit {
     private authService: AuthService,
     private route: ActivatedRoute,
     public router: Router,
-    private reportesService: ReportesService
+    private reportesService: ReportesService,
+    public cargandoService: CargandoService
   ) {}
   id = 0;
 
@@ -76,7 +79,7 @@ export class EditarIndicadorComponent implements OnInit {
   EstandarOpciones: any = [];
   CategoriaOpciones: any = [];
   SubcategoriaOpciones: any = [];
-  
+  cargando = true;
 
   bandera = 1;
 
@@ -84,6 +87,7 @@ export class EditarIndicadorComponent implements OnInit {
     indicador: "",
   };
   super: any = [];
+  contenModal: any;
   Categoria1 = {
     categoria1: "",
     NombreCategoria: "",
@@ -94,12 +98,22 @@ export class EditarIndicadorComponent implements OnInit {
     nombreSubcategoria: "",
   };
 
+  allowOutsideClick: false;
+  allowEscapeKey: false;
+
   ngOnInit() {
-   
     this.authService.enviarCorreos().subscribe((res: any) => {});
     this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
 
-    
+    $(".open").on("click", function () {
+      $(".overlay, .modal").addClass("active");
+    });
+
+    $(".close, .overlay").on("click", function () {
+      $(".overlay, .modal").removeClass("active");
+    });
+
+    //this.modalService.open(this.contenModal);
     this.id = parseInt(this.route.snapshot.paramMap.get("id"));
     this.accionEditar = this.route.snapshot.paramMap.get("accion");
     if (this.accionEditar == "editar") {
@@ -110,10 +124,10 @@ export class EditarIndicadorComponent implements OnInit {
     this.getCategoria();
     this.getSubCategoria();
     this.TraerFormato();
-    
   }
 
   TraerFormato() {
+    this.cargandoService.ventanaCargando();
     this.authService.EditarIndicador().subscribe((respuesta: any) => {
       this.resultado = respuesta.map((item) => {
         if (this.idArchivo.idArchivo == item.idArchivo) {
@@ -134,6 +148,9 @@ export class EditarIndicadorComponent implements OnInit {
       this.selectElement("subcategoria", this.resultadosTabla[0].subcategoria1);
       this.Subcategoria.setValue(this.resultadosTabla[0].subcategoria1);
       this.subcategoria();
+      if (this.resultado) {
+        Swal.close();
+      }
     });
   }
 
@@ -339,6 +356,7 @@ export class EditarIndicadorComponent implements OnInit {
   }
 
   guardar() {
+    this.cargandoService.ventanaCargando();
     this.super = this.resultadosHTML;
     this.eliminados.map((item1) => {
       this.super.splice(item1.posicion, 0, {
@@ -418,4 +436,5 @@ export class EditarIndicadorComponent implements OnInit {
     element = document.getElementById(id);
     element.value = valueToSelect;
   }
+
 }

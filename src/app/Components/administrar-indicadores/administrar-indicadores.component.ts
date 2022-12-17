@@ -4,6 +4,7 @@ import { ReportesService } from "./../../services/reportes.service";
 import { FormControl } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import Swal from "sweetalert2";
+import { CargandoService } from "src/app/services/cargando.service";
 
 @Component({
   selector: "app-administrar-indicadores",
@@ -14,15 +15,15 @@ export class AdministrarIndicadoresComponent implements OnInit {
   constructor(
     private authService: AuthService,
     public router: Router,
-    private reportesService: ReportesService
-  ) { }
+    private reportesService: ReportesService,
+    public cargandoService: CargandoService
+  ) {}
 
   estandarId = {
     id: "",
   };
 
   usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
-
 
   indicador = {
     id: 0,
@@ -59,8 +60,8 @@ export class AdministrarIndicadoresComponent implements OnInit {
   SubcategoriaOpciones: any = [];
 
   ngOnInit() {
-    this.authService.enviarCorreos().subscribe((res: any) => { });
-    this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
 
     this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
 
@@ -111,15 +112,18 @@ export class AdministrarIndicadoresComponent implements OnInit {
   }
 
   getindIcadores() {
+    this.cargandoService.ventanaCargando();
     this.reportesService
       .ConsultarIndicadoresAsignados()
       .subscribe((res: any) => {
         this.resultadosTabla = res.map((item) => {
-          
           return item;
         });
         this.resultadosTabla = this.resultadosTabla.sort();
         this.resultadosTabla = this.resultadosTabla.reverse();
+        if (this.resultadosTabla) {
+          Swal.close();
+        }
       });
   }
 

@@ -1,75 +1,76 @@
 @import "../../../assets/styles/main.scss";
 
-.contenedor{
-    @include contenedor;
+.contenedor {
+  @include contenedor;
 }
-.cuerpo{
-    @include body;
+.cuerpo {
+  @include body;
 }
-.title-body{
-    @include titleBody;
-    h1{
-        @include h1Body;
-    }
+.title-body {
+  @include titleBody;
+  h1 {
+    @include h1Body;
+  }
 }
-.tiempo{
-    display:flex;
-    justify-content: space-around;
+.tiempo {
+  display: flex;
+  justify-content: space-around;
 }
 .nombreIndicador {
-   display: flex;
-   justify-content: center;
-   .n{    
-    input{
-        @include inputCard(200px, 30px);    
-        display: block;    
+  display: flex;
+  justify-content: center;
+  .n {
+    input {
+      @include inputCard(200px, 30px);
+      display: block;
     }
-   }
+  }
 }
-.formatos{
-    border-bottom:1px gray solid;
-    margin: 20px;
+.formatos {
+  border-bottom: 1px gray solid;
+  margin: 20px;
 }
-img{
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
+img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
 }
-.seleccion{
-    display: flex;
-    flex-wrap: wrap;
-    font-weight: 500;
-    font-size: 16px;
-    justify-content: space-around;
-    height: max-content;
-    padding: 10px;
+.seleccion {
+  display: flex;
+  flex-wrap: wrap;
+  font-weight: 500;
+  font-size: 16px;
+  justify-content: space-around;
+  height: max-content;
+  padding: 10px;
 }
-select{
-    @include select;
+select {
+  @include select;
 }
 
-.title-card{
-    margin: 20px;
-    text-align: center;
-    font-family: 'Montserrat';
-    h1{
-        font-weight: bold;
-    }
+.title-card {
+  margin: 20px;
+  text-align: center;
+  font-family: "Montserrat";
+  h1 {
+    font-weight: bold;
+  }
 }
-.tablero{
-    padding: 2%;
+.tablero {
+  padding: 2%;
 }
-input{
-    width: 100%;
-    background: #ffffff;
-    border: 1px solid #d0d4d9;
+input {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #d0d4d9;
 }
 
-.botones{
-    display: flex;
-    flex-wrap:nowrap;
-    justify-content: center;
+.botones {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
 }
-.cancelar{
-    margin-right: 100px;
+.cancelar {
+  margin-right: 100px;
 }
+
