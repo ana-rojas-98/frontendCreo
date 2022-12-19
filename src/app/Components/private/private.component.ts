@@ -47,7 +47,12 @@ export class PrivateComponent implements OnInit {
   getReportes() {
     this.reportesService.ConsultaReportes().subscribe((res: any) => {
       res.map((item) => {
-        this.resultadosTablaIndicadores.push(item);
+        if (this.usuarioLocalStote.typeuser == '3' && this.usuarioLocalStote.usuarioid == item.idUsuarioCrea) {
+          this.resultadosTablaIndicadores.push(item);
+        }
+        else if (this.usuarioLocalStote.typeuser != '3') {
+          this.resultadosTablaIndicadores.push(item);
+        }
       })
       this.resultadosTablaIndicadores = this.resultadosTablaIndicadores.filter(item => item.finalizado == true);
       if (this.usuarioLocalStote.indicadorReportes != "todos" && this.usuarioLocalStote.typeuser == 3) {

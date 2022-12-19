@@ -11,7 +11,7 @@ export class ReportesTablerosComponent implements OnInit {
   constructor(
     private reportesService: ReportesService,
     public router: Router
-  ) {}
+  ) { }
   btnCrearReporte = true;
   btnEliminarReporte = true;
   btnVerReporte = true;
@@ -64,7 +64,12 @@ export class ReportesTablerosComponent implements OnInit {
   getReportes() {
     this.reportesService.ConsultaReportes().subscribe((res: any) => {
       res.map((item) => {
-        this.resultadosTabla.push(item);
+        if (this.usuarioLocalStote.typeuser == '3' && this.usuarioLocalStote.usuarioid == item.idUsuarioCrea) {
+          this.resultadosTabla.push(item);
+        }
+        else if (this.usuarioLocalStote.typeuser != '3') {
+          this.resultadosTabla.push(item);
+        }
       })
     });
   }
