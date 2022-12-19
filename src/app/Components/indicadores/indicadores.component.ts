@@ -101,7 +101,10 @@ export class IndicadoresComponent implements OnInit {
           });
           this.resultadosTabla = this.resultadosTabla.sort();
           this.resultadosTabla = this.resultadosTabla.reverse();
+    console.log(this.resultadosTabla)
+
         });
+        
     }
     if (this.usuarioLocalStote.typeuser == "3") {
       this.usuario = true;
@@ -112,6 +115,8 @@ export class IndicadoresComponent implements OnInit {
         this.resultadosTabla = res.map((item) => {
           return item;
         });
+    console.log(this.resultadosTabla)
+
       });
     }
   }
