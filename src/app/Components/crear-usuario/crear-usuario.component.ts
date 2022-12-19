@@ -6,6 +6,7 @@ import { AuthService } from "src/app/services/auth.service";
 import { AdministrarUsuariosService } from "src/app/services/administrar-usuarios.service";
 import { Subject } from "rxjs";
 import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
+import { CargandoService } from "src/app/services/cargando.service";
 
 @Component({
   selector: "app-crear-usuario",
@@ -17,7 +18,8 @@ export class CrearUsuarioComponent implements OnInit {
     private authService: AuthService,
     private serviceAdministaraUsuario: AdministrarUsuariosService,
     private route: ActivatedRoute,
-    public router: Router
+    public router: Router,
+    public cargandoService: CargandoService
   ) {}
 
   contrasenaAleatoria = "";
@@ -194,6 +196,7 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   getUsuarioModificar(usarioConsultarApi) {
+    this.cargandoService.ventanaCargando();
     this.authService
       .getUsuarioModificar(usarioConsultarApi)
       .subscribe((res: any) => {
@@ -250,6 +253,7 @@ export class CrearUsuarioComponent implements OnInit {
         this.NuevoUsuario.Typeuser = this.auxTypeUsuario;
       }
       this.permisos("reportes");
+      Swal.close();
       return true;
     } else if (this.auxTypeUsuario == "3") {
       this.NuevoUsuario.usuarioId = res.usuarioid;
@@ -279,6 +283,7 @@ export class CrearUsuarioComponent implements OnInit {
       this.gestorNotificaciones.Eliminat = false;
 
       this.administrarIndicadores.Reportes = res.indicadorReportes;
+      Swal.close();
       return true;
     }
 
@@ -318,6 +323,7 @@ export class CrearUsuarioComponent implements OnInit {
     this.configuracion.Editar = res.configuracionEditar;
 
     this.administrarIndicadores.Reportes = res.indicadorReportes;
+    Swal.close();
   }
 
   permisoTabala(permiso) {
@@ -596,6 +602,7 @@ export class CrearUsuarioComponent implements OnInit {
           this.changeSuccessMessage(3);
         } else {
           if (this.modificar == true) {
+            this.cargandoService.ventanaCargando();
             this.authService
               .ModificarUsuario(this.NuevoUsuario)
               .subscribe((res: any) => {
@@ -612,6 +619,7 @@ export class CrearUsuarioComponent implements OnInit {
               });
           } else {
             this.NuevoUsuario.Pass = this.contrasenaAleatoria;
+            this.cargandoService.ventanaCargando();
             this.authService
               .CrearNuevoUsuario(this.NuevoUsuario)
               .subscribe((res: any) => {

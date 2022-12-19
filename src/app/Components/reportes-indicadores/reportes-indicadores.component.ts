@@ -1,3 +1,4 @@
+import Swal  from "sweetalert2";
 import { Component, OnInit } from "@angular/core";
 import { ReportesService } from "./../../services/reportes.service";
 import { AuthService } from "src/app/services/auth.service";
@@ -6,6 +7,7 @@ import html2canvas from "html2canvas";
 import * as XLSX from "xlsx";
 import { IndicadoresService } from "src/app/services/indicadores.service";
 import { Router } from "@angular/router";
+import { CargandoService } from "src/app/services/cargando.service";
 
 @Component({
   selector: "app-reportes-indicadores",
@@ -17,7 +19,8 @@ export class ReportesIndicadoresComponent implements OnInit {
     private authService: AuthService,
     private reportesService: ReportesService,
     private indicadoresservice: IndicadoresService,
-    public router: Router
+    public router: Router,
+    public cargandoService: CargandoService
   ) {}
 
   title = "angular-app";
@@ -69,9 +72,7 @@ export class ReportesIndicadoresComponent implements OnInit {
     ) {
       return this.router.navigate(["reportes"]);
     }
-    if (
-      this.usuarioLocalStote.reportesCrear == false
-    ) {
+    if (this.usuarioLocalStote.reportesCrear == false) {
       return this.router.navigate(["reportes"]);
     }
 
@@ -236,7 +237,11 @@ export class ReportesIndicadoresComponent implements OnInit {
     });
   }
   getindIcadores(dato) {
-    if (this.usuarioLocalStote.typeuser != "3" || this.usuarioLocalStote.indicadorReportes == "todos") {
+    this.cargandoService.ventanaCargando();
+    if (
+      this.usuarioLocalStote.typeuser != "3" ||
+      this.usuarioLocalStote.indicadorReportes == "todos"
+    ) {
       if (dato == 0) {
         this.reportesService
           .ConsultarIndicadoresAsignados()
@@ -248,6 +253,9 @@ export class ReportesIndicadoresComponent implements OnInit {
             });
             this.resultadosTabla = this.resultadosTabla.sort();
             this.resultadosTabla = this.resultadosTabla.reverse();
+            if (this.resultadosTabla) {
+              Swal.close();
+            }
           });
         return true;
       }
@@ -261,6 +269,9 @@ export class ReportesIndicadoresComponent implements OnInit {
           return item;
         });
       });
+      if (this.resultadosTabla) {
+        Swal.close();
+      }
     }
   }
 

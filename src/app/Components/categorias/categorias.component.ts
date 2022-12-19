@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
 import { Subject } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
+import { CargandoService } from "src/app/services/cargando.service";
 import Swal from "sweetalert2";
 
 @Component({
@@ -26,12 +27,13 @@ export class CategoriasComponent implements OnInit {
   successMessage = "";
   @ViewChild("selfClosingAlert", { static: false }) selfClosingAlert: NgbAlert;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router,
+    public cargandoService: CargandoService) { }
 
   ngOnInit() {
     this.authService.enviarCorreos().subscribe((res: any) => {});
     this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
-    
+
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
     if (usarioLocalStote.typeuser == "3") {
       this.router.navigate(["private"]);
@@ -77,6 +79,7 @@ export class CategoriasComponent implements OnInit {
         this.changeSuccessMessage(4);
       }
       else {
+        this.cargandoService.ventanaCargando();
         this.authService.crear_categoria(this.Categoria).subscribe((res: any) => {
           if (res.resul == "Categoria guardada") {
             this.router.navigate(["subcatego"]);

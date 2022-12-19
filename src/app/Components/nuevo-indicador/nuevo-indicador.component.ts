@@ -11,7 +11,7 @@ import * as XSLX from "xlsx";
 import { Subject } from "rxjs";
 import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
 import Swal from "sweetalert2";
-
+import { CargandoService } from "src/app/services/cargando.service";
 
 @Component({
   selector: "app-nuevo-indicador",
@@ -19,7 +19,11 @@ import Swal from "sweetalert2";
   styleUrls: ["./nuevo-indicador.component.scss"],
 })
 export class NuevoIndicadorComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    public cargandoService: CargandoService
+  ) {}
 
   private _success = new Subject<string>();
   successMessage = "";
@@ -171,7 +175,6 @@ export class NuevoIndicadorComponent implements OnInit {
         workArchi.Sheets[nombreHojas[0]]
       );
     };
-
   }
 
   NuevoIndicadorRegistro = {
@@ -193,11 +196,9 @@ export class NuevoIndicadorComponent implements OnInit {
 
   ShowData() {
     this.element = true;
-
   }
   HiddenData() {
     this.element = false;
-
   }
 
   nuevoIndicador = {
@@ -209,17 +210,16 @@ export class NuevoIndicadorComponent implements OnInit {
   };
 
   setNuevoIndicador() {
-
     const formData = new FormData();
-    if (this.archivos == null){
+    if (this.archivos == null) {
       this.changeSuccessMessage(5);
-    } else if (this.Estandar.estandar == '') {
+    } else if (this.Estandar.estandar == "") {
       this.changeSuccessMessage(1);
-    } else if (this.Categoria.categoria1 == '') {
+    } else if (this.Categoria.categoria1 == "") {
       this.changeSuccessMessage(2);
-    } else if (this.SubCategoria.subcategoria1 == '') {
+    } else if (this.SubCategoria.subcategoria1 == "") {
       this.changeSuccessMessage(3);
-    } else if (this.seleccionado.periodicidadId == '') {
+    } else if (this.seleccionado.periodicidadId == "") {
       this.changeSuccessMessage(4);
     } else {
       formData.append("archivo", this.archivos);
@@ -230,10 +230,11 @@ export class NuevoIndicadorComponent implements OnInit {
       let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
       formData.append("IdUsuario", usarioLocalStote.usuarioid);
       formData.append("Nombre", this.archivos.name);
+      this.cargandoService.ventanaCargando();
       this.authService.setIndicadorNuevo(formData).subscribe((res: any) => {
-        if (res.result == 'Exitoso'){
-          this.alerta("¡Indicador creado exitosamente!")
-          this.router.navigate(['administrar-indicadores'])
+        if (res.result == "Exitoso") {
+          this.alerta("¡Indicador creado exitosamente!");
+          this.router.navigate(["administrar-indicadores"]);
         }
       });
       return formData;

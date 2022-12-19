@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
 import { Subject } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
+import { CargandoService } from "src/app/services/cargando.service";
 import Swal from "sweetalert2";
 
 @Component({
@@ -11,7 +12,7 @@ import Swal from "sweetalert2";
   styleUrls: ["./subcatego.component.scss"],
 })
 export class SubcategoComponent implements OnInit {
-  
+
   usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
   Usuarioid = this.usarioLocalStote.usuarioid
 
@@ -39,7 +40,8 @@ export class SubcategoComponent implements OnInit {
   @ViewChild("selfClosingAlert", { static: false }) selfClosingAlert: NgbAlert;
 
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router,
+    public cargandoService: CargandoService) { }
 
   ngOnInit() {
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
@@ -80,15 +82,15 @@ export class SubcategoComponent implements OnInit {
     this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
       this.resultados = res.filter(
         (item) => item.idEstandar == estandar
-        
+
       );
       this.Subcategoria.IdEstandar = estandar;
     });
-    
+
   }
 
   SetSubCategoria() {
-    
+
     if (this.Estandar.estandar == '') {
       this.changeSuccessMessage(2);
     }
@@ -101,6 +103,7 @@ export class SubcategoComponent implements OnInit {
           this.changeSuccessMessage(4);
         }
         else {
+          this.cargandoService.ventanaCargando();
           this.authService
             .crear_subcategoria(this.Subcategoria)
             .subscribe((res: any) => {

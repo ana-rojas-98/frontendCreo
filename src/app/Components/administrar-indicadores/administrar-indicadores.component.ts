@@ -228,6 +228,7 @@ export class AdministrarIndicadoresComponent implements OnInit {
     let a = confirm("¿Está seguro que desea borrar el indicador?");
     if (a) {
       this.indicador.id = id2;
+      this.cargandoService.ventanaCargando();
       this.authService.Eliminar(this.indicador).subscribe((res: any) => {
         if (res.resul == "ok") {
           this.alerta("Eliminado correctamente");

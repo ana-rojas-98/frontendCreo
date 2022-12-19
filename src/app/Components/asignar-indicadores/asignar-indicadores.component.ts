@@ -5,6 +5,7 @@ import { AuthService } from "src/app/services/auth.service";
 import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import Swal from "sweetalert2";
+import { CargandoService } from "src/app/services/cargando.service";
 
 @Component({
   selector: "app-asignar-indicadores",
@@ -18,8 +19,9 @@ export class AsignarIndicadoresComponent implements OnInit {
     private serviceAdministaraUsuario: AdministrarUsuariosService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    public router: Router
-  ) { }
+    public router: Router,
+    public cargandoService: CargandoService
+  ) {}
 
   public permisosIndicador: FormGroup = new FormGroup({
     id: new FormControl(""),
@@ -188,8 +190,8 @@ export class AsignarIndicadoresComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.enviarCorreos().subscribe((res: any) => { });
-    this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
 
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
     this.idUsuarioIndicador = parseInt(this.route.snapshot.paramMap.get("id"));
@@ -326,6 +328,7 @@ export class AsignarIndicadoresComponent implements OnInit {
   }
 
   GetIndicadoresPermisos(resultadosBusquedaIndicadores) {
+    this.cargandoService.ventanaCargando();
     this.IndicadoresService.GetIndicadoresPermisos("").subscribe((res: any) => {
       this.resultadosTabla = res;
       this.resultadosTabla = this.resultadosTabla.sort();
@@ -333,6 +336,9 @@ export class AsignarIndicadoresComponent implements OnInit {
       this.mapearResultadosTabla(resultadosBusquedaIndicadores);
       return res;
     });
+    if (this.resultadosTabla) {
+      Swal.close();
+    }
   }
 
   guardarIndicadores() {
@@ -341,6 +347,8 @@ export class AsignarIndicadoresComponent implements OnInit {
   }
 
   CerarPermisosIndicador() {
+    this.cargandoService.ventanaCargando();
+
     this.IndicadoresService.CerarPermisosIndicador(
       this.resulEnviarApi
     ).subscribe((res: any) => {

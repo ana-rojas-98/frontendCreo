@@ -11,6 +11,7 @@ import { EMPTY, empty, Subject } from "rxjs";
 import { element } from "protractor";
 import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
 import Swal from "sweetalert2";
+import { CargandoService } from "src/app/services/cargando.service";
 
 @Component({
   selector: "app-indicadores-masivos",
@@ -18,7 +19,8 @@ import Swal from "sweetalert2";
   styleUrls: ["./indicadores-masivos.component.scss"],
 })
 export class IndicadoresMasivosComponent implements OnInit {
-  constructor(private authService: AuthService, public router: Router) { }
+  constructor(private authService: AuthService, public router: Router,
+    public cargandoService: CargandoService) { }
   archivos: File = null;
   ensayo = [];
 
@@ -214,6 +216,7 @@ export class IndicadoresMasivosComponent implements OnInit {
         formD.append("IdUsuario", usarioLocalStote.usuarioid);
         formD.append("Nombre", this.archivos.name);
         i++;
+        this.cargandoService.ventanaCargando();
         this.authService.setIndicadorNuevo(formD).subscribe((res: any) => {
           if (res.result == 'Exitoso'){
             comp ++;

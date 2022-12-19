@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
 import { Subject } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
+import { CargandoService } from "src/app/services/cargando.service";
 import Swal from "sweetalert2";
 
 @Component({
@@ -20,7 +21,8 @@ export class EliminarEstandarComponent implements OnInit {
     IdUsuario: this.Usuarioid,
     NombreCategoria: "",
   };
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router,
+    public cargandoService: CargandoService) { }
 
   resultados = {};
 
@@ -32,7 +34,7 @@ export class EliminarEstandarComponent implements OnInit {
   ngOnInit() {
     this.authService.enviarCorreos().subscribe((res: any) => {});
     this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
-    
+
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
     if (usarioLocalStote.typeuser == "3") {
       this.router.navigate(["private"]);
@@ -59,6 +61,7 @@ export class EliminarEstandarComponent implements OnInit {
       this.changeSuccessMessage(2);
     }
     else {
+      this.cargandoService.ventanaCargando();
       this.authService.deleteEstandar(this.Estandar).subscribe((res: any) => {
         if (res.resul == "Estandar eliminado correctamente") {
           this.router.navigate(["administrar-indicadores"]);

@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
 import { Subject } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
+import { CargandoService } from "src/app/services/cargando.service";
 import Swal from "sweetalert2";
 
 @Component({
@@ -28,18 +29,22 @@ export class EstandaresComponent implements OnInit {
   }
 
   usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
-  Usuarioid = this.usarioLocalStote.usuarioid
+  Usuarioid = this.usarioLocalStote.usuarioid;
 
   Estandar = {
     NombreEstandar: "",
     IdUsuario: this.Usuarioid,
   };
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    public cargandoService: CargandoService
+  ) {}
 
   ngOnInit() {
     this.authService.enviarCorreos().subscribe((res: any) => {});
     this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
-    
+
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
     if (usarioLocalStote.typeuser == "3") {
       this.router.navigate(["private"]);
@@ -52,10 +57,10 @@ export class EstandaresComponent implements OnInit {
     this._success.subscribe((message) => (this.successMessage = message));
   }
   SetEstandar() {
-    if (this.Estandar.NombreEstandar == '') {
+    if (this.Estandar.NombreEstandar == "") {
       this.changeSuccessMessage(3);
-    }
-    else {
+    } else {
+      this.cargandoService.ventanaCargando();
       this.authService.crear_estandar(this.Estandar).subscribe((res: any) => {
         if (res.result == "se guardo exitosamente") {
           this.alerta("Estándar creado exitosamente");
