@@ -93,8 +93,9 @@
     <div class="horizontal">
       <h3>Último indicador trabajado</h3>
       <img src="../../../assets/imagenes/privateAdmin.png" alt="indicador" />
-      <div class="parrafo">
-        <p>Indicador 1</p>
+      <div *ngIf="indicadoresResultados.length > 0" class="parrafo">
+        <p>Indicador</p>
+        <p>"{{indicadoresResultados[0].indicador}}"</p>
         <button [routerLink]="['/diligenciar-indicador',indicadoresResultados[0].idIndicador,'editar']"
         [routerLinkActive]="['link-active']" class="continuar">Continuar</button>
       </div>
