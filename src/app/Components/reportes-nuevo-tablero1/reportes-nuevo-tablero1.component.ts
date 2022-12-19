@@ -95,7 +95,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
   }
 
   getindIcadores() {
-    if (this.usuarioLocalStote.typeuser != "3") {
+    if (this.usuarioLocalStote.typeuser != "3" || this.usuarioLocalStote.indicadorReportes == "todos") {
       for (let i = 0; i < this.idSelecionados.length; i++) {
         let idArchivo = {
           idArchivo: parseInt(this.idSelecionados[i]),

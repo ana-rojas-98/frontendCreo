@@ -70,7 +70,7 @@ export class ReportesIndicadoresComponent implements OnInit {
       return this.router.navigate(["reportes"]);
     }
     if (
-      this.usuarioLocalStote.reportesCrear == false 
+      this.usuarioLocalStote.reportesCrear == false
     ) {
       return this.router.navigate(["reportes"]);
     }
@@ -236,19 +236,31 @@ export class ReportesIndicadoresComponent implements OnInit {
     });
   }
   getindIcadores(dato) {
-    if (dato == 0) {
-      this.reportesService
-        .ConsultarIndicadoresAsignados()
-        .subscribe((res: any) => {
-          this.resultadosTabla = res.map((item) => {
-            this.estado = res;
-            this.resultadoIndicadores = res;
-            return item;
+    if (this.usuarioLocalStote.typeuser != "3" || this.usuarioLocalStote.indicadorReportes == "todos") {
+      if (dato == 0) {
+        this.reportesService
+          .ConsultarIndicadoresAsignados()
+          .subscribe((res: any) => {
+            this.resultadosTabla = res.map((item) => {
+              this.estado = res;
+              this.resultadoIndicadores = res;
+              return item;
+            });
+            this.resultadosTabla = this.resultadosTabla.sort();
+            this.resultadosTabla = this.resultadosTabla.reverse();
           });
-          this.resultadosTabla = this.resultadosTabla.sort();
-          this.resultadosTabla = this.resultadosTabla.reverse();
+        return true;
+      }
+    }
+    if (this.usuarioLocalStote.typeuser == "3") {
+      let id = {
+        id: this.usuarioLocalStote.usuarioid,
+      };
+      this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
+        this.resultadosTabla = res.map((item) => {
+          return item;
         });
-      return true;
+      });
     }
   }
 
