@@ -5,6 +5,7 @@ import { Component, OnInit } from "@angular/core";
 import { ReportesService } from "./../../services/reportes.service";
 import { AuthService } from "src/app/services/auth.service";
 import Swal from "sweetalert2";
+import { CargandoService } from "src/app/services/cargando.service";
 
 @Component({
   selector: "app-reportes-nuevo-tablero",
@@ -15,7 +16,8 @@ export class ReportesNuevoTableroComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private reportesService: ReportesService,
-    public router: Router
+    public router: Router,
+    public cargandoService: CargandoService
   ) {}
 
   resultadosUsuario = [];
@@ -161,6 +163,7 @@ export class ReportesNuevoTableroComponent implements OnInit {
     });
   }
   getindIcadores(dato) {
+    this.cargandoService.ventanaCargando();
     if (dato == 0) {
       if (
         this.usuarioLocalStote.typeuser != "3" ||
@@ -176,6 +179,9 @@ export class ReportesNuevoTableroComponent implements OnInit {
             });
             this.resultadosTabla = this.resultadosTabla.sort();
             this.resultadosTabla = this.resultadosTabla.reverse();
+            if (this.resultadosTabla) {
+              Swal.close();
+            }
           });
       }
 
@@ -192,6 +198,9 @@ export class ReportesNuevoTableroComponent implements OnInit {
             this.resultadoIndicadores = res;
             return item;
           });
+          if (this.resultadosTabla) {
+            Swal.close();
+          }
         });
       }
       return true;

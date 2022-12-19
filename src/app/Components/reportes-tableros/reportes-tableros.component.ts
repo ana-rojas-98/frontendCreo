@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { CargandoService } from "src/app/services/cargando.service";
+import Swal from "sweetalert2";
 import { ReportesService } from "./../../services/reportes.service";
 
 @Component({
@@ -10,8 +12,9 @@ import { ReportesService } from "./../../services/reportes.service";
 export class ReportesTablerosComponent implements OnInit {
   constructor(
     private reportesService: ReportesService,
-    public router: Router
-  ) { }
+    public router: Router,
+    public cargandoService: CargandoService
+  ) {}
   btnCrearReporte = true;
   btnEliminarReporte = true;
   btnVerReporte = true;
@@ -28,26 +31,18 @@ export class ReportesTablerosComponent implements OnInit {
       return this.router.navigate(["reportes"]);
     }
 
-    if (
-      this.usuarioLocalStote.reportesCrear == false
-    ) {
+    if (this.usuarioLocalStote.reportesCrear == false) {
       this.btnCrearReporte = false;
     }
-    if (
-      this.usuarioLocalStote.reportesEliminar == false
-    ) {
+    if (this.usuarioLocalStote.reportesEliminar == false) {
       this.btnEliminarReporte = false;
     }
 
-    if (
-      this.usuarioLocalStote.reportesVer == false
-    ) {
+    if (this.usuarioLocalStote.reportesVer == false) {
       this.btnVerReporte = false;
     }
 
-    if (
-      this.usuarioLocalStote.reportesEditar == false
-    ) {
+    if (this.usuarioLocalStote.reportesEditar == false) {
       this.btnEditarReporte = false;
     }
 
@@ -62,22 +57,29 @@ export class ReportesTablerosComponent implements OnInit {
   resultadosTabla = [];
 
   getReportes() {
+    this.cargandoService.ventanaCargando();
     this.reportesService.ConsultaReportes().subscribe((res: any) => {
       res.map((item) => {
-        if (this.usuarioLocalStote.typeuser == '3' && this.usuarioLocalStote.usuarioid == item.idUsuarioCrea) {
+        if (
+          this.usuarioLocalStote.typeuser == "3" &&
+          this.usuarioLocalStote.usuarioid == item.idUsuarioCrea
+        ) {
+          this.resultadosTabla.push(item);
+        } else if (this.usuarioLocalStote.typeuser != "3") {
           this.resultadosTabla.push(item);
         }
-        else if (this.usuarioLocalStote.typeuser != '3') {
-          this.resultadosTabla.push(item);
-        }
-      })
+      });
     });
+    if (this.resultadosTabla) {
+      Swal.close();
+    }
   }
 
   eliminar(id) {
     this.Reporte.id = id;
     let a = confirm("Seguro quiere eliminar el reporte?");
     if (a == true) {
+      this.cargandoService.ventanaCargando();
       this.reportesService
         .EliminarReporte(this.Reporte)
         .subscribe((res: any) => {

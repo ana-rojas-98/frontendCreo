@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { ActivatedRoute, Router } from "@angular/router";
 import Chart from "chart.js/auto";
 import { NgbModalConfig, NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { CargandoService } from "src/app/services/cargando.service";
 
 @Component({
   selector: "app-reportes-nuevo-tablero1",
@@ -19,7 +20,8 @@ export class ReportesNuevoTablero1Component implements OnInit {
     private route: ActivatedRoute,
     public router: Router,
     config: NgbModalConfig,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    public cargandoService: CargandoService
   ) {
     config.backdrop = "static";
     config.keyboard = false;
@@ -819,6 +821,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
         element.valor = a.value;
       });
       this.enviar[0].nombreReporte = this.NombreReporte;
+      this.cargandoService.ventanaCargando();
       this.reportesService.GuardarReporte(this.enviar).subscribe((res: any) => {
         if ((res.result = "Guardado")) {
           alert("Guardado con éxito");
