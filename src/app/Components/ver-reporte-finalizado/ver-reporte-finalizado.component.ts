@@ -94,6 +94,10 @@ export class VerReporteFinalizadoComponent implements OnInit {
     let myParent = document.getElementById("contenedor");
     this.reportesService.ConsultaReportesDetail(id).subscribe((res: any) => {
       this.resultadosTabla = res.map((item) => {
+        if (this.usuarioLocalStote.typeuser == '3' && item.idUsuarioCrea != this.usuarioLocalStote.usuarioid) {
+          return this.router.navigate(["reportes-tableros"]);
+
+        }
         this.NombreReporte = item.nombreReporte;
         if (item.tipo == "button") {
         } else {

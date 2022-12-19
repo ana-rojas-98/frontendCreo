@@ -99,7 +99,7 @@ export class EditarReporteComponent implements OnInit {
     if (this.usuarioLocalStote.reportesVer == false && accion == "ver") {
       return this.router.navigate(["reportes"]);
     }
-    if (accion !="editar" && accion != "ver") {
+    if (accion != "editar" && accion != "ver") {
       return this.router.navigate(["reportes"]);
     }
     if (accion == "ver") {
@@ -154,6 +154,10 @@ export class EditarReporteComponent implements OnInit {
     let myParent = document.getElementById("contenedor");
     this.reportesService.ConsultaReportesDetail(id).subscribe((res: any) => {
       this.resultadosTabla = res.map((item) => {
+        if (this.usuarioLocalStote.typeuser == '3' && item.idUsuarioCrea != this.usuarioLocalStote.usuarioid) {
+          return this.router.navigate(["reportes-tableros"]);
+
+        }
         this.NombreReporte = item.nombreReporte;
         if (item.tipo == "button") {
           let a = document.getElementById("content");
@@ -783,7 +787,7 @@ export class EditarReporteComponent implements OnInit {
       data: {
         labels: columnas,
         datasets: data,
-        
+
       },
       options: {
         plugins: {
@@ -852,7 +856,7 @@ export class EditarReporteComponent implements OnInit {
 
   }
 
-  finalizar(){
+  finalizar() {
     this.enviar = this.enviar.filter(element => element.idElement != undefined);
     if (this.NombreReporte == "") {
       alert("Debe ingresar nombre del reporte")
@@ -862,9 +866,8 @@ export class EditarReporteComponent implements OnInit {
     }
     else {
       let con = confirm("¿Desea finalizar el reporte?")
-      if (con == true)
-      {
-          this.enviar.forEach(element => {
+      if (con == true) {
+        this.enviar.forEach(element => {
           let a: any;
           a = document.getElementById(element.idElement.toString());
           element.valor = a.value;
@@ -893,7 +896,7 @@ export class EditarReporteComponent implements OnInit {
       idcol: parseInt(idCol),
       idElement: item.id,
       idReporte: this.Reporte.id,
-      idRow: parseInt(idRow) ,
+      idRow: parseInt(idRow),
       tipo: tipo,
       tituloGrafica: titulo_grafica,
       texto: texto,
