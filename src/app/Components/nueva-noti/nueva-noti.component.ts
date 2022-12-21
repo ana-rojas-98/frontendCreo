@@ -3,6 +3,7 @@ import { AuthService } from "src/app/services/auth.service";
 import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
 import Swal from "sweetalert2";
 import { ActivatedRoute, Router } from "@angular/router";
+import { CargandoService } from "src/app/services/cargando.service";
 @Component({
   selector: "app-nueva-noti",
   templateUrl: "./nueva-noti.component.html",
@@ -12,7 +13,8 @@ export class NuevaNotiComponent implements OnInit {
   constructor(
     private authService: AuthService,
     public router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public cargandoService: CargandoService
   ) {}
 
   usuarios = {
@@ -283,6 +285,7 @@ export class NuevaNotiComponent implements OnInit {
       form.append("periodicidad", this.periodicidad);
       form.append("fechaEnvio", this.ensayo);
       form.append("usuario", this.usuarioid.toString());
+      this.cargandoService.ventanaCargando();
       this.authService.enviarCorreo(form).subscribe((res: any) => {
         if (res.a == "ok") {
           this.alerta("Correo enviado correctamente");
@@ -291,6 +294,7 @@ export class NuevaNotiComponent implements OnInit {
         return res;
       });
     }
+    console.log("hola ", form);
     this.limpiar();
   }
 

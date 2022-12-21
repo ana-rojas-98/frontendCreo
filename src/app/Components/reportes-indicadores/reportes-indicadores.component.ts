@@ -1,4 +1,4 @@
-import Swal  from "sweetalert2";
+import Swal from "sweetalert2";
 import { Component, OnInit } from "@angular/core";
 import { ReportesService } from "./../../services/reportes.service";
 import { AuthService } from "src/app/services/auth.service";
@@ -113,6 +113,24 @@ export class ReportesIndicadoresComponent implements OnInit {
   getUsuarioFilter() {
     if (this.Usuario.usuario == "") {
       this.getindIcadores(0);
+      return true;
+    }
+
+    if (
+      this.usuarioLocalStote.typeuser == "3" &&
+      this.usuarioLocalStote.indicadorReportes == "asignados"
+    ) {
+      let id = {
+        id: this.usuarioLocalStote.usuarioid,
+      };
+      this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
+        this.resultadosTabla = res.map((item) => {
+          return item;
+        });
+      });
+      if (this.resultadosTabla) {
+        Swal.close();
+      }
       return true;
     }
 

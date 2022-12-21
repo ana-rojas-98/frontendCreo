@@ -134,7 +134,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
   contadoModel = 0;
   agregarFila(content) {
     if (this.NombreReporte == "") {
-      return alert("Ingrese titulo del tablero antes de continuar");
+      return Swal.fire("Ingrese titulo del tablero antes de continuar");
     }
     if (this.contadoModel == 0) {
       this.contenModal = content;
@@ -811,9 +811,9 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
   guardar() {
     if (this.NombreReporte == "") {
-      alert("Debe ingresar nombre del reporte");
+      Swal.fire("Debe ingresar nombre del reporte");
     } else if (this.enviar[0] == undefined || this.enviar[0] == null) {
-      alert("Debe ingresar alguna fila");
+      Swal.fire("Debe ingresar alguna fila");
     } else {
       this.enviar.forEach((element) => {
         let a: any;
@@ -824,7 +824,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
       this.cargandoService.ventanaCargando();
       this.reportesService.GuardarReporte(this.enviar).subscribe((res: any) => {
         if ((res.result = "Guardado")) {
-          alert("Guardado con éxito");
+          Swal.fire("Guardado con éxito");
           this.router.navigate(["reportes-tableros"]);
         }
         return res;
@@ -834,10 +834,10 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
   finalizar(){
     if (this.NombreReporte == "") {
-      alert("Debe ingresar nombre del reporte")
+      Swal.fire("Debe ingresar nombre del reporte")
     }
     else if (this.enviar[this.enviar.length - 1] == undefined || this.enviar[this.enviar.length - 1] == null) {
-      alert("Debe ingresar alguna fila")
+      Swal.fire("Debe ingresar alguna fila")
     }
     else {
       let con = confirm("¿Desea finalizar el reporte?")
@@ -851,7 +851,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
         this.enviar[this.enviar.length - 1].nombreReporte = this.NombreReporte;
         this.reportesService.FinalizarNuevoReporte(this.enviar).subscribe((res: any) => {
           if (res.result = "Guardado") {
-            alert("Guardado con éxito");
+            Swal.fire("Guardado con éxito");
             this.router.navigate(["reportes-tableros"]);
           }
           return res;

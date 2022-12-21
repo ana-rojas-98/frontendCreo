@@ -69,10 +69,10 @@ export class ReportesTablerosComponent implements OnInit {
           this.resultadosTabla.push(item);
         }
       });
+      if (this.resultadosTabla) {
+        Swal.close();
+      }
     });
-    if (this.resultadosTabla) {
-      Swal.close();
-    }
   }
 
   eliminar(id) {
@@ -84,7 +84,7 @@ export class ReportesTablerosComponent implements OnInit {
         .EliminarReporte(this.Reporte)
         .subscribe((res: any) => {
           if (res.result == "Guardado") {
-            alert("Eliminado con exito");
+            Swal.fire("Eliminado con exito");
             location.reload();
           }
         });

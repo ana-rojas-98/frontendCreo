@@ -229,7 +229,7 @@ export class EditarReporteComponent implements OnInit {
 
   agregarFila(content) {
     if (this.NombreReporte == "") {
-      return alert("Ingrese titulo del tablero antes de continuar")
+      return Swal.fire("Ingrese titulo del tablero antes de continuar")
     }
     if (this.contadoModel >= 0) {
       this.contenModal = content;
@@ -833,10 +833,10 @@ export class EditarReporteComponent implements OnInit {
   guardar() {
     this.enviar = this.enviar.filter(element => element.idElement != undefined);
     if (this.NombreReporte == "") {
-      alert("Debe ingresar nombre del reporte")
+      Swal.fire("Debe ingresar nombre del reporte")
     }
     else if (this.enviar[0] == undefined || this.enviar[0] == null) {
-      alert("Debe ingresar alguna fila")
+      Swal.fire("Debe ingresar alguna fila")
     }
     else {
       this.enviar.forEach(element => {
@@ -847,7 +847,7 @@ export class EditarReporteComponent implements OnInit {
       this.enviar[this.enviar.length - 1].nombreReporte = this.NombreReporte;
       this.reportesService.GuardarReporteDetail(this.enviar).subscribe((res: any) => {
         if (res.result = "Guardado") {
-          alert("Guardado con éxito");
+          Swal.fire("Guardado con éxito");
           this.router.navigate(["reportes-tableros"]);
         }
         return res;
@@ -859,10 +859,10 @@ export class EditarReporteComponent implements OnInit {
   finalizar() {
     this.enviar = this.enviar.filter(element => element.idElement != undefined);
     if (this.NombreReporte == "") {
-      alert("Debe ingresar nombre del reporte")
+      Swal.fire("Debe ingresar nombre del reporte")
     }
     else if (this.enviar[0] == undefined || this.enviar[0] == null) {
-      alert("Debe ingresar alguna fila")
+      Swal.fire("Debe ingresar alguna fila")
     }
     else {
       let con = confirm("¿Desea finalizar el reporte?")
@@ -875,7 +875,7 @@ export class EditarReporteComponent implements OnInit {
         this.enviar[this.enviar.length - 1].nombreReporte = this.NombreReporte;
         this.reportesService.FinalizarReporte(this.enviar).subscribe((res: any) => {
           if (res.result = "Guardado") {
-            alert("Guardado con éxito");
+            Swal.fire("Guardado con éxito");
             this.router.navigate(["reportes-tableros"]);
           }
           return res;
