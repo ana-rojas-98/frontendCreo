@@ -6,54 +6,42 @@
         (closed)="successMessage = ''">{{ successMessage }}
       </ngb-alert>
     </div>
-    <h1 class="Form-title" align="center">Nueva Subcategoría</h1>
+    <div class="title">
+      <h1 class="Form-title">
+        Nueva subcategoría
+      </h1>
+    </div>
     <div class="form-group col">
       <label>Estándar</label>
-      <select
-        class="selector" name="estandar" 
-        type="selectbox" [(ngModel)]="Estandar.estandar" (change)="getCategoriafilter(Estandar.estandar)">
-        <option value="">Estándar</option>
-        <option *ngFor="let resultado of resultadosEstandares"
-          [value]="resultado.estandar">
+      <select class="selector" [formControl]="Estandarf" id="estandar"
+        (change)="getCategoriafilter(Estandar.estandar)">
+        <option value="0">Estándar</option>
+        <option *ngFor="let resultado of resultadosEstandares" [value]="resultado.estandar">
           {{ resultado.nombreEstandar }}
         </option>
       </select>
 
       <label>Categoría</label>
-      <select
-        class="selector"
-        name="categoria"
-        type="selectbox"
-        [(ngModel)]="Subcategoria.Subcategoria1">
-        <option value="">Categoría</option>
-        <option
-          *ngFor="let resultadoCategoria of resultados"
-          [value]="resultadoCategoria.categoria1"
-        >
+      <select class="selector" [formControl]="Categoriaf" id="categoria">
+        <option value="0">Categoría</option>
+        <option *ngFor="let resultadoCategoria of resultados" [value]="resultadoCategoria.categoria1">
           {{ resultadoCategoria.nombreCategoria }}
         </option>
       </select>
       <label>Nombre Subcategoría</label>
-      <input
-        type="Subcatego"
-        name="Subcatego"
-        class="form-control"
-        [(ngModel)]="Subcategoria.NombreSubcategoria"
-      />
+      <input type="Subcatego" name="Subcatego" class="form-control" [(ngModel)]="Subcategoria.NombreSubcategoria" />
     </div>
     <div class="mt-5">
-      <button [routerLink]="['/administrar-indicadores']"
-              [routerLinkActive]="['link-active']"
-              type="cancel" class="bot_per_2">Cancelar</button>
+      <button [routerLink]="['/administrar-indicadores']" [routerLinkActive]="['link-active']" type="cancel"
+        class="bot_per_2">Cancelar</button>
       <button type="submit" class="bot_est" (click)="SetSubCategoria()">
         Guardar
       </button>
     </div>
-  </form>  
+  </form>
   <div class="cerrar">
     <div class="circulo">
-      <a [routerLink]="['/administrar-indicadores']"
-        [routerLinkActive]="['link-active']">
+      <a [routerLink]="['/administrar-indicadores']" [routerLinkActive]="['link-active']">
         X
       </a>
     </div>

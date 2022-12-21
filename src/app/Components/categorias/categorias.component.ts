@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
+import { FormControl } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
 import { Subject } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
@@ -23,17 +24,22 @@ export class CategoriasComponent implements OnInit {
   };
   resultados = {};
 
+  id = 0;
+
+
+  Estandar = new FormControl("");
+
   private _success = new Subject<string>();
   successMessage = "";
   @ViewChild("selfClosingAlert", { static: false }) selfClosingAlert: NgbAlert;
 
   constructor(private authService: AuthService, private router: Router,
-    public cargandoService: CargandoService) { }
+    public cargandoService: CargandoService, private route: ActivatedRoute,) { }
 
   ngOnInit() {
-    this.authService.enviarCorreos().subscribe((res: any) => {});
-    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
-
+    this.authService.enviarCorreos().subscribe((res: any) => { });
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
+    this.id = parseInt(this.route.snapshot.paramMap.get("id"));
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
     if (usarioLocalStote.typeuser == "3") {
       this.router.navigate(["private"]);
@@ -46,6 +52,13 @@ export class CategoriasComponent implements OnInit {
     this.getStandares();
     this._success.subscribe((message) => (this.successMessage = message));
   }
+
+  selectElement(id, valueToSelect) {
+    let element;
+    element = document.getElementById(id);
+    element.value = valueToSelect;
+  }
+
 
   public changeSuccessMessage(i: number) {
     if (i == 1) {
@@ -67,10 +80,14 @@ export class CategoriasComponent implements OnInit {
       this.resultados = res.map((item) => {
         return item;
       });
+      this.selectElement("estandar", this.id);
+      this.Estandar.setValue(this.id);
+      this.Categoria.IdEstandar = this.id.toString();
     });
   }
 
   crear_categoria() {
+
     if (this.Categoria.IdEstandar == '') {
       this.changeSuccessMessage(3);
     }
@@ -82,7 +99,7 @@ export class CategoriasComponent implements OnInit {
         this.cargandoService.ventanaCargando();
         this.authService.crear_categoria(this.Categoria).subscribe((res: any) => {
           if (res.resul == "Categoria guardada") {
-            this.router.navigate(["subcatego"]);
+            this.router.navigate(["subcategoria/" + this.Categoria.IdEstandar + "/" + res.id]);
             return this.alerta("Categoría creada exitosamente");
           } else {
             this.changeSuccessMessage(2);

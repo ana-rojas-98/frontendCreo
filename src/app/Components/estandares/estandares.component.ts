@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
+import { FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
 import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
 import { Subject } from "rxjs";
@@ -39,11 +40,11 @@ export class EstandaresComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     public cargandoService: CargandoService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.authService.enviarCorreos().subscribe((res: any) => {});
-    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+    this.authService.enviarCorreos().subscribe((res: any) => { });
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
 
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
     if (usarioLocalStote.typeuser == "3") {
@@ -64,7 +65,7 @@ export class EstandaresComponent implements OnInit {
       this.authService.crear_estandar(this.Estandar).subscribe((res: any) => {
         if (res.result == "se guardo exitosamente") {
           this.alerta("Estándar creado exitosamente");
-          this.router.navigate(["categorias"]);
+          this.router.navigate(["categorias/" + res.id]);
         } else {
           this.changeSuccessMessage(2);
         }

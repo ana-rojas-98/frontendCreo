@@ -6,16 +6,19 @@
         (closed)="successMessage = ''">{{ successMessage }}
       </ngb-alert>
     </div>
-    <h1 class="Form-title" align="center">
-      Nueva categoría
-    </h1>
+    <div class="title">
+      <h1 class="Form-title">
+        Nueva categoría
+      </h1>
+    </div>
+
     <div class="form-group">
       <div class="row">
         <label for="select">Estándar</label>
       </div>
       <div class="row">
-        <select name="select" type="selectbox" [(ngModel)]="Categoria.IdEstandar">
-          <option value="">Estándar</option>
+        <select class="selector" [formControl]="Estandar" (change)="estandar()" id="estandar">
+          <option value="0">Estándar</option>
           <option *ngFor="let resultado of resultados" [value]="resultado.estandar">
             <h1>{{ resultado.nombreEstandar}}</h1>
           </option>
