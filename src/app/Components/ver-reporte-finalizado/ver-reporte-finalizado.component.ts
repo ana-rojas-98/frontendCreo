@@ -128,7 +128,7 @@ export class VerReporteFinalizadoComponent implements OnInit {
 
             if (this.valorSelactNumeos == "1") {
               input.style.cssText =
-                "width:30%; height:100px; grid-column: 1/12;grid-row:" +
+                "width:100%; height:100px; grid-column: 1/12;grid-row:" +
                 (parseInt(item.idRow) + 2) +
                 ";";
             }
