@@ -193,7 +193,7 @@ export class EditarReporteComponent implements OnInit {
             item.idRow *= 3;
 
             if (this.valorSelactNumeos == "1") {
-              input.style.cssText = "width:30%; height:100px; grid-column: 1/12;grid-row:" + (parseInt(item.idRow) + 2) + ";";
+              input.style.cssText = "width:100%; height:100px; grid-column: 1/12;grid-row:" + (parseInt(item.idRow) + 2) + ";";
             }
 
             if (this.valorSelactNumeos != "1") {
@@ -402,7 +402,7 @@ export class EditarReporteComponent implements OnInit {
       }
 
       if (this.valorSelactNumeos == "1") {
-        input.style.cssText = "width:30%; height:100px; grid-column: 1/12;grid-row:" + (parseInt(idRow) + 2) + ";";
+        input.style.cssText = "width:100%; height:100px; grid-column: 1/12;grid-row:" + (parseInt(idRow) + 2) + ";";
       }
 
       if (this.valorSelactNumeos != "1") {
@@ -848,7 +848,9 @@ export class EditarReporteComponent implements OnInit {
       this.reportesService.GuardarReporteDetail(this.enviar).subscribe((res: any) => {
         if (res.result = "Guardado") {
           Swal.fire("Guardado con éxito");
-          this.router.navigate(["reportes-tableros"]);
+          setTimeout(() => {
+            this.router.navigate(["reportes-tableros"]);
+          }, 1000);
         }
         return res;
       });
