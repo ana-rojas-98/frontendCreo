@@ -19,7 +19,7 @@ export class EditarIndicadorComponent implements OnInit {
     public router: Router,
     private reportesService: ReportesService,
     public cargandoService: CargandoService
-  ) {}
+  ) { }
   id = 0;
 
   editar = false;
@@ -102,8 +102,8 @@ export class EditarIndicadorComponent implements OnInit {
   allowEscapeKey: false;
 
   ngOnInit() {
-    this.authService.enviarCorreos().subscribe((res: any) => {});
-    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+    this.authService.enviarCorreos().subscribe((res: any) => { });
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
 
     $(".open").on("click", function () {
       $(".overlay, .modal").addClass("active");
@@ -380,8 +380,8 @@ export class EditarIndicadorComponent implements OnInit {
         idArchivo: parseInt(item1.idArchivo),
         periodicidad: item1.periodicidad,
         anio: parseInt(item1.anio),
-        alinear: "center",
-        colorFondo: "transparent",
+        alinear: item1.alinear,
+        colorFondo: item1.colorFondo,
         usuarioid: this.usuarioid,
         nombreEstandar: this.Estandar.value.toString(),
         nombreCategoria: this.Categoria.value.toString(),
@@ -409,8 +409,8 @@ export class EditarIndicadorComponent implements OnInit {
         idArchivo: parseInt(item.idArchivo),
         periodicidad: item.periodicidad,
         anio: parseInt(item.anio),
-        alinear: "center",
-        colorFondo: "transparent",
+        alinear: item.alinear,
+        colorFondo: item.colorFondo,
         usuarioid: this.usuarioid,
         archivo: this.Nombre.indicador,
         eliminar: parseInt(item.eliminar),
