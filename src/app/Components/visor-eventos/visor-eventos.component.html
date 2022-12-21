@@ -5,11 +5,17 @@
         <h1 class="titulo">Visor de eventos</h1>
         <div class="contenedorSelect">
             <div class="row">
-                <div class="">
-                    <label for="">Fecha inicial: <input type="date" [(ngModel)]="fechaInicial" (change)="changeFecha()"></label>
+                <div class=" col-4">
+                    <label for="">Fecha inicial:</label>
                 </div>
-                <div class="">
-                    <label for="">Fecha final: <input type="date" [(ngModel)]="fechaFinal" (change)="changeFecha()"></label>
+                <div class=" col-6">
+                    <input class="fecha" type="date" [(ngModel)]="fechaInicial" (change)="changeFecha()">
+                </div>
+                <div class=" col-4">
+                    <label for="">Fecha final:</label> 
+                </div>
+                <div class=" col-6">
+                    <input class="fecha" type="date" [(ngModel)]="fechaFinal" (change)="changeFecha()">
                 </div>
             </div>
             <div class="box">
