@@ -24,8 +24,12 @@
       >
       <router-outlet></router-outlet>
     </div>
-    <div class="link-sidebar" *ngIf="administrarIndicadores" routerLinkActive="activo"
-    [routerLinkActiveOptions]="{ exact: true }">
+    <div
+      class="link-sidebar"
+      *ngIf="administrarIndicadores"
+      routerLinkActive="activo"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
       <img
         src="../../../assets/imagenes/administrar-indicador.png"
         alt="indicador"
@@ -36,8 +40,12 @@
         >Administrar indicadores</a
       >
     </div>
-    <div class="link-sidebar" *ngIf="administrarUsuarios" routerLinkActive="activo"
-    [routerLinkActiveOptions]="{ exact: true }">
+    <div
+      class="link-sidebar"
+      *ngIf="administrarUsuarios"
+      routerLinkActive="activo"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
       <img
         src="../../../assets/imagenes/administardor-usuarios.png"
         alt="indicador"
@@ -48,26 +56,45 @@
         >Administrador de usuarios</a
       >
     </div>
-    <div class="link-sidebar" *ngIf="visorEventos">
+    <div
+      class="link-sidebar"
+      *ngIf="visorEventos"
+      routerLinkActive="activo"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
       <img src="../../../assets/imagenes/visor-eventos.png" alt="indicador" />
       <a [routerLink]="['/visor-eventos']" [routerLinkActive]="['link-active']"
         >Visor de eventos</a
       >
     </div>
-    <div class="link-sidebar" *ngIf="notificaciones" routerLinkActive="activo"
-    [routerLinkActiveOptions]="{ exact: true }">
+    <div
+      class="link-sidebar"
+      *ngIf="notificaciones"
+      routerLinkActive="activo"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
       <img src="../../../assets/imagenes/notificaciones.png" alt="indicador" />
       <a [routerLink]="['/gestor-noti']" [routerLinkActive]="['link-active']">
         Notificaciones
       </a>
     </div>
-    <div class="link-sidebar" *ngIf="configuraciones">
+    <div
+      class="link-sidebar"
+      *ngIf="configuraciones"
+      routerLinkActive="activo"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
       <img src="../../../assets/imagenes/configuracion.png" alt="indicador" />
       <a [routerLink]="['/configuracion']" [routerLinkActive]="['link-active']"
         >Configuraciones</a
       >
     </div>
-    <div class="link-sidebar" *ngIf="licenciar" >
+    <div
+      class="link-sidebar"
+      *ngIf="licenciar"
+      routerLinkActive="activo"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
       <img src="../../../assets/imagenes/licencias.png" alt="indicador" />
       <a [routerLink]="['/licencia']" [routerLinkActive]="['link-active']"
         >Licenciar</a

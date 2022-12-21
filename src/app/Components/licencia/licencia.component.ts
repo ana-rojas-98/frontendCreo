@@ -33,7 +33,7 @@ export class LicenciaComponent implements OnInit {
   ngOnInit() {
     this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
     //let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
-    if (this.usarioLocalStote.usauarioid != 1) {
+    if (this.usarioLocalStote.usuarioid != 1) {
       this.router.navigate(["private"]);
     }
     this.GetLicencia();

@@ -47,8 +47,10 @@ export class VisorEventosComponent implements OnInit {
   };
 
   ngOnInit() {
-    console.log(this.fechaInicial)
-    if (this.usarioLocalStote.visorEventos = false) {
+    this.fechaInicial = "2022-11-16";
+    this.fechaFinal = "2022-11-16";
+    this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    if (this.usarioLocalStote.visorEventosVer == false) {
       this.router.navigate(["private"]);
       return true;
     }

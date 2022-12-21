@@ -6,6 +6,7 @@
   background-color: $buttonPrimary;
   color: #ffffff;
   font-family: 'Montserrat';
+  box-shadow: 1px 1px 2px rgb(0 0 0 / 45%), 0px 0px 1px rgb(0 0 0 / 45%);
 }
 
 .button-cancelar {
@@ -16,6 +17,7 @@
   background-color: $buttonSecondary;
   color: #ffffff;
   font-family: 'Montserrat';
+  box-shadow: 1px 1px 2px rgb(0 0 0 / 45%), 0px 0px 1px rgb(0 0 0 / 45%);
 }
 .guardar{
   display: flex;
@@ -30,7 +32,7 @@
   font-size: 20px;
   line-height: 24px;
   color: #FFFFFF;
-  border: 1px;  
+  border: 1px;
   width: 123px;
   height: 47px;
   left: calc(50% - 123px/2 + 112px);
@@ -49,11 +51,12 @@
   font-size: 20px;
   line-height: 24px;
   color: #FFFFFF;
-  border: 1px;  
+  border: 1px;
   width: 130px;
   height: 47px;
   left: calc(50% - 130px/2 - 109.5px);
   top: calc(50% - 47px/2 + 369.5px);
+  box-shadow: 1px 1px 2px rgb(0 0 0 / 45%), 0px 0px 1px rgb(0 0 0 / 45%);
 }
 .button-interactivo{
   background: $buttonDownload;
@@ -75,10 +78,12 @@
   .button-enviar {
     width: 90%;
     margin: 0 auto 20px;
+    box-shadow: 1px 1px 2px rgb(0 0 0 / 45%), 0px 0px 1px rgb(0 0 0 / 45%);
   }
 
   .button-cancelar {
     width: 90%;
     margin:0 auto;
+    box-shadow: 1px 1px 2px rgb(0 0 0 / 45%), 0px 0px 1px rgb(0 0 0 / 45%);
   }
 }

@@ -6,6 +6,7 @@ import { FormControl } from "@angular/forms";
 import { isNull } from "@angular/compiler/src/output/output_ast";
 import { IndicadoresService } from "src/app/services/indicadores.service";
 import Swal from "sweetalert2";
+import { CargandoService } from "src/app/services/cargando.service";
 
 @Component({
   selector: "app-indicadores",
@@ -16,8 +17,9 @@ export class IndicadoresComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private reportesService: ReportesService,
-    private indicadoresservice: IndicadoresService
-  ) { }
+    private indicadoresservice: IndicadoresService,
+    public cargandoService: CargandoService
+  ) {}
 
   usuario = false;
   Estandar = new FormControl("");
@@ -42,7 +44,7 @@ export class IndicadoresComponent implements OnInit {
     this.getStandares();
     this.getSubCategoria();
     this.getIndicadoresAsignados();
-    var htmltable = document.getElementById('exportContent');
+    var htmltable = document.getElementById("exportContent");
     htmltable.style.display = "none";
   }
 
@@ -92,6 +94,7 @@ export class IndicadoresComponent implements OnInit {
   }
 
   getindIcadores() {
+    this.cargandoService.ventanaCargando();
     if (this.usuarioLocalStote.typeuser != "3") {
       this.reportesService
         .ConsultarIndicadoresAsignados()
@@ -101,10 +104,10 @@ export class IndicadoresComponent implements OnInit {
           });
           this.resultadosTabla = this.resultadosTabla.sort();
           this.resultadosTabla = this.resultadosTabla.reverse();
-    console.log(this.resultadosTabla)
-
+          if(this.resultadosTabla){
+            Swal.close()
+          }
         });
-        
     }
     if (this.usuarioLocalStote.typeuser == "3") {
       this.usuario = true;
@@ -115,8 +118,9 @@ export class IndicadoresComponent implements OnInit {
         this.resultadosTabla = res.map((item) => {
           return item;
         });
-    console.log(this.resultadosTabla)
-
+        if(this.resultadosTabla){
+          Swal.close()
+        }
       });
     }
   }
@@ -292,104 +296,112 @@ export class IndicadoresComponent implements OnInit {
 
   MasivoExcel(id) {
     this.idArchivo.idArchivo = id;
-    this.indicadoresservice.VerDiligenciarIndicador(this.idArchivo).subscribe((res: any) => {
-      this.resultIndicadores = res.map((item) => {
-        this.anioArray.push(item.anio);
-        this.preciodicidadesArray.push(item.periodicidad);
-        return item;
-      });
-      this.filtrarInfo();
-      for (let i = 0; i < this.uniqueYears.length; i++) {
-        for (let j = 0; j < this.uniquePeriod.length; j++) {
-          this.filtrados = this.resultIndicadores.filter(
-            (an) => an.anio == this.uniqueYears[i]
-          );
-          this.filtrados = this.filtrados.filter(
-            (pe) => pe.periodicidad == this.uniquePeriod[j]
-          );
-          for (let h = 0; h < this.filtrados.length; h++) {
-            this.Ordenado.push(this.filtrados[h]);
-            this.html += this.filtrados[h].html;
+    this.indicadoresservice
+      .VerDiligenciarIndicador(this.idArchivo)
+      .subscribe((res: any) => {
+        this.resultIndicadores = res.map((item) => {
+          this.anioArray.push(item.anio);
+          this.preciodicidadesArray.push(item.periodicidad);
+          return item;
+        });
+        this.filtrarInfo();
+        for (let i = 0; i < this.uniqueYears.length; i++) {
+          for (let j = 0; j < this.uniquePeriod.length; j++) {
+            this.filtrados = this.resultIndicadores.filter(
+              (an) => an.anio == this.uniqueYears[i]
+            );
+            this.filtrados = this.filtrados.filter(
+              (pe) => pe.periodicidad == this.uniquePeriod[j]
+            );
+            for (let h = 0; h < this.filtrados.length; h++) {
+              this.Ordenado.push(this.filtrados[h]);
+              this.html += this.filtrados[h].html;
+            }
           }
         }
-      }
-      document.getElementById("prueba").innerHTML = this.html;
-      var htmltable = document.getElementById('exportContent');
-      var html2 = htmltable.outerHTML;
-      window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html2));
-      location.reload();
-    });
+        document.getElementById("prueba").innerHTML = this.html;
+        var htmltable = document.getElementById("exportContent");
+        var html2 = htmltable.outerHTML;
+        window.open(
+          "data:application/vnd.ms-excel," + encodeURIComponent(html2)
+        );
+        location.reload();
+      });
   }
 
   MasivoWord(id) {
     this.idArchivo.idArchivo = id;
-    this.indicadoresservice.VerDiligenciarIndicador(this.idArchivo).subscribe((res: any) => {
-      this.resultIndicadores = res.map((item) => {
-        this.anioArray.push(item.anio);
-        this.preciodicidadesArray.push(item.periodicidad);
-        return item;
-      });
-      this.filtrarInfo();
-      for (let i = 0; i < this.uniqueYears.length; i++) {
-        for (let j = 0; j < this.uniquePeriod.length; j++) {
-          this.filtrados = this.resultIndicadores.filter(
-            (an) => an.anio == this.uniqueYears[i]
-          );
-          this.filtrados = this.filtrados.filter(
-            (pe) => pe.periodicidad == this.uniquePeriod[j]
-          );
-          for (let h = 0; h < this.filtrados.length; h++) {
-            this.Ordenado.push(this.filtrados[h]);
-            this.html += this.filtrados[h].html;
+    this.indicadoresservice
+      .VerDiligenciarIndicador(this.idArchivo)
+      .subscribe((res: any) => {
+        this.resultIndicadores = res.map((item) => {
+          this.anioArray.push(item.anio);
+          this.preciodicidadesArray.push(item.periodicidad);
+          return item;
+        });
+        this.filtrarInfo();
+        for (let i = 0; i < this.uniqueYears.length; i++) {
+          for (let j = 0; j < this.uniquePeriod.length; j++) {
+            this.filtrados = this.resultIndicadores.filter(
+              (an) => an.anio == this.uniqueYears[i]
+            );
+            this.filtrados = this.filtrados.filter(
+              (pe) => pe.periodicidad == this.uniquePeriod[j]
+            );
+            for (let h = 0; h < this.filtrados.length; h++) {
+              this.Ordenado.push(this.filtrados[h]);
+              this.html += this.filtrados[h].html;
+            }
           }
         }
-      }
-      document.getElementById("prueba").innerHTML = this.html;
-      this.ExportToDoc('archivo');
-    });
-
+        document.getElementById("prueba").innerHTML = this.html;
+        this.ExportToDoc("archivo");
+      });
   }
 
   MasivoPDF(id) {
     this.idArchivo.idArchivo = id;
-    this.indicadoresservice.VerDiligenciarIndicador(this.idArchivo).subscribe((res: any) => {
-      this.resultIndicadores = res.map((item) => {
-        this.anioArray.push(item.anio);
-        this.preciodicidadesArray.push(item.periodicidad);
-        return item;
-      });
-      this.filtrarInfo();
-      for (let i = 0; i < this.uniqueYears.length; i++) {
-        for (let j = 0; j < this.uniquePeriod.length; j++) {
-          this.filtrados = this.resultIndicadores.filter(
-            (an) => an.anio == this.uniqueYears[i]
-          );
-          this.filtrados = this.filtrados.filter(
-            (pe) => pe.periodicidad == this.uniquePeriod[j]
-          );
-          for (let h = 0; h < this.filtrados.length; h++) {
-            this.Ordenado.push(this.filtrados[h]);
-            this.html += this.filtrados[h].html;
+    this.indicadoresservice
+      .VerDiligenciarIndicador(this.idArchivo)
+      .subscribe((res: any) => {
+        this.resultIndicadores = res.map((item) => {
+          this.anioArray.push(item.anio);
+          this.preciodicidadesArray.push(item.periodicidad);
+          return item;
+        });
+        this.filtrarInfo();
+        for (let i = 0; i < this.uniqueYears.length; i++) {
+          for (let j = 0; j < this.uniquePeriod.length; j++) {
+            this.filtrados = this.resultIndicadores.filter(
+              (an) => an.anio == this.uniqueYears[i]
+            );
+            this.filtrados = this.filtrados.filter(
+              (pe) => pe.periodicidad == this.uniquePeriod[j]
+            );
+            for (let h = 0; h < this.filtrados.length; h++) {
+              this.Ordenado.push(this.filtrados[h]);
+              this.html += this.filtrados[h].html;
+            }
           }
         }
-      }
-      document.getElementById("prueba").innerHTML = this.html;
-      var sTable = document.getElementById('exportContent').innerHTML;
-      // CREATE A WINDOW OBJECT.
-      var win = window.open('', '', 'height=700,width=700');
-      win.document.write('<html><head>');  // <title> FOR PDF HEADER.       // ADD STYLE INSIDE THE HEAD TAG.
-      win.document.write('</head>');
-      win.document.write('<body>');
-      win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
-      win.document.write('</body></html>');
-      win.document.close(); 	// CLOSE THE CURRENT WINDOW.
-      win.print();    // PRINT THE CONTENTS.
-      location.reload();
-    });
+        document.getElementById("prueba").innerHTML = this.html;
+        var sTable = document.getElementById("exportContent").innerHTML;
+        // CREATE A WINDOW OBJECT.
+        var win = window.open("", "", "height=700,width=700");
+        win.document.write("<html><head>"); // <title> FOR PDF HEADER.       // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write("</head>");
+        win.document.write("<body>");
+        win.document.write(sTable); // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write("</body></html>");
+        win.document.close(); // CLOSE THE CURRENT WINDOW.
+        win.print(); // PRINT THE CONTENTS.
+        location.reload();
+      });
   }
 
-  ExportToDoc(filename = '') {
-    var HtmlHead = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+  ExportToDoc(filename = "") {
+    var HtmlHead =
+      "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
 
     var EndHtml = "</body></html>";
 
@@ -398,15 +410,15 @@ export class IndicadoresComponent implements OnInit {
     var html = HtmlHead + dochtml + EndHtml;
 
     //specify the type
-    var blob = new Blob(['ufeff', html], {
-      type: 'application/msword'
+    var blob = new Blob(["ufeff", html], {
+      type: "application/msword",
     });
 
     // Specify link url
     var url = URL.createObjectURL(blob);
 
     // Specify file name
-    filename = filename ? filename + '.doc' : 'document.doc';
+    filename = filename ? filename + ".doc" : "document.doc";
 
     // Create download link element
     var downloadLink = document.createElement("a");
