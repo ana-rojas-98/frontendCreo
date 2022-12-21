@@ -230,8 +230,8 @@ export class AuthService {
   setConfiguracion(confi: any) {
     const headers = this.fnSetDefineTokenAuthorization();
     let res = this.http.post(
-      `${this.URL_SER}/api/Configuracions/guardarConfiguracion`,
-      confi, headers
+      `${this.URL_SER}/api/FormatoIndicadors/guardarConfiguracion`,
+      confi
     );
     return res;
   }

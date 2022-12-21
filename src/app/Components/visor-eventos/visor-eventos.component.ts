@@ -19,8 +19,8 @@ import { Router } from "@angular/router";
 export class VisorEventosComponent implements OnInit {
   [x: string]: any;
 
-  fechaInicial = "2022-11-16";
-  fechaFinal = "2022-11-16";
+  fechaInicial = Date.now().toLocaleString();
+  fechaFinal = Date.now().toLocaleString();
   resultadosModulos1 = "";
   resultadosModuloss = [];
 
@@ -28,7 +28,7 @@ export class VisorEventosComponent implements OnInit {
     private VisorEventosService: VisorEventosService,
     private reportesService: ReportesService,
     public router: Router
-  ) {}
+  ) { }
 
   resultadosTabla = [];
   resultadosTabla2 = [];
@@ -172,6 +172,7 @@ export class VisorEventosComponent implements OnInit {
       alert("La fecha inicial debe ser mayor a la final");
       this.fechaFinal = this.fechaInicial;
     }
+
     this.resultadosTabla = this.resultadosTabla2.filter((fecha) => {
       return (
         Date.parse(fecha.fecha2) >= Date.parse(this.fechaInicial) &&
