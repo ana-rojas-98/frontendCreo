@@ -1,73 +1,94 @@
 @import "../../../assets/styles/main.scss";
 
-.contenedor{
+.contenedor {
   @include contenedor;
   align-items: center;
-  justify-content: center; 
-  }
-  .cerrar{
-    height: 450px;
-    width: 50px;
-  }
-  .circulo{
-    width: max-content;
-    height: max-content;
-    border-radius: 100%;
-    border: 1px black solid;    
-    width: 25px;
-    height: 25px;
-    display: block;
-    text-align: center;
-  }
-  .cerrar .circulo a{
-    cursor: pointer;
-    text-decoration: none;
-    color: black;  
-    cursor: pointer;
-  }
+  justify-content: center;
+}
+
+.cerrar {
+  height: 450px;
+  width: 50px;
+}
+
+.circulo {
+  width: max-content;
+  height: max-content;
+  border-radius: 100%;
+  border: 1px black solid;
+  width: 25px;
+  height: 25px;
+  display: block;
+  text-align: center;
+}
+
+.cerrar .circulo a {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
 .form-box {
-    position: relative;
-    width: 627px;
-    height: 500px;
-    border-radius: 15px;
-    background-color: $background-color;
+  position: relative;
+  width: 627px;
+  height: 500px;
+  border-radius: 15px;
+  background-color: $background-color;
 }
-.Form-title{
-    @include tittleCard(700, 24px);
+
+.title {
+  align-items: center;
+  text-align: center;
+  margin: 10px;
 }
-.form-group{
-  display: flex;  
+
+.Form-title {
+  @include tittleCard(700, 24px);
+  width: fit-content;
+  margin: auto;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   margin-left: 170px;
 }
-.form-group label{
+
+.form-group label {
   @include label;
 }
-.form-group select{
+
+.form-group select {
   @include select;
   height: 40px;
   width: 280;
 }
-.form-box input[type="Subcatego"]{
+
+.form-box input[type="Subcatego"] {
   margin-top: 10px;
   width: 300px;
- @include inputCard(280px, 48px);
+  @include inputCard(280px, 48px);
 }
-.form-box input[type="Subcatego"] :focus{
+
+.form-box input[type="Subcatego"] :focus {
   border-color: aqua;
 }
-.bot_est{
+
+.bot_est {
   @include buttonCard($buttonPrimary);
   width: 123px;
   height: 47px;
   left: calc(50% - 123px/2 + 115px);
   cursor: pointer;
 }
-  .bot_per_2{
-    @include buttonCard($buttonSecondary);
-    width: 130px;
-    height: 47px;
-    left: calc(50% - 130px/2 - 106.5px);
-    cursor: pointer;
-  }
+
+.bot_per_2 {
+  @include buttonCard($buttonSecondary);
+  width: 130px;
+  height: 47px;
+  left: calc(50% - 130px/2 - 106.5px);
+  cursor: pointer;
+}

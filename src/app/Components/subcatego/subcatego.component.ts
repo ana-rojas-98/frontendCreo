@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
+import { FormControl } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 import { NgbAlert } from "@ng-bootstrap/ng-bootstrap";
 import { Subject } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
@@ -35,16 +36,24 @@ export class SubcategoComponent implements OnInit {
   resultados = {};
   resultadosEstandares = {};
 
+  Estandarf = new FormControl("");
+  Categoriaf = new FormControl("");
+
   private _success = new Subject<string>();
   successMessage = "";
   @ViewChild("selfClosingAlert", { static: false }) selfClosingAlert: NgbAlert;
 
+  est = 0;
+  cat = 0;
+
 
   constructor(private authService: AuthService, private router: Router,
-    public cargandoService: CargandoService) { }
+    public cargandoService: CargandoService,private route: ActivatedRoute,) { }
 
   ngOnInit() {
     let usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+    this.est = parseInt(this.route.snapshot.paramMap.get("es"));
+    this.cat = parseInt(this.route.snapshot.paramMap.get("cat"));
     if (usarioLocalStote.typeuser == "3") {
       this.router.navigate(["private"]);
       return true;
@@ -53,7 +62,6 @@ export class SubcategoComponent implements OnInit {
       this.router.navigate(["private"]);
       return true;
     }
-    this.getCategoria();
     this.getStandares();
     this._success.subscribe((message) => (this.successMessage = message));
   }
@@ -67,6 +75,9 @@ export class SubcategoComponent implements OnInit {
       this.resultados = res.map((item) => {
         return item;
       });
+      this.selectElement("categoria", this.cat);
+      this.Categoriaf.setValue(this.cat);
+      this.Subcategoria.Subcategoria1 = this.cat.toString();
     });
   }
 
@@ -75,8 +86,20 @@ export class SubcategoComponent implements OnInit {
       this.resultadosEstandares = res.map((item) => {
         return item;
       });
+      this.selectElement("estandar", this.est);
+      this.Estandarf.setValue(this.est);
+      this.Subcategoria.IdEstandar = this.est.toString();
+      this.Estandar.estandar = this.est.toString();
+      this.getCategoria();
     });
   }
+
+  selectElement(id, valueToSelect) {
+    let element;
+    element = document.getElementById(id);
+    element.value = valueToSelect;
+  }
+
 
   getCategoriafilter(estandar) {
     this.authService.getCategoria(this.Categoria).subscribe((res: any) => {

@@ -50,12 +50,12 @@
       </button>
 
       <button
-        *ngIf="crear" [routerLink]="['/categorias']" [routerLinkActive]="['link-active']">
+        *ngIf="crear" [routerLink]="['/categorias',0]" [routerLinkActive]="['link-active']">
         Crear nueva categoría
       </button>
 
       <button
-        *ngIf="crear" [routerLink]="['/subcatego']" [routerLinkActive]="['link-active']"
+        *ngIf="crear" [routerLink]="['/subcategoria',0,0]" [routerLinkActive]="['link-active']"
         class="crear-sub">
         Crear nueva subcategoría
       </button>

@@ -32,9 +32,21 @@
     background: #FFFFFF;
     border-radius: 15px;
     text-align: center;
+    align-items: center;
+    
   }
+
+  .title{
+    align-items: center;
+    text-align: center;
+    margin: 10px;
+  }
+  
   .Form-title{
     @include tittleCard(700, 24px);
+    width: fit-content;
+    margin: auto;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   }
 .form-group{
   display: flex;  
