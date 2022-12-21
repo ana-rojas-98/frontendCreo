@@ -278,7 +278,7 @@ export class NuevaNotiComponent implements OnInit {
     });
 
     for (let i = 0; i < this.enviarCorreo.length; i++) {
-      var form = new FormData();
+      let form = new FormData();
       form.append("asunto", this.enviarCorreo[i].asunto);
       form.append("mensaje", this.enviarCorreo[i].mensaje);
       form.append("correo", this.enviarCorreo[i].correo);
@@ -287,14 +287,14 @@ export class NuevaNotiComponent implements OnInit {
       form.append("usuario", this.usuarioid.toString());
       this.cargandoService.ventanaCargando();
       this.authService.enviarCorreo(form).subscribe((res: any) => {
-        if (res.a == "ok") {
+        if (i== (this.enviarCorreo.length-1) && res.a == "ok") {
           this.alerta("Correo enviado correctamente");
           this.router.navigate(["gestor-noti"]);
         }
         return res;
       });
     }
-    console.log("hola ", form);
+
     this.limpiar();
   }
 

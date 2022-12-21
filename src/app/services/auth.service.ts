@@ -254,7 +254,7 @@ export class AuthService {
     const headers = this.fnSetDefineTokenAuthorization();
     let resul = this.http.post(
       `${this.URL_SER}/api/Notificaciones/enviarNotificacion`,
-      correo, headers
+      correo
     );
     return resul;
   }
