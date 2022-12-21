@@ -65,7 +65,7 @@ export class EditarReporteComponent implements OnInit {
   tipoGrafica = "";
   columnasplaceholder = "Columnas";
   contenModal: any;
-  botonGraficar = false;
+  botonGraficar = true;
   inputColorVisible = true;
   divVariables = true;
   mostrarBotonMenosColumnas = true;
@@ -657,6 +657,23 @@ export class EditarReporteComponent implements OnInit {
     }
   }
 
+  limpiarData(){
+    this.data = [];
+    this.dataInput = "";
+    this.columnasInput = "";
+    this.coloresInput = "";
+    this.nombreVariable = "";
+    this.nombreGrafica = "";
+    this.auxDataInput = 0;
+    this.auxColumnaInput = 0;
+    this.auxColoresInput = 0;
+    this.dataVisualizar = "";
+    this.coloresVisualizar = [];
+    this.columnasVisualizar = "";
+    //this.botonGraficar = false;
+   //this.mostrarBotonMenosColumnas = true;
+  }
+
   AgregarGrafica() {
     if (this.tipoGrafica == "pie") {
       if (
@@ -684,10 +701,10 @@ export class EditarReporteComponent implements OnInit {
     this.arrayColumnas = this.columnasInput.split("~");
     this.arrayColores = this.coloresInput.split("~");
     this.coloresVisualizar = this.coloresInput.split("~");
-    if (this.arrayData.length > this.arrayColumnas.length) {
-      Swal.fire("No puedes tener mas valores que columnas");
-      return true;
-    }
+    // if (this.arrayData.length > this.arrayColumnas.length) {
+    //   Swal.fire("No puedes tener mas valores que columnas");
+    //   return true;
+    // }
     let grafica = {
       label: this.nombreVariable,
       data: this.arrayData,
@@ -700,14 +717,14 @@ export class EditarReporteComponent implements OnInit {
     this.dataVisualizar = this.dataInput;
     this.columnasVisualizar = this.columnasInput;
     this.data.push(grafica);
-    this.dataInput = "";
-    //this.columnasInput = "";
-    this.mostrarBotonMenosColumnas = false;
-    this.coloresInput = "";
-    this.nombreVariable = "";
-    this.auxDataInput = 0;
-    //this.auxColumnaInput = 0;
-    this.auxColoresInput = 0;
+    // this.dataInput = "";
+    // //this.columnasInput = "";
+    // this.mostrarBotonMenosColumnas = false;
+    // this.coloresInput = "";
+    // this.nombreVariable = "";
+    // this.auxDataInput = 0;
+    // //this.auxColumnaInput = 0;
+    // this.auxColoresInput = 0;
   }
 
   coloresFuncion() {
@@ -741,17 +758,17 @@ export class EditarReporteComponent implements OnInit {
       this.arrayColumnas,
       this.tipoGrafica
     );
-    this.data = [];
-    this.arrayColumnas = [];
-    this.dataVisualizar = "";
-    this.coloresVisualizar = [];
-    this.columnasVisualizar = "";
-    this.columnasInput = "";
-    this.coloresInput = "";
-    this.nombreVariable = "";
-    this.nombreGrafica = "";
-    this.botonGraficar = false;
-    this.mostrarBotonMenosColumnas = true;
+    // this.data = [];
+    // this.arrayColumnas = [];
+    // this.dataVisualizar = "";
+    // this.coloresVisualizar = [];
+    // this.columnasVisualizar = "";
+    // this.columnasInput = "";
+    // this.coloresInput = "";
+    // this.nombreVariable = "";
+    // this.nombreGrafica = "";
+    // this.botonGraficar = false;
+    // this.mostrarBotonMenosColumnas = true;
     this.modalService.dismissAll();
   }
 
@@ -813,20 +830,20 @@ export class EditarReporteComponent implements OnInit {
   }
 
   cerrarModal() {
-    this.data = [];
-    this.dataInput = "";
-    this.columnasInput = "";
-    this.coloresInput = "";
-    this.nombreVariable = "";
-    this.nombreGrafica = "";
-    this.auxDataInput = 0;
-    this.auxColumnaInput = 0;
-    this.auxColoresInput = 0;
-    this.dataVisualizar = "";
-    this.coloresVisualizar = [];
-    this.columnasVisualizar = "";
-    this.botonGraficar = false;
-    this.mostrarBotonMenosColumnas = true;
+    // this.data = [];
+    // this.dataInput = "";
+    // this.columnasInput = "";
+    // this.coloresInput = "";
+    // this.nombreVariable = "";
+    // this.nombreGrafica = "";
+    // this.auxDataInput = 0;
+    // this.auxColumnaInput = 0;
+    // this.auxColoresInput = 0;
+    // this.dataVisualizar = "";
+    // this.coloresVisualizar = [];
+    // this.columnasVisualizar = "";
+    // this.botonGraficar = false;
+    // this.mostrarBotonMenosColumnas = true;
     this.modalService.dismissAll();
   }
 

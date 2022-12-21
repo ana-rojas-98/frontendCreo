@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import { AuthService } from "src/app/services/auth.service";
+import { CargandoService } from "src/app/services/cargando.service";
 
 @Component({
   selector: "app-diligenciar-indicador",
@@ -19,7 +20,8 @@ export class DiligenciarIndicadorComponent implements OnInit {
     private route: ActivatedRoute,
     public router: Router,
     private indicadoresservice: IndicadoresService,
-    private reportesService: ReportesService
+    private reportesService: ReportesService,
+    cargandoService: CargandoService
   ) { }
   id = 0;
   accionVerModificar = "";
