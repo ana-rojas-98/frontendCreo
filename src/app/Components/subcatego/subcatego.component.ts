@@ -104,10 +104,10 @@ export class SubcategoComponent implements OnInit {
   getCategoriafilter(estandar) {
     this.authService.getCategoria(this.Categoria).subscribe((res: any) => {
       this.resultados = res.filter(
-        (item) => item.idEstandar == estandar
+        (item) => item.idEstandar == this.Estandarf.value
 
       );
-      this.Subcategoria.IdEstandar = estandar;
+      this.Subcategoria.IdEstandar = this.Estandarf.value;
     });
 
   }
