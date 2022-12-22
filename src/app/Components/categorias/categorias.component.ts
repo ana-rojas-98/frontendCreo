@@ -102,6 +102,7 @@ export class CategoriasComponent implements OnInit {
             this.router.navigate(["subcategoria/" + this.Categoria.IdEstandar + "/" + res.id]);
             return this.alerta("Categoría creada exitosamente");
           } else {
+            Swal.close()
             this.changeSuccessMessage(2);
           }
         });

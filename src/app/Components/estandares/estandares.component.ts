@@ -67,6 +67,7 @@ export class EstandaresComponent implements OnInit {
           this.alerta("Estándar creado exitosamente");
           this.router.navigate(["categorias/" + res.id]);
         } else {
+          Swal.close()
           this.changeSuccessMessage(2);
         }
       });
