@@ -87,7 +87,7 @@ export class CategoriasComponent implements OnInit {
   }
 
   crear_categoria() {
-
+    this.Categoria.IdEstandar = this.Estandar.value;
     if (this.Categoria.IdEstandar == '') {
       this.changeSuccessMessage(3);
     }

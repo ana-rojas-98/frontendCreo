@@ -17,7 +17,7 @@
         <label for="select">Estándar</label>
       </div>
       <div class="row">
-        <select class="selector" [formControl]="Estandar" (change)="estandar()" id="estandar">
+        <select class="selector" [formControl]="Estandar" (change)="estandar(resultado.estandar)" id="estandar">
           <option value="0">Estándar</option>
           <option *ngFor="let resultado of resultados" [value]="resultado.estandar">
             <h1>{{ resultado.nombreEstandar}}</h1>
