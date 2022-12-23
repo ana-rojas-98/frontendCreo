@@ -47,13 +47,13 @@ export class ReportesIndicadoresComponent implements OnInit {
     nombreSubcategoria: "",
   };
 
-  resultadosUsuario = [];
-  resultadosCategoria: {};
-  resultadoEstandar: {};
-  resultadosSubCategoria: {};
-  resultadoIndicadores: [];
+  resultadosUsuario: any = [];
+  resultadosCategoria: any = [];
+  resultadoEstandar: any = [];
+  resultadosSubCategoria: any = [];
+  resultadoIndicadores: any = [];
   resultadosTabla: any = [];
-  estado = [];
+  estado: any = [];
   variable: any = [
     {
       nombre: "1",
@@ -111,6 +111,7 @@ export class ReportesIndicadoresComponent implements OnInit {
   }
 
   getUsuarioFilter() {
+    let dato = parseInt(this.Usuario.usuario);
     if (this.Usuario.usuario == "") {
       this.getindIcadores(0);
       return true;
@@ -124,8 +125,8 @@ export class ReportesIndicadoresComponent implements OnInit {
         id: this.usuarioLocalStote.usuarioid,
       };
       this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
-        this.resultadosTabla = res.map((item) => {
-          return item;
+        this.resultadosTabla = res.filter((item) => {
+          return item.idUsuario == dato;
         });
       });
       if (this.resultadosTabla) {
@@ -133,8 +134,6 @@ export class ReportesIndicadoresComponent implements OnInit {
       }
       return true;
     }
-
-    let dato = parseInt(this.Usuario.usuario);
 
     this.reportesService
       .ConsultarIndicadoresAsignados()
@@ -153,6 +152,25 @@ export class ReportesIndicadoresComponent implements OnInit {
     }
     let dato = parseInt(this.Estandar.estandar);
     this.getCategoria(dato);
+
+    if (
+      this.usuarioLocalStote.typeuser == "3" &&
+      this.usuarioLocalStote.indicadorReportes == "asignados"
+    ) {
+      let id = {
+        id: this.usuarioLocalStote.usuarioid,
+      };
+      this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
+        this.resultadosTabla = res.filter((item) => {
+          return item.idEstandar == dato;
+        });
+      });
+      if (this.resultadosTabla) {
+        Swal.close();
+      }
+      return true;
+    }
+
     this.resultadosTabla = this.estado.filter((item) => {
       return item.idEstandar == dato;
     });
@@ -170,6 +188,24 @@ export class ReportesIndicadoresComponent implements OnInit {
     let dato = parseInt(this.Categoria.categoria1);
     this.getSubCategoria(dato);
 
+    if (
+      this.usuarioLocalStote.typeuser == "3" &&
+      this.usuarioLocalStote.indicadorReportes == "asignados"
+    ) {
+      let id = {
+        id: this.usuarioLocalStote.usuarioid,
+      };
+      this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
+        this.resultadosTabla = res.filter((item) => {
+          return item.idCategoria == dato;
+        });
+      });
+      if (this.resultadosTabla) {
+        Swal.close();
+      }
+      return true;
+    }
+
     this.resultadosTabla = this.estado.filter((item) => {
       return item.idCategoria == dato;
     });
@@ -185,6 +221,24 @@ export class ReportesIndicadoresComponent implements OnInit {
     let dato = parseInt(this.SubCategoria.subcategoria1);
     this.getindIcadores(dato);
 
+    if (
+      this.usuarioLocalStote.typeuser == "3" &&
+      this.usuarioLocalStote.indicadorReportes == "asignados"
+    ) {
+      let id = {
+        id: this.usuarioLocalStote.usuarioid,
+      };
+      this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
+        this.resultadosTabla = res.filter((item) => {
+          return item.idSubCategoria == dato;
+        });
+      });
+      if (this.resultadosTabla) {
+        Swal.close();
+      }
+      return true;
+    }
+
     this.resultadosTabla = this.estado.filter((item) => {
       return item.idSubCategoria == dato;
     });
@@ -193,6 +247,24 @@ export class ReportesIndicadoresComponent implements OnInit {
   getIndicadorFilter() {
     if (this.Indicador.idIndicador == "") {
       this.geSubtCategoriaFilter();
+      return true;
+    }
+
+    if (
+      this.usuarioLocalStote.typeuser == "3" &&
+      this.usuarioLocalStote.indicadorReportes == "asignados"
+    ) {
+      let id = {
+        id: this.usuarioLocalStote.usuarioid,
+      };
+      this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
+        this.resultadosTabla = res.filter((item) => {
+          return item.idIndicador == parseInt(this.Indicador.idIndicador);
+        });
+      });
+      if (this.resultadosTabla) {
+        Swal.close();
+      }
       return true;
     }
 
@@ -254,6 +326,7 @@ export class ReportesIndicadoresComponent implements OnInit {
       });
     });
   }
+
   getindIcadores(dato) {
     this.cargandoService.ventanaCargando();
     if (
@@ -283,6 +356,7 @@ export class ReportesIndicadoresComponent implements OnInit {
         id: this.usuarioLocalStote.usuarioid,
       };
       this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
+        this.resultadoIndicadores = res;
         this.resultadosTabla = res.map((item) => {
           return item;
         });
@@ -290,6 +364,7 @@ export class ReportesIndicadoresComponent implements OnInit {
       if (this.resultadosTabla) {
         Swal.close();
       }
+      return true;
     }
   }
 
@@ -304,4 +379,6 @@ export class ReportesIndicadoresComponent implements OnInit {
       a.click();
     });
   }
+
+  
 }

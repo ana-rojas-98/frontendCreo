@@ -17,21 +17,21 @@
                 <img [src]="prev" alt="logo-empresa">
                 <img [src]="logoEstatico" alt=".">
                 </div>
-                <button 
+                <button
                     class="cambiar-logo"
                     (click)="capturado.click()">
                     Cambiar logo
                 </button>
-                <input 
-                    type="file" 
-                    hidden (change)="captImg($event)" 
-                    #capturado 
+                <input
+                    type="file"
+                    hidden (change)="captImg($event)"
+                    #capturado
                     id="image"
                     accept=".jpg,.png">
             </div>
             <div class="nombre">
                 <h5 class="mb-2">Nombre empresa</h5>
-                <input                
+                <input
                 type="text"
                 [(ngModel)]="configuracion.nombreEmpresa">
             </div>
@@ -42,7 +42,7 @@
         <div class="tiempo">
             <div class="inicio">
                 <h5 class="mb-2">Año inicial</h5>
-                <input                
+                <input
                 type="number"
                 maxlength="4"
                 [(ngModel)]="configuracion.inicial"
@@ -50,7 +50,7 @@
             </div>
             <div class="final">
                 <h5 class="mb-2">Año final</h5>
-                <input 
+                <input
                 type="number"
                 maxlength="4"
                 [(ngModel)]="configuracion.final"
@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="botones">
-            <button class="cancelar">Cancelar</button>
+            <button class="cancelar" (click)="cancelar()">Cancelar</button>
             <button class="guardar" (click)="guardarConfiguracion()">Guardar</button>
         </div>
     </div>

@@ -144,6 +144,10 @@ export class ConfiguracionComponent implements OnInit {
     }
   }
 
+  cancelar() {
+    location.reload();
+  }
+
   alerta(mensaje: any) {
     Swal.fire(mensaje);
   }
