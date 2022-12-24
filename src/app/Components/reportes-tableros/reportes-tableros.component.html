@@ -3,12 +3,8 @@
   <app-sidebar></app-sidebar>
   <div class="cuerpo">
     <h1 class="titulo">Tableros</h1>
-    <button
-      *ngIf="btnCrearReporte"
-      [routerLink]="['/reportes-nuevo-tablero']"
-      routerLinkActive="router-link-active"
-      class="guardar"
-    >
+    <button *ngIf="btnCrearReporte" [routerLink]="['/reportes-nuevo-tablero']" routerLinkActive="router-link-active"
+      class="guardar">
       Crear nuevo
     </button>
     <div class="resultados-tabla">
@@ -16,58 +12,39 @@
         <thead>
           <tr>
             <th>
-              <img
-                src="../../../assets/imagenes/fechaHora.png"
-                alt="icono-nombre"
-              />
+              <img src="../../../assets/imagenes/fechaHora.png" alt="icono-nombre" />
               Fecha de creación
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/creador.svg"
-                alt="icono-creador"
-              />
+              <img src="../../../assets/imagenes/creador.svg" alt="icono-creador" />
               Creador
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/mensaje.svg"
-                alt="icono-nombre"
-              />
+              <img src="../../../assets/imagenes/fechaHora.png" alt="icono-nombre" />
+              Fecha de edición
+            </th>
+            <th>
+              <img src="../../../assets/imagenes/creador.svg" alt="icono-creador" />
+              Usuario editor
+            </th>
+            <th>
+              <img src="../../../assets/imagenes/mensaje.svg" alt="icono-nombre" />
               Nombre
             </th>
             <th *ngIf="btnVerReporte">
-              <img
-                id="imgPorcentaje"
-                src="../../../assets/imagenes/ver.png"
-                alt="icono-nombre"
-                class="mx-1 mt-1"
-              />
+              <img id="imgPorcentaje" src="../../../assets/imagenes/ver.png" alt="icono-nombre" class="mx-1 mt-1" />
               Ver
             </th>
             <th *ngIf="btnEditarReporte">
-              <img
-                src="../../../assets/imagenes/editar.png"
-                alt="icono-nombre"
-                class="mx-1"
-              />
+              <img src="../../../assets/imagenes/editar.png" alt="icono-nombre" class="mx-1" />
               Editar
             </th>
             <th>
-              <img
-                id="imgPorcentaje"
-                src="../../../assets/imagenes/ver.png"
-                alt="icono-nombre"
-                class="mx-1 mt-1"
-              />
+              <img id="imgPorcentaje" src="../../../assets/imagenes/ver.png" alt="icono-nombre" class="mx-1 mt-1" />
               Reporte finalizado
             </th>
             <th *ngIf="btnEliminarReporte">
-              <img
-                src="../../../assets/imagenes/eliminar.png"
-                alt="icono-nombre"
-                class="mx-1"
-              />
+              <img src="../../../assets/imagenes/eliminar.png" alt="icono-nombre" class="mx-1" />
               Eliminar
             </th>
           </tr>
@@ -76,44 +53,27 @@
           <tr *ngFor="let item of resultadosTabla">
             <td>{{ item.fechaCreacion }}</td>
             <td>{{ item.fullname }}</td>
+            <td>{{ item.fechaEdicion }}</td>
+            <td>{{ item.usuario2 }}</td>
             <td>{{ item.nombreReporte }}</td>
             <td *ngIf="btnVerReporte">
-              <img
-                src="../../../assets/imagenes/ver.png"
-                alt="icono-nombre"
-                class="mx-1"
-                [routerLink]="['/editar-reporte', item.id, 'ver']"
-                [routerLinkActive]="['link-active']"
-              />
+              <img src="../../../assets/imagenes/ver.png" alt="icono-nombre" class="mx-1"
+                [routerLink]="['/editar-reporte', item.id, 'ver']" [routerLinkActive]="['link-active']" />
             </td>
             <ng-template #empty>
               <td></td>
             </ng-template>
             <td *ngIf="btnEditarReporte">
-              <img
-                src="../../../assets/imagenes/editar.png"
-                alt="icono-nombre"
-                class="mx-1"
-                [routerLink]="['/editar-reporte', item.id, 'editar']"
-                [routerLinkActive]="['link-active']"
-              />
+              <img src="../../../assets/imagenes/editar.png" alt="icono-nombre" class="mx-1"
+                [routerLink]="['/editar-reporte', item.id, 'editar']" [routerLinkActive]="['link-active']" />
             </td>
             <td *ngIf="item.finalizado == true; else empty">
-              <img
-                src="../../../assets/imagenes/ver.png"
-                alt="icono-nombre"
-                class="mx-1"
-                [routerLink]="['/reporte-final', item.id]"
-                [routerLinkActive]="['link-active']"
-              />
+              <img src="../../../assets/imagenes/ver.png" alt="icono-nombre" class="mx-1"
+                [routerLink]="['/reporte-final', item.id]" [routerLinkActive]="['link-active']" />
             </td>
             <td *ngIf="btnEliminarReporte">
-              <img
-                src="../../../assets/imagenes/eliminar.png"
-                alt="icono-nombre"
-                class="mx-1"
-                (click)="eliminar(item.id)"
-              />
+              <img src="../../../assets/imagenes/eliminar.png" alt="icono-nombre" class="mx-1"
+                (click)="eliminar(item.id)" />
             </td>
           </tr>
         </tbody>
