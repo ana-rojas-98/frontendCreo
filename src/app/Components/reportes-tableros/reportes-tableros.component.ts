@@ -69,7 +69,6 @@ export class ReportesTablerosComponent implements OnInit {
           this.resultadosTabla.push(item);
         }
       });
-      console.log(this.resultadosTabla)
       if (this.resultadosTabla) {
         Swal.close();
       }
