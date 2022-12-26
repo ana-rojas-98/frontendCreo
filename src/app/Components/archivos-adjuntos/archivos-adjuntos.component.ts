@@ -106,26 +106,32 @@ export class ArchivosAdjuntosComponent implements OnInit {
 
   archivoCapt(event) {
     this.archivoCapturado = event.target.files[0];
-    this.archivos = this.archivoCapturado;
-    if (this.archivos != null) {
-      const formData = new FormData();
-      formData.append("Archivo", this.archivos);
-      formData.append("Nombre", this.nombreArchivo);
-      formData.append("idArchivo", this.id.toString());
-      formData.append(
-        "Extension",
-        this.archivos.name.toString().split(".").pop()
-      );
-      this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
-      let Usuarioid = this.usarioLocalStote.usuarioid;
-      formData.append("UsuarioID", Usuarioid);
-      this.indicadoresservice.GuardarAdjunto(formData).subscribe((res: any) => {
-        if (res.resul == "Se guardo con exito") {
-          this.alert("Archivo adjunto guardado");
-          location.reload();
-        }
-        return res;
-      });
+    if (this.archivoCapturado.size <= 10419200) {
+      this.archivos = this.archivoCapturado;
+      if (this.archivos != null) {
+        const formData = new FormData();
+        formData.append("Archivo", this.archivos);
+        formData.append("Nombre", this.nombreArchivo);
+        formData.append("idArchivo", this.id.toString());
+        formData.append(
+          "Extension",
+          this.archivos.name.toString().split(".").pop()
+        );
+        this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+        let Usuarioid = this.usarioLocalStote.usuarioid;
+        formData.append("UsuarioID", Usuarioid);
+        this.indicadoresservice
+          .GuardarAdjunto(formData)
+          .subscribe((res: any) => {
+            if (res.resul == "Se guardo con exito") {
+              this.alert("Archivo adjunto guardado");
+              location.reload();
+            }
+            return res;
+          });
+      }
+    } else {
+      Swal.fire("el archivo supera el tamaño permitido");
     }
   }
 

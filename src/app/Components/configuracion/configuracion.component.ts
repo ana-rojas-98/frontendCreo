@@ -43,10 +43,14 @@ export class ConfiguracionComponent implements OnInit {
   logoEstatico;
   captImg(event) {
     const imagen = event.target.files[0];
-    this.extraerBase64(imagen).then((i: any) => {
-      this.prev = i.base;
-    });
-    this.logo = imagen;
+    if (imagen.size <= 10419200) {
+      this.extraerBase64(imagen).then((i: any) => {
+        this.prev = i.base;
+      });
+      this.logo = imagen;
+    } else {
+      Swal.fire("el archivo supera el tamaño permitido");
+    }
   }
   extraerBase64 = async ($event: any) =>
     new Promise((resolve, reject) => {

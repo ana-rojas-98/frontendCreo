@@ -147,8 +147,12 @@ export class NuevoIndicadorComponent implements OnInit {
 
   archivoCapt(event) {
     this.archivoCapturado = event.target.files[0];
-    this.archivos = this.archivoCapturado;
-    this.archivoleer[0] = this.archivoCapturado;
+    if (this.archivoCapturado.size <= 10419200) {
+      this.archivos = this.archivoCapturado;
+      this.archivoleer[0] = this.archivoCapturado;
+    } else {
+      Swal.fire("el archivo supera el tamaño permitido");
+    }
     //otro metodo
     //this.leer(this.archivoCapturado);
   }

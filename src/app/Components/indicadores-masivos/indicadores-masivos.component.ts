@@ -19,8 +19,11 @@ import { CargandoService } from "src/app/services/cargando.service";
   styleUrls: ["./indicadores-masivos.component.scss"],
 })
 export class IndicadoresMasivosComponent implements OnInit {
-  constructor(private authService: AuthService, public router: Router,
-    public cargandoService: CargandoService) { }
+  constructor(
+    private authService: AuthService,
+    public router: Router,
+    public cargandoService: CargandoService
+  ) {}
   archivos: File = null;
   ensayo = [];
 
@@ -78,7 +81,6 @@ export class IndicadoresMasivosComponent implements OnInit {
 
   periodicidad(Posicion) {
     this.Registros[Posicion][3] = this.Periodicidad.value;
-
   }
 
   estandar(Posicion) {
@@ -96,7 +98,6 @@ export class IndicadoresMasivosComponent implements OnInit {
 
   subcategoria(Posicion) {
     this.Registros[Posicion][2] = this.Subcategoria.value;
-
   }
 
   ngOnInit() {
@@ -149,11 +150,13 @@ export class IndicadoresMasivosComponent implements OnInit {
   }
 
   getSubCategoriaFilter(Posicion, categoria) {
-    this.authService.getSubCategoria(this.Subcategoria).subscribe((res: any) => {
-      this.SubcategoriaOpciones[Posicion] = res.filter(
-        (item) => item.idCategoria == categoria
-      );
-    });
+    this.authService
+      .getSubCategoria(this.Subcategoria)
+      .subscribe((res: any) => {
+        this.SubcategoriaOpciones[Posicion] = res.filter(
+          (item) => item.idCategoria == categoria
+        );
+      });
   }
 
   capturarArchivo() {
@@ -161,12 +164,16 @@ export class IndicadoresMasivosComponent implements OnInit {
     const idInput = document.getElementById("in") as HTMLInputElement;
     for (let index = 0; index < idInput.files.length; index++) {
       const element = idInput.files[index];
-      this.archivos = element;
-      this.ensayo.push(this.archivos);
-      this.Registros.push([0, 0, 0, 0]);
-      this.EstandarOpciones.push(this.resultados);
-      this.CategoriaOpciones.push(this.resultadosCategoria);
-      this.SubcategoriaOpciones.push(this.resultadosSubCategoria);
+      if (element.size <= 1041920) {
+        this.archivos = element;
+        this.ensayo.push(this.archivos);
+        this.Registros.push([0, 0, 0, 0]);
+        this.EstandarOpciones.push(this.resultados);
+        this.CategoriaOpciones.push(this.resultadosCategoria);
+        this.SubcategoriaOpciones.push(this.resultadosSubCategoria);
+      } else {
+        Swal.fire("el archivo "+ element.name+ " supera el tamaño permitido");
+      }
     }
   }
 
@@ -189,19 +196,19 @@ export class IndicadoresMasivosComponent implements OnInit {
       const formD = new FormData();
       if (this.ensayo[j] == null) {
         return this.changeSuccessMessage(5, j);
-      } else if (this.Registros[j][0] == '') {
+      } else if (this.Registros[j][0] == "") {
         return this.changeSuccessMessage(1, j);
-      } else if (this.Registros[j][1] == '') {
+      } else if (this.Registros[j][1] == "") {
         return this.changeSuccessMessage(2, j);
-      } else if (this.Registros[j][2] == '') {
+      } else if (this.Registros[j][2] == "") {
         return this.changeSuccessMessage(3, j);
-      } else if (this.Registros[j][3] == '') {
+      } else if (this.Registros[j][3] == "") {
         return this.changeSuccessMessage(4, j);
       } else {
         contador++;
       }
       j++;
-    })
+    });
     if (contador == this.ensayo.length) {
       let comp = 0;
       let i = 0;
@@ -218,32 +225,41 @@ export class IndicadoresMasivosComponent implements OnInit {
         i++;
         this.cargandoService.ventanaCargando();
         this.authService.setIndicadorNuevo(formD).subscribe((res: any) => {
-          if (res.result == 'Exitoso'){
-            comp ++;
-            if (comp == i){
-              this.alerta("¡Indicadores creados exitosamente!")
-              this.router.navigate(['administrar-indicadores'])
+          if (res.result == "Exitoso") {
+            comp++;
+            if (comp == i) {
+              this.alerta("¡Indicadores creados exitosamente!");
+              this.router.navigate(["administrar-indicadores"]);
             }
           }
         });
-
-      })
+      });
     }
   }
 
-
   public changeSuccessMessage(i: number, Posicion) {
     if (i == 1) {
-      return this._success.next("¡Error!, debe seleccionar el estándar en la posición " + (Posicion + 1));
+      return this._success.next(
+        "¡Error!, debe seleccionar el estándar en la posición " + (Posicion + 1)
+      );
     }
     if (i == 2) {
-      return this._success.next("¡Error!, debe seleccionar la categoría en la posición " + (Posicion + 1));
+      return this._success.next(
+        "¡Error!, debe seleccionar la categoría en la posición " +
+          (Posicion + 1)
+      );
     }
     if (i == 3) {
-      return this._success.next("¡Error!, debe seleccionar la subcategoría en la posición " + (Posicion + 1));
+      return this._success.next(
+        "¡Error!, debe seleccionar la subcategoría en la posición " +
+          (Posicion + 1)
+      );
     }
     if (i == 4) {
-      return this._success.next("¡Error!, debe seleccionar la periodicidad en la posición " + (Posicion + 1));
+      return this._success.next(
+        "¡Error!, debe seleccionar la periodicidad en la posición " +
+          (Posicion + 1)
+      );
     }
     if (i == 5) {
       return this._success.next("¡Error!, en el archivo " + (Posicion + 1));
