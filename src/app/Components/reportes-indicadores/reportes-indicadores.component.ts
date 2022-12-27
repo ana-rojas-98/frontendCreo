@@ -327,8 +327,12 @@ export class ReportesIndicadoresComponent implements OnInit {
     });
   }
 
+  contadorCargando = 0;
   getindIcadores(dato) {
-    this.cargandoService.ventanaCargando();
+    if (this.contadorCargando == 0) {
+      this.cargandoService.ventanaCargando();
+      this.contadorCargando++;
+    }
     if (
       this.usuarioLocalStote.typeuser != "3" ||
       this.usuarioLocalStote.indicadorReportes == "todos"
@@ -379,6 +383,4 @@ export class ReportesIndicadoresComponent implements OnInit {
       a.click();
     });
   }
-
-  
 }

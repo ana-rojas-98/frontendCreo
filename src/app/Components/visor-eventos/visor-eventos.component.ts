@@ -10,6 +10,7 @@ import * as XLSX from "xlsx";
 import { FormGroup, FormControl } from "@angular/forms";
 import Swal from "sweetalert2";
 import { Router } from "@angular/router";
+import { CargandoService } from "src/app/services/cargando.service";
 
 @Component({
   selector: "app-visor-eventos",
@@ -27,7 +28,8 @@ export class VisorEventosComponent implements OnInit {
   constructor(
     private VisorEventosService: VisorEventosService,
     private reportesService: ReportesService,
-    public router: Router
+    public router: Router,
+    public cargandoService: CargandoService
   ) { }
 
   resultadosTabla = [];
@@ -88,6 +90,7 @@ export class VisorEventosComponent implements OnInit {
   }
 
   GetEventos() {
+    this.cargandoService.ventanaCargando();
     this.VisorEventosService.GetEventos().subscribe((res: any) => {
       this.resultadosTabla = res.map((item) => {
         this.resultadosModuloss.push(item.modulo);
@@ -98,6 +101,9 @@ export class VisorEventosComponent implements OnInit {
       this.resultadosTabla2 = this.resultadosTabla;
       this.resultadosModulos = new Set(this.resultadosModuloss);
       this.resultadosModulos = [...this.resultadosModulos];
+      if(this.resultadosTabla){
+        Swal.close()
+      }
     });
   }
 

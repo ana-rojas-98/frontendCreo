@@ -202,32 +202,21 @@ export class IndicadoresComponent implements OnInit {
   }
 
   getIndicadoresFilter() {
-    if (this.usuarioLocalStote.typeuser != "3") {
-      this.reportesService
-        .ConsultarIndicadoresAsignados()
-        .subscribe((res: any) => {
-          if (this.Subcategoria.value != "") {
-            this.resultadosTabla = res.filter(
-              (item) => item.idSubCategoria == this.Subcategoria.value
-            );
-          } else {
-            this.resultadosTabla = res.filter(
-              (item) =>
-                item.idCategoria == this.Categoria.value ||
-                item.idEstandar == this.Estandar.value ||
-                item.idSubCategoria == this.Subcategoria.value
-            );
+    this.cargandoService.ventanaCargando();
+    this.reportesService
+      .ConsultarIndicadoresAsignados()
+      .subscribe((res: any) => {
+        if (this.Categoria.value != "") {
+          this.resultadosTabla = res.filter(
+            (item) => item.idCategoria == this.Categoria.value
+          );
+          if (this.resultadosTabla) {
+            Swal.close();
           }
           this.resultadosTabla = this.resultadosTabla.sort();
           this.resultadosTabla = this.resultadosTabla.reverse();
-        });
-    }
-
-    if (this.usuarioLocalStote.typeuser == "3") {
-      let id = {
-        id: this.usuarioLocalStote.usuarioid,
-      };
-      this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
+          return true;
+        }
         if (this.Subcategoria.value != "") {
           this.resultadosTabla = res.filter(
             (item) => item.idSubCategoria == this.Subcategoria.value
@@ -240,10 +229,12 @@ export class IndicadoresComponent implements OnInit {
               item.idSubCategoria == this.Subcategoria.value
           );
         }
+        if (this.resultadosTabla) {
+          Swal.close();
+        }
         this.resultadosTabla = this.resultadosTabla.sort();
         this.resultadosTabla = this.resultadosTabla.reverse();
       });
-    }
   }
 
   alert(mensaje) {

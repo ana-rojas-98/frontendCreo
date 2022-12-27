@@ -21,8 +21,8 @@ export class DiligenciarIndicadorComponent implements OnInit {
     public router: Router,
     private indicadoresservice: IndicadoresService,
     private reportesService: ReportesService,
-    cargandoService: CargandoService
-  ) { }
+    public cargandoService: CargandoService
+  ) {}
   id = 0;
   accionVerModificar = "";
   modificar = false;
@@ -72,8 +72,8 @@ export class DiligenciarIndicadorComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.authService.enviarCorreos().subscribe((res: any) => { });
-    this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
+    this.authService.enviarCorreos().subscribe((res: any) => {});
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
 
     this.usuarioLocalStote;
     this.consultarIndicador();
@@ -105,6 +105,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
   casos = 0;
 
   consultarIndicador() {
+    this.cargandoService.ventanaCargando();
     if (this.usuarioLocalStote.typeuser == "3") {
       let id = {
         id: this.usuarioLocalStote.usuarioid,
@@ -112,11 +113,19 @@ export class DiligenciarIndicadorComponent implements OnInit {
       this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
         res.map((item) => {
           if (item.idIndicador == this.id) {
-            if (item.diligenciar == false && this.accionVerModificar == "editar" && this.modificar == true) {
+            if (
+              item.diligenciar == false &&
+              this.accionVerModificar == "editar" &&
+              this.modificar == true
+            ) {
               this.casos = 1;
               return this.router.navigate(["/indicadores"]);
             }
-            if (item.ver == false && this.accionVerModificar == "ver" && this.ver == true) {
+            if (
+              item.ver == false &&
+              this.accionVerModificar == "ver" &&
+              this.ver == true
+            ) {
               this.casos = 1;
               return this.router.navigate(["/indicadores"]);
             }
@@ -126,11 +135,9 @@ export class DiligenciarIndicadorComponent implements OnInit {
             this.resultados = true;
           }
         });
-        if (this.casos == 1)
-        {
+        if (this.casos == 1) {
           return this.router.navigate(["/indicadores"]);
-        }
-        else if (this.resultados != true) {
+        } else if (this.resultados != true) {
           this.router.navigate(["private"]);
         }
       });
@@ -139,6 +146,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
       this.word = true;
       this.pdf = true;
     }
+    Swal.close();
   }
 
   filtrarInfo() {
@@ -258,6 +266,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
           i++
         )
       );
+      this.cargandoService.ventanaCargando();
       this.indicadoresservice
         .GuardarRespuestasIndicador(contenidos)
         .subscribe((res: any) => {
@@ -300,6 +309,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
             i++
           )
         );
+        this.cargandoService.ventanaCargando();
         this.indicadoresservice
           .FinalizarIndicador(contenidos)
           .subscribe((res: any) => {
@@ -336,7 +346,6 @@ export class DiligenciarIndicadorComponent implements OnInit {
     this.resultadosHTML.map((item) => {
       if (item.idFila == 1) {
       } else {
-
         contents = document.getElementById((item.idFila - 1).toString());
         item.valor = contents.value;
         contenidos.push(item);
@@ -430,7 +439,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
                     if (bandera2 == 1) {
                       array3.push(
                         parseFloat(array3[array3.length - 1]) +
-                        parseFloat(array2[i + 1])
+                          parseFloat(array2[i + 1])
                       );
                       array3.splice(array3.length - 2, 1);
                     } else {
@@ -556,7 +565,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
                       if (bandera2 == 1) {
                         array3.push(
                           parseFloat(array3[array3.length - 1]) +
-                          parseFloat(array2[i + 1])
+                            parseFloat(array2[i + 1])
                         );
                         array3.splice(array3.length - 2, 1);
                       } else {

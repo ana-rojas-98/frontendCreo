@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
+import { CargandoService } from "src/app/services/cargando.service";
 import Swal from "sweetalert2";
 
 @Component({
@@ -9,7 +10,8 @@ import Swal from "sweetalert2";
   styleUrls: ["./gestor-noti.component.scss"],
 })
 export class GestorNotiComponent implements OnInit {
-  constructor(private authService: AuthService, public router: Router) {}
+  constructor(private authService: AuthService, public router: Router,
+    public cargandoService: CargandoService) {}
 
   resultadosNotificaciones: any = [];
   crearNotificacion = true
@@ -62,6 +64,7 @@ export class GestorNotiComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
+        this.cargandoService.ventanaCargando();
         this.authService
           .EliminarNotificacion(idNotificacion)
           .subscribe((res: any) => {
@@ -79,6 +82,7 @@ export class GestorNotiComponent implements OnInit {
   }
 
   traer() {
+    this.cargandoService.ventanaCargando();
     this.authService
       .getNotificacion(this.notificacion)
       .subscribe((res: any) => {
@@ -87,6 +91,9 @@ export class GestorNotiComponent implements OnInit {
         });
         this.resultadosNotificaciones = this.resultadosNotificaciones.sort();
         this.resultadosNotificaciones = this.resultadosNotificaciones.reverse();
+        if(this.resultadosNotificaciones){
+          Swal.close()
+        }
       });
   }
 }

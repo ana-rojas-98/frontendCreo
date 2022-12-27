@@ -204,9 +204,21 @@ export class AdministrarIndicadoresComponent implements OnInit {
   }
 
   getIndicadoresFilter() {
+    this.cargandoService.ventanaCargando();
     this.reportesService
       .ConsultarIndicadoresAsignados()
       .subscribe((res: any) => {
+        if (this.Categoria.value != "") {
+          this.resultadosTabla = res.filter(
+            (item) => item.idCategoria == this.Categoria.value
+          );
+          if (this.resultadosTabla) {
+            Swal.close();
+          }
+          this.resultadosTabla = this.resultadosTabla.sort();
+          this.resultadosTabla = this.resultadosTabla.reverse();
+          return true;
+        }
         if (this.Subcategoria.value != "") {
           this.resultadosTabla = res.filter(
             (item) => item.idSubCategoria == this.Subcategoria.value
@@ -218,6 +230,9 @@ export class AdministrarIndicadoresComponent implements OnInit {
               item.idEstandar == this.Estandar.value ||
               item.idSubCategoria == this.Subcategoria.value
           );
+        }
+        if (this.resultadosTabla) {
+          Swal.close();
         }
         this.resultadosTabla = this.resultadosTabla.sort();
         this.resultadosTabla = this.resultadosTabla.reverse();

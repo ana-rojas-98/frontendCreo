@@ -57,7 +57,7 @@ export class ReportesTablerosComponent implements OnInit {
   resultadosTabla = [];
 
   getReportes() {
-    this.cargandoService.ventanaCargando();
+   this.cargandoService.ventanaCargando();
     this.reportesService.ConsultaReportes().subscribe((res: any) => {
       res.map((item) => {
         if (
