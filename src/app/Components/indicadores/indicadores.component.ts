@@ -215,7 +215,6 @@ export class IndicadoresComponent implements OnInit {
           }
           this.resultadosTabla = this.resultadosTabla.sort();
           this.resultadosTabla = this.resultadosTabla.reverse();
-          return true;
         }
         if (this.Subcategoria.value != "") {
           this.resultadosTabla = res.filter(
