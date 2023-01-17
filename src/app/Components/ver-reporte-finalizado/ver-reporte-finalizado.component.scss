@@ -3,10 +3,17 @@
 .contenedor {
   @include contenedor;
 }
+
 .cuerpo {
   @include body;
+
   p {
     margin-bottom: 10px;
+  }
+
+  img {
+    width: 25px;
+    height: 25px;
   }
 }
 
@@ -24,6 +31,7 @@ h1 {
   margin-bottom: 20px;
   margin-top: 20px;
 }
+
 .guardar2 {
   width: 120px;
   height: 47px;
@@ -54,7 +62,7 @@ h1 {
   background-color: #2BAEE5;
 }
 
-.finalizar{
+.finalizar {
   align-items: center;
   display: flex;
 }
@@ -71,6 +79,7 @@ h1 {
 
 .contenedorNumeroColumnas {
   width: 100%;
+
   .selector {
     background: #ffffff;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
@@ -86,6 +95,7 @@ h1 {
 .contenedorTitulo {
   margin-left: 20px;
   margin-bottom: 20px;
+
   input {
     width: 375px;
     height: 50px;
@@ -118,6 +128,7 @@ h1 {
   .contenedorSelect1 {
     justify-self: flex-start;
   }
+
   .contenedorSelect2 {
     justify-self: flex-end;
   }
@@ -137,12 +148,14 @@ h1 {
 
 .data {
   margin-top: 30px;
+
   img {
     height: 20px;
     width: 20px;
     float: right;
     margin: 10px;
   }
+
   .img {
     float: right;
   }
@@ -191,8 +204,10 @@ h1 {
 .datosUsuario {
   margin-top: 50px;
 }
+
 .colorerVisualizar {
   display: inline;
+
   h3 {
     display: inline;
     margin-right: 5px;
@@ -232,4 +247,33 @@ h1 {
 .finalizar {
   align-items: center;
   display: flex;
+}
+
+.contenedorDescargas {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 20px;
+  margin-top: 27px;
+  margin-bottom: 20px;
+
+  .button {
+    width: 350px;
+    height: 30px;
+    background: $buttonDownload;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45), 0px 0px 1px rgba(0, 0, 0, 0.45);
+    border-radius: 25px;
+    border: 1px;
+    margin-right: 20px;
+    color: #ffffff;
+  }
+
+  .botonImagen {
+    padding: 0;
+    border: 0;
+    margin-right: 10px;
+    width: 25px;
+    height: 25px;
+  }
 }

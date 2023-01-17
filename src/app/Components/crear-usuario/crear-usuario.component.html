@@ -6,43 +6,22 @@
       <h1>{{ titulo }}</h1>
     </div>
     <div class="text-center mx-5 px-5">
-      <ngb-alert
-        #selfClosingAlert
-        *ngIf="successMessage"
-        type="danger"
-        [dismissible]="false"
-        id="Alert"
-        (closed)="successMessage = ''"
-        >{{ successMessage }}
+      <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" [dismissible]="false" id="Alert"
+        (closed)="successMessage = ''">{{ successMessage }}
       </ngb-alert>
     </div>
     <div class="container-input">
       <div>
         <p>Nombre*</p>
-        <input
-          class="input"
-          type="text"
-          [(ngModel)]="NuevoUsuario.Fullname"
-          [disabled]="readonly"
-        />
+        <input class="input" type="text" [(ngModel)]="NuevoUsuario.Fullname" [disabled]="readonly" />
       </div>
       <div>
         <p>Correo electrónico*</p>
-        <input
-          class="input"
-          type="email"
-          [(ngModel)]="NuevoUsuario.Email"
-          [disabled]="disabledEmail"
-        />
+        <input class="input" type="email" [(ngModel)]="NuevoUsuario.Email" [disabled]="disabledEmail" />
       </div>
       <div>
         <p>Teléfono</p>
-        <input
-          class="input"
-          type="text"
-          [(ngModel)]="NuevoUsuario.Telefono"
-          [disabled]="readonly"
-        />
+        <input class="input" type="text" [(ngModel)]="NuevoUsuario.Telefono" [disabled]="readonly" />
       </div>
       <div *ngIf="selectEstado">
         <h3>Estado</h3>
@@ -53,55 +32,24 @@
         </select>
       </div>
       <div>
-        <input
-          *ngIf="mostaraAsinnarIndicadorCrear"
-          class="boton"
-          type="button"
-          value="Asignar indicadores"
-          (click)="enviarUsuarioId()"
-        />
+        <input *ngIf="mostaraAsinnarIndicadorCrear" class="boton" type="button" value="Asignar indicadores"
+          (click)="enviarUsuarioId()" />
       </div>
     </div>
     <div class="container-tipos-usuarios">
       <h3>Tipo de usuario*</h3>
-      <label
-        >Super Administrador
-        <input
-          type="radio"
-          class="checkbox"
-          value="1"
-          (click)="inputSuperAdministrador()"
-          [disabled]="readonlySuperAdministrador"
-          [(ngModel)]="NuevoUsuario.Typeuser"
-        />
+      <label>Super Administrador
+        <input type="radio" class="checkbox" value="1" (click)="inputSuperAdministrador()"
+          [disabled]="readonlySuperAdministrador" [(ngModel)]="NuevoUsuario.Typeuser" />
       </label>
-      <label
-        >Administrador<input
-          type="radio"
-          class="checkbox"
-          value="2"
-          (click)="inputAdministrador()"
-          [(ngModel)]="NuevoUsuario.Typeuser"
-          [disabled]="readonlyAdministrador"
-        />
+      <label>Administrador<input type="radio" class="checkbox" value="2" (click)="inputAdministrador()"
+          [(ngModel)]="NuevoUsuario.Typeuser" [disabled]="readonlyAdministrador" />
       </label>
-      <label
-        >Usuario<input
-          type="radio"
-          class="checkbox"
-          value="3"
-          (click)="inputUsuario()"
-          [(ngModel)]="NuevoUsuario.Typeuser"
-          [disabled]="readonly"
-        />
+      <label>Usuario<input type="radio" class="checkbox" value="3" (click)="inputUsuario()"
+          [(ngModel)]="NuevoUsuario.Typeuser" [disabled]="readonly" />
       </label>
-      <input
-        *ngIf="mostaraAsignarIndicadorModificar"
-        class="boton1"
-        type="button"
-        value="Asignar indicadores"
-        (click)="enviarUsuarioId()"
-      />
+      <input *ngIf="mostaraAsignarIndicadorModificar" class="boton1" type="button" value="Asignar indicadores"
+        (click)="enviarUsuarioId()" />
     </div>
     <div class="resultados-tabla">
       <table class="tabla-indicadores">
@@ -118,93 +66,48 @@
           <tr>
             <td>Administrador de indicadores</td>
             <td>
-              <input
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoAdministrarIndicadores.Crear"
-                [(ngModel)]="administrarIndicadores.Crear"
-                [disabled]="readonlyTabla"
-              />
+              <input type="checkbox" class="checkbox" *ngIf="permisoAdministrarIndicadores.Crear"
+                [(ngModel)]="administrarIndicadores.Crear" [disabled]="readonlyTabla" />
             </td>
             <td>
-              <input
-                [disabled]="readonlyTabla"
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoAdministrarIndicadores.Ver"
-                [(ngModel)]="administrarIndicadores.Ver"
-                [disabled]="readonlyTabla"
-              />
+              <input [disabled]="readonlyTabla" type="checkbox" class="checkbox"
+                *ngIf="permisoAdministrarIndicadores.Ver" [(ngModel)]="administrarIndicadores.Ver"
+                [disabled]="readonlyTabla" />
             </td>
             <td>
-              <input
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoAdministrarIndicadores.Editar"
-                [(ngModel)]="administrarIndicadores.Editar"
-                [disabled]="readonlyTabla"
-              />
+              <input type="checkbox" class="checkbox" *ngIf="permisoAdministrarIndicadores.Editar"
+                [(ngModel)]="administrarIndicadores.Editar" [disabled]="readonlyTabla" />
             </td>
             <td>
-              <input
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoAdministrarIndicadores.Eliminat"
-                [(ngModel)]="administrarIndicadores.Eliminat"
-                [disabled]="readonlyTabla"
-              />
+              <input type="checkbox" class="checkbox" *ngIf="permisoAdministrarIndicadores.Eliminat"
+                [(ngModel)]="administrarIndicadores.Eliminat" [disabled]="readonlyTabla" />
             </td>
           </tr>
           <tr>
             <td>Administración de usuarios y permisos</td>
             <td>
-              <input
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoAdministrarPermisos.Crear"
-                [(ngModel)]="administrarPermisos.Crear"
-                [disabled]="readonlyTabla"
-              />
+              <input type="checkbox" class="checkbox" *ngIf="permisoAdministrarPermisos.Crear"
+                [(ngModel)]="administrarPermisos.Crear" [disabled]="readonlyTabla" />
             </td>
             <td>
-              <input
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoAdministrarPermisos.Ver"
-                [(ngModel)]="administrarPermisos.Ver"
-                [disabled]="readonlyTabla"
-              />
+              <input type="checkbox" class="checkbox" *ngIf="permisoAdministrarPermisos.Ver"
+                [(ngModel)]="administrarPermisos.Ver" [disabled]="readonlyTabla" />
             </td>
             <td>
-              <input
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoAdministrarPermisos.Editar"
-                [(ngModel)]="administrarPermisos.Editar"
-                [disabled]="readonlyTabla"
-              />
+              <input type="checkbox" class="checkbox" *ngIf="permisoAdministrarPermisos.Editar"
+                [(ngModel)]="administrarPermisos.Editar" [disabled]="readonlyTabla" />
             </td>
             <td>
-              <input
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoAdministrarPermisos.Eliminat"
-                [(ngModel)]="administrarPermisos.Eliminat"
-                [disabled]="readonlyTabla"
-              />
+              <input type="checkbox" class="checkbox" *ngIf="permisoAdministrarPermisos.Eliminat"
+                [(ngModel)]="administrarPermisos.Eliminat" [disabled]="readonlyTabla" />
             </td>
           </tr>
           <tr>
             <td>Visor de eventos</td>
             <td></td>
             <td>
-              <input
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoVisorEventos.Ver"
-                [(ngModel)]="visorEventos.Ver"
-                [disabled]="readonlyTabla"
-              />
+              <input type="checkbox" class="checkbox" *ngIf="permisoVisorEventos.Ver" [(ngModel)]="visorEventos.Ver"
+                [disabled]="readonlyTabla" />
             </td>
             <td></td>
             <td></td>
@@ -212,79 +115,39 @@
           <tr>
             <td>Gestor de notificaciones</td>
             <td>
-              <input
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoGestorNotificaciones.Crear"
-                [(ngModel)]="gestorNotificaciones.Crear"
-                [disabled]="readonlyTabla"
-              />
+              <input type="checkbox" class="checkbox" *ngIf="permisoGestorNotificaciones.Crear"
+                [(ngModel)]="gestorNotificaciones.Crear" [disabled]="readonlyTabla" />
             </td>
             <td>
-              <input
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoGestorNotificaciones.Ver"
-                [(ngModel)]="gestorNotificaciones.Ver"
-                [disabled]="readonlyTabla"
-              />
+              <input type="checkbox" class="checkbox" *ngIf="permisoGestorNotificaciones.Ver"
+                [(ngModel)]="gestorNotificaciones.Ver" [disabled]="readonlyTabla" />
             </td>
             <td>
-              <input
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoGestorNotificaciones.Editar"
-                [(ngModel)]="gestorNotificaciones.Editar"
-                [disabled]="readonlyTabla"
-              />
+              <input type="checkbox" class="checkbox" *ngIf="permisoGestorNotificaciones.Editar"
+                [(ngModel)]="gestorNotificaciones.Editar" [disabled]="readonlyTabla" />
             </td>
             <td>
-              <input
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoGestorNotificaciones.Eliminat"
-                [(ngModel)]="gestorNotificaciones.Eliminat"
-                [disabled]="readonlyTabla"
-              />
+              <input type="checkbox" class="checkbox" *ngIf="permisoGestorNotificaciones.Eliminat"
+                [(ngModel)]="gestorNotificaciones.Eliminat" [disabled]="readonlyTabla" />
             </td>
           </tr>
           <tr>
             <td>Reportes</td>
             <td>
-              <input
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoReportes.Crear"
-                [(ngModel)]="reportes.Crear"
-                [disabled]="readonlyTabla"
-              />
+              <input type="checkbox" class="checkbox" *ngIf="permisoReportes.Crear" [(ngModel)]="reportes.Crear"
+                [disabled]="readonlyTabla" />
             </td>
             <td>
-              <input
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoReportes.Ver"
-                [(ngModel)]="reportes.Ver"
-                [disabled]="readonlyTabla"
-              />
+              <input type="checkbox" class="checkbox" *ngIf="permisoReportes.Ver" [(ngModel)]="reportes.Ver"
+                [disabled]="readonlyTabla" />
             </td>
             <td>
-              <input
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoReportes.Editar"
-                [(ngModel)]="reportes.Editar"
-                [disabled]="readonlyTabla"
-              />
+              <input type="checkbox" class="checkbox" *ngIf="permisoReportes.Editar" [(ngModel)]="reportes.Editar"
+                [disabled]="readonlyTabla" />
             </td>
             <td>
-              <input
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoReportes.Eliminat"
-                [(ngModel)]="reportes.Eliminat"
-                [disabled]="readonlyTabla"
-              />
+              <input type="checkbox" class="checkbox" *ngIf="permisoReportes.Eliminat" [(ngModel)]="reportes.Eliminat"
+                [disabled]="readonlyTabla" />
             </td>
           </tr>
           <tr>
@@ -292,13 +155,8 @@
             <td></td>
             <td></td>
             <td>
-              <input
-                type="checkbox"
-                class="checkbox"
-                *ngIf="permisoConfiguracion.Editar"
-                [(ngModel)]="configuracion.Editar"
-                [disabled]="readonlyTabla"
-              />
+              <input type="checkbox" class="checkbox" *ngIf="permisoConfiguracion.Editar"
+                [(ngModel)]="configuracion.Editar" [disabled]="readonlyTabla" />
             </td>
             <td></td>
           </tr>
@@ -307,41 +165,18 @@
     </div>
     <div *ngIf="readonlyReportes" class="indicadoresReportes" [formGroup]="permisosReportes">
       <p>Indicadores para reportes:</p>
-      <label
-        >Asignados<input
-          type="radio"
-          class="checkbox"
-          value="asignados"
-          [(ngModel)]="administrarIndicadores.Reportes"
-          formControlName="permisosReportes"
-          
-        />
+      <label>Asignados<input type="radio" class="checkbox" value="asignados"
+          [(ngModel)]="administrarIndicadores.Reportes" formControlName="permisosReportes" />
       </label>
-      <label
-        >Todos<input
-          type="radio"
-          class="checkbox"
-          value="todos"
-          formControlName="permisosReportes"
-          [(ngModel)]="administrarIndicadores.Reportes"
-        />
+      <label>Todos<input type="radio" class="checkbox" value="todos" formControlName="permisosReportes"
+          [(ngModel)]="administrarIndicadores.Reportes" />
       </label>
     </div>
     <div class="container-button">
-      <input
-        [routerLink]="['/administrar-usuarios']"
-        [routerLinkActive]="['link-active']"
-        class="button-cancelar"
-        type="button"
-        value="Cancelar"
-      />
-      <input
-        *ngIf="mostaraGuardar"
-        class="button-enviar"
-        type="button"
-        value="Guardar"
-        (click)="asignarIndicadores()"
-      />
+      <input [routerLink]="['/administrar-usuarios']" [routerLinkActive]="['link-active']" class="button-cancelar"
+        type="button" value="Cancelar" />
+      <input *ngIf="mostaraGuardar" class="button-enviar" type="button" value="Guardar"
+        (click)="asignarIndicadores()" />
     </div>
   </div>
 </div>

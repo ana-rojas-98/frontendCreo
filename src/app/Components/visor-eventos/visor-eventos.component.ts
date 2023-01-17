@@ -175,7 +175,7 @@ export class VisorEventosComponent implements OnInit {
 
   changeFecha() {
     if (this.fechaFinal < this.fechaInicial) {
-      Swal.fire("La fecha inicial debe ser menor a la final");
+      Swal.fire("Recuerde que la fecha inicial debe ser menor a la final");
       this.fechaFinal = this.fechaInicial;
     }
 

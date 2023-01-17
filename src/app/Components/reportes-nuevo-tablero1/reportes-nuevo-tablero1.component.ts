@@ -102,15 +102,13 @@ export class ReportesNuevoTablero1Component implements OnInit {
         let idArchivo = {
           idArchivo: parseInt(this.idSelecionados[i]),
         };
-        this.indicadoresService
+      this.indicadoresService
           .VerDiligenciarIndicadorReportes(idArchivo)
           .subscribe((res: any) => {
             res.map((item) => {
               if (item.idFila != 1) {
                 this.arrayId.push(item.valor);
-                this.arrayIndicadores.push(
-                  item.archivo + "-" + item.anio + "-" + item.valor
-                );
+                this.arrayIndicadores.push("I: " + item.archivo + "- A: " + item.anio + "- P: " + item.periodicidad + "- V: " + item.valor);
               }
             });
             this.resultadosSeleccionados = this.resultadosSeleccionados.sort();
@@ -667,7 +665,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
     // this.auxColoresInput = 0;
   }
 
-  limpiarData(){
+  limpiarData() {
     this.data = [];
     this.dataInput = "";
     this.columnasInput = "";
@@ -681,7 +679,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
     this.coloresVisualizar = [];
     this.columnasVisualizar = "";
     //this.botonGraficar = false;
-   //this.mostrarBotonMenosColumnas = true;
+    //this.mostrarBotonMenosColumnas = true;
   }
 
   coloresFuncion() {
@@ -756,7 +754,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
         ";";
     }
     ctx.id = parseInt(idRow) / 3 + "-" + idCol + "-" + type.toString();
-    this.addData(ctx, parseInt(idRow) / 3, idCol, type.toString(), "","", this.nombreGrafica, JSON.stringify(data), columnas.toString());
+    this.addData(ctx, parseInt(idRow) / 3, idCol, type.toString(), "", "", this.nombreGrafica, JSON.stringify(data), columnas.toString());
     myParent.appendChild(ctx);
     new Chart(ctx, {
       type: type.toString(),
@@ -832,7 +830,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
     }
   }
 
-  finalizar(){
+  finalizar() {
     if (this.NombreReporte == "") {
       Swal.fire("Debe ingresar nombre del reporte")
     }
@@ -841,8 +839,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
     }
     else {
       let con = confirm("¿Desea finalizar el reporte?")
-      if (con == true)
-      {
+      if (con == true) {
         this.enviar.forEach(element => {
           let a: any;
           a = document.getElementById(element.idElement.toString());

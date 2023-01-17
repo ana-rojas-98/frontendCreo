@@ -127,8 +127,7 @@ export class EditarReporteComponent implements OnInit {
           res.map((item) => {
             if (item.idFila != 1) {
               this.arrayId.push(item.valor);
-              this.arrayIndicadores.push(item.archivo + "-" + item.anio + "-" + item.valor);
-            }
+              this.arrayIndicadores.push("I: " + item.archivo + "- A: " + item.anio + "- P: " + item.periodicidad + "- V: " + item.valor);            }
           });
           this.resultadosSeleccionados = this.resultadosSeleccionados.sort();
           this.resultadosSeleccionados = this.resultadosSeleccionados.reverse();
@@ -220,7 +219,8 @@ export class EditarReporteComponent implements OnInit {
         }
         return item;
       });
-      this.idSelecionados = this.resultadosTabla[0].indicadores;
+      let ids = this.resultadosTabla[0].indicadores;
+      this.idSelecionados = ids.split(",", 2);
       this.getindIcadores();
     });
   }

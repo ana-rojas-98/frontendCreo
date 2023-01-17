@@ -593,13 +593,13 @@ export class CrearUsuarioComponent implements OnInit {
 
   asignarIndicadores() {
     if (this.NuevoUsuario.Fullname == "") {
-      this.changeSuccessMessage(1);
+      this.alert("¡Error!, el campo nombre no puede estar vacío");
     } else {
       if (this.NuevoUsuario.Email == "") {
-        this.changeSuccessMessage(2);
+        this.alert("¡Error!, el campo correo electrónico no puede estar vacío");
       } else {
         if (this.NuevoUsuario.Typeuser == "") {
-          this.changeSuccessMessage(3);
+          this.alert("¡Error!, debe seleccionar un tipo de usuario");
         } else {
           if (this.modificar == true) {
             this.cargandoService.ventanaCargando();
@@ -612,7 +612,7 @@ export class CrearUsuarioComponent implements OnInit {
                 } else if (
                   res.resul == "el usuario no se encuentra registrado"
                 ) {
-                  this.changeSuccessMessage(4);
+                  this.alert("¡Error!, el correo ya se encuentra registrado");
                 } else {
                   return this.alert("Error al modificar el usuario");
                 }
@@ -630,7 +630,7 @@ export class CrearUsuarioComponent implements OnInit {
                 } else if (
                   res.resul == "El correo ya se encuentra registrado"
                 ) {
-                  this.changeSuccessMessage(4);
+                  this.alert("¡Error!, el correo ya se encuentra registrado");
                 } else {
                   return this.alert("Error al registrar el usuario");
                 }

@@ -1,5 +1,5 @@
 import { IndicadoresService } from "./../../services/indicadores.service";
-import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from "@angular/core";
 import { ReportesService } from "./../../services/reportes.service";
 import * as $ from "jquery";
 import Swal from "sweetalert2";
@@ -7,6 +7,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import Chart from "chart.js/auto";
 import { NgbModalConfig, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { element } from "protractor";
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: "app-ver-reporte-finalizado",
@@ -19,6 +21,20 @@ export class VerReporteFinalizadoComponent implements OnInit {
     static: false,
   })
   template!: TemplateRef<any>;
+  PDF(){
+    let DATA: any = document.getElementById('content1');
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 208;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL('image/png');
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      PDF.save('archivo.pdf');
+    });
+  }
+
+ 
 
   constructor(
     private reportesService: ReportesService,
