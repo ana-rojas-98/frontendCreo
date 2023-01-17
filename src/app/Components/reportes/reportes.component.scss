@@ -8,6 +8,7 @@
 }
 .contenedor-div {
   @include centerFlex;
+  gap: 5rem;
 }
 
 h1 {
@@ -20,12 +21,13 @@ h1 {
 .reportes {
   @include centerFlex;
   flex-direction: column;
-  margin-right: 154px;
+  //margin-right: 154px;
   width: 216px;
   height: 176px;
   background-color: #d9d9d9;
   border-radius: 15px;
-
+  align-items: center;
+  justify-content: center;
   img {
     width: 100px;
     height: 100px;

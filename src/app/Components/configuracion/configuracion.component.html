@@ -7,33 +7,24 @@
         </div>
         <div class="text-center mx-5">
             <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" [dismissible]="false" id="Alert"
-              (closed)="successMessage = ''">{{ successMessage }}
+                (closed)="successMessage = ''">{{ successMessage }}
             </ngb-alert>
-          </div>
+        </div>
         <div class="logo-nombre">
             <div class="logo">
                 <h5>Logo empresa</h5>
-                <div >
-                <img [src]="prev" alt="logo-empresa">
-                <img [src]="logoEstatico" alt=".">
+                <div>
+                    <img id="nuevologo" [src]="prev" alt="logo-empresa">
+                    <img [src]="logoEstatico" alt=".">
                 </div>
-                <button
-                    class="cambiar-logo"
-                    (click)="capturado.click()">
+                <button class="cambiar-logo" (click)="capturado.click()">
                     Cambiar logo
                 </button>
-                <input
-                    type="file"
-                    hidden (change)="captImg($event)"
-                    #capturado
-                    id="image"
-                    accept=".jpg,.png">
+                <input type="file" hidden (change)="captImg($event)" #capturado id="image" accept=".jpg,.png">
             </div>
             <div class="nombre">
                 <h5 class="mb-2">Nombre empresa</h5>
-                <input
-                type="text"
-                [(ngModel)]="configuracion.nombreEmpresa">
+                <input type="text" [(ngModel)]="configuracion.nombreEmpresa">
             </div>
         </div>
         <div class="titulo">
@@ -42,19 +33,11 @@
         <div class="tiempo">
             <div class="inicio">
                 <h5 class="mb-2">Año inicial</h5>
-                <input
-                type="number"
-                maxlength="4"
-                [(ngModel)]="configuracion.inicial"
-                >
+                <input type="number" maxlength="4" [(ngModel)]="configuracion.inicial">
             </div>
             <div class="final">
                 <h5 class="mb-2">Año final</h5>
-                <input
-                type="number"
-                maxlength="4"
-                [(ngModel)]="configuracion.final"
-                >
+                <input type="number" maxlength="4" [(ngModel)]="configuracion.final">
             </div>
         </div>
         <div class="botones">

@@ -4,22 +4,18 @@
   <div class="cuerpo">
     <h1 class="titulo">Tablero</h1>
     <div class="contenedor-div">
-      <div
-        class="reportes"
-        [routerLink]="['/reportes-indicadores']"
-        routerLinkActive="router-link-active"
-      >
-        <img src="../../../assets/imagenes/reporteIndicador.svg" alt="" />
-        <p>Reporte de Indicadores</p>
-      </div>
-      <div
-        [routerLink]="['/reportes-tableros']"
-        routerLinkActive="router-link-active"
-        class="reportes"
-      >
-        <img src="../../../assets/imagenes/reportesTableros.svg" alt="" />
-        <p>Tableros</p>
-      </div>
+      <a type="button">
+        <div class="reportes" [routerLink]="['/reportes-indicadores']" routerLinkActive="router-link-active">
+          <img src="../../../assets/imagenes/reporteIndicador.svg" alt="" />
+          <p>Reporte de Indicadores</p>
+        </div>
+      </a>
+      <a type="button">
+        <div [routerLink]="['/reportes-tableros']" routerLinkActive="router-link-active" class="reportes">
+          <img src="../../../assets/imagenes/reportesTableros.svg" alt="" />
+          <p>Tableros</p>
+        </div>
+      </a>     
     </div>
   </div>
 </div>

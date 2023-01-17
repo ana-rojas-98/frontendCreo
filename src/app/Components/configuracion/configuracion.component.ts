@@ -25,7 +25,8 @@ export class ConfiguracionComponent implements OnInit {
   ngOnInit() {
     this.authService.enviarCorreos().subscribe((res: any) => {});
     this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
-
+    let a = document.getElementById("nuevologo");
+    a.style.display = "none";
     if (this.usarioLocalStote.configuracionEditar == false) {
       this.router.navigate(["private"]);
       return true;
@@ -41,6 +42,7 @@ export class ConfiguracionComponent implements OnInit {
   logo: File = null;
   prev: string;
   logoEstatico;
+
   captImg(event) {
     const imagen = event.target.files[0];
     if (imagen.size <= 10419200) {
@@ -49,9 +51,12 @@ export class ConfiguracionComponent implements OnInit {
       });
       this.logo = imagen;
     } else {
-      Swal.fire("el archivo supera el tamaño permitido");
+      Swal.fire("El archivo supera el tamaño permitido");
     }
+    let a = document.getElementById("nuevologo");
+    a.style.display = "inline";
   }
+
   extraerBase64 = async ($event: any) =>
     new Promise((resolve, reject) => {
       try {

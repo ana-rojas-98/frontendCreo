@@ -884,22 +884,31 @@ export class EditarReporteComponent implements OnInit {
       Swal.fire("Debe ingresar alguna fila")
     }
     else {
-      let con = confirm("¿Desea finalizar el reporte?")
-      if (con == true) {
-        this.enviar.forEach(element => {
-          let a: any;
-          a = document.getElementById(element.idElement.toString());
-          element.valor = a.value;
-        });
-        this.enviar[this.enviar.length - 1].nombreReporte = this.NombreReporte;
-        this.reportesService.FinalizarReporte(this.enviar).subscribe((res: any) => {
-          if (res.result = "Guardado") {
-            Swal.fire("Guardado con éxito");
-            this.router.navigate(["reportes-tableros"]);
-          }
-          return res;
-        });
-      }
+      Swal.fire({
+        title: "¿Desea finalizar el reporte?",
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: "Confirmar",
+        denyButtonText: `Cancelar`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          this.enviar.forEach(element => {
+            let a: any;
+            a = document.getElementById(element.idElement.toString());
+            element.valor = a.value;
+          });
+          this.enviar[this.enviar.length - 1].nombreReporte = this.NombreReporte;
+          this.reportesService.FinalizarReporte(this.enviar).subscribe((res: any) => {
+            if (res.result = "Guardado") {
+              Swal.fire("Guardado con éxito");
+              this.router.navigate(["reportes-tableros"]);
+            }
+            return res;
+          });
+        } else if (result.isDenied) {
+        }
+      });
     }
   }
 

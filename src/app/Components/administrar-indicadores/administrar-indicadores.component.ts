@@ -239,9 +239,16 @@ export class AdministrarIndicadoresComponent implements OnInit {
   }
 
   Eliminar(id2) {
-    let a = confirm("¿Está seguro que desea borrar el indicador?");
-    if (a) {
-      this.indicador.id = id2;
+    Swal.fire({
+      title: "¿Está seguro que desea borrar el indicador?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Confirmar",
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.indicador.id = id2;
       this.cargandoService.ventanaCargando();
       this.authService.Eliminar(this.indicador).subscribe((res: any) => {
         if (res.resul == "ok") {
@@ -250,7 +257,9 @@ export class AdministrarIndicadoresComponent implements OnInit {
         }
         return res;
       });
-    }
+      } else if (result.isDenied) {
+      }
+    });
   }
 
   DuplicarIndicador(id2) {

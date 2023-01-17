@@ -19,7 +19,7 @@ export class ArchivosAdjuntosComponent implements OnInit {
     public router: Router,
     private indicadoresservice: IndicadoresService,
     private reportesService: ReportesService
-  ) {}
+  ) { }
 
   archivos: File = null;
   archivoCapturado: File;
@@ -40,8 +40,8 @@ export class ArchivosAdjuntosComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.authService.enviarCorreos().subscribe((res: any) => {});
-    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+    this.authService.enviarCorreos().subscribe((res: any) => { });
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
 
     this.id = parseInt(this.route.snapshot.paramMap.get("id"));
     this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
@@ -136,19 +136,28 @@ export class ArchivosAdjuntosComponent implements OnInit {
   }
 
   EliminarArchivo(id) {
-    let a = confirm("¿Está seguro que desea borrar el archivo adjunto?");
-    if (a == true) {
-      this.Adjunto2.idArchivo = id;
-      this.indicadoresservice
-        .EliminarArchivo(this.Adjunto2)
-        .subscribe((res: any) => {
-          if (res.resul == "Se guardo con exito") {
-            this.alert("Archivo adjunto eliminado");
-            location.reload();
-          }
-          return res;
-        });
-    }
+    Swal.fire({
+      title: "¿Está seguro que desea borrar el archivo adjunto?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Confirmar",
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.Adjunto2.idArchivo = id;
+        this.indicadoresservice
+          .EliminarArchivo(this.Adjunto2)
+          .subscribe((res: any) => {
+            if (res.resul == "Se guardo con exito") {
+              this.alert("Archivo adjunto eliminado");
+              location.reload();
+            }
+            return res;
+          });
+      } else if (result.isDenied) {
+      }
+    });
   }
 
   DescargarTodosAdjuntosIndividual() {

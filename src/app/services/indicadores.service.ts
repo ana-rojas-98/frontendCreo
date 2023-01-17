@@ -117,10 +117,10 @@ export class IndicadoresService {
     return result;
   }
 
-  DescargarTodosAdjuntos() {
+  DescargarTodosAdjuntos(id) {
     let resu = this.http.get(
       `${this.URL_SER}/api/indicadores/DescargarTodosAdjuntos`,
-      { observe: "response", responseType: "blob" }
+      { observe: "response", responseType: "blob", params: { IdUsuario: id }, }
     );
     return resu;
   }
@@ -146,7 +146,7 @@ export class IndicadoresService {
   }
 
   DescargarTodosAdjuntosIndividual(Archivo) {
-    let resu = this.http.post(
+    let resu = this.http.get(
       `${this.URL_SER}/api/indicadores/DescargarTodosAdjuntosIndividual`,
       {
         observe: "response",

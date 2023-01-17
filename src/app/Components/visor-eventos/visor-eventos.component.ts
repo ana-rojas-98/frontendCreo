@@ -49,8 +49,8 @@ export class VisorEventosComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.fechaInicial = "2022-11-16";
-    this.fechaFinal = "2022-11-16";
+    this.fechaInicial;
+    this.fechaFinal;
     this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
     if (this.usarioLocalStote.visorEventosVer == false) {
       this.router.navigate(["private"]);
@@ -62,16 +62,16 @@ export class VisorEventosComponent implements OnInit {
   }
 
   createPDF() {
-    let DATA: any = document.getElementById("tableIndicadores");
-    html2canvas(DATA).then((canvas) => {
-      let fileWidth = 208;
-      let fileHeight = (canvas.height * fileWidth) / canvas.width;
-      const FILEURI = canvas.toDataURL("image/png");
-      let PDF = new jsPDF("p", "mm", "a4");
-      let position = 0;
-      PDF.addImage(FILEURI, "PNG", 0, position, fileWidth, fileHeight);
-      PDF.save("Visor de eventos.pdf");
-    });
+    var sTable = document.getElementById("tableIndicadores").innerHTML;
+    // CREATE A WINDOW OBJECT.
+    var win = window.open("", "", "height=700,width=700");
+    win.document.write("<html><head>"); // <title> FOR PDF HEADER.       // ADD STYLE INSIDE THE HEAD TAG.
+    win.document.write("</head>");
+    win.document.write("<body>");
+    win.document.write(sTable); // THE TABLE CONTENTS INSIDE THE BODY TAG.
+    win.document.write("</body></html>");
+    win.document.close(); // CLOSE THE CURRENT WINDOW.
+    win.print(); // PRINT THE CONTENTS.
   }
 
   downloadExcel() {
@@ -175,7 +175,7 @@ export class VisorEventosComponent implements OnInit {
 
   changeFecha() {
     if (this.fechaFinal < this.fechaInicial) {
-      alert("La fecha inicial debe ser mayor a la final");
+      Swal.fire("La fecha inicial debe ser menor a la final");
       this.fechaFinal = this.fechaInicial;
     }
 

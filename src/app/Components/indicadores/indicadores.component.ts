@@ -104,6 +104,7 @@ export class IndicadoresComponent implements OnInit {
           });
           this.resultadosTabla = this.resultadosTabla.sort();
           this.resultadosTabla = this.resultadosTabla.reverse();
+
           if (this.resultadosTabla) {
             Swal.close();
           }
@@ -289,7 +290,7 @@ export class IndicadoresComponent implements OnInit {
   }
 
   DescargarTodosAdjuntos() {
-    this.indicadoresservice.DescargarTodosAdjuntos().subscribe((res) => {
+    this.indicadoresservice.DescargarTodosAdjuntos(this.usuarioLocalStote.usuarioid).subscribe((res) => {
       let nombreArchivo = res.headers.get("content-disposition");
       //?.split(';')[1].split('=')[1];
       let tipo: Blob = res.body as Blob;

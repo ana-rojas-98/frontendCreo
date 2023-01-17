@@ -21,7 +21,7 @@ export class ReportesIndicadoresComponent implements OnInit {
     private indicadoresservice: IndicadoresService,
     public router: Router,
     public cargandoService: CargandoService
-  ) {}
+  ) { }
 
   title = "angular-app";
   fileName = "Indicadores.xlsx";
@@ -126,7 +126,7 @@ export class ReportesIndicadoresComponent implements OnInit {
       };
       this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
         this.resultadosTabla = res.filter((item) => {
-          return item.idUsuario == dato;
+          return item.iidUsuarioModifica == dato;
         });
       });
       if (this.resultadosTabla) {
@@ -139,7 +139,7 @@ export class ReportesIndicadoresComponent implements OnInit {
       .ConsultarIndicadoresAsignados()
       .subscribe((res: any) => {
         this.resultadosTabla = res.filter((item) => {
-          return item.idUsuario == dato;
+          return item.iidUsuarioModifica == dato;
         });
         this.estado = this.resultadosTabla;
       });
@@ -373,7 +373,7 @@ export class ReportesIndicadoresComponent implements OnInit {
   }
 
   DescargarTodosAdjuntos() {
-    this.indicadoresservice.DescargarTodosAdjuntos().subscribe((res) => {
+    this.indicadoresservice.DescargarTodosAdjuntos(this.usuarioLocalStote.usuarioid).subscribe((res) => {
       let nombreArchivo = res.headers.get("content-disposition");
       //?.split(';')[1].split('=')[1];
       let tipo: Blob = res.body as Blob;

@@ -28,35 +28,19 @@
       <div class="box-select">
         <div class="box">
           <h3>Estándar</h3>
-          <select
-            class="selector"
-            name="estandar"
-            type="selectbox"
-            [(ngModel)]="Estandar.estandar"
-            (change)="estandar()"
-          >
+          <select class="selector" name="estandar" type="selectbox" [(ngModel)]="Estandar.estandar"
+            (change)="estandar()">
             <option value="">Seleccionar</option>
-            <option
-              *ngFor="let resultado of resultados"
-              [value]="resultado.estandar"
-            >
+            <option *ngFor="let resultado of resultados" [value]="resultado.estandar">
               <h1>{{ resultado.nombreEstandar }}</h1>
             </option>
           </select>
         </div>
         <div class="box">
           <h3>Categoría</h3>
-          <select
-            class="selector"
-            type="selectbox"
-            [(ngModel)]="Categoria.categoria1"
-            (change)="categoria()"
-          >
+          <select class="selector" type="selectbox" [(ngModel)]="Categoria.categoria1" (change)="categoria()">
             <option value="">Seleccionar</option>
-            <option
-              *ngFor="let resultadoCategoria of resultadosCategoria"
-              [value]="resultadoCategoria.categoria1"
-            >
+            <option *ngFor="let resultadoCategoria of resultadosCategoria" [value]="resultadoCategoria.categoria1">
               {{ resultadoCategoria.nombreCategoria }}
             </option>
           </select>
@@ -65,10 +49,7 @@
           <h3>Subcategoría</h3>
           <select class="selector" name="select" [(ngModel)]="SubCategoria.subcategoria1" type="selectbox">
             <option>Seleccionar</option>
-            <option
-              *ngFor="let item of resultadosSubCategoria"
-              [value]="item.subcategoria1"
-            >
+            <option *ngFor="let item of resultadosSubCategoria" [value]="item.subcategoria1">
               {{ item.nombreSubcategoria }}
             </option>
           </select>
@@ -82,18 +63,14 @@
       </button> -->
       <!--defino el boton que me va a mostrar la información en el ensayo-->
       <!-- <button (click)="mostrar()">Mostrar</button> -->
-      <input type="file" class="" (change)="archivoCapt($event)" #capturar id="in"  accept=".xlsx"/>
+      <input type="file" class="" (change)="archivoCapt($event)" #capturar id="in" accept=".xlsx" />
     </div>
     <div class="perioricidad-indicador">
       <p class="mb-2">Seleccione la periodicidad de este indicador</p>
 
       <h3>Periodicidad</h3>
 
-      <select
-        name="select"
-        type="selectbox"
-        [(ngModel)]="seleccionado.periodicidadId"
-      >
+      <select name="select" type="selectbox" [(ngModel)]="seleccionado.periodicidadId">
         <option value="">Seleccionar</option>
         <option *ngFor="let nombre of nombres" [value]="nombre.id">
           {{ nombre.periodicidad }}
@@ -102,8 +79,7 @@
     </div>
     <div class="previsualizar-indicador">
       <p>A continuación revise la previsualización del indicador:</p>
-      <button
-        class="button-interactivo" (click)="ShowData()" (click)="leerArchivo()">
+      <button class="button-interactivo" (click)="ShowData()" (click)="leerArchivo()">
         Previsualización del indicador
       </button>
       <div class="mt-3" *ngIf="element == true">
@@ -151,12 +127,8 @@
       </div>
     </div>
     <div class="buttons">
-      <button
-        [routerLink]="['/administrar-indicadores']"
-        [routerLinkActive]="['link-active']"
-        type="cancel"
-        class="cancelar"
-      >
+      <button [routerLink]="['/administrar-indicadores']" [routerLinkActive]="['link-active']" type="cancel"
+        class="cancelar">
         Cancelar
       </button>
       <button class="guardar" (click)="setNuevoIndicador()">Guardar</button>

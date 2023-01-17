@@ -14,7 +14,7 @@ export class ReportesTablerosComponent implements OnInit {
     private reportesService: ReportesService,
     public router: Router,
     public cargandoService: CargandoService
-  ) {}
+  ) { }
   btnCrearReporte = true;
   btnEliminarReporte = true;
   btnVerReporte = true;
@@ -57,7 +57,7 @@ export class ReportesTablerosComponent implements OnInit {
   resultadosTabla = [];
 
   getReportes() {
-   this.cargandoService.ventanaCargando();
+    this.cargandoService.ventanaCargando();
     this.reportesService.ConsultaReportes().subscribe((res: any) => {
       res.map((item) => {
         if (
@@ -77,17 +77,26 @@ export class ReportesTablerosComponent implements OnInit {
 
   eliminar(id) {
     this.Reporte.id = id;
-    let a = confirm("Seguro quiere eliminar el reporte?");
-    if (a == true) {
-      this.cargandoService.ventanaCargando();
-      this.reportesService
-        .EliminarReporte(this.Reporte)
-        .subscribe((res: any) => {
-          if (res.result == "Guardado") {
-            Swal.fire("Eliminado con exito");
-            location.reload();
-          }
-        });
-    }
+    Swal.fire({
+      title: "¿Seguro quiere eliminar el reporte?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Confirmar",
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.cargandoService.ventanaCargando();
+        this.reportesService
+          .EliminarReporte(this.Reporte)
+          .subscribe((res: any) => {
+            if (res.result == "Guardado") {
+              Swal.fire("Eliminado con exito");
+              location.reload();
+            }
+          });
+      } else if (result.isDenied) {
+      }
+    });
   }
 }

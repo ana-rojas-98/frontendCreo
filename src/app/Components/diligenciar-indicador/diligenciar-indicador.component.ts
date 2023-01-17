@@ -22,7 +22,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
     private indicadoresservice: IndicadoresService,
     private reportesService: ReportesService,
     public cargandoService: CargandoService
-  ) {}
+  ) { }
   id = 0;
   accionVerModificar = "";
   modificar = false;
@@ -72,8 +72,8 @@ export class DiligenciarIndicadorComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.authService.enviarCorreos().subscribe((res: any) => {});
-    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+    this.authService.enviarCorreos().subscribe((res: any) => { });
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
 
     this.usuarioLocalStote;
     this.consultarIndicador();
@@ -279,47 +279,56 @@ export class DiligenciarIndicadorComponent implements OnInit {
   }
 
   fnFinalizar() {
-    let a = confirm("¿Está seguro que ya finalizó este indicador?");
-    if (a == true) {
-      if (
-        this.Anio == "" ||
-        this.Anio == null ||
-        this.Periodo == "" ||
-        this.Periodo == null
-      ) {
-        this.alert("Debe seleccionar año y periodo antes de guardar");
-      } else {
-        this.resultadosHTML = this.resultadosTabla.filter(
-          (an) => an.anio == this.Anio
-        );
-        this.resultadosHTML = this.resultadosHTML.filter(
-          (pe) => pe.periodicidad == this.Periodo
-        );
-        let i = 0;
-        var contents;
-        let contenidos = [];
-        this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
-        this.resultadosHTML.shift();
-        this.resultadosHTML.map(
-          (item) => (
-            (contents = document.getElementById((item.idFila - 1).toString())),
-            (item.valor = contents.value),
-            (item.Usuarioid = this.usarioLocalStote.usuarioid),
-            contenidos.push(item),
-            i++
-          )
-        );
-        this.cargandoService.ventanaCargando();
-        this.indicadoresservice
-          .FinalizarIndicador(contenidos)
-          .subscribe((res: any) => {
-            if (res.resul == "Se guardo con exito") {
-              this.alert("Respuestas guardadas");
-            }
-            return res;
-          });
+    Swal.fire({
+      title: "¿Está seguro que ya finalizó este indicador?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Confirmar",
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        if (
+          this.Anio == "" ||
+          this.Anio == null ||
+          this.Periodo == "" ||
+          this.Periodo == null
+        ) {
+          this.alert("Debe seleccionar año y periodo antes de guardar");
+        } else {
+          this.resultadosHTML = this.resultadosTabla.filter(
+            (an) => an.anio == this.Anio
+          );
+          this.resultadosHTML = this.resultadosHTML.filter(
+            (pe) => pe.periodicidad == this.Periodo
+          );
+          let i = 0;
+          var contents;
+          let contenidos = [];
+          this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
+          this.resultadosHTML.shift();
+          this.resultadosHTML.map(
+            (item) => (
+              (contents = document.getElementById((item.idFila - 1).toString())),
+              (item.valor = contents.value),
+              (item.Usuarioid = this.usarioLocalStote.usuarioid),
+              contenidos.push(item),
+              i++
+            )
+          );
+          this.cargandoService.ventanaCargando();
+          this.indicadoresservice
+            .FinalizarIndicador(contenidos)
+            .subscribe((res: any) => {
+              if (res.resul == "Se guardo con exito") {
+                this.alert("Respuestas guardadas");
+              }
+              return res;
+            });
+        }
+      } else if (result.isDenied) {
       }
-    }
+    });
   }
 
   archivoCapt(event) {
@@ -439,7 +448,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
                     if (bandera2 == 1) {
                       array3.push(
                         parseFloat(array3[array3.length - 1]) +
-                          parseFloat(array2[i + 1])
+                        parseFloat(array2[i + 1])
                       );
                       array3.splice(array3.length - 2, 1);
                     } else {
@@ -565,7 +574,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
                       if (bandera2 == 1) {
                         array3.push(
                           parseFloat(array3[array3.length - 1]) +
-                            parseFloat(array2[i + 1])
+                          parseFloat(array2[i + 1])
                         );
                         array3.splice(array3.length - 2, 1);
                       } else {

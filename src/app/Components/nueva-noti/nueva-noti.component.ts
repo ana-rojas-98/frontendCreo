@@ -15,7 +15,7 @@ export class NuevaNotiComponent implements OnInit {
     public router: Router,
     private formBuilder: FormBuilder,
     public cargandoService: CargandoService
-  ) {}
+  ) { }
 
   usuarios = {
     tipoUsuario: "",
@@ -266,6 +266,7 @@ export class NuevaNotiComponent implements OnInit {
   }
 
   enviar() {
+
     const hola = this.aux.filter((hola) => hola.checked === true);
     hola.forEach((m) => {
       m.asunto = this.envios.asunto;
@@ -287,7 +288,7 @@ export class NuevaNotiComponent implements OnInit {
       form.append("usuario", this.usuarioid.toString());
       this.cargandoService.ventanaCargando();
       this.authService.enviarCorreo(form).subscribe((res: any) => {
-        if (i== (this.enviarCorreo.length-1) && res.a == "ok") {
+        if (i == (this.enviarCorreo.length - 1) && res.a == "ok") {
           this.alerta("Correo enviado correctamente");
           this.router.navigate(["gestor-noti"]);
         }
@@ -348,17 +349,29 @@ export class NuevaNotiComponent implements OnInit {
   }
 
   Guardar() {
+    const vacio = this.aux.filter((hola) => hola.checked === true);
+    if (this.envios.asunto == '') {
+      return this.alerta("Debe ingresar asunto");
+    } else if (this.envios.mensaje == '') {
+      return this.alerta("Debe ingresar mensaje");
+    }
     if (this.estadoi === true) {
       this.periodicidad = "0";
-      this.enviar();
+      if (vacio.length == 0) {
+        return this.alerta("Debe seleccionar destinatarios");
+      }
+      return this.enviar();
     }
     if (this.estadoii === true) {
+      if (vacio.length == 0) {
+        return this.alerta("Debe seleccionar destinatarios");
+      }
       var f1 = Date.parse(this.fechaEspera.toString());
       var f = Date.parse(this.completa);
       if (f1 < f) {
-        this.alerta("La fecha digitada es anterior a hoy");
+        return this.alerta("La fecha digitada es anterior a hoy");
       } else if (f1 === f) {
-        this.alerta(
+        return this.alerta(
           "La fecha digitada es hoy, selecciona enviar inmediatamente"
         );
       } else if (f1 > f) {
@@ -367,29 +380,40 @@ export class NuevaNotiComponent implements OnInit {
         this.fechaConvertida = this.fechaEspera.toString();
         // .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
         this.indicadoresFalta = 0;
-        this.programado();
+        return this.programado();
       }
-    }
-    if (this.estadoiii === true) {
-      this.caducidad = this.fechaCaducidad.toString();
-      // .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
-      this.indicadoresFalta = 0;
-
-      for (let i = 0; i < this.quedia.length; i++) {
-        var hola = this.quedia[i];
-        this.periodicidad = hola.dia;
-        this.fechaConvertida = hola.dia;
-        this.programado();
-      }
-    }
-    if (this.estadoiv === true) {
-      this.fechaConvertida = this.fechaEspera.toString();
-      // .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
-      this.periodicidad = "0";
-      this.caducidad = "0";
-      this.indicadoresFaltantes();
-      //this.programado();
-    }
+    } else
+      if (this.estadoiii === true) {
+        if (vacio.length == 0) {
+          return this.alerta("Debe seleccionar destinatarios");
+        }
+        if (this.fechaCaducidad == undefined){
+          return this.alerta("Debe seleccionar fecha de caducidad");
+        }
+        this.caducidad = this.fechaCaducidad.toString();
+        // .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
+        this.indicadoresFalta = 0;
+        if (this.quedia.length == 0){
+          return this.alerta("Debe seleccionar días de la semana");
+        }
+        for (let i = 0; i < this.quedia.length; i++) {
+          var hola = this.quedia[i];
+          this.periodicidad = hola.dia;
+          this.fechaConvertida = hola.dia;
+          return this.programado();
+        }
+      } else
+        if (this.estadoiv === true) {
+          this.fechaConvertida = this.fechaEspera.toString();
+          // .replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$2-$3/$1");
+          this.periodicidad = "0";
+          this.caducidad = "0";
+          return this.indicadoresFaltantes();
+          //this.programado();
+        }
+        else {
+          return this.alerta("Debe seleccionar configuración");
+        }
   }
 
   limpiar() {
