@@ -260,9 +260,9 @@ export class EditarReporteComponent implements OnInit {
       "width:30%; height:40px; grid-column: 1/12; margin-top:20px; grid-row: " +
       this.idSelec * 3;
     button.style.cssText =
-      "width:1%;height:30px;font-size: 2em;color: red;align-items: center;background-color: transparent;border-color: transparent;grid-column: 5/12; margin-top:20px; grid-row: " +
+      "width:1%;height:30px;font-size: 1.5rem;color: red;align-items: center;background-color: transparent;border-color: transparent;grid-column: 5/12; margin-top:20px; grid-row: " +
       this.idSelec * 3;
-    button.textContent = "x";
+    button.textContent = "Eliminar";
 
     myParent.appendChild(selectList);
     myParent.appendChild(button);

@@ -102,7 +102,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
         let idArchivo = {
           idArchivo: parseInt(this.idSelecionados[i]),
         };
-      this.indicadoresService
+        this.indicadoresService
           .VerDiligenciarIndicadorReportes(idArchivo)
           .subscribe((res: any) => {
             res.map((item) => {
@@ -163,9 +163,9 @@ export class ReportesNuevoTablero1Component implements OnInit {
       "width:30%; height:40px; grid-column: 1/12; margin-top:20px; grid-row: " +
       this.idSelec * 3;
     button.style.cssText =
-      "width:1%;height:30px;font-size: 2em;color: red;align-items: center;background-color: transparent;border-color: transparent;grid-column: 5/12; margin-top:20px; grid-row: " +
+      "width:1%;height:30px;font-size: 1.5em;color: red;align-items: center;background-color: transparent;border-color: transparent;grid-column: 5/12; margin-top:20px; grid-row: " +
       this.idSelec * 3;
-    button.textContent = "x";
+    button.textContent = "Eliminar";
 
     myParent.appendChild(selectList);
     myParent.appendChild(button);
@@ -838,22 +838,32 @@ export class ReportesNuevoTablero1Component implements OnInit {
       Swal.fire("Debe ingresar alguna fila")
     }
     else {
-      let con = confirm("¿Desea finalizar el reporte?")
-      if (con == true) {
-        this.enviar.forEach(element => {
-          let a: any;
-          a = document.getElementById(element.idElement.toString());
-          element.valor = a.value;
-        });
-        this.enviar[this.enviar.length - 1].nombreReporte = this.NombreReporte;
-        this.reportesService.FinalizarNuevoReporte(this.enviar).subscribe((res: any) => {
-          if (res.result = "Guardado") {
-            Swal.fire("Guardado con éxito");
-            this.router.navigate(["reportes-tableros"]);
-          }
-          return res;
-        });
-      }
+      Swal.fire({
+        title: "¿Desea finalizar el reporte?",
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: "Confirmar",
+        denyButtonText: `Cancelar`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          this.enviar.forEach(element => {
+            let a: any;
+            a = document.getElementById(element.idElement.toString());
+            element.valor = a.value;
+          });
+          this.enviar[this.enviar.length - 1].nombreReporte = this.NombreReporte;
+          this.reportesService.FinalizarNuevoReporte(this.enviar).subscribe((res: any) => {
+            if (res.result = "Guardado") {
+              Swal.fire("Guardado con éxito");
+              this.router.navigate(["reportes-tableros"]);
+            }
+            return res;
+          });
+        } else if (result.isDenied) {
+
+        }
+      });
     }
   }
   NombreReporte = "";
