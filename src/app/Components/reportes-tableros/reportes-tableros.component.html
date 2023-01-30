@@ -31,6 +31,10 @@
               <img src="../../../assets/imagenes/mensaje.svg" alt="icono-nombre" />
               Nombre
             </th>
+            <th>
+              <img src="../../../assets/imagenes/duplicar.png" alt="icono-nombre" />
+              Copia
+            </th>
             <th *ngIf="btnVerReporte">
               <img id="imgPorcentaje" src="../../../assets/imagenes/ver.png" alt="icono-nombre" class="mx-1 mt-1" />
               Ver
@@ -56,6 +60,10 @@
             <td>{{ item.fechaEdicion }}</td>
             <td>{{ item.usuario2 }}</td>
             <td>{{ item.nombreReporte }}</td>
+            <td>
+              <img src="../../../assets/imagenes/duplicar.png" alt="icono-nombre" class="mx-1"
+                (click)="copiar(item.id)" />
+            </td>
             <td *ngIf="btnVerReporte">
               <img src="../../../assets/imagenes/ver.png" alt="icono-nombre" class="mx-1"
                 [routerLink]="['/editar-reporte', item.id, 'ver']" [routerLinkActive]="['link-active']" />

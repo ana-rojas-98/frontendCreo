@@ -30,6 +30,7 @@
     "boostrap": "^2.0.0",
     "bootstrap": "^5.2.1",
     "chart.js": "^3.9.1",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "core-js": "^3.3.3",
     "exceljs": "^3.0.0",
     "file-saver": "^2.0.5",

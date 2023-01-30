@@ -117,4 +117,12 @@ export class ReportesService {
     return resul;
   }
 
+  DuplicarTablero(idTablero) {
+    const headers = this.authService.fnSetDefineTokenAuthorization();
+    let resul = this.http.post(
+      `${this.URL_SER}/api/Reportes/DuplicarTablero/`,idTablero, headers
+    );
+    return resul;
+  }
+
 }

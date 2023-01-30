@@ -99,4 +99,15 @@ export class ReportesTablerosComponent implements OnInit {
       }
     });
   }
+  
+  copiar(id){
+    this.Reporte.id = id;
+    this.cargandoService.ventanaCargando();
+    this.reportesService.DuplicarTablero(this.Reporte).subscribe((res: any) => {
+      if (res.result == "Guardado"){
+        Swal.fire("Duplicado correctamente");
+        location.reload();
+      }
+    });
+  }
 }

@@ -5,6 +5,7 @@ import * as $ from "jquery";
 import Swal from "sweetalert2";
 import { ActivatedRoute, Router } from "@angular/router";
 import Chart from "chart.js/auto";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { NgbModalConfig, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { element } from "protractor";
 import jsPDF from 'jspdf';
@@ -21,7 +22,7 @@ export class VerReporteFinalizadoComponent implements OnInit {
     static: false,
   })
   template!: TemplateRef<any>;
-  PDF(){
+  PDF() {
     let DATA: any = document.getElementById('content1');
     html2canvas(DATA).then((canvas) => {
       let fileWidth = 208;
@@ -34,7 +35,7 @@ export class VerReporteFinalizadoComponent implements OnInit {
     });
   }
 
- 
+
 
   constructor(
     private reportesService: ReportesService,
@@ -121,7 +122,7 @@ export class VerReporteFinalizadoComponent implements OnInit {
             let a: any;
             this.valorSelactNumeos = item.valor;
             this.configuracion[parseInt(item.idRow)] = [
-              parseInt(item.idRow) * 3,
+              parseInt(item.idRow) * 4,
               this.valorSelactNumeos,
             ];
             for (
@@ -140,7 +141,7 @@ export class VerReporteFinalizadoComponent implements OnInit {
           } else if (item.tipo == "input") {
             let input = document.createElement("div");
             input.id = item.idElement;
-            item.idRow *= 3;
+            item.idRow *= 4;
 
             if (this.valorSelactNumeos == "1") {
               input.style.cssText =
@@ -150,7 +151,7 @@ export class VerReporteFinalizadoComponent implements OnInit {
             }
 
             if (this.valorSelactNumeos != "1") {
-              let numero = 12 / this.configuracion[parseInt(item.idRow) / 3][1];
+              let numero = 12 / this.configuracion[parseInt(item.idRow) / 4][1];
               input.style.cssText =
                 "width:100%; height:100px; grid-column: " +
                 (item.idCol * numero - numero + 1) +
@@ -161,7 +162,7 @@ export class VerReporteFinalizadoComponent implements OnInit {
                 ";";
             }
             this.hijosdeHijos.push(
-              parseInt(item.idRow) / 3 + "-" + item.idCol + "-i"
+              parseInt(item.idRow) / 4 + "-" + item.idCol + "-i"
             );
             let contenido = document.createTextNode(item.valor.toString());
             input.appendChild(contenido);
@@ -170,7 +171,7 @@ export class VerReporteFinalizadoComponent implements OnInit {
             this.nombreGrafica = item.tituloGrafica;
             this.grafica(
               myParent,
-              item.idRow * 3,
+              item.idRow * 4,
               item.idCol,
               item.datos,
               item.columnas.split(","),
@@ -180,7 +181,7 @@ export class VerReporteFinalizadoComponent implements OnInit {
             this.nombreGrafica = item.tituloGrafica;
             this.grafica(
               myParent,
-              item.idRow * 3,
+              item.idRow * 4,
               item.idCol,
               item.datos,
               item.columnas.split(","),
@@ -190,12 +191,25 @@ export class VerReporteFinalizadoComponent implements OnInit {
             this.nombreGrafica = item.tituloGrafica;
             this.grafica(
               myParent,
-              item.idRow * 3,
+              item.idRow * 4,
               item.idCol,
               item.datos,
               item.columnas.split(","),
               item.tipo
             );
+          }
+          else if (item.tipo == "Table"){
+            let items = item.valor.split("-");
+            let items2 = item.texto.split("|");
+            this.CrearTabla(myParent, items[1], items[0], item.idRow, item.idCol);
+            let contador = 0;
+            for (let i = 0; i < parseInt(items[1]); i++) {
+              for (let j = 0; j < parseInt(items[0]); j++) {
+                let a = document.getElementById((parseInt(item.idRow) / 4 + "-" + item.idCol + "-Table-" + i + "-" + j).toString());
+                a.appendChild(document.createTextNode(items2[contador]));
+                contador++;
+              }
+            }
           }
         }
         return item;
@@ -203,10 +217,41 @@ export class VerReporteFinalizadoComponent implements OnInit {
     });
   }
 
+  CrearTabla(Parent, Filas, Columnas, idRow, idCol) {
+    let numero = 12 / this.configuracion[parseInt(idRow) / 4][1];
+    let exist = document.getElementById((parseInt(idRow) / 4 + "-" + idCol + "-Table").toString());
+    if (exist != undefined) {
+      Parent.removeChild(exist);
+    }
+    let tbl = document.createElement('table');
+    tbl.style.width = '100%';
+    tbl.id = parseInt(idRow) / 4 + "-" + idCol + "-Table";
+
+    tbl.style.border = '1px solid black';
+    if (this.valorSelactNumeos == "1") {
+      tbl.style.cssText = "width:100%; height:100px; table-layout: fixed; grid-column: 1/12;grid-row:" + (parseInt(idRow) + 3) + ";";
+    }
+    else {
+      tbl.style.cssText = "width:100%; height:100px; table-layout: fixed; grid-column:" + (idCol * numero - numero + 1) +
+        " / " + (idCol * numero) + ";grid-row:" + (parseInt(idRow) + 3) + ";";
+    }
+    for (let i = 0; i < Filas; i++) {
+      const tr = tbl.insertRow();
+      tr.id = (parseInt(idRow) / 4 + "-" + idCol + "-Table-" + i).toString();
+      for (let j = 0; j < Columnas; j++) {
+        const td = tr.insertCell();
+        td.id = (parseInt(idRow) / 4 + "-" + idCol + "-Table-" + i + "-" + j).toString();
+        td.style.cssText = "word-wrap:break-word";
+        td.style.border = '1px solid black';
+      }
+    }
+    Parent.appendChild(tbl);
+  }
+
   grafica(myParent, idRow, idCol, data, columnas, type) {
     data = JSON.parse(data);
     this.hijosdeHijos.push(
-      parseInt(idRow) / 3 + "-" + idCol + "-" + type.toString()
+      parseInt(idRow) / 4 + "-" + idCol + "-" + type.toString()
     );
     this.contadorId++;
     let ctx = document.createElement("canvas");
@@ -219,7 +264,7 @@ export class VerReporteFinalizadoComponent implements OnInit {
     }
 
     if (this.valorSelactNumeos != "1") {
-      let numero = 12 / this.configuracion[parseInt(idRow) / 3][1];
+      let numero = 12 / this.configuracion[parseInt(idRow) / 4][1];
       ctx.style.cssText =
         "margin-top:20px; width:100%; height:100%; grid-column: " +
         (idCol * numero - numero + 1) +
@@ -229,7 +274,7 @@ export class VerReporteFinalizadoComponent implements OnInit {
         (parseInt(idRow) + 2) +
         ";";
     }
-    ctx.id = parseInt(idRow) / 3 + "-" + idCol + "-" + type.toString();
+    ctx.id = parseInt(idRow) / 4 + "-" + idCol + "-" + type.toString();
     myParent.appendChild(ctx);
     new Chart(ctx, {
       type: type.toString(),
@@ -242,6 +287,26 @@ export class VerReporteFinalizadoComponent implements OnInit {
           title: {
             display: true,
             text: this.nombreGrafica,
+          },
+          datalabels: {
+            backgroundColor: function(context) {
+              return context.dataset.backgroundColor;
+            },
+            anchor: "end",
+            color: 'black',
+            borderColor: 'white',
+            borderRadius: 50,
+            borderWidth: 1,
+            labels: {
+              title: {
+                font: {
+                  weight: 'regular',
+                }
+              },
+              value: {
+                color: 'black'
+              }
+            }
           },
         },
         responsive: false,
