@@ -173,7 +173,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
     myParent.appendChild(button);
 
     button.addEventListener("click", () => {
-      console.log(this.hijosdeHijos)
       let idRow = button.getAttribute("id");
       if (this.hijos[parseInt(idRow)] != undefined) {
         for (let h = 0; h < this.hijos[parseInt(idRow)].length; h++) {
@@ -1063,7 +1062,6 @@ export class ReportesNuevoTablero1Component implements OnInit {
   }
 
   guardar() {
-    console.log(this.enviar);
     if (this.NombreReporte == "") {
       Swal.fire("Debe ingresar nombre del reporte");
     } else if (this.enviar[0] == undefined || this.enviar[0] == null) {

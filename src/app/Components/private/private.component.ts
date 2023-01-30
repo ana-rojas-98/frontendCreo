@@ -88,7 +88,6 @@ export class PrivateComponent implements OnInit {
             this.faltantes++;
           }
         });
-        console.log(this.indicadoresResultados)
         this.totales = this.completados + this.faltantes;
       });
     }

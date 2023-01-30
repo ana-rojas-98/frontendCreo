@@ -87,7 +87,6 @@ export class ArchivosAdjuntosComponent implements OnInit {
         let result = res.filter((item) => {
           return item.idIndicador == this.id;
         });
-        console.log("hola1: ", result.length);
         if (result.length == 0) {
           this.router.navigate(["private"]);
         }
