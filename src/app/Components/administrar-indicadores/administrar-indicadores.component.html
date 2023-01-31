@@ -9,12 +9,7 @@
       <div class="box">
         <h3>Estándar</h3>
         <br />
-        <select
-          class="selector"
-          name="estandar"
-          type="selectbox"
-          [formControl]="Estandar"
-          (change)="estandar()">
+        <select class="selector" name="estandar" type="selectbox" [formControl]="Estandar" (change)="estandar()">
           <option value="">Seleccionar estándar</option>
           <option *ngFor="let item of resultados" [value]="item.estandar">
             {{ item.nombreEstandar }}
@@ -24,9 +19,7 @@
       <div class="box">
         <h3>Categoría</h3>
         <br />
-        <select
-          class="selector" name="categoria" type="selectbox"
-          [formControl]="Categoria" (change)="categoria()">
+        <select class="selector" name="categoria" type="selectbox" [formControl]="Categoria" (change)="categoria()">
           <option value="">Seleccionar categoría</option>
           <option *ngFor="let item of resultadosCategoria" [value]="item.categoria1">
             {{ item.nombreCategoria }}
@@ -44,48 +37,34 @@
       </div>
     </div>
     <div class="botones-crear">
-      <button
-        *ngIf="crear" [routerLink]="['/estandares']" [routerLinkActive]="['link-active']">
+      <button *ngIf="crear" [routerLink]="['/estandares']" [routerLinkActive]="['link-active']">
         Crear nuevo estándar
       </button>
 
-      <button
-        *ngIf="crear" [routerLink]="['/categorias',0]" [routerLinkActive]="['link-active']">
+      <button *ngIf="crear" [routerLink]="['/categorias',0]" [routerLinkActive]="['link-active']">
         Crear nueva categoría
       </button>
 
-      <button
-        *ngIf="crear" [routerLink]="['/subcategoria',0,0]" [routerLinkActive]="['link-active']"
-        class="crear-sub">
+      <button *ngIf="crear" [routerLink]="['/subcategoria',0,0]" [routerLinkActive]="['link-active']" class="crear-sub">
         Crear nueva subcategoría
       </button>
 
-      <button
-        *ngIf="crear"
-        [routerLink]="['/nuevo-indicador']" [routerLinkActive]="['link-active']">
+      <button *ngIf="crear" [routerLink]="['/nuevo-indicador']" [routerLinkActive]="['link-active']">
         Crear nuevo indicador
       </button>
 
-      <button
-        *ngIf="crear" [routerLink]="['/indicadores-masivos']"
-        [routerLinkActive]="['link-active']">
+      <button *ngIf="crear" [routerLink]="['/indicadores-masivos']" [routerLinkActive]="['link-active']">
         Crear indicadores masivamente
       </button>
     </div>
     <div class="botones-eliminar">
-      <button
-        *ngIf="eliminar"
-        [routerLink]="['/eliminar-estandar']" [routerLinkActive]="['link-active']">
+      <button *ngIf="eliminar" [routerLink]="['/eliminar-estandar']" [routerLinkActive]="['link-active']">
         Eliminar estándar
       </button>
-      <button
-        *ngIf="eliminar"
-        [routerLink]="['/eliminar-categoria']" [routerLinkActive]="['link-active']">
+      <button *ngIf="eliminar" [routerLink]="['/eliminar-categoria']" [routerLinkActive]="['link-active']">
         Eliminar categoría
       </button>
-      <button
-        *ngIf="eliminar"
-        [routerLink]="['/eliminar-subcategoria']" [routerLinkActive]="['link-active']">
+      <button *ngIf="eliminar" [routerLink]="['/eliminar-subcategoria']" [routerLinkActive]="['link-active']">
         Eliminar subcategoría
       </button>
     </div>
@@ -94,50 +73,32 @@
         <thead>
           <tr>
             <th>
-              <img
-                src="../../../assets/imagenes/nombreIndicador.png"
-                alt="icono-nombre"
-                class="mx-1"/>
+              <img src="../../../assets/imagenes/nombreIndicador.png" alt="icono-nombre" class="mx-1" />
               Nombre indicador
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/creador.svg"
-                alt="icono-creador"
-                class="mx-1"/>
+              <img src="../../../assets/imagenes/creador.svg" alt="icono-creador" class="mx-1" />
               Creador
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/fechaHora.png"
-                alt="icono-fecha"
-                class="mx-1"/>
+              <img src="../../../assets/imagenes/fechaHora.png" alt="icono-fecha" class="mx-1" />
               Fecha y hora creación
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/archivo.png"
-                alt="icono-archivo"
-                class="mx-1"/>
+              <img src="../../../assets/imagenes/archivo.png" alt="icono-archivo" class="mx-1" />
               Archivo
             </th>
             <th *ngIf="ver">
               <img src="../../../assets/imagenes/ver.png" alt="icono-ver" />
             </th>
             <th *ngIf="editar">
-              <img
-                src="../../../assets/imagenes/editar.png"
-                alt="icono-editar"/>
+              <img src="../../../assets/imagenes/editar.png" alt="icono-editar" />
             </th>
             <th *ngIf="eliminar">
-              <img
-                src="../../../assets/imagenes/eliminar.png"
-                alt="icono-eliminar"/>
+              <img src="../../../assets/imagenes/eliminar.png" alt="icono-eliminar" />
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/duplicar.png"
-                alt="icono-duplicar"/>
+              <img src="../../../assets/imagenes/duplicar.png" alt="icono-duplicar" />
             </th>
             <th>
               <img src="../../../assets/imagenes/excel.png" alt="excel-icono" />
@@ -155,42 +116,32 @@
             <td>{{ item.indicador }}</td>
             <td>{{ item.usuario }}</td>
             <td>{{ item.fechaModificacion }}</td>
-            <td>
-              <a
-                [routerLink]="['/Archivos-Adjuntos', item.idIndicador]"
-                [routerLinkActive]="['link-active']"
-                >Archivos</a
-              >
+            <td *ngIf ="item.usar">
+              <img src="../../../assets/imagenes/disc1.png" alt="icono-ver"
+              [routerLink]="['/Archivos-Adjuntos', item.idIndicador]"
+              [routerLinkActive]="['link-active']"/>
+
+            </td>
+            <td *ngIf ="!item.usar">
+              <img src="../../../assets/imagenes/disc2.png" alt="icono-ver"
+              [routerLink]="['/Archivos-Adjuntos', item.idIndicador]"
+              [routerLinkActive]="['link-active']"/>
             </td>
             <td *ngIf="ver">
-              <img
-                src="../../../assets/imagenes/ver.png"
-                alt="ver-icono"
-                [routerLink]="['/ver-indicador', item.idIndicador, 'ver']"
-                [routerLinkActive]="['link-active']"
-              />
+              <img src="../../../assets/imagenes/ver.png" alt="ver-icono"
+                [routerLink]="['/ver-indicador', item.idIndicador, 'ver']" [routerLinkActive]="['link-active']" />
             </td>
             <td *ngIf="editar">
-              <img
-                src="../../../assets/imagenes/editar.png"
-                alt="editar-icono"
-                [routerLink]="['/editar-indicador', item.idIndicador, 'editar']"
-                [routerLinkActive]="['link-active']"
-              />
+              <img src="../../../assets/imagenes/editar.png" alt="editar-icono"
+                [routerLink]="['/editar-indicador', item.idIndicador, 'editar']" [routerLinkActive]="['link-active']" />
             </td>
             <td *ngIf="eliminar">
-              <img
-                (click)="Eliminar(item.idIndicador)"
-                src="../../../assets/imagenes/eliminar.png"
-                alt="eliminar-icono"
-              />
+              <img (click)="Eliminar(item.idIndicador)" src="../../../assets/imagenes/eliminar.png"
+                alt="eliminar-icono" />
             </td>
             <td>
-              <img
-                (click)="DuplicarIndicador(item.idIndicador)"
-                src="../../../assets/imagenes/duplicar.png"
-                alt="duplicar-icono"
-              />
+              <img (click)="DuplicarIndicador(item.idIndicador)" src="../../../assets/imagenes/duplicar.png"
+                alt="duplicar-icono" />
             </td>
             <td>
               <img src="../../../assets/imagenes/excel.png" alt="excel-icono" />

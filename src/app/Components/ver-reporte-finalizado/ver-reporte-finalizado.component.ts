@@ -2,12 +2,10 @@ import { IndicadoresService } from "./../../services/indicadores.service";
 import { Component, OnInit, TemplateRef, ViewChild, ElementRef } from "@angular/core";
 import { ReportesService } from "./../../services/reportes.service";
 import * as $ from "jquery";
-import Swal from "sweetalert2";
 import { ActivatedRoute, Router } from "@angular/router";
 import Chart from "chart.js/auto";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { NgbModalConfig, NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { element } from "protractor";
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -145,7 +143,7 @@ export class VerReporteFinalizadoComponent implements OnInit {
 
             if (this.valorSelactNumeos == "1") {
               input.style.cssText =
-                "width:100%; height:100px; grid-column: 1/12;grid-row:" +
+                "width:100%; height:100px; margin: auto; grid-column: 1/12;grid-row:" +
                 (parseInt(item.idRow) + 2) +
                 ";";
             }
@@ -153,7 +151,7 @@ export class VerReporteFinalizadoComponent implements OnInit {
             if (this.valorSelactNumeos != "1") {
               let numero = 12 / this.configuracion[parseInt(item.idRow) / 4][1];
               input.style.cssText =
-                "width:100%; height:100px; grid-column: " +
+                "width:100%; height:100px; margin: auto; grid-column: " +
                 (item.idCol * numero - numero + 1) +
                 " / " +
                 item.idCol * numero +
@@ -198,7 +196,7 @@ export class VerReporteFinalizadoComponent implements OnInit {
               item.tipo
             );
           }
-          else if (item.tipo == "Table"){
+          else if (item.tipo == "Table") {
             let items = item.valor.split("-");
             let items2 = item.texto.split("|");
             this.CrearTabla(myParent, items[1], items[0], item.idRow, item.idCol);
@@ -229,10 +227,10 @@ export class VerReporteFinalizadoComponent implements OnInit {
 
     tbl.style.border = '1px solid black';
     if (this.valorSelactNumeos == "1") {
-      tbl.style.cssText = "width:100%; height:100px; table-layout: fixed; grid-column: 1/12;grid-row:" + (parseInt(idRow) + 3) + ";";
+      tbl.style.cssText = "margin: auto;width:100%; height:100px; table-layout: fixed; grid-column: 1/12;grid-row:" + (parseInt(idRow) + 3) + ";";
     }
     else {
-      tbl.style.cssText = "width:100%; height:100px; table-layout: fixed; grid-column:" + (idCol * numero - numero + 1) +
+      tbl.style.cssText = "margin: auto;width:100%; height:100px; table-layout: fixed; grid-column:" + (idCol * numero - numero + 1) +
         " / " + (idCol * numero) + ";grid-row:" + (parseInt(idRow) + 3) + ";";
     }
     for (let i = 0; i < Filas; i++) {
@@ -258,7 +256,7 @@ export class VerReporteFinalizadoComponent implements OnInit {
 
     if (this.valorSelactNumeos == "1") {
       ctx.style.cssText =
-        "margin-top:20px; width:100%; height:100%; grid-column: 1/12;grid-row:" +
+        "margin: auto; width:100%; height:100%; grid-column: 1/12;grid-row:" +
         (parseInt(idRow) + 2) +
         ";";
     }
@@ -266,7 +264,7 @@ export class VerReporteFinalizadoComponent implements OnInit {
     if (this.valorSelactNumeos != "1") {
       let numero = 12 / this.configuracion[parseInt(idRow) / 4][1];
       ctx.style.cssText =
-        "margin-top:20px; width:100%; height:100%; grid-column: " +
+        "margin: auto; width:100%; height:100%; grid-column: " +
         (idCol * numero - numero + 1) +
         " / " +
         idCol * numero +
@@ -282,14 +280,16 @@ export class VerReporteFinalizadoComponent implements OnInit {
         labels: columnas,
         datasets: data,
       },
+      plugins: [ChartDataLabels],
       options: {
+
         plugins: {
           title: {
             display: true,
             text: this.nombreGrafica,
           },
           datalabels: {
-            backgroundColor: function(context) {
+            backgroundColor: function (context) {
               return context.dataset.backgroundColor;
             },
             anchor: "end",

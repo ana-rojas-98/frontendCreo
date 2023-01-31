@@ -13,18 +13,9 @@
       <div class="box">
         <h3>Estándar</h3>
         <br />
-        <select
-          class="selector"
-          name="estandar"
-          type="selectbox"
-          [(ngModel)]="Estandar.estandar"
-          (change)="estandar()"
-        >
+        <select class="selector" name="estandar" type="selectbox" [(ngModel)]="Estandar.estandar" (change)="estandar()">
           <option value="">Estándar</option>
-          <option
-            *ngFor="let resultado of resultados"
-            [value]="resultado.estandar"
-          >
+          <option *ngFor="let resultado of resultados" [value]="resultado.estandar">
             <h1>{{ resultado.nombreEstandar }}</h1>
           </option>
         </select>
@@ -32,18 +23,10 @@
       <div class="box">
         <h3>Categoría</h3>
         <br />
-        <select
-          class="selector"
-          name="categoria"
-          type="selectbox"
-          [(ngModel)]="Categoria.categoria1"
-          (change)="categoria()"
-        >
+        <select class="selector" name="categoria" type="selectbox" [(ngModel)]="Categoria.categoria1"
+          (change)="categoria()">
           <option value="">Categoría</option>
-          <option
-            *ngFor="let resultadoCategoria of resultadosCategoria"
-            [value]="resultadoCategoria.categoria1"
-          >
+          <option *ngFor="let resultadoCategoria of resultadosCategoria" [value]="resultadoCategoria.categoria1">
             {{ resultadoCategoria.nombreCategoria }}
           </option>
         </select>
@@ -53,10 +36,7 @@
         <br />
         <select class="selector" name="select" type="selectbox">
           <option>Subcategoría</option>
-          <option
-            *ngFor="let item of resultadosSubCategoria"
-            [value]="item.subcategoria1"
-          >
+          <option *ngFor="let item of resultadosSubCategoria" [value]="item.subcategoria1">
             {{ item.nombreSubcategoria }}
           </option>
         </select>
@@ -67,31 +47,19 @@
         <thead>
           <tr>
             <th>
-              <img
-                src="../../../assets/imagenes/nombreIndicador.png"
-                alt="icono-nombre"
-              />
+              <img src="../../../assets/imagenes/nombreIndicador.png" alt="icono-nombre" />
               Nombre indicador
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/creador.png"
-                alt="icono-creador"
-              />
+              <img src="../../../assets/imagenes/creador.png" alt="icono-creador" />
               Estandar
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/fechaHora.png"
-                alt="icono-fecha"
-              />
+              <img src="../../../assets/imagenes/fechaHora.png" alt="icono-fecha" />
               Categoria
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/archivo.png"
-                alt="icono-archivo"
-              />
+              <img src="../../../assets/imagenes/archivo.png" alt="icono-archivo" />
               Sub categoría
             </th>
             <th>Ver</th>
@@ -127,13 +95,8 @@
       </table>
       <br />
       <div class="container-button">
-        <input
-          [routerLink]="['/administrar-usuarios']"
-          [routerLinkActive]="['link-active']"
-          class="button-cancelar"
-          type="button"
-          value="Cancelar"
-        />
+        <input [routerLink]="['/administrar-usuarios']" [routerLinkActive]="['link-active']" class="button-cancelar"
+          type="button" value="Cancelar" />
         <input class="button-enviar" type="button" value="Guardar" />
       </div>
     </div>

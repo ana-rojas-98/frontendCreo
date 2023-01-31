@@ -10,6 +10,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { PrivateComponent } from './Components/private/private.component';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 
 // Providers
@@ -168,7 +169,7 @@ import { VerReporteFinalizadoComponent } from './Components/ver-reporte-finaliza
   providers: [
     // JWT
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
-    JwtHelperService
+    JwtHelperService,
   ],
   bootstrap: [AppComponent]
 })

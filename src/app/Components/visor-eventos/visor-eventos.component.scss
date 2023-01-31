@@ -3,12 +3,15 @@
 .contenedor {
   @include contenedor;
 }
+
 .cuerpo {
   @include body;
+  vertical-align: middle;
   //@include centerFlex;
   img {
     width: 25px;
     height: 25px;
+    vertical-align: middle;
   }
 }
 
@@ -20,6 +23,7 @@
   margin-right: 20px;
   margin-top: 27px;
   margin-bottom: 20px;
+
   .button {
     width: 350px;
     height: 30px;
@@ -30,12 +34,14 @@
     margin-right: 20px;
     color: #ffffff;
   }
+
   .botonImagen {
     padding: 0;
     border: 0;
     margin-right: 10px;
     width: 25px;
     height: 25px;
+    vertical-align: middle;
   }
 }
 
@@ -47,7 +53,7 @@ h1 {
 }
 
 .contenedorSelect {
-  @include grid(3,1);
+  @include grid(3, 1);
 }
 
 .selector {
@@ -64,8 +70,9 @@ h1 {
 
 #imgPorcentaje {
   margin: 0;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
 }
 
 .example-form-field {

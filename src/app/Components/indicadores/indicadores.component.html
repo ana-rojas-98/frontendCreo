@@ -17,32 +17,18 @@
       </div>
       <div class="box">
         <p>Categoría</p>
-        <select
-          [formControl]="Categoria"
-          (change)="categoria()"
-          class="selector"
-        >
+        <select [formControl]="Categoria" (change)="categoria()" class="selector">
           <option value="">Seleccione categoría</option>
-          <option
-            *ngFor="let item of resultadosCategoria"
-            [value]="item.categoria1"
-          >
+          <option *ngFor="let item of resultadosCategoria" [value]="item.categoria1">
             {{ item.nombreCategoria }}
           </option>
         </select>
       </div>
       <div class="box">
         <p>Subcategoría</p>
-        <select
-          class="selector"
-          [formControl]="Subcategoria"
-          (change)="subcategoria()"
-        >
+        <select class="selector" [formControl]="Subcategoria" (change)="subcategoria()">
           <option value="">Seleccione subcategoría</option>
-          <option
-            *ngFor="let item of resultadosSubCategoria"
-            [value]="item.subcategoria1"
-          >
+          <option *ngFor="let item of resultadosSubCategoria" [value]="item.subcategoria1">
             {{ item.nombreSubcategoria }}
           </option>
         </select>
@@ -53,41 +39,28 @@
         <thead>
           <tr>
             <th>
-              <img src="../../../assets/imagenes/nombreIndicador.png"
-                alt="icono-indicador"
-                class="mx-1"/>
+              <img src="../../../assets/imagenes/nombreIndicador.png" alt="icono-indicador" class="mx-1" />
               Nombre indicador
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/creador.png"
-                alt="icono-diligenciador" class="mx-1"/>
+              <img src="../../../assets/imagenes/creador.png" alt="icono-diligenciador" class="mx-1" />
               Ultimo que diligencio
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/fechaHora.png"
-                alt="icono-fecha" class="mx-1"/>
+              <img src="../../../assets/imagenes/fechaHora.png" alt="icono-fecha" class="mx-1" />
               Fecha y hora
             </th>
             <th>% Avance</th>
             <th>
-              <img
-                src="../../../assets/imagenes/archivo.png"
-                alt="icono-archivo" class="mx-1"/>
+              <img src="../../../assets/imagenes/archivo.png" alt="icono-archivo" class="mx-1" />
               Archivo
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/ver.png"
-                alt="icono-ver" class="mx-1"/>
+              <img src="../../../assets/imagenes/ver.png" alt="icono-ver" class="mx-1" />
               Ver
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/editar.png"
-                alt="icono-editar"
-                class="mx-1"/>
+              <img src="../../../assets/imagenes/editar.png" alt="icono-editar" class="mx-1" />
               Diligenciar
             </th>
             <th></th>
@@ -101,59 +74,55 @@
             <td [routerLink]="['/diligenciar-indicador',item.idIndicador,'editar']">{{ item.idUsuarioModifica }}</td>
             <td [routerLink]="['/diligenciar-indicador',item.idIndicador,'editar']">{{ item.fechaModificacion }}</td>
             <td [routerLink]="['/diligenciar-indicador',item.idIndicador,'editar']">{{ item.avance }}%</td>
-            <td>
-              <a
-                [routerLink]="['/Archivos-Adjuntos', item.idIndicador]"
-                [routerLinkActive]="['link-active']"
-                >Archivos</a>
+            <td *ngIf ="item.usar">
+              <img src="../../../assets/imagenes/disc1.png" alt="icono-ver"
+              [routerLink]="['/Archivos-Adjuntos', item.idIndicador]"
+              [routerLinkActive]="['link-active']"/>
+
+            </td>
+            <td *ngIf ="!item.usar">
+              <img src="../../../assets/imagenes/disc2.png" alt="icono-ver"
+              [routerLink]="['/Archivos-Adjuntos', item.idIndicador]"
+              [routerLinkActive]="['link-active']"/>
             </td>
             <td *ngIf="usuario">
-              <img
-                *ngIf="item.ver"
-                src="../../../assets/imagenes/ver.png"
-                alt="icono-ver"
-                [routerLink]="['/diligenciar-indicador',item.idIndicador,'ver']"
-                [routerLinkActive]="['link-active']"/>
+              <img *ngIf="item.ver" src="../../../assets/imagenes/ver.png" alt="icono-ver"
+                [routerLink]="['/diligenciar-indicador',item.idIndicador,'ver']" [routerLinkActive]="['link-active']" />
             </td>
             <td *ngIf="!usuario">
               <img src="../../../assets/imagenes/ver.png" alt="icono-ver"
-                [routerLink]="['/diligenciar-indicador',item.idIndicador,'ver']"
-                [routerLinkActive]="['link-active']"/>
+                [routerLink]="['/diligenciar-indicador',item.idIndicador,'ver']" [routerLinkActive]="['link-active']" />
             </td>
             <td *ngIf="usuario">
-              <img
-                *ngIf="item.diligenciar"
-                src="../../../assets/imagenes/editar.png"
-                alt="icono-editar"
+              <img *ngIf="item.diligenciar" src="../../../assets/imagenes/editar.png" alt="icono-editar"
                 [routerLink]="['/diligenciar-indicador',item.idIndicador,'editar']"
-                [routerLinkActive]="['link-active']"
-              />
+                [routerLinkActive]="['link-active']" />
             </td>
             <td *ngIf="!usuario">
-              <img
-                src="../../../assets/imagenes/editar.png"
-                alt="icono-editar"
+              <img src="../../../assets/imagenes/editar.png" alt="icono-editar"
                 [routerLink]="['/diligenciar-indicador',item.idIndicador,'editar']"
-                [routerLinkActive]="['link-active']"
-              />
+                [routerLinkActive]="['link-active']" />
             </td>
             <td *ngIf="usuario">
-              <a><img *ngIf="item.excel" src="../../../assets/imagenes/excel.png" alt="icono-excel"/></a>
+              <a><img *ngIf="item.excel" src="../../../assets/imagenes/excel.png" alt="icono-excel" /></a>
             </td>
             <td *ngIf="usuario">
-              <a><img *ngIf="item.word" src="../../../assets/imagenes/word.png" alt="icono-word"/></a>
+              <a><img *ngIf="item.word" src="../../../assets/imagenes/word.png" alt="icono-word" /></a>
             </td>
             <td *ngIf="usuario">
-              <a><img *ngIf="item.pdf" src="../../../assets/imagenes/pdf.png" alt="icono-pdf"/></a>
+              <a><img *ngIf="item.pdf" src="../../../assets/imagenes/pdf.png" alt="icono-pdf" /></a>
             </td>
             <td *ngIf="!usuario">
-              <a (click)="MasivoExcel(item.idIndicador)"><img src="../../../assets/imagenes/excel.png" alt="icono-excel" /></a>
+              <a (click)="MasivoExcel(item.idIndicador)"><img src="../../../assets/imagenes/excel.png"
+                  alt="icono-excel" /></a>
             </td>
             <td *ngIf="!usuario">
-              <a (click)="MasivoWord(item.idIndicador)"><img src="../../../assets/imagenes/word.png" alt="icono-word" /></a>
+              <a (click)="MasivoWord(item.idIndicador)"><img src="../../../assets/imagenes/word.png"
+                  alt="icono-word" /></a>
             </td>
             <td *ngIf="!usuario">
-              <a (click)="MasivoPDF(item.idIndicador)"><img src="../../../assets/imagenes/pdf.png" alt="icono-pdf" /></a>
+              <a (click)="MasivoPDF(item.idIndicador)"><img src="../../../assets/imagenes/pdf.png"
+                  alt="icono-pdf" /></a>
             </td>
           </tr>
         </tbody>

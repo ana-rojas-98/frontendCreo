@@ -83,9 +83,17 @@
             <td>{{ item.idUsuarioModifica }}</td>
             <td>{{ item.indicador }}</td>
             <td>{{ item.avance }}%</td>
-            <td><a [routerLink]="['/Archivos-Adjuntos',item.idIndicador]"
-                [routerLinkActive]="['link-active']">Archivos</a></td>
-            <td>
+            <td *ngIf ="item.usar">
+              <img src="../../../assets/imagenes/disc1.png" alt="icono-nombre"
+              [routerLink]="['/Archivos-Adjuntos', item.idIndicador]"
+              [routerLinkActive]="['link-active']"/>
+
+            </td>
+            <td *ngIf ="!item.usar">
+              <img src="../../../assets/imagenes/disc2.png" alt="icono-nombre"
+              [routerLink]="['/Archivos-Adjuntos', item.idIndicador]"
+              [routerLinkActive]="['link-active']"/>
+            </td>
           </tr>
         </tbody>
       </table>

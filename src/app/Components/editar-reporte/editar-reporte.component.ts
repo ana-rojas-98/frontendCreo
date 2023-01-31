@@ -1270,6 +1270,7 @@ export class EditarReporteComponent implements OnInit {
         datasets: data,
 
       },
+      plugins: [ChartDataLabels],
       options: {
         plugins: {
           title: {

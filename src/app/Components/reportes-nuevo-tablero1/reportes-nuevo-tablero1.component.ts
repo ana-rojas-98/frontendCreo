@@ -996,6 +996,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
         labels: columnas,
         datasets: data,
       },
+      plugins: [ChartDataLabels],
       options: {
         plugins: {
           title: {
