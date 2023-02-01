@@ -26,3 +26,8 @@ input{
     @include inputCard(150px, 30px);
     display: block;
 }
+
+td{
+    min-width: none;
+    max-width: 100px;
+}
