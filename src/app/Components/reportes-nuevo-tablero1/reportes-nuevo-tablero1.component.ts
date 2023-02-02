@@ -1004,7 +1004,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
             text: this.nombreGrafica,
           },
           datalabels: {
-            backgroundColor: function(context) {
+            backgroundColor: function (context) {
               return context.dataset.backgroundColor;
             },
             anchor: "end",
@@ -1080,8 +1080,13 @@ export class ReportesNuevoTablero1Component implements OnInit {
           element.texto = "";
           for (let i = 0; i < Rows.value; i++) {
             for (let j = 0; j < Cols.value; j++) {
-              var valor = document.getElementById(Sep[0] + "-" + Sep[1] + "-Table-" + i + "-" + j).firstChild.nodeValue
-              element.texto += (valor) + "|";
+              var valor = document.getElementById(Sep[0] + "-" + Sep[1] + "-Table-" + i + "-" + j).firstChild
+              if (valor != null || valor != undefined) {
+                element.texto += (valor.nodeValue) + "|";
+              }
+              else {
+                element.texto += "|";
+              }
             }
           }
         }
@@ -1132,8 +1137,13 @@ export class ReportesNuevoTablero1Component implements OnInit {
               element.texto = "";
               for (let i = 0; i < Rows.value; i++) {
                 for (let j = 0; j < Cols.value; j++) {
-                  var valor = document.getElementById(Sep[0] + "-" + Sep[1] + "-Table-" + i + "-" + j).firstChild.nodeValue
-                  element.texto += (valor) + "|";
+                  var valor = document.getElementById(Sep[0] + "-" + Sep[1] + "-Table-" + i + "-" + j).firstChild
+                  if (valor != null || valor != undefined) {
+                    element.texto += (valor.nodeValue) + "|";
+                  }
+                  else {
+                    element.texto += "|";
+                  }
                 }
               }
             }
