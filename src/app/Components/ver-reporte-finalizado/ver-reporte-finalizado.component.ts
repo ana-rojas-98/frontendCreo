@@ -239,7 +239,7 @@ export class VerReporteFinalizadoComponent implements OnInit {
       for (let j = 0; j < Columnas; j++) {
         const td = tr.insertCell();
         td.id = (parseInt(idRow) / 4 + "-" + idCol + "-Table-" + i + "-" + j).toString();
-        td.style.cssText = "word-wrap:break-word";
+        td.style.cssText = "word-wrap:break-word; text-align: end;";
         td.style.border = '1px solid black';
       }
     }

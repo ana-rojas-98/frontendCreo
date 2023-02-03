@@ -501,7 +501,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
             td.addEventListener("click", () => {
               this.selecManulRespuestas("table", td.id);
             });
-            td.style.cssText = "word-wrap:break-word";
+            td.style.cssText = "word-wrap:break-word; text-align: end;";
             td.style.border = '1px solid black';
           }
           Cols.value = (parseInt(Cols.value) + 1).toString();
@@ -536,7 +536,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
               this.selecManulRespuestas("table", td.id);
             });
 
-            td.style.cssText = "word-wrap:break-word";
+            td.style.cssText = "word-wrap:break-word; text-align: end;";
 
             td.style.border = '1px solid black';
 
@@ -617,7 +617,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
         td.addEventListener("click", () => {
           this.selecManulRespuestas("table", td.id);
         });
-        td.style.cssText = "word-wrap:break-word";
+        td.style.cssText = "word-wrap:break-word; text-align: end;";
 
         td.style.border = '1px solid black';
       }

@@ -2,8 +2,8 @@
   <div class="container-fluid border">
     <div class="d-flex justify-content-between">
       <div class="col-2 flex-row">
-        <a [routerLink]="['/private']" [routerLinkActive]="['link-active']"><img class="img-fluid float-left m-2" src="../../../assets/imagenes/logo-creo.png" alt="Responsive image"
-          width="230px" height="115"></a>
+        <a [routerLink]="['/private']" [routerLinkActive]="['link-active']"><img style="object-fit: contain; width: 100%;" class=" m-2" src="../../../assets/imagenes/logo-creo.png" alt="Responsive image"
+          width="230px" height="115px"></a>
       </div>
       <div class="col-8">
         <div class="nombre">
@@ -24,8 +24,8 @@
           </div>
         </div>
       </div>
-      <div class="col-2 flex-row-reverse logo-empresa">
-        <img class="float-right m-2" [src]="logo" alt="Responsive image" width="230px" height="115px">
+      <div class="col-2 flex-row-reverse logo-empresa" width = "230px" height="115px">
+        <img class="m-2" [src]="logo" style="object-fit: contain; width: 100%;" alt="Responsive image" width="230px" height="115px">
       </div>
     </div>
   </div>
