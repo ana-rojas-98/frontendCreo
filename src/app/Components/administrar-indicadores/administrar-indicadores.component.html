@@ -144,18 +144,27 @@
                 alt="duplicar-icono" />
             </td>
             <td>
-              <img src="../../../assets/imagenes/excel.png" alt="excel-icono" />
+              <a (click)="MasivoExcel(item.idIndicador)"><img src="../../../assets/imagenes/excel.png"
+                  alt="icono-excel" /></a>
             </td>
             <td>
-              <img src="../../../assets/imagenes/word.png" alt="word-icono" />
+              <a (click)="MasivoWord(item.idIndicador)"><img src="../../../assets/imagenes/word.png"
+                  alt="icono-word" /></a>
             </td>
             <td>
-              <img src="../../../assets/imagenes/pdf.png" alt="pdf-icono" />
+              <a (click)="MasivoPDF(item.idIndicador)"><img src="../../../assets/imagenes/pdf.png"
+                  alt="icono-pdf" /></a>
             </td>
           </tr>
         </tbody>
       </table>
       <button>Descargar todos los archivos adjuntos</button>
+    </div>
+    <div id="exportContent" class="tablero">
+      <!------------------------------------------------------------------------------------------------------------------>
+      <table id="prueba" class="prueba p-3">
+      </table>
+      <!------------------------------------------------------------------------------------------------------------------>
     </div>
   </div>
 </div>

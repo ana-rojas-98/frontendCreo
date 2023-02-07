@@ -5,6 +5,7 @@ import { FormControl } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import Swal from "sweetalert2";
 import { CargandoService } from "src/app/services/cargando.service";
+import { IndicadoresService } from "src/app/services/indicadores.service";
 
 @Component({
   selector: "app-administrar-indicadores",
@@ -16,6 +17,7 @@ export class AdministrarIndicadoresComponent implements OnInit {
     private authService: AuthService,
     public router: Router,
     private reportesService: ReportesService,
+    private indicadoresservice: IndicadoresService,
     public cargandoService: CargandoService
   ) {}
 
@@ -275,5 +277,197 @@ export class AdministrarIndicadoresComponent implements OnInit {
 
   alerta(mensaje: any) {
     Swal.fire(mensaje);
+  }
+
+  idArchivo = {
+    idArchivo: 1,
+  };
+
+  resultIndicadores = [];
+  uniqueYears = [];
+  uniquePeriod = [];
+  anioArray = [];
+  preciodicidadesArray = [];
+  filtrados = [];
+
+  Ordenado = [];
+  html = "";
+  prueba = "";
+
+  filtrarInfo() {
+    this.uniqueYears = [...new Set(this.anioArray)];
+    this.uniquePeriod = [...new Set(this.preciodicidadesArray)];
+  }
+
+  MasivoExcel(id) {
+    this.html = "";
+    this.idArchivo.idArchivo = id;
+    this.indicadoresservice
+      .VerDiligenciarIndicador(this.idArchivo)
+      .subscribe((res: any) => {
+        this.resultIndicadores = res.map((item) => {
+          this.anioArray.push(item.anio);
+          this.preciodicidadesArray.push(item.periodicidad);
+          return item;
+        });
+        this.filtrarInfo();
+        for (let i = 0; i < this.uniqueYears.length; i++) {
+          for (let j = 0; j < this.uniquePeriod.length; j++) {
+            this.filtrados = this.resultIndicadores.filter(
+              (an) => an.anio == this.uniqueYears[i]
+            );
+            this.filtrados = this.filtrados.filter(
+              (pe) => pe.periodicidad == this.uniquePeriod[j]
+            );
+            this.html += "<table>";
+            for (let h = 0; h < this.filtrados.length; h++) {
+              this.Ordenado.push(this.filtrados[h]);
+              if (this.filtrados[h].idFila == 1) {
+                this.html += this.filtrados[h].html;
+              }
+              else {
+                this.html += this.filtrados[h].html1export + this.filtrados[h].valor + this.filtrados[h].html2export;
+              }
+            }
+            this.html += "</table>";
+          }
+        }
+        document.getElementById("prueba").innerHTML = this.html;
+        var htmltable = document.getElementById("exportContent");
+        var html2 = htmltable.outerHTML;
+        window.open(
+          "data:application/vnd.ms-excel," + encodeURIComponent(html2)
+        );
+        location.reload();
+      });
+  }
+
+  MasivoWord(id) {
+    this.html = "";
+    this.idArchivo.idArchivo = id;
+    this.indicadoresservice
+      .VerDiligenciarIndicador(this.idArchivo)
+      .subscribe((res: any) => {
+        this.resultIndicadores = res.map((item) => {
+          this.anioArray.push(item.anio);
+          this.preciodicidadesArray.push(item.periodicidad);
+          return item;
+        });
+        this.filtrarInfo();
+        for (let i = 0; i < this.uniqueYears.length; i++) {
+          for (let j = 0; j < this.uniquePeriod.length; j++) {
+            this.filtrados = this.resultIndicadores.filter(
+              (an) => an.anio == this.uniqueYears[i]
+            );
+            this.filtrados = this.filtrados.filter(
+              (pe) => pe.periodicidad == this.uniquePeriod[j]
+            );
+            this.html += "<table>";
+            for (let h = 0; h < this.filtrados.length; h++) {
+              this.Ordenado.push(this.filtrados[h]);
+              if (this.filtrados[h].idFila == 1) {
+                this.html += this.filtrados[h].html;
+              }
+              else {
+                this.html += this.filtrados[h].html1export + this.filtrados[h].valor + this.filtrados[h].html2export;
+              }
+            }
+            this.html += "</table>";
+          }
+        }
+        document.getElementById("prueba").innerHTML = this.html;
+        this.ExportToDoc("archivo");
+      });
+  }
+
+  MasivoPDF(id) {
+    this.html = "";
+    this.idArchivo.idArchivo = id;
+    this.indicadoresservice
+      .VerDiligenciarIndicador(this.idArchivo)
+      .subscribe((res: any) => {
+        this.resultIndicadores = res.map((item) => {
+          this.anioArray.push(item.anio);
+          this.preciodicidadesArray.push(item.periodicidad);
+          return item;
+        });
+        this.filtrarInfo();
+        for (let i = 0; i < this.uniqueYears.length; i++) {
+          for (let j = 0; j < this.uniquePeriod.length; j++) {
+            this.filtrados = this.resultIndicadores.filter(
+              (an) => an.anio == this.uniqueYears[i]
+            );
+            this.filtrados = this.filtrados.filter(
+              (pe) => pe.periodicidad == this.uniquePeriod[j]
+            );
+            this.html += "<table>";
+            for (let h = 0; h < this.filtrados.length; h++) {
+              this.Ordenado.push(this.filtrados[h]);
+              if (this.filtrados[h].idFila == 1) {
+                this.html += this.filtrados[h].html;
+              }
+              else {
+                this.html += this.filtrados[h].html1export + this.filtrados[h].valor + this.filtrados[h].html2export;
+              }
+            }
+            this.html += "</table>";
+          }
+        }
+        document.getElementById("prueba").innerHTML = this.html;
+        var sTable = document.getElementById("exportContent").innerHTML;
+        // CREATE A WINDOW OBJECT.
+        var win = window.open("", "", "height=700,width=700");
+        win.document.write("<html><head>"); // <title> FOR PDF HEADER.       // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write("</head>");
+        win.document.write("<body>");
+        win.document.write(sTable); // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write("</body></html>");
+        win.document.close(); // CLOSE THE CURRENT WINDOW.
+        win.print(); // PRINT THE CONTENTS.
+        location.reload();
+      });
+  }
+
+  ExportToDoc(filename = "") {
+    var HtmlHead =
+      "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+
+    var EndHtml = "</body></html>";
+
+    var dochtml = document.getElementById("exportContent").innerHTML;
+    //complete html
+    var html = HtmlHead + dochtml + EndHtml;
+
+    //specify the type
+    var blob = new Blob(["ufeff", html], {
+      type: "application/msword",
+    });
+
+    // Specify link url
+    var url = URL.createObjectURL(blob);
+
+    // Specify file name
+    filename = filename ? filename + ".doc" : "document.doc";
+
+    // Create download link element
+    var downloadLink = document.createElement("a");
+
+    document.body.appendChild(downloadLink);
+    const nav = window.navigator as any;
+    if (nav.msSaveOrOpenBlob) {
+      nav.msSaveOrOpenBlob(blob, filename);
+    } else {
+      // Create a link to the file
+      downloadLink.href = url;
+
+      // Setting the file name
+      downloadLink.download = filename;
+
+      //triggering the function
+      downloadLink.click();
+    }
+
+    document.body.removeChild(downloadLink);
+    location.reload();
   }
 }

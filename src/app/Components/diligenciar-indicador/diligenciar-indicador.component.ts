@@ -356,10 +356,9 @@ export class DiligenciarIndicadorComponent implements OnInit {
       if (item.idFila == 1) {
       } else {
         contents = document.getElementById((item.idFila - 1).toString());
-        if (contents == null || contents == undefined){
+        if (contents == null || contents == undefined) {
           return 0;
         }
-        item.valor = contents.value;
         contenidos.push(item);
         if (item.entrada == "input" && item.numerop == "si") {
           let a = document.getElementById((item.idFila - 1).toString());
@@ -640,8 +639,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
   }
 
   ExportToExcel() {
-    var htmltable = document.getElementById("exportContent");
-    var html = htmltable.outerHTML;
+    var html = this.PrepararHTML();
     window.open("data:application/vnd.ms-excel," + encodeURIComponent(html));
   }
 
@@ -651,7 +649,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
 
     var EndHtml = "</body></html>";
 
-    var dochtml = document.getElementById("exportContent").innerHTML;
+    var dochtml = this.PrepararHTML();
     //complete html
     var html = HtmlHead + dochtml + EndHtml;
 
@@ -688,7 +686,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
   }
 
   createPDF() {
-    var sTable = document.getElementById("exportContent").innerHTML;
+    var sTable = this.PrepararHTML();
     // CREATE A WINDOW OBJECT.
     var win = window.open("", "", "height=700,width=700");
     win.document.write("<html><head>"); // <title> FOR PDF HEADER.       // ADD STYLE INSIDE THE HEAD TAG.
@@ -698,5 +696,25 @@ export class DiligenciarIndicadorComponent implements OnInit {
     win.document.write("</body></html>");
     win.document.close(); // CLOSE THE CURRENT WINDOW.
     win.print(); // PRINT THE CONTENTS.
+  }
+
+  PrepararHTML() {
+    let html = "<table>";
+    this.resultadosHTML.map((item) => {
+      if (item.idFila == 1) {
+        html += item.html;
+      }
+      else {
+        if (item.entrada == "input") {
+          let contents;
+          contents = document.getElementById((item.idFila - 1).toString());
+          item.valor = contents.value;
+        }
+        html += item.html1export + item.valor + item.html2export;
+      }
+    });
+    html += "</table>";
+
+    return html;
   }
 }

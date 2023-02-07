@@ -19,7 +19,7 @@ export class IndicadoresComponent implements OnInit {
     private reportesService: ReportesService,
     private indicadoresservice: IndicadoresService,
     public cargandoService: CargandoService
-  ) {}
+  ) { }
 
   usuario = false;
   Estandar = new FormControl("");
@@ -322,6 +322,7 @@ export class IndicadoresComponent implements OnInit {
   }
 
   MasivoExcel(id) {
+    this.html = "";
     this.idArchivo.idArchivo = id;
     this.indicadoresservice
       .VerDiligenciarIndicador(this.idArchivo)
@@ -340,10 +341,17 @@ export class IndicadoresComponent implements OnInit {
             this.filtrados = this.filtrados.filter(
               (pe) => pe.periodicidad == this.uniquePeriod[j]
             );
+            this.html += "<table>";
             for (let h = 0; h < this.filtrados.length; h++) {
               this.Ordenado.push(this.filtrados[h]);
-              this.html += this.filtrados[h].html;
+              if (this.filtrados[h].idFila == 1) {
+                this.html += this.filtrados[h].html;
+              }
+              else {
+                this.html += this.filtrados[h].html1export + this.filtrados[h].valor + this.filtrados[h].html2export;
+              }
             }
+            this.html += "</table>";
           }
         }
         document.getElementById("prueba").innerHTML = this.html;
@@ -357,6 +365,7 @@ export class IndicadoresComponent implements OnInit {
   }
 
   MasivoWord(id) {
+    this.html = "";
     this.idArchivo.idArchivo = id;
     this.indicadoresservice
       .VerDiligenciarIndicador(this.idArchivo)
@@ -375,10 +384,17 @@ export class IndicadoresComponent implements OnInit {
             this.filtrados = this.filtrados.filter(
               (pe) => pe.periodicidad == this.uniquePeriod[j]
             );
+            this.html += "<table>";
             for (let h = 0; h < this.filtrados.length; h++) {
               this.Ordenado.push(this.filtrados[h]);
-              this.html += this.filtrados[h].html;
+              if (this.filtrados[h].idFila == 1) {
+                this.html += this.filtrados[h].html;
+              }
+              else {
+                this.html += this.filtrados[h].html1export + this.filtrados[h].valor + this.filtrados[h].html2export;
+              }
             }
+            this.html += "</table>";
           }
         }
         document.getElementById("prueba").innerHTML = this.html;
@@ -387,6 +403,7 @@ export class IndicadoresComponent implements OnInit {
   }
 
   MasivoPDF(id) {
+    this.html = "";
     this.idArchivo.idArchivo = id;
     this.indicadoresservice
       .VerDiligenciarIndicador(this.idArchivo)
@@ -405,10 +422,17 @@ export class IndicadoresComponent implements OnInit {
             this.filtrados = this.filtrados.filter(
               (pe) => pe.periodicidad == this.uniquePeriod[j]
             );
+            this.html += "<table>";
             for (let h = 0; h < this.filtrados.length; h++) {
               this.Ordenado.push(this.filtrados[h]);
-              this.html += this.filtrados[h].html;
+              if (this.filtrados[h].idFila == 1) {
+                this.html += this.filtrados[h].html;
+              }
+              else {
+                this.html += this.filtrados[h].html1export + this.filtrados[h].valor + this.filtrados[h].html2export;
+              }
             }
+            this.html += "</table>";
           }
         }
         document.getElementById("prueba").innerHTML = this.html;
