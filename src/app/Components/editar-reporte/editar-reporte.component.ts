@@ -603,6 +603,11 @@ export class EditarReporteComponent implements OnInit {
       for (let k = 0; k < this.hijosdeHijos.length; k++) {
         if (this.hijosdeHijos[k].includes((parseInt(idRow) / 4 + "-" + idCol).toString())) {
           let child = document.getElementById(this.hijosdeHijos[k].toString());
+          this.enviar.forEach(element => {
+            if (element.idElement == this.hijosdeHijos[k].toString()) {
+              element.guardar = false;
+            }
+          });
           myParent.removeChild(child);
           this.hijosdeHijos[k] = "";
         }
@@ -1333,6 +1338,7 @@ export class EditarReporteComponent implements OnInit {
   }
 
   guardar() {
+    console.log(this.hijosdeHijos)
     this.enviar = this.enviar.filter(element => element.idElement != undefined);
     if (this.NombreReporte == "") {
       Swal.fire("Debe ingresar nombre del reporte")
@@ -1341,6 +1347,7 @@ export class EditarReporteComponent implements OnInit {
       Swal.fire("Debe ingresar alguna fila")
     }
     else {
+      this.enviar.filter(item => item.guardar == true);
       this.enviar.forEach(element => {
         if (element.tipo == "Table") {
           let id = element.idElement;

@@ -328,6 +328,11 @@ export class ReportesNuevoTablero1Component implements OnInit {
         if (this.hijosdeHijos[k].includes((parseInt(idRow) / 4 + "-" + idCol).toString())
         ) {
           let child = document.getElementById(this.hijosdeHijos[k].toString());
+          this.enviar.forEach(element => {
+            if (element.idElement == this.hijosdeHijos[k].toString()) {
+              element.guardar = false;
+            }
+          });
           myParent.removeChild(child);
           this.hijosdeHijos[k] = "";
         }
