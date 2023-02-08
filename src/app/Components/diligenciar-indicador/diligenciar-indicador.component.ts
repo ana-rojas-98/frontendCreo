@@ -359,6 +359,7 @@ export class DiligenciarIndicadorComponent implements OnInit {
         if (contents == null || contents == undefined) {
           return 0;
         }
+        contents.value = item.valor;
         contenidos.push(item);
         if (item.entrada == "input" && item.numerop == "si") {
           let a = document.getElementById((item.idFila - 1).toString());
