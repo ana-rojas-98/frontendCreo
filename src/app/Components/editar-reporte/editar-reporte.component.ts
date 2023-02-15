@@ -120,34 +120,23 @@ export class EditarReporteComponent implements OnInit {
   }
 
   getindIcadores() {
-    if (this.usuarioLocalStote.typeuser != "3") {
-      for (let i = 0; i < this.idSelecionados.length; i++) {
-        let idArchivo = {
-          idArchivo: parseInt(this.idSelecionados[i]),
-        };
-        this.indicadoresService.VerDiligenciarIndicadorReportes(idArchivo).subscribe((res: any) => {
-          res.map((item) => {
-            if (item.idFila != 1) {
-              this.arrayId.push(item.valor);
-              this.arrayIndicadores.push("I: " + item.archivo + "- A: " + item.anio + "- P: " + item.periodicidad + "- V: " + item.valor);
-            }
-          });
-          this.resultadosSeleccionados = this.resultadosSeleccionados.sort();
-          this.resultadosSeleccionados = this.resultadosSeleccionados.reverse();
-        });
-      }
 
-      if (this.usuarioLocalStote.typeuser == "3") {
-        let id = {
-          id: this.usuarioLocalStote.usuarioid,
-        };
-        this.reportesService.IndicadoresAsignados(id).subscribe((res: any) => {
-          this.resultadosSeleccionados = res.map((item) => {
-            return item;
-          });
+    for (let i = 0; i < this.idSelecionados.length; i++) {
+      let idArchivo = {
+        idArchivo: parseInt(this.idSelecionados[i]),
+      };
+      this.indicadoresService.VerDiligenciarIndicadorReportes(idArchivo).subscribe((res: any) => {
+        res.map((item) => {
+          if (item.idFila != 1) {
+            this.arrayId.push(item.valor);
+            this.arrayIndicadores.push("I: " + item.archivo + "- A: " + item.anio + "- P: " + item.periodicidad + "- V: " + item.valor);
+          }
         });
-      }
+        this.resultadosSeleccionados = this.resultadosSeleccionados.sort();
+        this.resultadosSeleccionados = this.resultadosSeleccionados.reverse();
+      });
     }
+
   }
 
   resultadosTabla: any;

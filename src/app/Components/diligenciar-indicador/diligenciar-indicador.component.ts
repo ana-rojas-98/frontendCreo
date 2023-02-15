@@ -152,8 +152,14 @@ export class DiligenciarIndicadorComponent implements OnInit {
   filtrarInfo() {
     this.uniqueYears = [...new Set(this.anioArray)];
     this.uniquePeriod = [...new Set(this.preciodicidadesArray)];
-    this.Anio = this.uniqueYears[this.uniqueYears.length - 1];
-    this.Periodo = this.uniquePeriod[this.uniquePeriod.length - 1];
+    let ytd = new Date().getFullYear();
+    let index = this.uniqueYears.indexOf(ytd);
+    if (index != -1) {
+      this.Anio = this.uniqueYears[index];
+    } else {
+      this.Anio = this.uniqueYears[0];
+    }
+    this.Periodo = this.uniquePeriod[0];
     this.ChangeAnio();
   }
 
