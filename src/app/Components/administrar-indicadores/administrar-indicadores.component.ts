@@ -19,7 +19,7 @@ export class AdministrarIndicadoresComponent implements OnInit {
     private reportesService: ReportesService,
     private indicadoresservice: IndicadoresService,
     public cargandoService: CargandoService
-  ) {}
+  ) { }
 
   estandarId = {
     id: "",
@@ -62,11 +62,11 @@ export class AdministrarIndicadoresComponent implements OnInit {
   SubcategoriaOpciones: any = [];
 
   ngOnInit() {
-    this.authService.enviarCorreos().subscribe((res: any) => {});
-    this.authService.enviarCorreosIndicadores().subscribe((res: any) => {});
+    this.authService.enviarCorreos().subscribe((res: any) => { });
+    this.authService.enviarCorreosIndicadores().subscribe((res: any) => { });
 
     this.usarioLocalStote = JSON.parse(localStorage.getItem("usario"));
-
+    document.getElementById("exportContent").style.display = "none";
     if (this.usarioLocalStote.typeuser == "3") {
       this.router.navigate(["private"]);
       return true;
@@ -130,60 +130,67 @@ export class AdministrarIndicadoresComponent implements OnInit {
   }
 
   estandar() {
-    this.getCategoriaFilter(this.Estandar.value);
-    this.getSubCategoriaFilter(this.Estandar.value, this.Categoria.value);
+    this.Categoria.setValue("");
+    this.Subcategoria.setValue("");
     if (this.Estandar.value != "") {
-      this.getIndicadoresFilter();
-    } else {
-      this.getCategoria();
+      this.getCategoriaFilter(this.Estandar.value);
+
     }
+    this.getSubCategoriaFilter(this.Estandar.value, this.Categoria.value);
     if (
       this.Estandar.value == "" &&
       this.Categoria.value == "" &&
       this.Subcategoria.value == ""
     ) {
-      this.getindIcadores();
-      this.getCategoria();
-      this.getStandares();
-      this.getSubCategoria();
+      return this.traertodo();
     }
   }
 
+  traertodo() {
+    this.getindIcadores();
+    this.getCategoria();
+    this.getStandares();
+    this.getSubCategoria();
+  }
+
   categoria() {
-    this.getSubCategoriaFilter(this.Estandar.value, this.Categoria.value);
-    if (this.Categoria.value != "") {
-      this.getIndicadoresFilter();
-    } else {
-      this.estandar();
-      this.getSubCategoria();
+    this.Subcategoria.setValue("");
+    if (this.Estandar.value == "") {
+      this.resultadosCategoria.forEach(element => {
+        if (element.categoria1 == this.Categoria.value) {
+          return this.Estandar.setValue(element.idEstandar);
+        }
+      });
     }
+    this.getCategoriaFilter(this.Estandar.value);
+
+    this.getSubCategoriaFilter(this.Estandar.value, this.Categoria.value);
     if (
       this.Estandar.value == "" &&
       this.Categoria.value == "" &&
       this.Subcategoria.value == ""
     ) {
-      this.getindIcadores();
-      this.getCategoria();
-      this.getStandares();
-      this.getSubCategoria();
+      return this.traertodo();
     }
   }
 
   subcategoria() {
-    if (this.Subcategoria.value != "") {
-      this.getIndicadoresFilter();
-    } else {
-      this.categoria();
+    if (this.Estandar.value == "" || this.Categoria.value == "") {
+      this.resultadosSubCategoria.forEach(element => {
+        if (element.subcategoria1 == this.Subcategoria.value) {
+          this.Estandar.setValue(element.idEstandar);
+          this.Categoria.setValue(element.idCategoria);
+          this.getCategoriaFilter(this.Estandar.value)
+          this.getSubCategoriaFilter(this.Estandar.value, this.Categoria.value)
+        }
+      });
     }
     if (
       this.Estandar.value == "" &&
       this.Categoria.value == "" &&
       this.Subcategoria.value == ""
     ) {
-      this.getindIcadores();
-      this.getCategoria();
-      this.getStandares();
-      this.getSubCategoria();
+      return this.traertodo();
     }
   }
 
@@ -193,16 +200,39 @@ export class AdministrarIndicadoresComponent implements OnInit {
         (item) => item.idEstandar == estandar
       );
     });
+    return this.getIndicadoresFilter();
+
   }
 
   getSubCategoriaFilter(estandar, categoria) {
-    this.authService
-      .getSubCategoria(this.Subcategoria)
-      .subscribe((res: any) => {
-        this.resultadosSubCategoria = res.filter(
-          (item) => item.idCategoria == categoria || item.idEstandar == estandar
-        );
-      });
+    if (estandar != "" && categoria == "") {
+      this.authService
+        .getSubCategoria(this.Subcategoria)
+        .subscribe((res: any) => {
+          this.resultadosSubCategoria = res.filter(
+            (item) => item.idEstandar == estandar
+          );
+        });
+    }
+    else if (categoria != "" && estandar == "") {
+      this.authService
+        .getSubCategoria(this.Subcategoria)
+        .subscribe((res: any) => {
+          this.resultadosSubCategoria = res.filter(
+            (item) => item.idCategoria == categoria
+          );
+        });
+    }
+    else {
+      this.authService
+        .getSubCategoria(this.Subcategoria)
+        .subscribe((res: any) => {
+          this.resultadosSubCategoria = res.filter(
+            (item) => item.idEstandar == estandar && item.idCategoria == categoria
+          );
+        });
+    }
+    return this.getIndicadoresFilter();
   }
 
   getIndicadoresFilter() {
@@ -210,26 +240,19 @@ export class AdministrarIndicadoresComponent implements OnInit {
     this.reportesService
       .ConsultarIndicadoresAsignados()
       .subscribe((res: any) => {
-        if (this.Categoria.value != "") {
-          this.resultadosTabla = res.filter(
-            (item) => item.idCategoria == this.Categoria.value
-          );
-          if (this.resultadosTabla) {
-            Swal.close();
-          }
-          this.resultadosTabla = this.resultadosTabla.sort();
-          this.resultadosTabla = this.resultadosTabla.reverse();
-        }
         if (this.Subcategoria.value != "") {
           this.resultadosTabla = res.filter(
             (item) => item.idSubCategoria == this.Subcategoria.value
           );
-        } else {
+        }
+        else if (this.Categoria.value != "") {
           this.resultadosTabla = res.filter(
-            (item) =>
-              item.idCategoria == this.Categoria.value ||
-              item.idEstandar == this.Estandar.value ||
-              item.idSubCategoria == this.Subcategoria.value
+            (item) => item.idCategoria == this.Categoria.value
+          );
+        }
+        else if (this.Estandar.value != "") {
+          this.resultadosTabla = res.filter(
+            (item) => item.idEstandar == this.Estandar.value
           );
         }
         if (this.resultadosTabla) {
@@ -251,14 +274,14 @@ export class AdministrarIndicadoresComponent implements OnInit {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         this.indicador.id = id2;
-      this.cargandoService.ventanaCargando();
-      this.authService.Eliminar(this.indicador).subscribe((res: any) => {
-        if (res.resul == "ok") {
-          this.alerta("Eliminado correctamente");
-          this.getindIcadores();
-        }
-        return res;
-      });
+        this.cargandoService.ventanaCargando();
+        this.authService.Eliminar(this.indicador).subscribe((res: any) => {
+          if (res.resul == "ok") {
+            this.alerta("Eliminado correctamente");
+            this.getindIcadores();
+          }
+          return res;
+        });
       } else if (result.isDenied) {
       }
     });

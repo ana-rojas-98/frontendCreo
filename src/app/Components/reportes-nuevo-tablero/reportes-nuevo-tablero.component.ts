@@ -108,11 +108,9 @@ export class ReportesNuevoTableroComponent implements OnInit {
     if (this.SubCategoria.subcategoria1 == "") {
       this.getCategoriaFilter();
       //this.getindIcadores(0);
-      return true;
     }
 
     let dato = parseInt(this.SubCategoria.subcategoria1);
-    this.getindIcadores(dato);
 
     this.resultadosTabla = this.estado.filter((item) => {
       return item.idSubCategoria == dato;

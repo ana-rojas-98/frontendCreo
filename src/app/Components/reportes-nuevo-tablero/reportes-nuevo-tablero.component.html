@@ -7,48 +7,27 @@
     <div class="contenedorSelect">
       <div class="box">
         <p>Estándar:</p>
-        <select
-          [(ngModel)]="Estandar.estandar"
-          (change)="getEstandarFilter()"
-          class="selector"
-        >
+        <select [(ngModel)]="Estandar.estandar" (change)="getEstandarFilter()" class="selector">
           <option value="">Seleccione estándar</option>
-          <option
-            *ngFor="let item of resultadoEstandar"
-            [value]="item.estandar"
-          >
+          <option *ngFor="let item of resultadoEstandar" [value]="item.estandar">
             {{ item.nombreEstandar }}
           </option>
         </select>
       </div>
       <div class="box">
         <p>Categoría</p>
-        <select
-          [(ngModel)]="Categoria.categoria1"
-          (change)="getCategoriaFilter()"
-          class="selector"
-        >
+        <select [(ngModel)]="Categoria.categoria1" (change)="getCategoriaFilter()" class="selector">
           <option value="">Seleccione categoría</option>
-          <option
-            *ngFor="let item of resultadosCategoria"
-            [value]="item.categoria1"
-          >
+          <option *ngFor="let item of resultadosCategoria" [value]="item.categoria1">
             {{ item.nombreCategoria }}
           </option>
         </select>
       </div>
       <div class="box">
         <p>Sub categoría</p>
-        <select
-          [(ngModel)]="SubCategoria.subcategoria1"
-          (change)="geSubtCategoriaFilter()"
-          class="selector"
-        >
+        <select [(ngModel)]="SubCategoria.subcategoria1" (change)="geSubtCategoriaFilter()" class="selector">
           <option value="">Seleccione sub categoría</option>
-          <option
-            *ngFor="let item of resultadosSubCategoria"
-            [value]="item.subcategoria1"
-          >
+          <option *ngFor="let item of resultadosSubCategoria" [value]="item.subcategoria1">
             {{ item.nombreSubcategoria }}
           </option>
         </select>
@@ -59,33 +38,20 @@
         <thead>
           <tr>
             <th>
-              <img
-                src="../../../assets/imagenes/indicadores.png"
-                alt="icono-indicador"
-              />
+              <img src="../../../assets/imagenes/indicadores.png" alt="icono-indicador" />
               Nombre indicador
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/estandar.svg"
-                alt="icono-estandar"
-              />
+              <img src="../../../assets/imagenes/estandar.svg" alt="icono-estandar" />
               Estandar
             </th>
             <th>
-              <img
-                src="../../../assets/imagenes/categoria.svg"
-                alt="icono-categoria"
-              />
+              <img src="../../../assets/imagenes/categoria.svg" alt="icono-categoria" />
               Categoría
             </th>
             <th>
-              <img
-                id="imgPorcentaje"
-                src="../../../assets/imagenes/subCategoria.svg"
-                alt="icono-subCategoria"
-                class="mx-1 mt-1"
-              />
+              <img id="imgPorcentaje" src="../../../assets/imagenes/subCategoria.svg" alt="icono-subCategoria"
+                class="mx-1 mt-1" />
               Sub categoría
             </th>
             <th>Usar</th>
@@ -98,20 +64,13 @@
             <td>{{ item.categoria }}</td>
             <td>{{ item.subCategoria }}</td>
             <td>
-              <input
-                [(ngModel)]="item.usar"
-                (change)="updateIndicado(item.idIndicador, item.usar)"
-                type="checkbox"
-              />
+              <input [(ngModel)]="item.usar" (change)="updateIndicado(item.idIndicador, item.usar)" type="checkbox" />
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div
-      class="boton"
-    (click)="continuar()"
-    >
+    <div class="boton" (click)="continuar()">
       <button class="guardar">Continuar</button>
     </div>
   </div>

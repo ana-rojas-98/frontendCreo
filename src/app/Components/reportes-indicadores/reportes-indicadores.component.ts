@@ -83,16 +83,16 @@ export class ReportesIndicadoresComponent implements OnInit {
     this.getindIcadores(0);
   }
   createPDF() {
-    let DATA: any = document.getElementById("tableIndicadores");
-    html2canvas(DATA).then((canvas) => {
-      let fileWidth = 208;
-      let fileHeight = (canvas.height * fileWidth) / canvas.width;
-      const FILEURI = canvas.toDataURL("image/png");
-      let PDF = new jsPDF("p", "mm", "a4");
-      let position = 0;
-      PDF.addImage(FILEURI, "PNG", 0, position, fileWidth, fileHeight);
-      PDF.save("Indicadores.pdf");
-    });
+    var sTable = document.getElementById("tableIndicadores").innerHTML;
+    // CREATE A WINDOW OBJECT.
+    var win = window.open("", "", "height=700,width=700");
+    win.document.write("<html><head>"); // <title> FOR PDF HEADER.       // ADD STYLE INSIDE THE HEAD TAG.
+    win.document.write("</head>");
+    win.document.write("<body>");
+    win.document.write(sTable); // THE TABLE CONTENTS INSIDE THE BODY TAG.
+    win.document.write("</body></html>");
+    win.document.close(); // CLOSE THE CURRENT WINDOW.
+    win.print(); // PRINT THE CONTENTS.
   }
 
   downloadExcel() {
