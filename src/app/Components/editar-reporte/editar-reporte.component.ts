@@ -184,12 +184,12 @@ export class EditarReporteComponent implements OnInit {
             item.idRow *= 4;
 
             if (this.valorSelactNumeos == "1") {
-              input.style.cssText = "width:100%; height:100px; grid-column: 1/12;grid-row:" + (parseInt(item.idRow) + 2) + ";";
+              input.style.cssText = "width:100%; height:100px; grid-column: 1/12;grid-row:" + (parseInt(item.idRow) + 2) + "/" + (parseInt(item.dRow) + 4) + ";"
             }
 
             if (this.valorSelactNumeos != "1") {
               let numero = 12 / this.configuracion[parseInt(item.idRow) / 4][1];
-              input.style.cssText = "width:100%; height:100px; grid-column: " + (item.idCol * numero - numero + 1) + " / " + item.idCol * numero + " ;grid-row:" + (parseInt(item.idRow) + 2) + ";";
+              input.style.cssText = "width:100%; height:100px; grid-column: " + (item.idCol * numero - numero + 1) + " / " + item.idCol * numero + " ;grid-row:" + (parseInt(item.idRow) + 2) + "/" + (parseInt(item.idRow) + 4) + ";"
             }
             this.hijosdeHijos.push(parseInt(item.idRow) / 4 + "-" + item.idCol + "-i");
             input.value = item.valor;
@@ -603,12 +603,12 @@ export class EditarReporteComponent implements OnInit {
       }
 
       if (this.valorSelactNumeos == "1") {
-        input.style.cssText = "width:100%; height:100px; grid-column: 1/12;grid-row:" + (parseInt(idRow) + 2) + ";";
+        input.style.cssText = "width:100%; height:100px; grid-column: 1/12;grid-row:" + (parseInt(idRow) + 2) + "/" + (parseInt(idRow) + 4) + ";"
       }
 
       if (this.valorSelactNumeos != "1") {
         let numero = 12 / this.configuracion[parseInt(idRow) / 4][1];
-        input.style.cssText = "width:100%; height:100px; grid-column: " + (idCol * numero - numero + 1) + " / " + idCol * numero + " ;grid-row:" + (parseInt(idRow) + 2) + ";";
+        input.style.cssText = "width:100%; height:100px; grid-column: " + (idCol * numero - numero + 1) + " / " + idCol * numero + " ;grid-row:" + (parseInt(idRow) + 2) + "/" + (parseInt(idRow) + 4) + ";"
       }
 
       if (selectOpciones.value == "Texto/numero") {
@@ -1238,8 +1238,7 @@ export class EditarReporteComponent implements OnInit {
     if (this.valorSelactNumeos == "1") {
       ctx.style.cssText =
         "margin-top:20px; width:100%; height:100%; grid-column: 1/12;grid-row:" +
-        (parseInt(idRow) + 2) +
-        ";";
+        (parseInt(idRow) + 2) + "/" + (parseInt(idRow) + 4) + ";"
     }
 
     if (this.valorSelactNumeos != "1") {
@@ -1250,8 +1249,7 @@ export class EditarReporteComponent implements OnInit {
         " / " +
         idCol * numero +
         " ;grid-row:" +
-        (parseInt(idRow) + 2) +
-        ";";
+        (parseInt(idRow) + 2) + "/" + (parseInt(idRow) + 4) + ";"
     }
     Chart.register(ChartDataLabels);
     ctx.id = parseInt(idRow) / 4 + "-" + idCol + "-" + type.toString();

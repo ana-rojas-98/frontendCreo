@@ -336,7 +336,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
         let numero = 12 / this.configuracion[parseInt(idRow) / 4][1];
         input.style.cssText =
           "width:100%; height:100px; grid-column: " + (idCol * numero - numero + 1) +
-          " / " + idCol * numero + " ;grid-row:" + (parseInt(idRow) + 2) + ";";
+          " / " + idCol * numero + " ;grid-row:" + (parseInt(idRow) + 2) + "/" + (parseInt(idRow) + 4) + ";";
       }
 
       if (selectOpciones.value == "Texto/numero") {
@@ -965,9 +965,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
 
     if (this.valorSelactNumeos == "1") {
       ctx.style.cssText =
-        "margin-top:20px; width:100%; height:100%; grid-column: 1/12;grid-row:" +
-        (parseInt(idRow) + 2) +
-        ";";
+        "margin-top:20px; width:100%; height:100%; grid-column: 1/12;grid-row:" + (parseInt(idRow) + 2) + "/" + (parseInt(idRow) + 4) + ";"
     }
 
     if (this.valorSelactNumeos != "1") {
@@ -977,9 +975,7 @@ export class ReportesNuevoTablero1Component implements OnInit {
         (idCol * numero - numero + 1) +
         " / " +
         idCol * numero +
-        " ;grid-row:" +
-        (parseInt(idRow) + 2) +
-        ";";
+        " ;grid-row:" + (parseInt(idRow) + 2) + "/" + (parseInt(idRow) + 4) + ";"
     }
     ctx.id = parseInt(idRow) / 4 + "-" + idCol + "-" + type.toString();
     this.addData(ctx, parseInt(idRow) / 4, idCol, type.toString(), "", "", this.nombreGrafica, JSON.stringify(data), columnas.toString());
